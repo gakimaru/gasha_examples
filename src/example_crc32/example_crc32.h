@@ -1,4 +1,6 @@
-﻿//C++11用の constexpr / ユーザー定義リテラルを使ったコンパイル時CRC計算およびSSE4.2を使用したCRC計算テスト
+﻿#if 0
+
+//C++11用の constexpr / ユーザー定義リテラルを使ったコンパイル時CRC計算およびSSE4.2を使用したCRC計算テスト
 
 //--------------------
 #include "constexpr.h"
@@ -60,5 +62,7 @@
 #else//NOCONST_TO_CONST
 #define NOCONST//※NOCONSTを非constとして扱う
 #endif//NOCONST_TO_CONST
+
+#endif
 
 // End of file

@@ -1,4 +1,8 @@
-﻿#include "constexpr_test.h"
+﻿#include "example_crc32.h"
+
+#if 0
+
+#include "constexpr_test.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -181,6 +185,8 @@ int main(const int arcg, const char* argv[])
 
 	return EXIT_SUCCESS;
 }
+#endif
+
 #endif
 
 // End of file
