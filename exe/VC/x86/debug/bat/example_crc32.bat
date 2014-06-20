@@ -1,1 +1,1 @@
-..\example_crc32.exe > log\example_crc32.log
+%~dp0..\example_crc32.exe > %~dp0log\example_crc32.log

@@ -1,1 +1,1 @@
-..\example_specify_environment.exe > log\example_specify_environment.log
+%~dp0..\example_specify_environment.exe > %~dp0log\example_specify_environment.log
