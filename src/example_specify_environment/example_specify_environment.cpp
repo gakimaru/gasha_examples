@@ -1,19 +1,19 @@
 ﻿//--------------------------------------------------------------------------------
-// exmaple_specify_environment.h
+// exmaple_specify_environment.cpp
 // 環境判別処理テスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
 //   Released under the MIT license
-//     https://github.com/gakimaru/gasha_examples/LICENSE
+//     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
 #include "example_specify_environment.h"
 
 #include <stdio.h>
-
 #include <cstddef>//std::size_t用
 
+//----------------------------------------
 //noinline/always_inlineテスト
 void func_normal()
 {
@@ -32,9 +32,11 @@ always_inline void func_always_inline()
 	printf("This is always inline func.\n");
 }
 
+//----------------------------------------
 //【C++11仕様】nullptrテスト
 void* nullptr_var = nullptr;
 
+//----------------------------------------
 //【C++11仕様】overrideテスト
 struct base
 {
@@ -52,10 +54,12 @@ struct derived : public base
 };
 derived override_func_var;
 
+//----------------------------------------
 //【C++11仕様】constexprテスト
 constexpr int constexpr_calc(int a, int b){ return a + b; }
 constexpr int constexpr_var = constexpr_calc(1, 2) + 3;
 
+//----------------------------------------
 //【C++11仕様】ユーザー定義リテラルテスト
 #ifdef HAS_USER_DEFINED_LITERAL
 constexpr int operator "" _len(const char* str, const std::size_t len)
@@ -65,17 +69,20 @@ constexpr int operator "" _len(const char* str, const std::size_t len)
 const std::size_t user_defined_literal_var = "1234567890"_len;
 #endif//HAS_USER_DEFINED_LITERAL
 
+//----------------------------------------
 //【C++11仕様】TLS変数宣言テスト
 thread_local int m_var_tls = 123;
 
+//----------------------------------------
 //【C++11仕様】アライメント指定テスト
 struct alignas(16) data_t
 {
 	int var[8];
 };
 
+//----------------------------------------
 //環境判別処理テスト
-void specify_environment()
+void example_specify_environment()
 {
 	//コンパイラ確認テスト
 	printf("Compiler: name=\"%s\", Ver=[%d(0x%08x).%d(0x%08x)]\n", COMPILER_NAME, COMPILER_VER, COMPILER_VER, COMPILER_MINOR, COMPILER_MINOR);

@@ -5,7 +5,7 @@
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
 //   Released under the MIT license
-//     https://github.com/gakimaru/gasha_examples/LICENSE
+//     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
 #include "example_specify_environment.h"
@@ -16,7 +16,7 @@
 int main(const int argc, const char* argv[])
 {
 	//環境判別処理テスト
-	specify_environment();
+	example_specify_environment();
 	
 	return EXIT_SUCCESS;
 }

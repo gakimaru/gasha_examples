@@ -9,11 +9,11 @@
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
 //   Released under the MIT license
-//     https://github.com/gakimaru/gasha_examples/LICENSE
+//     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
 //環境判別処理テスト
-void specify_environment();
+void example_specify_environment();
 
 #endif//__EXAMPLE_SPECIFY_ENVIRONMENT_H_
 

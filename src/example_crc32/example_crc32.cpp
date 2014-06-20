@@ -1,192 +1,134 @@
-﻿#include "example_crc32.h"
+﻿//--------------------------------------------------------------------------------
+// example_crc32.cpp
+// CRC32計算処理テスト
+//
+// Gakimaru's researched and standard library for C++ - GASHA
+//   Copyright (c) 2014 Itagaki Mamoru
+//   Released under the MIT license
+//     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
+//--------------------------------------------------------------------------------
 
-#if 0
+#include "example_crc32.h"
 
-#include "constexpr_test.h"
-
-#include <stdio.h>
-#include <stdlib.h>
+#include <crc32.h>//gasha::crc32
 
 #include <assert.h>//assert用
+#include <chrono>//C++11 std::chrono
 
-#include <chrono>//処理時間計測用
+USING_NAMESPACE_GASHA//ネームスペース使用
 
-//--------------------------------------------------------------------------------
-//テスト
-
-#ifdef ENABLE_MORE_TEST
-//--------------------
-//追加テスト用データ定義
-static const char* TEXT1 = "1";
-static const char* TEXT2 = "12";
-static const char* TEXT3 = "123";
-static const char* TEXT4 = "1234";
-static const char* TEXT5 = "12345";
-static const char* TEXT6 = "123456";
-static const char* TEXT7 = "1234567";
-static const char* TEXT8 = "12345678";
-static const char* TEXT9 = "123456789";
-static const char* TEXT10 = "1234567890";
-#endif//ENABLE_MORE_TEST
-
-//--------------------
-//constexpr / ユーザー定義リテラルによるCRC計算のテスト
-void test_constexpr()
+//CRC32計算処理テスト
+void example_crc32()
 {
-#ifdef USE_MAKE_STATIC_TABLE
+#if 0
+	//CRC多項式テーブルを作成
 	{
 		printf("\n");
-		makePolyTable();//CRC多項式テーブルを作成
+		makeAndPrintPolyTable();
 	}
-#endif//USE_MAKE_STATIC_TABLE
-#ifdef ENABLE_CONSTEXPR_TEST
+#endif
+
+	//【constexprによるCRC32計算テスト】
+	//※constexpr未対応のコンパイラでも一応使える
+	//　ただし、ランタイム時の実行となる。遅い。
+	//※constexprでコンパイル時に計算されると、static_assertが正常に反応し、
+	//　かつ、文字列定数 "1234567890" が実行コード上から削除される。
+	//※calcConstCRC32()の結果を const型で受けないとコンパイル時に処理されず、
+	//　static_assertがコンパイルエラーになってしまう。
 	{
 		printf("\n");
-		CONST crc32_t crc = calcConstCRC32("1234567890");//constexprでコンパイル時に計算 ※文字列リテラルも消滅 ※const変数に代入しないとコンパイル時に計算されないので注意
-	#ifdef USE_STATIC_ASSERT
-	#ifndef USE_CRC32C
-		static_assert(crc == 0x261daee5u, "invalid crc");//OK：コンパイル時に評価
-	#else//USE_CRC32C
-		static_assert(crc == 0xf3dbd4feu, "invalid crc");//OK：コンパイル時に評価
-	#endif//USE_CRC32C
-	#else//USE_STATIC_ASSERT
-	#ifndef USE_CRC32C
-		assert(crc == 0x261daee5u);//OK：ランタイム時に評価
-	#else//USE_CRC32C
-		assert(crc == 0xf3dbd4feu);//OK：ランタイム時に評価
-	#endif//USE_CRC32C
-	#endif//USE_STATIC_ASSERT
+		const crc32_t crc = calcConstCRC32("1234567890");//constexprでコンパイル時に計算 ※文字列リテラルも消滅 ※const変数に代入しないとコンパイル時に計算されないので注意
+	#ifdef HAS_CONSTEXPR//constexpr使用可能時はstatic_assertで結果をコンパイル時にチェック
+	#ifndef CRC32_IS_CRC32C//標準CRC-32(IEEE 802.3)
+		static_assert(crc == 0x261daee5u, "invalid crc");
+	#else//CRC32_IS_CRC32C//CRC-32C
+		static_assert(crc == 0xf3dbd4feu, "invalid crc");
+	#endif//CRC32_IS_CRC32C
+	#else//HAS_CONSTEXPR
+	#ifndef CRC32_IS_CRC32C//標準CRC-32(IEEE 802.3)
+			assert(crc == 0x261daee5u);
+	#else//CRC32_IS_CRC32C//CRC-32C
+			assert(crc == 0xf3dbd4feu);
+	#endif//CRC32_IS_CRC32C
+	#endif//HAS_CONSTEXPR
 		printf("constexpr によるCRC計算結果=0x%08x\n", crc);
-	#ifdef ENABLE_MORE_TEST
-		CONST crc32_t TEXT1_CRC = calcConstCRC32(TEXT1);
-		CONST crc32_t TEXT2_CRC = calcConstCRC32(TEXT2);
-		CONST crc32_t TEXT3_CRC = calcConstCRC32(TEXT3);
-		CONST crc32_t TEXT4_CRC = calcConstCRC32(TEXT4);
-		CONST crc32_t TEXT5_CRC = calcConstCRC32(TEXT5);
-		CONST crc32_t TEXT6_CRC = calcConstCRC32(TEXT6);
-		CONST crc32_t TEXT7_CRC = calcConstCRC32(TEXT7);
-		CONST crc32_t TEXT8_CRC = calcConstCRC32(TEXT8);
-		CONST crc32_t TEXT9_CRC = calcConstCRC32(TEXT9);
-		CONST crc32_t TEXT10_CRC = calcConstCRC32(TEXT10);
-		printf(" CRC32:TEXT1:\"%s\" = 0x%08x(%u)\n", TEXT1, TEXT1_CRC, TEXT1_CRC);
-		printf(" CRC32:TEXT2:\"%s\" = 0x%08x(%u)\n", TEXT2, TEXT2_CRC, TEXT2_CRC);
-		printf(" CRC32:TEXT3:\"%s\" = 0x%08x(%u)\n", TEXT3, TEXT3_CRC, TEXT3_CRC);
-		printf(" CRC32:TEXT4:\"%s\" = 0x%08x(%u)\n", TEXT4, TEXT4_CRC, TEXT4_CRC);
-		printf(" CRC32:TEXT5:\"%s\" = 0x%08x(%u)\n", TEXT5, TEXT5_CRC, TEXT5_CRC);
-		printf(" CRC32:TEXT6:\"%s\" = 0x%08x(%u)\n", TEXT6, TEXT6_CRC, TEXT6_CRC);
-		printf(" CRC32:TEXT7:\"%s\" = 0x%08x(%u)\n", TEXT7, TEXT7_CRC, TEXT7_CRC);
-		printf(" CRC32:TEXT8:\"%s\" = 0x%08x(%u)\n", TEXT8, TEXT8_CRC, TEXT8_CRC);
-		printf(" CRC32:TEXT9:\"%s\" = 0x%08x(%u)\n", TEXT9, TEXT9_CRC, TEXT9_CRC);
-		printf(" CRC32:TEXT10:\"%s\" = 0x%08x(%u)\n", TEXT10, TEXT10_CRC, TEXT10_CRC);
-	#endif//ENABLE_MORE_TEST
 	}
-#endif//ENABLE_CONSTEXPR_TEST
-#ifdef ENABLE_USER_DEFINED_LITERALS_TEST
+	
+#ifdef HAS_USER_DEFINED_LITERAL//constexpr使用可能時はstatic_assertで結果をコンパイル時にチェック
+	//【ユーザー定義リテラルによるCRC32計算テスト】
+	//※ユーザー定義リテラル未対応のコンパイラでは使用不可。
+	//※文字列定数の状態やstatic_assertの挙動については、上記のconstexprと同じ。
 	{
 		printf("\n");
-		CONST crc32_t crc = "1234567890"_crc32;//ユーザー定義リテラルでコンパイル時に計算 ※文字列リテラルも消滅 ※const変数に代入しないとコンパイル時に計算されないので注意
-	#ifdef USE_STATIC_ASSERT
-	#ifndef USE_CRC32C
-		static_assert(crc == 0x261daee5u, "invalid crc");//OK：コンパイル時に評価
-	#else//USE_CRC32C
-		static_assert(crc == 0xf3dbd4feu, "invalid crc");//OK：コンパイル時に評価
-	#endif//USE_CRC32C
-	#else//USE_STATIC_ASSERT
-	#ifndef USE_CRC32C
-		assert(crc == 0x261daee5u);//OK：ランタイム時に評価
-	#else//USE_CRC32C
-		assert(crc == 0xf3dbd4feu);//OK：ランタイム時に評価
-	#endif//USE_CRC32C
-	#endif//USE_STATIC_ASSERT
+		CONST crc32_t crc = "abcdefghij"_crc32;//ユーザー定義リテラルでコンパイル時に計算 ※文字列リテラルも消滅 ※const変数に代入しないとコンパイル時に計算されないので注意
+	#ifndef CRC32_IS_CRC32C//標準CRC-32(IEEE 802.3)
+		static_assert(crc == 0x3981703au, "invalid crc");
+	#else//CRC32_IS_CRC32C//CRC-32C
+		static_assert(crc == 0xe6599437u, "invalid crc");
+	#endif//CRC32_IS_CRC32C
 		printf("ユーザー定義リテラルによるCRC計算結果=0x%08x\n", crc);
-	#ifdef ENABLE_MORE_TEST
-		CONST crc32_t TEXT1_CRC = "1"_crc32;
-		CONST crc32_t TEXT2_CRC = "12"_crc32;
-		CONST crc32_t TEXT3_CRC = "123"_crc32;
-		CONST crc32_t TEXT4_CRC = "1234"_crc32;
-		CONST crc32_t TEXT5_CRC = "12345"_crc32;
-		CONST crc32_t TEXT6_CRC = "123456"_crc32;
-		CONST crc32_t TEXT7_CRC = "1234567"_crc32;
-		CONST crc32_t TEXT8_CRC = "12345678"_crc32;
-		CONST crc32_t TEXT9_CRC = "123456789"_crc32;
-		CONST crc32_t TEXT10_CRC = "1234567890"_crc32;
-		printf(" CRC32:TEXT1:\"%s\" = 0x%08x(%u)\n", TEXT1, TEXT1_CRC, TEXT1_CRC);
-		printf(" CRC32:TEXT2:\"%s\" = 0x%08x(%u)\n", TEXT2, TEXT2_CRC, TEXT2_CRC);
-		printf(" CRC32:TEXT3:\"%s\" = 0x%08x(%u)\n", TEXT3, TEXT3_CRC, TEXT3_CRC);
-		printf(" CRC32:TEXT4:\"%s\" = 0x%08x(%u)\n", TEXT4, TEXT4_CRC, TEXT4_CRC);
-		printf(" CRC32:TEXT5:\"%s\" = 0x%08x(%u)\n", TEXT5, TEXT5_CRC, TEXT5_CRC);
-		printf(" CRC32:TEXT6:\"%s\" = 0x%08x(%u)\n", TEXT6, TEXT6_CRC, TEXT6_CRC);
-		printf(" CRC32:TEXT7:\"%s\" = 0x%08x(%u)\n", TEXT7, TEXT7_CRC, TEXT7_CRC);
-		printf(" CRC32:TEXT8:\"%s\" = 0x%08x(%u)\n", TEXT8, TEXT8_CRC, TEXT8_CRC);
-		printf(" CRC32:TEXT9:\"%s\" = 0x%08x(%u)\n", TEXT9, TEXT9_CRC, TEXT9_CRC);
-		printf(" CRC32:TEXT10:\"%s\" = 0x%08x(%u)\n", TEXT10, TEXT10_CRC, TEXT10_CRC);
-	#endif//ENABLE_MORE_TEST
 	}
-#endif//ENABLE_USER_DEFINED_LITERALS_TEST
-#ifdef ENABLE_RUNTIME_TEST
+#endif//HAS_USER_DEFINED_LITERAL
+	
+	//【ランタイム関数によるCRC32計算テスト】
 	{
 		printf("\n");
-		NOCONST crc32_t crc = calcCRC32("1234567890");//通常関数でランタイム時に計算
-	#ifndef USE_CRC32C
-		assert(crc == 0x261daee5u);//OK：ランタイム時に評価
-	#else//USE_CRC32C
-		assert(crc == 0xf3dbd4feu);//OK：ランタイム時に評価
-	#endif//USE_CRC32C
+		const crc32_t crc = calcCRC32("ABCDEFGHIJ");
+	#ifndef CRC32_IS_CRC32C//標準CRC-32(IEEE 802.3)
+		assert(crc == 0x321e6d05u);
+	#else//CRC32_IS_CRC32C//CRC-32C
+		assert(crc == 0xd599aefdu);
+	#endif//CRC32_IS_CRC32C
 		printf("ランタイム関数によるCRC計算結果=0x%08x\n", crc);
-	#ifdef ENABLE_MORE_TEST
-		NOCONST crc32_t TEXT1_CRC = calcCRC32(TEXT1);
-		NOCONST crc32_t TEXT2_CRC = calcCRC32(TEXT2);
-		NOCONST crc32_t TEXT3_CRC = calcCRC32(TEXT3);
-		NOCONST crc32_t TEXT4_CRC = calcCRC32(TEXT4);
-		NOCONST crc32_t TEXT5_CRC = calcCRC32(TEXT5);
-		NOCONST crc32_t TEXT6_CRC = calcCRC32(TEXT6);
-		NOCONST crc32_t TEXT7_CRC = calcCRC32(TEXT7);
-		NOCONST crc32_t TEXT8_CRC = calcCRC32(TEXT8);
-		NOCONST crc32_t TEXT9_CRC = calcCRC32(TEXT9);
-		NOCONST crc32_t TEXT10_CRC = calcCRC32(TEXT10);
-		printf(" CRC32:TEXT1:\"%s\" = 0x%08x(%u)\n", TEXT1, TEXT1_CRC, TEXT1_CRC);
-		printf(" CRC32:TEXT2:\"%s\" = 0x%08x(%u)\n", TEXT2, TEXT2_CRC, TEXT2_CRC);
-		printf(" CRC32:TEXT3:\"%s\" = 0x%08x(%u)\n", TEXT3, TEXT3_CRC, TEXT3_CRC);
-		printf(" CRC32:TEXT4:\"%s\" = 0x%08x(%u)\n", TEXT4, TEXT4_CRC, TEXT4_CRC);
-		printf(" CRC32:TEXT5:\"%s\" = 0x%08x(%u)\n", TEXT5, TEXT5_CRC, TEXT5_CRC);
-		printf(" CRC32:TEXT6:\"%s\" = 0x%08x(%u)\n", TEXT6, TEXT6_CRC, TEXT6_CRC);
-		printf(" CRC32:TEXT7:\"%s\" = 0x%08x(%u)\n", TEXT7, TEXT7_CRC, TEXT7_CRC);
-		printf(" CRC32:TEXT8:\"%s\" = 0x%08x(%u)\n", TEXT8, TEXT8_CRC, TEXT8_CRC);
-		printf(" CRC32:TEXT9:\"%s\" = 0x%08x(%u)\n", TEXT9, TEXT9_CRC, TEXT9_CRC);
-		printf(" CRC32:TEXT10:\"%s\" = 0x%08x(%u)\n", TEXT10, TEXT10_CRC, TEXT10_CRC);
-	#endif//ENABLE_MORE_TEST
 	}
-#endif//ENABLE_RUNTIME_TEST
-#ifdef ENABLE_PERFORMANCE_TEST
+
+	//パフォーマンステスト
 	{
 		printf("\n");
-		const auto begin_time = std::chrono::system_clock::now();
-		const int repeat= 100000000;
+		static const int repeat= 10000000;
 		crc32_t crc = 0;
 		static const char* str = "1234567890";
-		for (int loop = 0; loop < repeat; ++loop)
+		crc32_t crc_sum;
+		auto prev_time = std::chrono::system_clock::now();
 		{
-			extern crc32_t test_performance(const char* str, const int dummy);
-			crc = test_performance(str, loop);
+			printf("[calcCRC32_recursive() * %d times]\n", repeat);
+			crc_sum = 0;
+			for (int loop = 0; loop < repeat; ++loop)
+				crc_sum += performance_test_crc32_recursive(str, loop);
 		}
-		const auto end_time = std::chrono::system_clock::now();
-		const auto duration_time = end_time - begin_time;
-		const float elapsed_time = static_cast<float>(static_cast<double>(std::chrono::duration_cast<std::chrono::microseconds>(duration_time).count()) / 1000000.);
-		printf("perfomance test(%d times calculate): str=\"%s\", crc=0x%08x, elapsed-time=%.06f sec\n", repeat, str, crc, elapsed_time);
+		auto print_elapsed_time = [](const std::chrono::system_clock::time_point prev_time, crc32_t crc_sum)
+		{
+			const auto end_time = std::chrono::system_clock::now();
+			const auto duration_time = end_time - prev_time;
+			const double elapsed_time = static_cast<double>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration_time).count()) / 1000000000.;
+			printf("*elapsed time = %.9llf sec (crc_sum=0x%08x)\n", elapsed_time, crc_sum);
+		};
+		print_elapsed_time(prev_time, crc_sum);
+		prev_time = std::chrono::system_clock::now();
+		{
+			printf("[calcCRC32_loop() * %d times]\n", repeat);
+			crc_sum = 0;
+			for (int loop = 0; loop < repeat; ++loop)
+				crc_sum += performance_test_crc32_loop(str, loop);
+		}
+		print_elapsed_time(prev_time, crc_sum);
+		prev_time = std::chrono::system_clock::now();
+		{
+			printf("[calcCRC32_table() * %d times]\n", repeat);
+			crc_sum = 0;
+			for (int loop = 0; loop < repeat; ++loop)
+				crc_sum += performance_test_crc32_table(str, loop);
+		}
+		print_elapsed_time(prev_time, crc_sum);
+		prev_time = std::chrono::system_clock::now();
+		{
+			printf("[calcCRC32_sse() * %d times]\n", repeat);
+			crc_sum = 0;
+			for (int loop = 0; loop < repeat; ++loop)
+				crc_sum += performance_test_crc32_sse(str, loop);
+		}
+		print_elapsed_time(prev_time, crc_sum);
 	}
-#endif//ENABLE_PERFORMANCE_TEST
 }
-
-#ifdef ENABLE_MAIN
-//テスト
-int main(const int arcg, const char* argv[])
-{
-	test_constexpr();
-
-	return EXIT_SUCCESS;
-}
-#endif
-
-#endif
 
 // End of file

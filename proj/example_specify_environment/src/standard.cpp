@@ -5,7 +5,7 @@
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
 //   Released under the MIT license
-//     https://github.com/gakimaru/gasha_examples/LICENSE
+//     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
 #include "standard.h"
