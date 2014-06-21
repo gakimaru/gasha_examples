@@ -284,11 +284,13 @@ Released under the [MIT license][MIT].
 
 3. **ライブラリパスとライブラリファイルを設定**  
 > 下記のパスをプロジェクトのライブラリパスおよびライブラリファイルに追加してください。  
+> 
 > **【Visual C++用】**  
 > > `project/sub/gasha/lib/vc/gasha_x86.lib` ... x86リリースビルド用  
 > > `project/sub/gasha/lib/vc/gasha_x86_debug.lib` ... x86デバッグビルド用  
 > > `project/sub/gasha/lib/vc/gasha_x64.lib` ... x64リリースビルド用  
 > > `project/sub/gasha/lib/vc/gasha_x64_debug.lib` ... x64デバッグビルド用  
+> 
 > **【GCC用】**  
 > > `project/sub/gasha/lib/gcc/gasha_x86.a` ... x86リリースビルド用  
 > > `project/sub/gasha/lib/gcc/gasha_x86_debug.a` ... x86デバッグビルド用  
@@ -297,15 +299,16 @@ Released under the [MIT license][MIT].
 4. **【推奨】強制インクルードとプリコンパイル済みヘッダーを設定**  
 > プラットフォーム／言語設定を暗黙的に全ソースファイルに反映させるために、強制インクルードを使用することを推奨します。  
 > 更に、強制インクルードファイルをプリコンパイル済みヘッダーにすることで、コンパイル速度を高速化することを、合わせて推奨します。  
+> 
 > **【設定例：standard.h】**  
 > > プロジェクトファイル（*.vcxproj, Makefile）と同じディレクトリに standard.h を配置して下さい。  
 > > `stadard.h`の内容（この一行のみ）  
-> > > #include <build_settings.h>  
+> > > `#include <build_settings.h>`  
 > 
 > **【設定例：standard.cpp】** ※Visual C++のみ必要  
 > > プロジェクトファイル（*.vcxproj, Makefile）と同じディレクトリに standard.cpp を配置して下さい。  
 > > `stadard.cpp`の内容（この一行のみ）  
-> > > #include <standard.h>  
+> > > `#include <standard.h>`  
 > 
 > **【Visual C++の場合】**  
 > > プロジェクトのプロパティから、［C/C++］→［詳細設定］ページの設定を下記のように変更して下さい。  
