@@ -40,9 +40,9 @@ Released under the [MIT license][MIT].
 > その「骨格」的な意味合いに、自身のハンドル名「Gakimaru」の頭文字「GA」を重ねて命名しました。
 [GASHADOKURO]: http://ja.wikipedia.org/wiki/%E3%81%8C%E3%81%97%E3%82%83%E3%81%A9%E3%81%8F%E3%82%8D
 
-【クイックスタート】
+ライブラリサンプルプログラム実行手順
 --------
-#ライブラリサンプルプログラム実行手順#
+###【クイックスタート】###
 1. **`git`で`gasha_examples`リポジトリのクローンを作成**  
 > $ git clone https://github.com/gakimaru/gasha_examples.git
 
