@@ -10,7 +10,7 @@
 
 #include "example_crc32.h"
 
-#include <crc32.h>//gasha::crc32
+#include <gasha/crc32.h>//gasha::crc32
 
 USING_NAMESPACE_GASHA//ネームスペース使用
 

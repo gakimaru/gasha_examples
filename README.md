@@ -111,7 +111,7 @@ Released under the [MIT license][MIT].
 ライブラリ概要
 --------
 ####【環境系】####
-* `<build_settings.h>`  
+* `<gasha/build_settings/build_settings.h>`  
     **プラットフォーム／言語設定**  
     
     > コンパイラの種類やバージョンを判別し、必要に応じて `nullptr`, `override`, `alignas`, `thread_local` などのC++11仕様に合わせた処理の独自実装版を有効化し、コード互換性の向上に寄与します。  
@@ -122,7 +122,7 @@ Released under the [MIT license][MIT].
 [本当にちょっとしたプログラミングTips.pdf]: https://github.com/gakimaru/public/blob/master/document/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips/%E6%9C%AC%E5%BD%93%E3%81%AB%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E3%81%97%E3%81%9F%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips.pdf
 
 ####【算術系】####
-* `<crc32>`  
+* `<gasha/crc32.h>`  
     **CRC32計算**  
     
     > `constexpr`, `ユーザー定義リテラル`によるメタプログラミング版と、SSE版にも対応しています。  
@@ -140,7 +140,14 @@ Released under the [MIT license][MIT].
         `-[gasha]                ... サブモジュール：ライブラリ本体用リポジトリ
            |
            |-[include]           ... インクルードファイル用
-           |  |-...
+           |  |
+           |  `-[gasha]          ... ネームスペースディレクトリ
+           |     |                   ※ライブラリファイル名の競合を避けるため
+           |     |- *.h/*.inl                   ... 各種インクルードファイル
+           |     |
+           |     `-[build_settings] ... ビルド設定用
+           |        |
+           |        `- build_settings.h         ... ライブラリビルド設定ファイル
            |
            |-[lib]               ... ライブラリファイル用
            |  |
@@ -171,10 +178,16 @@ Released under the [MIT license][MIT].
            |
            `-[include]           ... ライブラリインクルードファイル用
               |
-              |- project_build_settings_first.h ... プロジェクト固有のライブラリ設定（先行設定）
-              |                                     ※ネームスペース設定など
-              `- project_build_settings.h       ... プロジェクト固有のライブラリ設定
-                                                    ※SSE有効化設定など
+              `-[gasha]          ... ネームスペースディレクトリ
+                 |                   ※ライブラリファイル名の競合を避けるため
+                 `-[build_settings] ... ビルド設定用
+                    |
+                    `-[project]     ... プロジェクト固有設定用
+                       |
+                       |- project_build_settings_first.h ... プロジェクト固有のライブラリ設定（先行設定）
+                       |                                     ※ネームスペース設定など
+                       `- project_build_settings.h       ... プロジェクト固有のライブラリ設定
+                                                             ※SSE有効化設定など
 
 ####サブモジュール／ライブラリソース####
     [gasha_examples/gasha_proj]  ... ライブラリサンプルプログラム／ビルドプロジェクト用リポジトリ
@@ -305,7 +318,7 @@ Released under the [MIT license][MIT].
 > **【設定例：standard.h】**  
 > > プロジェクトファイル（*.vcxproj, Makefile）と同じディレクトリに standard.h を配置して下さい。  
 > > `stadard.h`の内容（この一行のみ）  
-> > > `#include <build_settings.h>`  
+> > > `#include <gasha/build_settings/build_settings.h>`  
 > 
 > **【設定例：standard.cpp】** ※Visual C++のみ必要  
 > > プロジェクトファイル（*.vcxproj, Makefile）と同じディレクトリに standard.cpp を配置して下さい。  

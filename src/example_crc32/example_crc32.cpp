@@ -10,7 +10,7 @@
 
 #include "example_crc32.h"
 
-#include <crc32.h>//gasha::crc32
+#include <gasha/crc32.h>//gasha::crc32
 
 #include <stdio.h>//printf用
 #include <assert.h>//assert用

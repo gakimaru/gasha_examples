@@ -12,7 +12,7 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include <crc32.h>//gasha::crc32
+#include <gasha/crc32.h>//gasha::crc32
 
 //CRC32計算処理テスト
 void example_crc32();
