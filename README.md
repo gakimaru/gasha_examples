@@ -12,6 +12,17 @@ Released under the [MIT license][MIT].
 > 多数のサンプルプログラムのビルドと実行が可能です。  
 > 
 > また、サブモジュールにより、ライブラリ用の各リポジトリを適切な位置関係に配置しており、ライブラリファイルのビルド、および、ソースコードレベルでのライブラリのデバッグが可能です。
+リポジトリには下記のものがあります。
+*[ライブラリ本体][gasha] ... ヘッダーファイルとライブラリファイル  
+*[プロジェクト固有のライブラリ挙動設定][gasha_settings] ... 挙動設定用のヘッダーファイル  
+*[ライブラリソースファイル][gasha_src] ... ライブラリのソースファイルとビルド用プロジェクト  
+*[サンプルプログラム][gasha_examples] ... ライブラリのサブモジュール配置と多数のサンプルプログラム用プロジェクト  
+*[ライブラリビルド用][gasha_proj] ... ライブラリビルド用のサブモジュール配置  
+[gasha]: https://github.com/gakimaru/gasha
+[gasha_settings]: https://github.com/gakimaru/gasha_settngs
+[gasha_src]: https://github.com/gakimaru/gasha_src
+[gasha_examples]: https://github.com/gakimaru/gasha_examples
+[gasha_proj]: https://github.com/gakimaru/gasha_proj
 
 「GASHA」とは？
 ---
@@ -37,7 +48,7 @@ Released under the [MIT license][MIT].
     > コンパイラの種類やバージョンを判別し、必要に応じて `nullptr`, `override`, `alignas`, `thread_local` などのC++11仕様に合わせた処理の独自実装版を有効化し、コード互換性の向上に寄与します。  
     > 同様に、`__FUNCTION__`, `__PRETTY_FUNCTION__` なども各コンパイラで共通利用可能にします。  
     > 通常このヘッダーは、強制インクルード ファイルに設定して利用します。  
-    > 資料：[本当にちょっとしたプログラミングTips.pdf][本当にちょっとしたプログラミングTips.pdf]［コーディングに関するTips］-［#defineマクロの活用］  
+    > *資料：[本当にちょっとしたプログラミングTips.pdf][本当にちょっとしたプログラミングTips.pdf]［コーディングに関するTips］-［#defineマクロの活用］*  
 [本当にちょっとしたプログラミングTips.pdf]: https://github.com/gakimaru/public/blob/master/document/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips/%E6%9C%AC%E5%BD%93%E3%81%AB%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E3%81%97%E3%81%9F%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips.pdf
 
 ####【算術系】####
@@ -45,7 +56,7 @@ Released under the [MIT license][MIT].
     CRC32計算。  
     
     > `constexpr`, `ユーザー定義リテラル`によるメタプログラミング版と、SSE版にも対応します。  
-    > 資料：[効果的なテンプレートテクニック.pdf][効果的なテンプレートテクニック.pdf]［メタプログラミング］-［constexprの活用：CRC値の算出］  
+    > *資料：[効果的なテンプレートテクニック.pdf][効果的なテンプレートテクニック.pdf]［メタプログラミング］-［constexprの活用：CRC値の算出］*  
 [効果的なテンプレートテクニック.pdf]: https://github.com/gakimaru/public/blob/master/document/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips/%E5%8A%B9%E6%9E%9C%E7%9A%84%E3%81%AA%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF.pdf
 
 対象コンパイラ
