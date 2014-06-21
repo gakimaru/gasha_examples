@@ -184,10 +184,10 @@ Released under the [MIT license][MIT].
                     |
                     `-[project]     ... プロジェクト固有設定用
                        |
-                       |- project_build_settings_first.h ... プロジェクト固有のライブラリ設定（先行設定）
-                       |                                     ※ネームスペース設定など
-                       `- project_build_settings.h       ... プロジェクト固有のライブラリ設定
-                                                             ※SSE有効化設定など
+                       |- first_settings.h      ... プロジェクト固有のライブラリ設定（先行設定）
+                       |                            ※ネームスペース設定など
+                       `- last_setteings.h      ... プロジェクト固有のライブラリ設定
+                                                    ※SSE有効化設定など
 
 ####サブモジュール／ライブラリソース####
     [gasha_examples/gasha_proj]  ... ライブラリサンプルプログラム／ビルドプロジェクト用リポジトリ
