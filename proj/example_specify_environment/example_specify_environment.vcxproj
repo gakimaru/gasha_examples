@@ -112,7 +112,7 @@
       <AdditionalDependencies>gasha_x86_debug.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>COPY $(OutDir)$(TargetName)$(TargetExt) $(ProjectDir)..\..\exe\VC\x86\debug\$(TargetName)$(TargetExt)</Command>
+      <Command>COPY $(OutDir)$(TargetName)$(TargetExt) $(ProjectDir)..\..\exe\vc\x86\debug\$(TargetName)$(TargetExt)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -141,7 +141,7 @@
       <AdditionalDependencies>gasha_x64_debug.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>COPY $(OutDir)$(TargetName)$(TargetExt) $(ProjectDir)..\..\exe\VC\x64\debug\$(TargetName)$(TargetExt)</Command>
+      <Command>COPY $(OutDir)$(TargetName)$(TargetExt) $(ProjectDir)..\..\exe\vc\x64\debug\$(TargetName)$(TargetExt)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -175,7 +175,7 @@
       <AdditionalDependencies>gasha_x86.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>COPY $(OutDir)$(TargetName)$(TargetExt) $(ProjectDir)..\..\exe\VC\x86\$(TargetName)$(TargetExt)</Command>
+      <Command>COPY $(OutDir)$(TargetName)$(TargetExt) $(ProjectDir)..\..\exe\vc\x86\$(TargetName)$(TargetExt)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -209,7 +209,7 @@
       <AdditionalDependencies>gasha_x64.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>COPY $(OutDir)$(TargetName)$(TargetExt) $(ProjectDir)..\..\exe\VC\x64\$(TargetName)$(TargetExt)</Command>
+      <Command>COPY $(OutDir)$(TargetName)$(TargetExt) $(ProjectDir)..\..\exe\vc\x64\$(TargetName)$(TargetExt)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

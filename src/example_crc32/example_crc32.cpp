@@ -12,6 +12,7 @@
 
 #include <crc32.h>//gasha::crc32
 
+#include <stdio.h>//printf用
 #include <assert.h>//assert用
 #include <chrono>//C++11 std::chrono
 
@@ -60,7 +61,7 @@ void example_crc32()
 	//※文字列定数の状態やstatic_assertの挙動については、上記のconstexprと同じ。
 	{
 		printf("\n");
-		CONST crc32_t crc = "abcdefghij"_crc32;//ユーザー定義リテラルでコンパイル時に計算 ※文字列リテラルも消滅 ※const変数に代入しないとコンパイル時に計算されないので注意
+		const crc32_t crc = "abcdefghij"_crc32;//ユーザー定義リテラルでコンパイル時に計算 ※文字列リテラルも消滅 ※const変数に代入しないとコンパイル時に計算されないので注意
 	#ifndef CRC32_IS_CRC32C//標準CRC-32(IEEE 802.3)
 		static_assert(crc == 0x3981703au, "invalid crc");
 	#else//CRC32_IS_CRC32C//CRC-32C
@@ -86,7 +87,6 @@ void example_crc32()
 	{
 		printf("\n");
 		static const int repeat= 10000000;
-		crc32_t crc = 0;
 		static const char* str = "1234567890";
 		crc32_t crc_sum;
 		auto prev_time = std::chrono::system_clock::now();
@@ -101,7 +101,7 @@ void example_crc32()
 			const auto end_time = std::chrono::system_clock::now();
 			const auto duration_time = end_time - prev_time;
 			const double elapsed_time = static_cast<double>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration_time).count()) / 1000000000.;
-			printf("*elapsed time = %.9llf sec (crc_sum=0x%08x)\n", elapsed_time, crc_sum);
+			printf("*elapsed time = %.9lf sec (crc_sum=0x%08x)\n", elapsed_time, crc_sum);
 		};
 		print_elapsed_time(prev_time, crc_sum);
 		prev_time = std::chrono::system_clock::now();
