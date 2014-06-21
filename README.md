@@ -48,7 +48,7 @@ Released under the [MIT license][MIT].
     
     > コンパイラの種類やバージョンを判別し、必要に応じて `nullptr`, `override`, `alignas`, `thread_local` などのC++11仕様に合わせた処理の独自実装版を有効化し、コード互換性の向上に寄与します。  
     > 同様に、`__FUNCTION__`, `__PRETTY_FUNCTION__` なども各コンパイラで共通利用可能にします。  
-    > 通常このヘッダーは、強制インクルード ファイルに設定して利用します。  
+    > 通常このファイルは、強制インクルード ファイルに設定して利用します。  
     > **資料：[本当にちょっとしたプログラミングTips.pdf][本当にちょっとしたプログラミングTips.pdf]**  
     > **　　　［コーディングに関するTips］-［#defineマクロの活用］**  
 [本当にちょっとしたプログラミングTips.pdf]: https://github.com/gakimaru/public/blob/master/document/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips/%E6%9C%AC%E5%BD%93%E3%81%AB%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E3%81%97%E3%81%9F%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips.pdf
@@ -74,6 +74,7 @@ Released under the [MIT license][MIT].
 
 基本ディレクトリ構成とサブモジュール構成
 --------
+####サンプルリビルド用リポジトリ####
     [gasha_examples]       ... サンプルプログラム用リポジトリ
      |  
      |-[exe]               ... 実行ファイル用
@@ -85,6 +86,7 @@ Released under the [MIT license][MIT].
         |-[gasha_settings] ... ライブラリ挙動設定(https://github.com/gakimaru/gasha_settings)
         `-[gasha_src]      ... ライブラリソース(https://github.com/gakimaru/gasha_src)
 
+####ライブラリビルド用リポジトリ####
     [gasha_proj]           ... ライブラリビルド用リポジトリ
      |  
      |-[proj]              ... ライブラリビルドプロジェクト用
@@ -128,11 +130,11 @@ Released under the [MIT license][MIT].
 ディレクトリ構成
 --------
 ####サブモジュール／ライブラリ本体####
-    [gasha_examples/gasha_proj]
+    [gasha_examples/gasha_proj]  ... ライブラリサンプル／ビルドプロジェクト用リポジトリ
      |  
-     |-[sub]
+     |-[sub]                     ... サブモジュール用
         |
-        `-[gasha]
+        `-[gasha]                ... サブモジュール：ライブラリ用リポジトリ
            |
            |-[include]           ... インクルードファイル用
            |  |-...
@@ -157,11 +159,11 @@ Released under the [MIT license][MIT].
                                      （ライブラリ／サンプルプログラム共用）
 
 ####サブモジュール／ライブラリ挙動設定####
-    [gasha_examples/gasha_proj]
+    [gasha_examples/gasha_proj]  ... ライブラリサンプル／ビルドプロジェクト用リポジトリ
      |  
-     |-[sub]
+     |-[sub]                     ... サブモジュール用
         |
-        `-[gasha_settings]
+        `-[gasha_settings]       ... サブモジュール：ライブラリ挙動設定用リポジトリ
            |
            `-[include]           ... ライブラリインクルードファイル用
               |
@@ -171,11 +173,11 @@ Released under the [MIT license][MIT].
                                                     ※SSE有効化設定など
 
 ####サブモジュール／ライブラリソース####
-    [gasha_examples/gasha_proj]
+    [gasha_examples/gasha_proj]  ... ライブラリサンプル／ビルドプロジェクト用リポジトリ
      |  
-     |-[sub]
+     |-[sub]                     ... サブモジュール用
         |
-        `-[gasha_src]
+        `-[gasha_src]            ... サブモジュール：ライブラリソース用リポジトリ
            |
            |-[proj]              ... ライブラリビルドプロジェクト用
            |  |
@@ -189,9 +191,9 @@ Released under the [MIT license][MIT].
               |-...
 
 ####実行ファイル####
-    [gasha_examples]
+    [gasha_examples]             ... ライブラリサンプル用リポジトリ
      |  
-     |-[exe]
+     |-[exe]                     ... 実行ファイル用
         |
         |-[gcc]                  ... GCCでビルドした実行ファイルの置き場
         |  |
@@ -223,18 +225,18 @@ Released under the [MIT license][MIT].
               |- ...
 
 ####各サンプルプログラムのソース####
-    [gasha_examples]
+    [gasha_examples]             ... ライブラリサンプル用リポジトリ
      |  
-     |-[src]
+     |-[src]                     ... サンプルプログラムソースファイル用
         |
         |-[（サンプル名）]       ... 各サンプルプログラムソースファイル用
         |  |
         |  |- *.cpp/.h
 
 ####ライブラリおよび各サンプルプログラムのビルドプロジェクト####
-    [gasha_examples]
+    [gasha_examples]             ... ライブラリサンプル用リポジトリ
      |  
-     |-[proj]
+     |-[proj]                    ... ライブラリ／サンプルプログラムビルドプロジェクト用
         |
         |-[（サンプル名）]       ... 各サンプルプログラムビルドプロジェクト用
         |  |
@@ -251,9 +253,9 @@ Released under the [MIT license][MIT].
         `- mk.sh                                ... GCC用ライブラリ＆全サンプルビルドシェルスクリプト
 
 ####ライブラリおよび各サンプルプログラムのビルドプロジェクト####
-    [gasha_proj]
+    [gasha_proj]                 ... ライブラリビルドプロジェクト用リポジトリ
      |  
-     |-[proj]
+     |-[proj]                    ... ライブラリビルドプロジェクト用
         |
         |- gasha.sln                            ... Visual C++用ライブラリビルドソリューション
         `- mk.sh                                ... GCC用ライブラリビルドシェルスクリプト
