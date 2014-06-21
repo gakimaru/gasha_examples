@@ -271,59 +271,59 @@ Released under the [MIT license][MIT].
 
 1. **ライブラリとライブラリ挙動設定リポジトリをプロジェクトに配置**  
 > サブモジュールとして、ライブラリ用のリポジトリを配置してください。  
-> **【配置例】**  
->    [project]              ... プロジェクト用ディレクトリ（gitリポジトリ）
->     |
->     `-[sub]               ... サブモジュール用
->        |
->        |-[gasha]          ... ライブラリ本体用リポジトリ(https://github.com/gakimaru/gasha)
->        `-[gasha_settings] ... ライブラリ挙動設定用リポジトリ(https://github.com/gakimaru/gasha_settings)
+> **【配置例】**`  
+> `[project]              ... プロジェクト用ディレクトリ（gitリポジトリ）`  
+> ` |`  
+> ` `-[sub]               ... サブモジュール用`  
+> `    |`  
+> `    |-[gasha]          ... ライブラリ本体用リポジトリ(https://github.com/gakimaru/gasha)`  
+> `    `-[gasha_settings] ... ライブラリ挙動設定用リポジトリ(https://github.com/gakimaru/gasha_settings)`  
 > ライブラリ自体をプロジェクト向けにビルドする場合は、ライブラリソース用リポジトリも配置してください。  
 > **【配置例】**  
->    [project]              ... プロジェクト用ディレクトリ（gitリポジトリ）
->     |  
->     `-[sub]               ... サブモジュール用
->        |
->        |-[gasha]          ... ライブラリ本体用リポジトリ(https://github.com/gakimaru/gasha)
->        |-[gasha_settings] ... ライブラリ挙動設定用リポジトリ(https://github.com/gakimaru/gasha_settings)
->        `-[gasha_src]      ... ライブラリソース用リポジトリ(https://github.com/gakimaru/gasha_src)
+> `[project]              ... プロジェクト用ディレクトリ（gitリポジトリ）`  
+> ` |  `  
+> ` `-[sub]               ... サブモジュール用`  
+> `    |`  
+> `    |-[gasha]          ... ライブラリ本体用リポジトリ(https://github.com/gakimaru/gasha)`  
+> `    |-[gasha_settings] ... ライブラリ挙動設定用リポジトリ(https://github.com/gakimaru/gasha_settings)`  
+> `    `-[gasha_src]      ... ライブラリソース用リポジトリ(https://github.com/gakimaru/gasha_src)`  
 
 2. **インクルードパスを設定**  
 > 下記のパスをプロジェクトのインクルードパスに追加してください。  
->    [project]
->     |
->     `-[sub]
->        |
->        |-[gasha]
->        |  |
->        |  `[include]            ... ライブラリ用
->        |
->        `-[gasha_settings]
->           |
->           `[include]            ... ライブラリ挙動設定用
+> `[project]`  
+> ` |`  
+> ` `-[sub]`  
+> `    |`  
+> `    |-[gasha]`  
+> `    |  |`  
+> `    |  `[include]            ... ライブラリ用`  
+> `    |`  
+> `    `-[gasha_settings]`  
+> `       |`  
+> `       `[include]            ... ライブラリ挙動設定用`  
 
 3. **ライブラリパスとライブラリファイルを設定**  
 > 下記のパスをプロジェクトのライブラリパスおよびライブラリファイルに追加してください。  
->    [project]
->     |
->     `-[sub]
->        |
->        `-[gasha]
->           |
->           `-[lib]               ... ライブラリファイル用
->              |
->              |-[gcc]            ... GCC用
->              |  |
->              |  |- gasha_x86.a                 ... x86リリースビルド用
->              |  `- gasha_x86_debug.a           ... x86デバッグビルド用
->              |                                     ※x86版Cygwinで開発したため、x64版は現状なし
->              |
->              `-[vc]             ... Visual C++用
->                 |
->                 |- gasha_x86.lib               ... x86リリースビルド用
->                 |- gasha_x86_debug.lib         ... x86デバッグビルド用
->                 |- gasha_x64.lib               ... x64リリースビルド用
->                 `- gasha_x64_debug.lib         ... x64デバッグビルド用
+> `[project]`  
+> ` |`  
+> ` `-[sub]`  
+> `    |`  
+> `    `-[gasha]`  
+> `       |`  
+> `       `-[lib]               ... ライブラリファイル用`  
+> `          |`  
+> `          |-[gcc]            ... GCC用`  
+> `          |  |`  
+> `          |  |- gasha_x86.a                 ... x86リリースビルド用`  
+> `          |  `- gasha_x86_debug.a           ... x86デバッグビルド用`  
+> `          |                                     ※x86版Cygwinで開発したため、x64版は現状なし`  
+> `          |`  
+> `          `-[vc]             ... Visual C++用`  
+> `             |`  
+> `             |- gasha_x86.lib               ... x86リリースビルド用`  
+> `             |- gasha_x86_debug.lib         ... x86デバッグビルド用`  
+> `             |- gasha_x64.lib               ... x64リリースビルド用`  
+> `             `- gasha_x64_debug.lib         ... x64デバッグビルド用`  
 
 4. **【推奨】強制インクルードとプリコンパイル済みヘッダーを設定**  
 > プラットフォーム／言語設定を暗黙的に全ソースファイルに反映させるために、強制インクルードを使用することを推奨します。  
@@ -331,12 +331,12 @@ Released under the [MIT license][MIT].
 > **【設定例：standard.h】**  
 > > プロジェクトファイル（*.vcxproj, Makefile）と同じディレクトリに standard.h を配置して下さい。  
 > > `stadard.h`の内容（この一行のみ）  
-    #include <build_settings.h>
+> > `#include <build_settings.h>`
 > 
 > **【設定例：standard.cpp】** ※Visual C++のみ必要  
 > > プロジェクトファイル（*.vcxproj, Makefile）と同じディレクトリに standard.cpp を配置して下さい。  
 > > `stadard.cpp`の内容（この一行のみ）  
-    #include <standard.h>
+> > `#include <standard.h>`
 > 
 > **【Visual C++の場合】**  
 > > プロジェクトのプロパティから、［C/C++］→［詳細設定］ページの設定を下記のように変更して下さい。  
