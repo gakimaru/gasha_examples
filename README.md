@@ -1,5 +1,5 @@
 GASHA
-====
+========
 **Gakimaru's researched and standard library for C++**  
 Copyright (c) 2014 Itagaki Mamoru  
 Released under the [MIT license][MIT].
@@ -7,7 +7,7 @@ Released under the [MIT license][MIT].
 [MIT]: http://www.opensource.org/licenses/mit-license.php
 
 サンプルプログラム用リポジトリ
----
+--------
 **このリポジトリは、「GASHA」のサンプルプログラム用です。**
 > 多数のサンプルプログラムのビルドと実行が可能です。  
 > 
@@ -26,7 +26,7 @@ Released under the [MIT license][MIT].
 [gasha_proj]: https://github.com/gakimaru/gasha_proj
 
 「GASHA」とは？
----
+--------
 **個人制作による、オープンソースのC++用基本ライブラリです。**  
 > 主にゲーム開発での利用を想定し、暗黙的なメモリ確保／解放を行わない点が特徴の一つです。  
 > 高速性もしくは生産性を追求し、品質と開発効率の向上を目的とするものです。  
@@ -41,7 +41,7 @@ Released under the [MIT license][MIT].
 [GASHADOKURO]: http://ja.wikipedia.org/wiki/%E3%81%8C%E3%81%97%E3%82%83%E3%81%A9%E3%81%8F%E3%82%8D
 
 ライブラリ概要
----
+--------
 ####【環境系】####
 * `<build_settings.h>`  
     **ビルド環境／言語に応じた自動環境設定です。**  
@@ -63,7 +63,7 @@ Released under the [MIT license][MIT].
 [効果的なテンプレートテクニック.pdf]: https://github.com/gakimaru/public/blob/master/document/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips/%E5%8A%B9%E6%9E%9C%E7%9A%84%E3%81%AA%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF.pdf
 
 対象コンパイラ
----
+--------
 **C++11仕様に対応したコンパイラが必要です。**  
 開発には下記のコンパイラを用いています。  
 * Visual Studio 2013  
@@ -73,7 +73,7 @@ Released under the [MIT license][MIT].
 > 逆に言えば、C++11仕様にさえ対応していれば、上記以外のコンパイラでも、ほとんど改変することなく利用可能です。  
 
 サンプルプログラム実行手順
----
+--------
 1. `git`で`gasha_examples`リポジトリのクローンを作成  
 > $ git clone https://github.com/gakimaru/gasha_examples.git
 
@@ -89,7 +89,7 @@ Released under the [MIT license][MIT].
 3. ライブラリのビルド【Visual Studioの場合】  
 > `proj/gasha_examples.sln` を開き、`[ビルド]→[バッチビルド]`メニューを実行し、すべての（もしくは任意の）プロジェクト／構成／プラットフォームを選んでビルドを実行してください。  
 
-4. ライブラリのビルド【Unix系環境の場合】  
+4. ライブラリのビルド【Unix系環境+GCCの場合】  
 > proj/mk.sh を実行してください。  
 > > $ cd proj  
 > > $ ./mk.sh  
@@ -99,12 +99,12 @@ Released under the [MIT license][MIT].
 > `gasha_examples/exe/vc/`以下のフォルダには、サンプルプログラムをまとめて実行し、結果をログファイルに記録するためのバッチファイルも多数用意しています。  
 > また、Visual Studio 上から、「スタートアッププロジェクト」を設定すれば、デバッグ実行することも可能です。  
 
-6. サンプルプログラムの実行【Unix系環境の場合】  
+6. サンプルプログラムの実行【Unix系環境+GCCの場合】  
 > `gasha_examples/exe/gcc/`以下のフォルダから、`（サンプル名）`の実行ファイルを実行することで、サンプルプログラムを実行可能です。  
 > `gasha_examples/exe/gcc/`以下のフォルダには、サンプルプログラムをまとめて実行し、結果をログファイルに記録するためのシェルスクリプトも多数用意しています。  
 
 ライブラリの利用手順
----
+--------
 1. xxx
 > xxx
 
@@ -112,49 +112,49 @@ Released under the [MIT license][MIT].
 > xxx
 
 基本的なフォルダ構成とサブモジュールの構成
----
-> [gasha_examples]  
->  |  
->  |-[exe]  
->  |  |  
->  |  |-[gcc] ... GCCでビルドした実行ファイルの置き場  
->  |  |  |  
->  |  |  `-[x86] ... x86(32bit)向け  
->  |  |     |  
->  |  |     |-[sh] ... サンプル実行とログ記録  
->  |  |     |  |  
->  |  |     |  |-[log]  
->  |  |     |  |  |  
->  |  |     |  |  `-（サンプル）.log  
->  |  |     |  |  
->  |  |     |  |-（サンプル）.sh  
->  |  |     |  |  
->  |  |     |  `- run.sh .. 全サンプル実行  
->  |  |     |  
->  |  |     |-（サンプル）.exe  
->  |  |     |  
->  |  |     `-[Debug] ... デバッグビルド用  
->  |  |        |- ...  
->  |  |  
->  |  `-[vc] ... GCCでビルドした実行ファイルの置き場  
->  |     |  
->  |     |-[x86] ... x86(32bit)向け  
->  |     |  |- ...  
->  |     `-[x64] ... x86_64(64bit)向け  
->  |        |- ...  
->  |  
->  |-[proj]  
->  |  
->  |-[src]  
->  |  
->  `-[sub]  
+--------
+    [gasha_examples]  
+     |  
+     |-[exe]  
+     |  |  
+     |  |-[gcc] ... GCCでビルドした実行ファイルの置き場  
+     |  |  |  
+     |  |  `-[x86] ... x86(32bit)向け  
+     |  |     |  
+     |  |     |-[sh] ... サンプル実行とログ記録  
+     |  |     |  |  
+     |  |     |  |-[log]  
+     |  |     |  |  |  
+     |  |     |  |  `-（サンプル）.log  
+     |  |     |  |  
+     |  |     |  |-（サンプル）.sh  
+     |  |     |  |  
+     |  |     |  `- run.sh .. 全サンプル実行  
+     |  |     |  
+     |  |     |-（サンプル）.exe  
+     |  |     |  
+     |  |     `-[Debug] ... デバッグビルド用  
+     |  |        |- ...  
+     |  |  
+     |  `-[vc] ... GCCでビルドした実行ファイルの置き場  
+     |     |  
+     |     |-[x86] ... x86(32bit)向け  
+     |     |  |- ...  
+     |     `-[x64] ... x86_64(64bit)向け  
+     |        |- ...  
+     |  
+     |-[proj]  
+     |  
+     |-[src]  
+     |  
+     `-[sub]  
 
 サブモジュールのバージョン更新方法
----
+--------
 xxx
 
 サンプルプログラムの構成
----
+--------
 xxx
 
 ■■以上
