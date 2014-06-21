@@ -13,13 +13,18 @@ Released under the [MIT license][MIT].
 > 
 > また、サブモジュールにより、ライブラリ用の各リポジトリを適切な位置関係に配置しており、ライブラリファイルのビルド、および、ソースコードレベルでのライブラリのデバッグが可能です。  
 > 
-> リポジトリには下記のものがあります。  
-> > * [ライブラリ本体][gasha] ... ヘッダーファイルとライブラリファイル  
-> > * [ライブラリ挙動設定][gasha_settings] ... プロジェクト固有の挙動設定用のヘッダーファイル  
-> > * [ライブラリソースファイル][gasha_src] ... ライブラリのソースファイルとビルド用プロジェクト  
-> > * [サンプルプログラム][gasha_examples] ... 多数のサンプルプログラム用プロジェクト  
-> >   　　　　　　　　　　　（ライブラリとソースをサブモジュール配置）  
-> > * [ライブラリビルド用][gasha_proj] ... ライブラリとソースをサブモジュール配置  
+> **リポジトリ構成**
+> > * [`gasha` ライブラリ本体用リポジトリ][gasha]  
+> >   ヘッダーファイルとライブラリファイル  
+> > * [`gasha_settings` ライブラリ挙動設定用リポジトリ][gasha_settings]  
+> >   プロジェクト固有の挙動設定用のヘッダーファイル  
+> > * [`gasha_src` ライブラリソース用リポジトリ][gasha_src]  
+> >   ライブラリのソースファイルとビルド用プロジェクト  
+> > * [`gasha_examples` サンプルプログラム用リポジトリ][gasha_examples]  
+> >   多数のサンプルプログラム用プロジェクト  
+> >   ライブラリとソースをサブモジュール配置  
+> > * [`gasha_proj` ライブラリビルド用リポジトリ][gasha_proj]  
+> >   ライブラリとソースをサブモジュール配置  
 [gasha]: https://github.com/gakimaru/gasha
 [gasha_settings]: https://github.com/gakimaru/gasha_settngs
 [gasha_src]: https://github.com/gakimaru/gasha_src
@@ -58,7 +63,7 @@ Released under the [MIT license][MIT].
 * `<crc32>`  
     CRC32計算。  
     
-    > `constexpr`, `ユーザー定義リテラル`によるメタプログラミング版と、SSE版にも対応します。  
+    > `constexpr`, `ユーザー定義リテラル`によるメタプログラミング版と、SSE版にも対応しています。  
     > **資料：[効果的なテンプレートテクニック.pdf][効果的なテンプレートテクニック.pdf]**  
     > **　　　［メタプログラミング］-［constexprの活用：CRC値の算出］**  
 [効果的なテンプレートテクニック.pdf]: https://github.com/gakimaru/public/blob/master/document/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips/%E5%8A%B9%E6%9E%9C%E7%9A%84%E3%81%AA%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF.pdf
@@ -81,6 +86,7 @@ Released under the [MIT license][MIT].
 2. サブモジュールのアップデート  
 > $ cd gasha_examples  
 > $ git submodule update --init  
+> 
 > これにより、サブモジュールとして配置された三つのリポジトリクローンが更新されます。  
 > > `sub/gasha` ... ライブラリ本体  
 > > `sub/gasha_settings` ... ライブラリ挙動設定  
