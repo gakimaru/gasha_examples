@@ -74,7 +74,7 @@ Released under the [MIT license][MIT].
 
 基本ディレクトリ構成とサブモジュール構成
 --------
-####サンプルリビルド用リポジトリ####
+####サンプルプログラムビルド用リポジトリ####
     [gasha_examples]       ... サンプルプログラム用リポジトリ
      |  
      |-[exe]               ... 実行ファイル用
@@ -130,7 +130,7 @@ Released under the [MIT license][MIT].
 ディレクトリ構成
 --------
 ####サブモジュール／ライブラリ本体####
-    [gasha_examples/gasha_proj]  ... ライブラリサンプル／ビルドプロジェクト用リポジトリ
+    [gasha_examples/gasha_proj]  ... ライブラリサンプルプログラム／ビルドプロジェクト用リポジトリ
      |  
      |-[sub]                     ... サブモジュール用
         |
@@ -159,7 +159,7 @@ Released under the [MIT license][MIT].
                                      （ライブラリ／サンプルプログラム共用）
 
 ####サブモジュール／ライブラリ挙動設定####
-    [gasha_examples/gasha_proj]  ... ライブラリサンプル／ビルドプロジェクト用リポジトリ
+    [gasha_examples/gasha_proj]  ... ライブラリサンプルプログラム／ビルドプロジェクト用リポジトリ
      |  
      |-[sub]                     ... サブモジュール用
         |
@@ -173,7 +173,7 @@ Released under the [MIT license][MIT].
                                                     ※SSE有効化設定など
 
 ####サブモジュール／ライブラリソース####
-    [gasha_examples/gasha_proj]  ... ライブラリサンプル／ビルドプロジェクト用リポジトリ
+    [gasha_examples/gasha_proj]  ... ライブラリサンプルプログラム／ビルドプロジェクト用リポジトリ
      |  
      |-[sub]                     ... サブモジュール用
         |
@@ -191,7 +191,7 @@ Released under the [MIT license][MIT].
               |-...
 
 ####実行ファイル####
-    [gasha_examples]             ... ライブラリサンプル用リポジトリ
+    [gasha_examples]             ... ライブラリサンプルプログラム用リポジトリ
      |  
      |-[exe]                     ... 実行ファイル用
         |
@@ -199,7 +199,7 @@ Released under the [MIT license][MIT].
         |  |
         |  `-[x86]               ... x86(32bit)向け
         |     |
-        |     |-[sh]             ... サンプル実行と実行ログ記録用
+        |     |-[sh]             ... サンプルプログラム実行と実行ログ記録用
         |     |  |
         |     |  |-[log]
         |     |  |  |
@@ -207,7 +207,7 @@ Released under the [MIT license][MIT].
         |     |  |
         |     |  |-（サンプル名）.sh
         |     |  |
-        |     |  `- run.sh                      ... 全サンプル実行用シェルスクリプト
+        |     |  `- run.sh                      ... 全サンプルプログラム実行用シェルスクリプト
         |     |
         |     |-（サンプル名）.exe
         |     |
@@ -225,7 +225,7 @@ Released under the [MIT license][MIT].
               |- ...
 
 ####各サンプルプログラムのソース####
-    [gasha_examples]             ... ライブラリサンプル用リポジトリ
+    [gasha_examples]             ... ライブラリサンプルプログラム用リポジトリ
      |  
      |-[src]                     ... サンプルプログラムソースファイル用
         |
@@ -234,23 +234,23 @@ Released under the [MIT license][MIT].
         |  |- *.cpp/.h
 
 ####ライブラリおよび各サンプルプログラムのビルドプロジェクト####
-    [gasha_examples]             ... ライブラリサンプル用リポジトリ
+    [gasha_examples]             ... ライブラリサンプルプログラム用リポジトリ
      |  
      |-[proj]                    ... ライブラリ／サンプルプログラムビルドプロジェクト用
         |
         |-[（サンプル名）]       ... 各サンプルプログラムビルドプロジェクト用
         |  |
-        |  |- main.cpp                          ... サンプル用メイン関数
-        |  |- standard.h/.cpp                   ... サンプル用強制インクルード／プリコンパイル済みヘッダー
+        |  |- main.cpp                          ... サンプルプログラム用メイン関数
+        |  |- standard.h/.cpp                   ... サンプルプログラム用強制インクルード／プリコンパイル済みヘッダー
         |  |
-        |  |- （サンプル名）.vcxproj            ... Visual C++用サンプルビルドプロジェクト
-        |  |- Makefile                          ... GCC用サンプルビルドメイクファイル
-        |  `- mk.sh                             ... GCC用サンプルビルドシェルスクリプト
+        |  |- （サンプル名）.vcxproj            ... Visual C++用サンプルプログラムビルドプロジェクト
+        |  |- Makefile                          ... GCC用サンプルプログラムビルドメイクファイル
+        |  `- mk.sh                             ... GCC用サンプルプログラムビルドシェルスクリプト
         |
-        |- Makefile_example_common              ... GCC用サンプルメイクファイルの共通部分
+        |- Makefile_example_common              ... GCC用サンプルプログラムメイクファイルの共通部分
         |
-        |- gasha_examples.sln                   ... Visual C++用ライブラリ＆全サンプルビルドソリューション
-        `- mk.sh                                ... GCC用ライブラリ＆全サンプルビルドシェルスクリプト
+        |- gasha_examples.sln                   ... Visual C++用ライブラリ＆全サンプルプログラムビルドソリューション
+        `- mk.sh                                ... GCC用ライブラリ＆全サンプルプログラムビルドシェルスクリプト
 
 ####ライブラリおよび各サンプルプログラムのビルドプロジェクト####
     [gasha_proj]                 ... ライブラリビルドプロジェクト用リポジトリ
