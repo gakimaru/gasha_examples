@@ -118,7 +118,7 @@ Released under the [MIT license][MIT].
 
 ディレクトリ構成
 --------
-*サブモジュール／ライブラリ本体*
+####サブモジュール／ライブラリ本体####
     [sub]
      |
      `-[gasha]
@@ -145,7 +145,7 @@ Released under the [MIT license][MIT].
            `- Makefile_common ... GCC用メイクファイルの共通部分
                                   （ライブラリ／サンプルプログラム共用）
 
-*サブモジュール／ライブラリ挙動設定*
+####サブモジュール／ライブラリ挙動設定####
     [sub]
      |
      `-[gasha_settings]
@@ -157,7 +157,7 @@ Released under the [MIT license][MIT].
            `- project_build_settings.h       ... プロジェクト固有のライブラリ設定
                                                  ※SSE有効化設定など
 
-*サブモジュール／ライブラリソース*
+####サブモジュール／ライブラリソース####
     [sub]
      |
      `-[gasha_src]
@@ -173,7 +173,7 @@ Released under the [MIT license][MIT].
         `-[src]               ... ライブラリソースファイル用
            |-...
 
-*実行ファイル*
+####実行ファイル####
     [exe]
      |
      |-[gcc]                  ... GCCでビルドした実行ファイルの置き場
@@ -205,7 +205,7 @@ Released under the [MIT license][MIT].
         `-[x64]               ... x64(64bit)向け
            |- ...
 
-*ライブラリおよび各サンプルプログラムのビルドプロジェクト*
+####ライブラリおよび各サンプルプログラムのビルドプロジェクト####
     [proj]
      |
      |-[（サンプル名）]       ... 各サンプルプログラムビルドプロジェクト用
@@ -222,7 +222,7 @@ Released under the [MIT license][MIT].
      |- gasha_examples.vcxproj               ... Visual C++用ライブラリ＆全サンプルビルドソリューション
      `- mk.sh                                ... GCC用ライブラリ＆全サンプルビルドシェルスクリプト
 
-*各サンプルプログラムのソース*
+####各サンプルプログラムのソース####
     [src]
      |
      |-[（サンプル名）]       ... 各サンプルプログラムソースファイル用
