@@ -1,0 +1,13 @@
+
+constexpr によるCRC計算結果=0xf3dbd4fe
+
+ランタイム関数によるCRC計算結果=0xd599aefd
+
+[calcCRC32_recursive() * 10000000 times]
+*elapsed time = 0.598568900 sec (crc_sum=0x33875300)
+[calcCRC32_loop() * 10000000 times]
+*elapsed time = 0.723690400 sec (crc_sum=0x33875300)
+[calcCRC32_table() * 10000000 times]
+*elapsed time = 0.210199500 sec (crc_sum=0x33875300)
+[calcCRC32_sse() * 10000000 times]
+*elapsed time = 0.088084200 sec (crc_sum=0x33875300)
