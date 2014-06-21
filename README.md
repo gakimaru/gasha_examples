@@ -55,13 +55,22 @@ C++11必須です。
 > $ cd gasha_examples
 > $ git submodule update --init
 
-3.（Visual Studioの場合）  
+3.（a.Visual Studioの場合）  
 proj/gasha_examples.sln を開き、[ビルド]→[バッチビルド]メニューを実行し、すべての（もしくは任意の）プロジェクト／構成／プラットフォームを選んでビルドを実行
 
-3.（Unix系環境の場合）
+3.（b.Unix系環境の場合）
 proj/mk.sh を実行
 > $ cd proj
 > $ ./mk.sh
+
+4.（a.Visual Studioの場合）  
+`gasha_examples\exe\vc\`以下のフォルダから、`（サンプル名）.exe`を実行することで、サンプルプログラムを実行可能。  
+`gasha_examples\exe\vc\`以下のフォルダには、サンプルプログラムをまとめて実行し、結果をログファイルに記録するためのバッチファイルも多数用意。
+また、Visual Studio 上から、「スタートアッププロジェクト」を設定して実行することも可能。
+
+4.（b.Unix系の場合）  
+`gasha_examples\exe\gcc\`以下のフォルダから、`（サンプル名）`の実行ファイルを実行することで、サンプルプログラムを実行可能。  
+`gasha_examples\exe\gcc\`以下のフォルダには、サンプルプログラムをまとめて実行し、結果をログファイルに記録するためのシェルスクリプトも多数用意。
 
 「GASHA」をプロジェクトに組み込んで利用する手順
 ---
