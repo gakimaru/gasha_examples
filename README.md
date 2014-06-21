@@ -44,7 +44,7 @@ Released under the [MIT license][MIT].
 --------
 ####【環境系】####
 * `<build_settings.h>`  
-    **ビルド環境／言語に応じた自動環境設定です。**  
+    **プラットフォーム／言語設定**  
     
     > コンパイラの種類やバージョンを判別し、必要に応じて `nullptr`, `override`, `alignas`, `thread_local` などのC++11仕様に合わせた処理の独自実装版を有効化し、コード互換性の向上に寄与します。  
     > 同様に、`__FUNCTION__`, `__PRETTY_FUNCTION__` なども各コンパイラで共通利用可能にします。  
@@ -55,7 +55,7 @@ Released under the [MIT license][MIT].
 
 ####【算術系】####
 * `<crc32>`  
-    **CRC32計算用です。**  
+    **CRC32計算**  
     
     > `constexpr`, `ユーザー定義リテラル`によるメタプログラミング版と、SSE版にも対応しています。  
     > **資料：[効果的なテンプレートテクニック.pdf][効果的なテンプレートテクニック.pdf]**  
@@ -76,25 +76,25 @@ Released under the [MIT license][MIT].
 --------
 ####サンプルプログラムビルド用リポジトリ####
     [gasha_examples]       ... サンプルプログラム用リポジトリ
-     |  
+     |
      |-[exe]               ... 実行ファイル用
      |-[proj]              ... 各サンプルプログラムのビルドプロジェクト用
      |-[src]               ... 各サンプルプログラムのソースファイル用
      `-[sub]               ... サブモジュール用
         |
-        |-[gasha]          ... ライブラリ本体(https://github.com/gakimaru/gasha)
-        |-[gasha_settings] ... ライブラリ挙動設定(https://github.com/gakimaru/gasha_settings)
-        `-[gasha_src]      ... ライブラリソース(https://github.com/gakimaru/gasha_src)
+        |-[gasha]          ... ライブラリ本体用リポジトリ(https://github.com/gakimaru/gasha)
+        |-[gasha_settings] ... ライブラリ挙動設定用リポジトリ(https://github.com/gakimaru/gasha_settings)
+        `-[gasha_src]      ... ライブラリソース用リポジトリ(https://github.com/gakimaru/gasha_src)
 
 ####ライブラリビルド用リポジトリ####
     [gasha_proj]           ... ライブラリビルド用リポジトリ
-     |  
+     |
      |-[proj]              ... ライブラリビルドプロジェクト用
      `-[sub]               ... サブモジュール用
         |
-        |-[gasha]          ... ライブラリ本体(https://github.com/gakimaru/gasha)
-        |-[gasha_settings] ... ライブラリ挙動設定(https://github.com/gakimaru/gasha_settings)
-        `-[gasha_src]      ... ライブラリソース(https://github.com/gakimaru/gasha_src)
+        |-[gasha]          ... ライブラリ本体用リポジトリ(https://github.com/gakimaru/gasha)
+        |-[gasha_settings] ... ライブラリ挙動設定用リポジトリ(https://github.com/gakimaru/gasha_settings)
+        `-[gasha_src]      ... ライブラリソース用リポジトリ(https://github.com/gakimaru/gasha_src)
 
 サンプルプログラム実行手順
 --------
@@ -110,20 +110,20 @@ Released under the [MIT license][MIT].
 > > `sub/gasha_settings` ... ライブラリ挙動設定  
 > > `sub/gasha_src` ... ライブラリソース
 
-3. ライブラリのビルド【Visual Studioの場合】  
+3. ライブラリのビルド
+####【Visual C++の場合】####
 > `proj/gasha_examples.sln` を開き、`[ビルド]→[バッチビルド]`メニューを実行し、すべての（もしくは任意の）プロジェクト／構成／プラットフォームを選んでビルドを実行してください。  
-
-4. ライブラリのビルド【Unix系環境+GCCの場合】  
+####【Unix系環境+GCCの場合】####
 > proj/mk.sh を実行してください。  
 > > $ cd proj  
 > > $ ./mk.sh  
 
-5. サンプルプログラムの実行【Visual Studioの場合】  
+4. サンプルプログラムの実行
+####【Visual C++の場合】####
 > `exe/vc/`以下のディレクトリから、`（サンプル名）.exe`を実行することで、サンプルプログラムを実行可能です。  
 > `exe/vc/`以下のディレクトリには、サンプルプログラムをまとめて実行し、結果をログファイルに記録するためのバッチファイルも多数用意しています。  
 > また、Visual Studio 上から、「スタートアッププロジェクト」を設定すれば、デバッグ実行することも可能です。  
-
-6. サンプルプログラムの実行【Unix系環境+GCCの場合】  
+####【Unix系環境+GCCの場合】####
 > `exe/gcc/`以下のディレクトリから、`（サンプル名）`の実行ファイルを実行することで、サンプルプログラムを実行可能です。  
 > `exe/gcc/`以下のディレクトリには、サンプルプログラムをまとめて実行し、結果をログファイルに記録するためのシェルスクリプトも多数用意しています。  
 
@@ -131,10 +131,10 @@ Released under the [MIT license][MIT].
 --------
 ####サブモジュール／ライブラリ本体####
     [gasha_examples/gasha_proj]  ... ライブラリサンプルプログラム／ビルドプロジェクト用リポジトリ
-     |  
+     |
      |-[sub]                     ... サブモジュール用
         |
-        `-[gasha]                ... サブモジュール：ライブラリ用リポジトリ
+        `-[gasha]                ... サブモジュール：ライブラリ本体用リポジトリ
            |
            |-[include]           ... インクルードファイル用
            |  |-...
@@ -143,15 +143,16 @@ Released under the [MIT license][MIT].
            |  |
            |  |-[gcc]            ... GCC用
            |  |  |
-           |  |  |- gasha_x86.a
-           |  |  `- gasha_x86_debug.a
+           |  |  |- gasha_x86.a                 ... x86リリースビルド用
+           |  |  `- gasha_x86_debug.a           ... x86デバッグビルド用
+           |  |                                     ※x32版Cygwinで開発したため、x64版は現状なし
            |  |
            |  `-[vc]             ... Visual C++用
            |     |
-           |     |- gasha_x86.lib
-           |     |- gasha_x86_debug.lib
-           |     |- gasha_x64.lib
-           |     `- gasha_x64_debug.lib
+           |     |- gasha_x86.lib               ... x86リリースビルド用
+           |     |- gasha_x86_debug.lib         ... x86デバッグビルド用
+           |     |- gasha_x64.lib               ... x64リリースビルド用
+           |     `- gasha_x64_debug.lib         ... x64デバッグビルド用
            |
            `-[proj]
               |
@@ -160,7 +161,7 @@ Released under the [MIT license][MIT].
 
 ####サブモジュール／ライブラリ挙動設定####
     [gasha_examples/gasha_proj]  ... ライブラリサンプルプログラム／ビルドプロジェクト用リポジトリ
-     |  
+     |
      |-[sub]                     ... サブモジュール用
         |
         `-[gasha_settings]       ... サブモジュール：ライブラリ挙動設定用リポジトリ
@@ -174,7 +175,7 @@ Released under the [MIT license][MIT].
 
 ####サブモジュール／ライブラリソース####
     [gasha_examples/gasha_proj]  ... ライブラリサンプルプログラム／ビルドプロジェクト用リポジトリ
-     |  
+     |
      |-[sub]                     ... サブモジュール用
         |
         `-[gasha_src]            ... サブモジュール：ライブラリソース用リポジトリ
@@ -192,12 +193,13 @@ Released under the [MIT license][MIT].
 
 ####実行ファイル####
     [gasha_examples]             ... ライブラリサンプルプログラム用リポジトリ
-     |  
+     |
      |-[exe]                     ... 実行ファイル用
         |
         |-[gcc]                  ... GCCでビルドした実行ファイルの置き場
         |  |
         |  `-[x86]               ... x86(32bit)向け
+        |     |                      ※x32版Cygwinで開発したため、x64版は現状なし
         |     |
         |     |-[sh]             ... サンプルプログラム実行と実行ログ記録用
         |     |  |
@@ -226,7 +228,7 @@ Released under the [MIT license][MIT].
 
 ####各サンプルプログラムのソース####
     [gasha_examples]             ... ライブラリサンプルプログラム用リポジトリ
-     |  
+     |
      |-[src]                     ... サンプルプログラムソースファイル用
         |
         |-[（サンプル名）]       ... 各サンプルプログラムソースファイル用
@@ -235,7 +237,7 @@ Released under the [MIT license][MIT].
 
 ####ライブラリおよび各サンプルプログラムのビルドプロジェクト####
     [gasha_examples]             ... ライブラリサンプルプログラム用リポジトリ
-     |  
+     |
      |-[proj]                    ... ライブラリ／サンプルプログラムビルドプロジェクト用
         |
         |-[（サンプル名）]       ... 各サンプルプログラムビルドプロジェクト用
@@ -254,7 +256,7 @@ Released under the [MIT license][MIT].
 
 ####ライブラリおよび各サンプルプログラムのビルドプロジェクト####
     [gasha_proj]                 ... ライブラリビルドプロジェクト用リポジトリ
-     |  
+     |
      |-[proj]                    ... ライブラリビルドプロジェクト用
         |
         |- gasha.sln                            ... Visual C++用ライブラリビルドソリューション
@@ -262,14 +264,96 @@ Released under the [MIT license][MIT].
 
 ライブラリの利用手順
 --------
-1. xxx
-> xxx
+*【前提１】GASHAもしくはその派生ライブラリをgitリポジトリで管理するものとする*  
+*【前提２】ライブラリを複数プロジェクトで共通利用するものとする*  
+1. ライブラリとライブラリ挙動設定リポジトリをプロジェクトに配置
+サブモジュールとして、ライブラリ用のリポジトリを配置してください。
+####【配置例】####
+    [project]              ... プロジェクト用ディレクトリ（gitリポジトリ）
+     |
+     `-[sub]               ... サブモジュール用
+        |
+        |-[gasha]          ... ライブラリ本体用リポジトリ(https://github.com/gakimaru/gasha)
+        `-[gasha_settings] ... ライブラリ挙動設定用リポジトリ(https://github.com/gakimaru/gasha_settings)
+ライブラリ自体をプロジェクト向けにビルドする場合は、ライブラリソース用リポジトリも配置してください。
+####【配置例】####
+    [project]              ... プロジェクト用ディレクトリ（gitリポジトリ）
+     |  
+     `-[sub]               ... サブモジュール用
+        |
+        |-[gasha]          ... ライブラリ本体用リポジトリ(https://github.com/gakimaru/gasha)
+        |-[gasha_settings] ... ライブラリ挙動設定用リポジトリ(https://github.com/gakimaru/gasha_settings)
+        `-[gasha_src]      ... ライブラリソース用リポジトリ(https://github.com/gakimaru/gasha_src)
 
-2. xxx
-> xxx
+2. インクルードパスを設定
+下記のパスをプロジェクトのインクルードパスに追加してください。
+    [project]
+     |
+     `-[sub]
+        |
+        |-[gasha]
+        |  |
+        |  `[include]            ... ライブラリ用
+        |
+        `-[gasha_settings]
+           |
+           `[include]            ... ライブラリ挙動設定用
 
-サブモジュールのバージョン更新方法
+3. ライブラリパスとライブラリファイルを設定
+下記のパスをプロジェクトのライブラリパスおよびライブラリファイルに追加してください。
+    [project]
+     |
+     `-[sub]
+        |
+        `-[gasha]
+           |
+           `-[lib]               ... ライブラリファイル用
+              |
+              |-[gcc]            ... GCC用
+              |  |
+              |  |- gasha_x86.a                 ... x86リリースビルド用
+              |  `- gasha_x86_debug.a           ... x86デバッグビルド用
+              |                                     ※x32版Cygwinで開発したため、x64版は現状なし
+              |
+              `-[vc]             ... Visual C++用
+                 |
+                 |- gasha_x86.lib               ... x86リリースビルド用
+                 |- gasha_x86_debug.lib         ... x86デバッグビルド用
+                 |- gasha_x64.lib               ... x64リリースビルド用
+                 `- gasha_x64_debug.lib         ... x64デバッグビルド用
+
+4. 【推奨】強制インクルードとプリコンパイル済みヘッダーを設定
+> プラットフォーム／言語設定を暗黙的に全ソースファイルに反映させるために、強制インクルードを使用することを推奨します。  
+> 更に、強制インクルードファイルをプリコンパイル済みヘッダーにすることで、コンパイル速度を高速化することを、合わせて推奨します。  
+####【設定例：standard.h】####
+> プロジェクトファイル（*.vcxproj, Makefile）と同じディレクトリに standard.h を配置して下さい。  
+`stadard.h`の内容（この一行のみ）  
+`#include <build_settings.h>`  
+####【設定例：standard.cpp】※Visual C++のみ必要####
+> プロジェクトファイル（*.vcxproj, Makefile）と同じディレクトリに standard.cpp を配置して下さい。  
+`stadard.cpp`の内容（この一行のみ）  
+`#include <standard.h>`  
+####【Visual C++の場合】####
+> プロジェクトのプロパティから、［C/C++］→［詳細設定］ページの設定を下記のように変更して下さい。  
+> ・［必ず使用されるインクルードファイル］に standard.h を指定  
+> プロジェクトのプロパティから、［C/C++］→［プリコンパイル済みヘッダー］ページの設定を下記のように変更して下さい。  
+> ・［プリコンパイル済みヘッダー］に「使用(/Yu)」を指定  
+> ・［プリコンパイル済みヘッダーファイル］に standard.h を指定  
+> 更に、standard.cpp のプロパティから、［C/C++］→［プリコンパイル済みヘッダー］ページの設定を下記のように変更して下さい。  
+> ・［プリコンパイル済みヘッダー］に「作成(/Yc)」を指定  
+> ・［プリコンパイル済みヘッダーファイル］に standard.h を指定  
+####【GCCの場合】####
+> g++コマンドでプリコンパイル済みヘッダーファイル standard.h.gch を作成して下さい。  
+> 【例】 $ g++ （-std=c++11 や -g などのコンパイルオプション） -x c++-header standard.h  
+> standard.h.gch はインクルードパスが通った場所に配置して下さい。  
+> コンパイル時にはは、g++コマンドに -inlude オプションを指定してください。  
+> .h.gch ではなく、.h ファイルを指定します。  
+> 【例】 $ g++ （-std=c++11 や -g などのコンパイルオプション） -include standard.h -c xxx.cpp -o xxx.o
+
+5. サブモジュールのブランチ（もしくはタグ／バージョン）を設定
+> サブモジュールの挙動設定ファイルの変更やライブラリのビルドなどを行った後、プロジェクトをコミットして下さい。  
+> サブモジュール用のフォルダがコミット対象になります。  
+> これにより、プロジェクトで使用するサブモジュール（ライブラリのリポジトリ）のバージョンが設定されます。  
+
 --------
-xxx
-
 ■■以上
