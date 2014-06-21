@@ -74,12 +74,21 @@ Released under the [MIT license][MIT].
 
 基本ディレクトリ構成とサブモジュール構成
 --------
-    [gasha_examples] ... サンプルプログラム用リポジトリ
+    [gasha_examples]       ... サンプルプログラム用リポジトリ
      |  
-     |-[exe]  ... 実行ファイル用
-     |-[proj] ... 各サンプルプログラムのビルドプロジェクト用
-     |-[src]  ... 各サンプルプログラムのソースファイル用
-     `-[sub]  ... サブモジュール用
+     |-[exe]               ... 実行ファイル用
+     |-[proj]              ... 各サンプルプログラムのビルドプロジェクト用
+     |-[src]               ... 各サンプルプログラムのソースファイル用
+     `-[sub]               ... サブモジュール用
+        |
+        |-[gasha]          ... ライブラリ本体(https://github.com/gakimaru/gasha)
+        |-[gasha_settings] ... ライブラリ挙動設定(https://github.com/gakimaru/gasha_settings)
+        `-[gasha_src]      ... ライブラリソース(https://github.com/gakimaru/gasha_src)
+
+    [gasha_proj]           ... ライブラリビルド用リポジトリ
+     |  
+     |-[proj]              ... ライブラリビルドプロジェクト用
+     `-[sub]               ... サブモジュール用
         |
         |-[gasha]          ... ライブラリ本体(https://github.com/gakimaru/gasha)
         |-[gasha_settings] ... ライブラリ挙動設定(https://github.com/gakimaru/gasha_settings)
@@ -119,115 +128,135 @@ Released under the [MIT license][MIT].
 ディレクトリ構成
 --------
 ####サブモジュール／ライブラリ本体####
-    [sub]
-     |
-     `-[gasha]
+    [gasha_examples/gasha_proj]
+     |  
+     |-[sub]
         |
-        |-[include]           ... インクルードファイル用
-        |  |-...
-        |
-        |-[lib]               ... ライブラリファイル用
-        |  |
-        |  |-[gcc]            ... GCC用
-        |  |  |
-        |  |  |- gasha_x86.a
-        |  |  `- gasha_x86_debug.a
-        |  |
-        |  `-[vc]             ... Visual C++用
-        |     |
-        |     |- gasha_x86.lib
-        |     |- gasha_x86_debug.lib
-        |     |- gasha_x64.lib
-        |     `- gasha_x64_debug.lib
-        |
-        `-[proj]
+        `-[gasha]
            |
-           `- Makefile_common ... GCC用メイクファイルの共通部分
-                                  （ライブラリ／サンプルプログラム共用）
+           |-[include]           ... インクルードファイル用
+           |  |-...
+           |
+           |-[lib]               ... ライブラリファイル用
+           |  |
+           |  |-[gcc]            ... GCC用
+           |  |  |
+           |  |  |- gasha_x86.a
+           |  |  `- gasha_x86_debug.a
+           |  |
+           |  `-[vc]             ... Visual C++用
+           |     |
+           |     |- gasha_x86.lib
+           |     |- gasha_x86_debug.lib
+           |     |- gasha_x64.lib
+           |     `- gasha_x64_debug.lib
+           |
+           `-[proj]
+              |
+              `- Makefile_common ... GCC用メイクファイルの共通部分
+                                     （ライブラリ／サンプルプログラム共用）
 
 ####サブモジュール／ライブラリ挙動設定####
-    [sub]
-     |
-     `-[gasha_settings]
+    [gasha_examples/gasha_proj]
+     |  
+     |-[sub]
         |
-        `-[include]           ... ライブラリインクルードファイル用
+        `-[gasha_settings]
            |
-           |- project_build_settings_first.h ... プロジェクト固有のライブラリ設定（先行設定）
-           |                                     ※ネームスペース設定など
-           `- project_build_settings.h       ... プロジェクト固有のライブラリ設定
-                                                 ※SSE有効化設定など
+           `-[include]           ... ライブラリインクルードファイル用
+              |
+              |- project_build_settings_first.h ... プロジェクト固有のライブラリ設定（先行設定）
+              |                                     ※ネームスペース設定など
+              `- project_build_settings.h       ... プロジェクト固有のライブラリ設定
+                                                    ※SSE有効化設定など
 
 ####サブモジュール／ライブラリソース####
-    [sub]
-     |
-     `-[gasha_src]
+    [gasha_examples/gasha_proj]
+     |  
+     |-[sub]
         |
-        |-[proj]              ... ライブラリビルドプロジェクト用
-        |  |
-        |  |- standard.h/.cpp                ... 強制インクルード／プリコンパイル済みヘッダー
-        |  |
-        |  |- gasha.vcxproj                  ... Visual C++用ライブラリビルドプロジェクト
-        |  |- Makefile                       ... GCC用ライブラリビルドメイクファイル
-        |  `- mk.sh                          ... GCC用ライブラリビルドシェルスクリプト
-        |
-        `-[src]               ... ライブラリソースファイル用
-           |-...
+        `-[gasha_src]
+           |
+           |-[proj]              ... ライブラリビルドプロジェクト用
+           |  |
+           |  |- standard.h/.cpp                ... 強制インクルード／プリコンパイル済みヘッダー
+           |  |
+           |  |- gasha.vcxproj                  ... Visual C++用ライブラリビルドプロジェクト
+           |  |- Makefile                       ... GCC用ライブラリビルドメイクファイル
+           |  `- mk.sh                          ... GCC用ライブラリビルドシェルスクリプト
+           |
+           `-[src]               ... ライブラリソースファイル用
+              |-...
 
 ####実行ファイル####
-    [exe]
-     |
-     |-[gcc]                  ... GCCでビルドした実行ファイルの置き場
-     |  |
-     |  `-[x86]               ... x86(32bit)向け
-     |     |
-     |     |-[sh]             ... サンプル実行とログ記録
-     |     |  |
-     |     |  |-[log]
-     |     |  |  |
-     |     |  |  `-（サンプル名）.log
-     |     |  |
-     |     |  |-（サンプル名）.sh
-     |     |  |
-     |     |  `- run.sh                      ... 全サンプル実行用シェルスクリプト
-     |     |
-     |     |-（サンプル名）.exe
-     |     |
-     |     `-[Debug]          ... デバッグビルド用
-     |        |- ...
-     |
-     `-[vc]                   ... Visual C++でビルドした実行ファイルの置き場
-        |                         ※GCC用と同様の構成
-        |                         ※シェルスクリプトの代わりにバッチファイル使用
+    [gasha_examples]
+     |  
+     |-[exe]
         |
-        |-[x86]               ... x86(32bit)向け
-        |  |- ...
+        |-[gcc]                  ... GCCでビルドした実行ファイルの置き場
+        |  |
+        |  `-[x86]               ... x86(32bit)向け
+        |     |
+        |     |-[sh]             ... サンプル実行と実行ログ記録用
+        |     |  |
+        |     |  |-[log]
+        |     |  |  |
+        |     |  |  `-（サンプル名）.log
+        |     |  |
+        |     |  |-（サンプル名）.sh
+        |     |  |
+        |     |  `- run.sh                      ... 全サンプル実行用シェルスクリプト
+        |     |
+        |     |-（サンプル名）.exe
+        |     |
+        |     `-[Debug]          ... デバッグビルド用
+        |        |- ...
         |
-        `-[x64]               ... x64(64bit)向け
-           |- ...
-
-####ライブラリおよび各サンプルプログラムのビルドプロジェクト####
-    [proj]
-     |
-     |-[（サンプル名）]       ... 各サンプルプログラムビルドプロジェクト用
-     |  |
-     |  |- main.cpp                          ... サンプル用メイン関数
-     |  |- standard.h/.cpp                   ... サンプル用強制インクルード／プリコンパイル済みヘッダー
-     |  |
-     |  |- （サンプル名）.vcxproj            ... Visual C++用サンプルビルドプロジェクト
-     |  |- Makefile                          ... GCC用サンプルビルドメイクファイル
-     |  `- mk.sh                             ... GCC用サンプルビルドシェルスクリプト
-     |
-     |- Makefile_example_common              ... GCC用サンプルメイクファイルの共通部分
-     |
-     |- gasha_examples.vcxproj               ... Visual C++用ライブラリ＆全サンプルビルドソリューション
-     `- mk.sh                                ... GCC用ライブラリ＆全サンプルビルドシェルスクリプト
+        `-[vc]                   ... Visual C++でビルドした実行ファイルの置き場
+           |                         ※GCC用と同様の構成
+           |                         ※シェルスクリプトの代わりにバッチファイル使用
+           |
+           |-[x86]               ... x86(32bit)向け
+           |  |- ...
+           |
+           `-[x64]               ... x64(64bit)向け
+              |- ...
 
 ####各サンプルプログラムのソース####
-    [src]
-     |
-     |-[（サンプル名）]       ... 各サンプルプログラムソースファイル用
-     |  |
-     |  |- *.cpp/.h
+    [gasha_examples]
+     |  
+     |-[src]
+        |
+        |-[（サンプル名）]       ... 各サンプルプログラムソースファイル用
+        |  |
+        |  |- *.cpp/.h
+
+####ライブラリおよび各サンプルプログラムのビルドプロジェクト####
+    [gasha_examples]
+     |  
+     |-[proj]
+        |
+        |-[（サンプル名）]       ... 各サンプルプログラムビルドプロジェクト用
+        |  |
+        |  |- main.cpp                          ... サンプル用メイン関数
+        |  |- standard.h/.cpp                   ... サンプル用強制インクルード／プリコンパイル済みヘッダー
+        |  |
+        |  |- （サンプル名）.vcxproj            ... Visual C++用サンプルビルドプロジェクト
+        |  |- Makefile                          ... GCC用サンプルビルドメイクファイル
+        |  `- mk.sh                             ... GCC用サンプルビルドシェルスクリプト
+        |
+        |- Makefile_example_common              ... GCC用サンプルメイクファイルの共通部分
+        |
+        |- gasha_examples.sln                   ... Visual C++用ライブラリ＆全サンプルビルドソリューション
+        `- mk.sh                                ... GCC用ライブラリ＆全サンプルビルドシェルスクリプト
+
+####ライブラリおよび各サンプルプログラムのビルドプロジェクト####
+    [gasha_proj]
+     |  
+     |-[proj]
+        |
+        |- gasha.sln                            ... Visual C++用ライブラリビルドソリューション
+        `- mk.sh                                ... GCC用ライブラリビルドシェルスクリプト
 
 ライブラリの利用手順
 --------
