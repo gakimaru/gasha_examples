@@ -50,7 +50,7 @@ Released under the [MIT license][MIT].
 ---
 ####【環境系】####
 * `<build_settings.h>`  
-    ビルド環境／言語に応じた自動環境設定。  
+    **ビルド環境／言語に応じた自動環境設定です。**  
     
     > コンパイラの種類やバージョンを判別し、必要に応じて `nullptr`, `override`, `alignas`, `thread_local` などのC++11仕様に合わせた処理の独自実装版を有効化し、コード互換性の向上に寄与します。  
     > 同様に、`__FUNCTION__`, `__PRETTY_FUNCTION__` なども各コンパイラで共通利用可能にします。  
@@ -61,7 +61,7 @@ Released under the [MIT license][MIT].
 
 ####【算術系】####
 * `<crc32>`  
-    CRC32計算。  
+    **CRC32計算用です。**  
     
     > `constexpr`, `ユーザー定義リテラル`によるメタプログラミング版と、SSE版にも対応しています。  
     > **資料：[効果的なテンプレートテクニック.pdf][効果的なテンプレートテクニック.pdf]**  
