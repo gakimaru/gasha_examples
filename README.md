@@ -98,10 +98,10 @@ Released under the [MIT license][MIT].
 
 サンプルプログラム実行手順
 --------
-1. `git`で`gasha_examples`リポジトリのクローンを作成  
+1. **`git`で`gasha_examples`リポジトリのクローンを作成**  
 > $ git clone https://github.com/gakimaru/gasha_examples.git
 
-2. サブモジュールのアップデート  
+2. **サブモジュールのアップデート**  
 > $ cd gasha_examples  
 > $ git submodule update --init  
 > 
@@ -110,20 +110,20 @@ Released under the [MIT license][MIT].
 > > `sub/gasha_settings` ... ライブラリ挙動設定  
 > > `sub/gasha_src` ... ライブラリソース
 
-3. ライブラリのビルド
-####【Visual C++の場合】####
+3. **ライブラリのビルド**  
+**【Visual C++の場合】**  
 > `proj/gasha_examples.sln` を開き、`[ビルド]→[バッチビルド]`メニューを実行し、すべての（もしくは任意の）プロジェクト／構成／プラットフォームを選んでビルドを実行してください。  
-####【Unix系環境+GCCの場合】####
+**【Unix系環境+GCCの場合】**  
 > proj/mk.sh を実行してください。  
 > > $ cd proj  
 > > $ ./mk.sh  
 
-4. サンプルプログラムの実行
-####【Visual C++の場合】####
+4. **サンプルプログラムの実行**  
+**【Visual C++の場合】**  
 > `exe/vc/`以下のディレクトリから、`（サンプル名）.exe`を実行することで、サンプルプログラムを実行可能です。  
 > `exe/vc/`以下のディレクトリには、サンプルプログラムをまとめて実行し、結果をログファイルに記録するためのバッチファイルも多数用意しています。  
 > また、Visual Studio 上から、「スタートアッププロジェクト」を設定すれば、デバッグ実行することも可能です。  
-####【Unix系環境+GCCの場合】####
+**【Unix系環境+GCCの場合】**  
 > `exe/gcc/`以下のディレクトリから、`（サンプル名）`の実行ファイルを実行することで、サンプルプログラムを実行可能です。  
 > `exe/gcc/`以下のディレクトリには、サンプルプログラムをまとめて実行し、結果をログファイルに記録するためのシェルスクリプトも多数用意しています。  
 
@@ -145,7 +145,7 @@ Released under the [MIT license][MIT].
            |  |  |
            |  |  |- gasha_x86.a                 ... x86リリースビルド用
            |  |  `- gasha_x86_debug.a           ... x86デバッグビルド用
-           |  |                                     ※x32版Cygwinで開発したため、x64版は現状なし
+           |  |                                     ※x86版Cygwinで開発したため、x64版は現状なし
            |  |
            |  `-[vc]             ... Visual C++用
            |     |
@@ -199,7 +199,7 @@ Released under the [MIT license][MIT].
         |-[gcc]                  ... GCCでビルドした実行ファイルの置き場
         |  |
         |  `-[x86]               ... x86(32bit)向け
-        |     |                      ※x32版Cygwinで開発したため、x64版は現状なし
+        |     |                      ※x86版Cygwinで開発したため、x64版は現状なし
         |     |
         |     |-[sh]             ... サンプルプログラム実行と実行ログ記録用
         |     |  |
@@ -264,11 +264,11 @@ Released under the [MIT license][MIT].
 
 ライブラリの利用手順
 --------
-*【前提１】GASHAもしくはその派生ライブラリをgitリポジトリで管理するものとする*  
-*【前提２】ライブラリを複数プロジェクトで共通利用するものとする*  
-1. ライブラリとライブラリ挙動設定リポジトリをプロジェクトに配置
+**【前提１】GASHAもしくはその派生ライブラリをgitリポジトリで管理するものとする**  
+**【前提２】ライブラリを複数プロジェクトで共通利用するものとする**  
+1. **ライブラリとライブラリ挙動設定リポジトリをプロジェクトに配置**  
 サブモジュールとして、ライブラリ用のリポジトリを配置してください。
-####【配置例】####
+**【配置例】**  
     [project]              ... プロジェクト用ディレクトリ（gitリポジトリ）
      |
      `-[sub]               ... サブモジュール用
@@ -276,7 +276,7 @@ Released under the [MIT license][MIT].
         |-[gasha]          ... ライブラリ本体用リポジトリ(https://github.com/gakimaru/gasha)
         `-[gasha_settings] ... ライブラリ挙動設定用リポジトリ(https://github.com/gakimaru/gasha_settings)
 ライブラリ自体をプロジェクト向けにビルドする場合は、ライブラリソース用リポジトリも配置してください。
-####【配置例】####
+**【配置例】**  
     [project]              ... プロジェクト用ディレクトリ（gitリポジトリ）
      |  
      `-[sub]               ... サブモジュール用
@@ -285,7 +285,7 @@ Released under the [MIT license][MIT].
         |-[gasha_settings] ... ライブラリ挙動設定用リポジトリ(https://github.com/gakimaru/gasha_settings)
         `-[gasha_src]      ... ライブラリソース用リポジトリ(https://github.com/gakimaru/gasha_src)
 
-2. インクルードパスを設定
+2. **インクルードパスを設定**  
 下記のパスをプロジェクトのインクルードパスに追加してください。
     [project]
      |
@@ -313,7 +313,7 @@ Released under the [MIT license][MIT].
               |  |
               |  |- gasha_x86.a                 ... x86リリースビルド用
               |  `- gasha_x86_debug.a           ... x86デバッグビルド用
-              |                                     ※x32版Cygwinで開発したため、x64版は現状なし
+              |                                     ※x86版Cygwinで開発したため、x64版は現状なし
               |
               `-[vc]             ... Visual C++用
                  |
