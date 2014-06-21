@@ -1,8 +1,7 @@
 GASHA
 ====
 **Gakimaru's researched and standard library for C++**  
-Copyright (c) 2014 Itagaki Mamoru  
-Released under the [MIT license][MIT]  
+Copyright (c) 2014 Itagaki Mamoru    Released under the [MIT license][MIT]  
 <https://github.com/gakimaru/gasha_examples/blob/master/LICENSE>  
 [MIT]: http://www.opensource.org/licenses/mit-license.php
 
@@ -21,7 +20,7 @@ Released under the [MIT license][MIT]
 > 個人的な学習・調査・研究に応じて、気まぐれに追加します。  
 
 #### 名前の由来 ####
-> 名前の由来は「[がしゃどくろ][GASHADOKURO]」から。
-> 「骨格」的な意味合いと、自身のハンドル名「Gakimaru」の頭文字「GA」を掛け合わせて命名しました。
+> 名前の由来は「[がしゃどくろ][GASHADOKURO]」から。  
+> その「骨格」的な意味合いに、自身のハンドル名「Gakimaru」の頭文字「GA」を重ねて命名しました。
 [GASHADOKURO]: http://ja.wikipedia.org/wiki/%E3%81%8C%E3%81%97%E3%82%83%E3%81%A9%E3%81%8F%E3%82%8D
 
