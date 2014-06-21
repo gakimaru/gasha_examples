@@ -55,6 +55,14 @@ C++11必須です。
 > $ cd gasha_examples
 > $ git submodule update --init
 
+3.（Visual Studioの場合）  
+proj/gasha_examples.sln を開き、[ビルド]→[バッチビルド]メニューを実行し、すべての（もしくは任意の）プロジェクト／構成／プラットフォームを選んでビルドを実行
+
+3.（Unix系環境の場合）
+proj/mk.sh を実行
+> $ cd proj
+> $ ./mk.sh
+
 「GASHA」をプロジェクトに組み込んで利用する手順
 ---
 
