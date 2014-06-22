@@ -28,6 +28,7 @@ function run_makefile() {
 	run_makefile_core ../sub/gasha_src/proj $3
 	run_makefile_core example_specify_environment $3
 	run_makefile_core example_crc32 $3
+	run_makefile_core example_sort_and_search $3
 }
 
 # x86 & Relase

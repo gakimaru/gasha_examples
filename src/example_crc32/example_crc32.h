@@ -8,8 +8,21 @@
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
-//   Released under the MIT license
+//   Released under the MIT license.
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
+//--------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------
+//CRC32計算処理テスト設定とコンパイラスイッチ
+
+#ifdef _DEBUG//デバッグ版
+static const int TEST_REPEAT_COUNT = 10000;//CRC32計算の繰り返しテスト回数
+
+#else//_DEBUG//リリース版
+static const int TEST_REPEAT_COUNT = 1000000;//CRC32計算の繰り返しテスト回数
+
+#endif//_DEBUG
+
 //--------------------------------------------------------------------------------
 
 #include <gasha/crc32.h>//gasha::crc32

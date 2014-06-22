@@ -86,14 +86,13 @@ void example_crc32()
 	//パフォーマンステスト
 	{
 		printf("\n");
-		static const int repeat= 10000000;
 		static const char* str = "1234567890";
 		crc32_t crc_sum;
 		auto prev_time = std::chrono::system_clock::now();
 		{
-			printf("[calcCRC32_recursive() * %d times]\n", repeat);
+			printf("[calcCRC32_recursive() * %d times]\n", TEST_REPEAT_COUNT);
 			crc_sum = 0;
-			for (int loop = 0; loop < repeat; ++loop)
+			for (int loop = 0; loop < TEST_REPEAT_COUNT; ++loop)
 				crc_sum += performance_test_crc32_recursive(str, loop);
 		}
 		auto print_elapsed_time = [](const std::chrono::system_clock::time_point prev_time, crc32_t crc_sum)
@@ -106,25 +105,25 @@ void example_crc32()
 		print_elapsed_time(prev_time, crc_sum);
 		prev_time = std::chrono::system_clock::now();
 		{
-			printf("[calcCRC32_loop() * %d times]\n", repeat);
+			printf("[calcCRC32_loop() * %d times]\n", TEST_REPEAT_COUNT);
 			crc_sum = 0;
-			for (int loop = 0; loop < repeat; ++loop)
+			for (int loop = 0; loop < TEST_REPEAT_COUNT; ++loop)
 				crc_sum += performance_test_crc32_loop(str, loop);
 		}
 		print_elapsed_time(prev_time, crc_sum);
 		prev_time = std::chrono::system_clock::now();
 		{
-			printf("[calcCRC32_table() * %d times]\n", repeat);
+			printf("[calcCRC32_table() * %d times]\n", TEST_REPEAT_COUNT);
 			crc_sum = 0;
-			for (int loop = 0; loop < repeat; ++loop)
+			for (int loop = 0; loop < TEST_REPEAT_COUNT; ++loop)
 				crc_sum += performance_test_crc32_table(str, loop);
 		}
 		print_elapsed_time(prev_time, crc_sum);
 		prev_time = std::chrono::system_clock::now();
 		{
-			printf("[calcCRC32_sse() * %d times]\n", repeat);
+			printf("[calcCRC32_sse() * %d times]\n", TEST_REPEAT_COUNT);
 			crc_sum = 0;
-			for (int loop = 0; loop < repeat; ++loop)
+			for (int loop = 0; loop < TEST_REPEAT_COUNT; ++loop)
 				crc_sum += performance_test_crc32_sse(str, loop);
 		}
 		print_elapsed_time(prev_time, crc_sum);

@@ -2,7 +2,7 @@
 
 #-------------------------------------------------------------------------------
 # mk.sh
-# 全プラットフォーム＆ビルド設定でサンプルプログラムをメイク
+# カレントのメイクファイルのメイクを一括実行
 #
 # Gakimaru's researched and standard library for C++ - GASHA
 #   Copyright (c) 2014 Itagaki Mamoru

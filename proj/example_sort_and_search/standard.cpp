@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
-// main.cpp
-// CRC32テスト - メイン
+// standard.cpp
+// プリコンパイル済みヘッダー作成用
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -8,17 +8,6 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_crc32.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-
-int main(const int argc, const char* argv[])
-{
-	//CRC32計算処理テスト
-	example_crc32();
-
-	return EXIT_SUCCESS;
-}
+#include "standard.h"
 
 // End of file
