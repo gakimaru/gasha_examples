@@ -113,7 +113,7 @@ Released under the [MIT license][MIT].
 
 ライブラリ概要
 --------
-####【環境系】####
+####環境系####
 * `gasha/build_settings/build_settings.h` **プラットフォーム／言語設定**  
     
     > コンパイラの種類やバージョンを判別し、必要に応じて `nullptr`, `override`, `alignas`, `thread_local` などのC++11仕様に合わせた処理の独自実装版を有効化し、コード互換性の向上に寄与します。  
@@ -123,15 +123,16 @@ Released under the [MIT license][MIT].
     > **資料：[本当にちょっとしたプログラミングTips.pdf][本当にちょっとしたプログラミングTips.pdf]**  
     > **　　　［コーディングに関するTips］-［#defineマクロの活用］**  
 
-####【算術系】####
+####算術系####
 * `gasha/crc32.h` **CRC32計算**  
     
-    > `constexpr`, `ユーザー定義リテラル`によるメタプログラミング版と、SSE版にも対応しています。  
+    > `constexpr`, `ユーザー定義リテラル`による、メタプログラミング版（コンパイル時計算）に対応しています。  
+    > 高速なSSE版に対応しています（多項式はCRC-32C限定）。  
     > 
     > **資料：[効果的なテンプレートテクニック.pdf][効果的なテンプレートテクニック.pdf]**  
     > **　　　［メタプログラミング］-［constexprの活用：CRC値の算出］**  
 
-####【アルゴリズム：ソート系】####
+####アルゴリズム：ソート系####
 **【交換ソート】**  
 * `gasha/bubble_sort.h` ［テンプレート］**バブルソート** ※1  
 * `gasha/shaker_sort.h` ［テンプレート］**シェーカーソート** ※1  
@@ -168,7 +169,7 @@ Released under the [MIT license][MIT].
     > **資料：[プログラム最適化Tips.pdf][プログラム最適化Tips.pdf]**  
     > **　　　［データ構造とアルゴリズムによる最適化］-［ソートアルゴリズム］**  
 
-####【アルゴリズム：探索系】####
+####アルゴリズム：探索系####
 * `gasha/linear_search.h` ［テンプレート］**線形探索** ※1  
 * `gasha/binary_search.h` ［テンプレート］**二分探索** ※1  
     
@@ -178,7 +179,7 @@ Released under the [MIT license][MIT].
     > **資料：[プログラム最適化Tips.pdf][プログラム最適化Tips.pdf]**  
     > **　　　［データ構造とアルゴリズムによる最適化］-［探索アルゴリズム］**  
 
-####【スレッド：ロック系】####
+####スレッド：ロック系####
 * `gasha/spin_lock.h` **スピンロック** ※1  
 * `gasha/lw_spin_lock.h` **サイズ軽量スピンロック** ※1 ※2  
 * `gasha/dummy_lock.h` **ダミーロック** ※1 ※3  
@@ -196,7 +197,7 @@ Released under the [MIT license][MIT].
     > **資料：[プログラム最適化Tips.pdf][プログラム最適化Tips.pdf]**  
     > **　　　［データ構造とアルゴリズムによる最適化］-［マルチスレッドを最適化するアルゴリズム］**  
 
-####【スレッド：共有ロック系】####
+####スレッド：共有ロック系####
 * `gasha/shared_spin_lock.h` **共有スピンロック** ※1  
 * `gasha/simple_shared_spin_lock.h` **単純共有スピンロック** ※1 ※2  
 * `gasha/unshared_spin_lock.h` **非共有スピンロック** ※1 ※3  
