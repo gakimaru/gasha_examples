@@ -80,6 +80,10 @@ Released under the [MIT license][MIT].
 対象コンパイラ
 --------
 ライブラリの利用、および、サンプルプログラムの実行には、**C++11仕様に対応したコンパイラ**が必要です。  
+**【推奨】**  
+* Visual C++ 12.0 (Visual Studio 2013) 以降  
+* GCC 4.6 以降  
+
 開発には下記のコンパイラを用いています。  
 * Visual C++ 12.0 (Visual Studio 2013)  
 * GCC 4.8.2 (32bit版Cygwin環境)  
@@ -224,7 +228,7 @@ Released under the [MIT license][MIT].
 [効果的なテンプレートテクニック.pdf]:       https://github.com/gakimaru/public/blob/master/document/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips/%E5%8A%B9%E6%9E%9C%E7%9A%84%E3%81%AA%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF.pdf
 [プログラム最適化Tips.pdf]:                 https://github.com/gakimaru/public/blob/master/document/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E6%9C%80%E9%81%A9%E5%8C%96Tips.pdf
 
-ライブラリ特記事項
+ライブラリのソースファイル
 --------
 ソースファイルは、Visual C++とGCCの互換性のために、下記の仕様で統一しています。
 
