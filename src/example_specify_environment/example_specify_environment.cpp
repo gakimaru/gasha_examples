@@ -23,7 +23,7 @@ inline void func_inline()
 {
 	printf("This is inline func.\n");
 }
-noinline void func_noinline()
+no_inline void func_noinline()
 {
 	printf("This is noinline func.\n");
 }

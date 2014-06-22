@@ -36,8 +36,11 @@ static const int TEST_DATA_COUNT = 10000;//テストデータ件数（最大）
 #define TEST_DATA_ALIGN 16//テストデータ一件のアラインメント
 //#define TEST_DATA_ALIGN 4//テストデータ一件のアラインメント
 
-//STLの仕様によるC4530警告を無視：warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
-#pragma warning(disable: 4530)
+//例外を無効化した状態で std::array をインクルードすると warning C4530 が出る
+//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
+#pragma warning(disable: 4530)//C4530を抑える
+
+#include <array>//C++11 std::array用
 
 //----------------------------------------
 //テスト用構造体
@@ -59,7 +62,6 @@ struct alignas(TEST_DATA_ALIGN) data_t
 
 //----------------------------------------
 //テスト用構造体の配列型
-#include <array>//C++11 std::array用
 class array_t : public std::array<data_t, TEST_DATA_COUNT>
 {
 public:
