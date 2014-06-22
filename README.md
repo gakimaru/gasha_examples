@@ -115,7 +115,7 @@ Released under the [MIT license][MIT].
 --------
 ####環境系####
 * `gasha/build_settings/build_settings.h` **プラットフォーム／言語設定**  
-    
+
     > コンパイラの種類やバージョンを判別し、必要に応じて `nullptr`, `override`, `alignas`, `thread_local` などのC++11仕様に合わせた処理の独自実装版を有効化し、コード互換性の向上に寄与します。  
     > 同様に、`__FUNCTION__`, `__PRETTY_FUNCTION__` なども各コンパイラで共通利用可能にします。  
     > 通常このファイルは、強制インクルード ファイルに設定して利用します。  
@@ -125,7 +125,7 @@ Released under the [MIT license][MIT].
 
 ####算術系####
 * `gasha/crc32.h` **CRC32計算**  
-    
+
     > C++11の `constexpr`, `ユーザー定義リテラル`による、メタプログラミング版（コンパイル時計算）に対応しています。どちらもVisual C++ 12.0(2013)では未対応です。GCCはconstexprが4.6から、ユーザー定義リテラルが4.7から対応です。  
     > 高速なSSE版に対応しています（多項式はCRC-32C限定）。  
     > 
@@ -160,7 +160,7 @@ Released under the [MIT license][MIT].
 
 **【分布ソート】**※非比較ソート  
 * `gasha/radix_sort.h` ［テンプレート］**基数ソート** ※1 ※2  
-    
+
     > 配列もしくはコンテナのデータをソートします。  
     > * ※1：安定ソートです。  
     > * ※2：外部ソートです。内部で一時的にメモリ確保します。  
@@ -172,7 +172,7 @@ Released under the [MIT license][MIT].
 ####アルゴリズム：探索系####
 * `gasha/linear_search.h` ［テンプレート］**線形探索** ※1  
 * `gasha/binary_search.h` ［テンプレート］**二分探索** ※1  
-    
+
     > 配列もしくはコンテナのデータを探索します。  
     > * ※1：配列以外のコンテナ（イテレータ）にも対応しています。  
     > 
@@ -185,7 +185,7 @@ Released under the [MIT license][MIT].
 * `gasha/dummy_lock.h` **ダミーロック** ※1 ※3  
 * `gasha/lock_guard.h` ［テンプレート］**スコープロック** ※4  
 * `gasha/unique_lock.h` ［テンプレート］**単一ロック** ※5  
-    
+
     > スレッド間のロック制御を行います。  
     > 一定回数のスピンでコンテキストスイッチを行います。  
     > * ※1：スコープロックパターン制御（lock_guard, unique_lock）に対応しています。  
@@ -225,10 +225,14 @@ Released under the [MIT license][MIT].
 ライブラリ特記事項
 --------
 ソースファイルは、Visual C++とGCCの互換性のために、下記の仕様で統一しています。
+
 * 文字コード ... UTF-8（BOM付き）
-* 改行コード ... LF
+    
     > * Visual Studio が扱う標準的なユニコードは UTF-8（BOM付き）です。  
     > * GCCが扱う標準的なユニコードは UTF-8（BOMなし）ですが、4.3.x 以降、BOM付きに対応しています。  
+
+* 改行コード ... LF
+    
     > * Windows系OSの標準的な改行コードは CR+LF ですが、Visual StudioはLFのみのソースファイルも扱えます。  
     > * Unix系OSの標準的な改行コードは LF です。  
 
