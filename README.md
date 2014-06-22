@@ -113,8 +113,7 @@ Released under the [MIT license][MIT].
 ライブラリ概要
 --------
 ####【環境系】####
-* `<gasha/build_settings/build_settings.h>`  
-    **プラットフォーム／言語設定**  
+* `<gasha/build_settings/build_settings.h>` ... **プラットフォーム／言語設定**  
     
     > コンパイラの種類やバージョンを判別し、必要に応じて `nullptr`, `override`, `alignas`, `thread_local` などのC++11仕様に合わせた処理の独自実装版を有効化し、コード互換性の向上に寄与します。  
     > 同様に、`__FUNCTION__`, `__PRETTY_FUNCTION__` なども各コンパイラで共通利用可能にします。  
@@ -123,8 +122,7 @@ Released under the [MIT license][MIT].
     > **　　　［コーディングに関するTips］-［#defineマクロの活用］**  
 
 ####【算術系】####
-* `<gasha/crc32.h>`  
-    **CRC32計算**  
+* `<gasha/crc32.h>` ... **CRC32計算**  
     
     > `constexpr`, `ユーザー定義リテラル`によるメタプログラミング版と、SSE版にも対応しています。  
     > **資料：[効果的なテンプレートテクニック.pdf][効果的なテンプレートテクニック.pdf]**  
@@ -157,6 +155,7 @@ Released under the [MIT license][MIT].
 * `<gasha/radix_sort.h>` ... **【テンプレートライブラリ】基数ソート**  
 ※外部ソート注意（内部で一時的にメモリ確保する）  
     
+    > 配列もしくはコンテナのデータをソートします。
     > **資料：[プログラム最適化Tips.pdf][プログラム最適化Tips.pdf]**  
     > **　　　［データ構造とアルゴリズムによる最適化］-［ソートアルゴリズム］**  
 
@@ -166,6 +165,7 @@ Released under the [MIT license][MIT].
 * `<gasha/binary_search.h>` ... **【テンプレートライブラリ】二分探索**  
 ※配列以外のイテレータにも対応  
     
+    > 配列もしくはコンテナのデータを探索します。
     > **資料：[プログラム最適化Tips.pdf][プログラム最適化Tips.pdf]**  
     > **　　　［データ構造とアルゴリズムによる最適化］-［探索アルゴリズム］**  
 [本当にちょっとしたプログラミングTips.pdf]: https://github.com/gakimaru/public/blob/master/document/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips/%E6%9C%AC%E5%BD%93%E3%81%AB%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E3%81%97%E3%81%9F%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips.pdf
