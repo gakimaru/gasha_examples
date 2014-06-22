@@ -144,27 +144,33 @@ Released under the [MIT license][MIT].
 * `<gasha/selection_sort.h>` ... **【テンプレートライブラリ】選択ソート**  
 * `<gasha/heap_sort.h>` ... **【テンプレートライブラリ】ヒープソート**  
 * **【分類：挿入ソート】**  
-* `<gasha/insertion_sort.h>` ... **【テンプレートライブラリ】挿入ソート**※配列以外のイテレータにも対応  
-* `<gasha/shell_sort.h>` ... **【テンプレートライブラリ】シェルソート**※配列以外のイテレータにも対応  
+* `<gasha/insertion_sort.h>` ... **【テンプレートライブラリ】挿入ソート**  
+※配列以外のイテレータにも対応  
+* `<gasha/shell_sort.h>` ... **【テンプレートライブラリ】シェルソート**  
+※配列以外のイテレータにも対応  
 * **【分類：マージソート】**  
 * `<gasha/inplace_merge_sort.h>` ... **【テンプレートライブラリ】インプレースマージソート**  
 * **【分類：混成ソート】**  
-* `<gasha/intro_sort.h>` ... **【テンプレートライブラリ】イントロソート**※配列以外のイテレータにも対応  
+* `<gasha/intro_sort.h>` ... **【テンプレートライブラリ】イントロソート**  
+※配列以外のイテレータにも対応  
 * **【分類：分布ソート】**※非比較ソート  
-* `<gasha/radix_sort.h>` ... **【テンプレートライブラリ】基数ソート**※外部ソート注意（内部で一時的にメモリ確保する）  
+* `<gasha/radix_sort.h>` ... **【テンプレートライブラリ】基数ソート**  
+※外部ソート注意（内部で一時的にメモリ確保する）  
     
     > **資料：[プログラム最適化Tips.pdf][プログラム最適化Tips.pdf]**  
     > **　　　［データ構造とアルゴリズムによる最適化］-［ソートアルゴリズム］**  
 
 * **【分類：探索】**  
-* `<gasha/linear_search.h>` ... **【テンプレートライブラリ】線形探索**※配列以外のイテレータにも対応  
-* `<gasha/binary_search.h>` ... **【テンプレートライブラリ】二分探索**※配列以外のイテレータにも対応  
+* `<gasha/linear_search.h>` ... **【テンプレートライブラリ】線形探索**  
+※配列以外のイテレータにも対応  
+* `<gasha/binary_search.h>` ... **【テンプレートライブラリ】二分探索**  
+※配列以外のイテレータにも対応  
     
     > **資料：[プログラム最適化Tips.pdf][プログラム最適化Tips.pdf]**  
     > **　　　［データ構造とアルゴリズムによる最適化］-［探索アルゴリズム］**  
 [本当にちょっとしたプログラミングTips.pdf]: https://github.com/gakimaru/public/blob/master/document/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips/%E6%9C%AC%E5%BD%93%E3%81%AB%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E3%81%97%E3%81%9F%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips.pdf
 [効果的なテンプレートテクニック.pdf]:       https://github.com/gakimaru/public/blob/master/document/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips/%E5%8A%B9%E6%9E%9C%E7%9A%84%E3%81%AA%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF.pdf
-[プログラム最適化Tips]:                     https://github.com/gakimaru/public/blob/master/document/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E6%9C%80%E9%81%A9%E5%8C%96Tips.pdf
+[プログラム最適化Tips.pdf]:                 https://github.com/gakimaru/public/blob/master/document/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E6%9C%80%E9%81%A9%E5%8C%96Tips.pdf
 
 ライブラリ特記事項
 --------
