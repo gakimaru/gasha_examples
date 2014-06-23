@@ -8,12 +8,12 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_crc32.h"
+#include "example_crc32.h"//CRC32計算処理テスト
 
-#include <gasha/crc32.h>//gasha::crc32
+#include <gasha/crc32.h>//CRC32計算
 
-#include <stdio.h>//printf用
-#include <assert.h>//assert用
+#include <stdio.h>//printf()
+#include <assert.h>//assert()
 #include <chrono>//C++11 std::chrono
 
 USING_NAMESPACE_GASHA//ネームスペース使用
@@ -52,7 +52,7 @@ void example_crc32()
 			assert(crc == 0xf3dbd4feu);
 	#endif//CRC32_IS_CRC32C
 	#endif//HAS_CONSTEXPR
-		printf("constexpr によるCRC計算結果=0x%08x\n", crc);
+		printf("Result of calculation CRC of \"1234567890\" by constexpr = 0x%08x\n", crc);
 	}
 	
 #ifdef HAS_USER_DEFINED_LITERAL//constexpr使用可能時はstatic_assertで結果をコンパイル時にチェック
@@ -67,7 +67,7 @@ void example_crc32()
 	#else//CRC32_IS_CRC32C//CRC-32C
 		static_assert(crc == 0xe6599437u, "invalid crc");
 	#endif//CRC32_IS_CRC32C
-		printf("ユーザー定義リテラルによるCRC計算結果=0x%08x\n", crc);
+		printf("Result of calculation CRC of \"abcdefghij\" by user-defined-literal = 0x%08x\n", crc);
 	}
 #endif//HAS_USER_DEFINED_LITERAL
 	
@@ -80,7 +80,7 @@ void example_crc32()
 	#else//CRC32_IS_CRC32C//CRC-32C
 		assert(crc == 0xd599aefdu);
 	#endif//CRC32_IS_CRC32C
-		printf("ランタイム関数によるCRC計算結果=0x%08x\n", crc);
+		printf("Result of calculation CRC of \"ABCDEFGHIJ\" by runtime-function = 0x%08x\n", crc);
 	}
 
 	//パフォーマンステスト
@@ -93,7 +93,7 @@ void example_crc32()
 			printf("[calcCRC32_recursive() * %d times]\n", TEST_REPEAT_COUNT);
 			crc_sum = 0;
 			for (int loop = 0; loop < TEST_REPEAT_COUNT; ++loop)
-				crc_sum += performance_test_crc32_recursive(str, loop);
+				crc_sum += testCRC32ForPerforman_recursive(str, loop);
 		}
 		auto print_elapsed_time = [](const std::chrono::system_clock::time_point prev_time, crc32_t crc_sum)
 		{
@@ -108,7 +108,7 @@ void example_crc32()
 			printf("[calcCRC32_loop() * %d times]\n", TEST_REPEAT_COUNT);
 			crc_sum = 0;
 			for (int loop = 0; loop < TEST_REPEAT_COUNT; ++loop)
-				crc_sum += performance_test_crc32_loop(str, loop);
+				crc_sum += testCRC32ForPerforman_loop(str, loop);
 		}
 		print_elapsed_time(prev_time, crc_sum);
 		prev_time = std::chrono::system_clock::now();
@@ -116,7 +116,7 @@ void example_crc32()
 			printf("[calcCRC32_table() * %d times]\n", TEST_REPEAT_COUNT);
 			crc_sum = 0;
 			for (int loop = 0; loop < TEST_REPEAT_COUNT; ++loop)
-				crc_sum += performance_test_crc32_table(str, loop);
+				crc_sum += testCRC32ForPerforman_table(str, loop);
 		}
 		print_elapsed_time(prev_time, crc_sum);
 		prev_time = std::chrono::system_clock::now();
@@ -124,7 +124,7 @@ void example_crc32()
 			printf("[calcCRC32_sse() * %d times]\n", TEST_REPEAT_COUNT);
 			crc_sum = 0;
 			for (int loop = 0; loop < TEST_REPEAT_COUNT; ++loop)
-				crc_sum += performance_test_crc32_sse(str, loop);
+				crc_sum += testCRC32ForPerforman_sse(str, loop);
 		}
 		print_elapsed_time(prev_time, crc_sum);
 	}

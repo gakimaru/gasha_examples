@@ -31,21 +31,83 @@ Sort type: [C-Library qsort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.003003000 sec.
+*elapsed time=0.003002700 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.003001100 sec.
+*elapsed time=0.003003000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
+*elapsed time=0.003002600 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(ordered)
+------------------------------
+*elapsed time=0.001001200 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(reversed)
+------------------------------
+*elapsed time=0.001000800 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(ordered_without_both_ends)
+------------------------------
+*elapsed time=0.001000900 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(hard_with_quick_sort)
+------------------------------
 *elapsed time=0.003002900 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+============================================================
+Sort type: [C-Library qsort]
+* Total time       = 0.015014100 sec.
+* Average time     = 0.002144871 sec.
+* Min time         = 0.001000800 sec.
+* Max time         = 0.003003000 sec.
+============================================================
+
+
+============================================================
+Sort type: [STL std::sort(with function)]
+============================================================
+
+------------------------------
+Sort array(shuffle1)
+------------------------------
+*elapsed time=0.001000900 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(shuffle2)
+------------------------------
+*elapsed time=0.002003200 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(shuffle3)
+------------------------------
+*elapsed time=0.001001200 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
@@ -54,12 +116,12 @@ Sort array(ordered)
 ------------------------------
 *elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
+Array is stable.
 
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.001000300 sec.
+*elapsed time=0.001001200 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
@@ -73,41 +135,103 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.003010600 sec.
+*elapsed time=0.001001200 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ============================================================
-Sort type: [C-Library qsort]
-* Total time       = 0.013017900 sec.
-* Average time     = 0.001859700 sec.
-* Min time         = 0.000000000 sec.
-* Max time         = 0.003010600 sec.
-============================================================
-
-
-============================================================
 Sort type: [STL std::sort(with function)]
+* Total time       = 0.006007700 sec.
+* Average time     = 0.000858243 sec.
+* Min time         = 0.000000000 sec.
+* Max time         = 0.002003200 sec.
+============================================================
+
+
+============================================================
+Sort type: [STL std::sort(with inline function)]
 ============================================================
 
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.001994400 sec.
+*elapsed time=0.002016700 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.001000900 sec.
+*elapsed time=0.000985900 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.001001200 sec.
+*elapsed time=0.001000900 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(ordered)
+------------------------------
+*elapsed time=0.001000900 sec.
+Array is ordered. [record(s)=10000]
+Array is stable.
+
+------------------------------
+Sort array(reversed)
+------------------------------
+*elapsed time=0.000000000 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(ordered_without_both_ends)
+------------------------------
+*elapsed time=0.000000000 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(hard_with_quick_sort)
+------------------------------
+*elapsed time=0.001000000 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+============================================================
+Sort type: [STL std::sort(with inline function)]
+* Total time       = 0.006004400 sec.
+* Average time     = 0.000857771 sec.
+* Min time         = 0.000000000 sec.
+* Max time         = 0.002016700 sec.
+============================================================
+
+
+============================================================
+Sort type: [STL std::sort(with functor)]
+============================================================
+
+------------------------------
+Sort array(shuffle1)
+------------------------------
+*elapsed time=0.000000000 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(shuffle2)
+------------------------------
+*elapsed time=0.000000000 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(shuffle3)
+------------------------------
+*elapsed time=0.001001100 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
@@ -135,21 +259,83 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.002002100 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ============================================================
-Sort type: [STL std::sort(with function)]
-* Total time       = 0.005998600 sec.
-* Average time     = 0.000856943 sec.
+Sort type: [STL std::sort(with functor)]
+* Total time       = 0.001001100 sec.
+* Average time     = 0.000143014 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.002002100 sec.
+* Max time         = 0.001001100 sec.
 ============================================================
 
 
 ============================================================
-Sort type: [STL std::sort(with inline function)]
+Sort type: [STL std::sort(with lamda)]
+============================================================
+
+------------------------------
+Sort array(shuffle1)
+------------------------------
+*elapsed time=0.000000000 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(shuffle2)
+------------------------------
+*elapsed time=0.000000000 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(shuffle3)
+------------------------------
+*elapsed time=0.000000000 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(ordered)
+------------------------------
+*elapsed time=0.000000000 sec.
+Array is ordered. [record(s)=10000]
+Array is stable.
+
+------------------------------
+Sort array(reversed)
+------------------------------
+*elapsed time=0.000000000 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(ordered_without_both_ends)
+------------------------------
+*elapsed time=0.000000000 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(hard_with_quick_sort)
+------------------------------
+*elapsed time=0.000994700 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+============================================================
+Sort type: [STL std::sort(with lamda)]
+* Total time       = 0.000994700 sec.
+* Average time     = 0.000142100 sec.
+* Min time         = 0.000000000 sec.
+* Max time         = 0.000994700 sec.
+============================================================
+
+
+============================================================
+Sort type: [STL std::stable_sort *Not inplace]
 ============================================================
 
 ------------------------------
@@ -157,242 +343,56 @@ Sort array(shuffle1)
 ------------------------------
 *elapsed time=0.002001200 sec.
 Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(shuffle2)
-------------------------------
-*elapsed time=0.002002100 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(shuffle3)
-------------------------------
-*elapsed time=0.002002300 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(ordered)
-------------------------------
-*elapsed time=0.001000900 sec.
-Array is ordered. [record(s)=10000]
-Array is stable.
-
-------------------------------
-Sort array(reversed)
-------------------------------
-*elapsed time=0.001000900 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(ordered_without_both_ends)
-------------------------------
-*elapsed time=0.000000000 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(hard_with_quick_sort)
-------------------------------
-*elapsed time=0.001000900 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-============================================================
-Sort type: [STL std::sort(with inline function)]
-* Total time       = 0.009008300 sec.
-* Average time     = 0.001286900 sec.
-* Min time         = 0.000000000 sec.
-* Max time         = 0.002002300 sec.
-============================================================
-
-
-============================================================
-Sort type: [STL std::sort(with functor)]
-============================================================
-
-------------------------------
-Sort array(shuffle1)
-------------------------------
-*elapsed time=0.001001400 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(shuffle2)
-------------------------------
-*elapsed time=0.001000600 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(shuffle3)
-------------------------------
-*elapsed time=0.001000600 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(ordered)
-------------------------------
-*elapsed time=0.000000000 sec.
-Array is ordered. [record(s)=10000]
-Array is stable.
-
-------------------------------
-Sort array(reversed)
-------------------------------
-*elapsed time=0.000000000 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(ordered_without_both_ends)
-------------------------------
-*elapsed time=0.000000000 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(hard_with_quick_sort)
-------------------------------
-*elapsed time=0.000000000 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-============================================================
-Sort type: [STL std::sort(with functor)]
-* Total time       = 0.003002600 sec.
-* Average time     = 0.000428943 sec.
-* Min time         = 0.000000000 sec.
-* Max time         = 0.001001400 sec.
-============================================================
-
-
-============================================================
-Sort type: [STL std::sort(with lamda)]
-============================================================
-
-------------------------------
-Sort array(shuffle1)
-------------------------------
-*elapsed time=0.000000000 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(shuffle2)
-------------------------------
-*elapsed time=0.000000000 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(shuffle3)
-------------------------------
-*elapsed time=0.001000900 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(ordered)
-------------------------------
-*elapsed time=0.000000000 sec.
-Array is ordered. [record(s)=10000]
-Array is stable.
-
-------------------------------
-Sort array(reversed)
-------------------------------
-*elapsed time=0.000000000 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(ordered_without_both_ends)
-------------------------------
-*elapsed time=0.000000000 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(hard_with_quick_sort)
-------------------------------
-*elapsed time=0.001001200 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-============================================================
-Sort type: [STL std::sort(with lamda)]
-* Total time       = 0.002002100 sec.
-* Average time     = 0.000286014 sec.
-* Min time         = 0.000000000 sec.
-* Max time         = 0.001001200 sec.
-============================================================
-
-
-============================================================
-Sort type: [STL std::stable_sort *Not inplace]
-============================================================
-
-------------------------------
-Sort array(shuffle1)
-------------------------------
-*elapsed time=0.002001800 sec.
-Array is ordered. [record(s)=10000]
 Array is stable.
 
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.001001100 sec.
+*elapsed time=0.001000900 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.001000900 sec.
+*elapsed time=0.001000000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 
 ------------------------------
 Sort array(ordered)
-------------------------------
-*elapsed time=0.001001200 sec.
-Array is ordered. [record(s)=10000]
-Array is stable.
-
-------------------------------
-Sort array(reversed)
-------------------------------
-*elapsed time=0.001001200 sec.
-Array is ordered. [record(s)=10000]
-Array is stable.
-
-------------------------------
-Sort array(ordered_without_both_ends)
 ------------------------------
 *elapsed time=0.001000600 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 
 ------------------------------
+Sort array(reversed)
+------------------------------
+*elapsed time=0.001000900 sec.
+Array is ordered. [record(s)=10000]
+Array is stable.
+
+------------------------------
+Sort array(ordered_without_both_ends)
+------------------------------
+*elapsed time=0.001001200 sec.
+Array is ordered. [record(s)=10000]
+Array is stable.
+
+------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.002001800 sec.
+*elapsed time=0.002002000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 
 ============================================================
 Sort type: [STL std::stable_sort *Not inplace]
-* Total time       = 0.009008600 sec.
-* Average time     = 0.001286943 sec.
-* Min time         = 0.001000600 sec.
-* Max time         = 0.002001800 sec.
+* Total time       = 0.009006800 sec.
+* Average time     = 0.001286686 sec.
+* Min time         = 0.001000000 sec.
+* Max time         = 0.002002000 sec.
 ============================================================
 
 
@@ -403,7 +403,7 @@ Sort type: [Bubble sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.250238400 sec.
+*elapsed time=0.225214400 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=25018590 count(s)]
@@ -411,7 +411,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.223212600 sec.
+*elapsed time=0.224212100 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=24895289 count(s)]
@@ -419,7 +419,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.222213300 sec.
+*elapsed time=0.223213200 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=24704876 count(s)]
@@ -435,7 +435,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.302288300 sec.
+*elapsed time=0.274259200 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=49985001 count(s)]
@@ -443,7 +443,7 @@ Array is stable.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.069066800 sec.
+*elapsed time=0.071068900 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=19995 count(s)]
@@ -451,17 +451,17 @@ Array is stable.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.242229600 sec.
+*elapsed time=0.263250400 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=37392840 count(s)]
 
 ============================================================
 Sort type: [Bubble sort]
-* Total time       = 1.309249000 sec.
-* Average time     = 0.187035571 sec.
+* Total time       = 1.281218200 sec.
+* Average time     = 0.183031171 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.302288300 sec.
+* Max time         = 0.274259200 sec.
 * Total Swapped    = 162016591 count(s)
 * Average  Swapped =  23145227 count(s)
 * Min Swapped      =         0 count(s)
@@ -476,7 +476,7 @@ Sort type: [Shaker sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.180169000 sec.
+*elapsed time=0.186186300 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=25018590 count(s)]
@@ -484,7 +484,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.179170700 sec.
+*elapsed time=0.184165000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=24895289 count(s)]
@@ -492,7 +492,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.179170500 sec.
+*elapsed time=0.200197700 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=24704876 count(s)]
@@ -508,7 +508,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.258245100 sec.
+*elapsed time=0.288273300 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=49985001 count(s)]
@@ -516,7 +516,7 @@ Array is stable.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.001000900 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=19995 count(s)]
@@ -524,17 +524,17 @@ Array is stable.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.264249900 sec.
+*elapsed time=0.246236100 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=37392840 count(s)]
 
 ============================================================
 Sort type: [Shaker sort]
-* Total time       = 1.062006100 sec.
-* Average time     = 0.151715157 sec.
+* Total time       = 1.105058400 sec.
+* Average time     = 0.157865486 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.264249900 sec.
+* Max time         = 0.288273300 sec.
 * Total Swapped    = 162016591 count(s)
 * Average  Swapped =  23145227 count(s)
 * Min Swapped      =         0 count(s)
@@ -549,7 +549,7 @@ Sort type: [Odd-Even sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.126120400 sec.
+*elapsed time=0.130122400 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=25018590 count(s)]
@@ -557,7 +557,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.130123600 sec.
+*elapsed time=0.130123300 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=24895289 count(s)]
@@ -565,7 +565,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.127121000 sec.
+*elapsed time=0.134128000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=24704876 count(s)]
@@ -581,7 +581,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.190180700 sec.
+*elapsed time=0.190180500 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=49985001 count(s)]
@@ -589,7 +589,7 @@ Array is stable.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.063060000 sec.
+*elapsed time=0.061058000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=19995 count(s)]
@@ -597,17 +597,17 @@ Array is stable.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.144136800 sec.
+*elapsed time=0.166158200 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=37392840 count(s)]
 
 ============================================================
 Sort type: [Odd-Even sort]
-* Total time       = 0.780742500 sec.
-* Average time     = 0.111534643 sec.
+* Total time       = 0.811770400 sec.
+* Average time     = 0.115967200 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.190180700 sec.
+* Max time         = 0.190180500 sec.
 * Total Swapped    = 162016591 count(s)
 * Average  Swapped =  23145227 count(s)
 * Min Swapped      =         0 count(s)
@@ -622,7 +622,7 @@ Sort type: [Shear sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.003002900 sec.
+*elapsed time=0.005004700 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=1892312 count(s)]
@@ -630,7 +630,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.003002700 sec.
+*elapsed time=0.005005000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=1873730 count(s)]
@@ -638,7 +638,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.004003800 sec.
+*elapsed time=0.005004900 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=1860168 count(s)]
@@ -654,7 +654,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.002001700 sec.
+*elapsed time=0.003002600 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=1465201 count(s)]
@@ -662,7 +662,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.001001200 sec.
+*elapsed time=0.001000900 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=485527 count(s)]
@@ -670,17 +670,17 @@ Array is stable.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.003002700 sec.
+*elapsed time=0.005004700 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=1882044 count(s)]
 
 ============================================================
 Sort type: [Shear sort]
-* Total time       = 0.017015900 sec.
-* Average time     = 0.002430843 sec.
+* Total time       = 0.025023700 sec.
+* Average time     = 0.003574814 sec.
 * Min time         = 0.001000900 sec.
-* Max time         = 0.004003800 sec.
+* Max time         = 0.005005000 sec.
 * Total Swapped    =   9944116 count(s)
 * Average  Swapped =   1420588 count(s)
 * Min Swapped      =    485134 count(s)
@@ -695,7 +695,7 @@ Sort type: [Comb sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.001000900 sec.
+*elapsed time=0.001000800 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=57500 count(s)]
@@ -703,7 +703,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.002001800 sec.
+*elapsed time=0.002002400 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=57587 count(s)]
@@ -711,7 +711,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.001000800 sec.
+*elapsed time=0.001000900 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=57584 count(s)]
@@ -719,7 +719,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered)
 ------------------------------
-*elapsed time=0.000000000 sec.
+*elapsed time=0.001000900 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=0 count(s)]
@@ -727,7 +727,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.000000000 sec.
+*elapsed time=0.001000900 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=18345 count(s)]
@@ -735,7 +735,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.001000800 sec.
+*elapsed time=0.001001200 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=7303 count(s)]
@@ -743,17 +743,17 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.001001200 sec.
+*elapsed time=0.002002000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=58823 count(s)]
 
 ============================================================
 Sort type: [Comb sort]
-* Total time       = 0.006005500 sec.
-* Average time     = 0.000857929 sec.
-* Min time         = 0.000000000 sec.
-* Max time         = 0.002001800 sec.
+* Total time       = 0.009009100 sec.
+* Average time     = 0.001287014 sec.
+* Min time         = 0.001000800 sec.
+* Max time         = 0.002002400 sec.
 * Total Swapped    =    257142 count(s)
 * Average  Swapped =     36734 count(s)
 * Min Swapped      =         0 count(s)
@@ -768,7 +768,7 @@ Sort type: [Gnome sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.153146800 sec.
+*elapsed time=0.157149100 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=25018590 count(s)]
@@ -776,7 +776,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.123117100 sec.
+*elapsed time=0.123117800 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=24895289 count(s)]
@@ -784,7 +784,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.121115100 sec.
+*elapsed time=0.123118000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=24704876 count(s)]
@@ -800,7 +800,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.257254000 sec.
+*elapsed time=0.261248100 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=49985001 count(s)]
@@ -816,17 +816,17 @@ Array is stable.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.191180700 sec.
+*elapsed time=0.234226700 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=37392840 count(s)]
 
 ============================================================
 Sort type: [Gnome sort]
-* Total time       = 0.845813700 sec.
-* Average time     = 0.120830529 sec.
+* Total time       = 0.898859700 sec.
+* Average time     = 0.128408529 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.257254000 sec.
+* Max time         = 0.261248100 sec.
 * Total Swapped    = 162016591 count(s)
 * Average  Swapped =  23145227 count(s)
 * Min Swapped      =         0 count(s)
@@ -841,7 +841,7 @@ Sort type: [Quick sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.001001200 sec.
+*elapsed time=0.000996500 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=33719 count(s)]
@@ -849,7 +849,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.001000900 sec.
+*elapsed time=0.001001800 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=33677 count(s)]
@@ -865,7 +865,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered)
 ------------------------------
-*elapsed time=0.000000000 sec.
+*elapsed time=0.001001200 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=3333 count(s)]
@@ -873,7 +873,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.001001200 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=8333 count(s)]
@@ -889,17 +889,17 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.001000900 sec.
+*elapsed time=0.001001800 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=36402 count(s)]
 
 ============================================================
 Sort type: [Quick sort]
-* Total time       = 0.005005000 sec.
-* Average time     = 0.000715000 sec.
+* Total time       = 0.005002100 sec.
+* Average time     = 0.000714586 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.001001200 sec.
+* Max time         = 0.001001800 sec.
 * Total Swapped    =    152242 count(s)
 * Average  Swapped =     21748 count(s)
 * Min Swapped      =      3333 count(s)
@@ -914,7 +914,7 @@ Sort type: [Selection sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.122116600 sec.
+*elapsed time=0.124118000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=9990 count(s)]
@@ -922,7 +922,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.126119200 sec.
+*elapsed time=0.122117200 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=9995 count(s)]
@@ -930,7 +930,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.123117800 sec.
+*elapsed time=0.124118300 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=9990 count(s)]
@@ -938,7 +938,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered)
 ------------------------------
-*elapsed time=0.123116000 sec.
+*elapsed time=0.123117800 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=0 count(s)]
@@ -946,7 +946,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.123117200 sec.
+*elapsed time=0.124117200 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=8333 count(s)]
@@ -954,7 +954,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.122116000 sec.
+*elapsed time=0.123115700 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=3 count(s)]
@@ -962,17 +962,17 @@ Array is stable.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.122115700 sec.
+*elapsed time=0.124120100 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=9989 count(s)]
 
 ============================================================
 Sort type: [Selection sort]
-* Total time       = 0.861818500 sec.
-* Average time     = 0.123116929 sec.
-* Min time         = 0.122115700 sec.
-* Max time         = 0.126119200 sec.
+* Total time       = 0.864824300 sec.
+* Average time     = 0.123546329 sec.
+* Min time         = 0.122117200 sec.
+* Max time         = 0.124120100 sec.
 * Total Swapped    =     48300 count(s)
 * Average  Swapped =      6900 count(s)
 * Min Swapped      =         0 count(s)
@@ -987,7 +987,7 @@ Sort type: [Heap sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.001000900 sec.
+*elapsed time=0.002001800 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=129635 count(s)]
@@ -995,7 +995,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.002002000 sec.
+*elapsed time=0.001000300 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=129583 count(s)]
@@ -1003,7 +1003,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.001000900 sec.
+*elapsed time=0.001000600 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=129778 count(s)]
@@ -1011,7 +1011,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered)
 ------------------------------
-*elapsed time=0.002001800 sec.
+*elapsed time=0.001000900 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=218680 count(s)]
@@ -1019,7 +1019,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.001001100 sec.
+*elapsed time=0.001000900 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=116627 count(s)]
@@ -1027,7 +1027,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.002001800 sec.
+*elapsed time=0.001000800 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=213143 count(s)]
@@ -1035,17 +1035,17 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.001002600 sec.
+*elapsed time=0.001001200 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=123006 count(s)]
 
 ============================================================
 Sort type: [Heap sort]
-* Total time       = 0.010011100 sec.
-* Average time     = 0.001430157 sec.
-* Min time         = 0.001000900 sec.
-* Max time         = 0.002002000 sec.
+* Total time       = 0.008006500 sec.
+* Average time     = 0.001143786 sec.
+* Min time         = 0.001000300 sec.
+* Max time         = 0.002001800 sec.
 * Total Swapped    =   1060452 count(s)
 * Average  Swapped =    151493 count(s)
 * Min Swapped      =    116627 count(s)
@@ -1060,7 +1060,7 @@ Sort type: [Insertion sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.118110500 sec.
+*elapsed time=0.118112800 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=9985 count(s)]
@@ -1068,7 +1068,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.118112400 sec.
+*elapsed time=0.138130900 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=9987 count(s)]
@@ -1076,7 +1076,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.114109600 sec.
+*elapsed time=0.116109600 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=9983 count(s)]
@@ -1092,7 +1092,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.249237800 sec.
+*elapsed time=0.249236100 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=9999 count(s)]
@@ -1108,17 +1108,17 @@ Array is stable.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.189179300 sec.
+*elapsed time=0.196186500 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=9994 count(s)]
 
 ============================================================
 Sort type: [Insertion sort]
-* Total time       = 0.788749600 sec.
-* Average time     = 0.112678514 sec.
+* Total time       = 0.817775900 sec.
+* Average time     = 0.116825129 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.249237800 sec.
+* Max time         = 0.249236100 sec.
 * Total Swapped    =     59947 count(s)
 * Average  Swapped =      8563 count(s)
 * Min Swapped      =         0 count(s)
@@ -1133,7 +1133,7 @@ Sort type: [Shell sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.001001400 sec.
+*elapsed time=0.001000900 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=48473 count(s)]
@@ -1141,7 +1141,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.001001200 sec.
+*elapsed time=0.002000600 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=48925 count(s)]
@@ -1149,7 +1149,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.001001200 sec.
+*elapsed time=0.001002100 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=48799 count(s)]
@@ -1173,7 +1173,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.000000000 sec.
+*elapsed time=0.001000900 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=5156 count(s)]
@@ -1188,10 +1188,10 @@ Array is NOT STABLE.
 
 ============================================================
 Sort type: [Shell sort]
-* Total time       = 0.004004700 sec.
-* Average time     = 0.000572100 sec.
+* Total time       = 0.006005400 sec.
+* Average time     = 0.000857914 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.001001400 sec.
+* Max time         = 0.002000600 sec.
 * Total Swapped    =    238044 count(s)
 * Average  Swapped =     34006 count(s)
 * Min Swapped      =         0 count(s)
@@ -1206,7 +1206,7 @@ Sort type: [Inplace Merge sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.072067300 sec.
+*elapsed time=0.075071200 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=58291 count(s)]
@@ -1214,7 +1214,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.073069400 sec.
+*elapsed time=0.075071800 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=58193 count(s)]
@@ -1222,7 +1222,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.072068600 sec.
+*elapsed time=0.074071100 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=58188 count(s)]
@@ -1238,7 +1238,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.159151800 sec.
+*elapsed time=0.167160900 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=60442 count(s)]
@@ -1254,17 +1254,17 @@ Array is stable.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.119112000 sec.
+*elapsed time=0.120110700 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=58404 count(s)]
 
 ============================================================
 Sort type: [Inplace Merge sort]
-* Total time       = 0.495469100 sec.
-* Average time     = 0.070781300 sec.
+* Total time       = 0.511485700 sec.
+* Average time     = 0.073069386 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.159151800 sec.
+* Max time         = 0.167160900 sec.
 * Total Swapped    =    303524 count(s)
 * Average  Swapped =     43360 count(s)
 * Min Swapped      =         0 count(s)
@@ -1279,7 +1279,7 @@ Sort type: [Intro sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.001001100 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=31152 count(s)]
@@ -1287,7 +1287,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.001000900 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=31250 count(s)]
@@ -1327,17 +1327,17 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.001002000 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=33844 count(s)]
 
 ============================================================
 Sort type: [Intro sort]
-* Total time       = 0.003004000 sec.
-* Average time     = 0.000429143 sec.
+* Total time       = 0.000000000 sec.
+* Average time     = 0.000000000 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.001002000 sec.
+* Max time         = 0.000000000 sec.
 * Total Swapped    =    134548 count(s)
 * Average  Swapped =     19221 count(s)
 * Min Swapped      =         0 count(s)
@@ -1360,7 +1360,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.000000000 sec.
+*elapsed time=0.001000900 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=10000 count(s)]
@@ -1368,7 +1368,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.001002100 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=9998 count(s)]
@@ -1392,7 +1392,7 @@ Array is stable.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.000000000 sec.
+*elapsed time=0.001000800 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=4 count(s)]
@@ -1407,10 +1407,10 @@ Array is stable.
 
 ============================================================
 Sort type: [Radix sort]
-* Total time       = 0.001002100 sec.
-* Average time     = 0.000143157 sec.
+* Total time       = 0.002001700 sec.
+* Average time     = 0.000285957 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.001002100 sec.
+* Max time         = 0.001000900 sec.
 * Total Swapped    =     49997 count(s)
 * Average  Swapped =      7142 count(s)
 * Min Swapped      =         0 count(s)
@@ -1428,44 +1428,44 @@ Total Array size   = 800000 Bytes
 - Sort name:                Elapsed Time (Sum/Average/Min/Max) [sec.]             Swapped (Sum/Average/Min/Max) [count(s)]
 --------------------------------------------------------------------------------------------------------------------------------
 [C-Library sort](Quick sort)
-- qsort(inline-function):   0.013017900/  0.001859700/  0.000000000/  0.003010600
+- qsort(inline-function):   0.015014100/  0.002144871/  0.001000800/  0.003003000
 --------------------------------------------------------------------------------------------------------------------------------
 [STL sort](Intro sort)
-- std::sort(function):      0.005998600/  0.000856943/  0.000000000/  0.002002100
-- std::sort(inline-func):   0.009008300/  0.001286900/  0.000000000/  0.002002300
-- std::sort(functor):       0.003002600/  0.000428943/  0.000000000/  0.001001400
-- std::sort(lambda):        0.002002100/  0.000286014/  0.000000000/  0.001001200
+- std::sort(function):      0.006007700/  0.000858243/  0.000000000/  0.002003200
+- std::sort(inline-func):   0.006004400/  0.000857771/  0.000000000/  0.002016700
+- std::sort(functor):       0.001001100/  0.000143014/  0.000000000/  0.001001100
+- std::sort(lambda):        0.000994700/  0.000142100/  0.000000000/  0.000994700
 --------------------------------------------------------------------------------------------------------------------------------
 [STL stable sort](Merge sort) *Not In-place sort
-- std::stable_sort<S>:      0.009008600/  0.001286943/  0.001000600/  0.002001800
+- std::stable_sort<S>:      0.009006800/  0.001286686/  0.001000000/  0.002002000
 --------------------------------------------------------------------------------------------------------------------------------
 [Exchange sorts]
-- Bubble sort<S>:           1.309249000/  0.187035571/  0.000000000/  0.302288300  162016591/   23145227/          0/   49985001
-- Shaker sort<S>:           1.062006100/  0.151715157/  0.000000000/  0.264249900  162016591/   23145227/          0/   49985001
-- Odd-Even sort<S>:         0.780742500/  0.111534643/  0.000000000/  0.190180700  162016591/   23145227/          0/   49985001
-- Shear sort:               0.017015900/  0.002430843/  0.001000900/  0.004003800    9944116/    1420588/     485134/    1892312
-- Comb sort:                0.006005500/  0.000857929/  0.000000000/  0.002001800     257142/      36734/          0/      58823
-- Gnome sort<S>:            0.845813700/  0.120830529/  0.000000000/  0.257254000  162016591/   23145227/          0/   49985001
+- Bubble sort<S>:           1.281218200/  0.183031171/  0.000000000/  0.274259200  162016591/   23145227/          0/   49985001
+- Shaker sort<S>:           1.105058400/  0.157865486/  0.000000000/  0.288273300  162016591/   23145227/          0/   49985001
+- Odd-Even sort<S>:         0.811770400/  0.115967200/  0.000000000/  0.190180500  162016591/   23145227/          0/   49985001
+- Shear sort:               0.025023700/  0.003574814/  0.001000900/  0.005005000    9944116/    1420588/     485134/    1892312
+- Comb sort:                0.009009100/  0.001287014/  0.001000800/  0.002002400     257142/      36734/          0/      58823
+- Gnome sort<S>:            0.898859700/  0.128408529/  0.000000000/  0.261248100  162016591/   23145227/          0/   49985001
 --------------------------------------------------------------------------------------------------------------------------------
 [Partition-exchange sorts]
-- Quick sort:               0.005005000/  0.000715000/  0.000000000/  0.001001200     152242/      21748/       3333/      36402
+- Quick sort:               0.005002100/  0.000714586/  0.000000000/  0.001001800     152242/      21748/       3333/      36402
 --------------------------------------------------------------------------------------------------------------------------------
 [Selection sorts]
-- Selection sort:           0.861818500/  0.123116929/  0.122115700/  0.126119200      48300/       6900/          0/       9995
-- Heap sort:                0.010011100/  0.001430157/  0.001000900/  0.002002000    1060452/     151493/     116627/     218680
+- Selection sort:           0.864824300/  0.123546329/  0.122117200/  0.124120100      48300/       6900/          0/       9995
+- Heap sort:                0.008006500/  0.001143786/  0.001000300/  0.002001800    1060452/     151493/     116627/     218680
 --------------------------------------------------------------------------------------------------------------------------------
 [Insertion sorts]
-- Insertion sort<S>:        0.788749600/  0.112678514/  0.000000000/  0.249237800      59947/       8563/          0/       9999
-- Shell sort:               0.004004700/  0.000572100/  0.000000000/  0.001001400     238044/      34006/          0/      49469
+- Insertion sort<S>:        0.817775900/  0.116825129/  0.000000000/  0.249236100      59947/       8563/          0/       9999
+- Shell sort:               0.006005400/  0.000857914/  0.000000000/  0.002000600     238044/      34006/          0/      49469
 --------------------------------------------------------------------------------------------------------------------------------
 [Merge sorts]
-- Inplace-Merge sort<S>:    0.495469100/  0.070781300/  0.000000000/  0.159151800     303524/      43360/          0/      60442
+- Inplace-Merge sort<S>:    0.511485700/  0.073069386/  0.000000000/  0.167160900     303524/      43360/          0/      60442
 --------------------------------------------------------------------------------------------------------------------------------
 [Hybrid sorts]
-- Intro sort:               0.003004000/  0.000429143/  0.000000000/  0.001002000     134548/      19221/          0/      33844
+- Intro sort:               0.000000000/  0.000000000/  0.000000000/  0.000000000     134548/      19221/          0/      33844
 --------------------------------------------------------------------------------------------------------------------------------
 [Distribution sorts] *Not In-place sort
-- Radix sort<S>:            0.001002100/  0.000143157/  0.000000000/  0.001002100      49997/       7142/          0/      10000
+- Radix sort<S>:            0.002001700/  0.000285957/  0.000000000/  0.001000900      49997/       7142/          0/      10000
 --------------------------------------------------------------------------------------------------------------------------------
 * <S> ... Stable sort algorithm.
 
@@ -1520,1403 +1520,1403 @@ target=-1
 target=-1, linearSearch=nullptr
 target=0
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DCCC10)
-    (data1_def=00DCCC10)
-    (data2_def=00DCCC10)
-    (data3_def=00DCCC10)
-    (data4_def=00DCCC10)
-    (data5_def=00DCCC10)
-    (data8_def=00DCCC10)
-    (data9_def=00DCCC10)
-    (data10_def=00DCCC10)
-    (data11_def=00DCCC10)
+    (data_def=0100EC10)
+    (data1_def=0100EC10)
+    (data2_def=0100EC10)
+    (data3_def=0100EC10)
+    (data4_def=0100EC10)
+    (data5_def=0100EC10)
+    (data8_def=0100EC10)
+    (data9_def=0100EC10)
+    (data10_def=0100EC10)
+    (data11_def=0100EC10)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DCCC10)
-    (data1=00DCCC10)
-    (data2=00DCCC10)
-    (data3=00DCCC10)
-    (data4=00DCCC10)
-    (data5=00DCCC10)
-    (data8=00DCCC10)
-    (data9=00DCCC10)
-    (data10=00DCCC10)
-    (data11=00DCCC10)
+    (data=0100EC10)
+    (data1=0100EC10)
+    (data2=0100EC10)
+    (data3=0100EC10)
+    (data4=0100EC10)
+    (data5=0100EC10)
+    (data8=0100EC10)
+    (data9=0100EC10)
+    (data10=0100EC10)
+    (data11=0100EC10)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DCCC10)
-    (data1_val=00DCCC10)
-    (data2_val=00DCCC10)
-    (data3_val=00DCCC10)
-    (data4_val=00DCCC10)
-    (data5_val=00DCCC10)
-    (data8_val=00DCCC10)
-    (data9_val=00DCCC10)
-    (data10_val=00DCCC10)
-    (data11_val=00DCCC10)
+    (data_val=0100EC10)
+    (data1_val=0100EC10)
+    (data2_val=0100EC10)
+    (data3_val=0100EC10)
+    (data4_val=0100EC10)
+    (data5_val=0100EC10)
+    (data8_val=0100EC10)
+    (data9_val=0100EC10)
+    (data10_val=0100EC10)
+    (data11_val=0100EC10)
 target=0, linearSearch=[0, 2342]
 target=1
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DDD0B0)
-    (data1_def=00DDD0B0)
-    (data2_def=00DDD0B0)
-    (data3_def=00DDD0B0)
-    (data4_def=00DDD0B0)
-    (data5_def=00DDD0B0)
-    (data8_def=00DDD0B0)
-    (data9_def=00DDD0B0)
-    (data10_def=00DDD0B0)
-    (data11_def=00DDD0B0)
+    (data_def=0101F0B0)
+    (data1_def=0101F0B0)
+    (data2_def=0101F0B0)
+    (data3_def=0101F0B0)
+    (data4_def=0101F0B0)
+    (data5_def=0101F0B0)
+    (data8_def=0101F0B0)
+    (data9_def=0101F0B0)
+    (data10_def=0101F0B0)
+    (data11_def=0101F0B0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DDD0B0)
-    (data1=00DDD0B0)
-    (data2=00DDD0B0)
-    (data3=00DDD0B0)
-    (data4=00DDD0B0)
-    (data5=00DDD0B0)
-    (data8=00DDD0B0)
-    (data9=00DDD0B0)
-    (data10=00DDD0B0)
-    (data11=00DDD0B0)
+    (data=0101F0B0)
+    (data1=0101F0B0)
+    (data2=0101F0B0)
+    (data3=0101F0B0)
+    (data4=0101F0B0)
+    (data5=0101F0B0)
+    (data8=0101F0B0)
+    (data9=0101F0B0)
+    (data10=0101F0B0)
+    (data11=0101F0B0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DDD0B0)
-    (data1_val=00DDD0B0)
-    (data2_val=00DDD0B0)
-    (data3_val=00DDD0B0)
-    (data4_val=00DDD0B0)
-    (data5_val=00DDD0B0)
-    (data8_val=00DDD0B0)
-    (data9_val=00DDD0B0)
-    (data10_val=00DDD0B0)
-    (data11_val=00DDD0B0)
+    (data_val=0101F0B0)
+    (data1_val=0101F0B0)
+    (data2_val=0101F0B0)
+    (data3_val=0101F0B0)
+    (data4_val=0101F0B0)
+    (data5_val=0101F0B0)
+    (data8_val=0101F0B0)
+    (data9_val=0101F0B0)
+    (data10_val=0101F0B0)
+    (data11_val=0101F0B0)
 target=1, linearSearch=[1, 3176]
 target=2
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DAA3E0)
-    (data1_def=00DAA3E0)
-    (data2_def=00DAA3E0)
-    (data3_def=00DAA3E0)
-    (data4_def=00DAA3E0)
-    (data5_def=00DAA3E0)
-    (data8_def=00DAA3E0)
-    (data9_def=00DAA3E0)
-    (data10_def=00DAA3E0)
-    (data11_def=00DAA3E0)
+    (data_def=00FEC3E0)
+    (data1_def=00FEC3E0)
+    (data2_def=00FEC3E0)
+    (data3_def=00FEC3E0)
+    (data4_def=00FEC3E0)
+    (data5_def=00FEC3E0)
+    (data8_def=00FEC3E0)
+    (data9_def=00FEC3E0)
+    (data10_def=00FEC3E0)
+    (data11_def=00FEC3E0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DAA3E0)
-    (data1=00DAA3E0)
-    (data2=00DAA3E0)
-    (data3=00DAA3E0)
-    (data4=00DAA3E0)
-    (data5=00DAA3E0)
-    (data8=00DAA3E0)
-    (data9=00DAA3E0)
-    (data10=00DAA3E0)
-    (data11=00DAA3E0)
+    (data=00FEC3E0)
+    (data1=00FEC3E0)
+    (data2=00FEC3E0)
+    (data3=00FEC3E0)
+    (data4=00FEC3E0)
+    (data5=00FEC3E0)
+    (data8=00FEC3E0)
+    (data9=00FEC3E0)
+    (data10=00FEC3E0)
+    (data11=00FEC3E0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DAA3E0)
-    (data1_val=00DAA3E0)
-    (data2_val=00DAA3E0)
-    (data3_val=00DAA3E0)
-    (data4_val=00DAA3E0)
-    (data5_val=00DAA3E0)
-    (data8_val=00DAA3E0)
-    (data9_val=00DAA3E0)
-    (data10_val=00DAA3E0)
-    (data11_val=00DAA3E0)
+    (data_val=00FEC3E0)
+    (data1_val=00FEC3E0)
+    (data2_val=00FEC3E0)
+    (data3_val=00FEC3E0)
+    (data4_val=00FEC3E0)
+    (data5_val=00FEC3E0)
+    (data8_val=00FEC3E0)
+    (data9_val=00FEC3E0)
+    (data10_val=00FEC3E0)
+    (data11_val=00FEC3E0)
 target=2, linearSearch=[2, 575]
 target=3
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DA4DA0)
-    (data1_def=00DA4DA0)
-    (data2_def=00DA4DA0)
-    (data3_def=00DA4DA0)
-    (data4_def=00DA4DA0)
-    (data5_def=00DA4DA0)
-    (data8_def=00DA4DA0)
-    (data9_def=00DA4DA0)
-    (data10_def=00DA4DA0)
-    (data11_def=00DA4DA0)
+    (data_def=00FE6DA0)
+    (data1_def=00FE6DA0)
+    (data2_def=00FE6DA0)
+    (data3_def=00FE6DA0)
+    (data4_def=00FE6DA0)
+    (data5_def=00FE6DA0)
+    (data8_def=00FE6DA0)
+    (data9_def=00FE6DA0)
+    (data10_def=00FE6DA0)
+    (data11_def=00FE6DA0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DA4DA0)
-    (data1=00DA4DA0)
-    (data2=00DA4DA0)
-    (data3=00DA4DA0)
-    (data4=00DA4DA0)
-    (data5=00DA4DA0)
-    (data8=00DA4DA0)
-    (data9=00DA4DA0)
-    (data10=00DA4DA0)
-    (data11=00DA4DA0)
+    (data=00FE6DA0)
+    (data1=00FE6DA0)
+    (data2=00FE6DA0)
+    (data3=00FE6DA0)
+    (data4=00FE6DA0)
+    (data5=00FE6DA0)
+    (data8=00FE6DA0)
+    (data9=00FE6DA0)
+    (data10=00FE6DA0)
+    (data11=00FE6DA0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DA4DA0)
-    (data1_val=00DA4DA0)
-    (data2_val=00DA4DA0)
-    (data3_val=00DA4DA0)
-    (data4_val=00DA4DA0)
-    (data5_val=00DA4DA0)
-    (data8_val=00DA4DA0)
-    (data9_val=00DA4DA0)
-    (data10_val=00DA4DA0)
-    (data11_val=00DA4DA0)
+    (data_val=00FE6DA0)
+    (data1_val=00FE6DA0)
+    (data2_val=00FE6DA0)
+    (data3_val=00FE6DA0)
+    (data4_val=00FE6DA0)
+    (data5_val=00FE6DA0)
+    (data8_val=00FE6DA0)
+    (data9_val=00FE6DA0)
+    (data10_val=00FE6DA0)
+    (data11_val=00FE6DA0)
 target=3, linearSearch=[3, 299]
 target=4
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00D9F5D0)
-    (data1_def=00D9F5D0)
-    (data2_def=00D9F5D0)
-    (data3_def=00D9F5D0)
-    (data4_def=00D9F5D0)
-    (data5_def=00D9F5D0)
-    (data8_def=00D9F5D0)
-    (data9_def=00D9F5D0)
-    (data10_def=00D9F5D0)
-    (data11_def=00D9F5D0)
+    (data_def=00FE15D0)
+    (data1_def=00FE15D0)
+    (data2_def=00FE15D0)
+    (data3_def=00FE15D0)
+    (data4_def=00FE15D0)
+    (data5_def=00FE15D0)
+    (data8_def=00FE15D0)
+    (data9_def=00FE15D0)
+    (data10_def=00FE15D0)
+    (data11_def=00FE15D0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00D9F5D0)
-    (data1=00D9F5D0)
-    (data2=00D9F5D0)
-    (data3=00D9F5D0)
-    (data4=00D9F5D0)
-    (data5=00D9F5D0)
-    (data8=00D9F5D0)
-    (data9=00D9F5D0)
-    (data10=00D9F5D0)
-    (data11=00D9F5D0)
+    (data=00FE15D0)
+    (data1=00FE15D0)
+    (data2=00FE15D0)
+    (data3=00FE15D0)
+    (data4=00FE15D0)
+    (data5=00FE15D0)
+    (data8=00FE15D0)
+    (data9=00FE15D0)
+    (data10=00FE15D0)
+    (data11=00FE15D0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00D9F5D0)
-    (data1_val=00D9F5D0)
-    (data2_val=00D9F5D0)
-    (data3_val=00D9F5D0)
-    (data4_val=00D9F5D0)
-    (data5_val=00D9F5D0)
-    (data8_val=00D9F5D0)
-    (data9_val=00D9F5D0)
-    (data10_val=00D9F5D0)
-    (data11_val=00D9F5D0)
+    (data_val=00FE15D0)
+    (data1_val=00FE15D0)
+    (data2_val=00FE15D0)
+    (data3_val=00FE15D0)
+    (data4_val=00FE15D0)
+    (data5_val=00FE15D0)
+    (data8_val=00FE15D0)
+    (data9_val=00FE15D0)
+    (data10_val=00FE15D0)
+    (data11_val=00FE15D0)
 target=4, linearSearch=[4, 18]
 target=5
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DFFAC0)
-    (data1_def=00DFFAC0)
-    (data2_def=00DFFAC0)
-    (data3_def=00DFFAC0)
-    (data4_def=00DFFAC0)
-    (data5_def=00DFFAC0)
-    (data8_def=00DFFAC0)
-    (data9_def=00DFFAC0)
-    (data10_def=00DFFAC0)
-    (data11_def=00DFFAC0)
+    (data_def=01041AC0)
+    (data1_def=01041AC0)
+    (data2_def=01041AC0)
+    (data3_def=01041AC0)
+    (data4_def=01041AC0)
+    (data5_def=01041AC0)
+    (data8_def=01041AC0)
+    (data9_def=01041AC0)
+    (data10_def=01041AC0)
+    (data11_def=01041AC0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DFFAC0)
-    (data1=00DFFAC0)
-    (data2=00DFFAC0)
-    (data3=00DFFAC0)
-    (data4=00DFFAC0)
-    (data5=00DFFAC0)
-    (data8=00DFFAC0)
-    (data9=00DFFAC0)
-    (data10=00DFFAC0)
-    (data11=00DFFAC0)
+    (data=01041AC0)
+    (data1=01041AC0)
+    (data2=01041AC0)
+    (data3=01041AC0)
+    (data4=01041AC0)
+    (data5=01041AC0)
+    (data8=01041AC0)
+    (data9=01041AC0)
+    (data10=01041AC0)
+    (data11=01041AC0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DFFAC0)
-    (data1_val=00DFFAC0)
-    (data2_val=00DFFAC0)
-    (data3_val=00DFFAC0)
-    (data4_val=00DFFAC0)
-    (data5_val=00DFFAC0)
-    (data8_val=00DFFAC0)
-    (data9_val=00DFFAC0)
-    (data10_val=00DFFAC0)
-    (data11_val=00DFFAC0)
+    (data_val=01041AC0)
+    (data1_val=01041AC0)
+    (data2_val=01041AC0)
+    (data3_val=01041AC0)
+    (data4_val=01041AC0)
+    (data5_val=01041AC0)
+    (data8_val=01041AC0)
+    (data9_val=01041AC0)
+    (data10_val=01041AC0)
+    (data11_val=01041AC0)
 target=5, linearSearch=[5, 4949]
 target=6
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DB2E50)
-    (data1_def=00DB2E50)
-    (data2_def=00DB2E50)
-    (data3_def=00DB2E50)
-    (data4_def=00DB2E50)
-    (data5_def=00DB2E50)
-    (data8_def=00DB2E50)
-    (data9_def=00DB2E50)
-    (data10_def=00DB2E50)
-    (data11_def=00DB2E50)
+    (data_def=00FF4E50)
+    (data1_def=00FF4E50)
+    (data2_def=00FF4E50)
+    (data3_def=00FF4E50)
+    (data4_def=00FF4E50)
+    (data5_def=00FF4E50)
+    (data8_def=00FF4E50)
+    (data9_def=00FF4E50)
+    (data10_def=00FF4E50)
+    (data11_def=00FF4E50)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DB2E50)
-    (data1=00DB2E50)
-    (data2=00DB2E50)
-    (data3=00DB2E50)
-    (data4=00DB2E50)
-    (data5=00DB2E50)
-    (data8=00DB2E50)
-    (data9=00DB2E50)
-    (data10=00DB2E50)
-    (data11=00DB2E50)
+    (data=00FF4E50)
+    (data1=00FF4E50)
+    (data2=00FF4E50)
+    (data3=00FF4E50)
+    (data4=00FF4E50)
+    (data5=00FF4E50)
+    (data8=00FF4E50)
+    (data9=00FF4E50)
+    (data10=00FF4E50)
+    (data11=00FF4E50)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DB2E50)
-    (data1_val=00DB2E50)
-    (data2_val=00DB2E50)
-    (data3_val=00DB2E50)
-    (data4_val=00DB2E50)
-    (data5_val=00DB2E50)
-    (data8_val=00DB2E50)
-    (data9_val=00DB2E50)
-    (data10_val=00DB2E50)
-    (data11_val=00DB2E50)
+    (data_val=00FF4E50)
+    (data1_val=00FF4E50)
+    (data2_val=00FF4E50)
+    (data3_val=00FF4E50)
+    (data4_val=00FF4E50)
+    (data5_val=00FF4E50)
+    (data8_val=00FF4E50)
+    (data9_val=00FF4E50)
+    (data10_val=00FF4E50)
+    (data11_val=00FF4E50)
 target=6, linearSearch=[6, 1018]
 target=7
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DF5D90)
-    (data1_def=00DF5D90)
-    (data2_def=00DF5D90)
-    (data3_def=00DF5D90)
-    (data4_def=00DF5D90)
-    (data5_def=00DF5D90)
-    (data8_def=00DF5D90)
-    (data9_def=00DF5D90)
-    (data10_def=00DF5D90)
-    (data11_def=00DF5D90)
+    (data_def=01037D90)
+    (data1_def=01037D90)
+    (data2_def=01037D90)
+    (data3_def=01037D90)
+    (data4_def=01037D90)
+    (data5_def=01037D90)
+    (data8_def=01037D90)
+    (data9_def=01037D90)
+    (data10_def=01037D90)
+    (data11_def=01037D90)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DF5D90)
-    (data1=00DF5D90)
-    (data2=00DF5D90)
-    (data3=00DF5D90)
-    (data4=00DF5D90)
-    (data5=00DF5D90)
-    (data8=00DF5D90)
-    (data9=00DF5D90)
-    (data10=00DF5D90)
-    (data11=00DF5D90)
+    (data=01037D90)
+    (data1=01037D90)
+    (data2=01037D90)
+    (data3=01037D90)
+    (data4=01037D90)
+    (data5=01037D90)
+    (data8=01037D90)
+    (data9=01037D90)
+    (data10=01037D90)
+    (data11=01037D90)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DF5D90)
-    (data1_val=00DF5D90)
-    (data2_val=00DF5D90)
-    (data3_val=00DF5D90)
-    (data4_val=00DF5D90)
-    (data5_val=00DF5D90)
-    (data8_val=00DF5D90)
-    (data9_val=00DF5D90)
-    (data10_val=00DF5D90)
-    (data11_val=00DF5D90)
+    (data_val=01037D90)
+    (data1_val=01037D90)
+    (data2_val=01037D90)
+    (data3_val=01037D90)
+    (data4_val=01037D90)
+    (data5_val=01037D90)
+    (data8_val=01037D90)
+    (data9_val=01037D90)
+    (data10_val=01037D90)
+    (data11_val=01037D90)
 target=7, linearSearch=[7, 4446]
 target=8
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DFABB0)
-    (data1_def=00DFABB0)
-    (data2_def=00DFABB0)
-    (data3_def=00DFABB0)
-    (data4_def=00DFABB0)
-    (data5_def=00DFABB0)
-    (data8_def=00DFABB0)
-    (data9_def=00DFABB0)
-    (data10_def=00DFABB0)
-    (data11_def=00DFABB0)
+    (data_def=0103CBB0)
+    (data1_def=0103CBB0)
+    (data2_def=0103CBB0)
+    (data3_def=0103CBB0)
+    (data4_def=0103CBB0)
+    (data5_def=0103CBB0)
+    (data8_def=0103CBB0)
+    (data9_def=0103CBB0)
+    (data10_def=0103CBB0)
+    (data11_def=0103CBB0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DFABB0)
-    (data1=00DFABB0)
-    (data2=00DFABB0)
-    (data3=00DFABB0)
-    (data4=00DFABB0)
-    (data5=00DFABB0)
-    (data8=00DFABB0)
-    (data9=00DFABB0)
-    (data10=00DFABB0)
-    (data11=00DFABB0)
+    (data=0103CBB0)
+    (data1=0103CBB0)
+    (data2=0103CBB0)
+    (data3=0103CBB0)
+    (data4=0103CBB0)
+    (data5=0103CBB0)
+    (data8=0103CBB0)
+    (data9=0103CBB0)
+    (data10=0103CBB0)
+    (data11=0103CBB0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DFABB0)
-    (data1_val=00DFABB0)
-    (data2_val=00DFABB0)
-    (data3_val=00DFABB0)
-    (data4_val=00DFABB0)
-    (data5_val=00DFABB0)
-    (data8_val=00DFABB0)
-    (data9_val=00DFABB0)
-    (data10_val=00DFABB0)
-    (data11_val=00DFABB0)
+    (data_val=0103CBB0)
+    (data1_val=0103CBB0)
+    (data2_val=0103CBB0)
+    (data3_val=0103CBB0)
+    (data4_val=0103CBB0)
+    (data5_val=0103CBB0)
+    (data8_val=0103CBB0)
+    (data9_val=0103CBB0)
+    (data10_val=0103CBB0)
+    (data11_val=0103CBB0)
 target=8, linearSearch=[8, 4696]
 target=9
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DA4120)
-    (data1_def=00DA4120)
-    (data2_def=00DA4120)
-    (data3_def=00DA4120)
-    (data4_def=00DA4120)
-    (data5_def=00DA4120)
-    (data8_def=00DA4120)
-    (data9_def=00DA4120)
-    (data10_def=00DA4120)
-    (data11_def=00DA4120)
+    (data_def=00FE6120)
+    (data1_def=00FE6120)
+    (data2_def=00FE6120)
+    (data3_def=00FE6120)
+    (data4_def=00FE6120)
+    (data5_def=00FE6120)
+    (data8_def=00FE6120)
+    (data9_def=00FE6120)
+    (data10_def=00FE6120)
+    (data11_def=00FE6120)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DA4120)
-    (data1=00DA4120)
-    (data2=00DA4120)
-    (data3=00DA4120)
-    (data4=00DA4120)
-    (data5=00DA4120)
-    (data8=00DA4120)
-    (data9=00DA4120)
-    (data10=00DA4120)
-    (data11=00DA4120)
+    (data=00FE6120)
+    (data1=00FE6120)
+    (data2=00FE6120)
+    (data3=00FE6120)
+    (data4=00FE6120)
+    (data5=00FE6120)
+    (data8=00FE6120)
+    (data9=00FE6120)
+    (data10=00FE6120)
+    (data11=00FE6120)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DA4120)
-    (data1_val=00DA4120)
-    (data2_val=00DA4120)
-    (data3_val=00DA4120)
-    (data4_val=00DA4120)
-    (data5_val=00DA4120)
-    (data8_val=00DA4120)
-    (data9_val=00DA4120)
-    (data10_val=00DA4120)
-    (data11_val=00DA4120)
+    (data_val=00FE6120)
+    (data1_val=00FE6120)
+    (data2_val=00FE6120)
+    (data3_val=00FE6120)
+    (data4_val=00FE6120)
+    (data5_val=00FE6120)
+    (data8_val=00FE6120)
+    (data9_val=00FE6120)
+    (data10_val=00FE6120)
+    (data11_val=00FE6120)
 target=9, linearSearch=[9, 259]
 target=10
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DA0D40)
-    (data1_def=00DA0D40)
-    (data2_def=00DA0D40)
-    (data3_def=00DA0D40)
-    (data4_def=00DA0D40)
-    (data5_def=00DA0D40)
-    (data8_def=00DA0D40)
-    (data9_def=00DA0D40)
-    (data10_def=00DA0D40)
-    (data11_def=00DA0D40)
+    (data_def=00FE2D40)
+    (data1_def=00FE2D40)
+    (data2_def=00FE2D40)
+    (data3_def=00FE2D40)
+    (data4_def=00FE2D40)
+    (data5_def=00FE2D40)
+    (data8_def=00FE2D40)
+    (data9_def=00FE2D40)
+    (data10_def=00FE2D40)
+    (data11_def=00FE2D40)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DA0D40)
-    (data1=00DA0D40)
-    (data2=00DA0D40)
-    (data3=00DA0D40)
-    (data4=00DA0D40)
-    (data5=00DA0D40)
-    (data8=00DA0D40)
-    (data9=00DA0D40)
-    (data10=00DA0D40)
-    (data11=00DA0D40)
+    (data=00FE2D40)
+    (data1=00FE2D40)
+    (data2=00FE2D40)
+    (data3=00FE2D40)
+    (data4=00FE2D40)
+    (data5=00FE2D40)
+    (data8=00FE2D40)
+    (data9=00FE2D40)
+    (data10=00FE2D40)
+    (data11=00FE2D40)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DA0D40)
-    (data1_val=00DA0D40)
-    (data2_val=00DA0D40)
-    (data3_val=00DA0D40)
-    (data4_val=00DA0D40)
-    (data5_val=00DA0D40)
-    (data8_val=00DA0D40)
-    (data9_val=00DA0D40)
-    (data10_val=00DA0D40)
-    (data11_val=00DA0D40)
+    (data_val=00FE2D40)
+    (data1_val=00FE2D40)
+    (data2_val=00FE2D40)
+    (data3_val=00FE2D40)
+    (data4_val=00FE2D40)
+    (data5_val=00FE2D40)
+    (data8_val=00FE2D40)
+    (data9_val=00FE2D40)
+    (data10_val=00FE2D40)
+    (data11_val=00FE2D40)
 target=10, linearSearch=[10, 93]
 target=11
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00E39F90)
-    (data1_def=00E39F90)
-    (data2_def=00E39F90)
-    (data3_def=00E39F90)
-    (data4_def=00E39F90)
-    (data5_def=00E39F90)
-    (data8_def=00E39F90)
-    (data9_def=00E39F90)
-    (data10_def=00E39F90)
-    (data11_def=00E39F90)
+    (data_def=0107BF90)
+    (data1_def=0107BF90)
+    (data2_def=0107BF90)
+    (data3_def=0107BF90)
+    (data4_def=0107BF90)
+    (data5_def=0107BF90)
+    (data8_def=0107BF90)
+    (data9_def=0107BF90)
+    (data10_def=0107BF90)
+    (data11_def=0107BF90)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00E39F90)
-    (data1=00E39F90)
-    (data2=00E39F90)
-    (data3=00E39F90)
-    (data4=00E39F90)
-    (data5=00E39F90)
-    (data8=00E39F90)
-    (data9=00E39F90)
-    (data10=00E39F90)
-    (data11=00E39F90)
+    (data=0107BF90)
+    (data1=0107BF90)
+    (data2=0107BF90)
+    (data3=0107BF90)
+    (data4=0107BF90)
+    (data5=0107BF90)
+    (data8=0107BF90)
+    (data9=0107BF90)
+    (data10=0107BF90)
+    (data11=0107BF90)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00E39F90)
-    (data1_val=00E39F90)
-    (data2_val=00E39F90)
-    (data3_val=00E39F90)
-    (data4_val=00E39F90)
-    (data5_val=00E39F90)
-    (data8_val=00E39F90)
-    (data9_val=00E39F90)
-    (data10_val=00E39F90)
-    (data11_val=00E39F90)
+    (data_val=0107BF90)
+    (data1_val=0107BF90)
+    (data2_val=0107BF90)
+    (data3_val=0107BF90)
+    (data4_val=0107BF90)
+    (data5_val=0107BF90)
+    (data8_val=0107BF90)
+    (data9_val=0107BF90)
+    (data10_val=0107BF90)
+    (data11_val=0107BF90)
 target=11, linearSearch=[11, 7934]
 target=12
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00E20EA0)
-    (data1_def=00E20EA0)
-    (data2_def=00E20EA0)
-    (data3_def=00E20EA0)
-    (data4_def=00E20EA0)
-    (data5_def=00E20EA0)
-    (data8_def=00E20EA0)
-    (data9_def=00E20EA0)
-    (data10_def=00E20EA0)
-    (data11_def=00E20EA0)
+    (data_def=01062EA0)
+    (data1_def=01062EA0)
+    (data2_def=01062EA0)
+    (data3_def=01062EA0)
+    (data4_def=01062EA0)
+    (data5_def=01062EA0)
+    (data8_def=01062EA0)
+    (data9_def=01062EA0)
+    (data10_def=01062EA0)
+    (data11_def=01062EA0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00E20EA0)
-    (data1=00E20EA0)
-    (data2=00E20EA0)
-    (data3=00E20EA0)
-    (data4=00E20EA0)
-    (data5=00E20EA0)
-    (data8=00E20EA0)
-    (data9=00E20EA0)
-    (data10=00E20EA0)
-    (data11=00E20EA0)
+    (data=01062EA0)
+    (data1=01062EA0)
+    (data2=01062EA0)
+    (data3=01062EA0)
+    (data4=01062EA0)
+    (data5=01062EA0)
+    (data8=01062EA0)
+    (data9=01062EA0)
+    (data10=01062EA0)
+    (data11=01062EA0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00E20EA0)
-    (data1_val=00E20EA0)
-    (data2_val=00E20EA0)
-    (data3_val=00E20EA0)
-    (data4_val=00E20EA0)
-    (data5_val=00E20EA0)
-    (data8_val=00E20EA0)
-    (data9_val=00E20EA0)
-    (data10_val=00E20EA0)
-    (data11_val=00E20EA0)
+    (data_val=01062EA0)
+    (data1_val=01062EA0)
+    (data2_val=01062EA0)
+    (data3_val=01062EA0)
+    (data4_val=01062EA0)
+    (data5_val=01062EA0)
+    (data8_val=01062EA0)
+    (data9_val=01062EA0)
+    (data10_val=01062EA0)
+    (data11_val=01062EA0)
 target=12, linearSearch=[12, 6651]
 target=13
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DC63B0)
-    (data1_def=00DC63B0)
-    (data2_def=00DC63B0)
-    (data3_def=00DC63B0)
-    (data4_def=00DC63B0)
-    (data5_def=00DC63B0)
-    (data8_def=00DC63B0)
-    (data9_def=00DC63B0)
-    (data10_def=00DC63B0)
-    (data11_def=00DC63B0)
+    (data_def=010083B0)
+    (data1_def=010083B0)
+    (data2_def=010083B0)
+    (data3_def=010083B0)
+    (data4_def=010083B0)
+    (data5_def=010083B0)
+    (data8_def=010083B0)
+    (data9_def=010083B0)
+    (data10_def=010083B0)
+    (data11_def=010083B0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DC63B0)
-    (data1=00DC63B0)
-    (data2=00DC63B0)
-    (data3=00DC63B0)
-    (data4=00DC63B0)
-    (data5=00DC63B0)
-    (data8=00DC63B0)
-    (data9=00DC63B0)
-    (data10=00DC63B0)
-    (data11=00DC63B0)
+    (data=010083B0)
+    (data1=010083B0)
+    (data2=010083B0)
+    (data3=010083B0)
+    (data4=010083B0)
+    (data5=010083B0)
+    (data8=010083B0)
+    (data9=010083B0)
+    (data10=010083B0)
+    (data11=010083B0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DC63B0)
-    (data1_val=00DC63B0)
-    (data2_val=00DC63B0)
-    (data3_val=00DC63B0)
-    (data4_val=00DC63B0)
-    (data5_val=00DC63B0)
-    (data8_val=00DC63B0)
-    (data9_val=00DC63B0)
-    (data10_val=00DC63B0)
-    (data11_val=00DC63B0)
+    (data_val=010083B0)
+    (data1_val=010083B0)
+    (data2_val=010083B0)
+    (data3_val=010083B0)
+    (data4_val=010083B0)
+    (data5_val=010083B0)
+    (data8_val=010083B0)
+    (data9_val=010083B0)
+    (data10_val=010083B0)
+    (data11_val=010083B0)
 target=13, linearSearch=[13, 2008]
 target=14
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DCA1E0)
-    (data1_def=00DCA1E0)
-    (data2_def=00DCA1E0)
-    (data3_def=00DCA1E0)
-    (data4_def=00DCA1E0)
-    (data5_def=00DCA1E0)
-    (data8_def=00DCA1E0)
-    (data9_def=00DCA1E0)
-    (data10_def=00DCA1E0)
-    (data11_def=00DCA1E0)
+    (data_def=0100C1E0)
+    (data1_def=0100C1E0)
+    (data2_def=0100C1E0)
+    (data3_def=0100C1E0)
+    (data4_def=0100C1E0)
+    (data5_def=0100C1E0)
+    (data8_def=0100C1E0)
+    (data9_def=0100C1E0)
+    (data10_def=0100C1E0)
+    (data11_def=0100C1E0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DCA1E0)
-    (data1=00DCA1E0)
-    (data2=00DCA1E0)
-    (data3=00DCA1E0)
-    (data4=00DCA1E0)
-    (data5=00DCA1E0)
-    (data8=00DCA1E0)
-    (data9=00DCA1E0)
-    (data10=00DCA1E0)
-    (data11=00DCA1E0)
+    (data=0100C1E0)
+    (data1=0100C1E0)
+    (data2=0100C1E0)
+    (data3=0100C1E0)
+    (data4=0100C1E0)
+    (data5=0100C1E0)
+    (data8=0100C1E0)
+    (data9=0100C1E0)
+    (data10=0100C1E0)
+    (data11=0100C1E0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DCA1E0)
-    (data1_val=00DCA1E0)
-    (data2_val=00DCA1E0)
-    (data3_val=00DCA1E0)
-    (data4_val=00DCA1E0)
-    (data5_val=00DCA1E0)
-    (data8_val=00DCA1E0)
-    (data9_val=00DCA1E0)
-    (data10_val=00DCA1E0)
-    (data11_val=00DCA1E0)
+    (data_val=0100C1E0)
+    (data1_val=0100C1E0)
+    (data2_val=0100C1E0)
+    (data3_val=0100C1E0)
+    (data4_val=0100C1E0)
+    (data5_val=0100C1E0)
+    (data8_val=0100C1E0)
+    (data9_val=0100C1E0)
+    (data10_val=0100C1E0)
+    (data11_val=0100C1E0)
 target=14, linearSearch=[14, 2207]
 target=15
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00D9FE90)
-    (data1_def=00D9FE90)
-    (data2_def=00D9FE90)
-    (data3_def=00D9FE90)
-    (data4_def=00D9FE90)
-    (data5_def=00D9FE90)
-    (data8_def=00D9FE90)
-    (data9_def=00D9FE90)
-    (data10_def=00D9FE90)
-    (data11_def=00D9FE90)
+    (data_def=00FE1E90)
+    (data1_def=00FE1E90)
+    (data2_def=00FE1E90)
+    (data3_def=00FE1E90)
+    (data4_def=00FE1E90)
+    (data5_def=00FE1E90)
+    (data8_def=00FE1E90)
+    (data9_def=00FE1E90)
+    (data10_def=00FE1E90)
+    (data11_def=00FE1E90)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00D9FE90)
-    (data1=00D9FE90)
-    (data2=00D9FE90)
-    (data3=00D9FE90)
-    (data4=00D9FE90)
-    (data5=00D9FE90)
-    (data8=00D9FE90)
-    (data9=00D9FE90)
-    (data10=00D9FE90)
-    (data11=00D9FE90)
+    (data=00FE1E90)
+    (data1=00FE1E90)
+    (data2=00FE1E90)
+    (data3=00FE1E90)
+    (data4=00FE1E90)
+    (data5=00FE1E90)
+    (data8=00FE1E90)
+    (data9=00FE1E90)
+    (data10=00FE1E90)
+    (data11=00FE1E90)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00D9FE90)
-    (data1_val=00D9FE90)
-    (data2_val=00D9FE90)
-    (data3_val=00D9FE90)
-    (data4_val=00D9FE90)
-    (data5_val=00D9FE90)
-    (data8_val=00D9FE90)
-    (data9_val=00D9FE90)
-    (data10_val=00D9FE90)
-    (data11_val=00D9FE90)
+    (data_val=00FE1E90)
+    (data1_val=00FE1E90)
+    (data2_val=00FE1E90)
+    (data3_val=00FE1E90)
+    (data4_val=00FE1E90)
+    (data5_val=00FE1E90)
+    (data8_val=00FE1E90)
+    (data9_val=00FE1E90)
+    (data10_val=00FE1E90)
+    (data11_val=00FE1E90)
 target=15, linearSearch=[15, 46]
 target=16
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00E20E00)
-    (data1_def=00E20E00)
-    (data2_def=00E20E00)
-    (data3_def=00E20E00)
-    (data4_def=00E20E00)
-    (data5_def=00E20E00)
-    (data8_def=00E20E00)
-    (data9_def=00E20E00)
-    (data10_def=00E20E00)
-    (data11_def=00E20E00)
+    (data_def=01062E00)
+    (data1_def=01062E00)
+    (data2_def=01062E00)
+    (data3_def=01062E00)
+    (data4_def=01062E00)
+    (data5_def=01062E00)
+    (data8_def=01062E00)
+    (data9_def=01062E00)
+    (data10_def=01062E00)
+    (data11_def=01062E00)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00E20E00)
-    (data1=00E20E00)
-    (data2=00E20E00)
-    (data3=00E20E00)
-    (data4=00E20E00)
-    (data5=00E20E00)
-    (data8=00E20E00)
-    (data9=00E20E00)
-    (data10=00E20E00)
-    (data11=00E20E00)
+    (data=01062E00)
+    (data1=01062E00)
+    (data2=01062E00)
+    (data3=01062E00)
+    (data4=01062E00)
+    (data5=01062E00)
+    (data8=01062E00)
+    (data9=01062E00)
+    (data10=01062E00)
+    (data11=01062E00)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00E20E00)
-    (data1_val=00E20E00)
-    (data2_val=00E20E00)
-    (data3_val=00E20E00)
-    (data4_val=00E20E00)
-    (data5_val=00E20E00)
-    (data8_val=00E20E00)
-    (data9_val=00E20E00)
-    (data10_val=00E20E00)
-    (data11_val=00E20E00)
+    (data_val=01062E00)
+    (data1_val=01062E00)
+    (data2_val=01062E00)
+    (data3_val=01062E00)
+    (data4_val=01062E00)
+    (data5_val=01062E00)
+    (data8_val=01062E00)
+    (data9_val=01062E00)
+    (data10_val=01062E00)
+    (data11_val=01062E00)
 target=16, linearSearch=[16, 6649]
 target=17
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DB1550)
-    (data1_def=00DB1550)
-    (data2_def=00DB1550)
-    (data3_def=00DB1550)
-    (data4_def=00DB1550)
-    (data5_def=00DB1550)
-    (data8_def=00DB1550)
-    (data9_def=00DB1550)
-    (data10_def=00DB1550)
-    (data11_def=00DB1550)
+    (data_def=00FF3550)
+    (data1_def=00FF3550)
+    (data2_def=00FF3550)
+    (data3_def=00FF3550)
+    (data4_def=00FF3550)
+    (data5_def=00FF3550)
+    (data8_def=00FF3550)
+    (data9_def=00FF3550)
+    (data10_def=00FF3550)
+    (data11_def=00FF3550)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DB1550)
-    (data1=00DB1550)
-    (data2=00DB1550)
-    (data3=00DB1550)
-    (data4=00DB1550)
-    (data5=00DB1550)
-    (data8=00DB1550)
-    (data9=00DB1550)
-    (data10=00DB1550)
-    (data11=00DB1550)
+    (data=00FF3550)
+    (data1=00FF3550)
+    (data2=00FF3550)
+    (data3=00FF3550)
+    (data4=00FF3550)
+    (data5=00FF3550)
+    (data8=00FF3550)
+    (data9=00FF3550)
+    (data10=00FF3550)
+    (data11=00FF3550)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DB1550)
-    (data1_val=00DB1550)
-    (data2_val=00DB1550)
-    (data3_val=00DB1550)
-    (data4_val=00DB1550)
-    (data5_val=00DB1550)
-    (data8_val=00DB1550)
-    (data9_val=00DB1550)
-    (data10_val=00DB1550)
-    (data11_val=00DB1550)
+    (data_val=00FF3550)
+    (data1_val=00FF3550)
+    (data2_val=00FF3550)
+    (data3_val=00FF3550)
+    (data4_val=00FF3550)
+    (data5_val=00FF3550)
+    (data8_val=00FF3550)
+    (data9_val=00FF3550)
+    (data10_val=00FF3550)
+    (data11_val=00FF3550)
 target=17, linearSearch=[17, 938]
 target=18
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DA8860)
-    (data1_def=00DA8860)
-    (data2_def=00DA8860)
-    (data3_def=00DA8860)
-    (data4_def=00DA8860)
-    (data5_def=00DA8860)
-    (data8_def=00DA8860)
-    (data9_def=00DA8860)
-    (data10_def=00DA8860)
-    (data11_def=00DA8860)
+    (data_def=00FEA860)
+    (data1_def=00FEA860)
+    (data2_def=00FEA860)
+    (data3_def=00FEA860)
+    (data4_def=00FEA860)
+    (data5_def=00FEA860)
+    (data8_def=00FEA860)
+    (data9_def=00FEA860)
+    (data10_def=00FEA860)
+    (data11_def=00FEA860)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DA8860)
-    (data1=00DA8860)
-    (data2=00DA8860)
-    (data3=00DA8860)
-    (data4=00DA8860)
-    (data5=00DA8860)
-    (data8=00DA8860)
-    (data9=00DA8860)
-    (data10=00DA8860)
-    (data11=00DA8860)
+    (data=00FEA860)
+    (data1=00FEA860)
+    (data2=00FEA860)
+    (data3=00FEA860)
+    (data4=00FEA860)
+    (data5=00FEA860)
+    (data8=00FEA860)
+    (data9=00FEA860)
+    (data10=00FEA860)
+    (data11=00FEA860)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DA8860)
-    (data1_val=00DA8860)
-    (data2_val=00DA8860)
-    (data3_val=00DA8860)
-    (data4_val=00DA8860)
-    (data5_val=00DA8860)
-    (data8_val=00DA8860)
-    (data9_val=00DA8860)
-    (data10_val=00DA8860)
-    (data11_val=00DA8860)
+    (data_val=00FEA860)
+    (data1_val=00FEA860)
+    (data2_val=00FEA860)
+    (data3_val=00FEA860)
+    (data4_val=00FEA860)
+    (data5_val=00FEA860)
+    (data8_val=00FEA860)
+    (data9_val=00FEA860)
+    (data10_val=00FEA860)
+    (data11_val=00FEA860)
 target=18, linearSearch=[18, 487]
 target=19
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DDB080)
-    (data1_def=00DDB080)
-    (data2_def=00DDB080)
-    (data3_def=00DDB080)
-    (data4_def=00DDB080)
-    (data5_def=00DDB080)
-    (data8_def=00DDB080)
-    (data9_def=00DDB080)
-    (data10_def=00DDB080)
-    (data11_def=00DDB080)
+    (data_def=0101D080)
+    (data1_def=0101D080)
+    (data2_def=0101D080)
+    (data3_def=0101D080)
+    (data4_def=0101D080)
+    (data5_def=0101D080)
+    (data8_def=0101D080)
+    (data9_def=0101D080)
+    (data10_def=0101D080)
+    (data11_def=0101D080)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DDB080)
-    (data1=00DDB080)
-    (data2=00DDB080)
-    (data3=00DDB080)
-    (data4=00DDB080)
-    (data5=00DDB080)
-    (data8=00DDB080)
-    (data9=00DDB080)
-    (data10=00DDB080)
-    (data11=00DDB080)
+    (data=0101D080)
+    (data1=0101D080)
+    (data2=0101D080)
+    (data3=0101D080)
+    (data4=0101D080)
+    (data5=0101D080)
+    (data8=0101D080)
+    (data9=0101D080)
+    (data10=0101D080)
+    (data11=0101D080)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DDB080)
-    (data1_val=00DDB080)
-    (data2_val=00DDB080)
-    (data3_val=00DDB080)
-    (data4_val=00DDB080)
-    (data5_val=00DDB080)
-    (data8_val=00DDB080)
-    (data9_val=00DDB080)
-    (data10_val=00DDB080)
-    (data11_val=00DDB080)
+    (data_val=0101D080)
+    (data1_val=0101D080)
+    (data2_val=0101D080)
+    (data3_val=0101D080)
+    (data4_val=0101D080)
+    (data5_val=0101D080)
+    (data8_val=0101D080)
+    (data9_val=0101D080)
+    (data10_val=0101D080)
+    (data11_val=0101D080)
 target=19, linearSearch=[19, 3073]
 target=20
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DF4300)
-    (data1_def=00DF4300)
-    (data2_def=00DF4300)
-    (data3_def=00DF4300)
-    (data4_def=00DF4300)
-    (data5_def=00DF4300)
-    (data8_def=00DF4300)
-    (data9_def=00DF4300)
-    (data10_def=00DF4300)
-    (data11_def=00DF4300)
+    (data_def=01036300)
+    (data1_def=01036300)
+    (data2_def=01036300)
+    (data3_def=01036300)
+    (data4_def=01036300)
+    (data5_def=01036300)
+    (data8_def=01036300)
+    (data9_def=01036300)
+    (data10_def=01036300)
+    (data11_def=01036300)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DF4300)
-    (data1=00DF4300)
-    (data2=00DF4300)
-    (data3=00DF4300)
-    (data4=00DF4300)
-    (data5=00DF4300)
-    (data8=00DF4300)
-    (data9=00DF4300)
-    (data10=00DF4300)
-    (data11=00DF4300)
+    (data=01036300)
+    (data1=01036300)
+    (data2=01036300)
+    (data3=01036300)
+    (data4=01036300)
+    (data5=01036300)
+    (data8=01036300)
+    (data9=01036300)
+    (data10=01036300)
+    (data11=01036300)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DF4300)
-    (data1_val=00DF4300)
-    (data2_val=00DF4300)
-    (data3_val=00DF4300)
-    (data4_val=00DF4300)
-    (data5_val=00DF4300)
-    (data8_val=00DF4300)
-    (data9_val=00DF4300)
-    (data10_val=00DF4300)
-    (data11_val=00DF4300)
+    (data_val=01036300)
+    (data1_val=01036300)
+    (data2_val=01036300)
+    (data3_val=01036300)
+    (data4_val=01036300)
+    (data5_val=01036300)
+    (data8_val=01036300)
+    (data9_val=01036300)
+    (data10_val=01036300)
+    (data11_val=01036300)
 target=20, linearSearch=[20, 4361]
 target=21
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00E160E0)
-    (data1_def=00E160E0)
-    (data2_def=00E160E0)
-    (data3_def=00E160E0)
-    (data4_def=00E160E0)
-    (data5_def=00E160E0)
-    (data8_def=00E160E0)
-    (data9_def=00E160E0)
-    (data10_def=00E160E0)
-    (data11_def=00E160E0)
+    (data_def=010580E0)
+    (data1_def=010580E0)
+    (data2_def=010580E0)
+    (data3_def=010580E0)
+    (data4_def=010580E0)
+    (data5_def=010580E0)
+    (data8_def=010580E0)
+    (data9_def=010580E0)
+    (data10_def=010580E0)
+    (data11_def=010580E0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00E160E0)
-    (data1=00E160E0)
-    (data2=00E160E0)
-    (data3=00E160E0)
-    (data4=00E160E0)
-    (data5=00E160E0)
-    (data8=00E160E0)
-    (data9=00E160E0)
-    (data10=00E160E0)
-    (data11=00E160E0)
+    (data=010580E0)
+    (data1=010580E0)
+    (data2=010580E0)
+    (data3=010580E0)
+    (data4=010580E0)
+    (data5=010580E0)
+    (data8=010580E0)
+    (data9=010580E0)
+    (data10=010580E0)
+    (data11=010580E0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00E160E0)
-    (data1_val=00E160E0)
-    (data2_val=00E160E0)
-    (data3_val=00E160E0)
-    (data4_val=00E160E0)
-    (data5_val=00E160E0)
-    (data8_val=00E160E0)
-    (data9_val=00E160E0)
-    (data10_val=00E160E0)
-    (data11_val=00E160E0)
+    (data_val=010580E0)
+    (data1_val=010580E0)
+    (data2_val=010580E0)
+    (data3_val=010580E0)
+    (data4_val=010580E0)
+    (data5_val=010580E0)
+    (data8_val=010580E0)
+    (data9_val=010580E0)
+    (data10_val=010580E0)
+    (data11_val=010580E0)
 target=21, linearSearch=[21, 6095]
 target=22
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DDEBE0)
-    (data1_def=00DDEBE0)
-    (data2_def=00DDEBE0)
-    (data3_def=00DDEBE0)
-    (data4_def=00DDEBE0)
-    (data5_def=00DDEBE0)
-    (data8_def=00DDEBE0)
-    (data9_def=00DDEBE0)
-    (data10_def=00DDEBE0)
-    (data11_def=00DDEBE0)
+    (data_def=01020BE0)
+    (data1_def=01020BE0)
+    (data2_def=01020BE0)
+    (data3_def=01020BE0)
+    (data4_def=01020BE0)
+    (data5_def=01020BE0)
+    (data8_def=01020BE0)
+    (data9_def=01020BE0)
+    (data10_def=01020BE0)
+    (data11_def=01020BE0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DDEBE0)
-    (data1=00DDEBE0)
-    (data2=00DDEBE0)
-    (data3=00DDEBE0)
-    (data4=00DDEBE0)
-    (data5=00DDEBE0)
-    (data8=00DDEBE0)
-    (data9=00DDEBE0)
-    (data10=00DDEBE0)
-    (data11=00DDEBE0)
+    (data=01020BE0)
+    (data1=01020BE0)
+    (data2=01020BE0)
+    (data3=01020BE0)
+    (data4=01020BE0)
+    (data5=01020BE0)
+    (data8=01020BE0)
+    (data9=01020BE0)
+    (data10=01020BE0)
+    (data11=01020BE0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DDEBE0)
-    (data1_val=00DDEBE0)
-    (data2_val=00DDEBE0)
-    (data3_val=00DDEBE0)
-    (data4_val=00DDEBE0)
-    (data5_val=00DDEBE0)
-    (data8_val=00DDEBE0)
-    (data9_val=00DDEBE0)
-    (data10_val=00DDEBE0)
-    (data11_val=00DDEBE0)
+    (data_val=01020BE0)
+    (data1_val=01020BE0)
+    (data2_val=01020BE0)
+    (data3_val=01020BE0)
+    (data4_val=01020BE0)
+    (data5_val=01020BE0)
+    (data8_val=01020BE0)
+    (data9_val=01020BE0)
+    (data10_val=01020BE0)
+    (data11_val=01020BE0)
 target=22, linearSearch=[22, 3263]
 target=23
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DD3B00)
-    (data1_def=00DD3B00)
-    (data2_def=00DD3B00)
-    (data3_def=00DD3B00)
-    (data4_def=00DD3B00)
-    (data5_def=00DD3B00)
-    (data8_def=00DD3B00)
-    (data9_def=00DD3B00)
-    (data10_def=00DD3B00)
-    (data11_def=00DD3B00)
+    (data_def=01015B00)
+    (data1_def=01015B00)
+    (data2_def=01015B00)
+    (data3_def=01015B00)
+    (data4_def=01015B00)
+    (data5_def=01015B00)
+    (data8_def=01015B00)
+    (data9_def=01015B00)
+    (data10_def=01015B00)
+    (data11_def=01015B00)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DD3B00)
-    (data1=00DD3B00)
-    (data2=00DD3B00)
-    (data3=00DD3B00)
-    (data4=00DD3B00)
-    (data5=00DD3B00)
-    (data8=00DD3B00)
-    (data9=00DD3B00)
-    (data10=00DD3B00)
-    (data11=00DD3B00)
+    (data=01015B00)
+    (data1=01015B00)
+    (data2=01015B00)
+    (data3=01015B00)
+    (data4=01015B00)
+    (data5=01015B00)
+    (data8=01015B00)
+    (data9=01015B00)
+    (data10=01015B00)
+    (data11=01015B00)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DD3B00)
-    (data1_val=00DD3B00)
-    (data2_val=00DD3B00)
-    (data3_val=00DD3B00)
-    (data4_val=00DD3B00)
-    (data5_val=00DD3B00)
-    (data8_val=00DD3B00)
-    (data9_val=00DD3B00)
-    (data10_val=00DD3B00)
-    (data11_val=00DD3B00)
+    (data_val=01015B00)
+    (data1_val=01015B00)
+    (data2_val=01015B00)
+    (data3_val=01015B00)
+    (data4_val=01015B00)
+    (data5_val=01015B00)
+    (data8_val=01015B00)
+    (data9_val=01015B00)
+    (data10_val=01015B00)
+    (data11_val=01015B00)
 target=23, linearSearch=[23, 2697]
 target=24
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DBAFB0)
-    (data1_def=00DBAFB0)
-    (data2_def=00DBAFB0)
-    (data3_def=00DBAFB0)
-    (data4_def=00DBAFB0)
-    (data5_def=00DBAFB0)
-    (data8_def=00DBAFB0)
-    (data9_def=00DBAFB0)
-    (data10_def=00DBAFB0)
-    (data11_def=00DBAFB0)
+    (data_def=00FFCFB0)
+    (data1_def=00FFCFB0)
+    (data2_def=00FFCFB0)
+    (data3_def=00FFCFB0)
+    (data4_def=00FFCFB0)
+    (data5_def=00FFCFB0)
+    (data8_def=00FFCFB0)
+    (data9_def=00FFCFB0)
+    (data10_def=00FFCFB0)
+    (data11_def=00FFCFB0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DBAFB0)
-    (data1=00DBAFB0)
-    (data2=00DBAFB0)
-    (data3=00DBAFB0)
-    (data4=00DBAFB0)
-    (data5=00DBAFB0)
-    (data8=00DBAFB0)
-    (data9=00DBAFB0)
-    (data10=00DBAFB0)
-    (data11=00DBAFB0)
+    (data=00FFCFB0)
+    (data1=00FFCFB0)
+    (data2=00FFCFB0)
+    (data3=00FFCFB0)
+    (data4=00FFCFB0)
+    (data5=00FFCFB0)
+    (data8=00FFCFB0)
+    (data9=00FFCFB0)
+    (data10=00FFCFB0)
+    (data11=00FFCFB0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DBAFB0)
-    (data1_val=00DBAFB0)
-    (data2_val=00DBAFB0)
-    (data3_val=00DBAFB0)
-    (data4_val=00DBAFB0)
-    (data5_val=00DBAFB0)
-    (data8_val=00DBAFB0)
-    (data9_val=00DBAFB0)
-    (data10_val=00DBAFB0)
-    (data11_val=00DBAFB0)
+    (data_val=00FFCFB0)
+    (data1_val=00FFCFB0)
+    (data2_val=00FFCFB0)
+    (data3_val=00FFCFB0)
+    (data4_val=00FFCFB0)
+    (data5_val=00FFCFB0)
+    (data8_val=00FFCFB0)
+    (data9_val=00FFCFB0)
+    (data10_val=00FFCFB0)
+    (data11_val=00FFCFB0)
 target=24, linearSearch=[24, 1432]
 target=25
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DE46D0)
-    (data1_def=00DE46D0)
-    (data2_def=00DE46D0)
-    (data3_def=00DE46D0)
-    (data4_def=00DE46D0)
-    (data5_def=00DE46D0)
-    (data8_def=00DE46D0)
-    (data9_def=00DE46D0)
-    (data10_def=00DE46D0)
-    (data11_def=00DE46D0)
+    (data_def=010266D0)
+    (data1_def=010266D0)
+    (data2_def=010266D0)
+    (data3_def=010266D0)
+    (data4_def=010266D0)
+    (data5_def=010266D0)
+    (data8_def=010266D0)
+    (data9_def=010266D0)
+    (data10_def=010266D0)
+    (data11_def=010266D0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DE46D0)
-    (data1=00DE46D0)
-    (data2=00DE46D0)
-    (data3=00DE46D0)
-    (data4=00DE46D0)
-    (data5=00DE46D0)
-    (data8=00DE46D0)
-    (data9=00DE46D0)
-    (data10=00DE46D0)
-    (data11=00DE46D0)
+    (data=010266D0)
+    (data1=010266D0)
+    (data2=010266D0)
+    (data3=010266D0)
+    (data4=010266D0)
+    (data5=010266D0)
+    (data8=010266D0)
+    (data9=010266D0)
+    (data10=010266D0)
+    (data11=010266D0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DE46D0)
-    (data1_val=00DE46D0)
-    (data2_val=00DE46D0)
-    (data3_val=00DE46D0)
-    (data4_val=00DE46D0)
-    (data5_val=00DE46D0)
-    (data8_val=00DE46D0)
-    (data9_val=00DE46D0)
-    (data10_val=00DE46D0)
-    (data11_val=00DE46D0)
+    (data_val=010266D0)
+    (data1_val=010266D0)
+    (data2_val=010266D0)
+    (data3_val=010266D0)
+    (data4_val=010266D0)
+    (data5_val=010266D0)
+    (data8_val=010266D0)
+    (data9_val=010266D0)
+    (data10_val=010266D0)
+    (data11_val=010266D0)
 target=25, linearSearch=[25, 3554]
 target=26
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DBC4F0)
-    (data1_def=00DBC4F0)
-    (data2_def=00DBC4F0)
-    (data3_def=00DBC4F0)
-    (data4_def=00DBC4F0)
-    (data5_def=00DBC4F0)
-    (data8_def=00DBC4F0)
-    (data9_def=00DBC4F0)
-    (data10_def=00DBC4F0)
-    (data11_def=00DBC4F0)
+    (data_def=00FFE4F0)
+    (data1_def=00FFE4F0)
+    (data2_def=00FFE4F0)
+    (data3_def=00FFE4F0)
+    (data4_def=00FFE4F0)
+    (data5_def=00FFE4F0)
+    (data8_def=00FFE4F0)
+    (data9_def=00FFE4F0)
+    (data10_def=00FFE4F0)
+    (data11_def=00FFE4F0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DBC4F0)
-    (data1=00DBC4F0)
-    (data2=00DBC4F0)
-    (data3=00DBC4F0)
-    (data4=00DBC4F0)
-    (data5=00DBC4F0)
-    (data8=00DBC4F0)
-    (data9=00DBC4F0)
-    (data10=00DBC4F0)
-    (data11=00DBC4F0)
+    (data=00FFE4F0)
+    (data1=00FFE4F0)
+    (data2=00FFE4F0)
+    (data3=00FFE4F0)
+    (data4=00FFE4F0)
+    (data5=00FFE4F0)
+    (data8=00FFE4F0)
+    (data9=00FFE4F0)
+    (data10=00FFE4F0)
+    (data11=00FFE4F0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DBC4F0)
-    (data1_val=00DBC4F0)
-    (data2_val=00DBC4F0)
-    (data3_val=00DBC4F0)
-    (data4_val=00DBC4F0)
-    (data5_val=00DBC4F0)
-    (data8_val=00DBC4F0)
-    (data9_val=00DBC4F0)
-    (data10_val=00DBC4F0)
-    (data11_val=00DBC4F0)
+    (data_val=00FFE4F0)
+    (data1_val=00FFE4F0)
+    (data2_val=00FFE4F0)
+    (data3_val=00FFE4F0)
+    (data4_val=00FFE4F0)
+    (data5_val=00FFE4F0)
+    (data8_val=00FFE4F0)
+    (data9_val=00FFE4F0)
+    (data10_val=00FFE4F0)
+    (data11_val=00FFE4F0)
 target=26, linearSearch=[26, 1500]
 target=27
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DDDD80)
-    (data1_def=00DDDD80)
-    (data2_def=00DDDD80)
-    (data3_def=00DDDD80)
-    (data4_def=00DDDD80)
-    (data5_def=00DDDD80)
-    (data8_def=00DDDD80)
-    (data9_def=00DDDD80)
-    (data10_def=00DDDD80)
-    (data11_def=00DDDD80)
+    (data_def=0101FD80)
+    (data1_def=0101FD80)
+    (data2_def=0101FD80)
+    (data3_def=0101FD80)
+    (data4_def=0101FD80)
+    (data5_def=0101FD80)
+    (data8_def=0101FD80)
+    (data9_def=0101FD80)
+    (data10_def=0101FD80)
+    (data11_def=0101FD80)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DDDD80)
-    (data1=00DDDD80)
-    (data2=00DDDD80)
-    (data3=00DDDD80)
-    (data4=00DDDD80)
-    (data5=00DDDD80)
-    (data8=00DDDD80)
-    (data9=00DDDD80)
-    (data10=00DDDD80)
-    (data11=00DDDD80)
+    (data=0101FD80)
+    (data1=0101FD80)
+    (data2=0101FD80)
+    (data3=0101FD80)
+    (data4=0101FD80)
+    (data5=0101FD80)
+    (data8=0101FD80)
+    (data9=0101FD80)
+    (data10=0101FD80)
+    (data11=0101FD80)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DDDD80)
-    (data1_val=00DDDD80)
-    (data2_val=00DDDD80)
-    (data3_val=00DDDD80)
-    (data4_val=00DDDD80)
-    (data5_val=00DDDD80)
-    (data8_val=00DDDD80)
-    (data9_val=00DDDD80)
-    (data10_val=00DDDD80)
-    (data11_val=00DDDD80)
+    (data_val=0101FD80)
+    (data1_val=0101FD80)
+    (data2_val=0101FD80)
+    (data3_val=0101FD80)
+    (data4_val=0101FD80)
+    (data5_val=0101FD80)
+    (data8_val=0101FD80)
+    (data9_val=0101FD80)
+    (data10_val=0101FD80)
+    (data11_val=0101FD80)
 target=27, linearSearch=[27, 3217]
 target=28
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DB5010)
-    (data1_def=00DB5010)
-    (data2_def=00DB5010)
-    (data3_def=00DB5010)
-    (data4_def=00DB5010)
-    (data5_def=00DB5010)
-    (data8_def=00DB5010)
-    (data9_def=00DB5010)
-    (data10_def=00DB5010)
-    (data11_def=00DB5010)
+    (data_def=00FF7010)
+    (data1_def=00FF7010)
+    (data2_def=00FF7010)
+    (data3_def=00FF7010)
+    (data4_def=00FF7010)
+    (data5_def=00FF7010)
+    (data8_def=00FF7010)
+    (data9_def=00FF7010)
+    (data10_def=00FF7010)
+    (data11_def=00FF7010)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DB5010)
-    (data1=00DB5010)
-    (data2=00DB5010)
-    (data3=00DB5010)
-    (data4=00DB5010)
-    (data5=00DB5010)
-    (data8=00DB5010)
-    (data9=00DB5010)
-    (data10=00DB5010)
-    (data11=00DB5010)
+    (data=00FF7010)
+    (data1=00FF7010)
+    (data2=00FF7010)
+    (data3=00FF7010)
+    (data4=00FF7010)
+    (data5=00FF7010)
+    (data8=00FF7010)
+    (data9=00FF7010)
+    (data10=00FF7010)
+    (data11=00FF7010)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DB5010)
-    (data1_val=00DB5010)
-    (data2_val=00DB5010)
-    (data3_val=00DB5010)
-    (data4_val=00DB5010)
-    (data5_val=00DB5010)
-    (data8_val=00DB5010)
-    (data9_val=00DB5010)
-    (data10_val=00DB5010)
-    (data11_val=00DB5010)
+    (data_val=00FF7010)
+    (data1_val=00FF7010)
+    (data2_val=00FF7010)
+    (data3_val=00FF7010)
+    (data4_val=00FF7010)
+    (data5_val=00FF7010)
+    (data8_val=00FF7010)
+    (data9_val=00FF7010)
+    (data10_val=00FF7010)
+    (data11_val=00FF7010)
 target=28, linearSearch=[28, 1126]
 target=29
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DB3350)
-    (data1_def=00DB3350)
-    (data2_def=00DB3350)
-    (data3_def=00DB3350)
-    (data4_def=00DB3350)
-    (data5_def=00DB3350)
-    (data8_def=00DB3350)
-    (data9_def=00DB3350)
-    (data10_def=00DB3350)
-    (data11_def=00DB3350)
+    (data_def=00FF5350)
+    (data1_def=00FF5350)
+    (data2_def=00FF5350)
+    (data3_def=00FF5350)
+    (data4_def=00FF5350)
+    (data5_def=00FF5350)
+    (data8_def=00FF5350)
+    (data9_def=00FF5350)
+    (data10_def=00FF5350)
+    (data11_def=00FF5350)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DB3350)
-    (data1=00DB3350)
-    (data2=00DB3350)
-    (data3=00DB3350)
-    (data4=00DB3350)
-    (data5=00DB3350)
-    (data8=00DB3350)
-    (data9=00DB3350)
-    (data10=00DB3350)
-    (data11=00DB3350)
+    (data=00FF5350)
+    (data1=00FF5350)
+    (data2=00FF5350)
+    (data3=00FF5350)
+    (data4=00FF5350)
+    (data5=00FF5350)
+    (data8=00FF5350)
+    (data9=00FF5350)
+    (data10=00FF5350)
+    (data11=00FF5350)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DB3350)
-    (data1_val=00DB3350)
-    (data2_val=00DB3350)
-    (data3_val=00DB3350)
-    (data4_val=00DB3350)
-    (data5_val=00DB3350)
-    (data8_val=00DB3350)
-    (data9_val=00DB3350)
-    (data10_val=00DB3350)
-    (data11_val=00DB3350)
+    (data_val=00FF5350)
+    (data1_val=00FF5350)
+    (data2_val=00FF5350)
+    (data3_val=00FF5350)
+    (data4_val=00FF5350)
+    (data5_val=00FF5350)
+    (data8_val=00FF5350)
+    (data9_val=00FF5350)
+    (data10_val=00FF5350)
+    (data11_val=00FF5350)
 target=29, linearSearch=[29, 1034]
 target=30
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DBD620)
-    (data1_def=00DBD620)
-    (data2_def=00DBD620)
-    (data3_def=00DBD620)
-    (data4_def=00DBD620)
-    (data5_def=00DBD620)
-    (data8_def=00DBD620)
-    (data9_def=00DBD620)
-    (data10_def=00DBD620)
-    (data11_def=00DBD620)
+    (data_def=00FFF620)
+    (data1_def=00FFF620)
+    (data2_def=00FFF620)
+    (data3_def=00FFF620)
+    (data4_def=00FFF620)
+    (data5_def=00FFF620)
+    (data8_def=00FFF620)
+    (data9_def=00FFF620)
+    (data10_def=00FFF620)
+    (data11_def=00FFF620)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DBD620)
-    (data1=00DBD620)
-    (data2=00DBD620)
-    (data3=00DBD620)
-    (data4=00DBD620)
-    (data5=00DBD620)
-    (data8=00DBD620)
-    (data9=00DBD620)
-    (data10=00DBD620)
-    (data11=00DBD620)
+    (data=00FFF620)
+    (data1=00FFF620)
+    (data2=00FFF620)
+    (data3=00FFF620)
+    (data4=00FFF620)
+    (data5=00FFF620)
+    (data8=00FFF620)
+    (data9=00FFF620)
+    (data10=00FFF620)
+    (data11=00FFF620)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DBD620)
-    (data1_val=00DBD620)
-    (data2_val=00DBD620)
-    (data3_val=00DBD620)
-    (data4_val=00DBD620)
-    (data5_val=00DBD620)
-    (data8_val=00DBD620)
-    (data9_val=00DBD620)
-    (data10_val=00DBD620)
-    (data11_val=00DBD620)
+    (data_val=00FFF620)
+    (data1_val=00FFF620)
+    (data2_val=00FFF620)
+    (data3_val=00FFF620)
+    (data4_val=00FFF620)
+    (data5_val=00FFF620)
+    (data8_val=00FFF620)
+    (data9_val=00FFF620)
+    (data10_val=00FFF620)
+    (data11_val=00FFF620)
 target=30, linearSearch=[30, 1555]
 target=31
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DDE5F0)
-    (data1_def=00DDE5F0)
-    (data2_def=00DDE5F0)
-    (data3_def=00DDE5F0)
-    (data4_def=00DDE5F0)
-    (data5_def=00DDE5F0)
-    (data8_def=00DDE5F0)
-    (data9_def=00DDE5F0)
-    (data10_def=00DDE5F0)
-    (data11_def=00DDE5F0)
+    (data_def=010205F0)
+    (data1_def=010205F0)
+    (data2_def=010205F0)
+    (data3_def=010205F0)
+    (data4_def=010205F0)
+    (data5_def=010205F0)
+    (data8_def=010205F0)
+    (data9_def=010205F0)
+    (data10_def=010205F0)
+    (data11_def=010205F0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DDE5F0)
-    (data1=00DDE5F0)
-    (data2=00DDE5F0)
-    (data3=00DDE5F0)
-    (data4=00DDE5F0)
-    (data5=00DDE5F0)
-    (data8=00DDE5F0)
-    (data9=00DDE5F0)
-    (data10=00DDE5F0)
-    (data11=00DDE5F0)
+    (data=010205F0)
+    (data1=010205F0)
+    (data2=010205F0)
+    (data3=010205F0)
+    (data4=010205F0)
+    (data5=010205F0)
+    (data8=010205F0)
+    (data9=010205F0)
+    (data10=010205F0)
+    (data11=010205F0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DDE5F0)
-    (data1_val=00DDE5F0)
-    (data2_val=00DDE5F0)
-    (data3_val=00DDE5F0)
-    (data4_val=00DDE5F0)
-    (data5_val=00DDE5F0)
-    (data8_val=00DDE5F0)
-    (data9_val=00DDE5F0)
-    (data10_val=00DDE5F0)
-    (data11_val=00DDE5F0)
+    (data_val=010205F0)
+    (data1_val=010205F0)
+    (data2_val=010205F0)
+    (data3_val=010205F0)
+    (data4_val=010205F0)
+    (data5_val=010205F0)
+    (data8_val=010205F0)
+    (data9_val=010205F0)
+    (data10_val=010205F0)
+    (data11_val=010205F0)
 target=31, linearSearch=[31, 3244]
 target=32
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DC66D0)
-    (data1_def=00DC66D0)
-    (data2_def=00DC66D0)
-    (data3_def=00DC66D0)
-    (data4_def=00DC66D0)
-    (data5_def=00DC66D0)
-    (data8_def=00DC66D0)
-    (data9_def=00DC66D0)
-    (data10_def=00DC66D0)
-    (data11_def=00DC66D0)
+    (data_def=010086D0)
+    (data1_def=010086D0)
+    (data2_def=010086D0)
+    (data3_def=010086D0)
+    (data4_def=010086D0)
+    (data5_def=010086D0)
+    (data8_def=010086D0)
+    (data9_def=010086D0)
+    (data10_def=010086D0)
+    (data11_def=010086D0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DC66D0)
-    (data1=00DC66D0)
-    (data2=00DC66D0)
-    (data3=00DC66D0)
-    (data4=00DC66D0)
-    (data5=00DC66D0)
-    (data8=00DC66D0)
-    (data9=00DC66D0)
-    (data10=00DC66D0)
-    (data11=00DC66D0)
+    (data=010086D0)
+    (data1=010086D0)
+    (data2=010086D0)
+    (data3=010086D0)
+    (data4=010086D0)
+    (data5=010086D0)
+    (data8=010086D0)
+    (data9=010086D0)
+    (data10=010086D0)
+    (data11=010086D0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DC66D0)
-    (data1_val=00DC66D0)
-    (data2_val=00DC66D0)
-    (data3_val=00DC66D0)
-    (data4_val=00DC66D0)
-    (data5_val=00DC66D0)
-    (data8_val=00DC66D0)
-    (data9_val=00DC66D0)
-    (data10_val=00DC66D0)
-    (data11_val=00DC66D0)
+    (data_val=010086D0)
+    (data1_val=010086D0)
+    (data2_val=010086D0)
+    (data3_val=010086D0)
+    (data4_val=010086D0)
+    (data5_val=010086D0)
+    (data8_val=010086D0)
+    (data9_val=010086D0)
+    (data10_val=010086D0)
+    (data11_val=010086D0)
 target=32, linearSearch=[32, 2018]
 target=33
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DE8050)
-    (data1_def=00DE8050)
-    (data2_def=00DE8050)
-    (data3_def=00DE8050)
-    (data4_def=00DE8050)
-    (data5_def=00DE8050)
-    (data8_def=00DE8050)
-    (data9_def=00DE8050)
-    (data10_def=00DE8050)
-    (data11_def=00DE8050)
+    (data_def=0102A050)
+    (data1_def=0102A050)
+    (data2_def=0102A050)
+    (data3_def=0102A050)
+    (data4_def=0102A050)
+    (data5_def=0102A050)
+    (data8_def=0102A050)
+    (data9_def=0102A050)
+    (data10_def=0102A050)
+    (data11_def=0102A050)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DE8050)
-    (data1=00DE8050)
-    (data2=00DE8050)
-    (data3=00DE8050)
-    (data4=00DE8050)
-    (data5=00DE8050)
-    (data8=00DE8050)
-    (data9=00DE8050)
-    (data10=00DE8050)
-    (data11=00DE8050)
+    (data=0102A050)
+    (data1=0102A050)
+    (data2=0102A050)
+    (data3=0102A050)
+    (data4=0102A050)
+    (data5=0102A050)
+    (data8=0102A050)
+    (data9=0102A050)
+    (data10=0102A050)
+    (data11=0102A050)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DE8050)
-    (data1_val=00DE8050)
-    (data2_val=00DE8050)
-    (data3_val=00DE8050)
-    (data4_val=00DE8050)
-    (data5_val=00DE8050)
-    (data8_val=00DE8050)
-    (data9_val=00DE8050)
-    (data10_val=00DE8050)
-    (data11_val=00DE8050)
+    (data_val=0102A050)
+    (data1_val=0102A050)
+    (data2_val=0102A050)
+    (data3_val=0102A050)
+    (data4_val=0102A050)
+    (data5_val=0102A050)
+    (data8_val=0102A050)
+    (data9_val=0102A050)
+    (data10_val=0102A050)
+    (data11_val=0102A050)
 target=33, linearSearch=[33, 3738]
 target=34
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DA07F0)
-    (data1_def=00DA07F0)
-    (data2_def=00DA07F0)
-    (data3_def=00DA07F0)
-    (data4_def=00DA07F0)
-    (data5_def=00DA07F0)
-    (data8_def=00DA07F0)
-    (data9_def=00DA07F0)
-    (data10_def=00DA07F0)
-    (data11_def=00DA07F0)
+    (data_def=00FE27F0)
+    (data1_def=00FE27F0)
+    (data2_def=00FE27F0)
+    (data3_def=00FE27F0)
+    (data4_def=00FE27F0)
+    (data5_def=00FE27F0)
+    (data8_def=00FE27F0)
+    (data9_def=00FE27F0)
+    (data10_def=00FE27F0)
+    (data11_def=00FE27F0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DA07F0)
-    (data1=00DA07F0)
-    (data2=00DA07F0)
-    (data3=00DA07F0)
-    (data4=00DA07F0)
-    (data5=00DA07F0)
-    (data8=00DA07F0)
-    (data9=00DA07F0)
-    (data10=00DA07F0)
-    (data11=00DA07F0)
+    (data=00FE27F0)
+    (data1=00FE27F0)
+    (data2=00FE27F0)
+    (data3=00FE27F0)
+    (data4=00FE27F0)
+    (data5=00FE27F0)
+    (data8=00FE27F0)
+    (data9=00FE27F0)
+    (data10=00FE27F0)
+    (data11=00FE27F0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DA07F0)
-    (data1_val=00DA07F0)
-    (data2_val=00DA07F0)
-    (data3_val=00DA07F0)
-    (data4_val=00DA07F0)
-    (data5_val=00DA07F0)
-    (data8_val=00DA07F0)
-    (data9_val=00DA07F0)
-    (data10_val=00DA07F0)
-    (data11_val=00DA07F0)
+    (data_val=00FE27F0)
+    (data1_val=00FE27F0)
+    (data2_val=00FE27F0)
+    (data3_val=00FE27F0)
+    (data4_val=00FE27F0)
+    (data5_val=00FE27F0)
+    (data8_val=00FE27F0)
+    (data9_val=00FE27F0)
+    (data10_val=00FE27F0)
+    (data11_val=00FE27F0)
 target=34, linearSearch=[34, 76]
 target=35
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00E27200)
-    (data1_def=00E27200)
-    (data2_def=00E27200)
-    (data3_def=00E27200)
-    (data4_def=00E27200)
-    (data5_def=00E27200)
-    (data8_def=00E27200)
-    (data9_def=00E27200)
-    (data10_def=00E27200)
-    (data11_def=00E27200)
+    (data_def=01069200)
+    (data1_def=01069200)
+    (data2_def=01069200)
+    (data3_def=01069200)
+    (data4_def=01069200)
+    (data5_def=01069200)
+    (data8_def=01069200)
+    (data9_def=01069200)
+    (data10_def=01069200)
+    (data11_def=01069200)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00E27200)
-    (data1=00E27200)
-    (data2=00E27200)
-    (data3=00E27200)
-    (data4=00E27200)
-    (data5=00E27200)
-    (data8=00E27200)
-    (data9=00E27200)
-    (data10=00E27200)
-    (data11=00E27200)
+    (data=01069200)
+    (data1=01069200)
+    (data2=01069200)
+    (data3=01069200)
+    (data4=01069200)
+    (data5=01069200)
+    (data8=01069200)
+    (data9=01069200)
+    (data10=01069200)
+    (data11=01069200)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00E27200)
-    (data1_val=00E27200)
-    (data2_val=00E27200)
-    (data3_val=00E27200)
-    (data4_val=00E27200)
-    (data5_val=00E27200)
-    (data8_val=00E27200)
-    (data9_val=00E27200)
-    (data10_val=00E27200)
-    (data11_val=00E27200)
+    (data_val=01069200)
+    (data1_val=01069200)
+    (data2_val=01069200)
+    (data3_val=01069200)
+    (data4_val=01069200)
+    (data5_val=01069200)
+    (data8_val=01069200)
+    (data9_val=01069200)
+    (data10_val=01069200)
+    (data11_val=01069200)
 target=35, linearSearch=[35, 6969]
 target=36
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00E084E0)
-    (data1_def=00E084E0)
-    (data2_def=00E084E0)
-    (data3_def=00E084E0)
-    (data4_def=00E084E0)
-    (data5_def=00E084E0)
-    (data8_def=00E084E0)
-    (data9_def=00E084E0)
-    (data10_def=00E084E0)
-    (data11_def=00E084E0)
+    (data_def=0104A4E0)
+    (data1_def=0104A4E0)
+    (data2_def=0104A4E0)
+    (data3_def=0104A4E0)
+    (data4_def=0104A4E0)
+    (data5_def=0104A4E0)
+    (data8_def=0104A4E0)
+    (data9_def=0104A4E0)
+    (data10_def=0104A4E0)
+    (data11_def=0104A4E0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00E084E0)
-    (data1=00E084E0)
-    (data2=00E084E0)
-    (data3=00E084E0)
-    (data4=00E084E0)
-    (data5=00E084E0)
-    (data8=00E084E0)
-    (data9=00E084E0)
-    (data10=00E084E0)
-    (data11=00E084E0)
+    (data=0104A4E0)
+    (data1=0104A4E0)
+    (data2=0104A4E0)
+    (data3=0104A4E0)
+    (data4=0104A4E0)
+    (data5=0104A4E0)
+    (data8=0104A4E0)
+    (data9=0104A4E0)
+    (data10=0104A4E0)
+    (data11=0104A4E0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00E084E0)
-    (data1_val=00E084E0)
-    (data2_val=00E084E0)
-    (data3_val=00E084E0)
-    (data4_val=00E084E0)
-    (data5_val=00E084E0)
-    (data8_val=00E084E0)
-    (data9_val=00E084E0)
-    (data10_val=00E084E0)
-    (data11_val=00E084E0)
+    (data_val=0104A4E0)
+    (data1_val=0104A4E0)
+    (data2_val=0104A4E0)
+    (data3_val=0104A4E0)
+    (data4_val=0104A4E0)
+    (data5_val=0104A4E0)
+    (data8_val=0104A4E0)
+    (data9_val=0104A4E0)
+    (data10_val=0104A4E0)
+    (data11_val=0104A4E0)
 target=36, linearSearch=[36, 5391]
 target=37
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DA3810)
-    (data1_def=00DA3810)
-    (data2_def=00DA3810)
-    (data3_def=00DA3810)
-    (data4_def=00DA3810)
-    (data5_def=00DA3810)
-    (data8_def=00DA3810)
-    (data9_def=00DA3810)
-    (data10_def=00DA3810)
-    (data11_def=00DA3810)
+    (data_def=00FE5810)
+    (data1_def=00FE5810)
+    (data2_def=00FE5810)
+    (data3_def=00FE5810)
+    (data4_def=00FE5810)
+    (data5_def=00FE5810)
+    (data8_def=00FE5810)
+    (data9_def=00FE5810)
+    (data10_def=00FE5810)
+    (data11_def=00FE5810)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DA3810)
-    (data1=00DA3810)
-    (data2=00DA3810)
-    (data3=00DA3810)
-    (data4=00DA3810)
-    (data5=00DA3810)
-    (data8=00DA3810)
-    (data9=00DA3810)
-    (data10=00DA3810)
-    (data11=00DA3810)
+    (data=00FE5810)
+    (data1=00FE5810)
+    (data2=00FE5810)
+    (data3=00FE5810)
+    (data4=00FE5810)
+    (data5=00FE5810)
+    (data8=00FE5810)
+    (data9=00FE5810)
+    (data10=00FE5810)
+    (data11=00FE5810)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DA3810)
-    (data1_val=00DA3810)
-    (data2_val=00DA3810)
-    (data3_val=00DA3810)
-    (data4_val=00DA3810)
-    (data5_val=00DA3810)
-    (data8_val=00DA3810)
-    (data9_val=00DA3810)
-    (data10_val=00DA3810)
-    (data11_val=00DA3810)
+    (data_val=00FE5810)
+    (data1_val=00FE5810)
+    (data2_val=00FE5810)
+    (data3_val=00FE5810)
+    (data4_val=00FE5810)
+    (data5_val=00FE5810)
+    (data8_val=00FE5810)
+    (data9_val=00FE5810)
+    (data10_val=00FE5810)
+    (data11_val=00FE5810)
 target=37, linearSearch=[37, 230]
 target=38
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DC9C90)
-    (data1_def=00DC9C90)
-    (data2_def=00DC9C90)
-    (data3_def=00DC9C90)
-    (data4_def=00DC9C90)
-    (data5_def=00DC9C90)
-    (data8_def=00DC9C90)
-    (data9_def=00DC9C90)
-    (data10_def=00DC9C90)
-    (data11_def=00DC9C90)
+    (data_def=0100BC90)
+    (data1_def=0100BC90)
+    (data2_def=0100BC90)
+    (data3_def=0100BC90)
+    (data4_def=0100BC90)
+    (data5_def=0100BC90)
+    (data8_def=0100BC90)
+    (data9_def=0100BC90)
+    (data10_def=0100BC90)
+    (data11_def=0100BC90)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DC9C90)
-    (data1=00DC9C90)
-    (data2=00DC9C90)
-    (data3=00DC9C90)
-    (data4=00DC9C90)
-    (data5=00DC9C90)
-    (data8=00DC9C90)
-    (data9=00DC9C90)
-    (data10=00DC9C90)
-    (data11=00DC9C90)
+    (data=0100BC90)
+    (data1=0100BC90)
+    (data2=0100BC90)
+    (data3=0100BC90)
+    (data4=0100BC90)
+    (data5=0100BC90)
+    (data8=0100BC90)
+    (data9=0100BC90)
+    (data10=0100BC90)
+    (data11=0100BC90)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DC9C90)
-    (data1_val=00DC9C90)
-    (data2_val=00DC9C90)
-    (data3_val=00DC9C90)
-    (data4_val=00DC9C90)
-    (data5_val=00DC9C90)
-    (data8_val=00DC9C90)
-    (data9_val=00DC9C90)
-    (data10_val=00DC9C90)
-    (data11_val=00DC9C90)
+    (data_val=0100BC90)
+    (data1_val=0100BC90)
+    (data2_val=0100BC90)
+    (data3_val=0100BC90)
+    (data4_val=0100BC90)
+    (data5_val=0100BC90)
+    (data8_val=0100BC90)
+    (data9_val=0100BC90)
+    (data10_val=0100BC90)
+    (data11_val=0100BC90)
 target=38, linearSearch=[38, 2190]
 target=39
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00DE2420)
-    (data1_def=00DE2420)
-    (data2_def=00DE2420)
-    (data3_def=00DE2420)
-    (data4_def=00DE2420)
-    (data5_def=00DE2420)
-    (data8_def=00DE2420)
-    (data9_def=00DE2420)
-    (data10_def=00DE2420)
-    (data11_def=00DE2420)
+    (data_def=01024420)
+    (data1_def=01024420)
+    (data2_def=01024420)
+    (data3_def=01024420)
+    (data4_def=01024420)
+    (data5_def=01024420)
+    (data8_def=01024420)
+    (data9_def=01024420)
+    (data10_def=01024420)
+    (data11_def=01024420)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00DE2420)
-    (data1=00DE2420)
-    (data2=00DE2420)
-    (data3=00DE2420)
-    (data4=00DE2420)
-    (data5=00DE2420)
-    (data8=00DE2420)
-    (data9=00DE2420)
-    (data10=00DE2420)
-    (data11=00DE2420)
+    (data=01024420)
+    (data1=01024420)
+    (data2=01024420)
+    (data3=01024420)
+    (data4=01024420)
+    (data5=01024420)
+    (data8=01024420)
+    (data9=01024420)
+    (data10=01024420)
+    (data11=01024420)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00DE2420)
-    (data1_val=00DE2420)
-    (data2_val=00DE2420)
-    (data3_val=00DE2420)
-    (data4_val=00DE2420)
-    (data5_val=00DE2420)
-    (data8_val=00DE2420)
-    (data9_val=00DE2420)
-    (data10_val=00DE2420)
-    (data11_val=00DE2420)
+    (data_val=01024420)
+    (data1_val=01024420)
+    (data2_val=01024420)
+    (data3_val=01024420)
+    (data4_val=01024420)
+    (data5_val=01024420)
+    (data8_val=01024420)
+    (data9_val=01024420)
+    (data10_val=01024420)
+    (data11_val=01024420)
 target=39, linearSearch=[39, 3443]
 
 [Variation test for binary-search]
@@ -2957,1403 +2957,1403 @@ target=-1
 target=-1, binarySearch=nullptr
 target=0
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9F030)
-    (data1_def=00D9F030)
-    (data2_def=00D9F030)
-    (data3_def=00D9F030)
-    (data4_def=00D9F030)
-    (data5_def=00D9F030)
-    (data8_def=00D9F030)
-    (data9_def=00D9F030)
-   (data10_def=00D9F030)
-    (data11_def=00D9F030)
+    (data_def=00FE1030)
+    (data1_def=00FE1030)
+    (data2_def=00FE1030)
+    (data3_def=00FE1030)
+    (data4_def=00FE1030)
+    (data5_def=00FE1030)
+    (data8_def=00FE1030)
+    (data9_def=00FE1030)
+   (data10_def=00FE1030)
+    (data11_def=00FE1030)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9F030)
-    (data1=00D9F030)
-    (data2=00D9F030)
-    (data3=00D9F030)
-    (data4=00D9F030)
-    (data5=00D9F030)
-    (data8=00D9F030)
-    (data9=00D9F030)
-    (data10=00D9F030)
-    (data11=00D9F030)
+    (data=00FE1030)
+    (data1=00FE1030)
+    (data2=00FE1030)
+    (data3=00FE1030)
+    (data4=00FE1030)
+    (data5=00FE1030)
+    (data8=00FE1030)
+    (data9=00FE1030)
+    (data10=00FE1030)
+    (data11=00FE1030)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9F030)
-    (data1_val=00D9F030)
-    (data2_val=00D9F030)
-    (data3_val=00D9F030)
-    (data4_val=00D9F030)
-    (data5_val=00D9F030)
-    (data8_val=00D9F030)
-    (data9_val=00D9F030)
-    (data10_val=00D9F030)
-    (data11_val=00D9F030)
+    (data_val=00FE1030)
+    (data1_val=00FE1030)
+    (data2_val=00FE1030)
+    (data3_val=00FE1030)
+    (data4_val=00FE1030)
+    (data5_val=00FE1030)
+    (data8_val=00FE1030)
+    (data9_val=00FE1030)
+    (data10_val=00FE1030)
+    (data11_val=00FE1030)
 target=0, binarySearch=[0, 2342]
 target=1
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9F120)
-    (data1_def=00D9F120)
-    (data2_def=00D9F120)
-    (data3_def=00D9F120)
-    (data4_def=00D9F120)
-    (data5_def=00D9F120)
-    (data8_def=00D9F120)
-    (data9_def=00D9F120)
-   (data10_def=00D9F120)
-    (data11_def=00D9F120)
+    (data_def=00FE1120)
+    (data1_def=00FE1120)
+    (data2_def=00FE1120)
+    (data3_def=00FE1120)
+    (data4_def=00FE1120)
+    (data5_def=00FE1120)
+    (data8_def=00FE1120)
+    (data9_def=00FE1120)
+   (data10_def=00FE1120)
+    (data11_def=00FE1120)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9F120)
-    (data1=00D9F120)
-    (data2=00D9F120)
-    (data3=00D9F120)
-    (data4=00D9F120)
-    (data5=00D9F120)
-    (data8=00D9F120)
-    (data9=00D9F120)
-    (data10=00D9F120)
-    (data11=00D9F120)
+    (data=00FE1120)
+    (data1=00FE1120)
+    (data2=00FE1120)
+    (data3=00FE1120)
+    (data4=00FE1120)
+    (data5=00FE1120)
+    (data8=00FE1120)
+    (data9=00FE1120)
+    (data10=00FE1120)
+    (data11=00FE1120)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9F120)
-    (data1_val=00D9F120)
-    (data2_val=00D9F120)
-    (data3_val=00D9F120)
-    (data4_val=00D9F120)
-    (data5_val=00D9F120)
-    (data8_val=00D9F120)
-    (data9_val=00D9F120)
-    (data10_val=00D9F120)
-    (data11_val=00D9F120)
+    (data_val=00FE1120)
+    (data1_val=00FE1120)
+    (data2_val=00FE1120)
+    (data3_val=00FE1120)
+    (data4_val=00FE1120)
+    (data5_val=00FE1120)
+    (data8_val=00FE1120)
+    (data9_val=00FE1120)
+    (data10_val=00FE1120)
+    (data11_val=00FE1120)
 target=1, binarySearch=[1, 7829]
 target=2
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9F210)
-    (data1_def=00D9F210)
-    (data2_def=00D9F210)
-    (data3_def=00D9F210)
-    (data4_def=00D9F210)
-    (data5_def=00D9F210)
-    (data8_def=00D9F210)
-    (data9_def=00D9F210)
-   (data10_def=00D9F210)
-    (data11_def=00D9F210)
+    (data_def=00FE1210)
+    (data1_def=00FE1210)
+    (data2_def=00FE1210)
+    (data3_def=00FE1210)
+    (data4_def=00FE1210)
+    (data5_def=00FE1210)
+    (data8_def=00FE1210)
+    (data9_def=00FE1210)
+   (data10_def=00FE1210)
+    (data11_def=00FE1210)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9F210)
-    (data1=00D9F210)
-    (data2=00D9F210)
-    (data3=00D9F210)
-    (data4=00D9F210)
-    (data5=00D9F210)
-    (data8=00D9F210)
-    (data9=00D9F210)
-    (data10=00D9F210)
-    (data11=00D9F210)
+    (data=00FE1210)
+    (data1=00FE1210)
+    (data2=00FE1210)
+    (data3=00FE1210)
+    (data4=00FE1210)
+    (data5=00FE1210)
+    (data8=00FE1210)
+    (data9=00FE1210)
+    (data10=00FE1210)
+    (data11=00FE1210)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9F210)
-    (data1_val=00D9F210)
-    (data2_val=00D9F210)
-    (data3_val=00D9F210)
-    (data4_val=00D9F210)
-    (data5_val=00D9F210)
-    (data8_val=00D9F210)
-    (data9_val=00D9F210)
-    (data10_val=00D9F210)
-    (data11_val=00D9F210)
+    (data_val=00FE1210)
+    (data1_val=00FE1210)
+    (data2_val=00FE1210)
+    (data3_val=00FE1210)
+    (data4_val=00FE1210)
+    (data5_val=00FE1210)
+    (data8_val=00FE1210)
+    (data9_val=00FE1210)
+    (data10_val=00FE1210)
+    (data11_val=00FE1210)
 target=2, binarySearch=[2, 6831]
 target=3
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9F300)
-    (data1_def=00D9F300)
-    (data2_def=00D9F300)
-    (data3_def=00D9F300)
-    (data4_def=00D9F300)
-    (data5_def=00D9F300)
-    (data8_def=00D9F300)
-    (data9_def=00D9F300)
-   (data10_def=00D9F300)
-    (data11_def=00D9F300)
+    (data_def=00FE1300)
+    (data1_def=00FE1300)
+    (data2_def=00FE1300)
+    (data3_def=00FE1300)
+    (data4_def=00FE1300)
+    (data5_def=00FE1300)
+    (data8_def=00FE1300)
+    (data9_def=00FE1300)
+   (data10_def=00FE1300)
+    (data11_def=00FE1300)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9F300)
-    (data1=00D9F300)
-    (data2=00D9F300)
-    (data3=00D9F300)
-    (data4=00D9F300)
-    (data5=00D9F300)
-    (data8=00D9F300)
-    (data9=00D9F300)
-    (data10=00D9F300)
-    (data11=00D9F300)
+    (data=00FE1300)
+    (data1=00FE1300)
+    (data2=00FE1300)
+    (data3=00FE1300)
+    (data4=00FE1300)
+    (data5=00FE1300)
+    (data8=00FE1300)
+    (data9=00FE1300)
+    (data10=00FE1300)
+    (data11=00FE1300)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9F300)
-    (data1_val=00D9F300)
-    (data2_val=00D9F300)
-    (data3_val=00D9F300)
-    (data4_val=00D9F300)
-    (data5_val=00D9F300)
-    (data8_val=00D9F300)
-    (data9_val=00D9F300)
-    (data10_val=00D9F300)
-    (data11_val=00D9F300)
+    (data_val=00FE1300)
+    (data1_val=00FE1300)
+    (data2_val=00FE1300)
+    (data3_val=00FE1300)
+    (data4_val=00FE1300)
+    (data5_val=00FE1300)
+    (data8_val=00FE1300)
+    (data9_val=00FE1300)
+    (data10_val=00FE1300)
+    (data11_val=00FE1300)
 target=3, binarySearch=[3, 1417]
 target=4
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9F3F0)
-    (data1_def=00D9F3F0)
-    (data2_def=00D9F3F0)
-    (data3_def=00D9F3F0)
-    (data4_def=00D9F3F0)
-    (data5_def=00D9F3F0)
-    (data8_def=00D9F3F0)
-    (data9_def=00D9F3F0)
-   (data10_def=00D9F3F0)
-    (data11_def=00D9F3F0)
+    (data_def=00FE13F0)
+    (data1_def=00FE13F0)
+    (data2_def=00FE13F0)
+    (data3_def=00FE13F0)
+    (data4_def=00FE13F0)
+    (data5_def=00FE13F0)
+    (data8_def=00FE13F0)
+    (data9_def=00FE13F0)
+   (data10_def=00FE13F0)
+    (data11_def=00FE13F0)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9F3F0)
-    (data1=00D9F3F0)
-    (data2=00D9F3F0)
-    (data3=00D9F3F0)
-    (data4=00D9F3F0)
-    (data5=00D9F3F0)
-    (data8=00D9F3F0)
-    (data9=00D9F3F0)
-    (data10=00D9F3F0)
-    (data11=00D9F3F0)
+    (data=00FE13F0)
+    (data1=00FE13F0)
+    (data2=00FE13F0)
+    (data3=00FE13F0)
+    (data4=00FE13F0)
+    (data5=00FE13F0)
+    (data8=00FE13F0)
+    (data9=00FE13F0)
+    (data10=00FE13F0)
+    (data11=00FE13F0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9F3F0)
-    (data1_val=00D9F3F0)
-    (data2_val=00D9F3F0)
-    (data3_val=00D9F3F0)
-    (data4_val=00D9F3F0)
-    (data5_val=00D9F3F0)
-    (data8_val=00D9F3F0)
-    (data9_val=00D9F3F0)
-    (data10_val=00D9F3F0)
-    (data11_val=00D9F3F0)
+    (data_val=00FE13F0)
+    (data1_val=00FE13F0)
+    (data2_val=00FE13F0)
+    (data3_val=00FE13F0)
+    (data4_val=00FE13F0)
+    (data5_val=00FE13F0)
+    (data8_val=00FE13F0)
+    (data9_val=00FE13F0)
+    (data10_val=00FE13F0)
+    (data11_val=00FE13F0)
 target=4, binarySearch=[4, 4998]
 target=5
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9F4E0)
-    (data1_def=00D9F4E0)
-    (data2_def=00D9F4E0)
-    (data3_def=00D9F4E0)
-    (data4_def=00D9F4E0)
-    (data5_def=00D9F4E0)
-    (data8_def=00D9F4E0)
-    (data9_def=00D9F4E0)
-   (data10_def=00D9F4E0)
-    (data11_def=00D9F4E0)
+    (data_def=00FE14E0)
+    (data1_def=00FE14E0)
+    (data2_def=00FE14E0)
+    (data3_def=00FE14E0)
+    (data4_def=00FE14E0)
+    (data5_def=00FE14E0)
+    (data8_def=00FE14E0)
+    (data9_def=00FE14E0)
+   (data10_def=00FE14E0)
+    (data11_def=00FE14E0)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9F4E0)
-    (data1=00D9F4E0)
-    (data2=00D9F4E0)
-    (data3=00D9F4E0)
-    (data4=00D9F4E0)
-    (data5=00D9F4E0)
-    (data8=00D9F4E0)
-    (data9=00D9F4E0)
-    (data10=00D9F4E0)
-    (data11=00D9F4E0)
+    (data=00FE14E0)
+    (data1=00FE14E0)
+    (data2=00FE14E0)
+    (data3=00FE14E0)
+    (data4=00FE14E0)
+    (data5=00FE14E0)
+    (data8=00FE14E0)
+    (data9=00FE14E0)
+    (data10=00FE14E0)
+    (data11=00FE14E0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9F4E0)
-    (data1_val=00D9F4E0)
-    (data2_val=00D9F4E0)
-    (data3_val=00D9F4E0)
-    (data4_val=00D9F4E0)
-    (data5_val=00D9F4E0)
-    (data8_val=00D9F4E0)
-    (data9_val=00D9F4E0)
-    (data10_val=00D9F4E0)
-    (data11_val=00D9F4E0)
+    (data_val=00FE14E0)
+    (data1_val=00FE14E0)
+    (data2_val=00FE14E0)
+    (data3_val=00FE14E0)
+    (data4_val=00FE14E0)
+    (data5_val=00FE14E0)
+    (data8_val=00FE14E0)
+    (data9_val=00FE14E0)
+    (data10_val=00FE14E0)
+    (data11_val=00FE14E0)
 target=5, binarySearch=[5, 4949]
 target=6
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9F5D0)
-    (data1_def=00D9F5D0)
-    (data2_def=00D9F5D0)
-    (data3_def=00D9F5D0)
-    (data4_def=00D9F5D0)
-    (data5_def=00D9F5D0)
-    (data8_def=00D9F5D0)
-    (data9_def=00D9F5D0)
-   (data10_def=00D9F5D0)
-    (data11_def=00D9F5D0)
+    (data_def=00FE15D0)
+    (data1_def=00FE15D0)
+    (data2_def=00FE15D0)
+    (data3_def=00FE15D0)
+    (data4_def=00FE15D0)
+    (data5_def=00FE15D0)
+    (data8_def=00FE15D0)
+    (data9_def=00FE15D0)
+   (data10_def=00FE15D0)
+    (data11_def=00FE15D0)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9F5D0)
-    (data1=00D9F5D0)
-    (data2=00D9F5D0)
-    (data3=00D9F5D0)
-    (data4=00D9F5D0)
-    (data5=00D9F5D0)
-    (data8=00D9F5D0)
-    (data9=00D9F5D0)
-    (data10=00D9F5D0)
-    (data11=00D9F5D0)
+    (data=00FE15D0)
+    (data1=00FE15D0)
+    (data2=00FE15D0)
+    (data3=00FE15D0)
+    (data4=00FE15D0)
+    (data5=00FE15D0)
+    (data8=00FE15D0)
+    (data9=00FE15D0)
+    (data10=00FE15D0)
+    (data11=00FE15D0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9F5D0)
-    (data1_val=00D9F5D0)
-    (data2_val=00D9F5D0)
-    (data3_val=00D9F5D0)
-    (data4_val=00D9F5D0)
-    (data5_val=00D9F5D0)
-    (data8_val=00D9F5D0)
-    (data9_val=00D9F5D0)
-    (data10_val=00D9F5D0)
-    (data11_val=00D9F5D0)
+    (data_val=00FE15D0)
+    (data1_val=00FE15D0)
+    (data2_val=00FE15D0)
+    (data3_val=00FE15D0)
+    (data4_val=00FE15D0)
+    (data5_val=00FE15D0)
+    (data8_val=00FE15D0)
+    (data9_val=00FE15D0)
+    (data10_val=00FE15D0)
+    (data11_val=00FE15D0)
 target=6, binarySearch=[6, 1018]
 target=7
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9F6C0)
-    (data1_def=00D9F6C0)
-    (data2_def=00D9F6C0)
-    (data3_def=00D9F6C0)
-    (data4_def=00D9F6C0)
-    (data5_def=00D9F6C0)
-    (data8_def=00D9F6C0)
-    (data9_def=00D9F6C0)
-   (data10_def=00D9F6C0)
-    (data11_def=00D9F6C0)
+    (data_def=00FE16C0)
+    (data1_def=00FE16C0)
+    (data2_def=00FE16C0)
+    (data3_def=00FE16C0)
+    (data4_def=00FE16C0)
+    (data5_def=00FE16C0)
+    (data8_def=00FE16C0)
+    (data9_def=00FE16C0)
+   (data10_def=00FE16C0)
+    (data11_def=00FE16C0)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9F6C0)
-    (data1=00D9F6C0)
-    (data2=00D9F6C0)
-    (data3=00D9F6C0)
-    (data4=00D9F6C0)
-    (data5=00D9F6C0)
-    (data8=00D9F6C0)
-    (data9=00D9F6C0)
-    (data10=00D9F6C0)
-    (data11=00D9F6C0)
+    (data=00FE16C0)
+    (data1=00FE16C0)
+    (data2=00FE16C0)
+    (data3=00FE16C0)
+    (data4=00FE16C0)
+    (data5=00FE16C0)
+    (data8=00FE16C0)
+    (data9=00FE16C0)
+    (data10=00FE16C0)
+    (data11=00FE16C0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9F6C0)
-    (data1_val=00D9F6C0)
-    (data2_val=00D9F6C0)
-    (data3_val=00D9F6C0)
-    (data4_val=00D9F6C0)
-    (data5_val=00D9F6C0)
-    (data8_val=00D9F6C0)
-    (data9_val=00D9F6C0)
-    (data10_val=00D9F6C0)
-    (data11_val=00D9F6C0)
+    (data_val=00FE16C0)
+    (data1_val=00FE16C0)
+    (data2_val=00FE16C0)
+    (data3_val=00FE16C0)
+    (data4_val=00FE16C0)
+    (data5_val=00FE16C0)
+    (data8_val=00FE16C0)
+    (data9_val=00FE16C0)
+    (data10_val=00FE16C0)
+    (data11_val=00FE16C0)
 target=7, binarySearch=[7, 7135]
 target=8
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9F7B0)
-    (data1_def=00D9F7B0)
-    (data2_def=00D9F7B0)
-    (data3_def=00D9F7B0)
-    (data4_def=00D9F7B0)
-    (data5_def=00D9F7B0)
-    (data8_def=00D9F7B0)
-    (data9_def=00D9F7B0)
-   (data10_def=00D9F7B0)
-    (data11_def=00D9F7B0)
+    (data_def=00FE17B0)
+    (data1_def=00FE17B0)
+    (data2_def=00FE17B0)
+    (data3_def=00FE17B0)
+    (data4_def=00FE17B0)
+    (data5_def=00FE17B0)
+    (data8_def=00FE17B0)
+    (data9_def=00FE17B0)
+   (data10_def=00FE17B0)
+    (data11_def=00FE17B0)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9F7B0)
-    (data1=00D9F7B0)
-    (data2=00D9F7B0)
-    (data3=00D9F7B0)
-    (data4=00D9F7B0)
-    (data5=00D9F7B0)
-    (data8=00D9F7B0)
-    (data9=00D9F7B0)
-    (data10=00D9F7B0)
-    (data11=00D9F7B0)
+    (data=00FE17B0)
+    (data1=00FE17B0)
+    (data2=00FE17B0)
+    (data3=00FE17B0)
+    (data4=00FE17B0)
+    (data5=00FE17B0)
+    (data8=00FE17B0)
+    (data9=00FE17B0)
+    (data10=00FE17B0)
+    (data11=00FE17B0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9F7B0)
-    (data1_val=00D9F7B0)
-    (data2_val=00D9F7B0)
-    (data3_val=00D9F7B0)
-    (data4_val=00D9F7B0)
-    (data5_val=00D9F7B0)
-    (data8_val=00D9F7B0)
-    (data9_val=00D9F7B0)
-    (data10_val=00D9F7B0)
-    (data11_val=00D9F7B0)
+    (data_val=00FE17B0)
+    (data1_val=00FE17B0)
+    (data2_val=00FE17B0)
+    (data3_val=00FE17B0)
+    (data4_val=00FE17B0)
+    (data5_val=00FE17B0)
+    (data8_val=00FE17B0)
+    (data9_val=00FE17B0)
+    (data10_val=00FE17B0)
+    (data11_val=00FE17B0)
 target=8, binarySearch=[8, 5948]
 target=9
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9F8A0)
-    (data1_def=00D9F8A0)
-    (data2_def=00D9F8A0)
-    (data3_def=00D9F8A0)
-    (data4_def=00D9F8A0)
-    (data5_def=00D9F8A0)
-    (data8_def=00D9F8A0)
-    (data9_def=00D9F8A0)
-   (data10_def=00D9F8A0)
-    (data11_def=00D9F8A0)
+    (data_def=00FE18A0)
+    (data1_def=00FE18A0)
+    (data2_def=00FE18A0)
+    (data3_def=00FE18A0)
+    (data4_def=00FE18A0)
+    (data5_def=00FE18A0)
+    (data8_def=00FE18A0)
+    (data9_def=00FE18A0)
+   (data10_def=00FE18A0)
+    (data11_def=00FE18A0)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9F8A0)
-    (data1=00D9F8A0)
-    (data2=00D9F8A0)
-    (data3=00D9F8A0)
-    (data4=00D9F8A0)
-    (data5=00D9F8A0)
-    (data8=00D9F8A0)
-    (data9=00D9F8A0)
-    (data10=00D9F8A0)
-    (data11=00D9F8A0)
+    (data=00FE18A0)
+    (data1=00FE18A0)
+    (data2=00FE18A0)
+    (data3=00FE18A0)
+    (data4=00FE18A0)
+    (data5=00FE18A0)
+    (data8=00FE18A0)
+    (data9=00FE18A0)
+    (data10=00FE18A0)
+    (data11=00FE18A0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9F8A0)
-    (data1_val=00D9F8A0)
-    (data2_val=00D9F8A0)
-    (data3_val=00D9F8A0)
-    (data4_val=00D9F8A0)
-    (data5_val=00D9F8A0)
-    (data8_val=00D9F8A0)
-    (data9_val=00D9F8A0)
-    (data10_val=00D9F8A0)
-    (data11_val=00D9F8A0)
+    (data_val=00FE18A0)
+    (data1_val=00FE18A0)
+    (data2_val=00FE18A0)
+    (data3_val=00FE18A0)
+    (data4_val=00FE18A0)
+    (data5_val=00FE18A0)
+    (data8_val=00FE18A0)
+    (data9_val=00FE18A0)
+    (data10_val=00FE18A0)
+    (data11_val=00FE18A0)
 target=9, binarySearch=[9, 7712]
 target=10
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9F990)
-    (data1_def=00D9F990)
-    (data2_def=00D9F990)
-    (data3_def=00D9F990)
-    (data4_def=00D9F990)
-    (data5_def=00D9F990)
-    (data8_def=00D9F990)
-    (data9_def=00D9F990)
-   (data10_def=00D9F990)
-    (data11_def=00D9F990)
+    (data_def=00FE1990)
+    (data1_def=00FE1990)
+    (data2_def=00FE1990)
+    (data3_def=00FE1990)
+    (data4_def=00FE1990)
+    (data5_def=00FE1990)
+    (data8_def=00FE1990)
+    (data9_def=00FE1990)
+   (data10_def=00FE1990)
+    (data11_def=00FE1990)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9F990)
-    (data1=00D9F990)
-    (data2=00D9F990)
-    (data3=00D9F990)
-    (data4=00D9F990)
-    (data5=00D9F990)
-    (data8=00D9F990)
-    (data9=00D9F990)
-    (data10=00D9F990)
-    (data11=00D9F990)
+    (data=00FE1990)
+    (data1=00FE1990)
+    (data2=00FE1990)
+    (data3=00FE1990)
+    (data4=00FE1990)
+    (data5=00FE1990)
+    (data8=00FE1990)
+    (data9=00FE1990)
+    (data10=00FE1990)
+    (data11=00FE1990)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9F990)
-    (data1_val=00D9F990)
-    (data2_val=00D9F990)
-    (data3_val=00D9F990)
-    (data4_val=00D9F990)
-    (data5_val=00D9F990)
-    (data8_val=00D9F990)
-    (data9_val=00D9F990)
-    (data10_val=00D9F990)
-    (data11_val=00D9F990)
+    (data_val=00FE1990)
+    (data1_val=00FE1990)
+    (data2_val=00FE1990)
+    (data3_val=00FE1990)
+    (data4_val=00FE1990)
+    (data5_val=00FE1990)
+    (data8_val=00FE1990)
+    (data9_val=00FE1990)
+    (data10_val=00FE1990)
+    (data11_val=00FE1990)
 target=10, binarySearch=[10, 7894]
 target=11
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9FA80)
-    (data1_def=00D9FA80)
-    (data2_def=00D9FA80)
-    (data3_def=00D9FA80)
-    (data4_def=00D9FA80)
-    (data5_def=00D9FA80)
-    (data8_def=00D9FA80)
-    (data9_def=00D9FA80)
-   (data10_def=00D9FA80)
-    (data11_def=00D9FA80)
+    (data_def=00FE1A80)
+    (data1_def=00FE1A80)
+    (data2_def=00FE1A80)
+    (data3_def=00FE1A80)
+    (data4_def=00FE1A80)
+    (data5_def=00FE1A80)
+    (data8_def=00FE1A80)
+    (data9_def=00FE1A80)
+   (data10_def=00FE1A80)
+    (data11_def=00FE1A80)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9FA80)
-    (data1=00D9FA80)
-    (data2=00D9FA80)
-    (data3=00D9FA80)
-    (data4=00D9FA80)
-    (data5=00D9FA80)
-    (data8=00D9FA80)
-    (data9=00D9FA80)
-    (data10=00D9FA80)
-    (data11=00D9FA80)
+    (data=00FE1A80)
+    (data1=00FE1A80)
+    (data2=00FE1A80)
+    (data3=00FE1A80)
+    (data4=00FE1A80)
+    (data5=00FE1A80)
+    (data8=00FE1A80)
+    (data9=00FE1A80)
+    (data10=00FE1A80)
+    (data11=00FE1A80)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9FA80)
-    (data1_val=00D9FA80)
-    (data2_val=00D9FA80)
-    (data3_val=00D9FA80)
-    (data4_val=00D9FA80)
-    (data5_val=00D9FA80)
-    (data8_val=00D9FA80)
-    (data9_val=00D9FA80)
-    (data10_val=00D9FA80)
-    (data11_val=00D9FA80)
+    (data_val=00FE1A80)
+    (data1_val=00FE1A80)
+    (data2_val=00FE1A80)
+    (data3_val=00FE1A80)
+    (data4_val=00FE1A80)
+    (data5_val=00FE1A80)
+    (data8_val=00FE1A80)
+    (data9_val=00FE1A80)
+    (data10_val=00FE1A80)
+    (data11_val=00FE1A80)
 target=11, binarySearch=[11, 7934]
 target=12
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9FB70)
-    (data1_def=00D9FB70)
-    (data2_def=00D9FB70)
-    (data3_def=00D9FB70)
-    (data4_def=00D9FB70)
-    (data5_def=00D9FB70)
-    (data8_def=00D9FB70)
-    (data9_def=00D9FB70)
-   (data10_def=00D9FB70)
-    (data11_def=00D9FB70)
+    (data_def=00FE1B70)
+    (data1_def=00FE1B70)
+    (data2_def=00FE1B70)
+    (data3_def=00FE1B70)
+    (data4_def=00FE1B70)
+    (data5_def=00FE1B70)
+    (data8_def=00FE1B70)
+    (data9_def=00FE1B70)
+   (data10_def=00FE1B70)
+    (data11_def=00FE1B70)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9FB70)
-    (data1=00D9FB70)
-    (data2=00D9FB70)
-    (data3=00D9FB70)
-    (data4=00D9FB70)
-    (data5=00D9FB70)
-    (data8=00D9FB70)
-    (data9=00D9FB70)
-    (data10=00D9FB70)
-    (data11=00D9FB70)
+    (data=00FE1B70)
+    (data1=00FE1B70)
+    (data2=00FE1B70)
+    (data3=00FE1B70)
+    (data4=00FE1B70)
+    (data5=00FE1B70)
+    (data8=00FE1B70)
+    (data9=00FE1B70)
+    (data10=00FE1B70)
+    (data11=00FE1B70)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9FB70)
-    (data1_val=00D9FB70)
-    (data2_val=00D9FB70)
-    (data3_val=00D9FB70)
-    (data4_val=00D9FB70)
-    (data5_val=00D9FB70)
-    (data8_val=00D9FB70)
-    (data9_val=00D9FB70)
-    (data10_val=00D9FB70)
-    (data11_val=00D9FB70)
+    (data_val=00FE1B70)
+    (data1_val=00FE1B70)
+    (data2_val=00FE1B70)
+    (data3_val=00FE1B70)
+    (data4_val=00FE1B70)
+    (data5_val=00FE1B70)
+    (data8_val=00FE1B70)
+    (data9_val=00FE1B70)
+    (data10_val=00FE1B70)
+    (data11_val=00FE1B70)
 target=12, binarySearch=[12, 6651]
 target=13
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9FC60)
-    (data1_def=00D9FC60)
-    (data2_def=00D9FC60)
-    (data3_def=00D9FC60)
-    (data4_def=00D9FC60)
-    (data5_def=00D9FC60)
-    (data8_def=00D9FC60)
-    (data9_def=00D9FC60)
-   (data10_def=00D9FC60)
-    (data11_def=00D9FC60)
+    (data_def=00FE1C60)
+    (data1_def=00FE1C60)
+    (data2_def=00FE1C60)
+    (data3_def=00FE1C60)
+    (data4_def=00FE1C60)
+    (data5_def=00FE1C60)
+    (data8_def=00FE1C60)
+    (data9_def=00FE1C60)
+   (data10_def=00FE1C60)
+    (data11_def=00FE1C60)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9FC60)
-    (data1=00D9FC60)
-    (data2=00D9FC60)
-    (data3=00D9FC60)
-    (data4=00D9FC60)
-    (data5=00D9FC60)
-    (data8=00D9FC60)
-    (data9=00D9FC60)
-    (data10=00D9FC60)
-    (data11=00D9FC60)
+    (data=00FE1C60)
+    (data1=00FE1C60)
+    (data2=00FE1C60)
+    (data3=00FE1C60)
+    (data4=00FE1C60)
+    (data5=00FE1C60)
+    (data8=00FE1C60)
+    (data9=00FE1C60)
+    (data10=00FE1C60)
+    (data11=00FE1C60)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9FC60)
-    (data1_val=00D9FC60)
-    (data2_val=00D9FC60)
-    (data3_val=00D9FC60)
-    (data4_val=00D9FC60)
-    (data5_val=00D9FC60)
-    (data8_val=00D9FC60)
-    (data9_val=00D9FC60)
-    (data10_val=00D9FC60)
-    (data11_val=00D9FC60)
+    (data_val=00FE1C60)
+    (data1_val=00FE1C60)
+    (data2_val=00FE1C60)
+    (data3_val=00FE1C60)
+    (data4_val=00FE1C60)
+    (data5_val=00FE1C60)
+    (data8_val=00FE1C60)
+    (data9_val=00FE1C60)
+    (data10_val=00FE1C60)
+    (data11_val=00FE1C60)
 target=13, binarySearch=[13, 7843]
 target=14
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9FD50)
-    (data1_def=00D9FD50)
-    (data2_def=00D9FD50)
-    (data3_def=00D9FD50)
-    (data4_def=00D9FD50)
-    (data5_def=00D9FD50)
-    (data8_def=00D9FD50)
-    (data9_def=00D9FD50)
-   (data10_def=00D9FD50)
-    (data11_def=00D9FD50)
+    (data_def=00FE1D50)
+    (data1_def=00FE1D50)
+    (data2_def=00FE1D50)
+    (data3_def=00FE1D50)
+    (data4_def=00FE1D50)
+    (data5_def=00FE1D50)
+    (data8_def=00FE1D50)
+    (data9_def=00FE1D50)
+   (data10_def=00FE1D50)
+    (data11_def=00FE1D50)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9FD50)
-    (data1=00D9FD50)
-    (data2=00D9FD50)
-    (data3=00D9FD50)
-    (data4=00D9FD50)
-    (data5=00D9FD50)
-    (data8=00D9FD50)
-    (data9=00D9FD50)
-    (data10=00D9FD50)
-    (data11=00D9FD50)
+    (data=00FE1D50)
+    (data1=00FE1D50)
+    (data2=00FE1D50)
+    (data3=00FE1D50)
+    (data4=00FE1D50)
+    (data5=00FE1D50)
+    (data8=00FE1D50)
+    (data9=00FE1D50)
+    (data10=00FE1D50)
+    (data11=00FE1D50)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9FD50)
-    (data1_val=00D9FD50)
-    (data2_val=00D9FD50)
-    (data3_val=00D9FD50)
-    (data4_val=00D9FD50)
-    (data5_val=00D9FD50)
-    (data8_val=00D9FD50)
-    (data9_val=00D9FD50)
-    (data10_val=00D9FD50)
-    (data11_val=00D9FD50)
+    (data_val=00FE1D50)
+    (data1_val=00FE1D50)
+    (data2_val=00FE1D50)
+    (data3_val=00FE1D50)
+    (data4_val=00FE1D50)
+    (data5_val=00FE1D50)
+    (data8_val=00FE1D50)
+    (data9_val=00FE1D50)
+    (data10_val=00FE1D50)
+    (data11_val=00FE1D50)
 target=14, binarySearch=[14, 4706]
 target=15
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9FE40)
-    (data1_def=00D9FE40)
-    (data2_def=00D9FE40)
-    (data3_def=00D9FE40)
-    (data4_def=00D9FE40)
-    (data5_def=00D9FE40)
-    (data8_def=00D9FE40)
-    (data9_def=00D9FE40)
-   (data10_def=00D9FE40)
-    (data11_def=00D9FE40)
+    (data_def=00FE1E40)
+    (data1_def=00FE1E40)
+    (data2_def=00FE1E40)
+    (data3_def=00FE1E40)
+    (data4_def=00FE1E40)
+    (data5_def=00FE1E40)
+    (data8_def=00FE1E40)
+    (data9_def=00FE1E40)
+   (data10_def=00FE1E40)
+    (data11_def=00FE1E40)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9FE40)
-    (data1=00D9FE40)
-    (data2=00D9FE40)
-    (data3=00D9FE40)
-    (data4=00D9FE40)
-    (data5=00D9FE40)
-    (data8=00D9FE40)
-    (data9=00D9FE40)
-    (data10=00D9FE40)
-    (data11=00D9FE40)
+    (data=00FE1E40)
+    (data1=00FE1E40)
+    (data2=00FE1E40)
+    (data3=00FE1E40)
+    (data4=00FE1E40)
+    (data5=00FE1E40)
+    (data8=00FE1E40)
+    (data9=00FE1E40)
+    (data10=00FE1E40)
+    (data11=00FE1E40)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9FE40)
-    (data1_val=00D9FE40)
-    (data2_val=00D9FE40)
-    (data3_val=00D9FE40)
-    (data4_val=00D9FE40)
-    (data5_val=00D9FE40)
-    (data8_val=00D9FE40)
-    (data9_val=00D9FE40)
-    (data10_val=00D9FE40)
-    (data11_val=00D9FE40)
+    (data_val=00FE1E40)
+    (data1_val=00FE1E40)
+    (data2_val=00FE1E40)
+    (data3_val=00FE1E40)
+    (data4_val=00FE1E40)
+    (data5_val=00FE1E40)
+    (data8_val=00FE1E40)
+    (data9_val=00FE1E40)
+    (data10_val=00FE1E40)
+    (data11_val=00FE1E40)
 target=15, binarySearch=[15, 355]
 target=16
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00D9FF30)
-    (data1_def=00D9FF30)
-    (data2_def=00D9FF30)
-    (data3_def=00D9FF30)
-    (data4_def=00D9FF30)
-    (data5_def=00D9FF30)
-    (data8_def=00D9FF30)
-    (data9_def=00D9FF30)
-   (data10_def=00D9FF30)
-    (data11_def=00D9FF30)
+    (data_def=00FE1F30)
+    (data1_def=00FE1F30)
+    (data2_def=00FE1F30)
+    (data3_def=00FE1F30)
+    (data4_def=00FE1F30)
+    (data5_def=00FE1F30)
+    (data8_def=00FE1F30)
+    (data9_def=00FE1F30)
+   (data10_def=00FE1F30)
+    (data11_def=00FE1F30)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00D9FF30)
-    (data1=00D9FF30)
-    (data2=00D9FF30)
-    (data3=00D9FF30)
-    (data4=00D9FF30)
-    (data5=00D9FF30)
-    (data8=00D9FF30)
-    (data9=00D9FF30)
-    (data10=00D9FF30)
-    (data11=00D9FF30)
+    (data=00FE1F30)
+    (data1=00FE1F30)
+    (data2=00FE1F30)
+    (data3=00FE1F30)
+    (data4=00FE1F30)
+    (data5=00FE1F30)
+    (data8=00FE1F30)
+    (data9=00FE1F30)
+    (data10=00FE1F30)
+    (data11=00FE1F30)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00D9FF30)
-    (data1_val=00D9FF30)
-    (data2_val=00D9FF30)
-    (data3_val=00D9FF30)
-    (data4_val=00D9FF30)
-    (data5_val=00D9FF30)
-    (data8_val=00D9FF30)
-    (data9_val=00D9FF30)
-    (data10_val=00D9FF30)
-    (data11_val=00D9FF30)
+    (data_val=00FE1F30)
+    (data1_val=00FE1F30)
+    (data2_val=00FE1F30)
+    (data3_val=00FE1F30)
+    (data4_val=00FE1F30)
+    (data5_val=00FE1F30)
+    (data8_val=00FE1F30)
+    (data9_val=00FE1F30)
+    (data10_val=00FE1F30)
+    (data11_val=00FE1F30)
 target=16, binarySearch=[16, 6649]
 target=17
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA0020)
-    (data1_def=00DA0020)
-    (data2_def=00DA0020)
-    (data3_def=00DA0020)
-    (data4_def=00DA0020)
-    (data5_def=00DA0020)
-    (data8_def=00DA0020)
-    (data9_def=00DA0020)
-   (data10_def=00DA0020)
-    (data11_def=00DA0020)
+    (data_def=00FE2020)
+    (data1_def=00FE2020)
+    (data2_def=00FE2020)
+    (data3_def=00FE2020)
+    (data4_def=00FE2020)
+    (data5_def=00FE2020)
+    (data8_def=00FE2020)
+    (data9_def=00FE2020)
+   (data10_def=00FE2020)
+    (data11_def=00FE2020)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA0020)
-    (data1=00DA0020)
-    (data2=00DA0020)
-    (data3=00DA0020)
-    (data4=00DA0020)
-    (data5=00DA0020)
-    (data8=00DA0020)
-    (data9=00DA0020)
-    (data10=00DA0020)
-    (data11=00DA0020)
+    (data=00FE2020)
+    (data1=00FE2020)
+    (data2=00FE2020)
+    (data3=00FE2020)
+    (data4=00FE2020)
+    (data5=00FE2020)
+    (data8=00FE2020)
+    (data9=00FE2020)
+    (data10=00FE2020)
+    (data11=00FE2020)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA0020)
-    (data1_val=00DA0020)
-    (data2_val=00DA0020)
-    (data3_val=00DA0020)
-    (data4_val=00DA0020)
-    (data5_val=00DA0020)
-    (data8_val=00DA0020)
-    (data9_val=00DA0020)
-    (data10_val=00DA0020)
-    (data11_val=00DA0020)
+    (data_val=00FE2020)
+    (data1_val=00FE2020)
+    (data2_val=00FE2020)
+    (data3_val=00FE2020)
+    (data4_val=00FE2020)
+    (data5_val=00FE2020)
+    (data8_val=00FE2020)
+    (data9_val=00FE2020)
+    (data10_val=00FE2020)
+    (data11_val=00FE2020)
 target=17, binarySearch=[17, 6450]
 target=18
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA0110)
-    (data1_def=00DA0110)
-    (data2_def=00DA0110)
-    (data3_def=00DA0110)
-    (data4_def=00DA0110)
-    (data5_def=00DA0110)
-    (data8_def=00DA0110)
-    (data9_def=00DA0110)
-   (data10_def=00DA0110)
-    (data11_def=00DA0110)
+    (data_def=00FE2110)
+    (data1_def=00FE2110)
+    (data2_def=00FE2110)
+    (data3_def=00FE2110)
+    (data4_def=00FE2110)
+    (data5_def=00FE2110)
+    (data8_def=00FE2110)
+    (data9_def=00FE2110)
+   (data10_def=00FE2110)
+    (data11_def=00FE2110)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA0110)
-    (data1=00DA0110)
-    (data2=00DA0110)
-    (data3=00DA0110)
-    (data4=00DA0110)
-    (data5=00DA0110)
-    (data8=00DA0110)
-    (data9=00DA0110)
-    (data10=00DA0110)
-    (data11=00DA0110)
+    (data=00FE2110)
+    (data1=00FE2110)
+    (data2=00FE2110)
+    (data3=00FE2110)
+    (data4=00FE2110)
+    (data5=00FE2110)
+    (data8=00FE2110)
+    (data9=00FE2110)
+    (data10=00FE2110)
+    (data11=00FE2110)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA0110)
-    (data1_val=00DA0110)
-    (data2_val=00DA0110)
-    (data3_val=00DA0110)
-    (data4_val=00DA0110)
-    (data5_val=00DA0110)
-    (data8_val=00DA0110)
-    (data9_val=00DA0110)
-    (data10_val=00DA0110)
-    (data11_val=00DA0110)
+    (data_val=00FE2110)
+    (data1_val=00FE2110)
+    (data2_val=00FE2110)
+    (data3_val=00FE2110)
+    (data4_val=00FE2110)
+    (data5_val=00FE2110)
+    (data8_val=00FE2110)
+    (data9_val=00FE2110)
+    (data10_val=00FE2110)
+    (data11_val=00FE2110)
 target=18, binarySearch=[18, 487]
 target=19
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA0200)
-    (data1_def=00DA0200)
-    (data2_def=00DA0200)
-    (data3_def=00DA0200)
-    (data4_def=00DA0200)
-    (data5_def=00DA0200)
-    (data8_def=00DA0200)
-    (data9_def=00DA0200)
-   (data10_def=00DA0200)
-    (data11_def=00DA0200)
+    (data_def=00FE2200)
+    (data1_def=00FE2200)
+    (data2_def=00FE2200)
+    (data3_def=00FE2200)
+    (data4_def=00FE2200)
+    (data5_def=00FE2200)
+    (data8_def=00FE2200)
+    (data9_def=00FE2200)
+   (data10_def=00FE2200)
+    (data11_def=00FE2200)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA0200)
-    (data1=00DA0200)
-    (data2=00DA0200)
-    (data3=00DA0200)
-    (data4=00DA0200)
-    (data5=00DA0200)
-    (data8=00DA0200)
-    (data9=00DA0200)
-    (data10=00DA0200)
-    (data11=00DA0200)
+    (data=00FE2200)
+    (data1=00FE2200)
+    (data2=00FE2200)
+    (data3=00FE2200)
+    (data4=00FE2200)
+    (data5=00FE2200)
+    (data8=00FE2200)
+    (data9=00FE2200)
+    (data10=00FE2200)
+    (data11=00FE2200)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA0200)
-    (data1_val=00DA0200)
-    (data2_val=00DA0200)
-    (data3_val=00DA0200)
-    (data4_val=00DA0200)
-    (data5_val=00DA0200)
-    (data8_val=00DA0200)
-    (data9_val=00DA0200)
-    (data10_val=00DA0200)
-    (data11_val=00DA0200)
+    (data_val=00FE2200)
+    (data1_val=00FE2200)
+    (data2_val=00FE2200)
+    (data3_val=00FE2200)
+    (data4_val=00FE2200)
+    (data5_val=00FE2200)
+    (data8_val=00FE2200)
+    (data9_val=00FE2200)
+    (data10_val=00FE2200)
+    (data11_val=00FE2200)
 target=19, binarySearch=[19, 7581]
 target=20
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA02F0)
-    (data1_def=00DA02F0)
-    (data2_def=00DA02F0)
-    (data3_def=00DA02F0)
-    (data4_def=00DA02F0)
-    (data5_def=00DA02F0)
-    (data8_def=00DA02F0)
-    (data9_def=00DA02F0)
-   (data10_def=00DA02F0)
-    (data11_def=00DA02F0)
+    (data_def=00FE22F0)
+    (data1_def=00FE22F0)
+    (data2_def=00FE22F0)
+    (data3_def=00FE22F0)
+    (data4_def=00FE22F0)
+    (data5_def=00FE22F0)
+    (data8_def=00FE22F0)
+    (data9_def=00FE22F0)
+   (data10_def=00FE22F0)
+    (data11_def=00FE22F0)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA02F0)
-    (data1=00DA02F0)
-    (data2=00DA02F0)
-    (data3=00DA02F0)
-    (data4=00DA02F0)
-    (data5=00DA02F0)
-    (data8=00DA02F0)
-    (data9=00DA02F0)
-    (data10=00DA02F0)
-    (data11=00DA02F0)
+    (data=00FE22F0)
+    (data1=00FE22F0)
+    (data2=00FE22F0)
+    (data3=00FE22F0)
+    (data4=00FE22F0)
+    (data5=00FE22F0)
+    (data8=00FE22F0)
+    (data9=00FE22F0)
+    (data10=00FE22F0)
+    (data11=00FE22F0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA02F0)
-    (data1_val=00DA02F0)
-    (data2_val=00DA02F0)
-    (data3_val=00DA02F0)
-    (data4_val=00DA02F0)
-    (data5_val=00DA02F0)
-    (data8_val=00DA02F0)
-    (data9_val=00DA02F0)
-    (data10_val=00DA02F0)
-    (data11_val=00DA02F0)
+    (data_val=00FE22F0)
+    (data1_val=00FE22F0)
+    (data2_val=00FE22F0)
+    (data3_val=00FE22F0)
+    (data4_val=00FE22F0)
+    (data5_val=00FE22F0)
+    (data8_val=00FE22F0)
+    (data9_val=00FE22F0)
+    (data10_val=00FE22F0)
+    (data11_val=00FE22F0)
 target=20, binarySearch=[20, 5535]
 target=21
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA03E0)
-    (data1_def=00DA03E0)
-    (data2_def=00DA03E0)
-    (data3_def=00DA03E0)
-    (data4_def=00DA03E0)
-    (data5_def=00DA03E0)
-    (data8_def=00DA03E0)
-    (data9_def=00DA03E0)
-   (data10_def=00DA03E0)
-    (data11_def=00DA03E0)
+    (data_def=00FE23E0)
+    (data1_def=00FE23E0)
+    (data2_def=00FE23E0)
+    (data3_def=00FE23E0)
+    (data4_def=00FE23E0)
+    (data5_def=00FE23E0)
+    (data8_def=00FE23E0)
+    (data9_def=00FE23E0)
+   (data10_def=00FE23E0)
+    (data11_def=00FE23E0)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA03E0)
-    (data1=00DA03E0)
-    (data2=00DA03E0)
-    (data3=00DA03E0)
-    (data4=00DA03E0)
-    (data5=00DA03E0)
-    (data8=00DA03E0)
-    (data9=00DA03E0)
-    (data10=00DA03E0)
-    (data11=00DA03E0)
+    (data=00FE23E0)
+    (data1=00FE23E0)
+    (data2=00FE23E0)
+    (data3=00FE23E0)
+    (data4=00FE23E0)
+    (data5=00FE23E0)
+    (data8=00FE23E0)
+    (data9=00FE23E0)
+    (data10=00FE23E0)
+    (data11=00FE23E0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA03E0)
-    (data1_val=00DA03E0)
-    (data2_val=00DA03E0)
-    (data3_val=00DA03E0)
-    (data4_val=00DA03E0)
-    (data5_val=00DA03E0)
-    (data8_val=00DA03E0)
-    (data9_val=00DA03E0)
-    (data10_val=00DA03E0)
-    (data11_val=00DA03E0)
+    (data_val=00FE23E0)
+    (data1_val=00FE23E0)
+    (data2_val=00FE23E0)
+    (data3_val=00FE23E0)
+    (data4_val=00FE23E0)
+    (data5_val=00FE23E0)
+    (data8_val=00FE23E0)
+    (data9_val=00FE23E0)
+    (data10_val=00FE23E0)
+    (data11_val=00FE23E0)
 target=21, binarySearch=[21, 9863]
 target=22
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA04D0)
-    (data1_def=00DA04D0)
-    (data2_def=00DA04D0)
-    (data3_def=00DA04D0)
-    (data4_def=00DA04D0)
-    (data5_def=00DA04D0)
-    (data8_def=00DA04D0)
-    (data9_def=00DA04D0)
-   (data10_def=00DA04D0)
-    (data11_def=00DA04D0)
+    (data_def=00FE24D0)
+    (data1_def=00FE24D0)
+    (data2_def=00FE24D0)
+    (data3_def=00FE24D0)
+    (data4_def=00FE24D0)
+    (data5_def=00FE24D0)
+    (data8_def=00FE24D0)
+    (data9_def=00FE24D0)
+   (data10_def=00FE24D0)
+    (data11_def=00FE24D0)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA04D0)
-    (data1=00DA04D0)
-    (data2=00DA04D0)
-    (data3=00DA04D0)
-    (data4=00DA04D0)
-    (data5=00DA04D0)
-    (data8=00DA04D0)
-    (data9=00DA04D0)
-    (data10=00DA04D0)
-    (data11=00DA04D0)
+    (data=00FE24D0)
+    (data1=00FE24D0)
+    (data2=00FE24D0)
+    (data3=00FE24D0)
+    (data4=00FE24D0)
+    (data5=00FE24D0)
+    (data8=00FE24D0)
+    (data9=00FE24D0)
+    (data10=00FE24D0)
+    (data11=00FE24D0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA04D0)
-    (data1_val=00DA04D0)
-    (data2_val=00DA04D0)
-    (data3_val=00DA04D0)
-    (data4_val=00DA04D0)
-    (data5_val=00DA04D0)
-    (data8_val=00DA04D0)
-    (data9_val=00DA04D0)
-    (data10_val=00DA04D0)
-    (data11_val=00DA04D0)
+    (data_val=00FE24D0)
+    (data1_val=00FE24D0)
+    (data2_val=00FE24D0)
+    (data3_val=00FE24D0)
+    (data4_val=00FE24D0)
+    (data5_val=00FE24D0)
+    (data8_val=00FE24D0)
+    (data9_val=00FE24D0)
+    (data10_val=00FE24D0)
+    (data11_val=00FE24D0)
 target=22, binarySearch=[22, 3263]
 target=23
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA05C0)
-    (data1_def=00DA05C0)
-    (data2_def=00DA05C0)
-    (data3_def=00DA05C0)
-    (data4_def=00DA05C0)
-    (data5_def=00DA05C0)
-    (data8_def=00DA05C0)
-    (data9_def=00DA05C0)
-   (data10_def=00DA05C0)
-    (data11_def=00DA05C0)
+    (data_def=00FE25C0)
+    (data1_def=00FE25C0)
+    (data2_def=00FE25C0)
+    (data3_def=00FE25C0)
+    (data4_def=00FE25C0)
+    (data5_def=00FE25C0)
+    (data8_def=00FE25C0)
+    (data9_def=00FE25C0)
+   (data10_def=00FE25C0)
+    (data11_def=00FE25C0)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA05C0)
-    (data1=00DA05C0)
-    (data2=00DA05C0)
-    (data3=00DA05C0)
-    (data4=00DA05C0)
-    (data5=00DA05C0)
-    (data8=00DA05C0)
-    (data9=00DA05C0)
-    (data10=00DA05C0)
-    (data11=00DA05C0)
+    (data=00FE25C0)
+    (data1=00FE25C0)
+    (data2=00FE25C0)
+    (data3=00FE25C0)
+    (data4=00FE25C0)
+    (data5=00FE25C0)
+    (data8=00FE25C0)
+    (data9=00FE25C0)
+    (data10=00FE25C0)
+    (data11=00FE25C0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA05C0)
-    (data1_val=00DA05C0)
-    (data2_val=00DA05C0)
-    (data3_val=00DA05C0)
-    (data4_val=00DA05C0)
-    (data5_val=00DA05C0)
-    (data8_val=00DA05C0)
-    (data9_val=00DA05C0)
-    (data10_val=00DA05C0)
-    (data11_val=00DA05C0)
+    (data_val=00FE25C0)
+    (data1_val=00FE25C0)
+    (data2_val=00FE25C0)
+    (data3_val=00FE25C0)
+    (data4_val=00FE25C0)
+    (data5_val=00FE25C0)
+    (data8_val=00FE25C0)
+    (data9_val=00FE25C0)
+    (data10_val=00FE25C0)
+    (data11_val=00FE25C0)
 target=23, binarySearch=[23, 9975]
 target=24
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA06B0)
-    (data1_def=00DA06B0)
-    (data2_def=00DA06B0)
-    (data3_def=00DA06B0)
-    (data4_def=00DA06B0)
-    (data5_def=00DA06B0)
-    (data8_def=00DA06B0)
-    (data9_def=00DA06B0)
-   (data10_def=00DA06B0)
-    (data11_def=00DA06B0)
+    (data_def=00FE26B0)
+    (data1_def=00FE26B0)
+    (data2_def=00FE26B0)
+    (data3_def=00FE26B0)
+    (data4_def=00FE26B0)
+    (data5_def=00FE26B0)
+    (data8_def=00FE26B0)
+    (data9_def=00FE26B0)
+   (data10_def=00FE26B0)
+    (data11_def=00FE26B0)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA06B0)
-    (data1=00DA06B0)
-    (data2=00DA06B0)
-    (data3=00DA06B0)
-    (data4=00DA06B0)
-    (data5=00DA06B0)
-    (data8=00DA06B0)
-    (data9=00DA06B0)
-    (data10=00DA06B0)
-    (data11=00DA06B0)
+    (data=00FE26B0)
+    (data1=00FE26B0)
+    (data2=00FE26B0)
+    (data3=00FE26B0)
+    (data4=00FE26B0)
+    (data5=00FE26B0)
+    (data8=00FE26B0)
+    (data9=00FE26B0)
+    (data10=00FE26B0)
+    (data11=00FE26B0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA06B0)
-    (data1_val=00DA06B0)
-    (data2_val=00DA06B0)
-    (data3_val=00DA06B0)
-    (data4_val=00DA06B0)
-    (data5_val=00DA06B0)
-    (data8_val=00DA06B0)
-    (data9_val=00DA06B0)
-    (data10_val=00DA06B0)
-    (data11_val=00DA06B0)
+    (data_val=00FE26B0)
+    (data1_val=00FE26B0)
+    (data2_val=00FE26B0)
+    (data3_val=00FE26B0)
+    (data4_val=00FE26B0)
+    (data5_val=00FE26B0)
+    (data8_val=00FE26B0)
+    (data9_val=00FE26B0)
+    (data10_val=00FE26B0)
+    (data11_val=00FE26B0)
 target=24, binarySearch=[24, 4050]
 target=25
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA07A0)
-    (data1_def=00DA07A0)
-    (data2_def=00DA07A0)
-    (data3_def=00DA07A0)
-    (data4_def=00DA07A0)
-    (data5_def=00DA07A0)
-    (data8_def=00DA07A0)
-    (data9_def=00DA07A0)
-   (data10_def=00DA07A0)
-    (data11_def=00DA07A0)
+    (data_def=00FE27A0)
+    (data1_def=00FE27A0)
+    (data2_def=00FE27A0)
+    (data3_def=00FE27A0)
+    (data4_def=00FE27A0)
+    (data5_def=00FE27A0)
+    (data8_def=00FE27A0)
+    (data9_def=00FE27A0)
+   (data10_def=00FE27A0)
+    (data11_def=00FE27A0)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA07A0)
-    (data1=00DA07A0)
-    (data2=00DA07A0)
-    (data3=00DA07A0)
-    (data4=00DA07A0)
-    (data5=00DA07A0)
-    (data8=00DA07A0)
-    (data9=00DA07A0)
-    (data10=00DA07A0)
-    (data11=00DA07A0)
+    (data=00FE27A0)
+    (data1=00FE27A0)
+    (data2=00FE27A0)
+    (data3=00FE27A0)
+    (data4=00FE27A0)
+    (data5=00FE27A0)
+    (data8=00FE27A0)
+    (data9=00FE27A0)
+    (data10=00FE27A0)
+    (data11=00FE27A0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA07A0)
-    (data1_val=00DA07A0)
-    (data2_val=00DA07A0)
-    (data3_val=00DA07A0)
-    (data4_val=00DA07A0)
-    (data5_val=00DA07A0)
-    (data8_val=00DA07A0)
-    (data9_val=00DA07A0)
-    (data10_val=00DA07A0)
-    (data11_val=00DA07A0)
+    (data_val=00FE27A0)
+    (data1_val=00FE27A0)
+    (data2_val=00FE27A0)
+    (data3_val=00FE27A0)
+    (data4_val=00FE27A0)
+    (data5_val=00FE27A0)
+    (data8_val=00FE27A0)
+    (data9_val=00FE27A0)
+    (data10_val=00FE27A0)
+    (data11_val=00FE27A0)
 target=25, binarySearch=[25, 3554]
 target=26
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA0890)
-    (data1_def=00DA0890)
-    (data2_def=00DA0890)
-    (data3_def=00DA0890)
-    (data4_def=00DA0890)
-    (data5_def=00DA0890)
-    (data8_def=00DA0890)
-    (data9_def=00DA0890)
-   (data10_def=00DA0890)
-    (data11_def=00DA0890)
+    (data_def=00FE2890)
+    (data1_def=00FE2890)
+    (data2_def=00FE2890)
+    (data3_def=00FE2890)
+    (data4_def=00FE2890)
+    (data5_def=00FE2890)
+    (data8_def=00FE2890)
+    (data9_def=00FE2890)
+   (data10_def=00FE2890)
+    (data11_def=00FE2890)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA0890)
-    (data1=00DA0890)
-    (data2=00DA0890)
-    (data3=00DA0890)
-    (data4=00DA0890)
-    (data5=00DA0890)
-    (data8=00DA0890)
-    (data9=00DA0890)
-    (data10=00DA0890)
-    (data11=00DA0890)
+    (data=00FE2890)
+    (data1=00FE2890)
+    (data2=00FE2890)
+    (data3=00FE2890)
+    (data4=00FE2890)
+    (data5=00FE2890)
+    (data8=00FE2890)
+    (data9=00FE2890)
+    (data10=00FE2890)
+    (data11=00FE2890)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA0890)
-    (data1_val=00DA0890)
-    (data2_val=00DA0890)
-    (data3_val=00DA0890)
-    (data4_val=00DA0890)
-    (data5_val=00DA0890)
-    (data8_val=00DA0890)
-    (data9_val=00DA0890)
-    (data10_val=00DA0890)
-    (data11_val=00DA0890)
+    (data_val=00FE2890)
+    (data1_val=00FE2890)
+    (data2_val=00FE2890)
+    (data3_val=00FE2890)
+    (data4_val=00FE2890)
+    (data5_val=00FE2890)
+    (data8_val=00FE2890)
+    (data9_val=00FE2890)
+    (data10_val=00FE2890)
+    (data11_val=00FE2890)
 target=26, binarySearch=[26, 5329]
 target=27
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA0980)
-    (data1_def=00DA0980)
-    (data2_def=00DA0980)
-    (data3_def=00DA0980)
-    (data4_def=00DA0980)
-    (data5_def=00DA0980)
-    (data8_def=00DA0980)
-    (data9_def=00DA0980)
-   (data10_def=00DA0980)
-    (data11_def=00DA0980)
+    (data_def=00FE2980)
+    (data1_def=00FE2980)
+    (data2_def=00FE2980)
+    (data3_def=00FE2980)
+    (data4_def=00FE2980)
+    (data5_def=00FE2980)
+    (data8_def=00FE2980)
+    (data9_def=00FE2980)
+   (data10_def=00FE2980)
+    (data11_def=00FE2980)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA0980)
-    (data1=00DA0980)
-    (data2=00DA0980)
-    (data3=00DA0980)
-    (data4=00DA0980)
-    (data5=00DA0980)
-    (data8=00DA0980)
-    (data9=00DA0980)
-    (data10=00DA0980)
-    (data11=00DA0980)
+    (data=00FE2980)
+    (data1=00FE2980)
+    (data2=00FE2980)
+    (data3=00FE2980)
+    (data4=00FE2980)
+    (data5=00FE2980)
+    (data8=00FE2980)
+    (data9=00FE2980)
+    (data10=00FE2980)
+    (data11=00FE2980)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA0980)
-    (data1_val=00DA0980)
-    (data2_val=00DA0980)
-    (data3_val=00DA0980)
-    (data4_val=00DA0980)
-    (data5_val=00DA0980)
-    (data8_val=00DA0980)
-    (data9_val=00DA0980)
-    (data10_val=00DA0980)
-    (data11_val=00DA0980)
+    (data_val=00FE2980)
+    (data1_val=00FE2980)
+    (data2_val=00FE2980)
+    (data3_val=00FE2980)
+    (data4_val=00FE2980)
+    (data5_val=00FE2980)
+    (data8_val=00FE2980)
+    (data9_val=00FE2980)
+    (data10_val=00FE2980)
+    (data11_val=00FE2980)
 target=27, binarySearch=[27, 3217]
 target=28
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA0A70)
-    (data1_def=00DA0A70)
-    (data2_def=00DA0A70)
-    (data3_def=00DA0A70)
-    (data4_def=00DA0A70)
-    (data5_def=00DA0A70)
-    (data8_def=00DA0A70)
-    (data9_def=00DA0A70)
-   (data10_def=00DA0A70)
-    (data11_def=00DA0A70)
+    (data_def=00FE2A70)
+    (data1_def=00FE2A70)
+    (data2_def=00FE2A70)
+    (data3_def=00FE2A70)
+    (data4_def=00FE2A70)
+    (data5_def=00FE2A70)
+    (data8_def=00FE2A70)
+    (data9_def=00FE2A70)
+   (data10_def=00FE2A70)
+    (data11_def=00FE2A70)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA0A70)
-    (data1=00DA0A70)
-    (data2=00DA0A70)
-    (data3=00DA0A70)
-    (data4=00DA0A70)
-    (data5=00DA0A70)
-    (data8=00DA0A70)
-    (data9=00DA0A70)
-    (data10=00DA0A70)
-    (data11=00DA0A70)
+    (data=00FE2A70)
+    (data1=00FE2A70)
+    (data2=00FE2A70)
+    (data3=00FE2A70)
+    (data4=00FE2A70)
+    (data5=00FE2A70)
+    (data8=00FE2A70)
+    (data9=00FE2A70)
+    (data10=00FE2A70)
+    (data11=00FE2A70)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA0A70)
-    (data1_val=00DA0A70)
-    (data2_val=00DA0A70)
-    (data3_val=00DA0A70)
-    (data4_val=00DA0A70)
-    (data5_val=00DA0A70)
-    (data8_val=00DA0A70)
-    (data9_val=00DA0A70)
-    (data10_val=00DA0A70)
-    (data11_val=00DA0A70)
+    (data_val=00FE2A70)
+    (data1_val=00FE2A70)
+    (data2_val=00FE2A70)
+    (data3_val=00FE2A70)
+    (data4_val=00FE2A70)
+    (data5_val=00FE2A70)
+    (data8_val=00FE2A70)
+    (data9_val=00FE2A70)
+    (data10_val=00FE2A70)
+    (data11_val=00FE2A70)
 target=28, binarySearch=[28, 1126]
 target=29
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA0B60)
-    (data1_def=00DA0B60)
-    (data2_def=00DA0B60)
-    (data3_def=00DA0B60)
-    (data4_def=00DA0B60)
-    (data5_def=00DA0B60)
-    (data8_def=00DA0B60)
-    (data9_def=00DA0B60)
-   (data10_def=00DA0B60)
-    (data11_def=00DA0B60)
+    (data_def=00FE2B60)
+    (data1_def=00FE2B60)
+    (data2_def=00FE2B60)
+    (data3_def=00FE2B60)
+    (data4_def=00FE2B60)
+    (data5_def=00FE2B60)
+    (data8_def=00FE2B60)
+    (data9_def=00FE2B60)
+   (data10_def=00FE2B60)
+    (data11_def=00FE2B60)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA0B60)
-    (data1=00DA0B60)
-    (data2=00DA0B60)
-    (data3=00DA0B60)
-    (data4=00DA0B60)
-    (data5=00DA0B60)
-    (data8=00DA0B60)
-    (data9=00DA0B60)
-    (data10=00DA0B60)
-    (data11=00DA0B60)
+    (data=00FE2B60)
+    (data1=00FE2B60)
+    (data2=00FE2B60)
+    (data3=00FE2B60)
+    (data4=00FE2B60)
+    (data5=00FE2B60)
+    (data8=00FE2B60)
+    (data9=00FE2B60)
+    (data10=00FE2B60)
+    (data11=00FE2B60)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA0B60)
-    (data1_val=00DA0B60)
-    (data2_val=00DA0B60)
-    (data3_val=00DA0B60)
-    (data4_val=00DA0B60)
-    (data5_val=00DA0B60)
-    (data8_val=00DA0B60)
-    (data9_val=00DA0B60)
-    (data10_val=00DA0B60)
-    (data11_val=00DA0B60)
+    (data_val=00FE2B60)
+    (data1_val=00FE2B60)
+    (data2_val=00FE2B60)
+    (data3_val=00FE2B60)
+    (data4_val=00FE2B60)
+    (data5_val=00FE2B60)
+    (data8_val=00FE2B60)
+    (data9_val=00FE2B60)
+    (data10_val=00FE2B60)
+    (data11_val=00FE2B60)
 target=29, binarySearch=[29, 1034]
 target=30
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA0C50)
-    (data1_def=00DA0C50)
-    (data2_def=00DA0C50)
-    (data3_def=00DA0C50)
-    (data4_def=00DA0C50)
-    (data5_def=00DA0C50)
-    (data8_def=00DA0C50)
-    (data9_def=00DA0C50)
-   (data10_def=00DA0C50)
-    (data11_def=00DA0C50)
+    (data_def=00FE2C50)
+    (data1_def=00FE2C50)
+    (data2_def=00FE2C50)
+    (data3_def=00FE2C50)
+    (data4_def=00FE2C50)
+    (data5_def=00FE2C50)
+    (data8_def=00FE2C50)
+    (data9_def=00FE2C50)
+   (data10_def=00FE2C50)
+    (data11_def=00FE2C50)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA0C50)
-    (data1=00DA0C50)
-    (data2=00DA0C50)
-    (data3=00DA0C50)
-    (data4=00DA0C50)
-    (data5=00DA0C50)
-    (data8=00DA0C50)
-    (data9=00DA0C50)
-    (data10=00DA0C50)
-    (data11=00DA0C50)
+    (data=00FE2C50)
+    (data1=00FE2C50)
+    (data2=00FE2C50)
+    (data3=00FE2C50)
+    (data4=00FE2C50)
+    (data5=00FE2C50)
+    (data8=00FE2C50)
+    (data9=00FE2C50)
+    (data10=00FE2C50)
+    (data11=00FE2C50)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA0C50)
-    (data1_val=00DA0C50)
-    (data2_val=00DA0C50)
-    (data3_val=00DA0C50)
-    (data4_val=00DA0C50)
-    (data5_val=00DA0C50)
-    (data8_val=00DA0C50)
-    (data9_val=00DA0C50)
-    (data10_val=00DA0C50)
-    (data11_val=00DA0C50)
+    (data_val=00FE2C50)
+    (data1_val=00FE2C50)
+    (data2_val=00FE2C50)
+    (data3_val=00FE2C50)
+    (data4_val=00FE2C50)
+    (data5_val=00FE2C50)
+    (data8_val=00FE2C50)
+    (data9_val=00FE2C50)
+    (data10_val=00FE2C50)
+    (data11_val=00FE2C50)
 target=30, binarySearch=[30, 5065]
 target=31
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA0D40)
-    (data1_def=00DA0D40)
-    (data2_def=00DA0D40)
-    (data3_def=00DA0D40)
-    (data4_def=00DA0D40)
-    (data5_def=00DA0D40)
-    (data8_def=00DA0D40)
-    (data9_def=00DA0D40)
-   (data10_def=00DA0D40)
-    (data11_def=00DA0D40)
+    (data_def=00FE2D40)
+    (data1_def=00FE2D40)
+    (data2_def=00FE2D40)
+    (data3_def=00FE2D40)
+    (data4_def=00FE2D40)
+    (data5_def=00FE2D40)
+    (data8_def=00FE2D40)
+    (data9_def=00FE2D40)
+   (data10_def=00FE2D40)
+    (data11_def=00FE2D40)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA0D40)
-    (data1=00DA0D40)
-    (data2=00DA0D40)
-    (data3=00DA0D40)
-    (data4=00DA0D40)
-    (data5=00DA0D40)
-    (data8=00DA0D40)
-    (data9=00DA0D40)
-    (data10=00DA0D40)
-    (data11=00DA0D40)
+    (data=00FE2D40)
+    (data1=00FE2D40)
+    (data2=00FE2D40)
+    (data3=00FE2D40)
+    (data4=00FE2D40)
+    (data5=00FE2D40)
+    (data8=00FE2D40)
+    (data9=00FE2D40)
+    (data10=00FE2D40)
+    (data11=00FE2D40)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA0D40)
-    (data1_val=00DA0D40)
-    (data2_val=00DA0D40)
-    (data3_val=00DA0D40)
-    (data4_val=00DA0D40)
-    (data5_val=00DA0D40)
-    (data8_val=00DA0D40)
-    (data9_val=00DA0D40)
-    (data10_val=00DA0D40)
-    (data11_val=00DA0D40)
+    (data_val=00FE2D40)
+    (data1_val=00FE2D40)
+    (data2_val=00FE2D40)
+    (data3_val=00FE2D40)
+    (data4_val=00FE2D40)
+    (data5_val=00FE2D40)
+    (data8_val=00FE2D40)
+    (data9_val=00FE2D40)
+    (data10_val=00FE2D40)
+    (data11_val=00FE2D40)
 target=31, binarySearch=[31, 5061]
 target=32
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA0E30)
-    (data1_def=00DA0E30)
-    (data2_def=00DA0E30)
-    (data3_def=00DA0E30)
-    (data4_def=00DA0E30)
-    (data5_def=00DA0E30)
-    (data8_def=00DA0E30)
-    (data9_def=00DA0E30)
-   (data10_def=00DA0E30)
-    (data11_def=00DA0E30)
+    (data_def=00FE2E30)
+    (data1_def=00FE2E30)
+    (data2_def=00FE2E30)
+    (data3_def=00FE2E30)
+    (data4_def=00FE2E30)
+    (data5_def=00FE2E30)
+    (data8_def=00FE2E30)
+    (data9_def=00FE2E30)
+   (data10_def=00FE2E30)
+    (data11_def=00FE2E30)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA0E30)
-    (data1=00DA0E30)
-    (data2=00DA0E30)
-    (data3=00DA0E30)
-    (data4=00DA0E30)
-    (data5=00DA0E30)
-    (data8=00DA0E30)
-    (data9=00DA0E30)
-    (data10=00DA0E30)
-    (data11=00DA0E30)
+    (data=00FE2E30)
+    (data1=00FE2E30)
+    (data2=00FE2E30)
+    (data3=00FE2E30)
+    (data4=00FE2E30)
+    (data5=00FE2E30)
+    (data8=00FE2E30)
+    (data9=00FE2E30)
+    (data10=00FE2E30)
+    (data11=00FE2E30)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA0E30)
-    (data1_val=00DA0E30)
-    (data2_val=00DA0E30)
-    (data3_val=00DA0E30)
-    (data4_val=00DA0E30)
-    (data5_val=00DA0E30)
-    (data8_val=00DA0E30)
-    (data9_val=00DA0E30)
-    (data10_val=00DA0E30)
-    (data11_val=00DA0E30)
+    (data_val=00FE2E30)
+    (data1_val=00FE2E30)
+    (data2_val=00FE2E30)
+    (data3_val=00FE2E30)
+    (data4_val=00FE2E30)
+    (data5_val=00FE2E30)
+    (data8_val=00FE2E30)
+    (data9_val=00FE2E30)
+    (data10_val=00FE2E30)
+    (data11_val=00FE2E30)
 target=32, binarySearch=[32, 2018]
 target=33
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA0F20)
-    (data1_def=00DA0F20)
-    (data2_def=00DA0F20)
-    (data3_def=00DA0F20)
-    (data4_def=00DA0F20)
-    (data5_def=00DA0F20)
-    (data8_def=00DA0F20)
-    (data9_def=00DA0F20)
-   (data10_def=00DA0F20)
-    (data11_def=00DA0F20)
+    (data_def=00FE2F20)
+    (data1_def=00FE2F20)
+    (data2_def=00FE2F20)
+    (data3_def=00FE2F20)
+    (data4_def=00FE2F20)
+    (data5_def=00FE2F20)
+    (data8_def=00FE2F20)
+    (data9_def=00FE2F20)
+   (data10_def=00FE2F20)
+    (data11_def=00FE2F20)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA0F20)
-    (data1=00DA0F20)
-    (data2=00DA0F20)
-    (data3=00DA0F20)
-    (data4=00DA0F20)
-    (data5=00DA0F20)
-    (data8=00DA0F20)
-    (data9=00DA0F20)
-    (data10=00DA0F20)
-    (data11=00DA0F20)
+    (data=00FE2F20)
+    (data1=00FE2F20)
+    (data2=00FE2F20)
+    (data3=00FE2F20)
+    (data4=00FE2F20)
+    (data5=00FE2F20)
+    (data8=00FE2F20)
+    (data9=00FE2F20)
+    (data10=00FE2F20)
+    (data11=00FE2F20)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA0F20)
-    (data1_val=00DA0F20)
-    (data2_val=00DA0F20)
-    (data3_val=00DA0F20)
-    (data4_val=00DA0F20)
-    (data5_val=00DA0F20)
-    (data8_val=00DA0F20)
-    (data9_val=00DA0F20)
-    (data10_val=00DA0F20)
-    (data11_val=00DA0F20)
+    (data_val=00FE2F20)
+    (data1_val=00FE2F20)
+    (data2_val=00FE2F20)
+    (data3_val=00FE2F20)
+    (data4_val=00FE2F20)
+    (data5_val=00FE2F20)
+    (data8_val=00FE2F20)
+    (data9_val=00FE2F20)
+    (data10_val=00FE2F20)
+    (data11_val=00FE2F20)
 target=33, binarySearch=[33, 3738]
 target=34
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA1010)
-    (data1_def=00DA1010)
-    (data2_def=00DA1010)
-    (data3_def=00DA1010)
-    (data4_def=00DA1010)
-    (data5_def=00DA1010)
-    (data8_def=00DA1010)
-    (data9_def=00DA1010)
-   (data10_def=00DA1010)
-    (data11_def=00DA1010)
+    (data_def=00FE3010)
+    (data1_def=00FE3010)
+    (data2_def=00FE3010)
+    (data3_def=00FE3010)
+    (data4_def=00FE3010)
+    (data5_def=00FE3010)
+    (data8_def=00FE3010)
+    (data9_def=00FE3010)
+   (data10_def=00FE3010)
+    (data11_def=00FE3010)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA1010)
-    (data1=00DA1010)
-    (data2=00DA1010)
-    (data3=00DA1010)
-    (data4=00DA1010)
-    (data5=00DA1010)
-    (data8=00DA1010)
-    (data9=00DA1010)
-    (data10=00DA1010)
-    (data11=00DA1010)
+    (data=00FE3010)
+    (data1=00FE3010)
+    (data2=00FE3010)
+    (data3=00FE3010)
+    (data4=00FE3010)
+    (data5=00FE3010)
+    (data8=00FE3010)
+    (data9=00FE3010)
+    (data10=00FE3010)
+    (data11=00FE3010)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA1010)
-    (data1_val=00DA1010)
-    (data2_val=00DA1010)
-    (data3_val=00DA1010)
-    (data4_val=00DA1010)
-    (data5_val=00DA1010)
-    (data8_val=00DA1010)
-    (data9_val=00DA1010)
-    (data10_val=00DA1010)
-    (data11_val=00DA1010)
+    (data_val=00FE3010)
+    (data1_val=00FE3010)
+    (data2_val=00FE3010)
+    (data3_val=00FE3010)
+    (data4_val=00FE3010)
+    (data5_val=00FE3010)
+    (data8_val=00FE3010)
+    (data9_val=00FE3010)
+    (data10_val=00FE3010)
+    (data11_val=00FE3010)
 target=34, binarySearch=[34, 3825]
 target=35
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA1100)
-    (data1_def=00DA1100)
-    (data2_def=00DA1100)
-    (data3_def=00DA1100)
-    (data4_def=00DA1100)
-    (data5_def=00DA1100)
-    (data8_def=00DA1100)
-    (data9_def=00DA1100)
-   (data10_def=00DA1100)
-    (data11_def=00DA1100)
+    (data_def=00FE3100)
+    (data1_def=00FE3100)
+    (data2_def=00FE3100)
+    (data3_def=00FE3100)
+    (data4_def=00FE3100)
+    (data5_def=00FE3100)
+    (data8_def=00FE3100)
+    (data9_def=00FE3100)
+   (data10_def=00FE3100)
+    (data11_def=00FE3100)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA1100)
-    (data1=00DA1100)
-    (data2=00DA1100)
-    (data3=00DA1100)
-    (data4=00DA1100)
-    (data5=00DA1100)
-    (data8=00DA1100)
-    (data9=00DA1100)
-    (data10=00DA1100)
-    (data11=00DA1100)
+    (data=00FE3100)
+    (data1=00FE3100)
+    (data2=00FE3100)
+    (data3=00FE3100)
+    (data4=00FE3100)
+    (data5=00FE3100)
+    (data8=00FE3100)
+    (data9=00FE3100)
+    (data10=00FE3100)
+    (data11=00FE3100)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA1100)
-    (data1_val=00DA1100)
-    (data2_val=00DA1100)
-    (data3_val=00DA1100)
-    (data4_val=00DA1100)
-    (data5_val=00DA1100)
-    (data8_val=00DA1100)
-    (data9_val=00DA1100)
-    (data10_val=00DA1100)
-    (data11_val=00DA1100)
+    (data_val=00FE3100)
+    (data1_val=00FE3100)
+    (data2_val=00FE3100)
+    (data3_val=00FE3100)
+    (data4_val=00FE3100)
+    (data5_val=00FE3100)
+    (data8_val=00FE3100)
+    (data9_val=00FE3100)
+    (data10_val=00FE3100)
+    (data11_val=00FE3100)
 target=35, binarySearch=[35, 7690]
 target=36
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA11F0)
-    (data1_def=00DA11F0)
-    (data2_def=00DA11F0)
-    (data3_def=00DA11F0)
-    (data4_def=00DA11F0)
-    (data5_def=00DA11F0)
-    (data8_def=00DA11F0)
-    (data9_def=00DA11F0)
-   (data10_def=00DA11F0)
-    (data11_def=00DA11F0)
+    (data_def=00FE31F0)
+    (data1_def=00FE31F0)
+    (data2_def=00FE31F0)
+    (data3_def=00FE31F0)
+    (data4_def=00FE31F0)
+    (data5_def=00FE31F0)
+    (data8_def=00FE31F0)
+    (data9_def=00FE31F0)
+   (data10_def=00FE31F0)
+    (data11_def=00FE31F0)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA11F0)
-    (data1=00DA11F0)
-    (data2=00DA11F0)
-    (data3=00DA11F0)
-    (data4=00DA11F0)
-    (data5=00DA11F0)
-    (data8=00DA11F0)
-    (data9=00DA11F0)
-    (data10=00DA11F0)
-    (data11=00DA11F0)
+    (data=00FE31F0)
+    (data1=00FE31F0)
+    (data2=00FE31F0)
+    (data3=00FE31F0)
+    (data4=00FE31F0)
+    (data5=00FE31F0)
+    (data8=00FE31F0)
+    (data9=00FE31F0)
+    (data10=00FE31F0)
+    (data11=00FE31F0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA11F0)
-    (data1_val=00DA11F0)
-    (data2_val=00DA11F0)
-    (data3_val=00DA11F0)
-    (data4_val=00DA11F0)
-    (data5_val=00DA11F0)
-    (data8_val=00DA11F0)
-    (data9_val=00DA11F0)
-    (data10_val=00DA11F0)
-    (data11_val=00DA11F0)
+    (data_val=00FE31F0)
+    (data1_val=00FE31F0)
+    (data2_val=00FE31F0)
+    (data3_val=00FE31F0)
+    (data4_val=00FE31F0)
+    (data5_val=00FE31F0)
+    (data8_val=00FE31F0)
+    (data9_val=00FE31F0)
+    (data10_val=00FE31F0)
+    (data11_val=00FE31F0)
 target=36, binarySearch=[36, 5391]
 target=37
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA12E0)
-    (data1_def=00DA12E0)
-    (data2_def=00DA12E0)
-    (data3_def=00DA12E0)
-    (data4_def=00DA12E0)
-    (data5_def=00DA12E0)
-    (data8_def=00DA12E0)
-    (data9_def=00DA12E0)
-   (data10_def=00DA12E0)
-    (data11_def=00DA12E0)
+    (data_def=00FE32E0)
+    (data1_def=00FE32E0)
+    (data2_def=00FE32E0)
+    (data3_def=00FE32E0)
+    (data4_def=00FE32E0)
+    (data5_def=00FE32E0)
+    (data8_def=00FE32E0)
+    (data9_def=00FE32E0)
+   (data10_def=00FE32E0)
+    (data11_def=00FE32E0)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA12E0)
-    (data1=00DA12E0)
-    (data2=00DA12E0)
-    (data3=00DA12E0)
-    (data4=00DA12E0)
-    (data5=00DA12E0)
-    (data8=00DA12E0)
-    (data9=00DA12E0)
-    (data10=00DA12E0)
-    (data11=00DA12E0)
+    (data=00FE32E0)
+    (data1=00FE32E0)
+    (data2=00FE32E0)
+    (data3=00FE32E0)
+    (data4=00FE32E0)
+    (data5=00FE32E0)
+    (data8=00FE32E0)
+    (data9=00FE32E0)
+    (data10=00FE32E0)
+    (data11=00FE32E0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA12E0)
-    (data1_val=00DA12E0)
-    (data2_val=00DA12E0)
-    (data3_val=00DA12E0)
-    (data4_val=00DA12E0)
-    (data5_val=00DA12E0)
-    (data8_val=00DA12E0)
-    (data9_val=00DA12E0)
-    (data10_val=00DA12E0)
-    (data11_val=00DA12E0)
+    (data_val=00FE32E0)
+    (data1_val=00FE32E0)
+    (data2_val=00FE32E0)
+    (data3_val=00FE32E0)
+    (data4_val=00FE32E0)
+    (data5_val=00FE32E0)
+    (data8_val=00FE32E0)
+    (data9_val=00FE32E0)
+    (data10_val=00FE32E0)
+    (data11_val=00FE32E0)
 target=37, binarySearch=[37, 3766]
 target=38
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA13D0)
-    (data1_def=00DA13D0)
-    (data2_def=00DA13D0)
-    (data3_def=00DA13D0)
-    (data4_def=00DA13D0)
-    (data5_def=00DA13D0)
-    (data8_def=00DA13D0)
-    (data9_def=00DA13D0)
-   (data10_def=00DA13D0)
-    (data11_def=00DA13D0)
+    (data_def=00FE33D0)
+    (data1_def=00FE33D0)
+    (data2_def=00FE33D0)
+    (data3_def=00FE33D0)
+    (data4_def=00FE33D0)
+    (data5_def=00FE33D0)
+    (data8_def=00FE33D0)
+    (data9_def=00FE33D0)
+   (data10_def=00FE33D0)
+    (data11_def=00FE33D0)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA13D0)
-    (data1=00DA13D0)
-    (data2=00DA13D0)
-    (data3=00DA13D0)
-    (data4=00DA13D0)
-    (data5=00DA13D0)
-    (data8=00DA13D0)
-    (data9=00DA13D0)
-    (data10=00DA13D0)
-    (data11=00DA13D0)
+    (data=00FE33D0)
+    (data1=00FE33D0)
+    (data2=00FE33D0)
+    (data3=00FE33D0)
+    (data4=00FE33D0)
+    (data5=00FE33D0)
+    (data8=00FE33D0)
+    (data9=00FE33D0)
+    (data10=00FE33D0)
+    (data11=00FE33D0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA13D0)
-    (data1_val=00DA13D0)
-    (data2_val=00DA13D0)
-    (data3_val=00DA13D0)
-    (data4_val=00DA13D0)
-    (data5_val=00DA13D0)
-    (data8_val=00DA13D0)
-    (data9_val=00DA13D0)
-    (data10_val=00DA13D0)
-    (data11_val=00DA13D0)
+    (data_val=00FE33D0)
+    (data1_val=00FE33D0)
+    (data2_val=00FE33D0)
+    (data3_val=00FE33D0)
+    (data4_val=00FE33D0)
+    (data5_val=00FE33D0)
+    (data8_val=00FE33D0)
+    (data9_val=00FE33D0)
+    (data10_val=00FE33D0)
+    (data11_val=00FE33D0)
 target=38, binarySearch=[38, 2190]
 target=39
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00DA14C0)
-    (data1_def=00DA14C0)
-    (data2_def=00DA14C0)
-    (data3_def=00DA14C0)
-    (data4_def=00DA14C0)
-    (data5_def=00DA14C0)
-    (data8_def=00DA14C0)
-    (data9_def=00DA14C0)
-   (data10_def=00DA14C0)
-    (data11_def=00DA14C0)
+    (data_def=00FE34C0)
+    (data1_def=00FE34C0)
+    (data2_def=00FE34C0)
+    (data3_def=00FE34C0)
+    (data4_def=00FE34C0)
+    (data5_def=00FE34C0)
+    (data8_def=00FE34C0)
+    (data9_def=00FE34C0)
+   (data10_def=00FE34C0)
+    (data11_def=00FE34C0)
   binarySearch(*array_shuffle1, search_comparison);
-    (data=00DA14C0)
-    (data1=00DA14C0)
-    (data2=00DA14C0)
-    (data3=00DA14C0)
-    (data4=00DA14C0)
-    (data5=00DA14C0)
-    (data8=00DA14C0)
-    (data9=00DA14C0)
-    (data10=00DA14C0)
-    (data11=00DA14C0)
+    (data=00FE34C0)
+    (data1=00FE34C0)
+    (data2=00FE34C0)
+    (data3=00FE34C0)
+    (data4=00FE34C0)
+    (data5=00FE34C0)
+    (data8=00FE34C0)
+    (data9=00FE34C0)
+    (data10=00FE34C0)
+    (data11=00FE34C0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00DA14C0)
-    (data1_val=00DA14C0)
-    (data2_val=00DA14C0)
-    (data3_val=00DA14C0)
-    (data4_val=00DA14C0)
-    (data5_val=00DA14C0)
-    (data8_val=00DA14C0)
-    (data9_val=00DA14C0)
-    (data10_val=00DA14C0)
-    (data11_val=00DA14C0)
+    (data_val=00FE34C0)
+    (data1_val=00FE34C0)
+    (data2_val=00FE34C0)
+    (data3_val=00FE34C0)
+    (data4_val=00FE34C0)
+    (data5_val=00FE34C0)
+    (data8_val=00FE34C0)
+    (data9_val=00FE34C0)
+    (data10_val=00FE34C0)
+    (data11_val=00FE34C0)
 target=39, binarySearch=[39, 8991]
 ============================================================
 Finalize
@@ -4370,4 +4370,4 @@ Finalize
 ============================================================
 End
 ============================================================
-*elapsed time=6.309001300 sec.
+*elapsed time=6.454139500 sec.

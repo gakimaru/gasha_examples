@@ -8,7 +8,7 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_crc32.h"
+#include "example_crc32.h"//CRC32計算処理テスト
 
 #include <stdio.h>
 #include <stdlib.h>

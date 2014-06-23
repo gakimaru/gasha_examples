@@ -1,0 +1,67 @@
+------------------------------------------------------------------------------
+Check build-settings suitable for runtime environment.
+
+[OK?] SSE is supported?
+[OK?] SSE2 is supported?
+[OK?] SSE3 is supported?
+[--] SSE4a is not used.
+[OK?] SSE4.1 is NOT supported?
+[OK?] SSE4.2 is supported?
+[OK?] POPCNT is supported?
+[OK?] AES is supported?
+[OK?] AVX is supported?
+[--] AVX2 is not used.
+------------------------------------------------------------------------------
+Compiler: name="GCC", Ver=[4(0x00000004).8(0x00000008)]
+    This compiler is "GCC"
+
+Compiler-language: C++ (C++ Ver.=2011)
+    C++ is available.
+        C++ is implemented C++98.
+        C++ is implemented C++03.
+        C++ is implemented C++11.
+
+Plataform: "Cygin"(x86 32bits, little-endian), Ver=[0(0x00000000).0(0x00000000)]
+    Target plarform is "Cygwin"
+
+__FILE__="../../src/example_build_settings/example_build_settings.cpp"
+__LINE__=132
+__FUNCTION__="func"
+__PRETTY_FUNCTION__="static void example_build_settings()::test::func()"
+__FUNCSIG__="static void example_build_settings()::test::func()"
+__func__="func"
+__FUNCDNAME__=""
+__DATE__="Jun 23 2014"
+__TIME__="16:55:02"
+__TIMESTAMP__="Mon Jun 23 11:43:17 2014"
+
+GET_FUNC_NAME()="static void example_build_settings()::test::func()"
+GET_FILE_LINE()="../../src/example_build_settings/example_build_settings.cpp(143)"
+GET_FILE_LINE_TIME()="../../src/example_build_settings/example_build_settings.cpp(144)[Mon Jun 23 11:43:17 2014]"
+This is normal func.
+This is inline func.
+This is noinline func.
+This is always inline func.
+
+nullptr_var=0x0
+    'nullptr' is featured.
+
+This is override func.
+    'override' is featured.
+
+constexpr_var=6
+constexpr_calc(1, 2)=3
+    'constexpr' is featured.
+
+user_defined_literal_var=10
+    'operator ""'(user defined literal) is featured.
+
+TLS Variable=123
+    'thread_local' is featured.
+
+sizeof(data_t)=32
+alignof(data_t)=16
+_aligned_malloc(sizeof(data_t), alignof(data_t))=0x800203e0
+_aligned_free(p)
+    'alignas' is featured.
+    'alignof' is featured.

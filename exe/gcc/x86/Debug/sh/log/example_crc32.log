@@ -1,15 +1,15 @@
 
-constexpr によるCRC計算結果=0xf3dbd4fe
+Result of calculation CRC of "1234567890" by constexpr = 0xf3dbd4fe
 
-ユーザー定義リテラルによるCRC計算結果=0xe6599437
+Result of calculation CRC of "abcdefghij" by user-defined-literal = 0xe6599437
 
-ランタイム関数によるCRC計算結果=0xd599aefd
+Result of calculation CRC of "ABCDEFGHIJ" by runtime-function = 0xd599aefd
 
 [calcCRC32_recursive() * 10000 times]
-*elapsed time = 0.002079000 sec (crc_sum=0xbb3001e0)
+*elapsed time = 0.001919000 sec (crc_sum=0xbb3001e0)
 [calcCRC32_loop() * 10000 times]
-*elapsed time = 0.002002000 sec (crc_sum=0xbb3001e0)
+*elapsed time = 0.002030000 sec (crc_sum=0xbb3001e0)
 [calcCRC32_table() * 10000 times]
-*elapsed time = 0.000300000 sec (crc_sum=0xbb3001e0)
+*elapsed time = 0.000292000 sec (crc_sum=0xbb3001e0)
 [calcCRC32_sse() * 10000 times]
-*elapsed time = 0.000308000 sec (crc_sum=0xbb3001e0)
+*elapsed time = 0.000295000 sec (crc_sum=0xbb3001e0)

@@ -40,7 +40,7 @@ static const int TEST_DATA_COUNT = 10000;//テストデータ件数（最大）
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
 #pragma warning(disable: 4530)//C4530を抑える
 
-#include <array>//C++11 std::array用
+#include <array>//C++11 std::array
 
 //----------------------------------------
 //テスト用構造体

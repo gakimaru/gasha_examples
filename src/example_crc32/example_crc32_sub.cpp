@@ -8,26 +8,26 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_crc32.h"
+#include "example_crc32.h"//CRC32計算処理テスト
 
-#include <gasha/crc32.h>//gasha::crc32
+#include <gasha/crc32.h>//CRC32計算
 
 USING_NAMESPACE_GASHA//ネームスペース使用
 
 //再帰処理版の関数で計算
-crc32_t performance_test_crc32_recursive(const char* str, const int dummy)
+crc32_t testCRC32ForPerforman_recursive(const char* str, const int dummy)
 {
 	return calcCRC32_recursive(str);
 }
 
 //ループ処理版の関数で計算
-crc32_t performance_test_crc32_loop(const char* str, const int dummy)
+crc32_t testCRC32ForPerforman_loop(const char* str, const int dummy)
 {
 	return calcCRC32_loop(str);
 }
 
 //事前計算済み多項式テーブル版の関数で計算
-crc32_t performance_test_crc32_table(const char* str, const int dummy)
+crc32_t testCRC32ForPerforman_table(const char* str, const int dummy)
 {
 #ifdef CRC32_USE_STATIC_TABLE
 	return calcCRC32_table(str);
@@ -37,7 +37,7 @@ crc32_t performance_test_crc32_table(const char* str, const int dummy)
 }
 
 //SSE命令版の関数で計算
-crc32_t performance_test_crc32_sse(const char* str, const int dummy)
+crc32_t testCRC32ForPerforman_sse(const char* str, const int dummy)
 {
 #ifdef USE_SSE4_2
 	return calcCRC32_sse(str);

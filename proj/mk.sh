@@ -26,7 +26,10 @@ function run_makefile() {
 	export BUILD_PLATFORM=$1
 	export BUILD_TYPE=$2
 	run_makefile_core ../sub/gasha_src/proj $3
-	run_makefile_core example_specify_environment $3
+	run_makefile_core example_build_settings $3
+	run_makefile_core example_type_traits $3
+	run_makefile_core example_utility $3
+	run_makefile_core example_basic_math $3
 	run_makefile_core example_crc32 $3
 	run_makefile_core example_sort_and_search $3
 }

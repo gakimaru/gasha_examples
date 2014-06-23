@@ -8,7 +8,7 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_sort_and_search.h"
+#include "example_sort_and_search.h"//ソート＆探索処理テスト
 
 //【ソート処理】
 //分類：交換ソート
@@ -37,11 +37,11 @@
 #include <gasha/linear_search.h>//線形探索
 #include <gasha/binary_search.h>//二分探索
 
-#include <algorithm>//std::sort, std::for_each用
-#include <random>//C++11 random用
-#include <chrono>//C++11 std::chrono用
-#include <bitset>//std::bitset用
-#include <functional>//C++11 std::function用
+#include <algorithm>//std::sort(), std::for_each()
+#include <random>//C++11 std::random
+#include <chrono>//C++11 std::chrono
+#include <bitset>//std::bitset
+#include <functional>//C++11 std::function
 
 USING_NAMESPACE_GASHA//ネームスペース使用
 

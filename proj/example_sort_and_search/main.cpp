@@ -8,7 +8,7 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_sort_and_search.h"
+#include "example_sort_and_search.h"//ソート＆探索処理テスト
 
 #include <stdio.h>
 #include <stdlib.h>

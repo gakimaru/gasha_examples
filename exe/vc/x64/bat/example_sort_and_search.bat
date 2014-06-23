@@ -1,1 +1,4 @@
-%~dp0..\example_sort_and_search.exe > %~dp0log\example_sort_and_search.log
+@SET BAT_NAME=%~n0
+@SET EXE_PATH=%~dp0..\%BAT_NAME%.exe
+@SET LOG_PATH=%~dp0log\%BAT_NAME%.log
+%EXE_PATH% > %LOG_PATH%
