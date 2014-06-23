@@ -1,10 +1,10 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_UTILITY_H_
-#define __EXAMPLE_UTILITY_H_
+#ifndef __EXAMPLE_SHARED_DATA_H_
+#define __EXAMPLE_SHARED_DATA_H_
 
 //--------------------------------------------------------------------------------
-// exmaple_utility.h
-// 汎用ユーティリティテスト
+// exmaple_shared_data.h
+// 共有データテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -12,9 +12,9 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-//汎用ユーティリティテスト
-void example_utility();
+//共有データテスト
+void example_shared_data();
 
-#endif//__EXAMPLE_UTILITY_H_
+#endif//__EXAMPLE_SHARED_DATA_H_
 
 // End of file

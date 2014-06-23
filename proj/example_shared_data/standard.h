@@ -1,10 +1,10 @@
-﻿#pragma once
-#ifndef __EXAMPLE_UTILITY_H_
-#define __EXAMPLE_UTILITY_H_
+﻿//#pragma once
+#ifndef __STANDARD_H_
+#define __STANDARD_H_
 
 //--------------------------------------------------------------------------------
-// exmaple_utility.h
-// 汎用ユーティリティテスト
+// standard.h
+// 標準インクルード（プリコンパイル済みヘッダー／強制インクルード用）
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -12,9 +12,8 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-//汎用ユーティリティテスト
-void example_utility();
+#include <gasha/build_settings/build_settings.h>
 
-#endif//__EXAMPLE_UTILITY_H_
+#endif//__STANDARD_H_
 
 // End of file

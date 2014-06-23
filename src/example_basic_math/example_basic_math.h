@@ -23,7 +23,7 @@ static const int TEST_BITCOUNT_MAX = 100000000;//ビット数計測テスト回�
 
 #endif//_DEBUG
 
-//環境判別処理テスト
+//基本算術処理テスト
 void example_basic_math();
 
 #endif//__EXAMPLE_BASIC_MATH_H_
