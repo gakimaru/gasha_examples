@@ -291,16 +291,16 @@ Released under the [MIT license][MIT].
 --------
 ライブラリに用いている命名規則は、基本的には下記のとおりです。  
 * **ネームスペース名** すべて小文字でアンダースコアを区切り文字としたスネークケース。
-> （例）word_and_word  
+> * （例）word_and_word  
 
 * **クラス名／関数名／メソッド名** 小文字から始まるローワーキャメルケース。  
-> （例）wordAndWord  
+> * （例）wordAndWord  
 
 * **例外** 標準ライブラリのクラスやメソッドど同質・同類・類似の場合、それがスネークケースであっても、同じ名前か同様の名前を用いる。  
-> （例）push_backメソッド, lock_guardクラス, max_size_realメソッド（類似メソッド）  
+> * （例）push_backメソッド, lock_guardクラス, max_size_realメソッド（類似メソッド）  
 
 * **混在の許容** 一つのソースファイルやクラス内に、キャメルケースと例外（スネークケース）が混在することを問題とせず、むしろ独自拡張を識別可能なものとして扱う。  
-> （例）dynamic_array::conrtainerクラスは、std::vectorに準拠し、assign, popo_back などのメソッドを実装しており、独自メソッドは assignArray のようなキャメルケースの名前で実装。  
+> * （例）dynamic_array::conrtainerクラスは、std::vectorに準拠し、assign, popo_back などのメソッドを実装しており、独自メソッドは assignArray のようなキャメルケースの名前で実装。  
 
 ライブラリのソースファイル
 --------
