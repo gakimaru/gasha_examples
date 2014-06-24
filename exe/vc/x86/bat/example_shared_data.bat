@@ -1,0 +1,4 @@
+@SET BAT_NAME=%~n0
+@SET EXE_PATH=%~dp0..\%BAT_NAME%.exe
+@SET LOG_PATH=%~dp0log\%BAT_NAME%.log
+%EXE_PATH% > %LOG_PATH%

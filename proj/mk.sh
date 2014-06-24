@@ -32,6 +32,7 @@ function run_makefile() {
 	run_makefile_core example_basic_math $3
 	run_makefile_core example_crc32 $3
 	run_makefile_core example_sort_and_search $3
+	run_makefile_core example_shared_data $3
 }
 
 # x86 & Relase

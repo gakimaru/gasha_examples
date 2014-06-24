@@ -13,6 +13,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+USING_NAMESPACE_GASHA;//ネームスペース使用
+
 int main(const int argc, const char* argv[])
 {
 	//ビルド設定が正しく実行環境に適合するかチェック

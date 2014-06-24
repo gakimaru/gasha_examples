@@ -16,7 +16,7 @@
 #include <assert.h>//assert()
 #include <chrono>//C++11 std::chrono
 
-USING_NAMESPACE_GASHA//ネームスペース使用
+USING_NAMESPACE_GASHA;//ネームスペース使用
 
 //CRC32計算処理テスト
 void example_crc32()

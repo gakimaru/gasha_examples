@@ -13,6 +13,8 @@
 #include <stdio.h>//printf()
 #include <cstddef>//std::size_t
 
+USING_NAMESPACE_GASHA;//ネームスペース使用
+
 //----------------------------------------
 //noinline/always_inlineテスト
 void func_normal()

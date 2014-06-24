@@ -6,3 +6,4 @@
 ./example_basic_math.sh
 ./example_crc32.sh
 ./example_sort_and_search.sh
+./example_shared_data.sh

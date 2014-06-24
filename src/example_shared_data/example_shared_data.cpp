@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
-// exmaple_utility.cpp
-// 汎用ユーティリティテスト
+// exmaple_shared_data.cpp
+// マルチスレッド共有データテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -8,65 +8,52 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_utility.h"//汎用ユーティリティ
+#include "example_shared_data.h"//マルチスレッド共有データテスト
 
-#include <gasha/utility.h>//汎用ユーティリティ
+#include <gasha/shared_pool_allocator.h>//マルチスレッド共有プールアロケータ
+#include <gasha/shared_stack.h>//マルチスレッド共有スタック
+#include <gasha/shared_queue.h>//マルチスレッド共有キュー
 
+#include <gasha/lockfree_pool_allocator.h>//ロックフリープールアロケータ
+#include <gasha/lockfree_stack.h>//ロックフリースタック
+#include <gasha/lockfree_queue.h>//ロックフリーキュー
+
+#include <gasha/spin_lock.h>//スピンロック
+#include <gasha/lw_spin_lock.h>//サイズ計量スピンロック
+#include <gasha/dummy_lock.h>//ダミーロック
+#include <gasha/shared_spin_lock.h>//共有スピンロック
+#include <gasha/simple_shared_spin_lock.h>//単純共有スピンロック
+#include <gasha/unshared_spin_lock.h>//非共有スピンロック
+#include <gasha/dummy_shared_lock.h>//ダミー共有ロック
+
+#include <gasha/type_traits.h>//型特性ユーティリティ
+
+#include <mutex>//C++11 std::mutex
+#include <chrono>//C++11 std::chrono
 #include <stdio.h>//printf()
 
-//----------------------------------------
-//汎用ユーティリティテスト
-void example_utility()
-{
-	{
-		//min() / max()関数テスト
-		printf("----- Test for min() / max() -----\n");
-		#define MIN_MAX(T, FMT, ...) \
-			{ const T var = min(__VA_ARGS__); printf("min(" #__VA_ARGS__ ") = " FMT "\n", var); } \
-			{ const T var = max(__VA_ARGS__); printf("max(" #__VA_ARGS__ ") = " FMT "\n", var); }
+#if USE_LOCK_TYPE == 1//共有データのロックに spinLock を使用する場合
+typedef GASHA_ spinLock lock_type;//共有データのロックに spinLock を使用する場合は、この行を有効化する
+#elif USE_LOCK_TYPE == 2//共有データのロックに std::mutex を使用する場合
+typedef std::mutex lock_type;//共有データのロックに std::mutex を使用する場合は、この行を有効化する
+#else//if USE_LOCK_TYPE == 0//共有データのロックに dummyLock を使用する場合
+typedef GASHA_ dummyLock lock_type;//共有データのロックに dummyLock を使用する場合は、この行を有効化する（ロックしなくなる）
+#endif//USE_LOCK_TYPE
 
-		MIN_MAX(int, "%d", 1, 2);
-		MIN_MAX(int, "%d", 2, 1);
-		MIN_MAX(int, "%d", 1, 2, 3);
-		MIN_MAX(int, "%d", 3, 2, 1);
-		MIN_MAX(int, "%d", 2, 3, 1);
-		MIN_MAX(int, "%d", 3, 1, 2);
-
-		MIN_MAX(float, "%.1f", 1.1f, 2.2f);
-		MIN_MAX(float, "%.1f", 2.2f, 1.1f);
-		MIN_MAX(float, "%.1f", 1.1f, 2.2f, 3.3f);
-		MIN_MAX(float, "%.1f", 3.3f, 2.2f, 1.1f);
-		MIN_MAX(float, "%.1f", 2.2f, 3.3f, 1.1f);
-		MIN_MAX(float, "%.1f", 3.3f, 1.1f, 2.2f);
-
-		MIN_MAX(int, "%d", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
-		MIN_MAX(int, "%d", 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1);
-		MIN_MAX(int, "%d", 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 19, 17, 15, 13, 11, 9, 7, 5, 3, 1);
-	}
-}
-
-
-
+USING_NAMESPACE_GASHA;//ネームスペース使用
 
 //--------------------------------------------------------------------------------
-//テスト用データ
-struct data_t
-{
-	int m_temp;
-	int m_value;
-};
+//マルチスレッド共有プールアロケータテスト
 
-//--------------------------------------------------------------------------------
-//通常プールアロケータテスト
+typedef sharedPoolAllocator<data_t, TEST_POOL_SIZE, lock_type> shared_pool_allocator_t;
+static shared_pool_allocator_t s_poolAllocator;//マルチスレッド共有プールアロケータ
 
-static pool_allocator<data_t, TEST_POOL_SIZE> s_poolAllocator;//通常プールアロケータ
-
-//通常プールアロケータからアロケート
+//マルチスレッド共有プールアロケータからアロケート
 data_t* allocNormal()
 {
 	return s_poolAllocator.newObj();
 }
-//通常プールアロケータからフリー
+//マルチスレッド共有プールアロケータからフリー
 bool freeNormal(data_t* value)
 {
 	return s_poolAllocator.deleteObj(value);
@@ -75,7 +62,8 @@ bool freeNormal(data_t* value)
 //--------------------------------------------------------------------------------
 //ロックフリープールアロケータテスト
 
-static lf_pool_allocator<data_t, TEST_POOL_SIZE> s_lfPoolAllocator;//ロックフリープールアロケータ
+typedef lfPoolAllocator<data_t, TEST_POOL_SIZE> lf_pool_allocator_t;
+static lf_pool_allocator_t s_lfPoolAllocator;//ロックフリープールアロケータ
 
 //ロックフリープールアロケータからアロケート
 data_t* allocLockFree()
@@ -89,15 +77,12 @@ bool freeLockFree(data_t* value)
 }
 
 //--------------------------------------------------------------------------------
-//通常スタックテスト
+//マルチスレッド共有スタックテスト
 
-#ifdef USE_POOL_ALLOCATOR
-static stack<data_t, TEST_POOL_SIZE> s_stack;//通常スタック
-#else//USE_POOL_ALLOCATOR
-static stack<data_t> s_stack;//通常スタック
-#endif//USE_POOL_ALLOCATOR
+typedef sharedStack<data_t, TEST_POOL_SIZE, lock_type> shared_stack_t;
+static shared_stack_t s_stack;//マルチスレッド共有スタック
 
-//通常スタックにプッシュ
+//マルチスレッド共有スタックにプッシュ
 bool pushNormal(data_t&& data)
 {
 	return s_stack.push(std::move(data));//スタックにプッシュ
@@ -107,7 +92,7 @@ bool pushNormal(data_t& data)
 	return s_stack.push(data);//スタックにプッシュ
 }
 
-//通常スタックからポップ
+//マルチスレッド共有スタックからポップ
 bool popNormal(data_t& data)
 {
 	return s_stack.pop(data);//スタックからポップ
@@ -116,11 +101,8 @@ bool popNormal(data_t& data)
 //--------------------------------------------------------------------------------
 //ロックフリースタックテスト
 
-#ifdef USE_LF_POOL_ALLOCATOR
-static lf_stack<data_t, TEST_POOL_SIZE> s_lfStack;//ロックフリースタック
-#else//USE_LF_POOL_ALLOCATOR
-static lf_stack<data_t> s_lfStack;//ロックフリースタック
-#endif//USE_LF_POOL_ALLOCATOR
+typedef lfStack<data_t, TEST_POOL_SIZE, TEST_TAGGED_PTR_TAG_SIZE, TEST_TAGGED_PTR_TAG_SHIFT> lf_stack_t;
+static lf_stack_t s_lfStack;//ロックフリースタック
 
 //ロックフリースタックにプッシュ
 bool pushLockFree(data_t&& data)
@@ -139,15 +121,12 @@ bool popLockFree(data_t& data)
 }
 
 //--------------------------------------------------------------------------------
-//通常キューテスト
+//マルチスレッド共有キューテスト
 
-#ifdef USE_POOL_ALLOCATOR
-static queue<data_t, TEST_POOL_SIZE> s_queue;//通常キュー
-#else//USE_POOL_ALLOCATOR
-static queue<data_t> s_queue;//通常キュー
-#endif//USE_POOL_ALLOCATOR
+typedef sharedQueue<data_t, TEST_POOL_SIZE, lock_type> shared_queue_t;
+static shared_queue_t s_queue;//マルチスレッド共有キュー
 
-//通常キューにエンキュー
+//マルチスレッド共有キューにエンキュー
 bool enqueueNormal(data_t&& value)
 {
 	return s_queue.enqueue(std::move(value));
@@ -157,7 +136,7 @@ bool enqueueNormal(data_t& value)
 	return s_queue.enqueue(value);
 }
 
-//通常キューからデキュー
+//マルチスレッド共有キューからデキュー
 bool dequeueNormal(data_t& value)
 {
 	return s_queue.dequeue(value);
@@ -166,11 +145,8 @@ bool dequeueNormal(data_t& value)
 //--------------------------------------------------------------------------------
 //ロックフリーキューテスト
 
-#ifdef USE_LF_POOL_ALLOCATOR
-static lf_queue<data_t, TEST_POOL_SIZE> s_lfQueue;//ロックフリーキュー
-#else//USE_LF_POOL_ALLOCATOR
-static lf_queue<data_t> s_lfQueue;//ロックフリーキュー
-#endif//USE_LF_POOL_ALLOCATOR
+typedef lfQueue<data_t, TEST_POOL_SIZE, TEST_TAGGED_PTR_TAG_SIZE, TEST_TAGGED_PTR_TAG_SHIFT> lf_queue_t;
+static lf_queue_t s_lfQueue;//ロックフリーキュー
 
 //ロックフリーキューにエンキュー
 bool enqueueLockFree(data_t&& value)
@@ -188,16 +164,39 @@ bool dequeueLockFree(data_t& value)
 	return	s_lfQueue.dequeue(value);
 }
 
-//--------------------------------------------------------------------------------
-//テスト
+#ifdef ENABLE_TAGGED_PTRTEST
+//----------------------------------------
+//タグ付きポインタテスト
+void taggedPtrTest()
+{
+	printf("================================================================================\n");
+	printf("[Test for taggedPtr]\n");
+
+	int i = 0;
+	int* p = &i;
+	std::uint32_t tag = 65535;
+	GASHA_ taggedPtr<int, 32, 32> a;//タグ=上位32ビット
+	GASHA_ taggedPtr<int,  2,  0> b;//タグ=下位2ビット
+	GASHA_ taggedPtr<int,  8, -8> c;//タグ=上位8ビット
+	a.set(p, tag);
+	b.set(p, tag);
+	c.set(p, tag);
+	printf("p=0x%p, tag=%d\n", p, tag);
+	printf("taggedPtr<int, 32, 32>: .value()=0x%016llx, .ptr()=0x%p, .tag()=%d\n", a.value(), a.ptr(), a.tag());
+	printf("taggedPtr<int,  2,  0>: .value()=0x%016llx, .ptr()=0x%p, .tag()=%d\n", b.value(), b.ptr(), b.tag());
+	printf("taggedPtr<int,  8, -8>: .value()=0x%016llx, .ptr()=0x%p, .tag()=%d\n", c.value(), c.ptr(), c.tag());
+}
+#endif//ENABLE_TAGGED_PTRTEST
 
 #ifdef ENABLE_EASY_TEST
+//----------------------------------------
 //簡易テスト
 void easyTest()
 {
 	printf("================================================================================\n");
-	printf("[Test for Lock-free pool-allocator/stack/queue]\n");
+	printf("[Test for Lock-free pool-allocator/sharedStack/sharedQueue]\n");
 	
+#if defined(ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR) || defined(ENABLE_TEST_FOR_LF_POOL_ALLOCATOR)
 	//プールアロケータのテスト（共通処理）
 	auto test_pool_allocator = [](const char* caption, std::function<data_t*()> alloc, std::function<bool(data_t*)> free)
 	{
@@ -207,7 +206,7 @@ void easyTest()
 		printf("*Allocate and free test threads = %d\n", 1);
 		printf("*Memory pool size               = %d\n", TEST_POOL_SIZE);
 		const auto begin_time = std::chrono::system_clock::now();
-		pool_allocator<data_t, TEST_POOL_SIZE> allocator;
+		sharedPoolAllocator<data_t, TEST_POOL_SIZE> allocator;
 		data_t* data[TEST_POOL_SIZE + 1] = { 0 };
 		int count = 0;
 		while(true)
@@ -236,10 +235,12 @@ void easyTest()
 		const auto end_time = std::chrono::system_clock::now();
 		const auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - begin_time);
 		const double elapsed_time = static_cast<double>(duration.count()) / 1000000000.;
-		printf("[%s:END] elapsed_time=%.9llf sec\n", caption, elapsed_time);
+		printf("[%s:END] elapsed_time=%.9lf sec\n", caption, elapsed_time);
 		printf("--------------------------------------------------------------------------------\n");
 	};
+#endif//defined(ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR) || defined(ENABLE_TEST_FOR_LF_POOL_ALLOCATOR)
 
+#if defined(ENABLE_TEST_FOR_SHARED_STACK) || defined(ENABLE_TEST_FOR_LF_STACK) || defined(ENABLE_TEST_FOR_SHARED_QUEUE) || defined(ENABLE_TEST_FOR_LF_QUEUE)
 	//スタック／キューのテスト（共通処理）
 	auto test_stack_queue = [](const char* caption, std::function<bool(data_t&&)> push, std::function<bool(data_t&)> pop)
 	{
@@ -253,7 +254,6 @@ void easyTest()
 		int count = 0;
 		while (true)
 		{
-			int num = 0;
 			while (true)
 			{
 				const bool result = push({ count++ });
@@ -278,18 +278,21 @@ void easyTest()
 		const auto end_time = std::chrono::system_clock::now();
 		const auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - begin_time);
 		const double elapsed_time = static_cast<double>(duration.count()) / 1000000000.;
-		printf("[%s:END] elapsed_time=%.9llf sec\n", caption, elapsed_time);
+		printf("[%s:END] elapsed_time=%.9lf sec\n", caption, elapsed_time);
 		printf("--------------------------------------------------------------------------------\n");
 	};
+#endif//defined(ENABLE_TEST_FOR_SHARED_STACK) || defined(ENABLE_TEST_FOR_LF_STACK) || defined(ENABLE_TEST_FOR_SHARED_QUEUE) || defined(ENABLE_TEST_FOR_LF_QUEUE)
 
+#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 	//デバッグ情報表示用処理
 	auto debug_print_info = [](const data_t& data)
 	{
 		printf("temp=%d, value=%d", data.m_temp, data.m_value);
 	};
+#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 
-#ifdef ENABLE_TEST_FOR_NORMAL_POOL_ALLOCATOR
-	//通常プールアロケータのテスト
+#ifdef ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR
+	//マルチスレッド共有プールアロケータのテスト
 	{
 		auto alloc = []() -> data_t*
 		{
@@ -299,13 +302,13 @@ void easyTest()
 		{
 			return freeNormal(data);
 		};
-		test_pool_allocator("Normal Pool-allocator", alloc, free);
+		test_pool_allocator("Shared Pool-allocator", alloc, free);
 
-#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
+	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		s_poolAllocator.printDebugInfo(debug_print_info);
-#endif//ENABLE_TEST_PRINT_DEBUG_INFO
+	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
-#endif//ENABLE_TEST_FOR_NORMAL_POOL_ALLOCATOR
+#endif//ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR
 
 #ifdef ENABLE_TEST_FOR_LF_POOL_ALLOCATOR
 	//ロックフリープールアロケータのテスト
@@ -320,14 +323,14 @@ void easyTest()
 		};
 		test_pool_allocator("Lock-Free Pool-allocator", alloc, free);
 
-#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
+	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		s_lfPoolAllocator.printDebugInfo(debug_print_info);
-#endif//ENABLE_TEST_PRINT_DEBUG_INFO
+	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_POOL_ALLOCATOR
 
-#ifdef ENABLE_TEST_FOR_NORMAL_STACK
-	//通常スタックのテスト
+#ifdef ENABLE_TEST_FOR_SHARED_STACK
+	//マルチスレッド共有スタックのテスト
 	{
 		auto push = [](data_t&& data) -> bool
 		{
@@ -337,13 +340,13 @@ void easyTest()
 		{
 			return popNormal(data);
 		};
-		test_stack_queue("Normal Stack", push, pop);
+		test_stack_queue("Shared Stack", push, pop);
 
-#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
+	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		s_stack.printDebugInfo(debug_print_info);
-#endif//ENABLE_TEST_PRINT_DEBUG_INFO
+	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
-#endif//ENABLE_TEST_FOR_NORMAL_STACK
+#endif//ENABLE_TEST_FOR_SHARED_STACK
 
 #ifdef ENABLE_TEST_FOR_LF_STACK
 	//ロックフリースタックのテスト
@@ -358,14 +361,14 @@ void easyTest()
 		};
 		test_stack_queue("Lock-Free Stack", push, pop);
 
-#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
+	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		s_lfStack.printDebugInfo(debug_print_info);
-#endif//ENABLE_TEST_PRINT_DEBUG_INFO
+	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_STACK
 
-#ifdef ENABLE_TEST_FOR_NORMAL_QUEUE
-	//通常キューのテスト
+#ifdef ENABLE_TEST_FOR_SHARED_QUEUE
+	//マルチスレッド共有キューのテスト
 	{
 		auto push = [](data_t&& data) -> bool
 		{
@@ -375,13 +378,13 @@ void easyTest()
 		{
 			return dequeueNormal(data);
 		};
-		test_stack_queue("Normal Queue", push, pop);
+		test_stack_queue("Shared Queue", push, pop);
 
-#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
+	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		s_queue.printDebugInfo(debug_print_info);
-#endif//ENABLE_TEST_PRINT_DEBUG_INFO
+	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
-#endif//ENABLE_TEST_FOR_NORMAL_QUEUE
+#endif//ENABLE_TEST_FOR_SHARED_QUEUE
 
 #ifdef ENABLE_TEST_FOR_LF_QUEUE
 	//ロックフリーキューのテスト
@@ -396,15 +399,16 @@ void easyTest()
 		};
 		test_stack_queue("Lock-Free Queue", push, pop);
 
-#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
+	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		s_lfQueue.printDebugInfo(debug_print_info);
-#endif//ENABLE_TEST_PRINT_DEBUG_INFO
+	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_QUEUE
 }
 #endif//ENABLE_EASY_TEST
 
 #ifdef ENABLE_THREAD_TEST
+//----------------------------------------
 //スレッドを使ったテスト
 #include <thread>//C++11 std::thread
 #include <condition_variable>//C++11 std::condition_variable
@@ -413,8 +417,9 @@ void easyTest()
 void thread_test()
 {
 	printf("================================================================================\n");
-	printf("[Test for Lock-free pool-allocator/stack/queue with threads]\n");
+	printf("[Test for Lock-free pool-allocator/sharedStack/sharedQueue with threads]\n");
 
+#if defined(ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR) || defined(ENABLE_TEST_FOR_LF_POOL_ALLOCATOR)
 	//プールアロケータのテスト（共通処理）
 	auto test_pool_allocator = [](const char* caption, std::function<data_t*()> alloc, std::function<bool(data_t*)> free)
 	{
@@ -468,7 +473,10 @@ void thread_test()
 				data_t* obj = alloc();
 				if (!obj)
 					continue;
-				const int count = alloc_count.fetch_add(1);
+			#ifdef ENABLE_TEST_PRINT
+				const int count = 
+			#endif//ENABLE_TEST_PRINT
+					alloc_count.fetch_add(1);
 				std::this_thread::sleep_for(std::chrono::microseconds(0));
 				free(obj);
 				++my_alloc_count;
@@ -520,10 +528,12 @@ void thread_test()
 		const auto end_time = std::chrono::system_clock::now();
 		const auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - begin_time);
 		const double elapsed_time = static_cast<double>(duration.count()) / 1000000000.;
-		printf("[%s:END] elapsed_time=%.9llf sec\n", caption, elapsed_time);
+		printf("[%s:END] elapsed_time=%.9lf sec\n", caption, elapsed_time);
 		printf("--------------------------------------------------------------------------------\n");
 	};
+#endif//defined(ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR) || defined(ENABLE_TEST_FOR_LF_POOL_ALLOCATOR)
 
+#if defined(ENABLE_TEST_FOR_SHARED_STACK) || defined(ENABLE_TEST_FOR_LF_STACK) || defined(ENABLE_TEST_FOR_SHARED_QUEUE) || defined(ENABLE_TEST_FOR_LF_QUEUE)
 	//スタック／キューのテスト（共通処理）
 	auto test_stack_queue = [](const char* caption, const char* push_name, const char* pop_name, std::function<bool(data_t&&)> push, std::function<bool(data_t&)> pop)
 	{
@@ -572,10 +582,25 @@ void thread_test()
 
 			int loop_count = 0;
 			int my_push_count = 0;
+int push_count_prev = 0;
+int same_count = 0;
 			while (true)
 			{
 				if (push_count.load() > TEST_COUNT)
 					break;
+if (push_count_prev == push_count.load())
+{
+	++same_count;
+	if (same_count % 100000 == 0)
+	{
+		printf("!!![%d] problem!? push_count=%d, same_count=%d, seq_no=%d\n", thread_no, push_count.load(), same_count, seq_no.load());
+	}
+}
+else
+{
+	push_count_prev = push_count.load();
+	same_count = 0;
+}
 				++loop_count;
 				if (loop_count % 1000 == 0)
 					std::this_thread::sleep_for(std::chrono::microseconds(0));
@@ -591,7 +616,10 @@ void thread_test()
 					seq_no.fetch_sub(1);
 					continue;
 				}
-				const int count = push_count.fetch_add(1);
+			#ifdef ENABLE_TEST_PRINT
+				const int count = 
+			#endif//ENABLE_TEST_PRINT
+					push_count.fetch_add(1);
 				++my_push_count;
 				if (my_push_count % 1000 == 0)
 					std::this_thread::sleep_for(std::chrono::microseconds(1));
@@ -629,7 +657,10 @@ void thread_test()
 				data_t data;
 				if (pop(data))
 				{
-					const int count = pop_count.fetch_add(1);
+				#ifdef ENABLE_TEST_PRINT
+					const int count = 
+				#endif//ENABLE_TEST_PRINT
+						pop_count.fetch_add(1);
 				#ifdef ENABLE_TEST_PRINT
 					if (TEST_PRINT_STEP > 0 && count % TEST_PRINT_STEP == 0)
 						printf("[%s:%2d] count=%d\n", pop_name, thread_no, count);
@@ -689,18 +720,21 @@ void thread_test()
 		const auto end_time = std::chrono::system_clock::now();
 		const auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - begin_time);
 		const double elapsed_time = static_cast<double>(duration.count()) / 1000000000.;
-		printf("[%s:END] elapsed_time=%.9llf sec\n", caption, elapsed_time);
+		printf("[%s:END] elapsed_time=%.9lf sec\n", caption, elapsed_time);
 		printf("--------------------------------------------------------------------------------\n");
 	};
-	
+#endif//defined(ENABLE_TEST_FOR_SHARED_STACK) || defined(ENABLE_TEST_FOR_LF_STACK) || defined(ENABLE_TEST_FOR_SHARED_QUEUE) || defined(ENABLE_TEST_FOR_LF_QUEUE)
+
+#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 	//デバッグ情報表示用処理
 	auto debug_print_info = [](const data_t& data)
 	{
 		printf("temp=%d, value=%d", data.m_temp, data.m_value);
 	};
-	
-#ifdef ENABLE_TEST_FOR_NORMAL_POOL_ALLOCATOR
-	//通常プールアロケータのテスト
+#endif//ENABLE_TEST_PRINT_DEBUG_INFO
+
+#ifdef ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR
+	//マルチスレッド共有プールアロケータのテスト
 	{
 		auto alloc = []() -> data_t*
 		{
@@ -710,13 +744,13 @@ void thread_test()
 		{
 			return freeNormal(data);
 		};
-		test_pool_allocator("Normal Pool-allocator", alloc, free);
+		test_pool_allocator("Shared Pool-allocator", alloc, free);
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		s_poolAllocator.printDebugInfo(debug_print_info);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
-#endif//ENABLE_TEST_FOR_NORMAL_POOL_ALLOCATOR
+#endif//ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR
 
 #ifdef ENABLE_TEST_FOR_LF_POOL_ALLOCATOR
 	//ロックフリープールアロケータのテスト
@@ -737,8 +771,8 @@ void thread_test()
 	}
 #endif//ENABLE_TEST_FOR_LF_POOL_ALLOCATOR
 
-#ifdef ENABLE_TEST_FOR_NORMAL_STACK
-	//通常スタックのテスト
+#ifdef ENABLE_TEST_FOR_SHARED_STACK
+	//マルチスレッド共有スタックのテスト
 	{
 		auto push = [](data_t&& data) -> bool
 		{
@@ -748,13 +782,13 @@ void thread_test()
 		{
 			return popNormal(data);
 		};
-		test_stack_queue("Normal Stack", "PUSH", "POP ", push, pop);
+		test_stack_queue("Shared Stack", "PUSH", "POP ", push, pop);
 		
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		s_stack.printDebugInfo(debug_print_info);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
-#endif//ENABLE_TEST_FOR_NORMAL_STACK
+#endif//ENABLE_TEST_FOR_SHARED_STACK
 
 #ifdef ENABLE_TEST_FOR_LF_STACK
 	//ロックフリースタックのテスト
@@ -775,8 +809,8 @@ void thread_test()
 	}
 #endif//ENABLE_TEST_FOR_LF_STACK
 
-#ifdef ENABLE_TEST_FOR_NORMAL_QUEUE
-	//通常キューのテスト
+#ifdef ENABLE_TEST_FOR_SHARED_QUEUE
+	//マルチスレッド共有キューのテスト
 	{
 		auto push = [](data_t&& data) -> bool
 		{
@@ -786,13 +820,13 @@ void thread_test()
 		{
 			return dequeueNormal(data);
 		};
-		test_stack_queue("Normal Queue", "ENQUEUE", "DEQUEUE", push, pop);
+		test_stack_queue("Shared Queue", "ENQUEUE", "DEQUEUE", push, pop);
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		s_queue.printDebugInfo(debug_print_info);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
-#endif//ENABLE_TEST_FOR_NORMAL_QUEUE
+#endif//ENABLE_TEST_FOR_SHARED_QUEUE
 
 #ifdef ENABLE_TEST_FOR_LF_QUEUE
 	//ロックフリーキューのテスト
@@ -815,9 +849,133 @@ void thread_test()
 }
 #endif//ENABLE_THREAD_TEST
 
-//テスト
-int main(const int argc, const char* argv[])
+//----------------------------------------
+//一通りのスコープロック実行テスト
+#include <gasha/spin_lock.h>//スピンロック
+#include <gasha/lw_spin_lock.h>//サイズ計量スピンロック
+#include <gasha/dummy_lock.h>//ダミーロック
+#include <mutex>//C++11 std::mutex
+#include <gasha/shared_spin_lock.h>//共有スピンロック
+#include <gasha/simple_shared_spin_lock.h>//単純共有スピンロック
+#include <gasha/unshared_spin_lock.h>//非共有スピンロック
+#include <gasha/dummy_shared_lock.h>//ダミー共有ロック
+template<class T>
+void testScopedLock()
 {
+	T lock;
+	{
+		auto lk = lock.lock_scoped();
+	}
+	{
+		auto lk = lock.get_unique_lock();
+	}
+	{
+		auto lk = lock.get_unique_lock(with_lock);
+	}
+	{
+		auto lk = lock.get_unique_lock(try_lock);
+	}
+	{
+		lock.lock();
+		auto lk = lock.get_unique_lock(adopt_lock);
+	}
+	{
+		auto lk = lock.get_unique_lock(defer_lock);
+	}
+}
+template<class T>
+void testScopedLockStandard()
+{
+	T lock;
+	{
+		GASHA_ lock_guard<T> lk(lock);
+	}
+	{
+		GASHA_ unique_lock<T> lk(lock);
+	}
+	{
+		GASHA_ unique_lock<T> lk(lock, with_lock);
+	}
+	{
+		GASHA_ unique_lock<T> lk(lock, try_lock);
+	}
+	{
+		lock.lock();
+		GASHA_ unique_lock<T> lk(lock, adopt_lock);
+	}
+	{
+		GASHA_ unique_lock<T> lk(lock, defer_lock);
+	}
+}
+template<class T>
+void testScopedSharedLock()
+{
+	T lock;
+	{
+		auto lk = lock.lock_scoped();
+	}
+	{
+		auto lk = lock.lock_shared_scoped();
+	}
+	{
+		auto lk = lock.get_unique_lock();
+	}
+	{
+		auto lk = lock.get_unique_lock(with_lock);
+	}
+	{
+		auto lk = lock.get_unique_lock(with_lock_shared);
+	}
+	{
+		auto lk = lock.get_unique_lock(try_lock);
+	}
+	{
+		auto lk = lock.get_unique_lock(try_lock_shared);
+	}
+	{
+		lock.lock();
+		auto lk = lock.get_unique_lock(adopt_lock);
+	}
+	{
+		lock.lock_shared();
+		auto lk = lock.get_unique_lock(adopt_shared_lock);
+	}
+	{
+		auto lk = lock.get_unique_lock(defer_lock);
+	}
+}
+
+//----------------------------------------
+//マルチスレッド共有データテスト
+void example_shared_data()
+{
+	printf("----- Basin information -----\n");
+	printf("alignof(data_t)=%d\n", alignof(data_t));
+	printf("calcStaticMSB<alignof(data_t)>::value=%d\n", calcStaticMSB<alignof(data_t)>::value);
+	printf("sizeof(lf_stack_t)=%d\n", sizeof(lf_stack_t));
+	printf("alignof(lf_stack_t)=%d\n", alignof(lf_stack_t));
+	printf("sizeof(lf_stack_t::stack_t)=%d\n", sizeof(lf_stack_t::stack_t));
+	printf("alignof(lf_stack_t::stack_t)=%d\n", alignof(lf_stack_t::stack_t));
+	printf("lf_stack_t::TAGGED_PTR_TAG_BITS=%d\n", lf_stack_t::TAGGED_PTR_TAG_BITS);
+	printf("lf_stack_t::TAGGED_PTR_TAG_SHIFT=%d\n", lf_stack_t::TAGGED_PTR_TAG_SHIFT);
+	printf("lf_stack_t::stack_ptr_t::TAG_BITS=%d\n", lf_stack_t::stack_ptr_t::TAG_BITS);
+	printf("lf_stack_t::stack_ptr_t::TAG_SHIFT=%d\n", lf_stack_t::stack_ptr_t::TAG_SHIFT);
+	printf("sizeof(lf_queue_t)=%d\n", sizeof(lf_queue_t));
+	printf("alignof(lf_queue_t)=%d\n", alignof(lf_queue_t));
+	printf("sizeof(lf_queue_t::queue_t)=%d\n", sizeof(lf_queue_t::queue_t));
+	printf("alignof(lf_queue_t::queue_t)=%d\n", alignof(lf_queue_t::queue_t));
+	printf("lf_queue_t::TAGGED_PTR_TAG_BITS=%d\n", lf_queue_t::TAGGED_PTR_TAG_BITS);
+	printf("lf_queue_t::TAGGED_PTR_TAG_SHIFT=%d\n", lf_queue_t::TAGGED_PTR_TAG_SHIFT);
+	printf("lf_queue_t::queue_ptr_t::TAG_BITS=%d\n", lf_queue_t::queue_ptr_t::TAG_BITS);
+	printf("lf_queue_t::queue_ptr_t::TAG_SHIFT=%d\n", lf_queue_t::queue_ptr_t::TAG_SHIFT);
+	printf("-----------------------------\n");
+	printf("\n");
+
+#ifdef ENABLE_TAGGED_PTRTEST
+	//タグ付きポインタテスト
+	taggedPtrTest();
+#endif//ENABLE_TAGGED_PTRTEST
+
 #ifdef ENABLE_EASY_TEST
 	//簡易テスト
 	easyTest();
@@ -828,29 +986,17 @@ int main(const int argc, const char* argv[])
 	thread_test();
 #endif//ENABLE_THREAD_TEST
 
-	return EXIT_SUCCESS;
+	//一通りのスコープロックテスト
+	//※すべてコンパイルが通って、実行時には素通りすればOK
+	//※特に何も結果を表示しない
+	testScopedLock<spinLock>();
+	testScopedLock<lwSpinLock>();
+	testScopedLock<dummyLock>();
+	testScopedLockStandard<std::mutex>();
+	testScopedSharedLock<sharedSpinLock>();
+	testScopedSharedLock<simpleSharedSpinLock>();
+	testScopedSharedLock<unsharedSpinLock>();
+	testScopedSharedLock<dummySharedLock>();
 }
-
-
-
-
-#if 0
-//テスト処理
-{
-	int i = 0;
-	int* p = &i;
-	std::uint32_t tag = 65535;
-	GASHA_ taggedPtr<int, 32, 32> a;//タグ=上位32ビット
-	GASHA_ taggedPtr<int, 2, 0> b;//タグ=下位2ビット
-	GASHA_ taggedPtr<int, 8, -8> c;//タグ=上位8ビット
-	a.set(p, tag);
-	b.set(p, tag);
-	c.set(p, tag);
-	printf("p=0x%p, tag=%d\n", p, tag);
-	printf("a:value=0x%016llx, ptr=0x%p, tag=%d\n", a.value(), a.ptr(), a.tag());
-	printf("b:value=0x%016llx, ptr=0x%p, tag=%d\n", b.value(), b.ptr(), b.tag());
-	printf("c:value=0x%016llx, ptr=0x%p, tag=%d\n", c.value(), c.ptr(), c.tag());
-}
-#endif
 
 // End of file

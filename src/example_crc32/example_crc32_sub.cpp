@@ -12,7 +12,7 @@
 
 #include <gasha/crc32.h>//CRC32計算
 
-USING_NAMESPACE_GASHA//ネームスペース使用
+USING_NAMESPACE_GASHA;//ネームスペース使用
 
 //再帰処理版の関数で計算
 crc32_t testCRC32ForPerforman_recursive(const char* str, const int dummy)

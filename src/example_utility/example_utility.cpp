@@ -14,6 +14,8 @@
 
 #include <stdio.h>//printf()
 
+USING_NAMESPACE_GASHA;//ネームスペース使用
+
 //----------------------------------------
 //汎用ユーティリティテスト
 void example_utility()

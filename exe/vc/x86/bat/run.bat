@@ -4,3 +4,4 @@ CALL %~dp0example_type_traits.bat
 CALL %~dp0example_basic_math.bat
 CALL %~dp0example_crc32.bat
 CALL %~dp0example_sort_and_search.bat
+CALL %~dp0example_shared_data.bat
