@@ -10,8 +10,7 @@ function run_all_sub()
 	fi
 }
 
-#for sub_dir in `ls -F|grep /`
-for sub_dir in sh
+for sub_dir in `ls -F|grep /`
 do
 	run_all_sub $sub_dir
 done

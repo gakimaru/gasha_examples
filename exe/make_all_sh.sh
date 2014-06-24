@@ -3,9 +3,9 @@
 function run_all_sub()
 {
 	sub_dir=$1
-	if [ -f $sub_dir/run_all.sh ]; then
+	if [ -f $sub_dir/make_all_sh.sh ]; then
 		pushd $sub_dir > /dev/null
-		./run_all.sh
+		./make_all_sh.sh
 		popd > /dev/null
 	fi
 }
