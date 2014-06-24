@@ -40,7 +40,7 @@ typedef std::mutex lock_type;//共有データのロックに std::mutex を使�
 typedef GASHA_ dummyLock lock_type;//共有データのロックに dummyLock を使用する場合は、この行を有効化する（ロックしなくなる）
 #endif//USE_LOCK_TYPE
 
-USING_NAMESPACE_GASHA;//ネームスペース使用
+GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //--------------------------------------------------------------------------------
 //マルチスレッド共有プールアロケータテスト

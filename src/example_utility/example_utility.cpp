@@ -8,13 +8,13 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_utility.h"//汎用ユーティリティ
+#include "example_utility.h"//汎用ユーティリティテスト
 
 #include <gasha/utility.h>//汎用ユーティリティ
 
 #include <stdio.h>//printf()
 
-USING_NAMESPACE_GASHA;//ネームスペース使用
+GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //----------------------------------------
 //汎用ユーティリティテスト
@@ -24,8 +24,8 @@ void example_utility()
 		//min() / max()関数テスト
 		printf("----- Test for min() / max() -----\n");
 		#define MIN_MAX(T, FMT, ...) \
-			{ const T var = min(__VA_ARGS__); printf("min(" #__VA_ARGS__ ") = " FMT "\n", var); } \
-			{ const T var = max(__VA_ARGS__); printf("max(" #__VA_ARGS__ ") = " FMT "\n", var); }
+			{ const T var = GASHA_ min(__VA_ARGS__); printf("min(" #__VA_ARGS__ ") = " FMT "\n", var); } \
+			{ const T var = GASHA_ max(__VA_ARGS__); printf("max(" #__VA_ARGS__ ") = " FMT "\n", var); }
 
 		MIN_MAX(int, "%d", 1, 2);
 		MIN_MAX(int, "%d", 2, 1);

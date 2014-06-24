@@ -43,7 +43,7 @@
 #include <bitset>//std::bitset
 #include <functional>//C++11 std::function
 
-USING_NAMESPACE_GASHA;//ネームスペース使用
+GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //----------------------------------------
 //テスト用の比較処理

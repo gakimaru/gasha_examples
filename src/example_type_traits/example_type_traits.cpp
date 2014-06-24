@@ -15,7 +15,7 @@
 #include <type_traits>//std::rank, std::extent
 #include <stdio.h>//printf()
 
-USING_NAMESPACE_GASHA;//ネームスペース使用
+GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //----------------------------------------
 //型特性ユーティリティテスト

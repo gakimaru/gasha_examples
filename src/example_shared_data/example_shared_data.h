@@ -33,18 +33,18 @@
 //ロックフリーアルゴリズムABA問題対策設定
 //※ロックフリースタック／キューで使用するタグ付きポインタのタグサイズ（ビット数）とタグ位置（ビットシフト数）の設定。
 //※タグサイズが大きければ大きいほど、スレッドが混み合った時の問題発生を抑えることができる。
-#ifdef IS_32BIT//【32bit環境向け】
+#ifdef GASHA_IS_32BIT//【32bit環境向け】
 static const std::size_t TEST_TAGGED_PTR_TAG_SIZE = 32;//タグサイズ=32bit
 static const int TEST_TAGGED_PTR_TAG_SHIFT = 32;//タグ位置=上位32bit
 //static const std::size_t TEST_TAGGED_PTR_TAG_SIZE = 0;//タグサイズ=デフォルト：型のアラインメントサイズに合わせる
 //static const int TEST_TAGGED_PTR_TAG_SHIFT = 0;//タグ位置=最下位ビット（ポインターのアラインメントの隙間にタグを仕込む）
-#endif//IS_32BIT
-#ifdef IS_64BIT//【64bit環境向け】
+#endif//GASHA_IS_32BIT
+#ifdef GASHA_IS_64BIT//【64bit環境向け】
 static const std::size_t TEST_TAGGED_PTR_TAG_SIZE = 8;//タグサイズ=8bit ※64ビット中上位8bitを未使用と仮定しているので、あまり良い設定ではない
 static const int TEST_TAGGED_PTR_TAG_SHIFT = -8;//タグ位置=上位8bit       （タグ付きポインタを128bitで扱うのがベストだが、現状未対応）
 //static const std::size_t TEST_TAGGED_PTR_TAG_SIZE = 0;//タグサイズ=デフォルト：型のアラインメントサイズに合わせる
 //static const int TEST_TAGGED_PTR_TAG_SHIFT = 0;//タグ位置=最下位ビット（ポインターのアラインメントの隙間にタグを仕込む）
-#endif//IS_64BIT
+#endif//GASHA_IS_64BIT
 
 #define ENABLE_TEST_PRINT//スレッドテストの経過メッセージを表示する場合は、このマクロを有効化する
 #define ENABLE_TEST_PRINT_DEBUG_INFO//スレッドテストの最後にデバッグ情報を表示する場合は、このマクロを有効化する
@@ -58,14 +58,14 @@ static const int TEST_ALLOC_THREADS = 1;//テスト用のアロケートスレ�
 static const int TEST_POOL_SIZE = 10;//テスト用プールアロケータのプールサイズ
 #else//TEST_1_TIME
 #ifdef _DEBUG//デバッグ版
-static const int TEST_COUNT = 1000000;//テスト回数
+static const int TEST_COUNT = 100000;//テスト回数
 static const int TEST_PRINT_COUNT = 5;//テスト中のメッセージ表示回数
 static const int TEST_PUSH_THREADS = 3;//テスト用のプッシュ／エンキュースレッド数
 static const int TEST_POP_THREADS = 2;//テスト用のポップ／デキュースレッド数
 static const int TEST_ALLOC_THREADS = 5;//テスト用のアロケートスレッド数
 static const int TEST_POOL_SIZE = 20;//テスト用プールアロケータのプールサイズ
 #else//_DEBUG//リリース版
-static const int TEST_COUNT = 10000000;//テスト回数
+static const int TEST_COUNT = 1000000;//テスト回数
 static const int TEST_PRINT_COUNT = 5;//テスト中のメッセージ表示回数
 static const int TEST_PUSH_THREADS = 3;//テスト用のプッシュ／エンキュースレッド数
 static const int TEST_POP_THREADS = 2;//テスト用のポップ／デキュースレッド数

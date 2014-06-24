@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-USING_NAMESPACE_GASHA;//ネームスペース使用
+GASHA_USING_NAMESPACE;//ネームスペース使用
 
 int main(const int argc, const char* argv[])
 {

@@ -12,7 +12,7 @@
 
 #include <gasha/crc32.h>//CRC32計算
 
-USING_NAMESPACE_GASHA;//ネームスペース使用
+GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //再帰処理版の関数で計算
 crc32_t testCRC32ForPerforman_recursive(const char* str, const int dummy)
@@ -29,21 +29,21 @@ crc32_t testCRC32ForPerforman_loop(const char* str, const int dummy)
 //事前計算済み多項式テーブル版の関数で計算
 crc32_t testCRC32ForPerforman_table(const char* str, const int dummy)
 {
-#ifdef CRC32_USE_STATIC_TABLE
+#ifdef GASHA_CRC32_USE_STATIC_TABLE
 	return calcCRC32_table(str);
-#else//CRC32_USE_STATIC_TABLE
+#else//GASHA_CRC32_USE_STATIC_TABLE
 	return 0;
-#endif//CRC32_USE_STATIC_TABLE
+#endif//GASHA_CRC32_USE_STATIC_TABLE
 }
 
 //SSE命令版の関数で計算
 crc32_t testCRC32ForPerforman_sse(const char* str, const int dummy)
 {
-#ifdef USE_SSE4_2
+#ifdef GASHA_USE_SSE4_2
 	return calcCRC32_sse(str);
-#else//USE_SSE4_2
+#else//GASHA_USE_SSE4_2
 	return 0;
-#endif//USE_SSE4_2
+#endif//GASHA_USE_SSE4_2
 }
 
 // End of file

@@ -16,7 +16,7 @@
 #include <chrono>//C++11 std::chrono
 #include<stdarg.h>//va_list
 
-USING_NAMESPACE_GASHA;//ネームスペース使用
+GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //----------------------------------------
 //【ランタイム版】素数判定／算出テスト

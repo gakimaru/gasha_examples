@@ -12,10 +12,13 @@
 
 # メイクファイル実行関数
 function run_makefile_core() {
-	echo '--------------------------------------------------------------------------------'
-	pushd $1
-	make $2
-	popd
+	if [ -f $1/Makefile ]; then
+		echo '--------------------------------------------------------------------------------'
+		echo "[" $1 "]"
+		pushd $1 > /dev/null
+		make $2
+		popd > /dev/null
+	fi
 }
 
 # メイクファイル呼び出し
@@ -26,13 +29,10 @@ function run_makefile() {
 	export BUILD_PLATFORM=$1
 	export BUILD_TYPE=$2
 	run_makefile_core ../sub/gasha_src/proj $3
-	run_makefile_core example_build_settings $3
-	run_makefile_core example_type_traits $3
-	run_makefile_core example_utility $3
-	run_makefile_core example_basic_math $3
-	run_makefile_core example_crc32 $3
-	run_makefile_core example_sort_and_search $3
-	run_makefile_core example_shared_data $3
+	for sub_dir in `ls -d example_*`
+	do
+		run_makefile_core $sub_dir $3
+	done
 }
 
 # x86 & Relase

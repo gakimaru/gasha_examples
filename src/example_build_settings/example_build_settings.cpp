@@ -13,7 +13,7 @@
 #include <stdio.h>//printf()
 #include <cstddef>//std::size_t
 
-USING_NAMESPACE_GASHA;//ネームスペース使用
+GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //----------------------------------------
 //noinline/always_inlineテスト
@@ -63,13 +63,13 @@ constexpr int constexpr_var = constexpr_calc(1, 2) + 3;
 
 //----------------------------------------
 //【C++11仕様】ユーザー定義リテラルテスト
-#ifdef HAS_USER_DEFINED_LITERAL
+#ifdef GASHA_HAS_USER_DEFINED_LITERAL
 constexpr int operator "" _len(const char* str, const std::size_t len)
 {
 	return len;
 }
 const std::size_t user_defined_literal_var = "1234567890"_len;
-#endif//HAS_USER_DEFINED_LITERAL
+#endif//GASHA_HAS_USER_DEFINED_LITERAL
 
 //----------------------------------------
 //【C++11仕様】TLS変数宣言テスト
@@ -87,42 +87,42 @@ struct alignas(16) data_t
 void example_build_settings()
 {
 	//コンパイラ確認テスト
-	printf("Compiler: name=\"%s\", Ver=[%d(0x%08x).%d(0x%08x)]\n", COMPILER_NAME, COMPILER_VER, COMPILER_VER, COMPILER_MINOR, COMPILER_MINOR);
-#ifdef IS_VC
+	printf("Compiler: name=\"%s\", Ver=[%d(0x%08x).%d(0x%08x)]\n", GASHA_COMPILER_NAME, GASHA_COMPILER_VER, GASHA_COMPILER_VER, GASHA_COMPILER_MINOR, GASHA_COMPILER_MINOR);
+#ifdef GASHA_IS_VC
 	printf("    This compiler is \"Visual C++\"\n");
-#endif//IS_VC
-#ifdef IS_GCC
+#endif//GASHA_IS_VC
+#ifdef GASHA_IS_GCC
 	printf("    This compiler is \"GCC\"\n");
-#endif//IS_GCC
+#endif//GASHA_IS_GCC
 
 	//C++言語確認テスト
 	printf("\n");
-	printf("Compiler-language: %s (C++ Ver.=%d)\n", COMPILER_LANGUAGE, CPP_VER);
-#ifdef IS_CPP
+	printf("Compiler-language: %s (C++ Ver.=%d)\n", GASHA_PROGRAM_LANGUAGE_NAME, GASHA_CPP_VER);
+#ifdef GASHA_IS_CPP
 	printf("    C++ is available.\n");
-#endif//IS_CPP
-#ifdef HAS_CPP98
+#endif//GASHA_IS_CPP
+#ifdef GASHA_HAS_CPP98
 	printf("        C++ is implemented C++98.\n");
-#endif//HAS_CPP98
-#ifdef HAS_CPP03
+#endif//GASHA_HAS_CPP98
+#ifdef GASHA_HAS_CPP03
 	printf("        C++ is implemented C++03.\n");
-#endif//HAS_CPP03
-#ifdef HAS_CPP11
+#endif//GASHA_HAS_CPP03
+#ifdef GASHA_HAS_CPP11
 	printf("        C++ is implemented C++11.\n");
-#endif//HAS_CPP11
+#endif//GASHA_HAS_CPP11
 
 	//プラットフォーム確認テスト
 	printf("\n");
-	printf("Plataform: \"%s\"(%s %dbits, %s-endian), Ver=[%d(0x%08x).%d(0x%08x)]\n", PLATFORM_NAME, PLATFORM_ARCHITECTURE, PLATFORM_ARCHITECTURE_BITS, ENDIAN, PLATFORM_VER, PLATFORM_VER, PLATFORM_MINOR, PLATFORM_MINOR);
-#ifdef IS_WIN
+	printf("Plataform: \"%s\"(%s %dbits, %s-endian), Ver=[%d(0x%08x).%d(0x%08x)]\n", GASHA_PLATFORM_NAME, GASHA_PLATFORM_ARCHITECTURE_NAME, GASHA_PLATFORM_ARCHITECTURE_BITS, GASHA_ENDIAN_NAME, GASHA_PLATFORM_VER, GASHA_PLATFORM_VER, GASHA_PLATFORM_MINOR, GASHA_PLATFORM_MINOR);
+#ifdef GASHA_IS_WIN
 	printf("    Target plarform is \"Windows\"\n");
-#endif//IS_WIN
-#ifdef IS_LINUX
+#endif//GASHA_IS_WIN
+#ifdef GASHA_IS_LINUX
 	printf("    Target plarform is \"Linux\"\n");
-#endif//IS_LINUX
-#ifdef IS_CYGWIN
+#endif//GASHA_IS_LINUX
+#ifdef GASHA_IS_CYGWIN
 	printf("    Target plarform is \"Cygwin\"\n");
-#endif//IS_CYGWIN
+#endif//GASHA_IS_CYGWIN
 
 	//定義済みマクロ表示テスト
 	struct test
@@ -141,9 +141,9 @@ void example_build_settings()
 			printf("__TIME__=\"%s\"\n", __TIME__);
 			printf("__TIMESTAMP__=\"%s\"\n", __TIMESTAMP__);
 			printf("\n");
-			printf("GET_FUNC_NAME()=\"%s\"\n", GET_FUNC_NAME());
-			printf("GET_FILE_LINE()=\"%s\"\n", GET_FILE_LINE());
-			printf("GET_FILE_LINE_TIME()=\"%s\"\n", GET_FILE_LINE_TIME());
+			printf("GASHA_FUNC_NAME()=\"%s\"\n", GASHA_FUNC_NAME());
+			printf("GASHA_FILE_LINE()=\"%s\"\n", GASHA_FILE_LINE());
+			printf("GASHA_FILE_LINE_TIME()=\"%s\"\n", GASHA_FILE_LINE_TIME());
 		}
 	};
 	test::func();
@@ -157,40 +157,40 @@ void example_build_settings()
 	//【C++11仕様】nullptrテスト
 	printf("\n");
 	printf("nullptr_var=%p\n", nullptr_var);
-#ifdef HAS_NULLPTR
+#ifdef GASHA_HAS_NULLPTR
 	printf("    'nullptr' is featured.\n");
-#endif//HAS_NULLPTR
+#endif//GASHA_HAS_NULLPTR
 
 	//【C++11仕様】overrideテスト
 	printf("\n");
 	override_func_var.func();
-#ifdef HAS_OVERRIDE
+#ifdef GASHA_HAS_OVERRIDE
 	printf("    'override' is featured.\n");
-#endif//HAS_OVERRIDE
+#endif//GASHA_HAS_OVERRIDE
 
 	//【C++11仕様】constexprテスト
 	printf("\n");
 	printf("constexpr_var=%d\n", constexpr_var);
 	printf("constexpr_calc(1, 2)=%d\n", constexpr_calc(1, 2));
-#ifdef HAS_CONSTEXPR
+#ifdef GASHA_HAS_CONSTEXPR
 	printf("    'constexpr' is featured.\n");
-#endif//HAS_CONSTEXPR
+#endif//GASHA_HAS_CONSTEXPR
 
 	//【C++11仕様】ユーザー定義リテラルテスト
-#ifdef HAS_USER_DEFINED_LITERAL
+#ifdef GASHA_HAS_USER_DEFINED_LITERAL
 	printf("\n");
 	printf("user_defined_literal_var=%d\n", user_defined_literal_var);
-#endif//HAS_USER_DEFINED_LITERAL
-#ifdef HAS_USER_DEFINED_LITERAL
+#endif//GASHA_HAS_USER_DEFINED_LITERAL
+#ifdef GASHA_HAS_USER_DEFINED_LITERAL
 	printf("    'operator \"\"'(user defined literal) is featured.\n");
-#endif//HAS_USER_DEFINED_LITERAL
+#endif//GASHA_HAS_USER_DEFINED_LITERAL
 
 	//【C++11仕様】TLSテスト
 	printf("\n");
 	printf("TLS Variable=%d\n", m_var_tls);
-#ifdef HAS_THREAD_LOCAL
+#ifdef GASHA_HAS_THREAD_LOCAL
 	printf("    'thread_local' is featured.\n");
-#endif//HAS_THREAD_LOCAL
+#endif//GASHA_HAS_THREAD_LOCAL
 
 	//【C++11仕様】アラインメント指定／取得／指定付メモリ確保と解放テスト
 	printf("\n");
@@ -200,12 +200,12 @@ void example_build_settings()
 	printf("_aligned_malloc(sizeof(data_t), alignof(data_t))=%p\n", p);
 	_aligned_free(p);
 	printf("_aligned_free(p)\n");
-#ifdef HAS_ALIGNAS
+#ifdef GASHA_HAS_ALIGNAS
 	printf("    'alignas' is featured.\n");
-#endif//HAS_ALIGNAS
-#ifdef HAS_ALIGNOF
+#endif//GASHA_HAS_ALIGNAS
+#ifdef GASHA_HAS_ALIGNOF
 	printf("    'alignof' is featured.\n");
-#endif//HAS_ALIGNOF
+#endif//GASHA_HAS_ALIGNOF
 }
 
 // End of file
