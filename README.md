@@ -609,8 +609,10 @@ Released under the [MIT license][MIT].
 
 関連資料
 --------
-[ゲームシステムのアーキテクチャと開発環境][ゲームシステムのアーキテクチャと開発環境]
+[ゲームシステムのアーキテクチャと開発環境（GitHub）][ゲームシステムのアーキテクチャと開発環境]  
+[ゲームシステムのアーキテクチャと開発環境（DropBox）][ゲームシステムのアーキテクチャと開発環境DropBox]  
 
+[ゲームシステムのアーキテクチャと開発環境DropBox]: https://www.dropbox.com/sh/xh1tauzgqhkk7hy/AACyWgV6uaEnjOJNT5FVBG4Ia/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8
 [ゲームシステムのアーキテクチャと開発環境]: https://github.com/gakimaru/public/tree/master/document/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8
 [本当にちょっとしたプログラミングTips.pdf]: https://github.com/gakimaru/public/blob/master/document/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips/%E6%9C%AC%E5%BD%93%E3%81%AB%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E3%81%97%E3%81%9F%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips.pdf
 [効果的なテンプレートテクニック.pdf]:       https://github.com/gakimaru/public/blob/master/document/%E4%BB%95%E6%A7%98%E3%83%BB%E8%A8%AD%E8%A8%88%E6%9B%B8/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0Tips/%E5%8A%B9%E6%9E%9C%E7%9A%84%E3%81%AA%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF.pdf
