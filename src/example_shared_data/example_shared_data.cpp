@@ -582,25 +582,10 @@ void thread_test()
 
 			int loop_count = 0;
 			int my_push_count = 0;
-int push_count_prev = 0;
-int same_count = 0;
 			while (true)
 			{
 				if (push_count.load() > TEST_COUNT)
 					break;
-if (push_count_prev == push_count.load())
-{
-	++same_count;
-	if (same_count % 100000 == 0)
-	{
-		printf("!!![%d] problem!? push_count=%d, same_count=%d, seq_no=%d\n", thread_no, push_count.load(), same_count, seq_no.load());
-	}
-}
-else
-{
-	push_count_prev = push_count.load();
-	same_count = 0;
-}
 				++loop_count;
 				if (loop_count % 1000 == 0)
 					std::this_thread::sleep_for(std::chrono::microseconds(0));
