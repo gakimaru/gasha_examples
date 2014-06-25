@@ -12,6 +12,17 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
+//--------------------------------------------------------------------------------
+//ハッシュテーブルテスト用設定とコンパイラスイッチ
+//static const int TEST_DATA_TABLE_SIZE = 500000;//テストデータテーブルサイズ
+static const int TEST_DATA_TABLE_SIZE = 20;//テストデータテーブルサイズ
+
+#define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
+//#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
+
+//#define USE_GCC//GCC版でコンパイルするときは、このマクロを有効化する
+
+
 //開番地法ハッシュテーブルテストテスト
 void example_hash_table();
 
