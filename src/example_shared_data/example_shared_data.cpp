@@ -10,13 +10,13 @@
 
 #include "example_shared_data.h"//マルチスレッド共有データテスト
 
-#include <gasha/shared_pool_allocator.h>//マルチスレッド共有プールアロケータ
-#include <gasha/shared_stack.h>//マルチスレッド共有スタック
-#include <gasha/shared_queue.h>//マルチスレッド共有キュー
+#include <gasha/shared_pool_allocator.inl>//マルチスレッド共有プールアロケータ【インライン関数／テンプレート関数実装部】
+#include <gasha/shared_stack.inl>//マルチスレッド共有スタック【インライン関数／テンプレート関数実装部】
+#include <gasha/shared_queue.inl>//マルチスレッド共有キュー【インライン関数／テンプレート関数実装部】
 
-#include <gasha/lockfree_pool_allocator.h>//ロックフリープールアロケータ
-#include <gasha/lockfree_stack.h>//ロックフリースタック
-#include <gasha/lockfree_queue.h>//ロックフリーキュー
+#include <gasha/lf_pool_allocator.inl>//ロックフリープールアロケータ【インライン関数／テンプレート関数実装部】
+#include <gasha/lf_stack.inl>//ロックフリースタック【インライン関数／テンプレート関数実装部】
+#include <gasha/lf_queue.inl>//ロックフリーキュー【インライン関数／テンプレート関数実装部】
 
 #include <gasha/spin_lock.h>//スピンロック
 #include <gasha/lw_spin_lock.h>//サイズ計量スピンロック
@@ -25,27 +25,18 @@
 #include <gasha/simple_shared_spin_lock.h>//単純共有スピンロック
 #include <gasha/unshared_spin_lock.h>//非共有スピンロック
 #include <gasha/dummy_shared_lock.h>//ダミー共有ロック
+#include <mutex>//C++11 std::mutex
 
 #include <gasha/type_traits.h>//型特性ユーティリティ
 
-#include <mutex>//C++11 std::mutex
 #include <chrono>//C++11 std::chrono
 #include <stdio.h>//printf()
-
-#if USE_LOCK_TYPE == 1//共有データのロックに spinLock を使用する場合
-typedef GASHA_ spinLock lock_type;//共有データのロックに spinLock を使用する場合は、この行を有効化する
-#elif USE_LOCK_TYPE == 2//共有データのロックに std::mutex を使用する場合
-typedef std::mutex lock_type;//共有データのロックに std::mutex を使用する場合は、この行を有効化する
-#else//if USE_LOCK_TYPE == 0//共有データのロックに dummyLock を使用する場合
-typedef GASHA_ dummyLock lock_type;//共有データのロックに dummyLock を使用する場合は、この行を有効化する（ロックしなくなる）
-#endif//USE_LOCK_TYPE
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //--------------------------------------------------------------------------------
 //マルチスレッド共有プールアロケータテスト
 
-typedef sharedPoolAllocator<data_t, TEST_POOL_SIZE, lock_type> shared_pool_allocator_t;
 static shared_pool_allocator_t s_poolAllocator;//マルチスレッド共有プールアロケータ
 
 //マルチスレッド共有プールアロケータからアロケート
@@ -62,7 +53,6 @@ bool freeNormal(data_t* value)
 //--------------------------------------------------------------------------------
 //ロックフリープールアロケータテスト
 
-typedef lfPoolAllocator<data_t, TEST_POOL_SIZE> lf_pool_allocator_t;
 static lf_pool_allocator_t s_lfPoolAllocator;//ロックフリープールアロケータ
 
 //ロックフリープールアロケータからアロケート
@@ -79,7 +69,6 @@ bool freeLockFree(data_t* value)
 //--------------------------------------------------------------------------------
 //マルチスレッド共有スタックテスト
 
-typedef sharedStack<data_t, TEST_POOL_SIZE, lock_type> shared_stack_t;
 static shared_stack_t s_stack;//マルチスレッド共有スタック
 
 //マルチスレッド共有スタックにプッシュ
@@ -101,7 +90,6 @@ bool popNormal(data_t& data)
 //--------------------------------------------------------------------------------
 //ロックフリースタックテスト
 
-typedef lfStack<data_t, TEST_POOL_SIZE, TEST_TAGGED_PTR_TAG_SIZE, TEST_TAGGED_PTR_TAG_SHIFT> lf_stack_t;
 static lf_stack_t s_lfStack;//ロックフリースタック
 
 //ロックフリースタックにプッシュ
@@ -123,7 +111,6 @@ bool popLockFree(data_t& data)
 //--------------------------------------------------------------------------------
 //マルチスレッド共有キューテスト
 
-typedef sharedQueue<data_t, TEST_POOL_SIZE, lock_type> shared_queue_t;
 static shared_queue_t s_queue;//マルチスレッド共有キュー
 
 //マルチスレッド共有キューにエンキュー
@@ -145,7 +132,6 @@ bool dequeueNormal(data_t& value)
 //--------------------------------------------------------------------------------
 //ロックフリーキューテスト
 
-typedef lfQueue<data_t, TEST_POOL_SIZE, TEST_TAGGED_PTR_TAG_SIZE, TEST_TAGGED_PTR_TAG_SHIFT> lf_queue_t;
 static lf_queue_t s_lfQueue;//ロックフリーキュー
 
 //ロックフリーキューにエンキュー
@@ -849,23 +835,23 @@ void testScopedLock()
 {
 	T lock;
 	{
-		auto lk = lock.lock_scoped();
+		auto lk = lock.lockScoped();
 	}
 	{
-		auto lk = lock.get_unique_lock();
+		auto lk = lock.lockUnique();
 	}
 	{
-		auto lk = lock.get_unique_lock(with_lock);
+		auto lk = lock.lockUnique(with_lock);
 	}
 	{
-		auto lk = lock.get_unique_lock(try_lock);
+		auto lk = lock.lockUnique(try_lock);
 	}
 	{
 		lock.lock();
-		auto lk = lock.get_unique_lock(adopt_lock);
+		auto lk = lock.lockUnique(adopt_lock);
 	}
 	{
-		auto lk = lock.get_unique_lock(defer_lock);
+		auto lk = lock.lockUnique(defer_lock);
 	}
 }
 template<class T>
@@ -897,36 +883,36 @@ void testScopedSharedLock()
 {
 	T lock;
 	{
-		auto lk = lock.lock_scoped();
+		auto lk = lock.lockScoped();
 	}
 	{
-		auto lk = lock.lock_shared_scoped();
+		auto lk = lock.lockSharedScoped();
 	}
 	{
-		auto lk = lock.get_unique_lock();
+		auto lk = lock.lockUnique();
 	}
 	{
-		auto lk = lock.get_unique_lock(with_lock);
+		auto lk = lock.lockUnique(with_lock);
 	}
 	{
-		auto lk = lock.get_unique_lock(with_lock_shared);
+		auto lk = lock.lockUnique(with_lock_shared);
 	}
 	{
-		auto lk = lock.get_unique_lock(try_lock);
+		auto lk = lock.lockUnique(try_lock);
 	}
 	{
-		auto lk = lock.get_unique_lock(try_lock_shared);
+		auto lk = lock.lockUnique(try_lock_shared);
 	}
 	{
 		lock.lock();
-		auto lk = lock.get_unique_lock(adopt_lock);
+		auto lk = lock.lockUnique(adopt_lock);
 	}
 	{
 		lock.lock_shared();
-		auto lk = lock.get_unique_lock(adopt_shared_lock);
+		auto lk = lock.lockUnique(adopt_shared_lock);
 	}
 	{
-		auto lk = lock.get_unique_lock(defer_lock);
+		auto lk = lock.lockUnique(defer_lock);
 	}
 }
 

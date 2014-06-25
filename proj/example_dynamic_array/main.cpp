@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
 // main.cpp
-// 動的配列テスト - メイン
+// 動的配列コンテナテスト - メイン
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -15,7 +15,7 @@
 
 int main(const int argc, const char* argv[])
 {
-	//動的配列テスト
+	//動的配列コンテナテスト
 	example_dynamic_array();
 	
 	return EXIT_SUCCESS;

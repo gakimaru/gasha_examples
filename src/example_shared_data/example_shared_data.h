@@ -87,6 +87,56 @@ struct data_t
 	int m_value;
 };
 
+//--------------------------------------------------------------------------------
+//各マルチスレッド共有データ定義
+
+//----------------------------------------
+//マルチスレッド共有データに使用するロックオブジェクトの設定
+
+#if USE_LOCK_TYPE == 1//共有データのロックに spinLock を使用する場合
+
+#include <gasha/spin_lock.h>//スピンロック
+typedef GASHA_ spinLock lock_type;//共有データのロックに spinLock を使用する場合は、この行を有効化する
+
+#elif USE_LOCK_TYPE == 2//共有データのロックに std::mutex を使用する場合
+
+//例外を無効化した状態で <mutex> をインクルードすると、warning C4530 が発生する
+//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
+#pragma warning(disable: 4530)//C4530を抑える
+
+#include <mutex>//C++11 std::mutex
+typedef std::mutex lock_type;//共有データのロックに std::mutex を使用する場合は、この行を有効化する
+
+#else//if USE_LOCK_TYPE == 0//共有データのロックに dummyLock を使用する場合
+
+#include <gasha/dummy_lock.h>//ダミーロック
+typedef GASHA_ dummyLock lock_type;//共有データのロックに dummyLock を使用する場合は、この行を有効化する（ロックしなくなる）
+
+#endif//USE_LOCK_TYPE
+
+//----------------------------------------
+//マルチスレッド共有データ
+
+#include <gasha/shared_pool_allocator.h>//マルチスレッド共有プールアロケータ【宣言部】
+#include <gasha/shared_stack.h>//マルチスレッド共有スタック【宣言部】
+#include <gasha/shared_queue.h>//マルチスレッド共有キュー【宣言部】
+
+typedef GASHA_ sharedPoolAllocator<data_t, TEST_POOL_SIZE, lock_type> shared_pool_allocator_t;//マルチスレッド共有プールアロケータ
+typedef GASHA_ sharedStack<data_t, TEST_POOL_SIZE, lock_type> shared_stack_t;//マルチスレッド共有スタック
+typedef GASHA_ sharedQueue<data_t, TEST_POOL_SIZE, lock_type> shared_queue_t;//マルチスレッド共有キュー
+
+//----------------------------------------
+//ロックフリー共有データ
+
+#include <gasha/lf_pool_allocator.h>//ロックフリープールアロケータ【宣言部】
+#include <gasha/lf_stack.h>//ロックフリースタック【宣言部】
+#include <gasha/lf_queue.h>//ロックフリーキュー【宣言部】
+
+typedef GASHA_ lfPoolAllocator<data_t, TEST_POOL_SIZE> lf_pool_allocator_t;//ロックフリープールアロケータ
+typedef GASHA_ lfStack<data_t, TEST_POOL_SIZE, TEST_TAGGED_PTR_TAG_SIZE, TEST_TAGGED_PTR_TAG_SHIFT> lf_stack_t;//ロックフリースタック
+typedef GASHA_ lfQueue<data_t, TEST_POOL_SIZE, TEST_TAGGED_PTR_TAG_SIZE, TEST_TAGGED_PTR_TAG_SHIFT> lf_queue_t;//ロックフリーキュー
+
+//----------------------------------------
 //マルチスレッド共有データテスト
 void example_shared_data();
 

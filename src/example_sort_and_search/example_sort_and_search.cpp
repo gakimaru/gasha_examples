@@ -11,6 +11,7 @@
 #include "example_sort_and_search.h"//ソート＆探索処理テスト
 
 //【ソート処理】
+#include <gasha/is_ordered.h>//整列状態確認
 //分類：交換ソート
 #include <gasha/bubble_sort.h>//バブルソート
 #include <gasha/shaker_sort.h>//シェーカーソート
@@ -135,7 +136,7 @@ void example_sort_and_search()
 	//配列状態表示
 	auto showArrayCondition = [&prev_time, &printElapsedTime](const array_t* array)
 	{
-		const int ng = static_cast<int>(calcUnordered(*array, predicate_default));
+		const int ng = static_cast<int>(sumupUnordered(*array, predicate_default));
 		if (ng == 0)
 			printf("Array is ordered. [record(s)=%d]\n", array->size());
 		else
@@ -804,6 +805,9 @@ void example_sort_and_search()
 	//----------------------------------------
 	//バリエーションテスト
 
+	printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+	printf("Functoin variation test for sort and search.\n");
+	printf("--------------------------------------------------------------------------------------------------------------------------------\n");
 #if 1
 	//----------------------------------------
 	//ソートのバリエーション
@@ -852,7 +856,8 @@ void example_sort_and_search()
 	{
 		printf("\n");
 		printf("[Variation test for linear-search]\n");
-		for (int target = -1; target < 40; ++target)
+		int plus = 1;
+		for (int target = -1; target < 300; target += plus, plus *= 2)
 		{
 			printf("target=%d\n", target);
 			const data_t* data_def = linearSearchValue(*array_shuffle1, target);
@@ -960,7 +965,8 @@ void example_sort_and_search()
 		printf("[Variation test for binary-search]\n");
 		auto sort_pred = [](const data_t& lhs, const data_t& rhs) -> bool { return lhs.m_key < rhs.m_key; };
 		introSort(*array_shuffle1, sort_pred);
-		for (int target = -1; target < 40; ++target)
+		int plus = 1;
+		for (int target = -1; target < 300; target += plus, plus *= 2)
 		{
 			printf("target=%d\n", target);
 			const data_t* data_def = binarySearchValue(*array_shuffle1, target);
@@ -1099,12 +1105,12 @@ void example_sort_and_search()
 			printf("\n");
 		};
 		auto predicate = [](data_t* val1, data_t* val2){ return val1->m_key < val2->m_key; };
-		std::size_t unordered = calcUnordered(p_arr, predicate);
+		std::size_t unordered = sumupUnordered(p_arr, predicate);
 		printf("[Before]\n");
 		printData();
 		printf("unordered=%d\n", unordered);
 		introSort(p_arr, predicate);
-		unordered = calcUnordered(p_arr, predicate);
+		unordered = sumupUnordered(p_arr, predicate);
 		printf("[After]\n");
 		printData();
 		printf("unordered=%d\n", unordered);

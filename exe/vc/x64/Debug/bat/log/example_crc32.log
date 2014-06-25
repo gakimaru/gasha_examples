@@ -4,10 +4,10 @@ Result of calculation CRC of "1234567890" by constexpr = 0xf3dbd4fe
 Result of calculation CRC of "ABCDEFGHIJ" by runtime-function = 0xd599aefd
 
 [calcCRC32_recursive() * 10000 times]
-*elapsed time = 0.009009700 sec (crc_sum=0xbb3001e0)
+*elapsed time = 0.008007100 sec (crc_sum=0xbb3001e0)
 [calcCRC32_loop() * 10000 times]
-*elapsed time = 0.003002600 sec (crc_sum=0xbb3001e0)
+*elapsed time = 0.003002400 sec (crc_sum=0xbb3001e0)
 [calcCRC32_table() * 10000 times]
-*elapsed time = 0.001001200 sec (crc_sum=0xbb3001e0)
-[calcCRC32_sse() * 10000 times]
 *elapsed time = 0.000000000 sec (crc_sum=0xbb3001e0)
+[calcCRC32_sse() * 10000 times]
+*elapsed time = 0.001001500 sec (crc_sum=0xbb3001e0)
