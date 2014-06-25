@@ -644,14 +644,35 @@ Released under the [MIT license][MIT].
     [gasha_examples]  ... ライブラリサンプルプログラム用リポジトリ
      |
      `-[proj]
-        |
+        |                                   【ビルド設定】
         |-[example_build_settings]      ... ビルド設定テスト
+        |
+        |                                   【ユーティリティ】
         |-[example_utility]             ... 汎用ユーティリティテスト
         |-[example_type_traits]         ... 型特性ユーティリティテスト
+        |
+        |                                   【算術】
         |-[example_basic_math]          ... 基本演算処理テスト
         |-[example_crc32]               ... CRC32計算処理テスト
+        |
+        |                                   【アルゴリズム】
         |-[example_sort_and_search]     ... ソート＆探索処理テスト
-        |-[example_shared_data]         ... マルチスレッド共有データ／ロックフリーアルゴリズムテスト
+        |
+        |                                   【スレッド】
+        |-[example_shared_data]         ... マルチスレッド共有データ／ロックフリー共有データテスト
+        |
+        |                                   【擬似コンテナ（外部データコンテナ）】
+        |-[example_dynamic_array]       ... 動的配列コンテナテスト
+        |-[example_reing_buffer]        ... リングバッファコンテナテスト
+        |-[example_linked_list]         ... 双方向連結リストコンテナテスト
+        |-[example_singly_linked_list]  ... 片方向連結リストコンテナテスト
+        |-[example_rb_tree]             ... 赤黒木コンテナテスト
+        |
+        |                                   【コンテナ（内部データコンテナ）】
+        |-[example_hahs_table]          ... 開番地法ハッシュテーブルコンテナテスト
+        |
+        |                                   【コンテナアダプタ】
+        |-[example_priority_queue]      ... 二分ヒープコンテナ＆優先度付きキューコンテナアダプタテスト
 
 > 各サンプルプログラムは、チュートリアル的な内容ではなく、開発過程で機能やパフォーマンスの評価に使用したものそのままです。  
 > 条件を変えながら多彩なテストをできるように構成しているものも多く、難解に見えるかもしれません。  
