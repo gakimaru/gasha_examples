@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
 // exmaple_singly_linked_list.cpp
-// 片方向連結リストテスト
+// 片方向連結リストコンテナテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -8,9 +8,16 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_singly_linked_list.h"//片方向連結リストテスト
+#include "example_singly_linked_list.h"//片方向連結リストコンテナテスト
 
-//#include <gasha/singly_linked_list.h>//片方向連結リスト
+#include <gasha/singly_linked_list.inl>//片方向連結リストコンテナ【インライン関数／テンプレート関数定義部】
+
+#include <gasha/iterator.h>//イテレータ操作
+
+#include <algorithm>//std::for_each用
+#include <chrono>//C++11 時間計測用
+#include <vector>//std::vector用（比較用）
+#include <assert.h>//assert用
 
 #include <stdio.h>//printf()
 
@@ -79,20 +86,20 @@ struct data_t
 	{
 		return m_key == key;
 	}
-#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 	inline bool operator<(const int key) const
 	{
 		return m_key < key;
 	}
-#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 };
-#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 //※std::binary_searchを使用する場合は、このオペレータも必要
 static bool operator<(const int key, const data_t& rhs)
 {
 	return key < rhs.m_key;
 }
-#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 
 //----------------------------------------
 //テストデータ向けノード操作用クラス（CRTP）
@@ -130,7 +137,7 @@ struct another_ope_t : public ope_t
 		}
 	};
 
-#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 	//二分探索用比較関数オブジェクト
 	//※m_valメンバーを比較
 	struct comparisonForSearch{
@@ -139,7 +146,7 @@ struct another_ope_t : public ope_t
 			return rhs - lhs.m_val;
 		}
 	};
-#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 };
 
 //----------------------------------------
@@ -178,7 +185,7 @@ int main(const int argc, const char* argv[])
 		//※std::forward_listにない処理
 		auto printReverse = [&con]()
 		{
-		#ifdef ENABLE_REVERSE_ITERATOR
+		#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR
 			printf("size=%d\n", con.size());
 			printf("list(reverse)=");
 			if (con.empty())
@@ -193,7 +200,7 @@ int main(const int argc, const char* argv[])
 				}
 			);
 			printf("\n");
-		#endif//ENABLE_REVERSE_ITERATOR
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR
 		};
 
 		//先頭に連続プッシュ(1)
@@ -518,7 +525,7 @@ int main(const int argc, const char* argv[])
 		find(6);
 		find(7);
 
-	#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+	#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 		//二分探索（ソート前）
 		printf("\n");
 		printf("[binary search(before sort)]\n");
@@ -553,7 +560,7 @@ int main(const int argc, const char* argv[])
 		binary_search(5);
 		binary_search(6);
 		binary_search(7);
-	#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+	#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 
 	#if 0
 		con.sort(reverse_pred);//通常ソート
@@ -818,7 +825,7 @@ int main(const int argc, const char* argv[])
 		find(110);
 		find(103);
 
-	#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+	#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 		//二分探索
 		//【注意】低速処理
 		printf("\n");
@@ -836,7 +843,7 @@ int main(const int argc, const char* argv[])
 		binary_search(101);
 		binary_search(110);
 		binary_search(103);
-	#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+	#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 
 		//カスタムソート
 		{
@@ -866,7 +873,7 @@ int main(const int argc, const char* argv[])
 		custom_find1(2, 102);
 		custom_find1(2, 103);
 
-	#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+	#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 		//カスタム二分探索(1)
 		//【注意】低速処理
 		printf("\n");
@@ -885,7 +892,7 @@ int main(const int argc, const char* argv[])
 		custom_binary_search1(2, 101);
 		custom_binary_search1(2, 102);
 		custom_binary_search1(2, 103);
-	#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+	#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 
 		//カスタム線形探索(2)
 		printf("\n");
@@ -905,7 +912,7 @@ int main(const int argc, const char* argv[])
 		custom_find2(7);
 		custom_find2(3);
 
-	#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+	#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 		//カスタム二分探索(2)
 		printf("\n");
 		printf("[binary search with custom comparison(2)]\n");
@@ -923,7 +930,7 @@ int main(const int argc, const char* argv[])
 		custom_binary_search2(2);
 		custom_binary_search2(7);
 		custom_binary_search2(3);
-	#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+	#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 	}
 
 	//--------------------
@@ -1028,7 +1035,7 @@ int main(const int argc, const char* argv[])
 			prev_time = printElapsedTime(prev_time, true);
 		#endif//ENABLE_SORT_TEST
 
-		#ifdef ENABLE_REVERSE_ITERATOR
+		#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR
 			//リバースイテレータ
 			//【注意】低速処理
 			//※std::forward_listにない処理
@@ -1050,10 +1057,10 @@ int main(const int argc, const char* argv[])
 				printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
-		#endif//ENABLE_REVERSE_ITERATOR
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR
 
 		#ifdef ENABLE_SORT_TEST
-		#ifdef ENABLE_STABLE_SORT
+		#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_STABLE_SORT
 			//逆順安定ソート
 			printf("\n");
 			printf("[reverse stable sort]\n");
@@ -1067,7 +1074,7 @@ int main(const int argc, const char* argv[])
 			con->stableSort();
 			assert(con->isOrdered());
 			prev_time = printElapsedTime(prev_time, true);
-		#endif//ENABLE_STABLE_SORT
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_STABLE_SORT
 		#endif//ENABLE_SORT_TEST
 
 			//線形探索
@@ -1086,7 +1093,7 @@ int main(const int argc, const char* argv[])
 			}
 			prev_time = printElapsedTime(prev_time, true);
 
-		#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+		#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 			//二分探索
 			//【注意】低速処理
 			printf("\n");
@@ -1103,7 +1110,7 @@ int main(const int argc, const char* argv[])
 				printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
-		#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 
 			//データを破棄
 			printf("\n");
@@ -1212,7 +1219,7 @@ int main(const int argc, const char* argv[])
 			prev_time = printElapsedTime(prev_time, true);
 		#endif//ENABLE_SORT_TEST
 
-		#ifdef ENABLE_REVERSE_ITERATOR
+		#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR
 			//リバースイテレータ（非対応）
 			printf("\n");
 			printf("[iterator](has not reverse_iterator)\n");
@@ -1232,10 +1239,10 @@ int main(const int argc, const char* argv[])
 				printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
-		#endif//ENABLE_REVERSE_ITERATOR
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR
 
 		#ifdef ENABLE_SORT_TEST
-		#ifdef ENABLE_STABLE_SORT
+		#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_STABLE_SORT
 			//逆順ソート　※安定ソートの代わり
 			printf("\n");
 			printf("[reverse (stable) sort]\n");
@@ -1247,7 +1254,7 @@ int main(const int argc, const char* argv[])
 			printf("[(stable) sort]\n");
 			con->sort();
 			prev_time = printElapsedTime(prev_time, true);
-		#endif//ENABLE_STABLE_SORT
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_STABLE_SORT
 		#endif//ENABLE_SORT_TEST
 
 			//線形探索
@@ -1266,7 +1273,7 @@ int main(const int argc, const char* argv[])
 			}
 			prev_time = printElapsedTime(prev_time, true);
 
-		#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+		#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 			//二分探索
 			printf("\n");
 			printf("[binarySearchValue]\n");
@@ -1282,7 +1289,7 @@ int main(const int argc, const char* argv[])
 				printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
-		#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 
 			//データを破棄
 			printf("\n");

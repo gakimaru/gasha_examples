@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
 // exmaple_ring_buffer.cpp
-// リングバッファテスト
+// リングバッファコンテナテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -8,9 +8,16 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_ring_buffer.h"//リングバッファテスト
+#include "example_ring_buffer.h"//リングバッファコンテナテスト
 
-//#include <gasha/ring_buffer.h>//リングバッファ
+#include <gasha/ring_buffer.inl>//リングバッファコンテナ【インライン関数／テンプレート関数定義部】
+
+#include <gasha/iterator.h>//イテレータ操作
+
+#include <algorithm>//std::for_each用
+#include <chrono>//C++11 時間計測用
+#include <vector>//std::vector用（比較用）
+#include <assert.h>//assert用
 
 #include <stdio.h>//printf()
 
@@ -19,11 +26,6 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //--------------------------------------------------------------------------------
 //リングバッファテスト
 //--------------------------------------------------------------------------------
-
-#include <algorithm>//std::for_each用
-#include <chrono>//C++11 時間計測用
-#include <deque>//std::deque用（比較用）
-#include <assert.h>//assert用
 
 #if 0
 

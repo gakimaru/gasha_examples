@@ -4,13 +4,17 @@
 
 //--------------------------------------------------------------------------------
 // exmaple_linked_list.h
-// 双方向連結リストテスト
+// 双方向連結リストコンテナテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
 //   Released under the MIT license.
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
+
+#include <gasha/linked_list.h>//双方向連結リストコンテナ【宣言部】
+
+#include <gasha/shared_spin_lock.h>//共有スピンロック
 
 //--------------------------------------------------------------------------------
 //双方向連結リストテスト用設定とコンパイラスイッチ

@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
 // exmaple_dynamic_array_sub.cpp
-// 動的配列テスト
+// 動的配列コンテナテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -10,12 +10,12 @@
 
 #include "example_dynamic_array.h"//動的配列コンテナテスト
 
-GASHA_USING_NAMESPACE;//ネームスペース使用
-
 //----------------------------------------
 //テンプレートの明示的なインスタンス化
 
 #include <gasha/dynamic_array.cpp.h>//動的配列コンテナ【関数定義部】
+
+GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //※コンパイル速度の劣化や、ソース改変時の広範囲な再コンパイルの影響を抑えるために、
 //　コンテナのヘッダーファイルを三つに分割。

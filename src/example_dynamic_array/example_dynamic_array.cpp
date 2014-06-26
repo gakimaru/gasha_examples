@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
 // exmaple_dynamic_array.cpp
-// 動的配列テスト
+// 動的配列コンテナテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -8,9 +8,9 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_dynamic_array.h"//動的配列テスト
+#include "example_dynamic_array.h"//動的配列コンテナテスト
 
-#include <gasha/dynamic_array.inl>//動的配列【インライン関数／テンプレート関数定義部】
+#include <gasha/dynamic_array.inl>//動的配列コンテナ【インライン関数／テンプレート関数定義部】
 
 #include <gasha/iterator.h>//イテレータ操作
 

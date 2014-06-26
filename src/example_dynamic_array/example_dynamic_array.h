@@ -12,7 +12,7 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include <gasha/dynamic_array.h>//動的配列【宣言部】
+#include <gasha/dynamic_array.h>//動的配列コンテナ【宣言部】
 
 #include <gasha/shared_spin_lock.h>//共有スピンロック
 

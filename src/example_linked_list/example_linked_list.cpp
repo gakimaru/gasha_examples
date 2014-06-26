@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
 // exmaple_linked_list.cpp
-// 双方向連結リストテスト
+// 双方向連結リストコンテナテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -8,9 +8,16 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_linked_list.h"//双方向連結リストテスト
+#include "example_linked_list.h"//双方向連結リストコンテナテスト
 
-//#include <gasha/linked_list.h>//双方向連結リスト
+#include <gasha/linked_list.inl>//双方向連結リストコンテナ【インライン関数／テンプレート関数定義部】
+
+#include <gasha/iterator.h>//イテレータ操作
+
+#include <algorithm>//std::for_each用
+#include <chrono>//C++11 時間計測用
+#include <vector>//std::vector用（比較用）
+#include <assert.h>//assert用
 
 #include <stdio.h>//printf()
 

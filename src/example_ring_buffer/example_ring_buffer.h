@@ -4,13 +4,17 @@
 
 //--------------------------------------------------------------------------------
 // exmaple_ring_buffer.h
-// リングバッファテスト
+// リングバッファコンテナテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
 //   Released under the MIT license.
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
+
+#include <gasha/ring_buffer.h>//リングバッファコンテナ【宣言部】
+
+#include <gasha/shared_spin_lock.h>//共有スピンロック
 
 //--------------------------------------------------------------------------------
 //リングバッファテスト用設定とコンパイラスイッチ

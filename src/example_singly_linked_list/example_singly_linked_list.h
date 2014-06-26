@@ -4,13 +4,17 @@
 
 //--------------------------------------------------------------------------------
 // exmaple_singly_linked_list.h
-// 片方向連結リストテスト
+// 片方向連結リストコンテナテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
 //   Released under the MIT license.
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
+
+#include <gasha/singly_linked_list.h>//片方向連結リストコンテナ【宣言部】
+
+#include <gasha/shared_spin_lock.h>//共有スピンロック
 
 //--------------------------------------------------------------------------------
 //片方向連結リストテスト用設定とコンパイラスイッチ
@@ -27,12 +31,12 @@ static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST
 
 //--------------------------------------------------------------------------------
 //片方向連結リストのコンパイラスイッチ
-#define ENABLE_REVERSE_ITERATOR//リバースイテレータを有効化する場合は、このマクロを有効化する【注意】低速処理
-//#define GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH//二分探索を有効にする ※リバースイテレータ無効化時は無効
-//#define ENABLE_STABLE_SORT//安定ソートを有効にする
+#define GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR//リバースイテレータを有効化する場合は、このマクロを有効化する【注意】低速処理
+//#define GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH//二分探索を有効にする ※リバースイテレータ無効化時は無効
+//#define GASHA_SINGLY_LINKED_LIST_ENABLE_STABLE_SORT//安定ソートを有効にする
 
-#if defined(GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH) && !defined(ENABLE_REVERSE_ITERATOR)
-#undef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
+#if defined(GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH) && !defined(GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR)
+#undef GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 #endif
 
 //片方向連結リストテスト
