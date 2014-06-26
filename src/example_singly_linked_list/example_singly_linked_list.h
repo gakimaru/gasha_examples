@@ -28,11 +28,11 @@ static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST
 //--------------------------------------------------------------------------------
 //片方向連結リストのコンパイラスイッチ
 #define ENABLE_REVERSE_ITERATOR//リバースイテレータを有効化する場合は、このマクロを有効化する【注意】低速処理
-//#define ENABLE_BINARY_SEARCH//二分探索を有効にする ※リバースイテレータ無効化時は無効
+//#define GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH//二分探索を有効にする ※リバースイテレータ無効化時は無効
 //#define ENABLE_STABLE_SORT//安定ソートを有効にする
 
-#if defined(ENABLE_BINARY_SEARCH) && !defined(ENABLE_REVERSE_ITERATOR)
-#undef ENABLE_BINARY_SEARCH
+#if defined(GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH) && !defined(ENABLE_REVERSE_ITERATOR)
+#undef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 #endif
 
 //片方向連結リストテスト

@@ -82,20 +82,20 @@ struct data_t
 	{
 		return m_key == key;
 	}
-#ifdef ENABLE_BINARY_SEARCH
+#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 	inline bool operator<(const int key) const
 	{
 		return m_key < key;
 	}
-#endif//ENABLE_BINARY_SEARCH
+#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 };
-#ifdef ENABLE_BINARY_SEARCH
+#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 //※std::binary_searchを使用する場合は、このオペレータも必要
 static bool operator<(const int key, const data_t& rhs)
 {
 	return key < rhs.m_key;
 }
-#endif//ENABLE_BINARY_SEARCH
+#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 
 //----------------------------------------
 //テストデータ向けノード操作用クラス（CRTP）
@@ -138,7 +138,7 @@ struct another_ope_t : public ope_t
 		}
 	};
 
-#ifdef ENABLE_BINARY_SEARCH
+#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 	//二分探索用比較関数オブジェクト
 	//※m_valメンバーを比較
 	struct comparisonForSearch{
@@ -147,7 +147,7 @@ struct another_ope_t : public ope_t
 			return rhs - lhs.m_val;
 		}
 	};
-#endif//ENABLE_BINARY_SEARCH
+#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 };
 
 //----------------------------------------
@@ -469,7 +469,7 @@ int main(const int argc, const char* argv[])
 		find(6);
 		find(7);
 
-	#ifdef ENABLE_BINARY_SEARCH
+	#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 		//二分探索（ソート前）
 		printf("\n");
 		printf("[binary search(before sort)]\n");
@@ -504,7 +504,7 @@ int main(const int argc, const char* argv[])
 		binary_search(5);
 		binary_search(6);
 		binary_search(7);
-	#endif//ENABLE_BINARY_SEARCH
+	#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 
 	#if 0
 		con.sort(reverse_pred);//通常ソート
@@ -691,7 +691,7 @@ int main(const int argc, const char* argv[])
 		find(110);
 		find(103);
 
-	#ifdef ENABLE_BINARY_SEARCH
+	#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 		//二分探索
 		printf("\n");
 		printf("[binary search]\n");
@@ -708,7 +708,7 @@ int main(const int argc, const char* argv[])
 		binary_search(101);
 		binary_search(110);
 		binary_search(103);
-	#endif//ENABLE_BINARY_SEARCH
+	#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 
 		//カスタムソート
 		{
@@ -738,7 +738,7 @@ int main(const int argc, const char* argv[])
 		custom_find1(2, 102);
 		custom_find1(2, 103);
 
-	#ifdef ENABLE_BINARY_SEARCH
+	#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 		//カスタム二分探索(1)
 		printf("\n");
 		printf("[binary search with custom comparison(1)]\n");
@@ -756,7 +756,7 @@ int main(const int argc, const char* argv[])
 		custom_binary_search1(2, 101);
 		custom_binary_search1(2, 102);
 		custom_binary_search1(2, 103);
-	#endif//ENABLE_BINARY_SEARCH
+	#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 
 		//カスタム線形探索(2)
 		printf("\n");
@@ -776,7 +776,7 @@ int main(const int argc, const char* argv[])
 		custom_find2(7);
 		custom_find2(3);
 
-	#ifdef ENABLE_BINARY_SEARCH
+	#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 		//カスタム二分探索(2)
 		printf("\n");
 		printf("[binary search with custom comparison(2)]\n");
@@ -794,7 +794,7 @@ int main(const int argc, const char* argv[])
 		custom_binary_search2(2);
 		custom_binary_search2(7);
 		custom_binary_search2(3);
-	#endif//ENABLE_BINARY_SEARCH
+	#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 	}
 
 	//--------------------
@@ -953,7 +953,7 @@ int main(const int argc, const char* argv[])
 			}
 			prev_time = printElapsedTime(prev_time, true);
 
-		#ifdef ENABLE_BINARY_SEARCH
+		#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 			//二分探索
 			printf("\n");
 			printf("[binarySearchValue]\n");
@@ -969,7 +969,7 @@ int main(const int argc, const char* argv[])
 				printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
-		#endif//ENABLE_BINARY_SEARCH
+		#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 
 			//データを破棄
 			printf("\n");
@@ -1130,7 +1130,7 @@ int main(const int argc, const char* argv[])
 			}
 			prev_time = printElapsedTime(prev_time, true);
 
-		#ifdef ENABLE_BINARY_SEARCH
+		#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 			//二分探索
 			printf("\n");
 			printf("[binarySearchValue]\n");
@@ -1146,7 +1146,7 @@ int main(const int argc, const char* argv[])
 				printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
-		#endif//ENABLE_BINARY_SEARCH
+		#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 
 			//データを破棄
 			printf("\n");
