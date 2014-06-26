@@ -10,13 +10,13 @@
 
 #include "example_shared_data.h"//マルチスレッド共有データテスト
 
-#include <gasha/shared_pool_allocator.inl>//マルチスレッド共有プールアロケータ【インライン関数／テンプレート関数実装部】
-#include <gasha/shared_stack.inl>//マルチスレッド共有スタック【インライン関数／テンプレート関数実装部】
-#include <gasha/shared_queue.inl>//マルチスレッド共有キュー【インライン関数／テンプレート関数実装部】
+#include <gasha/shared_pool_allocator.inl>//マルチスレッド共有プールアロケータ【インライン関数／テンプレート関数定義部】
+#include <gasha/shared_stack.inl>//マルチスレッド共有スタック【インライン関数／テンプレート関数定義部】
+#include <gasha/shared_queue.inl>//マルチスレッド共有キュー【インライン関数／テンプレート関数定義部】
 
-#include <gasha/lf_pool_allocator.inl>//ロックフリープールアロケータ【インライン関数／テンプレート関数実装部】
-#include <gasha/lf_stack.inl>//ロックフリースタック【インライン関数／テンプレート関数実装部】
-#include <gasha/lf_queue.inl>//ロックフリーキュー【インライン関数／テンプレート関数実装部】
+#include <gasha/lf_pool_allocator.inl>//ロックフリープールアロケータ【インライン関数／テンプレート関数定義部】
+#include <gasha/lf_stack.inl>//ロックフリースタック【インライン関数／テンプレート関数定義部】
+#include <gasha/lf_queue.inl>//ロックフリーキュー【インライン関数／テンプレート関数定義部】
 
 #include <gasha/spin_lock.h>//スピンロック
 #include <gasha/lw_spin_lock.h>//サイズ計量スピンロック

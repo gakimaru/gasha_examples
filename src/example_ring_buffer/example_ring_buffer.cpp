@@ -121,14 +121,14 @@ static bool operator<(const int key, const data_t& rhs)
 }
 //----------------------------------------
 //テストデータ操作クラス①：デフォルトのまま使う
-struct ope_t : public ring_buffer::base_ope_t<ope_t, data_t>{};
+struct ope_t : public ring_buffer::baseOpe_t<ope_t, data_t>{};
 //----------------------------------------
 //テストデータ操作クラス②：ソート／探索方法をデフォルトから変える
-struct another_ope_t : public ring_buffer::base_ope_t<ope_t, data_t>
+struct another_ope_t : public ring_buffer::baseOpe_t<ope_t, data_t>
 {
 	//ソート用プレディケート関数オブジェクト
 	//※m_valメンバーを基準にソート
-	struct sort_predicate{
+	struct predicateForSort{
 		inline bool operator()(const value_type& lhs, const value_type& rhs) const
 		{
 			return lhs.m_val < rhs.m_val;
@@ -137,7 +137,7 @@ struct another_ope_t : public ring_buffer::base_ope_t<ope_t, data_t>
 
 	//線形探索用プレディケート関数オブジェクト
 	//※m_valメンバーを探索
-	struct find_predicate{
+	struct predicateForFind{
 		inline bool operator()(const value_type& lhs, const int rhs) const
 		{
 			return lhs.m_val == rhs;
@@ -146,7 +146,7 @@ struct another_ope_t : public ring_buffer::base_ope_t<ope_t, data_t>
 
 	//二分探索用比較関数オブジェクト
 	//※m_valメンバーを比較
-	struct search_comparison{
+	struct comparisonForSearch{
 		inline int operator()(const value_type& lhs, const int rhs) const
 		{
 			return rhs - lhs.m_val;
@@ -162,7 +162,7 @@ struct another_ope_t : public ring_buffer::base_ope_t<ope_t, data_t>
 };
 //----------------------------------------
 //テストデータ操作クラス③：ロックを有効化する
-struct mt_ope_t : public ring_buffer::base_ope_t<mt_ope_t, data_t>
+struct mt_ope_t : public ring_buffer::baseOpe_t<mt_ope_t, data_t>
 {
 	//ロック型
 	typedef shared_spin_lock lock_type;//ロックオブジェクトを指定
@@ -187,7 +187,7 @@ int main(const int argc, const char* argv[])
 		int arr[20];//配列
 
 		//int型用のデータ操作クラス定義
-		struct ope_t : public ring_buffer::base_ope_t<ope_t, int>{};
+		struct ope_t : public ring_buffer::baseOpe_t<ope_t, int>{};
 
 		//コンテナ生成
 		//※既存の配列を渡してリングバッファコンテナとして扱う
@@ -361,7 +361,7 @@ int main(const int argc, const char* argv[])
 		printf("\n");
 		printf("[sort]\n");
 		con.sort();//高速ソート
-		//con.stable_sort();//安定ソート
+		//con.stableSort();//安定ソート
 		//std::sort(con.begin(), con.end());//高速ソート(STL版)
 		//std::stable_sort(con.begin(), con.end());//安定ソート(STL版)
 		printAll();//全件表示
@@ -371,7 +371,7 @@ int main(const int argc, const char* argv[])
 		printf("[custom sort]\n");
 		auto reverse_pred = [](const int lhs, const int rhs) -> bool {return lhs > rhs; };
 		con.sort(reverse_pred);//高速ソート
-		//con.stable_sort(reverse_pred);//安定ソート
+		//con.stableSort(reverse_pred);//安定ソート
 		//std::sort(con.begin(), con.end(), reverse_pred);//高速ソート(STL版)
 		//std::stable_sort(con.begin(), con.end(), reverse_pred);//安定ソート(STL版)
 		printAll();//全件表示
@@ -402,8 +402,8 @@ int main(const int argc, const char* argv[])
 		printAll();//全件表示
 		auto find = [&con](const int val)
 		{
-			printf("find_value(%d)=", val);
-			auto ite = con.find_value(val);//線形探索
+			printf("findValue(%d)=", val);
+			auto ite = con.findValue(val);//線形探索
 			//auto ite = std::find(con.begin(), con.end(), val);//線形探索(STL版)
 			if (ite.isExist())
 			{
@@ -426,8 +426,8 @@ int main(const int argc, const char* argv[])
 		printAll();//全件表示
 		auto binary_search = [&con](const int val)
 		{
-			printf("binary_search_value(%d)=", val);
-			auto ite = con.binary_search_value(val);//二分探索
+			printf("binarySearchValue(%d)=", val);
+			auto ite = con.binarySearchValue(val);//二分探索
 			if (ite.isExist())
 			{
 			//if(std::binary_search(con.begin(), con.end(), val))//二分探索(STL版)
@@ -461,9 +461,9 @@ int main(const int argc, const char* argv[])
 			printAll();//全件表示
 			con.sort();//高速ソート
 			printAll();//全件表示
-			con.stable_sort(reverse_pred);//安定ソート
+			con.stableSort(reverse_pred);//安定ソート
 			printAll();//全件表示
-			con.stable_sort();//安定ソート
+			con.stableSort();//安定ソート
 			printAll();//全件表示
 			find(1);
 			find(2);
@@ -546,12 +546,12 @@ int main(const int argc, const char* argv[])
 		//                                                             //（コンテナのデストラクタで、残っている要素のデストラクタを呼び出す。デフォルトは自動クリアなし）
 		//container_t con;//初期状態で配列の割り当てをせずにコンテナを生成する場合
 
-		//後から配列を割り当てる場合は assign_array() を使用する
+		//後から配列を割り当てる場合は assignArray() を使用する
 		//container_t con;//デフォルトコンストラクタ ※コンテナ生成時に配列を割り当てない
-		//con.assign_array(array);//※配列要素数を自動取得
-		//con.assign_array(&array[0], 10);//※要素数を明示的に受け渡す方法
+		//con.assignArray(array);//※配列要素数を自動取得
+		//con.assignArray(&array[0], 10);//※要素数を明示的に受け渡す方法
 		//char buff[1024];
-		//con.assign_array(buff, sizeof(buff), ring_buffer::AUTO_CLEAR);//バッファとバッファサイズを受け渡す方法＋コンテナ破棄時に自動クリア属性追加
+		//con.assignArray(buff, sizeof(buff), ring_buffer::AUTO_CLEAR);//バッファとバッファサイズを受け渡す方法＋コンテナ破棄時に自動クリア属性追加
 		//                                                              //（コンテナのデストラクタで、残っている要素のデストラクタを呼び出す。デフォルトは自動クリアなし）
 
 		//データを表示
@@ -642,9 +642,9 @@ int main(const int argc, const char* argv[])
 		printAll();//全件表示
 		con.sort();//高速ソート
 		printAll();//全件表示
-		con.stable_sort(reverse_pred);//安定ソート
+		con.stableSort(reverse_pred);//安定ソート
 		printAll();//全件表示
-		con.stable_sort();//安定ソート
+		con.stableSort();//安定ソート
 		printAll();//全件表示
 		find(1);
 		find(2);
@@ -763,7 +763,7 @@ int main(const int argc, const char* argv[])
 		printf("\n");
 		printf("[sort]\n");
 		con.sort();//高速ソート
-		//con.stable_sort();//安定ソート
+		//con.stableSort();//安定ソート
 		//std::sort(con.begin(), con.end());//高速ソート(STL版)
 		//std::stable_sort(con.begin(), con.end());//安定ソート(STL版)
 		printAll();//全件表示
@@ -773,7 +773,7 @@ int main(const int argc, const char* argv[])
 		printf("[custom sort]\n");
 		auto reverse_pred = [](const data_t& lhs, const data_t& rhs) -> bool {return lhs.m_key > rhs.m_key; };
 		con.sort(reverse_pred);//高速ソート
-		//con.stable_sort(reverse_pred);//安定ソート
+		//con.stableSort(reverse_pred);//安定ソート
 		//std::sort(con.begin(), con.end(), reverse_pred);//高速ソート(STL版)
 		//std::stable_sort(con.begin(), con.end(), reverse_pred);//安定ソート(STL版)
 		printAll();//全件表示
@@ -898,8 +898,8 @@ int main(const int argc, const char* argv[])
 		printAll();//全件表示
 		auto find = [&con](const int key)
 		{
-			printf("find_value(key=%d)=", key);
-			auto ite = con.find_value(key);//線形探索
+			printf("findValue(key=%d)=", key);
+			auto ite = con.findValue(key);//線形探索
 			//auto ite = std::find(con.begin(), con.end(), key);//線形探索(STL版)
 			if (ite.isExist())
 			{
@@ -922,8 +922,8 @@ int main(const int argc, const char* argv[])
 		printAll();//全件表示
 		auto binary_search = [&con](const int key)
 		{
-			printf("binary_search_value(key=%d)=", key);
-			auto ite = con.binary_search_value(key);//二分探索
+			printf("binarySearchValue(key=%d)=", key);
+			auto ite = con.binarySearchValue(key);//二分探索
 			if (ite.isExist())
 			{
 			//if (std::binary_search(con.begin(), con.end(), key))//二分探索(STL版)
@@ -1041,7 +1041,7 @@ int main(const int argc, const char* argv[])
 
 		//コンテナのインスタンス生成時に配列を渡せない場合は、sertArray() を使用する
 		//container_t con;
-		//con.assign_array(array);
+		//con.assignArray(array);
 
 		//10件ほどデータの開始位置をずらす
 		{
@@ -1088,7 +1088,7 @@ int main(const int argc, const char* argv[])
 		printf("\n");
 		printf("[sort]\n");
 		con.sort();//高速ソート
-		//con.stable_sort();//安定ソート
+		//con.stableSort();//安定ソート
 		printAll();//全件表示
 
 		//線形探索
@@ -1096,8 +1096,8 @@ int main(const int argc, const char* argv[])
 		printf("[find]\n");
 		auto find = [&con](const int value)
 		{
-			printf("find_value(value=%d)=", value);
-			auto ite = con.find_value(value);//線形探索
+			printf("findValue(value=%d)=", value);
+			auto ite = con.findValue(value);//線形探索
 			if (ite.isExist())
 				printf(" [%d:%d]", ite->m_key, ite->m_val);
 			else
@@ -1113,8 +1113,8 @@ int main(const int argc, const char* argv[])
 		printf("[binary search]\n");
 		auto binary_search = [&con](const int value)
 		{
-			printf("binary_search_value(value=%d)=", value);
-			auto ite = con.binary_search_value(value);//二分探索
+			printf("binarySearchValue(value=%d)=", value);
+			auto ite = con.binarySearchValue(value);//二分探索
 			if (ite.isExist())
 				printf(" [%d:%d]", ite->m_key, ite->m_val);
 			else
@@ -1131,7 +1131,7 @@ int main(const int argc, const char* argv[])
 			printf("[sort with custom predicate]\n");
 			auto predicate = [](const data_t& lhs, const data_t& rhs) -> bool {return lhs.m_key < rhs.m_key ? true : lhs.m_key == rhs.m_key ? lhs.m_val > rhs.m_val : false; };
 			con.sort(predicate);//高速ソート
-			//con.stable_sort(reverse_pred);//安定ソート
+			//con.stableSort(reverse_pred);//安定ソート
 			printAll();//全件表示
 		}
 
@@ -1158,7 +1158,7 @@ int main(const int argc, const char* argv[])
 		printf("[binary search with custom comparison(1)]\n");
 		auto custom_binary_search1 = [&con](const int key, const int value)
 		{
-			printf("binary_search_value(key=%d, value=%d)=", key, value);
+			printf("binarySearchValue(key=%d, value=%d)=", key, value);
 			auto comparison = [&key, &value](const data_t& lhs) -> int { return key == lhs.m_key ? lhs.m_val - value : key > lhs.m_key ? 1 : -1; };
 			auto ite = con.binary_search(comparison);//二分探索
 			if (ite.isExist())
@@ -1178,7 +1178,7 @@ int main(const int argc, const char* argv[])
 		{
 			printf("find(key=%d)=", key);
 			auto predicate = [](const data_t& lhs, const int key) -> bool { return lhs.m_key == key; };
-			auto ite = con.find_value(key, predicate);//線形探索
+			auto ite = con.findValue(key, predicate);//線形探索
 			if (ite.isExist())
 				printf(" [%d:%d]", ite->m_key, ite->m_val);
 			else
@@ -1194,9 +1194,9 @@ int main(const int argc, const char* argv[])
 		printf("[binary search with custom comparison(2)]\n");
 		auto custom_binary_search2 = [&con](const int key)
 		{
-			printf("binary_search_value(key=%d)=", key);
+			printf("binarySearchValue(key=%d)=", key);
 			auto comparison = [](const data_t& lhs, const int key) -> int { return key - lhs.m_key; };
-			auto ite = con.binary_search_value(key, comparison);//二分探索
+			auto ite = con.binarySearchValue(key, comparison);//二分探索
 			if (ite.isExist())
 				printf(" [%d:%d]", ite->m_key, ite->m_val);
 			else
@@ -1237,7 +1237,7 @@ int main(const int argc, const char* argv[])
 
 		//コンテナのインスタンス生成時に配列を渡せない場合は、sertArray() を使用する
 		//ring_buffer::container<ope_t> con;
-		//con.assign_array(array, -1);//第二引数で使用中のデータサイズを指定（-1で全域）
+		//con.assignArray(array, -1);//第二引数で使用中のデータサイズを指定（-1で全域）
 
 		//データを表示
 		auto printAll = [&con]()
@@ -1263,7 +1263,7 @@ int main(const int argc, const char* argv[])
 		printf("\n");
 		printf("[sort(after)]\n");
 		//con.sort();//高速ソート
-		con.stable_sort();//安定ソート
+		con.stableSort();//安定ソート
 		printAll();//全件表示
 	}
 
@@ -1364,7 +1364,7 @@ int main(const int argc, const char* argv[])
 			printf("[reverse sort]\n");
 			auto reverse_sort = [](const data_t& lhs, const data_t& rhs){return lhs.m_key > rhs.m_key; };
 			con->sort(reverse_sort);
-			assert(con->is_ordered(reverse_sort));
+			assert(con->isOrdered(reverse_sort));
 			prev_time = printElapsedTime(prev_time, true);
 
 			//イテレータ(2)
@@ -1391,7 +1391,7 @@ int main(const int argc, const char* argv[])
 			printf("\n");
 			printf("[sort]\n");
 			con->sort();
-			assert(con->is_ordered());
+			assert(con->isOrdered());
 			prev_time = printElapsedTime(prev_time, true);
 
 			//リバースイテレータ
@@ -1418,26 +1418,26 @@ int main(const int argc, const char* argv[])
 			//逆順安定ソート
 			printf("\n");
 			printf("[reverse stable sort]\n");
-			con->stable_sort(reverse_sort);
-			assert(con->is_ordered(reverse_sort));
+			con->stableSort(reverse_sort);
+			assert(con->isOrdered(reverse_sort));
 			prev_time = printElapsedTime(prev_time, true);
 
 			//正順安定ソート
 			printf("\n");
 			printf("[stable sort]\n");
-			con->stable_sort();
-			assert(con->is_ordered());
+			con->stableSort();
+			assert(con->isOrdered());
 			prev_time = printElapsedTime(prev_time, true);
 		#endif
 
 			//線形探索
 			printf("\n");
-			printf("[find_value]\n");
+			printf("[findValue]\n");
 			{
 				int num = 0;
 				for (int i = 0; i < TEST_DATA_NUM; i += TEST_DATA_FIND_STEP)
 				{
-					container_t::iterator ite = std::move(con->find_value(i));
+					container_t::iterator ite = std::move(con->findValue(i));
 					printf_detail(" [%d:%d]", ite->m_key, ite->m_val);
 					++num;
 				}
@@ -1448,12 +1448,12 @@ int main(const int argc, const char* argv[])
 
 			//二分探索
 			printf("\n");
-			printf("[binary_search_value]\n");
+			printf("[binarySearchValue]\n");
 			{
 				int num = 0;
 				for (int i = 0; i < TEST_DATA_NUM; ++i)
 				{
-					container_t::iterator ite = std::move(con->binary_search_value(i));
+					container_t::iterator ite = std::move(con->binarySearchValue(i));
 					printf_detail(" [%d:%d]", ite->m_key, ite->m_val);
 					++num;
 				}
@@ -1615,7 +1615,7 @@ int main(const int argc, const char* argv[])
 
 			//線形探索
 			printf("\n");
-			printf("[find_value]\n");
+			printf("[findValue]\n");
 			{
 				int num = 0;
 				for (int i = 0; i < TEST_DATA_NUM; i += TEST_DATA_FIND_STEP)
@@ -1631,7 +1631,7 @@ int main(const int argc, const char* argv[])
 
 			//二分探索
 			printf("\n");
-			printf("[binary_search_value]\n");
+			printf("[binarySearchValue]\n");
 			{
 				int num = 0;
 				for (int i = 0; i < TEST_DATA_NUM; ++i)
@@ -1718,7 +1718,7 @@ void testThread(const char* container_type)
 		}
 		{
 			lock_guard<lock_type> lock(con);//ライト・ロック取得 ※コンテナを渡してスコープロック
-			auto ite = con.find_value(key);
+			auto ite = con.findValue(key);
 			std::this_thread::sleep_for(std::chrono::microseconds(1));
 			con.erase(ite, 1);
 		}

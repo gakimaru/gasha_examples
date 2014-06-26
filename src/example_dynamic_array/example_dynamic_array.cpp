@@ -10,7 +10,7 @@
 
 #include "example_dynamic_array.h"//動的配列テスト
 
-#include <gasha/dynamic_array.inl>//動的配列【インライン関数／テンプレート関数実装部】
+#include <gasha/dynamic_array.inl>//動的配列【インライン関数／テンプレート関数定義部】
 
 #include <gasha/iterator.h>//イテレータ操作
 
@@ -170,7 +170,7 @@ void example_dynamic_array()
 		printf("\n");
 		printf("[sort]\n");
 		con.sort();//高速ソート
-		//con.stable_sort();//安定ソート
+		//con.stableSort();//安定ソート
 		//std::sort(con.begin(), con.end());//高速ソート(STL版)
 		//std::stable_sort(con.begin(), con.end());//安定ソート(STL版)
 		printAll();//全件表示
@@ -180,7 +180,7 @@ void example_dynamic_array()
 		printf("[custom sort]\n");
 		auto reverse_pred = [](const int lhs, const int rhs) -> bool {return lhs > rhs; };
 		con.sort(reverse_pred);//高速ソート
-		//con.stable_sort(reverse_pred);//安定ソート
+		//con.stableSort(reverse_pred);//安定ソート
 		//std::sort(con.begin(), con.end(), reverse_pred);//高速ソート(STL版)
 		//std::stable_sort(con.begin(), con.end(), reverse_pred);//安定ソート(STL版)
 		printAll();//全件表示
@@ -211,8 +211,8 @@ void example_dynamic_array()
 		printAll();//全件表示
 		auto find = [&con](const int val)
 		{
-			printf("find_value(%d)=", val);
-			auto ite = con.find_value(val);//線形探索
+			printf("findValue(%d)=", val);
+			auto ite = con.findValue(val);//線形探索
 			//auto ite = std::find(con.begin(), con.end(), val);//線形探索(STL版)
 			if (ite.isExist())
 			{
@@ -235,8 +235,8 @@ void example_dynamic_array()
 		printAll();//全件表示
 		auto binary_search = [&con](const int val)
 		{
-			printf("binary_search_value(%d)=", val);
-			auto ite = con.binary_search_value(val);//二分探索
+			printf("binarySearchValue(%d)=", val);
+			auto ite = con.binarySearchValue(val);//二分探索
 			if (ite.isExist())
 			{
 				//if(std::binary_search(con.begin(), con.end(), val))//二分探索(STL版)
@@ -341,12 +341,12 @@ void example_dynamic_array()
 		//                                                               //（コンテナのデストラクタで、残っている要素のデストラクタを呼び出す。デフォルトは自動クリアなし）
 		//container_t con;//初期状態で配列の割り当てをせずにコンテナを生成する場合
 
-		//後から配列を割り当てる場合は assign_array() を使用する
+		//後から配列を割り当てる場合は assignArray() を使用する
 		//container_t con;//デフォルトコンストラクタ ※コンテナ生成時に配列を割り当てない
-		//con.assign_array(array);//※配列要素数を自動取得
-		//con.assign_array(&array[0], 10);//※要素数を明示的に受け渡す方法
+		//con.assignArray(array);//※配列要素数を自動取得
+		//con.assignArray(&array[0], 10);//※要素数を明示的に受け渡す方法
 		//char buff[1024];
-		//con.assign_array(buff, sizeof(buff), dynamic_array::AUTO_CLEAR);//バッファとバッファサイズを受け渡す方法＋コンテナ破棄時に自動クリア属性追加
+		//con.assignArray(buff, sizeof(buff), dynamic_array::AUTO_CLEAR);//バッファとバッファサイズを受け渡す方法＋コンテナ破棄時に自動クリア属性追加
 		//                                                                //（コンテナのデストラクタで、残っている要素のデストラクタを呼び出す。デフォルトは自動クリアなし）
 
 		//データを表示
@@ -398,7 +398,7 @@ void example_dynamic_array()
 			printAll();
 			for (int i = 0; i < 100; ++i)
 			{
-				auto& ite = con.binary_search_value(i);
+				auto& ite = con.binarySearchValue(i);
 				printf("binary_search(%d)=", i);
 				if (ite.isExist())
 				{
@@ -455,7 +455,7 @@ void example_dynamic_array()
 		printf("\n");
 		printf("[sort]\n");
 		con.sort();//高速ソート
-		//con.stable_sort();//安定ソート
+		//con.stableSort();//安定ソート
 		//std::sort(con.begin(), con.end());//高速ソート(STL版)
 		//std::stable_sort(con.begin(), con.end());//安定ソート(STL版)
 		printAll();//全件表示
@@ -465,7 +465,7 @@ void example_dynamic_array()
 		printf("[custom sort]\n");
 		auto reverse_pred = [](const data_t& lhs, const data_t& rhs) -> bool {return lhs.m_key > rhs.m_key; };
 		con.sort(reverse_pred);//高速ソート
-		//con.stable_sort(reverse_pred);//安定ソート
+		//con.stableSort(reverse_pred);//安定ソート
 		//std::sort(con.begin(), con.end(), reverse_pred);//高速ソート(STL版)
 		//std::stable_sort(con.begin(), con.end(), reverse_pred);//安定ソート(STL版)
 		printAll();//全件表示
@@ -590,8 +590,8 @@ void example_dynamic_array()
 		printAll();//全件表示
 		auto find = [&con](const int key)
 		{
-			printf("find_value(key=%d)=", key);
-			auto ite = con.find_value(key);//線形探索
+			printf("findValue(key=%d)=", key);
+			auto ite = con.findValue(key);//線形探索
 			//auto ite = std::find(con.begin(), con.end(), key);//線形探索(STL版)
 			if (ite.isExist())
 			{
@@ -614,8 +614,8 @@ void example_dynamic_array()
 		printAll();//全件表示
 		auto binary_search = [&con](const int key)
 		{
-			printf("binary_search_value(key=%d)=", key);
-			auto ite = con.binary_search_value(key);//二分探索
+			printf("binarySearchValue(key=%d)=", key);
+			auto ite = con.binarySearchValue(key);//二分探索
 			if (ite.isExist())
 			{
 				//if (std::binary_search(con.begin(), con.end(), key))//二分探索(STL版)
@@ -738,7 +738,7 @@ void example_dynamic_array()
 
 		//コンテナのインスタンス生成時に配列を渡せない場合は、sertArray() を使用する
 		//container_t con;
-		//con.assign_array(array);
+		//con.assignArray(array);
 
 		//データ登録１：push_back()メソッド＋コンストラクタパラメータ（コンストラクタ呼び出しを行う）
 		printf("\n");
@@ -776,7 +776,7 @@ void example_dynamic_array()
 		printf("\n");
 		printf("[sort]\n");
 		con.sort();//高速ソート
-		//con.stable_sort();//安定ソート
+		//con.stableSort();//安定ソート
 		printAll();//全件表示
 
 		//線形探索
@@ -784,8 +784,8 @@ void example_dynamic_array()
 		printf("[find]\n");
 		auto find = [&con](const int value)
 		{
-			printf("find_value(value=%d)=", value);
-			auto ite = con.find_value(value);//線形探索
+			printf("findValue(value=%d)=", value);
+			auto ite = con.findValue(value);//線形探索
 			if (ite.isExist())
 				printf(" [%d:%d]", ite->m_key, ite->m_val);
 			else
@@ -801,8 +801,8 @@ void example_dynamic_array()
 		printf("[binary search]\n");
 		auto binary_search = [&con](const int value)
 		{
-			printf("binary_search_value(value=%d)=", value);
-			auto ite = con.binary_search_value(value);//二分探索
+			printf("binarySearchValue(value=%d)=", value);
+			auto ite = con.binarySearchValue(value);//二分探索
 			if (ite.isExist())
 				printf(" [%d:%d]", ite->m_key, ite->m_val);
 			else
@@ -819,7 +819,7 @@ void example_dynamic_array()
 			printf("[sort with custom predicate]\n");
 			auto predicate = [](const data_t& lhs, const data_t& rhs) -> bool {return lhs.m_key < rhs.m_key ? true : lhs.m_key == rhs.m_key ? lhs.m_val > rhs.m_val : false; };
 			con.sort(predicate);//高速ソート
-			//con.stable_sort(reverse_pred);//安定ソート
+			//con.stableSort(reverse_pred);//安定ソート
 			printAll();//全件表示
 		}
 
@@ -846,7 +846,7 @@ void example_dynamic_array()
 		printf("[binary search with custom comparison(1)]\n");
 		auto custom_binary_search1 = [&con](const int key, const int value)
 		{
-			printf("binary_search_value(key=%d, value=%d)=", key, value);
+			printf("binarySearchValue(key=%d, value=%d)=", key, value);
 			auto comparison = [&key, &value](const data_t& lhs) -> int { return key == lhs.m_key ? lhs.m_val - value : key > lhs.m_key ? 1 : -1; };
 			auto ite = con.binary_search(comparison);//二分探索
 			if (ite.isExist())
@@ -866,7 +866,7 @@ void example_dynamic_array()
 		{
 			printf("find(key=%d)=", key);
 			auto predicate = [](const data_t& lhs, const int key) -> bool { return lhs.m_key == key; };
-			auto ite = con.find_value(key, predicate);//線形探索
+			auto ite = con.findValue(key, predicate);//線形探索
 			if (ite.isExist())
 				printf(" [%d:%d]", ite->m_key, ite->m_val);
 			else
@@ -882,9 +882,9 @@ void example_dynamic_array()
 		printf("[binary search with custom comparison(2)]\n");
 		auto custom_binary_search2 = [&con](const int key)
 		{
-			printf("binary_search_value(key=%d)=", key);
+			printf("binarySearchValue(key=%d)=", key);
 			auto comparison = [](const data_t& lhs, const int key) -> int { return key - lhs.m_key; };
-			auto ite = con.binary_search_value(key, comparison);//二分探索
+			auto ite = con.binarySearchValue(key, comparison);//二分探索
 			if (ite.isExist())
 				printf(" [%d:%d]", ite->m_key, ite->m_val);
 			else
@@ -924,7 +924,7 @@ void example_dynamic_array()
 
 		//コンテナのインスタンス生成時に配列を渡せない場合は、sertArray() を使用する
 		//dynamic_array::container<ope_t> con;
-		//con.assign_array(array, -1);//第二引数で使用中のデータサイズを指定（-1で全域）
+		//con.assignArray(array, -1);//第二引数で使用中のデータサイズを指定（-1で全域）
 
 		//データを表示
 		auto printAll = [&con]()
@@ -950,7 +950,7 @@ void example_dynamic_array()
 		printf("\n");
 		printf("[sort(after)]\n");
 		//con.sort();//高速ソート
-		con.stable_sort();//安定ソート
+		con.stableSort();//安定ソート
 		printAll();//全件表示
 	}
 
@@ -1040,7 +1040,7 @@ void example_dynamic_array()
 			printf("[reverse sort]\n");
 			auto reverse_sort = [](const data_t& lhs, const data_t& rhs){return lhs.m_key > rhs.m_key; };
 			con->sort(reverse_sort);
-			assert(con->is_ordered(reverse_sort));
+			assert(con->isOrdered(reverse_sort));
 			prev_time = printElapsedTime(prev_time, true);
 
 			//イテレータ(2)
@@ -1067,7 +1067,7 @@ void example_dynamic_array()
 			printf("\n");
 			printf("[sort]\n");
 			con->sort();
-			assert(con->is_ordered());
+			assert(con->isOrdered());
 			prev_time = printElapsedTime(prev_time, true);
 
 			//リバースイテレータ
@@ -1094,26 +1094,26 @@ void example_dynamic_array()
 			//逆順安定ソート
 			printf("\n");
 			printf("[reverse stable sort]\n");
-			con->stable_sort(reverse_sort);
-			assert(con->is_ordered(reverse_sort));
+			con->stableSort(reverse_sort);
+			assert(con->isOrdered(reverse_sort));
 			prev_time = printElapsedTime(prev_time, true);
 
 			//正順安定ソート
 			printf("\n");
 			printf("[stable sort]\n");
-			con->stable_sort();
-			assert(con->is_ordered());
+			con->stableSort();
+			assert(con->isOrdered());
 			prev_time = printElapsedTime(prev_time, true);
 		#endif
 
 			//線形探索
 			printf("\n");
-			printf("[find_value]\n");
+			printf("[findValue]\n");
 			{
 				int num = 0;
 				for (int i = 0; i < TEST_DATA_NUM; i += TEST_DATA_FIND_STEP)
 				{
-					container_t::iterator ite = std::move(con->find_value(i));
+					container_t::iterator ite = std::move(con->findValue(i));
 					printf_detail(" [%d:%d]", ite->m_key, ite->m_val);
 					++num;
 				}
@@ -1124,12 +1124,12 @@ void example_dynamic_array()
 
 			//二分探索
 			printf("\n");
-			printf("[binary_search_value]\n");
+			printf("[binarySearchValue]\n");
 			{
 				int num = 0;
 				for (int i = 0; i < TEST_DATA_NUM; ++i)
 				{
-					container_t::iterator ite = std::move(con->binary_search_value(i));
+					container_t::iterator ite = std::move(con->binarySearchValue(i));
 					printf_detail(" [%d:%d]", ite->m_key, ite->m_val);
 					++num;
 				}
@@ -1280,7 +1280,7 @@ void example_dynamic_array()
 
 			//線形探索
 			printf("\n");
-			printf("[find_value]\n");
+			printf("[findValue]\n");
 			{
 				int num = 0;
 				for (int i = 0; i < TEST_DATA_NUM; i += TEST_DATA_FIND_STEP)
@@ -1296,7 +1296,7 @@ void example_dynamic_array()
 
 			//二分探索
 			printf("\n");
-			printf("[binary_search_value]\n");
+			printf("[binarySearchValue]\n");
 			{
 				int num = 0;
 				for (int i = 0; i < TEST_DATA_NUM; ++i)
@@ -1340,8 +1340,7 @@ void example_dynamic_array()
 template <class C>
 void testThread(const char* container_type)
 {
-	typedef C container_t;//テンプレートパラメータで、ロックありコンテナか、ロックなしコンテナの型を受け取る
-	typedef typename container_t::lock_type lock_type;//ロック制御型
+	typedef C container_t;//テンプレートパラメータでコンテナの型を受け取る
 
 	printf("\n");
 	printf("[%s]\n", container_type);
@@ -1375,17 +1374,20 @@ void testThread(const char* container_type)
 		std::this_thread::sleep_for(std::chrono::microseconds(1));
 		//スタート
 		{
-			auto lock = con.lockScoped();//ライト・ロック取得 ※スコープロック
+			//GASHA_ lock_guard<typename container_t::lock_type> lock(con);//ライト・ロック取得 ※スコープロック
+			auto lock = con.lockScoped();//（上の処理と同じ意味）
 			con.push_back(key, value);
 		}
 		{
-			auto lock = con.lockScoped();//ライト・ロック取得 ※スコープロック
-			auto ite = con.find_value(key);
+			//GASHA_ lock_guard<typename container_t::lock_type> lock(con);//ライト・ロック取得 ※スコープロック
+			auto lock = con.lockScoped();//（上の処理と同じ意味）
+			auto ite = con.findValue(key);
 			std::this_thread::sleep_for(std::chrono::microseconds(1));
 			con.erase(ite, 1);
 		}
 		{
-			auto lock = con.lockScoped();//ライト・ロック取得 ※スコープロック
+			//GASHA_ lock_guard<typename container_t::lock_type> lock(con);//ライト・ロック取得 ※スコープロック
+			auto lock = con.lockScoped();//（上の処理と同じ意味）
 			con.push_back(key, value + 10);
 		}
 	};
@@ -1418,7 +1420,8 @@ void testThread(const char* container_type)
 		//配列を表示
 		auto print_data = [&con](const char* caption)
 		{
-			auto lock = con.lockSharedScoped();//リード・ロック取得 ※スコープロック
+			//GASHA_ shared_lock_guard<typename container_t::lock_type> lock(con);//リード・ロック取得 ※スコープロック
+			auto lock = con.lockSharedScoped();//（上の処理と同じ意味）
 			printf("(%s)\n", caption);
 			printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
 			std::this_thread::sleep_for(std::chrono::microseconds(1));

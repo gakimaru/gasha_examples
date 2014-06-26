@@ -36,7 +36,7 @@ static const int TEST_DATA_COUNT = 10000;//テストデータ件数（最大）
 #define TEST_DATA_ALIGN 16//テストデータ一件のアラインメント
 //#define TEST_DATA_ALIGN 4//テストデータ一件のアラインメント
 
-//例外を無効化した状態で <array> をインクルードすると warning C4530 が出る
+//【VC++】例外を無効化した状態で <array> をインクルードすると warning C4530 が出る
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
 #pragma warning(disable: 4530)//C4530を抑える
 

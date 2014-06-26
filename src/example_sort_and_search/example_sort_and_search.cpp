@@ -998,23 +998,23 @@ void example_sort_and_search()
 				printf("   (data10_def=%p)\n", data10_def);
 				printf("    (data11_def=%p)\n", data11_def);
 			}
-			auto search_comparison = [&target](const data_t& data) -> int { return target - data.m_key; };
-			const data_t* data = binarySearch(*array_shuffle1, search_comparison);
+			auto comparisonForSearch = [&target](const data_t& data) -> int { return target - data.m_key; };
+			const data_t* data = binarySearch(*array_shuffle1, comparisonForSearch);
 			{
 				array_t& arr = *array_shuffle1;
 				const array_t& const_arr = *array_shuffle1;
-				const data_t* data1 = binarySearch(arr, search_comparison);
-				const data_t* data2 = binarySearch(const_arr, search_comparison);
-				const data_t* data3 = binarySearch(arr.begin(), arr.end(), search_comparison);
-				const data_t* data4 = binarySearch(arr.cbegin(), arr.cend(), search_comparison);
-				const data_t* data5 = binarySearch(const_arr.begin(), const_arr.end(), search_comparison);
-				//const data_t* data6 = binarySearch(arr._Elems, search_comparison);//VC++
-				//const data_t* data7 = binarySearch(const_arr._Elems, search_comparison);//VC++
-				const data_t* data8 = binarySearch(&arr.at(0), arr.size(), search_comparison);
-				const data_t* data9 = binarySearch(&const_arr.at(0), const_arr.size(), search_comparison);
-				const data_t* data10 = binarySearch(&arr.at(0), &arr.at(0) + arr.size(), search_comparison);
-				const data_t* data11 = binarySearch(&const_arr.at(0), &const_arr.at(0) + const_arr.size(), search_comparison);
-				printf("  binarySearch(*array_shuffle1, search_comparison);\n");
+				const data_t* data1 = binarySearch(arr, comparisonForSearch);
+				const data_t* data2 = binarySearch(const_arr, comparisonForSearch);
+				const data_t* data3 = binarySearch(arr.begin(), arr.end(), comparisonForSearch);
+				const data_t* data4 = binarySearch(arr.cbegin(), arr.cend(), comparisonForSearch);
+				const data_t* data5 = binarySearch(const_arr.begin(), const_arr.end(), comparisonForSearch);
+				//const data_t* data6 = binarySearch(arr._Elems, comparisonForSearch);//VC++
+				//const data_t* data7 = binarySearch(const_arr._Elems, comparisonForSearch);//VC++
+				const data_t* data8 = binarySearch(&arr.at(0), arr.size(), comparisonForSearch);
+				const data_t* data9 = binarySearch(&const_arr.at(0), const_arr.size(), comparisonForSearch);
+				const data_t* data10 = binarySearch(&arr.at(0), &arr.at(0) + arr.size(), comparisonForSearch);
+				const data_t* data11 = binarySearch(&const_arr.at(0), &const_arr.at(0) + const_arr.size(), comparisonForSearch);
+				printf("  binarySearch(*array_shuffle1, comparisonForSearch);\n");
 				printf("    (data=%p)\n", data);
 				printf("    (data1=%p)\n", data1);
 				printf("    (data2=%p)\n", data2);

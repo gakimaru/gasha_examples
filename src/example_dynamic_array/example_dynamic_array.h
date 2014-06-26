@@ -84,15 +84,15 @@ static inline bool operator<(const int key, const data_t& rhs)
 
 //----------------------------------------
 //テストデータ操作クラス①：デフォルトのまま使う
-struct ope_t : public GASHA_ dynamic_array::base_ope_t<ope_t, data_t>{};
+struct ope_t : public GASHA_ dynamic_array::baseOpe_t<ope_t, data_t>{};
 
 //----------------------------------------
 //テストデータ操作クラス②：ソート／探索方法をデフォルトから変える
-struct another_ope_t : public GASHA_ dynamic_array::base_ope_t<ope_t, data_t>
+struct another_ope_t : public GASHA_ dynamic_array::baseOpe_t<ope_t, data_t>
 {
 	//ソート用プレディケート関数オブジェクト
 	//※m_valメンバーを基準にソート
-	struct sort_predicate{
+	struct predicateForSort{
 		inline bool operator()(const value_type& lhs, const value_type& rhs) const
 		{
 			return lhs.m_val < rhs.m_val;
@@ -101,7 +101,7 @@ struct another_ope_t : public GASHA_ dynamic_array::base_ope_t<ope_t, data_t>
 
 	//線形探索用プレディケート関数オブジェクト
 	//※m_valメンバーを探索
-	struct find_predicate{
+	struct predicateForFind{
 		inline bool operator()(const value_type& lhs, const int rhs) const
 		{
 			return lhs.m_val == rhs;
@@ -110,7 +110,7 @@ struct another_ope_t : public GASHA_ dynamic_array::base_ope_t<ope_t, data_t>
 
 	//二分探索用比較関数オブジェクト
 	//※m_valメンバーを比較
-	struct search_comparison{
+	struct comparisonForSearch{
 		inline int operator()(const value_type& lhs, const int rhs) const
 		{
 			return rhs - lhs.m_val;
@@ -127,7 +127,7 @@ struct another_ope_t : public GASHA_ dynamic_array::base_ope_t<ope_t, data_t>
 
 //----------------------------------------
 //テストデータ操作クラス③：ロックを有効化する
-struct mt_ope_t : public GASHA_ dynamic_array::base_ope_t<mt_ope_t, data_t>
+struct mt_ope_t : public GASHA_ dynamic_array::baseOpe_t<mt_ope_t, data_t>
 {
 	//ロック型
 	typedef GASHA_ sharedSpinLock lock_type;//ロックオブジェクトを指定
@@ -135,7 +135,7 @@ struct mt_ope_t : public GASHA_ dynamic_array::base_ope_t<mt_ope_t, data_t>
 
 //----------------------------------------
 //int型用のデータ操作クラス定義
-struct int_ope_t : public GASHA_ dynamic_array::base_ope_t<ope_t, int>{};
+struct int_ope_t : public GASHA_ dynamic_array::baseOpe_t<ope_t, int>{};
 
 //----------------------------------------
 //動的配列コンテナテスト

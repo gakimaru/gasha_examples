@@ -129,7 +129,7 @@ struct data_t
 };
 //----------------------------------------
 //テストデータ操作クラス
-struct heap_ope_t : public binary_heap::base_ope_t<heap_ope_t, data_t>
+struct heap_ope_t : public binary_heap::baseOpe_t<heap_ope_t, data_t>
 {
 	//キーを比較
 	//※lhsの方が小さいければ true を返す
@@ -145,7 +145,7 @@ struct heap_ope_t : public binary_heap::base_ope_t<heap_ope_t, data_t>
 };
 //----------------------------------------
 //テストデータ操作クラス
-struct ope_t : public priority_queue::base_ope_t<ope_t, data_t, PRIORITY, int>
+struct ope_t : public priority_queue::baseOpe_t<ope_t, data_t, PRIORITY, int>
 {
 	//優先度を取得
 	inline static priority_type getPriority(const node_type& node){ return node.m_priority; }
@@ -784,7 +784,7 @@ int main(const int argc, const char* argv[])
 		printf("\n");
 
 		//操作型
-		struct p_ope_t : public priority_queue::base_ope_t<p_ope_t, data_t*, PRIORITY, int>
+		struct p_ope_t : public priority_queue::baseOpe_t<p_ope_t, data_t*, PRIORITY, int>
 		{
 			inline static priority_type getPriority(const node_type& node){ return node->m_priority; }
 			inline static void setPriority(node_type& node, const priority_type priority){ node->m_priority = priority; }

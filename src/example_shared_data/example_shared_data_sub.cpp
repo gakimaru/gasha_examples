@@ -15,19 +15,19 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //----------------------------------------
 //テンプレートの明示的なインスタンス化
 
-#include <gasha/shared_pool_allocator.cpp.h>//マルチスレッド共有プールアロケータ【関数実装部】
-#include <gasha/shared_stack.cpp.h>//マルチスレッド共有スタック【関数実装部】
-#include <gasha/shared_queue.cpp.h>//マルチスレッド共有キュー【関数実装部】
+#include <gasha/shared_pool_allocator.cpp.h>//マルチスレッド共有プールアロケータ【関数定義部】
+#include <gasha/shared_stack.cpp.h>//マルチスレッド共有スタック【関数定義部】
+#include <gasha/shared_queue.cpp.h>//マルチスレッド共有キュー【関数定義部】
 
-#include <gasha/lf_pool_allocator.cpp.h>//ロックフリープールアロケータ【関数実装部】
-#include <gasha/lf_stack.cpp.h>//ロックフリースタック【関数実装部】
-#include <gasha/lf_queue.cpp.h>//ロックフリーキュー【関数実装部】
+#include <gasha/lf_pool_allocator.cpp.h>//ロックフリープールアロケータ【関数定義部】
+#include <gasha/lf_stack.cpp.h>//ロックフリースタック【関数定義部】
+#include <gasha/lf_queue.cpp.h>//ロックフリーキュー【関数定義部】
 
 //※コンパイル速度の劣化や、ソース改変時の広範囲な再コンパイルの影響を抑えるために、
 //　コンテナのヘッダーファイルを三つに分割。
 //　　・*.h     ... 宣言部                                  （クラスの宣言が必要な場所でインクルード）
 //　　・*.inl   ... インライン関数／テンプレート関数の実装部（クラスの操作が必要な場所でインクルード）
-//　　・*.cpp.h ... 関数実装部                              （クラスの実体化が必要な場所でインクルード）
+//　　・*.cpp.h ... 関数定義部                              （クラスの実体化が必要な場所でインクルード）
 //※わざわざ分けて書くのが面倒なら、クラスの操作が必要な場所で
 //　このヘッダーファイルをインクルードすれば、明示的なインスタンス化は
 //　必要ない。

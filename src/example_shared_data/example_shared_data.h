@@ -100,7 +100,7 @@ typedef GASHA_ spinLock lock_type;//共有データのロックに spinLock を�
 
 #elif USE_LOCK_TYPE == 2//共有データのロックに std::mutex を使用する場合
 
-//例外を無効化した状態で <mutex> をインクルードすると、warning C4530 が発生する
+//【VC++】例外を無効化した状態で <mutex> をインクルードすると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
 #pragma warning(disable: 4530)//C4530を抑える
 

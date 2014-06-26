@@ -73,7 +73,7 @@ struct data_t
 };
 //----------------------------------------
 //テストデータ向けノード操作用クラス（CRTP）
-struct ope_t : public rb_tree::base_ope_t<ope_t, data_t, int, TEST_DATA_STACK_DEPTH_MAX>
+struct ope_t : public rb_tree::baseOpe_t<ope_t, data_t, int, TEST_DATA_STACK_DEPTH_MAX>
 {
 	//子ノードを取得
 	inline static const node_type* getChildL(const node_type& node){ return node.m_nodeL; }//大（右）側

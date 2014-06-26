@@ -157,7 +157,7 @@ struct data_t
 //テストデータ操作クラス
 #include <functional>//C++11 std::function用
 #include <algorithm>//C++11 std::for_each用
-struct ope_t : public hash_table::base_ope_t<ope_t, crc32_t, data_t>
+struct ope_t : public hash_table::baseOpe_t<ope_t, crc32_t, data_t>
 {
 	//データ置換属性
 	//※デフォルト（NEVER_REPLACE）のままとする
@@ -403,7 +403,7 @@ int main(const int argc, const char* argv[])
 			}
 			//【登録方法③】insert()メソッドにキーとオブジェクトを渡して登録する方法
 			//※オブジェクトのコピーが発生するので少し遅い
-			//※操作用クラス base_ope_t の派生クラスで、getKey() を実装する必要あり
+			//※操作用クラス baseOpe_t の派生クラスで、getKey() を実装する必要あり
 			#elif USE_INSERT_TYPE == 3
 			{
 				data_t new_obj(name, i);
@@ -411,7 +411,7 @@ int main(const int argc, const char* argv[])
 			}
 			//【登録方法④】insertAuto()メソッドにオブジェクトを渡して登録する方法
 			//※オブジェクトのコピーが発生するので少し遅い
-			//※操作用クラス base_ope_t の派生クラスで、getKey() を実装する必要あり
+			//※操作用クラス baseOpe_t の派生クラスで、getKey() を実装する必要あり
 			#elif USE_INSERT_TYPE == 4
 			{
 				data_t new_obj(name, i);
@@ -669,7 +669,7 @@ int main(const int argc, const char* argv[])
 				result = con->erase(calcCRC32(name));//キーを渡して削除
 			}
 			//【削除方法②】eraseAuto()メソッドにオブジェクトを渡して削除する方法
-			//※操作用クラス base_ope_t の派生クラスで、getKey() を実装する必要あり
+			//※操作用クラス baseOpe_t の派生クラスで、getKey() を実装する必要あり
 			#elif USE_INSERT_TYPE == 2
 			{
 				data_t obj(name, i);
@@ -1044,7 +1044,7 @@ int main(const int argc, const char* argv[])
 		printf("--------------------------------------------------------------------------------\n");
 
 		//操作型
-		struct p_ope_t : public hash_table::base_ope_t<p_ope_t, int, data_t*>
+		struct p_ope_t : public hash_table::baseOpe_t<p_ope_t, int, data_t*>
 		{
 			//データ置換属性
 			//※デフォルト（NEVER_REPLACE）のままとする
@@ -1101,7 +1101,7 @@ int main(const int argc, const char* argv[])
 		printf("--------------------------------------------------------------------------------\n");
 		
 		//操作型 ※単純な関数呼び出し用
-		struct func_ope_t : public hash_table::base_ope_t<func_ope_t, crc32_t, std::function<int(int, int)>>
+		struct func_ope_t : public hash_table::baseOpe_t<func_ope_t, crc32_t, std::function<int(int, int)>>
 		{
 		};
 		
@@ -1120,7 +1120,7 @@ int main(const int argc, const char* argv[])
 		};
 
 		//操作型 ※オブジェクトメンバー関数呼び出し用
-		struct obj_ope_t : public hash_table::base_ope_t<func_ope_t, crc32_t, std::function<int(data_t&, int, int)>>
+		struct obj_ope_t : public hash_table::baseOpe_t<func_ope_t, crc32_t, std::function<int(data_t&, int, int)>>
 		{
 		};
 
