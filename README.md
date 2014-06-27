@@ -13,9 +13,9 @@ Released under the [MIT license][MIT].
 > 
 > また、サブモジュールにより、ライブラリ用の各リポジトリを適切な位置関係に配置しており、ライブラリファイルのビルド、および、ソースコードレベルでのライブラリのデバッグが可能です。  
 
-**関連リポジトリ**
+**構成リポジトリ**
 * [`gasha` ライブラリ本体用リポジトリ][gasha]  
-* [`gasha_settings` ライブラリ挙動設定用リポジトリ][gasha_settings]  
+* [`gasha_settings` プロジェクト固有のライブラリ挙動カスタマイズ用リポジトリ][gasha_settings]  
 * [`gasha_src` ライブラリソース用リポジトリ][gasha_src]  
 * [`gasha_examples` サンプルプログラム用リポジトリ][gasha_examples]  
 * [`gasha_proj` ライブラリビルド用リポジトリ][gasha_proj]  
@@ -43,7 +43,7 @@ Released under the [MIT license][MIT].
 > プロジェクトごとに、ライブラリの動作要件をカスタマイズし易いように、複数のリポジトリを組み合わせて構成しています。  
 
 **名前の由来は？**  
-> 名前の由来は「[がしゃどくろ][GASHADOKURO]」から。なので、読み方は「ガシャ」。  
+> 名前の由来は「[がしゃどくろ][GASHADOKURO]」から。読み方は「ガシャ」。  
 > その「骨格」的な意味合い（？）がライブラリを象徴し、自身のハンドル名「Gakimaru」の頭文字「GA」を重ねて命名しました。  
 > 「GA」は「ゲーム開発向け」の意味も兼ねます。  
 [GASHADOKURO]: http://ja.wikipedia.org/wiki/%E3%81%8C%E3%81%97%E3%82%83%E3%81%A9%E3%81%8F%E3%82%8D
@@ -60,7 +60,7 @@ Released under the [MIT license][MIT].
 > 
 > これにより、サブモジュールとして配置された三つのリポジトリクローンが更新されます。  
 > > `sub/gasha` ライブラリ本体  
-> > `sub/gasha_settings` ライブラリ挙動設定  
+> > `sub/gasha_settings` プロジェクト固有のライブラリ挙動カスタマイズ用  
 > > `sub/gasha_src` ライブラリソース
 
 3. **ライブラリのビルド**  
@@ -111,7 +111,7 @@ Released under the [MIT license][MIT].
      `-[sub]               ... サブモジュール用
         |
         |-[gasha]          ... ライブラリ本体用リポジトリ(https://github.com/gakimaru/gasha)
-        |-[gasha_settings] ... ライブラリ挙動設定用リポジトリ(https://github.com/gakimaru/gasha_settings)
+        |-[gasha_settings] ... プロジェクト固有のライブラリ挙動カスタマイズ用(https://github.com/gakimaru/gasha_settings)
         `-[gasha_src]      ... ライブラリソース用リポジトリ(https://github.com/gakimaru/gasha_src)
 
 ####ライブラ単体リビルド用リポジトリ####
@@ -121,7 +121,7 @@ Released under the [MIT license][MIT].
      `-[sub]               ... サブモジュール用
         |
         |-[gasha]          ... ライブラリ本体用リポジトリ(https://github.com/gakimaru/gasha)
-        |-[gasha_settings] ... ライブラリ挙動設定用リポジトリ(https://github.com/gakimaru/gasha_settings)
+        |-[gasha_settings] ... プロジェクト固有のライブラリ挙動カスタマイズ用(https://github.com/gakimaru/gasha_settings)
         `-[gasha_src]      ... ライブラリソース用リポジトリ(https://github.com/gakimaru/gasha_src)
 
 ライブラリ概要
@@ -515,7 +515,7 @@ Released under the [MIT license][MIT].
      |
      |-[sub]                     ... サブモジュール用
         |
-        `-[gasha_settings]       ... サブモジュール：ライブラリ挙動設定用リポジトリ
+        `-[gasha_settings]       ... サブモジュール：プロジェクト固有のライブラリ挙動カスタマイズ用
            |
            `-[include]           ... ライブラリインクルードファイル用
               |
@@ -527,7 +527,7 @@ Released under the [MIT license][MIT].
                        |
                        |- first_settings.h      ... プロジェクト固有のライブラリ設定（先行設定）
                        |                            ※ネームスペース設定など
-                       `- last_setteings.h      ... プロジェクト固有のライブラリ設定
+                       `- last_setteings.h      ... プロジェクト固有のライブラリ設定（最終設定）
                                                     ※SSE有効化設定など
 
 ####サブモジュール／ライブラリソース####
@@ -628,10 +628,10 @@ Released under the [MIT license][MIT].
 * **前提１：GASHAもしくはその派生ライブラリをgitリポジトリで管理するものとします。**  
 * **前提２：ライブラリを複数プロジェクトで共通利用するものとします。**  
 
-1. **ライブラリとライブラリ挙動設定リポジトリをプロジェクトに配置**  
+1. **ライブラリ用リポジトリとプロジェクト固有のライブラリ挙動カスタマイズ用リポジトリをプロジェクトに配置**  
 > サブモジュールとして、ライブラリ用のリポジトリを配置して下さい。  
 > > `project/sub/gasha` ... ライブラリ本体用リポジトリ(https://github.com/gakimaru/gasha)  
-> > `project/sub/gasha_settings` ... ライブラリ挙動設定用リポジトリ(https://github.com/gakimaru/gasha_settings)  
+> > `project/sub/gasha_settings` ... プロジェクト固有のライブラリ挙動カスタマイズ用(https://github.com/gakimaru/gasha_settings)  
 > 
 > ライブラリ自体をプロジェクト向けにビルドする場合は、ライブラリソース用リポジトリも配置して下さい。  
 > > `project/sub/gasha_src` ... ライブラリソース用リポジトリ(https://github.com/gakimaru/gasha_src)   
