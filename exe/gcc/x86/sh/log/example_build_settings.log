@@ -20,8 +20,8 @@ __PRETTY_FUNCTION__="static void example_build_settings()::test::func()"
 __FUNCSIG__="static void example_build_settings()::test::func()"
 __func__="func"
 __FUNCDNAME__=""
-__DATE__="Jun 27 2014"
-__TIME__="21:51:40"
+__DATE__="Jun 28 2014"
+__TIME__="05:57:13"
 __TIMESTAMP__="Fri Jun 27 21:49:49 2014"
 
 GASHA_FUNC_NAME()="static void example_build_settings()::test::func()"
@@ -57,7 +57,7 @@ _aligned_free(p)
 ------------------------------------------------------------------------------
 Checking build-settings suitable for runtime environment.
 
-cpu_string="Genunteline"
+cpu_string="ÿÿÿÿÿÿÿÿÿÿÿ"
 [OK] SSE is supported.
 [OK] SSE2 is supported.
 [OK] SSE3 is supported.
@@ -78,24 +78,25 @@ CPU Architecture: x86 (32 bit, little endian) [x86]
 Compiler: GCC (Version=4.8)
 Language: C++ (__cplusplus=201103) [C++98] [C++03] [C++11]
 
-- no_inline ... is available.(substitution)
-- always_inline ... is available.(substitution)
 - nullptr ... is available.
 - override ... is available.
 - final ... is available.
 - auto ... is available.
 - decltype ... is available.
-- default/delete member ... is available.
+- default/delete ... is available.
 - constexpr ... is available.
 - user-defined-literal ... is available.
 - lambda expression ... is available.
 - enum class ... is available.
 - variadic template ... is available.
-- template aliases(using) ... is available.
+- template aliases ... is available.
 - rvalue reference & std::move ... is available.
 - static_assert ... is available.
 - thread_local ... is available.
 - alignas ... is available.
 - alignof ... is available.
-- _aligned_malloc ... is available.(substitution)
-- _aligned_free ... is available.(substitution)
+
+- _aligned_malloc ... is available with commonized.
+- _aligned_free ... is available with commonized.
+- no_inline ... is available with commonized.
+- always_inline ... is available with commonized.
