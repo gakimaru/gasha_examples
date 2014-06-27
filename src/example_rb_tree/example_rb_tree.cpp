@@ -8,9 +8,15 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_rb_tree.h"//赤黒木テスト
+#include "example_rb_tree.h"//赤黒木コンテナテスト
 
-//#include <gasha/rb_tree.h>//赤黒木
+#include <gasha/rb_tree.inl>//赤黒木コンテナ【インライン関数／テンプレート関数定義部】
+
+#include <gasha/iterator.h>//イテレータ操作
+
+#include <algorithm>//for_each用
+#include <random>//C++11 std::random用
+#include <chrono>//C++11 時間計測用
 
 #include <stdio.h>//printf()
 
@@ -19,10 +25,6 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //--------------------------------------------------------------------------------
 //赤黒木テスト
 //--------------------------------------------------------------------------------
-
-#include <algorithm>//for_each用
-#include <random>//C++11 std::random用
-#include <chrono>//C++11 時間計測用
 
 #if 0
 

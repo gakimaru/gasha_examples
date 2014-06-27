@@ -16,7 +16,7 @@
 
 #include <algorithm>//std::for_each用
 #include <chrono>//C++11 時間計測用
-#include <vector>//std::vector用（比較用）
+#include <forward_list>//std::forward_list用（比較用）
 #include <assert.h>//assert用
 
 #include <stdio.h>//printf()
