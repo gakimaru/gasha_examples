@@ -17,12 +17,12 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 int main(const int argc, const char* argv[])
 {
-	//ビルド設定が正しく実行環境に適合するかチェック
-	checkBuildSettings();
-	
 	//ビルド設定処理テスト
 	example_build_settings();
 	
+	//ビルド設定が正しく実行環境に適合するかチェック
+	checkBuildSettings();
+
 	return EXIT_SUCCESS;
 }
 

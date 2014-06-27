@@ -86,6 +86,10 @@ struct alignas(16) data_t
 //ビルド設定処理テスト
 void example_build_settings()
 {
+	printf("\n");
+	printf("================================================================================\n");
+	printf("\n");
+	
 	//コンパイラ確認テスト
 	printf("Compiler: name=\"%s\", Ver=[%d(0x%08x).%d(0x%08x)]\n", GASHA_COMPILER_NAME, GASHA_COMPILER_VER, GASHA_COMPILER_VER, GASHA_COMPILER_MINOR, GASHA_COMPILER_MINOR);
 #ifdef GASHA_IS_VC
