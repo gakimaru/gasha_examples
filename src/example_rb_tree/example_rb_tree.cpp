@@ -14,9 +14,9 @@
 
 #include <gasha/iterator.h>//イテレータ操作
 
-#include <algorithm>//for_each用
-#include <random>//C++11 std::random用
-#include <chrono>//C++11 時間計測用
+#include <algorithm>//std::for_each()
+#include <random>//C++11 std::random
+#include <chrono>//C++11 std::chrono
 
 #include <stdio.h>//printf()
 

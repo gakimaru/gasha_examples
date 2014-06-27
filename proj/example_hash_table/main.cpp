@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
 // main.cpp
-// 開番地法ハッシュテーブルテストテスト - メイン
+// 開番地法ハッシュテーブルコンテナテスト - メイン
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -8,14 +8,14 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_hash_table.h"//開番地法ハッシュテーブルテストテスト
+#include "example_hash_table.h"//開番地法ハッシュテーブルコンテナテスト
 
 #include <stdio.h>
 #include <stdlib.h>
 
 int main(const int argc, const char* argv[])
 {
-	//開番地法ハッシュテーブルテストテスト
+	//開番地法ハッシュテーブルコンテナテスト
 	example_hash_table();
 	
 	return EXIT_SUCCESS;

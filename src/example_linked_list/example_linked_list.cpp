@@ -14,10 +14,10 @@
 
 #include <gasha/iterator.h>//イテレータ操作
 
-#include <algorithm>//std::for_each用
-#include <chrono>//C++11 時間計測用
-#include <list>//std::list用（比較用）
-#include <assert.h>//assert用
+#include <algorithm>//std::for_each()
+#include <chrono>//C++11 std::chrono
+#include <list>//std::list（比較用）
+#include <assert.h>//assert()
 
 #include <stdio.h>//printf()
 

@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
 // exmaple_hash_table.cpp
-// 開番地法ハッシュテーブルテストテスト
+// 開番地法ハッシュテーブルコンテナテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -8,9 +8,21 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_hash_table.h"//開番地法ハッシュテーブルテストテスト
+#include "example_hash_table.h"//開番地法ハッシュテーブルコンテナテスト
 
-//#include <gasha/hash_table.h>//開番地法ハッシュテーブルテスト
+#include <gasha/hash_table.inl>//開番地法ハッシュテーブルコンテナ【インライン関数／テンプレート関数定義部】
+
+#include <gasha/iterator.h>//イテレータ操作
+
+#include <algorithm>//std::for_each()
+#include <chrono>//C++11 std::chrono
+#include <forward_list>//std::forward_list（比較用）
+#include <assert.h>//assert()
+
+#include <stdio.h>//printf()
+
+GASHA_USING_NAMESPACE;//ネームスペース使用
+
 
 #include <stdio.h>//printf()
 
@@ -1179,7 +1191,7 @@ int func_add(int a, int b)
 #endif
 
 //----------------------------------------
-//開番地法ハッシュテーブルテストテスト
+//開番地法ハッシュテーブルコンテナテスト
 void example_hash_table()
 {
 }
