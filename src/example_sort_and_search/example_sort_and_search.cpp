@@ -42,6 +42,7 @@
 #include <random>//C++11 std::random
 #include <chrono>//C++11 std::chrono
 #include <bitset>//std::bitset
+#include <cstdint>//C++11 std::intptr_t
 #include <functional>//C++11 std::function
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
@@ -272,7 +273,7 @@ void example_sort_and_search()
 		const data_t* element0_p = &(*array)[0];
 		const data_t* element1_p = &(*array)[1];
 		const std::size_t data_size = sizeof(data_t);
-		const std::size_t element_size = reinterpret_cast<intptr_t>(element1_p)-reinterpret_cast<intptr_t>(element0_p);
+		const std::size_t element_size = reinterpret_cast<std::intptr_t>(element1_p)-reinterpret_cast<std::intptr_t>(element0_p);
 		const std::size_t array_size = sizeof(*array);
 		const std::size_t element_count = array->size();
 		printf("array_size=%d, element_count=%d, element_size=%d, data_size=%d, element0_p=%p, element1_p=%p\n", array_size, element_count, element_size, data_size, element0_p, element1_p);
