@@ -29,13 +29,6 @@ static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST
 #define PRINT_TEST_DATA_DETAIL//テストデータの詳細タを表示する場合は、このマクロを有効化する
 //#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
 
-//--------------------------------------------------------------------------------
-//双方向連結リストのコンパイラスイッチ
-//#define GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH//二分探索を有効にする
-//#define GASHA_LINKED_LIST_ENABLE_STABLE_SORT//安定ソートを有効にする
-//#define GASHA_LINKED_LIST_USE_SHELL_SORT//通常ソートにシェルソートを使用する（無効化時は挿入ソートを使用）
-
-
 //双方向連結リストテスト
 void example_linked_list();
 

@@ -29,12 +29,6 @@ static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST
 #define PRINT_TEST_DATA_DETAIL//テストデータの詳細タを表示する場合は、このマクロを有効化する
 //#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
 
-//--------------------------------------------------------------------------------
-//片方向連結リストのコンパイラスイッチ
-#define GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR//リバースイテレータを有効化する場合は、このマクロを有効化する【注意】低速処理
-//#define GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH//二分探索を有効にする ※リバースイテレータ無効化時は無効
-//#define GASHA_SINGLY_LINKED_LIST_ENABLE_STABLE_SORT//安定ソートを有効にする
-
 #if defined(GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH) && !defined(GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR)
 #undef GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 #endif
