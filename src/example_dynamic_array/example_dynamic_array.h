@@ -141,6 +141,10 @@ struct int_ope_t : public GASHA_ dynamic_array::baseOpe_t<ope_t, int>{};
 //動的配列コンテナテスト
 void example_dynamic_array();
 
+//----------------------------------------
+//動的配列シンプルコンテナテスト
+void example_simple_dynamic_array();
+
 #endif//__EXAMPLE_DYNAMIC_ARRAY_H_
 
 // End of file

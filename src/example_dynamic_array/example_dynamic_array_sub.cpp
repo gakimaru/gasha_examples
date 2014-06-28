@@ -10,6 +10,8 @@
 
 #include "example_dynamic_array.h"//動的配列コンテナテスト
 
+#include <stdio.h>//printf()
+
 //----------------------------------------
 //テンプレートの明示的なインスタンス化
 
@@ -32,5 +34,28 @@ template class dynamic_array::container<int_ope_t>;
 template class dynamic_array::container<ope_t>;
 template class dynamic_array::container<another_ope_t>;
 template class dynamic_array::container<mt_ope_t>;
+
+//----------------------------------------
+//動的配列シンプルコンテナテスト
+//※.inl と .cpp.h をインクルードした後は、明示的なインスタンス化をせずにコンテナを使用可能。
+//※シンプルコンテナを使用すると、コンテナ操作用構造体の定義も省略可能。
+void example_simple_dynamic_array()
+{
+	printf("\n");
+	printf("--- example_simple_dynamic_array ---\n");
+
+	char arr[10];
+	dArrayS<char>::con con(arr);//シンプルコンテナ
+	con.push_back(5);
+	con.push_back(1);
+	con.push_back(3);
+	con.sort();
+	printf("data =");
+	for(auto data : con)
+	{
+		printf(" %d", data);
+	}
+	printf("\n");
+}
 
 // End of file
