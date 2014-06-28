@@ -259,7 +259,7 @@ void example_sort_and_search()
 			break;
 		case init_ordered_without_both_ends:
 			{
-				swapValues((*array)[0], (*array)[array->size() - 1]);
+				GASHA_ swapValues((*array)[0], (*array)[array->size() - 1]);
 			}
 			break;
 		}

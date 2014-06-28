@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
 // exmaple_priority_queue_sub.cpp
-// 優先度付きキューテスト
+// 優先度付きキューコンテナアダプタ／二分ヒープコンテナテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -8,14 +8,15 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_priority_queue.h"//優先度付きキューコンテナテスト
+#include "example_priority_queue.h"//優先度付きキューコンテナアダプタ／二分ヒープコンテナテスト
+
+#include <gasha/binary_heap.cpp.h>//二分ヒープコンテナ【関数定義部】
+#include <gasha/priority_queue.cpp.h>//優先度付きキューコンテナアダプタ【関数定義部】
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //----------------------------------------
 //テンプレートの明示的なインスタンス化
-
-#include <gasha/priority_queue.cpp.h>//優先度付きキューコンテナ【関数定義部】
 
 //※コンパイル速度の劣化や、ソース改変時の広範囲な再コンパイルの影響を抑えるために、
 //　コンテナのヘッダーファイルを三つに分割。

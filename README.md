@@ -45,7 +45,6 @@ Released under the [MIT license][MIT].
 **名前の由来は？**  
 > 名前の由来は「[がしゃどくろ][GASHADOKURO]」から。読み方は「ガシャ」。  
 > その「骨格」的な意味合い（？）がライブラリを象徴し、自身のハンドル名「Gakimaru」の頭文字「GA」を重ねて命名しました。  
-> 「GA」は「ゲーム開発向け」の意味も兼ねます。  
 [GASHADOKURO]: http://ja.wikipedia.org/wiki/%E3%81%8C%E3%81%97%E3%82%83%E3%81%A9%E3%81%8F%E3%82%8D
 
 ライブラリサンプルプログラム実行手順
