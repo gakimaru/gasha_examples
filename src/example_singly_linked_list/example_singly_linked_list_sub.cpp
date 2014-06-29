@@ -31,7 +31,7 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 #if 0
 
 template class singly_linked_list::container<int_ope_t>;
-template class singly_linked_list::container<ope_t>;
+template class singly_linked_list::container<ope>;
 template class singly_linked_list::container<another_ope_t>;
 template class singly_linked_list::container<mt_ope_t>;
 

@@ -333,7 +333,7 @@ void example_dynamic_array()
 		//※この宣言だと、デフォルトコンストラクタとデストラクタが呼び出される点に注意
 
 		//動的配列コンテナ生成
-		typedef dynamic_array::container<ope_t> container_t;
+		typedef dynamic_array::container<ope> container_t;
 		container_t con(array);//※配列要素数を自動取得
 		//container_t con(&array[0], 10);//※要素数を明示的に受け渡す方法
 		//char buff[1024];
@@ -920,10 +920,10 @@ void example_dynamic_array()
 		};
 
 		//設定済みのデータを残したまま、動的配列コンテナのデータとして活用
-		dynamic_array::container<ope_t> con(array, -1);//第二引数で使用中のデータサイズを指定（-1で全域）
+		dynamic_array::container<ope> con(array, -1);//第二引数で使用中のデータサイズを指定（-1で全域）
 
 		//コンテナのインスタンス生成時に配列を渡せない場合は、sertArray() を使用する
-		//dynamic_array::container<ope_t> con;
+		//dynamic_array::container<ope> con;
 		//con.assignArray(array, -1);//第二引数で使用中のデータサイズを指定（-1で全域）
 
 		//データを表示
@@ -960,7 +960,7 @@ void example_dynamic_array()
 		printf("--------------------------------------------------------------------------------\n");
 		printf("[Test for dynamic_array::container(User defined type for multi-thread)]\n");
 
-		testThread<dynamic_array::container<ope_t> >("normal container");//ロックなし版のスレッド
+		testThread<dynamic_array::container<ope> >("normal container");//ロックなし版のスレッド
 		testThread<dynamic_array::container<mt_ope_t> >("multi-thread container");//ロックあり版のスレッド
 	}
 
@@ -991,7 +991,7 @@ void example_dynamic_array()
 			printf("[create container & assign() * %d]\n", TEST_DATA_NUM);
 			const std::size_t buff_size = sizeof(data_t)* TEST_DATA_NUM;
 			char* buff = new char[buff_size];
-			typedef dynamic_array::container<ope_t> container_t;
+			typedef dynamic_array::container<ope> container_t;
 			container_t* con = new container_t(buff, buff_size, 0, dynamic_array::AUTO_CLEAR);//コンテナ生成（バッファを割り当て）
 			con->assign(-1, 0, 0);//全件初期化
 			prev_time = printElapsedTime(prev_time, true);

@@ -32,7 +32,7 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 #if 0
 
 template class priority_queue::container<int_ope_t>;
-template class priority_queue::container<ope_t>;
+template class priority_queue::container<ope>;
 template class priority_queue::container<another_ope_t>;
 template class priority_queue::container<mt_ope_t>;
 

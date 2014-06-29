@@ -31,7 +31,7 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 #if 0
 
 template class rb_tree::container<int_ope_t>;
-template class rb_tree::container<ope_t>;
+template class rb_tree::container<ope>;
 template class rb_tree::container<another_ope_t>;
 template class rb_tree::container<mt_ope_t>;
 

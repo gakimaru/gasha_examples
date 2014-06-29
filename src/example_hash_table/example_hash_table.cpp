@@ -169,7 +169,7 @@ struct data_t
 //テストデータ操作クラス
 #include <functional>//C++11 std::function用
 #include <algorithm>//C++11 std::for_each用
-struct ope_t : public hash_table::baseOpe_t<ope_t, crc32_t, data_t>
+struct ope : public hash_table::baseOpe<ope, crc32_t, data_t>
 {
 	//データ置換属性
 	//※デフォルト（NEVER_REPLACE）のままとする
@@ -248,10 +248,10 @@ int main(const int argc, const char* argv[])
 	//※全てのインデックスが、正確にテーブルサイズ（素数）回の再計算を行う事で、元のインデックスに戻ることを確認。
 	{
 		int ng_count = 0;
-		const ope_t::key_type key_min = 0;// con.getKeyMin();
-		const ope_t::key_type key_max = 100000;// con.getKeyMax();
-		const ope_t::key_type key_step = 1;
-		for (ope_t::key_type key = key_min; key <= key_max; key += key_step)
+		const ope::key_type key_min = 0;// con.getKeyMin();
+		const ope::key_type key_max = 100000;// con.getKeyMax();
+		const ope::key_type key_step = 1;
+		for (ope::key_type key = key_min; key <= key_max; key += key_step)
 		{
 			if (key % (1024 * 1024) == 0)
 				printf("pass ... Key:%d\n", key);
@@ -281,7 +281,7 @@ int main(const int argc, const char* argv[])
 	//--------------------
 	//ハッシュテーブルテスト（旧）
 	{
-		hash_table::container<ope_t, 20> con(hash_table::AUTO_WRITE_LOCK);
+		hash_table::container<ope, 20> con(hash_table::AUTO_WRITE_LOCK);
 		
 		data_t* result;
 		printf("- emplace -\n");
@@ -349,7 +349,7 @@ int main(const int argc, const char* argv[])
 	printf("--------------------------------------------------------------------------------\n");
 	printf("Hash Table Test\n");
 	printf("--------------------------------------------------------------------------------\n");
-	typedef hash_table::container<ope_t, TEST_DATA_TABLE_SIZE, 0, 0> container_t;//自動リハッシュなし, 検索巡回回数制限なし
+	typedef hash_table::container<ope, TEST_DATA_TABLE_SIZE, 0, 0> container_t;//自動リハッシュなし, 検索巡回回数制限なし
 	container_t* con = new container_t();
 
 	//ハッシュテーブルの基本情報表示
@@ -415,7 +415,7 @@ int main(const int argc, const char* argv[])
 			}
 			//【登録方法③】insert()メソッドにキーとオブジェクトを渡して登録する方法
 			//※オブジェクトのコピーが発生するので少し遅い
-			//※操作用クラス baseOpe_t の派生クラスで、getKey() を実装する必要あり
+			//※操作用クラス baseOpe の派生クラスで、getKey() を実装する必要あり
 			#elif USE_INSERT_TYPE == 3
 			{
 				data_t new_obj(name, i);
@@ -423,7 +423,7 @@ int main(const int argc, const char* argv[])
 			}
 			//【登録方法④】insertAuto()メソッドにオブジェクトを渡して登録する方法
 			//※オブジェクトのコピーが発生するので少し遅い
-			//※操作用クラス baseOpe_t の派生クラスで、getKey() を実装する必要あり
+			//※操作用クラス baseOpe の派生クラスで、getKey() を実装する必要あり
 			#elif USE_INSERT_TYPE == 4
 			{
 				data_t new_obj(name, i);
@@ -681,7 +681,7 @@ int main(const int argc, const char* argv[])
 				result = con->erase(calcCRC32(name));//キーを渡して削除
 			}
 			//【削除方法②】eraseAuto()メソッドにオブジェクトを渡して削除する方法
-			//※操作用クラス baseOpe_t の派生クラスで、getKey() を実装する必要あり
+			//※操作用クラス baseOpe の派生クラスで、getKey() を実装する必要あり
 			#elif USE_INSERT_TYPE == 2
 			{
 				data_t obj(name, i);
@@ -1056,7 +1056,7 @@ int main(const int argc, const char* argv[])
 		printf("--------------------------------------------------------------------------------\n");
 
 		//操作型
-		struct p_ope_t : public hash_table::baseOpe_t<p_ope_t, int, data_t*>
+		struct p_ope_t : public hash_table::baseOpe<p_ope_t, int, data_t*>
 		{
 			//データ置換属性
 			//※デフォルト（NEVER_REPLACE）のままとする
@@ -1113,7 +1113,7 @@ int main(const int argc, const char* argv[])
 		printf("--------------------------------------------------------------------------------\n");
 		
 		//操作型 ※単純な関数呼び出し用
-		struct func_ope_t : public hash_table::baseOpe_t<func_ope_t, crc32_t, std::function<int(int, int)>>
+		struct func_ope_t : public hash_table::baseOpe<func_ope_t, crc32_t, std::function<int(int, int)>>
 		{
 		};
 		
@@ -1132,7 +1132,7 @@ int main(const int argc, const char* argv[])
 		};
 
 		//操作型 ※オブジェクトメンバー関数呼び出し用
-		struct obj_ope_t : public hash_table::baseOpe_t<func_ope_t, crc32_t, std::function<int(data_t&, int, int)>>
+		struct obj_ope_t : public hash_table::baseOpe<func_ope_t, crc32_t, std::function<int(data_t&, int, int)>>
 		{
 		};
 

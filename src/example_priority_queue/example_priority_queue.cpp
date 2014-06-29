@@ -139,7 +139,7 @@ struct data_t
 };
 //----------------------------------------
 //テストデータ操作クラス
-struct heap_ope_t : public binary_heap::baseOpe_t<heap_ope_t, data_t>
+struct heap_ope_t : public binary_heap::baseOpe<heap_ope_t, data_t>
 {
 	//キーを比較
 	//※lhsの方が小さいければ true を返す
@@ -155,7 +155,7 @@ struct heap_ope_t : public binary_heap::baseOpe_t<heap_ope_t, data_t>
 };
 //----------------------------------------
 //テストデータ操作クラス
-struct ope_t : public priority_queue::baseOpe_t<ope_t, data_t, PRIORITY, int>
+struct ope : public priority_queue::baseOpe<ope, data_t, PRIORITY, int>
 {
 	//優先度を取得
 	inline static priority_type getPriority(const node_type& node){ return node.m_priority; }
@@ -163,9 +163,9 @@ struct ope_t : public priority_queue::baseOpe_t<ope_t, data_t, PRIORITY, int>
 	inline static void setPriority(node_type& node, const priority_type priority){ node.m_priority = priority; }
 	
 	//シーケンス番号を取得
-	inline static seq_type getSeqNo(const node_type& node){ return node.m_seqNo; }
+	inline static seq_no_type getSeqNo(const node_type& node){ return node.m_seqNo; }
 	//シーケンス番号を更新
-	inline static void setSeqNo(node_type& node, const seq_type seq_no){ node.m_seqNo = seq_no; }
+	inline static void setSeqNo(node_type& node, const seq_no_type seq_no){ node.m_seqNo = seq_no; }
 
 	//ロック型
 	//※デフォルト（dummy_lock）のままとする
@@ -244,7 +244,7 @@ void showTree(const HEAP& heap)
 int main(const int argc, const char* argv[])
 {
 	//プライオリティキューコンテナ生成
-	typedef priority_queue::container_adapter<ope_t, TEST_DATA_MAX> pqueue_t;
+	typedef priority_queue::containerAdapter<ope, TEST_DATA_MAX> pqueue_t;
 	pqueue_t* con = new pqueue_t();
 
 	//処理時間計測開始
@@ -254,7 +254,7 @@ int main(const int argc, const char* argv[])
 	//--------------------
 	//プライオリティキューのテスト
 	printf("--------------------------------------------------------------------------------\n");
-	printf("[Test for priority_queue::container_adapter(Priority Queue)]\n");
+	printf("[Test for priority_queue::containerAdapter(Priority Queue)]\n");
 
 	//エンキュー
 	auto enqueue = [&con]()
@@ -674,7 +674,7 @@ int main(const int argc, const char* argv[])
 	
 	//優先度付きキューコンテナ生成
 	typedef std::priority_queue<data_t, std::vector<data_t>, heap_ope_t> stl_container_type;
-	//typedef std::priority_queue<data_t, std::vector<data_t>, ope_t> stl_container_type;
+	//typedef std::priority_queue<data_t, std::vector<data_t>, ope> stl_container_type;
 	stl_container_type* stl_heap = new stl_container_type();
 
 	//STLでノードをプッシュ
@@ -729,7 +729,7 @@ int main(const int argc, const char* argv[])
 	//※上記の二分ヒープ／STLのテストと同一の流れのテストを実施
 	printf("\n");
 	printf("--------------------------------------------------------------------------------\n");
-	printf("[Test for priority_queue::container_adapter(Priority Queue)] *Second time\n");
+	printf("[Test for priority_queue::containerAdapter(Priority Queue)] *Second time\n");
 
 	//エンキュー
 	enqueue();
@@ -759,7 +759,7 @@ int main(const int argc, const char* argv[])
 	//プライオリティキューのクリアのテスト
 	printf("\n");
 	printf("--------------------------------------------------------------------------------\n");
-	printf("[Test for priority_queue::container_adapter(Priority Queue)] *Clear\n");
+	printf("[Test for priority_queue::containerAdapter(Priority Queue)] *Clear\n");
 		
 	//エンキュー
 	enqueue();
@@ -790,16 +790,16 @@ int main(const int argc, const char* argv[])
 	{
 		printf("\n");
 		printf("--------------------------------------------------------------------------------\n");
-		printf("[Test for priority_queue::container_adapter(Priority Queue)] *Pointer\n");
+		printf("[Test for priority_queue::containerAdapter(Priority Queue)] *Pointer\n");
 		printf("\n");
 
 		//操作型
-		struct p_ope_t : public priority_queue::baseOpe_t<p_ope_t, data_t*, PRIORITY, int>
+		struct p_ope_t : public priority_queue::baseOpe<p_ope_t, data_t*, PRIORITY, int>
 		{
 			inline static priority_type getPriority(const node_type& node){ return node->m_priority; }
 			inline static void setPriority(node_type& node, const priority_type priority){ node->m_priority = priority; }
-			inline static seq_type getSeqNo(const node_type& node){ return node->m_seqNo; }
-			inline static void setSeqNo(node_type& node, const seq_type seq_no){ node->m_seqNo = seq_no; }
+			inline static seq_no_type getSeqNo(const node_type& node){ return node->m_seqNo; }
+			inline static void setSeqNo(node_type& node, const seq_no_type seq_no){ node->m_seqNo = seq_no; }
 
 			//ロック型
 			//※デフォルト（dummy_lock）のままとする
@@ -807,7 +807,7 @@ int main(const int argc, const char* argv[])
 		};
 		
 		//プライオリティキュー
-		priority_queue::container_adapter<p_ope_t, 100> p_con;
+		priority_queue::containerAdapter<p_ope_t, 100> p_con;
 		
 		//エンキュー
 		data_t obj1(NORMAL, 1);

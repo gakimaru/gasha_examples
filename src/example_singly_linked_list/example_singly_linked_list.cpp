@@ -103,7 +103,7 @@ static bool operator<(const int key, const data_t& rhs)
 
 //----------------------------------------
 //テストデータ向けノード操作用クラス（CRTP）
-struct ope_t : public singly_linked_list::baseOpe_t<ope_t, data_t>
+struct ope : public singly_linked_list::baseOpe<ope, data_t>
 {
 	//次ノードを取得
 	inline static const node_type* getNext(const node_type& node){ return node.m_next; }
@@ -117,7 +117,7 @@ struct ope_t : public singly_linked_list::baseOpe_t<ope_t, data_t>
 
 //----------------------------------------
 //テストデータ操作クラス②：ソート／探索方法をデフォルトから変える
-struct another_ope_t : public ope_t
+struct another_ope_t : public ope
 {
 	//ソート用プレディケート関数オブジェクト
 	//※m_valメンバーを基準にソート
@@ -160,7 +160,7 @@ int main(const int argc, const char* argv[])
 		printf("[Test for singly_linked_list::container(User defined type)]\n");
 
 		//片方向連結リストコンテナ生成
-		typedef singly_linked_list::container<ope_t> container_t;
+		typedef singly_linked_list::container<ope> container_t;
 		container_t con;
 
 		//データを表示
@@ -958,7 +958,7 @@ int main(const int argc, const char* argv[])
 			//データを初期化
 			printf("\n");
 			printf("[create container]\n");
-			typedef singly_linked_list::container<ope_t> container_t;
+			typedef singly_linked_list::container<ope> container_t;
 			container_t* con = new container_t;//コンテナ生成
 			prev_time = printElapsedTime(prev_time, true);
 

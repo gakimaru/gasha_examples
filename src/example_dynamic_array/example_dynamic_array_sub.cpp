@@ -31,7 +31,7 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //　インクルードしてしまっても良い）
 
 template class dynamic_array::container<int_ope_t>;
-template class dynamic_array::container<ope_t>;
+template class dynamic_array::container<ope>;
 template class dynamic_array::container<another_ope_t>;
 template class dynamic_array::container<mt_ope_t>;
 
@@ -39,13 +39,14 @@ template class dynamic_array::container<mt_ope_t>;
 //動的配列シンプルコンテナテスト
 //※.inl と .cpp.h をインクルードした後は、明示的なインスタンス化をせずにコンテナを使用可能。
 //※シンプルコンテナを使用すると、コンテナ操作用構造体の定義も省略可能。
+//　ただし、ソート用関数や探索用関数の定義、ロックオブジェクトの指定といった細かいカスタマイズはできない。
 void example_simple_dynamic_array()
 {
 	printf("\n");
 	printf("--- example_simple_dynamic_array ---\n");
 
-	char arr[10];
-	dArrayS<char>::con con(arr);//シンプルコンテナ
+	short arr[10];
+	simpleDArray<short>::con con(arr);//シンプル動的配列コンテナ
 	con.push_back(5);
 	con.push_back(1);
 	con.push_back(3);

@@ -123,10 +123,10 @@ static bool operator<(const int key, const data_t& rhs)
 }
 //----------------------------------------
 //テストデータ操作クラス①：デフォルトのまま使う
-struct ope_t : public ring_buffer::baseOpe_t<ope_t, data_t>{};
+struct ope : public ring_buffer::baseOpe<ope, data_t>{};
 //----------------------------------------
 //テストデータ操作クラス②：ソート／探索方法をデフォルトから変える
-struct another_ope_t : public ring_buffer::baseOpe_t<ope_t, data_t>
+struct another_ope_t : public ring_buffer::baseOpe<ope, data_t>
 {
 	//ソート用プレディケート関数オブジェクト
 	//※m_valメンバーを基準にソート
@@ -164,7 +164,7 @@ struct another_ope_t : public ring_buffer::baseOpe_t<ope_t, data_t>
 };
 //----------------------------------------
 //テストデータ操作クラス③：ロックを有効化する
-struct mt_ope_t : public ring_buffer::baseOpe_t<mt_ope_t, data_t>
+struct mt_ope_t : public ring_buffer::baseOpe<mt_ope_t, data_t>
 {
 	//ロック型
 	typedef shared_spin_lock lock_type;//ロックオブジェクトを指定
@@ -189,11 +189,11 @@ int main(const int argc, const char* argv[])
 		int arr[20];//配列
 
 		//int型用のデータ操作クラス定義
-		struct ope_t : public ring_buffer::baseOpe_t<ope_t, int>{};
+		struct ope : public ring_buffer::baseOpe<ope, int>{};
 
 		//コンテナ生成
 		//※既存の配列を渡してリングバッファコンテナとして扱う
-		ring_buffer::container<ope_t> con(arr);//配列要素数を自動取得
+		ring_buffer::container<ope> con(arr);//配列要素数を自動取得
 
 		//データを表示
 		auto printAll = [&con]()
@@ -540,7 +540,7 @@ int main(const int argc, const char* argv[])
 		//※この宣言だと、デフォルトコンストラクタとデストラクタが呼び出される点に注意
 
 		//リングバッファコンテナ生成
-		typedef ring_buffer::container<ope_t> container_t;
+		typedef ring_buffer::container<ope> container_t;
 		container_t con(array);//※配列要素数を自動取得
 		//container_t con(&array[0], 10);//※要素数を明示的に受け渡す方法
 		//char buff[1024];
@@ -1235,10 +1235,10 @@ int main(const int argc, const char* argv[])
 		};
 
 		//設定済みのデータを残したまま、リングバッファコンテナのデータとして活用
-		ring_buffer::container<ope_t> con(array, -1);//第二引数で使用中のデータサイズを指定（-1で全域）
+		ring_buffer::container<ope> con(array, -1);//第二引数で使用中のデータサイズを指定（-1で全域）
 
 		//コンテナのインスタンス生成時に配列を渡せない場合は、sertArray() を使用する
-		//ring_buffer::container<ope_t> con;
+		//ring_buffer::container<ope> con;
 		//con.assignArray(array, -1);//第二引数で使用中のデータサイズを指定（-1で全域）
 
 		//データを表示
@@ -1276,7 +1276,7 @@ int main(const int argc, const char* argv[])
 		printf("--------------------------------------------------------------------------------\n");
 		printf("[Test for ring_buffer::container(User defined type for multi-thread)]\n");
 
-		testThread<ring_buffer::container<ope_t> >("normal container");//ロックなし版のスレッド
+		testThread<ring_buffer::container<ope> >("normal container");//ロックなし版のスレッド
 		testThread<ring_buffer::container<mt_ope_t> >("multi-thread container");//ロックあり版のスレッド
 	}
 
@@ -1308,7 +1308,7 @@ int main(const int argc, const char* argv[])
 			printf("[create container & assign() * %d]\n", TEST_DATA_NUM);
 			const std::size_t buff_size = sizeof(data_t)* TEST_DATA_NUM;
 			char* buff = new char[buff_size];
-			typedef ring_buffer::container<ope_t> container_t;
+			typedef ring_buffer::container<ope> container_t;
 			container_t* con = new container_t(buff, buff_size, 0, ring_buffer::AUTO_CLEAR);//コンテナ生成（バッファを割り当て）
 			con->assign(-1, 0, 0);//全件初期化
 			prev_time = printElapsedTime(prev_time, true);

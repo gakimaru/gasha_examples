@@ -31,7 +31,7 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 #if 0
 
 template class ring_buffer::container<int_ope_t>;
-template class ring_buffer::container<ope_t>;
+template class ring_buffer::container<ope>;
 template class ring_buffer::container<another_ope_t>;
 template class ring_buffer::container<mt_ope_t>;
 

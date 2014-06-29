@@ -31,7 +31,7 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 #if 0
 
 template class hash_table::container<int_ope_t>;
-template class hash_table::container<ope_t>;
+template class hash_table::container<ope>;
 template class hash_table::container<another_ope_t>;
 template class hash_table::container<mt_ope_t>;
 

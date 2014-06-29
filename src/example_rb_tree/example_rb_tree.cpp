@@ -75,7 +75,7 @@ struct data_t
 };
 //----------------------------------------
 //テストデータ向けノード操作用クラス（CRTP）
-struct ope_t : public rb_tree::baseOpe_t<ope_t, data_t, int, TEST_DATA_STACK_DEPTH_MAX>
+struct ope : public rb_tree::baseOpe<ope, data_t, int, TEST_DATA_STACK_DEPTH_MAX>
 {
 	//子ノードを取得
 	inline static const node_type* getChildL(const node_type& node){ return node.m_nodeL; }//大（右）側
@@ -106,7 +106,7 @@ struct ope_t : public rb_tree::baseOpe_t<ope_t, data_t, int, TEST_DATA_STACK_DEP
 int main(const int argc, const char* argv[])
 {
 	//型
-	typedef rb_tree::container<ope_t> container_t;
+	typedef rb_tree::container<ope> container_t;
 	typedef container_t::iterator iterator;
 	typedef container_t::const_iterator const_iterator;
 	typedef container_t::reverse_iterator reverse_iterator;
@@ -194,7 +194,7 @@ int main(const int argc, const char* argv[])
 				{
 					if (depth_tmp < 0)
 						break;
-					node = ope_t::getChild(*node, (breath_tmp & (0x1 << depth_tmp)) != 0x0);
+					node = ope::getChild(*node, (breath_tmp & (0x1 << depth_tmp)) != 0x0);
 				}
 				if (node)
 				{
@@ -202,20 +202,20 @@ int main(const int argc, const char* argv[])
 						int c = 0;
 						for (; c < print_indent / 2; ++c)
 							printf(" ");
-						if (ope_t::getChildS(*node) && c < print_indent)
+						if (ope::getChildS(*node) && c < print_indent)
 						{
 							printf(".");
 							++c;
 						}
 						for (; c < print_indent; ++c)
-							printf(ope_t::getChildS(*node) ? "-" : " ");
+							printf(ope::getChildS(*node) ? "-" : " ");
 					}
-					printf("%s%2d:%c%s", ope_t::getChildS(*node) ? "{" : "[", node->m_key, ope_t::isBlack(*node) ? 'B' : 'R', ope_t::getChildL(*node) ? "}" : "]");
+					printf("%s%2d:%c%s", ope::getChildS(*node) ? "{" : "[", node->m_key, ope::isBlack(*node) ? 'B' : 'R', ope::getChildL(*node) ? "}" : "]");
 					{
 						int c = 0;
 						for (; c < print_indent / 2; ++c)
-							printf(ope_t::getChildL(*node) ? "-" : " ");
-						if (ope_t::getChildL(*node) && c < print_indent)
+							printf(ope::getChildL(*node) ? "-" : " ");
+						if (ope::getChildL(*node) && c < print_indent)
 						{
 							printf(".");
 							++c;
@@ -286,12 +286,12 @@ int main(const int argc, const char* argv[])
 			for (long long depth_tmp = depth_max - 1; node; --depth_tmp)
 			{
 				last_node = node;
-				if (ope_t::isBlack(*node))
+				if (ope::isBlack(*node))
 					++blacks;
-				else//if (ope_t::isRed(*node))
+				else//if (ope::isRed(*node))
 				{
 					++reds;
-					if (parent_node && ope_t::isRed(*parent_node))
+					if (parent_node && ope::isRed(*parent_node))
 					{
 						++illegal_connects;
 					}
@@ -299,7 +299,7 @@ int main(const int argc, const char* argv[])
 				if (depth_tmp < 0)
 					break;
 				parent_node = node;
-				node = ope_t::getChild(*node, (breath_tmp & (0x1ll << depth_tmp)) != 0x0ll);
+				node = ope::getChild(*node, (breath_tmp & (0x1ll << depth_tmp)) != 0x0ll);
 			}
 			int total = blacks + reds;
 			blacks_min = blacks_min > blacks || blacks_min == -1 ? blacks : blacks_min;
