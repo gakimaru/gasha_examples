@@ -21,7 +21,7 @@ int main(const int argc, const char* argv[])
 	example_build_settings();
 	
 	//ビルド設定が正しく実行環境に適合するかチェック
-	checkBuildSettings();
+	diagnoseBuildSettings();
 
 	return EXIT_SUCCESS;
 }
