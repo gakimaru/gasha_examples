@@ -27,7 +27,70 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //リングバッファテスト
 //--------------------------------------------------------------------------------
 
-#if 0
+//----------------------------------------
+//テストデータ
+
+//コンストラクタ
+data_t::data_t(const int key, const int val) :
+m_key(key),
+m_val(val)
+{
+#ifdef TEST_DATA_WATCH_CONSTRUCTOR
+	printf("data_t::constructor(%d, %d)\n", key, val);
+#endif//TEST_DATA_WATCH_CONSTRUCTOR
+}
+//デフォルトコンストラクタ
+data_t::data_t() :
+m_key(0),
+m_val(0)
+{
+#ifdef TEST_DATA_WATCH_CONSTRUCTOR
+	printf("data_t::constructor()\n");
+#endif//TEST_DATA_WATCH_CONSTRUCTOR
+}
+//デストラクタ
+data_t::~data_t()
+{
+#ifdef TEST_DATA_WATCH_CONSTRUCTOR
+	printf("data_t::destructor(): key=%d, val=%d\n", m_key, m_val);
+#endif//TEST_DATA_WATCH_CONSTRUCTOR
+}
+#ifdef TEST_DATA_WATCH_CONSTRUCTOR
+//ムーブオペレータ
+data_t::data_t& operator=(const data_t&& rhs)
+{
+	memcpy(this, &rhs, sizeof(*this));
+	printf("data_t::move_operator\n");
+	return *this;
+}
+//コピーオペレータ
+data_t::data_t& operator=(const data_t& rhs)
+{
+	memcpy(this, &rhs, sizeof(*this));
+	printf("data_t::copy_operator\n");
+	return *this;
+}
+//ムーブコンストラクタ
+data_t::data_t(const data_t&& src)
+{
+	memcpy(this, &src, sizeof(*this));
+	printf("data_t::move_constructor\n");
+}
+//コピーコンストラクタ
+data_t::data_t(const data_t& src)
+{
+	memcpy(this, &src, sizeof(*this));
+	printf("data_t::copy_constructor\n");
+}
+#endif//TEST_DATA_WATCH_CONSTRUCTOR
+
+#ifdef USE_STL_ALGORITM
+//※std::binary_search(), std::upper_bound() を使用する場合は、このオペレータも必要（std::lower_bound()には不要）
+static bool operator<(const int key, const data_t& rhs)
+{
+	return key < rhs.m_key;
+}
+#endif//USE_STL_ALGORITM
 
 //----------------------------------------
 //テスト用補助関数
@@ -42,142 +105,13 @@ inline int printf_detail(const char* fmt, ...){ return 0; }
 #endif//PRINT_TEST_DATA_DETAIL
 
 //----------------------------------------
-//テストデータ
-struct data_t
-{
-	int m_key;//キー
-	int m_val;//データ
-
-	//コンストラクタ
-	data_t(const int key, const int val) :
-		m_key(key),
-		m_val(val)
-	{
-	#ifdef TEST_DATA_WATCH_CONSTRUCTOR
-		printf("data_t::constructor(%d, %d)\n", key, val);
-	#endif//TEST_DATA_WATCH_CONSTRUCTOR
-	}
-	//デフォルトコンストラクタ
-	data_t() :
-		m_key(0),
-		m_val(0)
-	{
-	#ifdef TEST_DATA_WATCH_CONSTRUCTOR
-		printf("data_t::constructor()\n");
-	#endif//TEST_DATA_WATCH_CONSTRUCTOR
-	}
-	//デストラクタ
-	~data_t()
-	{
-	#ifdef TEST_DATA_WATCH_CONSTRUCTOR
-		printf("data_t::destructor(): key=%d, val=%d\n", m_key, m_val);
-	#endif//TEST_DATA_WATCH_CONSTRUCTOR
-	}
-#ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	//ムーブオペレータ
-	data_t& operator=(const data_t&& rhs)
-	{
-		memcpy(this, &rhs, sizeof(*this));
-		printf("data_t::move_operator\n");
-		return *this;
-	}
-	//コピーオペレータ
-	data_t& operator=(const data_t& rhs)
-	{
-		memcpy(this, &rhs, sizeof(*this));
-		printf("data_t::copy_operator\n");
-		return *this;
-	}
-	//ムーブコンストラクタ
-	data_t(const data_t&& src)
-	{
-		memcpy(this, &src, sizeof(*this));
-		printf("data_t::move_constructor\n");
-	}
-	//コピーコンストラクタ
-	data_t(const data_t& src)
-	{
-		memcpy(this, &src, sizeof(*this));
-		printf("data_t::copy_constructor\n");
-	}
-#endif//TEST_DATA_WATCH_CONSTRUCTOR
-	//デフォルトのソート用の比較演算子（必須ではない）
-	inline bool operator<(const data_t& rhs) const
-	{
-		return m_key < rhs.m_key;
-	}
-	//デフォルトの線形／二分探索用の比較演算子（必須ではない）
-	inline bool operator==(const int key) const
-	{
-		return m_key == key;
-	}
-	inline bool operator<(const int key) const
-	{
-		return m_key < key;
-	}
-};
-//※std::binary_searchを使用する場合は、このオペレータも必要
-static bool operator<(const int key, const data_t& rhs)
-{
-	return key < rhs.m_key;
-}
-//----------------------------------------
-//テストデータ操作クラス①：デフォルトのまま使う
-struct ope : public ring_buffer::baseOpe<ope, data_t>{};
-//----------------------------------------
-//テストデータ操作クラス②：ソート／探索方法をデフォルトから変える
-struct another_ope_t : public ring_buffer::baseOpe<ope, data_t>
-{
-	//ソート用プレディケート関数オブジェクト
-	//※m_valメンバーを基準にソート
-	struct predicateForSort{
-		inline bool operator()(const value_type& lhs, const value_type& rhs) const
-		{
-			return lhs.m_val < rhs.m_val;
-		}
-	};
-
-	//線形探索用プレディケート関数オブジェクト
-	//※m_valメンバーを探索
-	struct predicateForFind{
-		inline bool operator()(const value_type& lhs, const int rhs) const
-		{
-			return lhs.m_val == rhs;
-		}
-	};
-
-	//二分探索用比較関数オブジェクト
-	//※m_valメンバーを比較
-	struct comparisonForSearch{
-		inline int operator()(const value_type& lhs, const int rhs) const
-		{
-			return rhs - lhs.m_val;
-		}
-	};
-
-	//デストラクタ呼び出しを禁止したい場合、
-	//この空のメソッドを定義する。
-	inline static void callDestructor(value_type* obj)
-	{
-		//何もしない
-	}
-};
-//----------------------------------------
-//テストデータ操作クラス③：ロックを有効化する
-struct mt_ope_t : public ring_buffer::baseOpe<mt_ope_t, data_t>
-{
-	//ロック型
-	typedef shared_spin_lock lock_type;//ロックオブジェクトを指定
-};
-
-//----------------------------------------
 //スレッドテスト用関数の参照
 template <class C>
 extern void testThread(const char* container_type);
 
 //----------------------------------------
-//テストメイン
-int main(const int argc, const char* argv[])
+//リングバッファテスト
+void example_ring_buffer()
 {
 	//--------------------
 	//テスト①：基本ロジックテスト：プリミティブ型の配列を扱う場合
@@ -188,12 +122,9 @@ int main(const int argc, const char* argv[])
 
 		int arr[20];//配列
 
-		//int型用のデータ操作クラス定義
-		struct ope : public ring_buffer::baseOpe<ope, int>{};
-
 		//コンテナ生成
 		//※既存の配列を渡してリングバッファコンテナとして扱う
-		ring_buffer::container<ope> con(arr);//配列要素数を自動取得
+		ring_buffer::container<int_ope_t> con(arr);//配列要素数を自動取得
 
 		//データを表示
 		auto printAll = [&con]()
@@ -362,20 +293,43 @@ int main(const int argc, const char* argv[])
 		//ソ―ト
 		printf("\n");
 		printf("[sort]\n");
+	#ifdef USE_STL_ALGORITM
+		std::sort(con.begin(), con.end());//高速ソート(STL版)
+	#else//USE_STL_ALGORITM
 		con.sort();//高速ソート
-		//con.stableSort();//安定ソート
-		//std::sort(con.begin(), con.end());//高速ソート(STL版)
-		//std::stable_sort(con.begin(), con.end());//安定ソート(STL版)
+	#endif//USE_STL_ALGORITM
 		printAll();//全件表示
 
 		//逆順にソート ※カスタムプレディケート関数を使用
 		printf("\n");
 		printf("[custom sort]\n");
 		auto reverse_pred = [](const int lhs, const int rhs) -> bool {return lhs > rhs; };
+	#ifdef USE_STL_ALGORITM
+		std::sort(con.begin(), con.end(), reverse_pred);//高速ソート(STL版)
+	#else//USE_STL_ALGORITM
 		con.sort(reverse_pred);//高速ソート
-		//con.stableSort(reverse_pred);//安定ソート
-		//std::sort(con.begin(), con.end(), reverse_pred);//高速ソート(STL版)
-		//std::stable_sort(con.begin(), con.end(), reverse_pred);//安定ソート(STL版)
+	#endif//USE_STL_ALGORITM
+		printAll();//全件表示
+
+		//安定ソ―ト
+		printf("\n");
+		printf("[stable_sort]\n");
+	#ifdef USE_STL_ALGORITM
+		std::stable_sort(con.begin(), con.end());//安定ソート(STL版)
+	#else//USE_STL_ALGORITM
+		con.stableSort();//安定ソート
+	#endif//USE_STL_ALGORITM
+		printAll();//全件表示
+
+		//逆順に安定ソート ※カスタムプレディケート関数を使用
+		printf("\n");
+		printf("[custom stable_sort]\n");
+		//auto reverse_pred = [](const int lhs, const int rhs) -> bool {return lhs > rhs; };
+	#ifdef USE_STL_ALGORITM
+		std::stable_sort(con.begin(), con.end(), reverse_pred);//安定ソート(STL版)
+	#else//USE_STL_ALGORITM
+		con.stableSort(reverse_pred);//安定ソート
+	#endif//USE_STL_ALGORITM
 		printAll();//全件表示
 
 		//ポップ(1)
@@ -405,8 +359,11 @@ int main(const int argc, const char* argv[])
 		auto find = [&con](const int val)
 		{
 			printf("findValue(%d)=", val);
+		#ifdef USE_STL_ALGORITM
+			auto ite = std::find(con.begin(), con.end(), val);//線形探索(STL版)
+		#else//USE_STL_ALGORITM
 			auto ite = con.findValue(val);//線形探索
-			//auto ite = std::find(con.begin(), con.end(), val);//線形探索(STL版)
+		#endif//USE_STL_ALGORITM
 			if (ite.isExist())
 			{
 				printf("%d", *ite);
@@ -429,12 +386,15 @@ int main(const int argc, const char* argv[])
 		auto binary_search = [&con](const int val)
 		{
 			printf("binarySearchValue(%d)=", val);
+		#ifdef USE_STL_ALGORITM
+			if (std::binary_search(con.begin(), con.end(), val))//二分探索(STL版)
+			{
+				auto ite = std::lower_bound(con.begin(), con.end(), val);
+		#else//USE_STL_ALGORITM
 			auto ite = con.binarySearchValue(val);//二分探索
 			if (ite.isExist())
 			{
-			//if(std::binary_search(con.begin(), con.end(), val))//二分探索(STL版)
-			//{
-			//	auto ite = std::lower_bound(con.begin(), con.end(), val);
+		#endif//USE_STL_ALGORITM
 				printf("%d", *ite);
 				--ite;
 				if (ite.isExist())
@@ -764,20 +724,43 @@ int main(const int argc, const char* argv[])
 		//ソ―ト
 		printf("\n");
 		printf("[sort]\n");
+	#ifdef USE_STL_ALGORITM
+		std::sort(con.begin(), con.end());//高速ソート(STL版)
+	#else//USE_STL_ALGORITM
 		con.sort();//高速ソート
-		//con.stableSort();//安定ソート
-		//std::sort(con.begin(), con.end());//高速ソート(STL版)
-		//std::stable_sort(con.begin(), con.end());//安定ソート(STL版)
+	#endif//USE_STL_ALGORITM
 		printAll();//全件表示
 
 		//逆順にソート ※カスタムプレディケート関数を使用
 		printf("\n");
 		printf("[custom sort]\n");
 		auto reverse_pred = [](const data_t& lhs, const data_t& rhs) -> bool {return lhs.m_key > rhs.m_key; };
+	#ifdef USE_STL_ALGORITM
+		std::sort(con.begin(), con.end(), reverse_pred);//高速ソート(STL版)
+	#else//USE_STL_ALGORITM
 		con.sort(reverse_pred);//高速ソート
-		//con.stableSort(reverse_pred);//安定ソート
-		//std::sort(con.begin(), con.end(), reverse_pred);//高速ソート(STL版)
-		//std::stable_sort(con.begin(), con.end(), reverse_pred);//安定ソート(STL版)
+	#endif//USE_STL_ALGORITM
+		printAll();//全件表示
+
+		//安定ソ―ト
+		printf("\n");
+		printf("[stable_sort]\n");
+	#ifdef USE_STL_ALGORITM
+		std::stable_sort(con.begin(), con.end());//安定ソート(STL版)
+	#else//USE_STL_ALGORITM
+		con.stableSort();//安定ソート
+	#endif//USE_STL_ALGORITM
+		printAll();//全件表示
+
+		//逆順に安定ソート ※カスタムプレディケート関数を使用
+		printf("\n");
+		printf("[custom stable_sort]\n");
+		//auto reverse_pred = [](const data_t& lhs, const data_t& rhs) -> bool {return lhs.m_key > rhs.m_key; };
+	#ifdef USE_STL_ALGORITM
+		std::stable_sort(con.begin(), con.end(), reverse_pred);//安定ソート(STL版)
+	#else//USE_STL_ALGORITM
+		con.stableSort(reverse_pred);//安定ソート
+	#endif//USE_STL_ALGORITM
 		printAll();//全件表示
 
 	#if 0
@@ -901,8 +884,11 @@ int main(const int argc, const char* argv[])
 		auto find = [&con](const int key)
 		{
 			printf("findValue(key=%d)=", key);
+		#ifdef USE_STL_ALGORITM
+			auto ite = std::find(con.begin(), con.end(), key);//線形探索(STL版)
+		#else//USE_STL_ALGORITM
 			auto ite = con.findValue(key);//線形探索
-			//auto ite = std::find(con.begin(), con.end(), key);//線形探索(STL版)
+		#endif//USE_STL_ALGORITM
 			if (ite.isExist())
 			{
 				printf(" [%d:%d]", ite->m_key, ite->m_val);
@@ -925,12 +911,15 @@ int main(const int argc, const char* argv[])
 		auto binary_search = [&con](const int key)
 		{
 			printf("binarySearchValue(key=%d)=", key);
+		#ifdef USE_STL_ALGORITM
+			if (std::binary_search(con.begin(), con.end(), key))//二分探索(STL版)
+			{
+				auto ite = std::lower_bound(con.begin(), con.end(), key);
+		#else//USE_STL_ALGORITM
 			auto ite = con.binarySearchValue(key);//二分探索
 			if (ite.isExist())
 			{
-			//if (std::binary_search(con.begin(), con.end(), key))//二分探索(STL版)
-			//{
-			//	auto ite = std::lower_bound(con.begin(), con.end(), key);
+		#endif//USE_STL_ALGORITM
 				printf(" [%d:%d]", ite->m_key, ite->m_val);
 				--ite;
 				if (ite.isExist())
@@ -1292,7 +1281,7 @@ int main(const int argc, const char* argv[])
 			const auto duration = now_time - prev_time;
 			const double elapsed_time = static_cast<double>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count()) / 1000000000.;
 			if (is_show)
-				printf("*elapsed_time=%.9llf sec\n", elapsed_time);
+				printf("*elapsed_time=%.9lf sec\n", elapsed_time);
 			return now_time;
 		};
 		
@@ -1663,8 +1652,6 @@ int main(const int argc, const char* argv[])
 
 	printf("\n");
 	printf("- end -\n");
-	
-	return EXIT_SUCCESS;
 }
 
 //--------------------
@@ -1789,14 +1776,6 @@ void testThread(const char* container_type)
 		//配列を表示
 		print_data("after");
 	}
-}
-
-#endif
-
-//----------------------------------------
-//リングバッファテスト
-void example_ring_buffer()
-{
 }
 
 // End of file

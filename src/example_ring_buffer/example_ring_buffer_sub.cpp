@@ -28,13 +28,32 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //　（コンパイルへの影響を気にしないなら、ヘッダーファイルに
 //　インクルードしてしまっても良い）
 
-#if 0
-
 template class ring_buffer::container<int_ope_t>;
 template class ring_buffer::container<ope>;
 template class ring_buffer::container<another_ope_t>;
 template class ring_buffer::container<mt_ope_t>;
 
-#endif
+//----------------------------------------
+//シンプルリングバッファコンテナテスト
+//※.inl と .cpp.h をインクルードした後は、明示的なインスタンス化をせずにコンテナを使用可能。
+//※シンプルコンテナを使用すると、コンテナ操作用構造体の定義も省略可能。
+//　ただし、ソート用関数や探索用関数の定義、ロックオブジェクトの指定といった細かいカスタマイズはできない。
+void example_simple_ring_buffer()
+{
+	printf("\n");
+	printf("--- example_simple_dynamic_array ---\n");
 
+	short arr[10];
+	simpleRBuff<short>::con con(arr);//シンプルリングバッファコンテナ
+	con.push_back(5);
+	con.push_back(1);
+	con.push_back(3);
+	con.sort();
+	printf("data =");
+	for (auto data : con)
+	{
+		printf(" %d", data);
+	}
+	printf("\n");
+}
 // End of file

@@ -16,27 +16,32 @@
 
 #include <gasha/shared_spin_lock.h>//共有スピンロック
 
+GASHA_USING_NAMESPACE;//ネームスペース使用
+
 //----------------------------------------
 //動的配列テスト用設定とコンパイラスイッチ
 
 #ifdef _DEBUG//デバッグ版
-//static const int TEST_DATA_NUM = 10;//大量登録テストデータの登録数
-static const int TEST_DATA_NUM = 10000;//大量登録テストデータの登録数
+static const int TEST_DATA_NUM = 10;//大量登録テストデータの登録数
 
-static const int TEST_DATA_FIND_NUM = 100;//大量テストの線形探索回数
-static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST_DATA_NUM / TEST_DATA_FIND_NUM : 1;//大量テストの線形実行ステップ
+static const int TEST_DATA_FIND_NUM = 100;//線形探索テストの回数
+static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST_DATA_NUM / TEST_DATA_FIND_NUM : 1;//線形探索テストの実行ステップ
+
+#define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
+//#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
 
 #else//_DEBUG//リリース版
-//static const int TEST_DATA_NUM = 10;//大量登録テストデータの登録数
 static const int TEST_DATA_NUM = 10000000;//大量登録テストデータの登録数
 
-static const int TEST_DATA_FIND_NUM = 100;//大量テストの線形探索回数
-static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST_DATA_NUM / TEST_DATA_FIND_NUM : 1;//大量テストの線形実行ステップ
-
-#endif//_DEBUG
+static const int TEST_DATA_FIND_NUM = 100;//線形探索テストの回数
+static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST_DATA_NUM / TEST_DATA_FIND_NUM : 1;//線形探索テストの実行ステップ
 
 //#define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
 //#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
+
+#endif//_DEBUG
+
+//#define USE_STL_ALGORITM//ソート／線形探索／二分探索で、内部関数の代わりに STL を使用する場合は、このマクロを有効にする
 
 //----------------------------------------
 //テストデータ
@@ -76,11 +81,6 @@ struct data_t
 		return m_key < key;
 	}
 };
-//※std::binary_searchを使用する場合は、このオペレータも必要
-static inline bool operator<(const int key, const data_t& rhs)
-{
-	return key < rhs.m_key;
-}
 
 //----------------------------------------
 //テストデータ操作クラス①：デフォルトのまま使う
@@ -142,7 +142,7 @@ struct int_ope_t : public GASHA_ dynamic_array::baseOpe<ope, int>{};
 void example_dynamic_array();
 
 //----------------------------------------
-//動的配列シンプルコンテナテスト
+//シンプル動的配列コンテナテスト
 void example_simple_dynamic_array();
 
 #endif//__EXAMPLE_DYNAMIC_ARRAY_H_

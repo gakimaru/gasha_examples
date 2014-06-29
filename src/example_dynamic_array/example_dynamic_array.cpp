@@ -80,6 +80,14 @@ data_t::data_t(const data_t& src)
 }
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 
+#ifdef USE_STL_ALGORITM
+//※std::binary_search(), std::upper_bound() を使用する場合は、このオペレータも必要（std::lower_bound()には不要）
+static inline bool operator<(const int key, const data_t& rhs)
+{
+	return key < rhs.m_key;
+}
+#endif//USE_STL_ALGORITM
+
 //----------------------------------------
 //テスト用補助関数
 #ifdef PRINT_TEST_DATA_DETAIL
@@ -134,9 +142,9 @@ void example_dynamic_array()
 				printf("(empty)");
 			std::for_each(con.rbegin(), con.rend(),
 				[](int val)
-			{
-				printf(" %d", val);
-			}
+				{
+					printf(" %d", val);
+				}
 			);
 			printf("\n");
 		};
@@ -169,20 +177,43 @@ void example_dynamic_array()
 		//ソ―ト
 		printf("\n");
 		printf("[sort]\n");
+	#ifdef USE_STL_ALGORITM
+		std::sort(con.begin(), con.end());//高速ソート(STL版)
+	#else//USE_STL_ALGORITM
 		con.sort();//高速ソート
-		//con.stableSort();//安定ソート
-		//std::sort(con.begin(), con.end());//高速ソート(STL版)
-		//std::stable_sort(con.begin(), con.end());//安定ソート(STL版)
+	#endif//USE_STL_ALGORITM
 		printAll();//全件表示
 
 		//逆順にソート ※カスタムプレディケート関数を使用
 		printf("\n");
 		printf("[custom sort]\n");
 		auto reverse_pred = [](const int lhs, const int rhs) -> bool {return lhs > rhs; };
+	#ifdef USE_STL_ALGORITM
+		std::sort(con.begin(), con.end(), reverse_pred);//高速ソート(STL版)
+	#else//USE_STL_ALGORITM
 		con.sort(reverse_pred);//高速ソート
-		//con.stableSort(reverse_pred);//安定ソート
-		//std::sort(con.begin(), con.end(), reverse_pred);//高速ソート(STL版)
-		//std::stable_sort(con.begin(), con.end(), reverse_pred);//安定ソート(STL版)
+	#endif//USE_STL_ALGORITM
+		printAll();//全件表示
+
+		//安定ソ―ト
+		printf("\n");
+		printf("[stable_sort]\n");
+	#ifdef USE_STL_ALGORITM
+		std::stable_sort(con.begin(), con.end());//安定ソート(STL版)
+	#else//USE_STL_ALGORITM
+		con.stableSort();//安定ソート
+	#endif//USE_STL_ALGORITM
+		printAll();//全件表示
+
+		//逆順に安定ソート ※カスタムプレディケート関数を使用
+		printf("\n");
+		printf("[custom stable_sort]\n");
+		//auto reverse_pred = [](const int lhs, const int rhs) -> bool {return lhs > rhs; };
+	#ifdef USE_STL_ALGORITM
+		std::stable_sort(con.begin(), con.end(), reverse_pred);//安定ソート(STL版)
+	#else//USE_STL_ALGORITM
+		con.stableSort(reverse_pred);//安定ソート
+	#endif//USE_STL_ALGORITM
 		printAll();//全件表示
 
 		//ポップ(1)
@@ -212,8 +243,11 @@ void example_dynamic_array()
 		auto find = [&con](const int val)
 		{
 			printf("findValue(%d)=", val);
+		#ifdef USE_STL_ALGORITM
+			auto ite = std::find(con.begin(), con.end(), val);//線形探索(STL版)
+		#else//USE_STL_ALGORITM
 			auto ite = con.findValue(val);//線形探索
-			//auto ite = std::find(con.begin(), con.end(), val);//線形探索(STL版)
+		#endif//USE_STL_ALGORITM
 			if (ite.isExist())
 			{
 				printf("%d", *ite);
@@ -236,12 +270,15 @@ void example_dynamic_array()
 		auto binary_search = [&con](const int val)
 		{
 			printf("binarySearchValue(%d)=", val);
+		#ifdef USE_STL_ALGORITM
+			if (std::binary_search(con.begin(), con.end(), val))//二分探索(STL版)
+			{
+				auto ite = std::lower_bound(con.begin(), con.end(), val);
+		#else//USE_STL_ALGORITM
 			auto ite = con.binarySearchValue(val);//二分探索
 			if (ite.isExist())
 			{
-				//if(std::binary_search(con.begin(), con.end(), val))//二分探索(STL版)
-				//{
-				//	auto ite = std::lower_bound(con.begin(), con.end(), val);
+		#endif//USE_STL_ALGORITM
 				printf("%d", *ite);
 				--ite;
 				if (ite.isExist())
@@ -378,9 +415,9 @@ void example_dynamic_array()
 			}
 			std::for_each(con.rbegin(), con.rend(),
 				[](data_t& data)
-			{
-				printf(" [%d:%d]", data.m_key, data.m_val);
-			}
+				{
+					printf(" [%d:%d]", data.m_key, data.m_val);
+				}
 			);
 			printf("\n");
 		};
@@ -454,20 +491,43 @@ void example_dynamic_array()
 		//ソ―ト
 		printf("\n");
 		printf("[sort]\n");
+	#ifdef USE_STL_ALGORITM
+		std::sort(con.begin(), con.end());//高速ソート(STL版)
+	#else//USE_STL_ALGORITM
 		con.sort();//高速ソート
-		//con.stableSort();//安定ソート
-		//std::sort(con.begin(), con.end());//高速ソート(STL版)
-		//std::stable_sort(con.begin(), con.end());//安定ソート(STL版)
+	#endif//USE_STL_ALGORITM
 		printAll();//全件表示
 
 		//逆順にソート ※カスタムプレディケート関数を使用
 		printf("\n");
 		printf("[custom sort]\n");
 		auto reverse_pred = [](const data_t& lhs, const data_t& rhs) -> bool {return lhs.m_key > rhs.m_key; };
+	#ifdef USE_STL_ALGORITM
+		std::sort(con.begin(), con.end(), reverse_pred);//高速ソート(STL版)
+	#else//USE_STL_ALGORITM
 		con.sort(reverse_pred);//高速ソート
-		//con.stableSort(reverse_pred);//安定ソート
-		//std::sort(con.begin(), con.end(), reverse_pred);//高速ソート(STL版)
-		//std::stable_sort(con.begin(), con.end(), reverse_pred);//安定ソート(STL版)
+	#endif//USE_STL_ALGORITM
+		printAll();//全件表示
+
+		//安定ソ―ト
+		printf("\n");
+		printf("[stable_sort]\n");
+	#ifdef USE_STL_ALGORITM
+		std::stable_sort(con.begin(), con.end());//安定ソート(STL版)
+	#else//USE_STL_ALGORITM
+		con.stableSort();//安定ソート
+	#endif//USE_STL_ALGORITM
+		printAll();//全件表示
+
+		//逆順に安定ソート ※カスタムプレディケート関数を使用
+		printf("\n");
+		printf("[custom stable_sort]\n");
+		//auto reverse_pred = [](const data_t& lhs, const data_t& rhs) -> bool {return lhs.m_key > rhs.m_key; };
+	#ifdef USE_STL_ALGORITM
+		std::stable_sort(con.begin(), con.end(), reverse_pred);//安定ソート(STL版)
+	#else//USE_STL_ALGORITM
+		con.stableSort(reverse_pred);//安定ソート
+	#endif//USE_STL_ALGORITM
 		printAll();//全件表示
 
 #if 0
@@ -591,8 +651,11 @@ void example_dynamic_array()
 		auto find = [&con](const int key)
 		{
 			printf("findValue(key=%d)=", key);
+		#ifdef USE_STL_ALGORITM
+			auto ite = std::find(con.begin(), con.end(), key);//線形探索(STL版)
+		#else//USE_STL_ALGORITM
 			auto ite = con.findValue(key);//線形探索
-			//auto ite = std::find(con.begin(), con.end(), key);//線形探索(STL版)
+		#endif//USE_STL_ALGORITM
 			if (ite.isExist())
 			{
 				printf(" [%d:%d]", ite->m_key, ite->m_val);
@@ -615,12 +678,15 @@ void example_dynamic_array()
 		auto binary_search = [&con](const int key)
 		{
 			printf("binarySearchValue(key=%d)=", key);
+		#ifdef USE_STL_ALGORITM
+			if (std::binary_search(con.begin(), con.end(), key))//二分探索(STL版)
+			{
+		#else//USE_STL_ALGORITM
 			auto ite = con.binarySearchValue(key);//二分探索
 			if (ite.isExist())
 			{
-				//if (std::binary_search(con.begin(), con.end(), key))//二分探索(STL版)
-				//{
-				//	auto ite = std::lower_bound(con.begin(), con.end(), key);
+		#endif//USE_STL_ALGORITM
+				auto ite = std::lower_bound(con.begin(), con.end(), key);
 				printf(" [%d:%d]", ite->m_key, ite->m_val);
 				--ite;
 				if (ite.isExist())
