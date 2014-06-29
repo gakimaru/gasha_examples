@@ -15,13 +15,13 @@
 //--------------------------------------------------------------------------------
 //基本算術処理テスト設定とコンパイラスイッチ
 
-#ifdef _DEBUG//デバッグ版
-static const int TEST_BITCOUNT_MAX = 10000000;//ビット数計測テスト回数
-
-#else//_DEBUG//リリース版
+#ifdef GASHA_OPTIMIZED
 static const int TEST_BITCOUNT_MAX = 100000000;//ビット数計測テスト回数
 
-#endif//_DEBUG
+#else//GASHA_OPTIMIZED
+static const int TEST_BITCOUNT_MAX = 10000000;//ビット数計測テスト回数
+
+#endif//GASHA_OPTIMIZED
 
 //基本算術処理テスト
 void example_basic_math();

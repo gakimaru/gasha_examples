@@ -15,13 +15,13 @@
 //--------------------------------------------------------------------------------
 //CRC32計算処理テスト設定とコンパイラスイッチ
 
-#ifdef _DEBUG//デバッグ版
-static const int TEST_REPEAT_COUNT = 10000;//CRC32計算の繰り返しテスト回数
-
-#else//_DEBUG//リリース版
+#ifdef GASHA_OPTIMIZED
 static const int TEST_REPEAT_COUNT = 1000000;//CRC32計算の繰り返しテスト回数
 
-#endif//_DEBUG
+#else//GASHA_OPTIMIZED
+static const int TEST_REPEAT_COUNT = 10000;//CRC32計算の繰り返しテスト回数
+
+#endif//GASHA_OPTIMIZED
 
 //--------------------------------------------------------------------------------
 

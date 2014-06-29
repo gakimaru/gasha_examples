@@ -57,21 +57,21 @@ static const int TEST_POP_THREADS = 1;//テスト用のポップ／デキュー�
 static const int TEST_ALLOC_THREADS = 1;//テスト用のアロケートスレッド数
 static const int TEST_POOL_SIZE = 10;//テスト用プールアロケータのプールサイズ
 #else//TEST_1_TIME
-#ifdef _DEBUG//デバッグ版
-static const int TEST_COUNT = 10000;//テスト回数
-static const int TEST_PRINT_COUNT = 5;//テスト中のメッセージ表示回数
-static const int TEST_PUSH_THREADS = 3;//テスト用のプッシュ／エンキュースレッド数
-static const int TEST_POP_THREADS = 2;//テスト用のポップ／デキュースレッド数
-static const int TEST_ALLOC_THREADS = 5;//テスト用のアロケートスレッド数
-static const int TEST_POOL_SIZE = 20;//テスト用プールアロケータのプールサイズ
-#else//_DEBUG//リリース版
+#ifdef GASHA_OPTIMIZED
 static const int TEST_COUNT = 5000000;//テスト回数
 static const int TEST_PRINT_COUNT = 5;//テスト中のメッセージ表示回数
 static const int TEST_PUSH_THREADS = 3;//テスト用のプッシュ／エンキュースレッド数
 static const int TEST_POP_THREADS = 2;//テスト用のポップ／デキュースレッド数
 static const int TEST_ALLOC_THREADS = 5;//テスト用のアロケートスレッド数
 static const int TEST_POOL_SIZE = 20;//テスト用プールアロケータのプールサイズ
-#endif//_DEBUG
+#else//GASHA_OPTIMIZED
+static const int TEST_COUNT = 10000;//テスト回数
+static const int TEST_PRINT_COUNT = 5;//テスト中のメッセージ表示回数
+static const int TEST_PUSH_THREADS = 3;//テスト用のプッシュ／エンキュースレッド数
+static const int TEST_POP_THREADS = 2;//テスト用のポップ／デキュースレッド数
+static const int TEST_ALLOC_THREADS = 5;//テスト用のアロケートスレッド数
+static const int TEST_POOL_SIZE = 20;//テスト用プールアロケータのプールサイズ
+#endif//GASHA_OPTIMIZED
 #endif//TEST_1_TIME
 #ifdef ENABLE_TEST_PRINT
 static const int TEST_PRINT_STEP = TEST_COUNT >= TEST_PRINT_COUNT * 10 ? TEST_COUNT / TEST_PRINT_COUNT : 10;//テスト中のメッセージ表示の間隔

@@ -28,13 +28,7 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //　（コンパイルへの影響を気にしないなら、ヘッダーファイルに
 //　インクルードしてしまっても良い）
 
-#if 0
-
-template class linked_list::container<int_ope_t>;
 template class linked_list::container<ope>;
 template class linked_list::container<another_ope_t>;
-template class linked_list::container<mt_ope_t>;
-
-#endif
 
 // End of file

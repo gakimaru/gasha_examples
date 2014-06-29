@@ -19,9 +19,15 @@ int main(const int argc, const char* argv[])
 {
 	//ビルド設定処理テスト
 	example_build_settings();
-	
+
 	//ビルド設定が正しく実行環境に適合するかチェック
-	diagnoseBuildSettings();
+	{
+		char message[4096];
+		std::size_t size = 0;
+		diagnoseBuildSettings(message, size);
+		printf(message);
+		printf("message size = %d butes.\n", size);
+	}
 
 	return EXIT_SUCCESS;
 }

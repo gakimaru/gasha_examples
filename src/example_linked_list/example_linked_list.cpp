@@ -24,15 +24,77 @@
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //--------------------------------------------------------------------------------
-//双方向連結リストテスト
+//双方向連結リストコンテナテスト
 //--------------------------------------------------------------------------------
 
-#include <algorithm>//std::for_each用
-#include <chrono>//C++11 時間計測用
-#include <list>//std::list用（比較用）
-#include <assert.h>//assert用
+//----------------------------------------
+//テストデータ
 
-#if 0
+//コンストラクタ
+data_t::data_t(const int key, const int val) :
+	m_next(nullptr),
+	m_prev(nullptr),
+	m_key(key),
+	m_val(val)
+{
+#ifdef TEST_DATA_WATCH_CONSTRUCTOR
+	printf("data_t::constructor(%d, %d)\n", key, val);
+#endif//TEST_DATA_WATCH_CONSTRUCTOR
+}
+//デフォルトコンストラクタ
+data_t::data_t() :
+	m_next(nullptr),
+	m_prev(nullptr),
+	m_key(0),
+	m_val(0)
+{
+#ifdef TEST_DATA_WATCH_CONSTRUCTOR
+	printf("data_t::constructor()\n");
+#endif//TEST_DATA_WATCH_CONSTRUCTOR
+}
+//デストラクタ
+data_t::~data_t()
+{
+#ifdef TEST_DATA_WATCH_CONSTRUCTOR
+	printf("data_t::destructor(): key=%d, val=%d\n", m_key, m_val);
+#endif//TEST_DATA_WATCH_CONSTRUCTOR
+}
+#ifdef TEST_DATA_WATCH_CONSTRUCTOR
+//ムーブオペレータ
+data_t::data_t& operator=(const data_t&& rhs)
+{
+	memcpy(this, &rhs, sizeof(*this));
+	printf("data_t::move_operator\n");
+	return *this;
+}
+//コピーオペレータ
+data_t::data_t& operator=(const data_t& rhs)
+{
+	memcpy(this, &rhs, sizeof(*this));
+	printf("data_t::copy_operator\n");
+	return *this;
+}
+//ムーブコンストラクタ
+data_t::data_t(const data_t&& src)
+{
+	memcpy(this, &src, sizeof(*this));
+	printf("data_t::move_constructor\n");
+}
+//コピーコンストラクタ
+data_t::data_t(const data_t& src)
+{
+	memcpy(this, &src, sizeof(*this));
+	printf("data_t::copy_constructor\n");
+}
+#endif//TEST_DATA_WATCH_CONSTRUCTOR
+
+#ifdef USE_STL_ALGORITM
+//※std::binary_search(), std::upper_bound() を使用する場合は、このオペレータも必要（std::lower_bound()には不要）
+static inline bool operator<(const int key, const data_t& rhs)
+{
+	return key < rhs.m_key;
+}
+#endif//USE_STL_ALGORITM
 
 //----------------------------------------
 //テスト用補助関数
@@ -56,110 +118,8 @@ inline int printf_dbg_search(const char* fmt, ...){ return 0; }
 #endif//PRINT_TEST_DATA_SEARCH
 
 //----------------------------------------
-//テストデータ
-struct data_t
-{
-	mutable const data_t* m_prev;//前ノード
-	mutable const data_t* m_next;//次ノード
-	
-	int m_key;//キー
-	int m_val;//値
-	
-	//コンストラクタ
-	data_t(const int key, const int val) :
-		m_next(nullptr),
-		m_prev(nullptr),
-		m_key(key),
-		m_val(val)
-	{}
-	data_t() :
-		m_next(nullptr),
-		m_prev(nullptr),
-		m_key(0),
-		m_val(0)
-	{}
-
-	//デフォルトのソート用の比較演算子（必須ではない）
-	inline bool operator<(const data_t& rhs) const
-	{
-		return m_key < rhs.m_key;
-	}
-	//デフォルトの線形／二分探索用の比較演算子（必須ではない）
-	inline bool operator==(const int key) const
-	{
-		return m_key == key;
-	}
-#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
-	inline bool operator<(const int key) const
-	{
-		return m_key < key;
-	}
-#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
-};
-#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
-//※std::binary_searchを使用する場合は、このオペレータも必要
-static bool operator<(const int key, const data_t& rhs)
-{
-	return key < rhs.m_key;
-}
-#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
-
-//----------------------------------------
-//テストデータ向けノード操作用クラス（CRTP）
-struct ope : public linked_list::baseOpe<ope, data_t>
-{
-	//前ノードを取得
-	inline static const node_type* getPrev(const node_type& node){ return node.m_prev; }
-	//前ノードを変更
-	inline static void setPrev(node_type& node, const node_type* prev){ node.m_prev = prev; }
-	
-	//次ノードを取得
-	inline static const node_type* getNext(const node_type& node){ return node.m_next; }
-	//次ノードを変更
-	inline static void setNext(node_type& node, const node_type* next){ node.m_next = next; }
-
-	//ロック型
-	//※デフォルト（dummy_shared_lock）のままとする
-	//typedef shared_spin_lock lock_type;//ロックオブジェクト型
-};
-
-//----------------------------------------
-//テストデータ操作クラス②：ソート／探索方法をデフォルトから変える
-struct another_ope_t : public ope
-{
-	//ソート用プレディケート関数オブジェクト
-	//※m_valメンバーを基準にソート
-	struct predicateForSort{
-		inline bool operator()(const node_type& lhs, const node_type& rhs) const
-		{
-			return lhs.m_val < rhs.m_val;
-		}
-	};
-
-	//線形探索用プレディケート関数オブジェクト
-	//※m_valメンバーを探索
-	struct predicateForFind{
-		inline bool operator()(const node_type& lhs, const int rhs) const
-		{
-			return lhs.m_val == rhs;
-		}
-	};
-
-#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
-	//二分探索用比較関数オブジェクト
-	//※m_valメンバーを比較
-	struct comparisonForSearch{
-		inline int operator()(const node_type& lhs, const int rhs) const
-		{
-			return rhs - lhs.m_val;
-		}
-	};
-#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
-};
-
-//----------------------------------------
-//テストメイン
-int main(const int argc, const char* argv[])
+//双方向連結リストコンテナテスト
+void example_linked_list()
 {
 	//--------------------
 	//テスト①：基本ロジックテスト
@@ -753,7 +713,7 @@ int main(const int argc, const char* argv[])
 		{
 			printf("binarySearchValue(key=%d, value=%d)=", key, value);
 			auto comparison = [&key, &value](const data_t& lhs) -> int { return key == lhs.m_key ? lhs.m_val - value : key > lhs.m_key ? 1 : -1; };
-			auto ite = con.binary_search(comparison);//二分探索
+			auto ite = con.binarySearch(comparison);//二分探索
 			if (ite.isExist())
 				printf(" [%d:%d]", ite->m_key, ite->m_val);
 			else
@@ -815,7 +775,7 @@ int main(const int argc, const char* argv[])
 			const auto duration = now_time - prev_time;
 			const double elapsed_time = static_cast<double>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count()) / 1000000000.;
 			if (is_show)
-				printf("*elapsed_time=%.9llf sec\n", elapsed_time);
+				printf("*elapsed_time=%.9lf sec\n", elapsed_time);
 			return now_time;
 		};
 
@@ -1171,16 +1131,6 @@ int main(const int argc, const char* argv[])
 
 	printf("\n");
 	printf("- end -\n");
-
-	return EXIT_SUCCESS;
-}
-
-#endif
-
-//----------------------------------------
-//双方向連結リストテスト
-void example_linked_list()
-{
 }
 
 // End of file

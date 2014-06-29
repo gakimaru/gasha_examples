@@ -15,13 +15,13 @@
 //--------------------------------------------------------------------------------
 //ソートアルゴリズムテスト用設定とコンパイラスイッチ
 
-#ifdef _DEBUG//デバッグ版
-static const int TEST_DATA_COUNT = 1000;//テストデータ件数（最大）
-
-#else//_DEBUG//リリース版
+#ifdef GASHA_OPTIMIZED
 static const int TEST_DATA_COUNT = 10000;//テストデータ件数（最大）
 
-#endif//_DEBUG
+#else//GASHA_OPTIMIZED
+static const int TEST_DATA_COUNT = 1000;//テストデータ件数（最大）
+
+#endif//GASHA_OPTIMIZED
 
 //#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
 
