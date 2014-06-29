@@ -31,4 +31,32 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 template class linked_list::container<ope>;
 template class linked_list::container<another_ope_t>;
 
+//----------------------------------------
+//シンプル双方向連結リストコンテナテスト
+//※.inl と .cpp.h をインクルードした後は、明示的なインスタンス化をせずにコンテナを使用可能。
+//※シンプルコンテナを使用すると、コンテナ操作用構造体の定義も省略可能。
+//　ただし、ソート用関数や探索用関数の定義、ロックオブジェクトの指定といった細かいカスタマイズはできない。
+//　シンプルコンテナも明示的なインスタンス化は可能。
+void example_simple_linked_list()
+{
+	printf("\n");
+	printf("--- example_simple_dynamic_array ---\n");
+
+	simpleLList<short>::con con;//シンプル双方向連結リストコンテナ
+	simpleLList<short>::node data[3];
+	data[0] = 5;
+	data[1] = 1;
+	data[2] = 3;
+	con.push_back(data[0]);
+	con.push_back(data[1]);
+	con.push_back(data[2]);
+	con.sort();
+	printf("data =");
+	for (auto data : con)
+	{
+		printf(" %d", data.value());
+	}
+	printf("\n");
+}
+
 // End of file

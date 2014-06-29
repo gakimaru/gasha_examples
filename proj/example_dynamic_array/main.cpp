@@ -18,7 +18,7 @@ int main(const int argc, const char* argv[])
 	//動的配列コンテナテスト
 	example_dynamic_array();
 	
-	//動的配列シンプルコンテナテスト
+	//シンプル動的配列コンテナテスト
 	example_simple_dynamic_array();
 
 	return EXIT_SUCCESS;

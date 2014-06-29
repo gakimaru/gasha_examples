@@ -18,6 +18,9 @@ int main(const int argc, const char* argv[])
 	//双方向連結リストテスト
 	example_linked_list();
 	
+	//シンプル双方向連結リストコンテナテスト
+	example_simple_linked_list();
+	
 	return EXIT_SUCCESS;
 }
 
