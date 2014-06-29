@@ -82,15 +82,23 @@ struct data_t
 	{
 		return m_key < key;
 	}
+#ifdef USE_STL_ALGORITM
+	//※std::binary_search(), std::upper_bound() を使用する場合は、このオペレータも必要（std::lower_bound()には不要）
+	friend inline bool operator<(const int key, const data_t& rhs)
+	{
+		return key < rhs.m_key;
+	}
+#endif//USE_STL_ALGORITM
+
 };
 
 //----------------------------------------
 //テストデータ操作クラス①：デフォルトのまま使う
-struct ope : public GASHA_ dynamic_array::baseOpe<ope, data_t>{};
+struct ope : public dynamic_array::baseOpe<ope, data_t>{};
 
 //----------------------------------------
 //テストデータ操作クラス②：ソート／探索方法をデフォルトから変える
-struct another_ope_t : public GASHA_ dynamic_array::baseOpe<ope, data_t>
+struct another_ope_t : public dynamic_array::baseOpe<ope, data_t>
 {
 	//ソート用プレディケート関数オブジェクト
 	//※m_valメンバーを基準にソート
@@ -129,7 +137,7 @@ struct another_ope_t : public GASHA_ dynamic_array::baseOpe<ope, data_t>
 
 //----------------------------------------
 //テストデータ操作クラス③：ロックを有効化する
-struct mt_ope_t : public GASHA_ dynamic_array::baseOpe<mt_ope_t, data_t>
+struct mt_ope_t : public dynamic_array::baseOpe<mt_ope_t, data_t>
 {
 	//ロック型
 	typedef GASHA_ sharedSpinLock lock_type;//ロックオブジェクトを指定
@@ -137,7 +145,7 @@ struct mt_ope_t : public GASHA_ dynamic_array::baseOpe<mt_ope_t, data_t>
 
 //----------------------------------------
 //int型用のデータ操作クラス定義
-struct int_ope_t : public GASHA_ dynamic_array::baseOpe<ope, int>{};
+struct int_ope_t : public dynamic_array::baseOpe<ope, int>{};
 
 //----------------------------------------
 //動的配列コンテナテスト

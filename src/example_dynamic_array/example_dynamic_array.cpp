@@ -80,19 +80,11 @@ data_t::data_t(const data_t& src)
 }
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 
-#ifdef USE_STL_ALGORITM
-//※std::binary_search(), std::upper_bound() を使用する場合は、このオペレータも必要（std::lower_bound()には不要）
-static inline bool operator<(const int key, const data_t& rhs)
-{
-	return key < rhs.m_key;
-}
-#endif//USE_STL_ALGORITM
-
 //----------------------------------------
 //テスト用補助関数
 #ifdef PRINT_TEST_DATA_DETAIL
 template<typename... Tx>
-inline int printf_detail(const char* fmt, Tx... args)
+inline int printf_detail(const char* fmt, const Tx&... args)
 {
 	return printf(fmt, args...);
 }

@@ -93,7 +93,7 @@ struct data_t
 
 //----------------------------------------
 //テストデータ向けノード操作用クラス（CRTP）
-struct ope : public GASHA_ linked_list::baseOpe<ope, data_t>
+struct ope : public linked_list::baseOpe<ope, data_t>
 {
 	//前ノードを取得
 	inline static const node_type* getPrev(const node_type& node){ return node.m_prev; }
@@ -106,8 +106,8 @@ struct ope : public GASHA_ linked_list::baseOpe<ope, data_t>
 	inline static void setNext(node_type& node, const node_type* next){ node.m_next = next; }
 
 	//ロック型
-	//※デフォルト（dummy_shared_lock）のままとする
-	//typedef shared_spin_lock lock_type;//ロックオブジェクト型
+	//※デフォルト（dummySharedLock）のままとする
+	//typedef GASHA_ sharedSpinLock lock_type;//ロックオブジェクト型
 };
 
 //----------------------------------------

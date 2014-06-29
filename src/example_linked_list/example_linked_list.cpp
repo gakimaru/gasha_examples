@@ -90,9 +90,9 @@ data_t::data_t(const data_t& src)
 
 #ifdef USE_STL_ALGORITM
 //※std::binary_search(), std::upper_bound() を使用する場合は、このオペレータも必要（std::lower_bound()には不要）
-static inline bool operator<(const int key, const data_t& rhs)
+static inline bool operator>(const int key, const data_t& rhs)
 {
-	return key < rhs.m_key;
+	return key > rhs.m_key;
 }
 #endif//USE_STL_ALGORITM
 
@@ -100,7 +100,7 @@ static inline bool operator<(const int key, const data_t& rhs)
 //テスト用補助関数
 #ifdef PRINT_TEST_DATA_DETAIL
 template<typename... Tx>
-inline int printf_detail(const char* fmt, Tx... args)
+inline int printf_detail(const char* fmt, const Tx&... args)
 {
 	return printf(fmt, args...);
 }
@@ -109,7 +109,7 @@ inline int printf_detail(const char* fmt, ...){ return 0; }
 #endif//PRINT_TEST_DATA_DETAIL
 #ifdef PRINT_TEST_DATA_SEARCH
 template<typename... Tx>
-inline int printf_dbg_search(const char* fmt, Tx... args)
+inline int printf_dbg_search(const char* fmt, const Tx&... args)
 {
 	return printf(fmt, args...);
 }

@@ -41,7 +41,7 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //テスト用補助関数
 #ifdef PRINT_TEST_DATA_DETAIL
 template<typename... Tx>
-inline int printf_detail(const char* fmt, Tx... args)
+inline int printf_detail(const char* fmt, const Tx&... args)
 {
 	return printf(fmt, args...);
 }
