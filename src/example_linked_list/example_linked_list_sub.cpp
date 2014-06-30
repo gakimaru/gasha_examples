@@ -79,9 +79,9 @@ void example_simple_linked_list()
 			bool operator<(const data_t& rhs) const { return m_val1 < rhs.m_val1; }//sort(), std::sort()用
 			bool operator<(const int rhs) const { return m_val1 < rhs; }//binarySearch(), std::binary_search()用
 			//friend bool operator<(const int lhs, const data_t& rhs)//std::binary_search()用
-			//{                                                             //※ローカルクラスではfriend関数を定義できないため、
-			//	return rhs < rhs.m_val1;                                    //　この演算子を定義できない
-			//}                                                             //　（つまり、std::binary_searchは使えない）
+			//{                                                      //※ローカルクラスではfriend関数を定義できないため、
+			//	return rhs < rhs.m_val1;                             //　この演算子を定義できない
+			//}                                                      //　（つまり、std::binary_searchは使えない）
 			data_t(const int val) :
 				m_val1(val / 10),
 				m_val2(val % 10)
@@ -130,5 +130,24 @@ void example_simple_linked_list()
 //明示的インスタンス化する場合
 //※専用マクロ使用
 //INSTANCING_simpleLList(short);
+
+//明示的インスタンス化のテスト
+//※operatorCRTP を使って基本比較オペレータを実装
+#include <gasha/type_traits.h>
+struct derived : public operatorCRTP<derived, int>
+{
+	operator int() const { return m_primaryData; }//int型にキャスト ※operatorCRTP への第二テンプレート引数の型に対するキャストオペレータを実装しておく必要がある
+	int m_primaryData;//（比較に用いる）主要データ
+	int m_otherData;//他のデータ
+};
+bool funct()
+{
+	derived a;
+	derived b;
+	a.m_primaryData = 1;
+	b.m_primaryData = 1;
+	return a == b;
+}
+INSTANCING_simpleLList(derived);
 
 // End of file
