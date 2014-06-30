@@ -140,8 +140,13 @@ struct another_ope_t : public ope
 #endif//GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 };
 
-//片方向連結リストテスト
+//----------------------------------------
+//片方向連結リストコンテナテスト
 void example_singly_linked_list();
+
+//----------------------------------------
+//シンプル片方向連結リストコンテナテスト
+void example_simple_singly_linked_list();
 
 #endif//__EXAMPLE_SINGLY_LINKED_LIST_H_
 

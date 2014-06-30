@@ -4,7 +4,7 @@
 
 //--------------------------------------------------------------------------------
 // exmaple_rb_tree.h
-// 赤黒木テスト
+// 赤黒木コンテナテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -16,26 +16,35 @@
 
 #include <gasha/shared_spin_lock.h>//共有スピンロック
 
-
-//--------------------------------------------------------------------------------
-//【謝辞】
-//このプログラムのアルゴリズムは、下記の個人サイトにて発表されております、
-//サイト主様が開発されたアルゴリズムを参考にいたしました。
-//    URL： http ://www.moon.sannet.ne.jp/okahisa/rb-tree/rb-tree.html
-//    記事：「Red - Black Tree by Java -- これで分かった赤黒木」
-//          トップページURL : http ://www.moon.sannet.ne.jp/okahisa/
-//                           「OKおじさんのホームページ」
-//とても分かり易く優れたアルゴリズムであり、問題なくプログラムを作成でき
-//ましたことを感謝いたします。
-//なお、ソースコードは引用しておりません。
-//--------------------------------------------------------------------------------
-
 //--------------------------------------------------------------------------------
 //赤黒木テスト用設定とコンパイラスイッチ
 static const int TEST_DATA_KEY_MIN = 1;//テストデータの最小キー
 static const int TEST_DATA_KEY_MAX = 10;//テストデータの最大キー
 static const int TEST_DATA_REG_NUM = 20;//テストデータの登録数
-static const int TEST_DATA_STACK_DEPTH_MAX = 32;//テストデータの赤黒木操作用スタックの最大の深さ（デフォルトは32で、平衡木なら10万件は扱える）
+static const int TEST_DATA_STACK_DEPTH_MAX = 40;//テストデータの赤黒木操作用スタックの最大の深さ（デフォルトは40で、平衡木なら100万件は扱える）
+
+#ifdef GASHA_OPTIMIZED
+
+static const int TEST_DATA_NUM = 20000;//大量登録テストデータの登録数
+
+static const int TEST_DATA_FIND_NUM = 100;//線形探索テストの回数
+static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST_DATA_NUM / TEST_DATA_FIND_NUM : 1;//線形探索テストの実行ステップ
+
+//#define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
+//#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
+
+#else//GASHA_OPTIMIZED
+
+static const int TEST_DATA_NUM = 10;//大量登録テストデータの登録数
+
+static const int TEST_DATA_FIND_NUM = 100;//線形探索テストの回数
+static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST_DATA_NUM / TEST_DATA_FIND_NUM : 1;//線形探索テストの実行ステップ
+
+#define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
+//#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
+
+#endif//GASHA_OPTIMIZED
+
 //#define REGIST_TEST_DATA_SEQUENTIALLY//データをシーケンシャルに登録する場合は、このマクロを有効化する（無効化時はランダム）
 #define PRINT_TEST_DATA_TREE//テストデータの木を表示する場合は、このマクロを有効化する（表示しなくても検索は実行する）
 #define PRINT_TEST_DATA_SEARCH//テストデーたの検索結果を表示する場合は、このマクロを有効化する（表示しなくても検索は実行する）
@@ -43,14 +52,74 @@ static const int TEST_DATA_STACK_DEPTH_MAX = 32;//テストデータの赤黒木
 #define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
 //#define ENABLE_CALC_COUNT_PERFORMANCE//データ件数カウントの処理時間を計測する場合は、このマクロを有効化する
 
-//テストデータを固定順に登録する場合は、このマクロを有効化する（無効時はランダム、ただし、REGIST_TEST_DATA_SEQUENTIALLYが優先）
-//#define TEST_DATA_REGISTRATION_LIST { 54, 59, 71, 84, 60, 85, 54, 84, 42, 62, 64, 38, 43, 29, 89, 5, 96, 27, 38, 47, 79, 81, 52, 47, 56, 39, 92, 83, 7, 33, 8, 64, 2, 36, 83, 95, 77, 14, 87, 87, 97, 47, 79, 80, 46, 52, 78, 67, 11, 72, 63, 58, 14, 53, 94, 75, 52, 10, 41, 47, 26, 18, 77, 73, 45, 21, 56, 13, 1, 32, 61, 14, 61, 22, 61, 38, 94, 90, 68, 44, 35, 61, 43, 90, 69, 9, 6, 96, 66, 65, 67, 17, 21, 35, 12, 75, 31, 60, 36, 32}
+//#define USE_STL_ALGORITM//ソート／線形探索／二分探索で、内部関数の代わりに STL を使用する場合は、このマクロを有効にする
 
-//テストデータを固定順に削除する場合は、このマクロを有効化する（無効時はランダム）
-//#define TEST_DATA_REMOVING_LIST { 41, 72, 12, 14, 9, 39, 18, 38, 66, 53, 84, 31, 68, 52, 44, 87 }
+GASHA_USING_NAMESPACE;//ネームスペース使用
 
-//赤黒木テスト
+//----------------------------------------
+//テストデータ
+struct data_t
+{
+	mutable const data_t* m_childS;//小（左）側の子ノード
+	mutable const data_t* m_childL;//大（右）側の子ノード
+
+	bool m_isBlack;//ノードの色
+	int m_key;//キー
+	int m_val;//値
+
+	//コンストラクタ
+	data_t(const int key, const int val);
+	//デフォルトコンストラクタ
+	data_t();
+	//デストラクタ
+	~data_t();
+
+#ifdef TEST_DATA_WATCH_CONSTRUCTOR
+	//ムーブオペレータ
+	data_t& operator=(data_t&& rhs);
+	//コピーオペレータ
+	data_t& operator=(const data_t& rhs);
+	//ムーブコンストラクタ
+	data_t(data_t&& src);
+	//コピーコンストラクタ
+	data_t(const data_t& src);
+#endif//TEST_DATA_WATCH_CONSTRUCTOR
+};
+//----------------------------------------
+//テストデータ向けノード操作用クラス（CRTP）
+struct ope : public rb_tree::baseOpe<ope, data_t, int, TEST_DATA_STACK_DEPTH_MAX>
+{
+	//子ノードを取得
+	inline static const node_type* getChildL(const node_type& node){ return node.m_childL; }//大（右）側
+	inline static const node_type* getChildS(const node_type& node){ return node.m_childS; }//小（左）側
+	//子ノードを変更
+	inline static void setChildL(node_type& node, const node_type* child){ node.m_childL = child; }//大（右）側
+	inline static void setChildS(node_type& node, const node_type* child){ node.m_childS = child; }//小（左）側
+
+	//ノードの色を取得
+	inline static color_t getColor(const node_type& node){ return node.m_isBlack ? BLACK : RED; }
+	//ノードの色を変更
+	inline static void setColor(node_type& node, const color_t color){ node.m_isBlack = color == BLACK; }
+
+	//キーを取得
+	inline static key_type getKey(const node_type& node){ return node.m_key; }
+
+	//キーを比較
+	//※デフォルトのままとする
+	//inline static int compareKey(const key_type lhs, const key_type rhs);
+
+	//ロック型
+	//※デフォルト（dummy_shared_lock）のままとする
+	//typedef shared_spin_lock lock_type;//ロックオブジェクト型
+};
+
+//----------------------------------------
+//赤黒木コンテナテスト
 void example_rb_tree();
+
+//----------------------------------------
+//シンプル赤黒木コンテナテスト
+void example_simple_rb_tree();
 
 #endif//__EXAMPLE_RB_TREE_H_
 

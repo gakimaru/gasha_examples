@@ -49,7 +49,7 @@ INSTANCING_slList(another_ope_t);//template class singly_linked_list::container<
 #include <algorithm>//std::find(), std::binary_search(), std::lower_bound()
 
 //シンプル片方向連結リストコンテナテスト
-void example_simple_linked_list()
+void example_simple_singly_linked_list()
 {
 	printf("\n");
 	printf("--- example_simple_singly_linked_list ---\n");

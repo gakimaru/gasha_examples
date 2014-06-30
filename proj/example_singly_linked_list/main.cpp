@@ -17,7 +17,10 @@ int main(const int argc, const char* argv[])
 {
 	//片方向連結リストテスト
 	example_singly_linked_list();
-	
+
+	//シンプル片方向連結リストコンテナテスト
+	example_simple_singly_linked_list();
+
 	return EXIT_SUCCESS;
 }
 

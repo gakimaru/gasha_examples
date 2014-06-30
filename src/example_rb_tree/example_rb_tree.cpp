@@ -14,6 +14,7 @@
 
 #include <gasha/iterator.h>//イテレータ操作
 
+#include <utility>//C++11 std::forward
 #include <random>//C++11 std::random
 #include <chrono>//C++11 std::chrono
 
@@ -24,7 +25,7 @@
 #pragma warning(disable: 4530)//C4530を抑える
 
 #include <algorithm>//std::for_each()
-#include <map>//std::map（比較用）
+//#include <map>//std::map（比較用）
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
@@ -32,84 +33,99 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //赤黒木テスト
 //--------------------------------------------------------------------------------
 
-#if 0
+//テストデータを固定順に登録する場合は、このマクロを有効化する（無効時はランダム、ただし、REGIST_TEST_DATA_SEQUENTIALLYが優先）
+//#define TEST_DATA_REGISTRATION_LIST { 54, 59, 71, 84, 60, 85, 54, 84, 42, 62, 64, 38, 43, 29, 89, 5, 96, 27, 38, 47, 79, 81, 52, 47, 56, 39, 92, 83, 7, 33, 8, 64, 2, 36, 83, 95, 77, 14, 87, 87, 97, 47, 79, 80, 46, 52, 78, 67, 11, 72, 63, 58, 14, 53, 94, 75, 52, 10, 41, 47, 26, 18, 77, 73, 45, 21, 56, 13, 1, 32, 61, 14, 61, 22, 61, 38, 94, 90, 68, 44, 35, 61, 43, 90, 69, 9, 6, 96, 66, 65, 67, 17, 21, 35, 12, 75, 31, 60, 36, 32}
+
+//テストデータを固定順に削除する場合は、このマクロを有効化する（無効時はランダム）
+//#define TEST_DATA_REMOVING_LIST { 41, 72, 12, 14, 9, 39, 18, 38, 66, 53, 84, 31, 68, 52, 44, 87 }
+
+//----------------------------------------
+//テストデータ
+
+//コンストラクタ
+data_t::data_t(const int key, const int val) :
+	m_childS(nullptr),
+	m_childL(nullptr),
+	m_isBlack(false),
+	m_key(key),
+	m_val(val)
+{
+#ifdef TEST_DATA_WATCH_CONSTRUCTOR
+	printf("data_t::constructor(%d, %d)\n", key, val);
+#endif//TEST_DATA_WATCH_CONSTRUCTOR
+}
+//デフォルトコンストラクタ
+data_t::data_t() :
+	m_childS(nullptr),
+	m_childL(nullptr),
+	m_isBlack(false),
+	m_key(0),
+	m_val(0)
+{
+#ifdef TEST_DATA_WATCH_CONSTRUCTOR
+	printf("data_t::constructor()\n");
+#endif//TEST_DATA_WATCH_CONSTRUCTOR
+}
+//デストラクタ
+data_t::~data_t()
+{
+#ifdef TEST_DATA_WATCH_CONSTRUCTOR
+	printf("data_t::destructor(): key=%d, val=%d\n", m_key, m_val);
+#endif//TEST_DATA_WATCH_CONSTRUCTOR
+}
+#ifdef TEST_DATA_WATCH_CONSTRUCTOR
+//ムーブオペレータ
+data_t::data_t& operator=(data_t&& rhs)
+{
+	memcpy(this, &rhs, sizeof(*this));
+	printf("data_t::move_operator\n");
+	return *this;
+}
+//コピーオペレータ
+data_t::data_t& operator=(const data_t& rhs)
+{
+	memcpy(this, &rhs, sizeof(*this));
+	printf("data_t::copy_operator\n");
+	return *this;
+}
+//ムーブコンストラクタ
+data_t::data_t(data_t&& src)
+{
+	memcpy(this, &src, sizeof(*this));
+	printf("data_t::move_constructor\n");
+}
+//コピーコンストラクタ
+data_t::data_t(const data_t& src)
+{
+	memcpy(this, &src, sizeof(*this));
+	printf("data_t::copy_constructor\n");
+}
+#endif//TEST_DATA_WATCH_CONSTRUCTOR
 
 //----------------------------------------
 //テスト用補助関数
 #ifdef PRINT_TEST_DATA_DETAIL
 template<typename... Tx>
-inline int printf_detail(const char* fmt, const Tx&... args)
+inline int printf_detail(const char* fmt, Tx&&... args)
 {
-	return printf(fmt, args...);
+	return printf(fmt, std::forward<Tx>(args)...);
 }
 #else//PRINT_TEST_DATA_DETAIL
 inline int printf_detail(const char* fmt, ...){ return 0; }
 #endif//PRINT_TEST_DATA_DETAIL
 #ifdef PRINT_TEST_DATA_SEARCH
 template<typename... Tx>
-inline int printf_dbg_search(const char* fmt, const Tx&... args)
+inline int printf_dbg_search(const char* fmt, Tx&&... args)
 {
-	return printf(fmt, args...);
+	return printf(fmt, std::forward<Tx>(args)...);
 }
 #else//PRINT_TEST_DATA_SEARCH
 inline int printf_dbg_search(const char* fmt, ...){ return 0; }
 #endif//PRINT_TEST_DATA_SEARCH
 
 //----------------------------------------
-//テストデータ
-struct data_t
-{
-	mutable const data_t* m_nodeS;//小（左）側の子ノード
-	mutable const data_t* m_nodeL;//大（右）側の子ノード
-	
-	bool m_isBlack;//ノードの色
-	int m_key;//キー
-	
-	//コンストラクタ
-	data_t(const int key) :
-		m_nodeS(nullptr),
-		m_nodeL(nullptr),
-		m_isBlack(false),
-		m_key(key)
-	{}
-	data_t() :
-		m_nodeS(nullptr),
-		m_nodeL(nullptr),
-		m_isBlack(false),
-		m_key(0)
-	{}
-};
-//----------------------------------------
-//テストデータ向けノード操作用クラス（CRTP）
-struct ope : public rb_tree::baseOpe<ope, data_t, int, TEST_DATA_STACK_DEPTH_MAX>
-{
-	//子ノードを取得
-	inline static const node_type* getChildL(const node_type& node){ return node.m_nodeL; }//大（右）側
-	inline static const node_type* getChildS(const node_type& node){ return node.m_nodeS; }//小（左）側
-	//子ノードを変更
-	inline static void setChildL(node_type& node, const node_type* child){ node.m_nodeL = child; }//大（右）側
-	inline static void setChildS(node_type& node, const node_type* child){ node.m_nodeS = child; }//小（左）側
-
-	//ノードの色を取得
-	inline static color_t getColor(const node_type& node){ return node.m_isBlack ? BLACK : RED; }
-	//ノードの色を変更
-	inline static void setColor(node_type& node, const color_t color){ node.m_isBlack = color == BLACK; }
-	
-	//キーを取得
-	inline static key_type getKey(const node_type& node){ return node.m_key; }
-
-	//キーを比較
-	//※デフォルトのままとする
-	//inline static int compareKey(const key_type lhs, const key_type rhs);
-
-	//ロック型
-	//※デフォルト（dummy_shared_lock）のままとする
-	//typedef shared_spin_lock lock_type;//ロックオブジェクト型
-};
-
-//----------------------------------------
-//テストメイン
-int main(const int argc, const char* argv[])
+//赤黒木テスト
+void example_rb_tree()
 {
 	//型
 	typedef rb_tree::container<ope> container_t;
@@ -131,8 +147,8 @@ int main(const int argc, const char* argv[])
 		printf("--- Make table ---\n");
 		auto insert = [&con](const int key)
 		{
-			data_t* new_node = new data_t(key);
-			printf_detail("[%2d] ", new_node->m_key);
+			data_t* new_node = new data_t(key, 1000 + key);
+			printf_detail("[%2d:%d] ", new_node->m_key, new_node->m_val);
 			con.insert(*new_node);
 			rb_tree::printf_dbg_add("\n");
 		};
@@ -170,7 +186,7 @@ int main(const int argc, const char* argv[])
 		const auto now_time = std::chrono::system_clock::now();
 		const auto duration = now_time - prev_time;
 		const double elapsed_time = static_cast<double>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count()) / 1000000000.;
-		printf("*elapsed_time=%.9llf sec\n", elapsed_time);
+		printf("*elapsed_time=%.9lf sec\n", elapsed_time);
 		return now_time;
 	};
 	prev_time = printElapsedTime(prev_time);
@@ -704,16 +720,6 @@ int main(const int argc, const char* argv[])
 	//終了
 	printf("--- end ---\n");
 	printElapsedTime(begin_time);//経過時間を表示
-
-	return EXIT_SUCCESS;
-}
-
-#endif
-
-//----------------------------------------
-//赤黒木テスト
-void example_rb_tree()
-{
 }
 
 // End of file

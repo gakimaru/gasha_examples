@@ -18,7 +18,7 @@
 #include <memory.h>//memcpy()
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-data_t& data_t::operator=(const data_t&& rhs)
+data_t& data_t::operator=(data_t&& rhs)
 {
 	memcpy(this, &rhs, sizeof(*this));
 	printf("data_t::move_assignment_operator\n");
@@ -30,7 +30,7 @@ data_t& data_t::operator=(const data_t& rhs)
 	printf("data_t::copy_assignment_operator\n");
 	return *this;
 }
-data_t::data_t(const data_t&& src)
+data_t::data_t(data_t&& src)
 {
 	memcpy(this, &src, sizeof(*this));
 	printf("data_t::move_constructor\n");

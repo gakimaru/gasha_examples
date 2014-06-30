@@ -14,7 +14,7 @@
 
 #include <gasha/iterator.h>//イテレータ操作
 
-#include <utility>//C++11 std::move
+#include <utility>//C++11 std::move, std::forward
 #include <chrono>//C++11 std::chrono
 #include <stdio.h>//printf()
 
@@ -67,7 +67,7 @@ data_t::~data_t()
 }
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
 //ムーブオペレータ
-data_t::data_t& operator=(const data_t&& rhs)
+data_t::data_t& operator=(data_t&& rhs)
 {
 	memcpy(this, &rhs, sizeof(*this));
 	printf("data_t::move_operator\n");
@@ -81,7 +81,7 @@ data_t::data_t& operator=(const data_t& rhs)
 	return *this;
 }
 //ムーブコンストラクタ
-data_t::data_t(const data_t&& src)
+data_t::data_t(data_t&& src)
 {
 	memcpy(this, &src, sizeof(*this));
 	printf("data_t::move_constructor\n");
@@ -98,18 +98,18 @@ data_t::data_t(const data_t& src)
 //テスト用補助関数
 #ifdef PRINT_TEST_DATA_DETAIL
 template<typename... Tx>
-inline int printf_detail(const char* fmt, const Tx&... args)
+inline int printf_detail(const char* fmt, Tx&&... args)
 {
-	return printf(fmt, args...);
+	return printf(fmt, std::forward<Tx>(args)...);
 }
 #else//PRINT_TEST_DATA_DETAIL
 inline int printf_detail(const char* fmt, ...){ return 0; }
 #endif//PRINT_TEST_DATA_DETAIL
 #ifdef PRINT_TEST_DATA_SEARCH
 template<typename... Tx>
-inline int printf_dbg_search(const char* fmt, const Tx&... args)
+inline int printf_dbg_search(const char* fmt, Tx&&... args)
 {
-	return printf(fmt, args...);
+	return printf(fmt, std::forward<Tx>(args)...);
 }
 #else//PRINT_TEST_DATA_SEARCH
 inline int printf_dbg_search(const char* fmt, ...){ return 0; }

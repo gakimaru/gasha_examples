@@ -28,13 +28,104 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //　（コンパイルへの影響を気にしないなら、ヘッダーファイルに
 //　インクルードしてしまっても良い）
 
-#if 0
+//明示的インスタンス化
+//※専用マクロを使用
+INSTANCING_rbTree(ope);//template class rb_tree::stack_t<OPE_TYPE>; template class rb_tree::container<ope>; と同じ
 
-template class rb_tree::container<int_ope_t>;
-template class rb_tree::container<ope>;
-template class rb_tree::container<another_ope_t>;
-template class rb_tree::container<mt_ope_t>;
+//----------------------------------------
+//シンプル双方向連結リストコンテナテスト
+//※.inl と .cpp.h をインクルードした後は、明示的なインスタンス化をせずにコンテナを使用可能。
+//※シンプルコンテナを使用すると、コンテナ操作用構造体の定義も省略可能。
+//　ただし、ソート用関数や探索用関数の定義、ロックオブジェクトの指定といった細かいカスタマイズはできない。
+//※シンプルコンテナも明示的なインスタンス化は可能。
 
-#endif
+#include <stdio.h>//printf()
+
+//【VC++】例外を無効化した状態で <algorithm> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
+//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
+#pragma warning(disable: 4530)//C4530を抑える
+
+#include <algorithm>//std::find(), std::binary_search(), std::lower_bound()
+
+//シンプル赤黒木コンテナテスト
+void example_simple_rb_tree()
+{
+	printf("\n");
+	printf("--- example_simple_linked_list ---\n");
+
+	{
+		simpleRBTree<short, int>::con con;//シンプル赤黒木コンテナ
+		simpleRBTree<short, int>::node data[3];
+		data[0].emplace(5, 15);
+		data[1].emplace(1, 11);
+		data[2].emplace(3, 13);
+		con.insert(data[0]);
+		con.insert(data[1]);
+		con.insert(data[2]);
+		auto print = [&con]()
+		{
+			printf("data =");
+			for (auto data : con)
+			{
+				printf(" {%d,%d}", data.key(), data.value());
+			}
+			printf("\n");
+		};
+		print();
+		auto ite = con.find(5);
+		printf(".findValue(5): ite=%d\n", ite->m_value);
+	}
+	{
+		//ローカルクラス（関数内クラス）を使うと、明示的なインスタンス化ができない点に注意
+		struct data_t
+		{
+			int m_val1;
+			int m_val2;
+			bool operator==(const int rhs) const { return m_val1 == rhs; }//find(), std::find()用
+			bool operator<(const data_t& rhs) const { return m_val1 < rhs.m_val1; }//sort(), std::sort()用
+			bool operator<(const int rhs) const { return m_val1 < rhs; }//binarySearch(), std::binary_search()用
+			//friend bool operator<(const int lhs, const data_t& rhs)//std::binary_search()用
+			//{                                                      //※ローカルクラス（関数内クラス）ではfriend関数を定義できないため、
+			//	return rhs < rhs.m_val1;                             //　この演算子を定義できない
+			//}                                                      //　（つまり、std::binary_searchは使えない）
+			data_t(const int val) :
+				m_val1(val / 10),
+				m_val2(val % 10)
+			{}
+			data_t(const int val1, const int val2) :
+				m_val1(val1),
+				m_val2(val2)
+			{}
+			data_t() :
+				m_val1(0),
+				m_val2(0){}
+		};
+		typedef simpleRBTree<data_t, int> con_t;
+		con_t::con con;//シンプル赤黒木コンテナ
+		con_t::node data[3];
+		data[0].emplace(5, 56);
+		data[1].emplace(1, 1, 2);
+		data[2].emplace(3, 34);
+		con.insert(data[0]);
+		con.insert(data[1]);
+		con.insert(data[2]);
+		auto print = [&con]()
+		{
+			printf("data =");
+			for (auto& data : con)
+			{
+				printf(" {%d,{%d,%d}}", data.m_key, data->m_val1, data->m_val2);
+			}
+			printf("\n");
+		};
+		print();
+		auto ite = con.find(5);
+		printf(".findValue(5): ite={%d,{%d:%d}}\n", ite->m_key, ite->m_value.m_val1, ite->m_value.m_val2);
+	}
+}
+//明示的インスタンス化する場合
+//※専用マクロ使用
+INSTANCING_simpleRBTree(short, int);
+//INSTANCING_simpleRBTree(data_t, int);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
 
 // End of file

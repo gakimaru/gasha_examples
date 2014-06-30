@@ -14,6 +14,7 @@
 
 #include <gasha/iterator.h>//イテレータ操作
 
+#include <utility>//C++11 std::forward
 #include <chrono>//C++11 std::chrono
 #include <forward_list>//std::forward_list（比較用）
 #include <stdio.h>//printf()
@@ -43,9 +44,9 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //テスト用補助関数
 #ifdef PRINT_TEST_DATA_DETAIL
 template<typename... Tx>
-inline int printf_detail(const char* fmt, const Tx&... args)
+inline int printf_detail(const char* fmt, Tx&&... args)
 {
-	return printf(fmt, args...);
+	return printf(fmt, std::forward<Tx>(args)...);
 }
 #else//PRINT_TEST_DATA_DETAIL
 inline int printf_detail(const char* fmt, ...){ return 0; }
@@ -63,9 +64,9 @@ inline char* strncpy_s(char* dst, const std::size_t size, const char* src, const
 	return strncpy(dst, src, max);
 }
 template<typename... Tx>
-inline int sprintf_s(char* dst, const std::size_t size, const char* fmt, const Tx&... args)
+inline int sprintf_s(char* dst, const std::size_t size, const char* fmt, Tx&&... args)
 {
-	return sprintf(dst, fmt, args...);
+	return sprintf(dst, fmt, std::forward<Tx>(args)...);
 }
 #endif//USE_GCC
 
@@ -123,7 +124,7 @@ struct data_t
 	}
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
 	//ムーブオペレータ
-	data_t& operator=(const data_t&& rhs)
+	data_t& operator=(data_t&& rhs)
 	{
 		memcpy(this, &rhs, sizeof(*this));
 		printf("data_t::move_operator\n");
@@ -137,7 +138,7 @@ struct data_t
 		return *this;
 	}
 	//ムーブコンストラクタ
-	data_t(const data_t&& src)
+	data_t(data_t&& src)
 	{
 		memcpy(this, &src, sizeof(*this));
 		printf("data_t::move_constructor\n");

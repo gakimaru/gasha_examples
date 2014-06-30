@@ -54,9 +54,9 @@ struct alignas(TEST_DATA_ALIGN) data_t
 	char m_data[TEST_DATA_SIZE];//データ（大き目のサイズにする）
 
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	data_t& operator=(const data_t&& rhs);
+	data_t& operator=(data_t&& rhs);
 	data_t& operator=(const data_t& rhs);
-	data_t(const data_t&& src);
+	data_t(data_t&& src);
 	data_t(const data_t& src);
 	data_t();
 	~data_t();

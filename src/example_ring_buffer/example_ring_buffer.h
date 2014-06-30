@@ -60,11 +60,11 @@ struct data_t
 	~data_t();
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
 	//ムーブオペレータ
-	data_t& operator=(const data_t&& rhs);
+	data_t& operator=(data_t&& rhs);
 	//コピーオペレータ
 	data_t& operator=(const data_t& rhs);
 	//ムーブコンストラクタ
-	data_t(const data_t&& src);
+	data_t(data_t&& src);
 	//コピーコンストラクタ
 	data_t(const data_t& src);
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
