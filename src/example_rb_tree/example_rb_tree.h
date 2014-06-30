@@ -97,9 +97,9 @@ struct ope : public rb_tree::baseOpe<ope, data_t, int, TEST_DATA_STACK_DEPTH_MAX
 	inline static void setChildS(node_type& node, const node_type* child){ node.m_childS = child; }//小（左）側
 
 	//ノードの色を取得
-	inline static color_t getColor(const node_type& node){ return node.m_isBlack ? BLACK : RED; }
+	inline static color_t getColor(const node_type& node){ return node.m_isBlack ? color_t::BLACK : color_t::RED; }
 	//ノードの色を変更
-	inline static void setColor(node_type& node, const color_t color){ node.m_isBlack = color == BLACK; }
+	inline static void setColor(node_type& node, const color_t color){ node.m_isBlack = color == color_t::BLACK; }
 
 	//キーを取得
 	inline static key_type getKey(const node_type& node){ return node.m_key; }

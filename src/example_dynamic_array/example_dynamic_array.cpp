@@ -103,6 +103,7 @@ inline int printf_detail(const char* fmt, ...){ return 0; }
 template <class C>
 extern void testThread(const char* container_type);
 
+#include <list>
 //----------------------------------------
 //動的配列コンテナテスト
 void example_dynamic_array()

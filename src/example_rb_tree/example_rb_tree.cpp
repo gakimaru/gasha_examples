@@ -197,7 +197,7 @@ void example_rb_tree()
 		printf("--- Show tree (count=%d) ---\n", con.size());
 		//static const int depth_limit = 5;//最大でも5段階目までを表示（0段階目から数えるので最大で6段階表示される→最大：1+2+4+8+16+32=63個）
 		static const int depth_limit = 4;//最大でも4段階目までを表示（0段階目から数えるので最大で5段階表示される→最大：1+2+4+8+16=31個）
-		const int _depth_max = con.depth_max();
+		const int _depth_max = con.maxDepth();
 		printf("depth_max=%d (limit for showing=%d)\n", _depth_max, depth_limit);
 	#ifdef PRINT_TEST_DATA_TREE
 		const int depth_max = _depth_max <= depth_limit ? _depth_max : depth_limit;
@@ -279,7 +279,7 @@ void example_rb_tree()
 	auto showNodesCount = [&con]()
 	{
 		printf("--- Show nodes count (count=%d) ---\n", con.size());
-		const int depth_max = con.depth_max();
+		const int depth_max = con.maxDepth();
 		const unsigned long long width_max = depth_max < 0 ? 0llu : 1llu << depth_max;//static_cast<long long>(std::pow(2, static_cast<long long>(depth_max)));
 		printf("depth_max=%d, width_max=%llu\n", depth_max, width_max);
 		if(depth_max > 63)
@@ -646,7 +646,7 @@ void example_rb_tree()
 		for (int remove_key = TEST_DATA_KEY_MIN; remove_key <= TEST_DATA_KEY_MAX; ++remove_key)
 		{
 			const_iterator ite(con.find(remove_key));
-			data_t* removed_node = con.erase(*ite);
+			data_t* removed_node = con.erase(ite);
 			//※イテレータの変数宣言と検索を分けた方が若干効率的
 			//const_iterator ite;con._find(ite, search_key);
 			//...
@@ -685,7 +685,7 @@ void example_rb_tree()
 		for (int remove_key = TEST_DATA_KEY_MIN; remove_key <= TEST_DATA_KEY_MAX;)
 		{
 			const_iterator ite(con.find(remove_key));
-			data_t* removed_node = con.erase(*ite);
+			data_t* removed_node = con.erase(ite);
 			//※イテレータの変数宣言と検索を分けた方が若干効率的
 			//const_iterator ite;con._find(ite, search_key);
 			//...
