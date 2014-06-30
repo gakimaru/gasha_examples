@@ -14,11 +14,17 @@
 
 #include <gasha/iterator.h>//イテレータ操作
 
-#include <algorithm>//std::for_each()
 #include <random>//C++11 std::random
 #include <chrono>//C++11 std::chrono
 
 #include <stdio.h>//printf()
+
+//【VC++】例外を無効化した状態で <algorithm> <map> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
+//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
+#pragma warning(disable: 4530)//C4530を抑える
+
+#include <algorithm>//std::for_each()
+#include <map>//std::map（比較用）
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

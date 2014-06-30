@@ -25,12 +25,18 @@
 #include <gasha/simple_shared_spin_lock.h>//単純共有スピンロック
 #include <gasha/unshared_spin_lock.h>//非共有スピンロック
 #include <gasha/dummy_shared_lock.h>//ダミー共有ロック
-#include <mutex>//C++11 std::mutex
 
 #include <gasha/type_traits.h>//型特性ユーティリティ
 
+#include <utility>//C++11 std::move
 #include <chrono>//C++11 std::chrono
 #include <stdio.h>//printf()
+
+//【VC++】例外を無効化した状態で <mutex> をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
+//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
+#pragma warning(disable: 4530)//C4530を抑える
+
+#include <mutex>//C++11 std::mutex
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

@@ -33,6 +33,14 @@ template class ring_buffer::container<ope>;
 template class ring_buffer::container<another_ope_t>;
 template class ring_buffer::container<mt_ope_t>;
 
+#include <stdio.h>//printf()
+
+//【VC++】例外を無効化した状態で <algorithm> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
+//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
+#pragma warning(disable: 4530)//C4530を抑える
+
+#include <algorithm>//std::find(), std::binary_search(), std::lower_bound()
+
 //----------------------------------------
 //シンプルリングバッファコンテナテスト
 //※.inl と .cpp.h をインクルードした後は、明示的なインスタンス化をせずにコンテナを使用可能。

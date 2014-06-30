@@ -12,6 +12,9 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
+//【VC++】ワーニング設定を退避
+#pragma warning(push)
+
 //--------------------------------------------------------------------------------
 //テスト用コンパイラスイッチ／定数
 
@@ -139,6 +142,9 @@ typedef GASHA_ lfQueue<data_t, TEST_POOL_SIZE, TEST_TAGGED_PTR_TAG_SIZE, TEST_TA
 //----------------------------------------
 //マルチスレッド共有データテスト
 void example_shared_data();
+
+//【VC++】ワーニング設定を復元
+#pragma warning(pop)
 
 #endif//__EXAMPLE_SHARED_DATA_H_
 

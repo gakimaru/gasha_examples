@@ -38,12 +38,17 @@
 #include <gasha/linear_search.h>//線形探索
 #include <gasha/binary_search.h>//二分探索
 
-#include <algorithm>//std::sort(), std::for_each()
 #include <random>//C++11 std::random
 #include <chrono>//C++11 std::chrono
-#include <bitset>//std::bitset
 #include <cstdint>//C++11 std::intptr_t
+
+//【VC++】例外を無効化した状態で <algorithm> <functional> <bitset> をインクルードすると、warning C4530 が発生する
+//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
+#pragma warning(disable: 4530)//C4530を抑える
+
+#include <algorithm>//std::sort(), std::for_each()
 #include <functional>//C++11 std::function
+#include <bitset>//std::bitset
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

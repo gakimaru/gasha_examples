@@ -14,17 +14,17 @@
 
 #include <gasha/iterator.h>//イテレータ操作
 
-#include <algorithm>//std::for_each()
 #include <chrono>//C++11 std::chrono
 #include <forward_list>//std::forward_list（比較用）
 #include <assert.h>//assert()
 
 #include <stdio.h>//printf()
 
-GASHA_USING_NAMESPACE;//ネームスペース使用
+//【VC++】例外を無効化した状態で <mutex> <functoinal> <algoritm> をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
+//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
+#pragma warning(disable: 4530)//C4530を抑える
 
-
-#include <stdio.h>//printf()
+#include <algorithm>//std::for_each()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
@@ -167,8 +167,8 @@ struct data_t
 
 //----------------------------------------
 //テストデータ操作クラス
-#include <functional>//C++11 std::function用
-#include <algorithm>//C++11 std::for_each用
+#include <functional>//C++11 std::function
+#include <algorithm>//C++11 std::for_each
 struct ope : public hash_table::baseOpe<ope, crc32_t, data_t>
 {
 	//データ置換属性
