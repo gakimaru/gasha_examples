@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
 // exmaple_linked_list_sub.cpp
-// 双方向連結リストテスト
+// 双方向連結リストコンテナテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -29,9 +29,16 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //　インクルードしてしまっても良い）
 
 //明示的インスタンス化
-//※専用マクロ使用
-INSTANCING_lList(ope);
-INSTANCING_lList(another_ope_t);
+//※専用マクロを使用
+INSTANCING_lList(ope);//template class linked_list::container<ope>; と同じ
+INSTANCING_lList(another_ope_t);//template class linked_list::container<another_ope_t>; と同じ
+
+//----------------------------------------
+//シンプル双方向連結リストコンテナテスト
+//※.inl と .cpp.h をインクルードした後は、明示的なインスタンス化をせずにコンテナを使用可能。
+//※シンプルコンテナを使用すると、コンテナ操作用構造体の定義も省略可能。
+//　ただし、ソート用関数や探索用関数の定義、ロックオブジェクトの指定といった細かいカスタマイズはできない。
+//※シンプルコンテナも明示的なインスタンス化は可能。
 
 #include <stdio.h>//printf()
 
@@ -41,20 +48,15 @@ INSTANCING_lList(another_ope_t);
 
 #include <algorithm>//std::find(), std::binary_search(), std::lower_bound()
 
-//----------------------------------------
 //シンプル双方向連結リストコンテナテスト
-//※.inl と .cpp.h をインクルードした後は、明示的なインスタンス化をせずにコンテナを使用可能。
-//※シンプルコンテナを使用すると、コンテナ操作用構造体の定義も省略可能。
-//　ただし、ソート用関数や探索用関数の定義、ロックオブジェクトの指定といった細かいカスタマイズはできない。
-//※シンプルコンテナも明示的なインスタンス化は可能。
 void example_simple_linked_list()
 {
 	printf("\n");
-	printf("--- example_simple_dynamic_array ---\n");
+	printf("--- example_simple_linked_list ---\n");
 
 	{
 		simpleLList<short>::con con;//シンプル双方向連結リストコンテナ
-		simpleLList<short>::node data[3];//そのノード
+		simpleLList<short>::node data[3];
 		data[0] = 5;
 		data[1] = 1;
 		data[2] = 3;
@@ -73,12 +75,18 @@ void example_simple_linked_list()
 		print();
 		con.sort();
 		print();
-		auto ite1 = con.findValue(5);
-		auto ite2 = con.binarySearchValue(3);
-		printf("ite1=%d\n", ite1->m_value);
-		printf("ite2=%d\n", ite2->m_value);
+		auto ite = con.findValue(5);
+		printf(".findValue(5): ite=%d\n", ite->m_value);
+		ite = con.binarySearchValue(3);
+		printf(".binarySearchValue(3): ite=%d\n", ite->m_value);
+		ite = std::find(con.begin(), con.end(), 5);
+		printf("std::find(.begin(), .end(), 5): ite=%d\n", ite->m_value);
+		if (std::binary_search(con.begin(), con.end(), 3))
+			ite = std::lower_bound(con.begin(), con.end(), 3);
+		printf("std::lower_bound(.begin(), .end(), 3): ite=%d\n", ite->m_value);
 	}
 	{
+		//ローカルクラス（関数内クラス）を使うと、明示的なインスタンス化ができない点に注意
 		struct data_t
 		{
 			int m_val1;
@@ -87,7 +95,7 @@ void example_simple_linked_list()
 			bool operator<(const data_t& rhs) const { return m_val1 < rhs.m_val1; }//sort(), std::sort()用
 			bool operator<(const int rhs) const { return m_val1 < rhs; }//binarySearch(), std::binary_search()用
 			//friend bool operator<(const int lhs, const data_t& rhs)//std::binary_search()用
-			//{                                                      //※ローカルクラスではfriend関数を定義できないため、
+			//{                                                      //※ローカルクラス（関数内クラス）ではfriend関数を定義できないため、
 			//	return rhs < rhs.m_val1;                             //　この演算子を定義できない
 			//}                                                      //　（つまり、std::binary_searchは使えない）
 			data_t(const int val) :
@@ -104,7 +112,7 @@ void example_simple_linked_list()
 		};
 		typedef simpleLList<data_t> con_t;
 		con_t::con con;//シンプル双方向連結リストコンテナ
-		con_t::node data[3];//そのノード
+		con_t::node data[3];
 		data[0] = 56;
 		data[1].constructor(1, 2);
 		data[2] = 34;
@@ -123,22 +131,24 @@ void example_simple_linked_list()
 		print();
 		con.sort();
 		print();
-		auto ite1 = con.findValue(5);
-		auto ite2 = con.binarySearchValue(3);
-		printf("ite1={%d,%d}\n", ite1->m_value.m_val1, ite1->m_value.m_val2);
-		printf("ite2={%d,%d}\n", ite2->m_value.m_val1, ite2->m_value.m_val2);
-		ite1 = std::find(con.begin(), con.end(), 5);
+		auto ite = con.findValue(5);
+		printf(".findValue(5): ite={%d,%d}\n", ite->m_value.m_val1, ite->m_value.m_val2);
+		ite = con.binarySearchValue(3);
+		printf(".binarySearchValue(3): ite={%d,%d}\n", ite->m_value.m_val1, ite->m_value.m_val2);
+		ite = std::find(con.begin(), con.end(), 5);
+		printf("std::find(.begin(), .end(), 5): ite={%d,%d}\n", ite->m_value.m_val1, ite->m_value.m_val2);
 		//if (std::binary_search(con.begin(), con.end(), 3))//operator<(const int, const data_t&) が定義できないのでNG
-		//	ite2 = std::lower_bound(con.begin(), con.end(), 3);
-		printf("ite1={%d,%d}\n", ite1->m_value.m_val1, ite1->m_value.m_val2);
-		//printf("ite2={%d,%d}\n", ite2->m_value.m_val1, ite2->m_value.m_val2);
+		//	ite = std::lower_bound(con.begin(), con.end(), 3);
+		//printf("std::lower_bound(.begin(), .end(), 3): ite={%d,%d}\n", ite->m_value.m_val1, ite->m_value.m_val2);
 		data[1].destructor();
 	}
 }
 //明示的インスタンス化する場合
 //※専用マクロ使用
-//INSTANCING_simpleLList(short);
+INSTANCING_simpleLList(short);
+//INSTANCING_simpleLList(data_t);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
 
+#if 1
 //明示的インスタンス化のテスト
 //※operatorCRTP を使って基本比較オペレータを実装
 #include <gasha/type_traits.h>
@@ -157,5 +167,6 @@ bool funct()
 	return a == b;
 }
 INSTANCING_simpleLList(derived);
+#endif
 
 // End of file

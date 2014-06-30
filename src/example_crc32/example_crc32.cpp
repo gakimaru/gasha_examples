@@ -13,8 +13,9 @@
 #include <gasha/crc32.h>//CRC32計算
 
 #include <stdio.h>//printf()
-#include <assert.h>//assert()
 #include <chrono>//C++11 std::chrono
+
+#include <assert.h>//assert()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

@@ -16,8 +16,9 @@
 
 #include <utility>//C++11 std::move
 #include <chrono>//C++11 std::chrono
-#include <assert.h>//assert()
 #include <stdio.h>//printf()
+
+#include <assert.h>//assert()
 
 //【VC++】例外を無効化した状態で <algorithm> <vector> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。

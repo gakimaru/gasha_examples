@@ -16,9 +16,9 @@
 
 #include <chrono>//C++11 std::chrono
 #include <forward_list>//std::forward_list（比較用）
-#include <assert.h>//assert()
-
 #include <stdio.h>//printf()
+
+#include <assert.h>//assert()
 
 //【VC++】例外を無効化した状態で <mutex> <functoinal> <algoritm> をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。

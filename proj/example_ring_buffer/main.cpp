@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
 // main.cpp
-// リングバッファテスト - メイン
+// リングバッファコンテナテスト - メイン
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -8,16 +8,19 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_ring_buffer.h"//リングバッファテスト
+#include "example_ring_buffer.h"//リングバッファコンテナテスト
 
 #include <stdio.h>
 #include <stdlib.h>
 
 int main(const int argc, const char* argv[])
 {
-	//リングバッファテスト
+	//リングバッファコンテナテスト
 	example_ring_buffer();
 	
+	//シンプルリングバッファコンテナテスト
+	example_simple_ring_buffer();
+
 	return EXIT_SUCCESS;
 }
 

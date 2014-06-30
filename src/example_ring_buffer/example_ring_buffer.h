@@ -82,6 +82,13 @@ struct data_t
 	{
 		return m_key < key;
 	}
+#ifdef USE_STL_ALGORITM
+	//※std::binary_search(), std::upper_bound() を使用する場合は、このオペレータも必要（std::lower_bound()には不要）
+	friend inline bool operator<(const int key, const data_t& rhs)
+	{
+		return key < rhs.m_key;
+	}
+#endif//USE_STL_ALGORITM
 };
 
 //----------------------------------------

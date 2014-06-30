@@ -479,7 +479,7 @@ Released under the [MIT license][MIT].
 以下、本ライブラリが想定するビルド構成です。  
 任意に追加しても問題ありません。  
 * `DEBUG` **フルデバッグ設定**  
-> マクロ：`GASHA_BUILD_CONFIG_FULL_DEBUG`  
+> マクロ：`GASHA_BUILD_CONFIG_IS_FULL_DEBUG`  
 > デバッグ機能：あり（冗長）  
 > アサーション：有効  
 > 最適化：なし  
@@ -488,7 +488,7 @@ Released under the [MIT license][MIT].
 > シンボル情報：あり  
 
 * `DEBUG_MODERATE` **プログラム開発向け設定**  
-> マクロ：`GASHA_BUILD_CONFIG_DEBUG_MODERATE`  
+> マクロ：`GASHA_BUILD_CONFIG_IS_DEBUG_MODERATE`  
 > デバッグ機能：あり（冗長）  
 > アサーション：有効  
 > 最適化：小  
@@ -497,7 +497,7 @@ Released under the [MIT license][MIT].
 > シンボル情報：あり  
 
 * `DEBUG_OPT` **コンテンツ制作・QA向け設定**  
-> マクロ：`GASHA_BUILD_CONFIG_DEBUG_OPT`  
+> マクロ：`GASHA_BUILD_CONFIG_IS_DEBUG_OPT`  
 > デバッグ機能：あり  
 > アサーション：有効  
 > 最適化：最大  
@@ -506,7 +506,7 @@ Released under the [MIT license][MIT].
 > シンボル情報：あり  
 
 * `UNIT_TEST` **自動回帰テスト向け設定**  
-> マクロ：`GASHA_BUILD_CONFIG_REGRESSION_TEST`  
+> マクロ：`GASHA_BUILD_CONFIG_IS_REGRESSION_TEST`  
 > デバッグ機能：あり  
 > アサーション：有効  
 > 最適化：最大  
@@ -515,7 +515,7 @@ Released under the [MIT license][MIT].
 > シンボル情報：あり  
 
 * `LOCAL_RELEASE` **製品テスト向け設定**  
-> マクロ：`GASHA_BUILD_CONFIG_LOCAL_RELEASE`  
+> マクロ：`GASHA_BUILD_CONFIG_IS_LOCAL_RELEASE`  
 > デバッグ機能：なし  
 > アサーション：無効  
 > 最適化：最大  
@@ -524,7 +524,7 @@ Released under the [MIT license][MIT].
 > シンボル情報：あり  
 
 * `RELEASE` **製品向け設定**  
-> マクロ：`GASHA_BUILD_CONFIG_RELEASE`  
+> マクロ：`GASHA_BUILD_CONFIG_IS_RELEASE`  
 > デバッグ機能：なし  
 > アサーション：無効  
 > 最適化：最大  
@@ -538,7 +538,7 @@ Released under the [MIT license][MIT].
 ライブラリを使用するプロジェクト（ユーザー側）でも使用可能です。  
 * `GASHA_HAS_DEBUG_FEATURE`       ... デバッグ機能有効化  
 * `GASHA_HAS_VERBOSE_DEBUG`       ... 冗長デバッグ機能有効化  
-* `GASHA_ASSERTION_ENABLED`       ... アサーション有効化  
+* `GASHA_ASSERTION_IS_ENABLED`    ... アサーション有効化  
 * `GASHA_NO_OPTIMIZED`            ... 最適化なし ※1  
 * `GASHA_OPTIMIZED_MODERATELY`    ... 適度に最適化 ※1  
 * `GASHA_OPTIMIZED`               ... 最大限の最適化 ※1  
@@ -555,6 +555,9 @@ Released under the [MIT license][MIT].
 > なお、このマクロに基づいて、最適化コードの切り替えを行う処理を組んでも構いません。  
 > * **※3**：「回帰テスト」はユニットテストの自動実行です。  
 > * **※2**：これもビルドの状態を示すことを目的としたマクロであり、実際にこのマクロに基づいてシンボル情報の組み込み／削除を行うわけではありません。  
+
+####ビルドターゲットプラットフォーム####
+現状、x86系Windows、x64系Windows、Cygwinに対応しています。  
 
 ディレクトリ構成
 --------
@@ -828,7 +831,8 @@ Released under the [MIT license][MIT].
 --------
 本ライブラリの実績は不十分であり、品質を保証できる状態ではありません。  
 ライブラリの不具合には基本的に対応できませんので、ご利用の際は、自己責任でお願いします。  
-なお、MITライセンスに基づき、自由な改変や商用利用も可能ですので、独自に改変・修正の上でご利用頂ければ幸いです。  
+なお、MITライセンスに基づき、自由な改変や商用利用も可能ですので、独自に改変・修正の上でご利用頂けます。  
+不具合を見つけた場合には、教えて頂けると幸いです。  
 
 関連資料
 --------
