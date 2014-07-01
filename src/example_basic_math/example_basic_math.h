@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_BASIC_MATH_H_
-#define __EXAMPLE_BASIC_MATH_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_EXAMPLE_BASIC_MATH_H
+#define GASHA_INCLUDED_EXAMPLE_EXAMPLE_BASIC_MATH_H
 
 //--------------------------------------------------------------------------------
 // exmaple_basic_math.h
@@ -26,6 +26,6 @@ static const int TEST_BITCOUNT_MAX = 10000000;//ビット数計測テスト回�
 //基本算術処理テスト
 void example_basic_math();
 
-#endif//__EXAMPLE_BASIC_MATH_H_
+#endif//GASHA_INCLUDED_EXAMPLE_EXAMPLE_BASIC_MATH_H
 
 // End of file

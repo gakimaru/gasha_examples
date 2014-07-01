@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_DYNAMIC_ARRAY_H_
-#define __EXAMPLE_DYNAMIC_ARRAY_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_DYNAMIC_ARRAY_H
+#define GASHA_INCLUDED_EXAMPLE_DYNAMIC_ARRAY_H
 
 //--------------------------------------------------------------------------------
 // exmaple_dynamic_array.h
@@ -155,6 +155,6 @@ void example_dynamic_array();
 //シンプル動的配列コンテナテスト
 void example_simple_dynamic_array();
 
-#endif//__EXAMPLE_DYNAMIC_ARRAY_H_
+#endif//GASHA_INCLUDED_EXAMPLE_DYNAMIC_ARRAY_H
 
 // End of file

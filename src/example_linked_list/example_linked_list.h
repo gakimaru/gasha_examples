@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_LINKED_LIST_H_
-#define __EXAMPLE_LINKED_LIST_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_EXAMPLE_EXAMPLE_LINKED_LIST_H
+#define GASHA_INCLUDED_EXAMPLE_EXAMPLE_EXAMPLE_LINKED_LIST_H
 
 //--------------------------------------------------------------------------------
 // exmaple_linked_list.h
@@ -159,6 +159,6 @@ void example_linked_list();
 //シンプル双方向連結リストコンテナテスト
 void example_simple_linked_list();
 
-#endif//__EXAMPLE_LINKED_LIST_H_
+#endif//GASHA_INCLUDED_EXAMPLE_EXAMPLE_EXAMPLE_LINKED_LIST_H
 
 // End of file

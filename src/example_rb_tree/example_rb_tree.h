@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_RB_TREE_H_
-#define __EXAMPLE_RB_TREE_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_RB_TREE_H
+#define GASHA_INCLUDED_EXAMPLE_RB_TREE_H
 
 //--------------------------------------------------------------------------------
 // exmaple_rb_tree.h
@@ -128,6 +128,6 @@ void example_rb_tree();
 //シンプル赤黒木コンテナテスト
 void example_simple_rb_tree();
 
-#endif//__EXAMPLE_RB_TREE_H_
+#endif//GASHA_INCLUDED_EXAMPLE_RB_TREE_H
 
 // End of file

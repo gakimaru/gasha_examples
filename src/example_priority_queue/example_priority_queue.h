@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_PRIORITY_QEUEUE_H_
-#define __EXAMPLE_PRIORITY_QEUEUE_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_EXAMPLE_EXAMPLE_PRIORITY_QEUEUE_H
+#define GASHA_INCLUDED_EXAMPLE_EXAMPLE_EXAMPLE_PRIORITY_QEUEUE_H
 
 //--------------------------------------------------------------------------------
 // exmaple_priority_queue.h
@@ -33,6 +33,6 @@ static const int TEST_DATA_REG_NUM = 20;//テストデータの登録数
 //優先度付きキュー／二分ヒープテスト
 void example_priority_queue();
 
-#endif//__EXAMPLE_PRIORITY_QEUEUE_H_
+#endif//GASHA_INCLUDED_EXAMPLE_EXAMPLE_EXAMPLE_PRIORITY_QEUEUE_H
 
 // End of file

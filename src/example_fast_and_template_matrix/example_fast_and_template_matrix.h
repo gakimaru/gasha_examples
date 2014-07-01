@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_FAST_AND_TEMPLATE_MATRIX_H_
-#define __EXAMPLE_FAST_AND_TEMPLATE_MATRIX_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_FAST_AND_TEMPLATE_MATRIX_H
+#define GASHA_INCLUDED_EXAMPLE_FAST_AND_TEMPLATE_MATRIX_H
 
 //--------------------------------------------------------------------------------
 // exmaple_fast_and_template_matrix.h
@@ -15,6 +15,6 @@
 //テンプレート／高速行列テスト
 void example_fast_and_template_matrix();
 
-#endif//__EXAMPLE_FAST_AND_TEMPLATE_MATRIX_H_
+#endif//GASHA_INCLUDED_EXAMPLE_FAST_AND_TEMPLATE_MATRIX_H
 
 // End of file

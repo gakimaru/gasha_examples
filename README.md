@@ -169,6 +169,7 @@ Released under the [MIT license][MIT].
 ####ユーティリティ系####
 * `gasha/utility.h` ［テンプレート］**汎用ユーティリティ** ※1  
 * `gasha/type_traits.h` ［テンプレート関数］**型特性ユーティリティ** ※2  
+* `gasha/limits.h` ［テンプレートクラス］**限界値ユーティリティ** ※3  
 
 > ＜説明＞  
 > * 汎用的なユーティリティ関数／クラスです。  
@@ -177,6 +178,10 @@ Released under the [MIT license][MIT].
 > ＜注釈＞  
 > * **※1**：不定長 min() / max() 関数や、値を交換するための swapValues() 関数などを扱います。  
 > * **※2**：配列の要素数を取得するための extentof(), rankof() などを扱います。  
+> * **※3**：各型の限界値を numeric_limits<type> で取得できます。  
+> * std::numeric_limits<type> を継承し、静的メンバー MIN(最小値)とMAX(最大値)、および、値全域を扱える符号付きの型(contained_signed_type)を持ちます。  
+> * contained_signed_type は、元の型が chara なら chara、unsigned char なら short を返します。  
+> * unsigned long long に対しては、（不本意ながら）long long を返します。  
 
 > ＜資料＞  
 > * **[効果的なテンプレートテクニック.pdf][効果的なテンプレートテクニック.pdf]**  

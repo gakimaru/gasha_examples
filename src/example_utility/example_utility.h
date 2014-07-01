@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_UTILITY_H_
-#define __EXAMPLE_UTILITY_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_UTILITY_H
+#define GASHA_INCLUDED_EXAMPLE_UTILITY_H
 
 //--------------------------------------------------------------------------------
 // exmaple_utility.h
@@ -15,6 +15,6 @@
 //汎用ユーティリティテスト
 void example_utility();
 
-#endif//__EXAMPLE_UTILITY_H_
+#endif//GASHA_INCLUDED_EXAMPLE_UTILITY_H
 
 // End of file

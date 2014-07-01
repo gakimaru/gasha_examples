@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_FAST_STRING_H_
-#define __EXAMPLE_FAST_STRING_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_FAST_STRING_H
+#define GASHA_INCLUDED_EXAMPLE_FAST_STRING_H
 
 //--------------------------------------------------------------------------------
 // exmaple_fast_string.h
@@ -15,6 +15,6 @@
 //高速文字列操作テスト
 void example_fast_string();
 
-#endif//__EXAMPLE_FAST_STRING_H_
+#endif//GASHA_INCLUDED_EXAMPLE_FAST_STRING_H
 
 // End of file

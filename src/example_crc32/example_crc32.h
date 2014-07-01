@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_CRC32_H_
-#define __EXAMPLE_CRC32_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_CRC32_H
+#define GASHA_INCLUDED_EXAMPLE_CRC32_H
 
 //--------------------------------------------------------------------------------
 // example_crc32.h
@@ -36,6 +36,6 @@ extern GASHA_ crc32_t testCRC32ForPerforman_loop(const char* str, const int dumm
 extern GASHA_ crc32_t testCRC32ForPerforman_table(const char* str, const int dummy);//事前計算済み多項式テーブル版
 extern GASHA_ crc32_t testCRC32ForPerforman_sse(const char* str, const int dummy);//SSE命令版
 
-#endif//__EXAMPLE_CRC32_H_
+#endif//GASHA_INCLUDED_EXAMPLE_CRC32_H
 
 // End of file

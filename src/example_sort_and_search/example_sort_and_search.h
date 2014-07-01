@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_SORT_AND_SEARCH_H_
-#define __EXAMPLE_SORT_AND_SEARCH_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_SORT_AND_SEARCH_H
+#define GASHA_INCLUDED_EXAMPLE_SORT_AND_SEARCH_H
 
 //--------------------------------------------------------------------------------
 // exmaple_sort_and_search.h
@@ -84,6 +84,6 @@ void example_sort_and_search();
 //【VC++】ワーニング設定を退避
 #pragma warning(pop)
 
-#endif//__EXAMPLE_SORT_AND_SEARCH_H_
+#endif//GASHA_INCLUDED_EXAMPLE_SORT_AND_SEARCH_H
 
 // End of file

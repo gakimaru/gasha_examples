@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_SHARED_DATA_H_
-#define __EXAMPLE_SHARED_DATA_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_SHARED_DATA_H
+#define GASHA_INCLUDED_EXAMPLE_SHARED_DATA_H
 
 //--------------------------------------------------------------------------------
 // exmaple_shared_data.h
@@ -146,6 +146,6 @@ void example_shared_data();
 //【VC++】ワーニング設定を復元
 #pragma warning(pop)
 
-#endif//__EXAMPLE_SHARED_DATA_H_
+#endif//GASHA_INCLUDED_EXAMPLE_SHARED_DATA_H
 
 // End of file

@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_FAST_VECTOR_H_
-#define __EXAMPLE_FAST_VECTOR_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_EXAMPLE_FAST_VECTOR_H
+#define GASHA_INCLUDED_EXAMPLE_EXAMPLE_FAST_VECTOR_H
 
 //--------------------------------------------------------------------------------
 // exmaple_fast_vector.h
@@ -15,6 +15,6 @@
 //高速ベクトルテスト
 void example_fast_vector();
 
-#endif//__EXAMPLE_FAST_VECTOR_H_
+#endif//GASHA_INCLUDED_EXAMPLE_EXAMPLE_FAST_VECTOR_H
 
 // End of file

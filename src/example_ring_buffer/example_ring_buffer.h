@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_RING_BUFFER_H_
-#define __EXAMPLE_RING_BUFFER_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_RING_BUFFER_H
+#define GASHA_INCLUDED_EXAMPLE_RING_BUFFER_H
 
 //--------------------------------------------------------------------------------
 // exmaple_ring_buffer.h
@@ -154,6 +154,6 @@ void example_ring_buffer();
 //シンプルリングバッファコンテナテスト
 void example_simple_ring_buffer();
 
-#endif//__EXAMPLE_RING_BUFFER_H_
+#endif//GASHA_INCLUDED_EXAMPLE_RING_BUFFER_H
 
 // End of file

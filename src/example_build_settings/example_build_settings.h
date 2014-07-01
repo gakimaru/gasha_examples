@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_BUILD_SETTINGS_H_
-#define __EXAMPLE_BUILD_SETTINGS_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_EXAMPLE_BUILD_SETTINGS_H
+#define GASHA_INCLUDED_EXAMPLE_EXAMPLE_BUILD_SETTINGS_H
 
 //--------------------------------------------------------------------------------
 // exmaple_build_settings.h
@@ -15,6 +15,6 @@
 //ビルド設定処理テスト
 void example_build_settings();
 
-#endif//__EXAMPLE_BUILD_SETTINGS_H_
+#endif//GASHA_INCLUDED_EXAMPLE_EXAMPLE_BUILD_SETTINGS_H
 
 // End of file

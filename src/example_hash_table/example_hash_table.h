@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_HASH_TABLE_H_
-#define __EXAMPLE_HASH_TABLE_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_HASH_TABLE_H
+#define GASHA_INCLUDED_EXAMPLE_HASH_TABLE_H
 
 //--------------------------------------------------------------------------------
 // exmaple_hash_table.h
@@ -141,6 +141,6 @@ void example_hash_table();
 //シンプル開番地法ハッシュテーブルコンテナテスト
 void example_simple_hash_table();
 
-#endif//__EXAMPLE_HASH_TABLE_H_
+#endif//GASHA_INCLUDED_EXAMPLE_HASH_TABLE_H
 
 // End of file

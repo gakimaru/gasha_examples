@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_FAST_DIV_H_
-#define __EXAMPLE_FAST_DIV_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_FAST_DIV_H
+#define GASHA_INCLUDED_EXAMPLE_FAST_DIV_H
 
 //--------------------------------------------------------------------------------
 // exmaple_fast_div.h
@@ -15,6 +15,6 @@
 //高速除算テスト
 void example_fast_div();
 
-#endif//__EXAMPLE_FAST_DIV_H_
+#endif//GASHA_INCLUDED_EXAMPLE_FAST_DIV_H
 
 // End of file

@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __EXAMPLE_TYPE_TRAITS_H_
-#define __EXAMPLE_TYPE_TRAITS_H_
+#ifndef GASHA_INCLUDED_EXAMPLE_TYPE_TRAITS_H
+#define GASHA_INCLUDED_EXAMPLE_TYPE_TRAITS_H
 
 //--------------------------------------------------------------------------------
 // exmaple_type_traits.h
@@ -15,6 +15,6 @@
 //型特性ユーティリティテスト
 void example_type_traits();
 
-#endif//__EXAMPLE_TYPE_TRAITS_H_
+#endif//GASHA_INCLUDED_EXAMPLE_TYPE_TRAITS_H
 
 // End of file
