@@ -108,7 +108,7 @@ struct ope : public singly_linked_list::baseOpe<ope, data_t>
 
 //----------------------------------------
 //テストデータ操作クラス②：ソート／探索方法をデフォルトから変える
-struct another_ope_t : public ope
+struct another_ope : public ope
 {
 	//ソート用プレディケート関数オブジェクト
 	//※m_valメンバーを基準にソート

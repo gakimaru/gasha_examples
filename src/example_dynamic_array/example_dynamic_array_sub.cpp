@@ -32,9 +32,9 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //明示的インスタンス化
 //※専用マクロを使用
-INSTANCING_dArray(int_ope_t);//template class dynamic_array::container<int_ope_t>; と同じ
+INSTANCING_dArray(int_ope);//template class dynamic_array::container<int_ope>; と同じ
 INSTANCING_dArray(ope);//template class dynamic_array::container<ope>; と同じ
-INSTANCING_dArray(another_ope_t);//template class dynamic_array::container<another_ope_t>; と同じ
+INSTANCING_dArray(another_ope);//template class dynamic_array::container<another_ope>; と同じ
 INSTANCING_dArray(mt_ope_t);//template class dynamic_array::container<mt_ope_t>; と同じ
 
 //----------------------------------------

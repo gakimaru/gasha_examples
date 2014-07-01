@@ -118,7 +118,7 @@ void example_dynamic_array()
 
 		//コンテナ生成
 		//※既存の配列を渡して動的配列コンテナとして扱う
-		dynamic_array::container<int_ope_t> con(arr);//配列要素数を自動取得
+		dynamic_array::container<int_ope> con(arr);//配列要素数を自動取得
 
 		//データを表示
 		auto printAll = [&con]()
@@ -798,7 +798,7 @@ void example_dynamic_array()
 		data_t array[20];
 
 		//動的配列コンテナ生成
-		typedef dynamic_array::container<another_ope_t> container_t;
+		typedef dynamic_array::container<another_ope> container_t;
 		container_t con(array);
 
 		//コンテナのインスタンス生成時に配列を渡せない場合は、sertArray() を使用する

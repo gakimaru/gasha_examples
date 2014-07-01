@@ -30,9 +30,9 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //明示的インスタンス化
 //※専用マクロを使用
-INSTANCING_rBuff(int_ope_t);//template class ring_buffer::container<int_ope_t>; と同じ
+INSTANCING_rBuff(int_ope);//template class ring_buffer::container<int_ope>; と同じ
 INSTANCING_rBuff(ope);//template class ring_buffer::container<ope>; と同じ
-INSTANCING_rBuff(another_ope_t);//template class ring_buffer::container<another_ope_t>; と同じ
+INSTANCING_rBuff(another_ope);//template class ring_buffer::container<another_ope>; と同じ
 INSTANCING_rBuff(mt_ope_t);//template class ring_buffer::container<mt_ope_t>; と同じ
 
 //----------------------------------------

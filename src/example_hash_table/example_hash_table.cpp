@@ -887,7 +887,7 @@ void example_hash_table()
 		printf("--------------------------------------------------------------------------------\n");
 
 		//ハッシュテーブル
-		hash_table::container<p_ope_t, TEST_DATA_TABLE_SIZE_FOR_POINTER> p_con;
+		hash_table::container<ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER> p_con;
 
 		//登録
 		data_t obj1("0010", 123);
@@ -914,7 +914,7 @@ void example_hash_table()
 
 		//ロック取得テスト
 		{
-			shared_lock_guard<p_ope_t::lock_type> lock(p_con);//共有ロック（リードロック）取得（処理ブロックを抜ける時に自動開放）
+			shared_lock_guard<ptr_ope::lock_type> lock(p_con);//共有ロック（リードロック）取得（処理ブロックを抜ける時に自動開放）
 			printObj(20);
 		}
 	}
@@ -929,8 +929,8 @@ void example_hash_table()
 		printf("--------------------------------------------------------------------------------\n");
 		
 		//ハッシュテーブル
-		hash_table::container<func_ope_t, TEST_DATA_TABLE_SIZE_FOR_FUNC> func_con;
-		hash_table::container<obj_ope_t, TEST_DATA_TABLE_SIZE_FOR_FUNC> obj_con;
+		hash_table::container<func_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC> func_con;
+		hash_table::container<obj_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC> obj_con;
 
 		//関数型ハッシュテーブルテスト用関数：通常関数
 		extern int func_add(int a, int b);

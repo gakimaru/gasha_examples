@@ -97,7 +97,7 @@ struct ope : public ring_buffer::baseOpe<ope, data_t>{};
 
 //----------------------------------------
 //テストデータ操作クラス②：ソート／探索方法をデフォルトから変える
-struct another_ope_t : public ring_buffer::baseOpe<ope, data_t>
+struct another_ope : public ring_buffer::baseOpe<ope, data_t>
 {
 	//ソート用プレディケート関数オブジェクト
 	//※m_valメンバーを基準にソート
@@ -144,7 +144,7 @@ struct mt_ope_t : public ring_buffer::baseOpe<mt_ope_t, data_t>
 
 //----------------------------------------
 //int型用のデータ操作クラス定義
-struct int_ope_t : public ring_buffer::baseOpe<ope, int>{};
+struct int_ope : public ring_buffer::baseOpe<ope, int>{};
 
 //----------------------------------------
 //リングバッファコンテナテスト

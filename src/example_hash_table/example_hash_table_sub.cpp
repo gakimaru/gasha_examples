@@ -30,10 +30,10 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //明示的インスタンス化
 //※専用マクロを使用
-INSTANCING_hashTbl(ope, TEST_DATA_TABLE_SIZE);//template class hash_table::container<ope, TEST_DATA_TABLE_SIZE>; と同じ
-INSTANCING_hashTbl(p_ope_t, TEST_DATA_TABLE_SIZE_FOR_POINTER);//template class hash_table::container<p_ope_t, TEST_DATA_TABLE_SIZE_FOR_POINTER>; と同じ
-INSTANCING_hashTbl(func_ope_t, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class hash_table::container<func_ope_t, TEST_DATA_TABLE_SIZE_FOR_FUNC>; と同じ
-INSTANCING_hashTbl(obj_ope_t, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class hash_table::container<obj_ope_t, TEST_DATA_TABLE_SIZE_FOR_FUNC>; と同じ
+INSTANCING_hTable(ope, TEST_DATA_TABLE_SIZE);//template class hash_table::container<ope, TEST_DATA_TABLE_SIZE>; と同じ
+INSTANCING_hTable(ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER);//template class hash_table::container<ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER>; と同じ
+INSTANCING_hTable(func_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class hash_table::container<func_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC>; と同じ
+INSTANCING_hTable(obj_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class hash_table::container<obj_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC>; と同じ
 
 //----------------------------------------
 //シンプル開番地法ハッシュテーブルコンテナテスト
@@ -57,10 +57,10 @@ void example_simple_hash_table()
 	printf("--- example_simple_hash_table ---\n");
 
 	{
-		simpleHashTbl<short, crc32_t, 100>::con con;//シンプル開番地法ハッシュテーブルコンテナ
-		con.insert("KEY5", 5);
+		simpleHTable<short, 100>::con con;//シンプル開番地法ハッシュテーブルコンテナ
 		con.insert("KEY1,", 1);
 		con.insert("KEY3", 3);
+		con.insert("KEY5", 5);
 		auto print = [&con]()
 		{
 			printf("data =");
@@ -92,11 +92,11 @@ void example_simple_hash_table()
 				m_val1(0),
 				m_val2(0){}
 		};
-		typedef simpleHashTbl<data_t, crc32_t, 100> con_t;
+		typedef simpleHTable<data_t, 100> con_t;
 		con_t::con con;//シンプル動的配列コンテナ
-		con.insert("KEY5", 56);
 		con.emplace("KEY1", 1, 2);
 		con.insert("KEY3", 34);
+		con.insert("KEY5", 56);
 		auto print = [&con]()
 		{
 			printf("data =");
@@ -113,7 +113,7 @@ void example_simple_hash_table()
 }
 //明示的インスタンス化する場合
 //※専用マクロ使用
-INSTANCING_simpleHashTbl(short, crc32_t, 100);
-//INSTANCING_simpleDArray(data_t, crc32_t, 100);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
+INSTANCING_simpleHTable(short, 100);
+//INSTANCING_simpleDArray(data_t, 100);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
 
 // End of file

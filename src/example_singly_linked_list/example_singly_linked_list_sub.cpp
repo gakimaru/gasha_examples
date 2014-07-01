@@ -31,7 +31,7 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //明示的インスタンス化
 //※専用マクロを使用
 INSTANCING_slList(ope);//template class singly_linked_list::container<ope>; と同じ
-INSTANCING_slList(another_ope_t);//template class singly_linked_list::container<another_ope_t>; と同じ
+INSTANCING_slList(another_ope);//template class singly_linked_list::container<another_ope>; と同じ
 
 //----------------------------------------
 //シンプル片方向連結リストコンテナテスト

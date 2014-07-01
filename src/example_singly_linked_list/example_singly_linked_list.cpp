@@ -725,7 +725,7 @@ void example_singly_linked_list()
 		printf("[Test for singly_linked_list::container(User defined type with custom operator type)]\n");
 
 		//片方向連結リストコンテナ生成
-		typedef singly_linked_list::container<another_ope_t> container_t;
+		typedef singly_linked_list::container<another_ope> container_t;
 		container_t con;
 
 		//データ登録１：push_front()メソッド

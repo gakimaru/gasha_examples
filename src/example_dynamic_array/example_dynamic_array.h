@@ -98,7 +98,7 @@ struct ope : public dynamic_array::baseOpe<ope, data_t>{};
 
 //----------------------------------------
 //テストデータ操作クラス②：ソート／探索方法をデフォルトから変える
-struct another_ope_t : public dynamic_array::baseOpe<ope, data_t>
+struct another_ope : public dynamic_array::baseOpe<ope, data_t>
 {
 	//ソート用プレディケート関数オブジェクト
 	//※m_valメンバーを基準にソート
@@ -145,7 +145,7 @@ struct mt_ope_t : public dynamic_array::baseOpe<mt_ope_t, data_t>
 
 //----------------------------------------
 //int型用のデータ操作クラス定義
-struct int_ope_t : public dynamic_array::baseOpe<ope, int>{};
+struct int_ope : public dynamic_array::baseOpe<ope, int>{};
 
 //----------------------------------------
 //動的配列コンテナテスト

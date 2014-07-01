@@ -176,12 +176,15 @@ Released under the [MIT license][MIT].
 > メタプログラミングにも対応し、コンパイル時の情報取得に活用できます。  
 
 > ＜注釈＞  
-> * **※1**：不定長 min() / max() 関数や、値を交換するための swapValues() 関数などを扱います。  
-> * **※2**：配列の要素数を取得するための extentof(), rankof() などを扱います。  
+> * **※1**：任意の数の引数を指定可能な `min()`, `max()` 関数や、値を交換するための `swapValues()` 関数などを扱います。  
+> * **※2**：配列の要素数や次元数を取得するための `extentof()`, `rankof()` などを扱います。  
+> 標準ライブラリの `<type_traits>` と異なり、変数を引数にとって結果を返します。  
 > * **※3**：各型の限界値を numeric_limits<type> で取得できます。  
-> * std::numeric_limits<type> を継承し、静的メンバー MIN(最小値)とMAX(最大値)、および、値全域を扱える符号付きの型(contained_signed_type)を持ちます。  
-> * contained_signed_type は、元の型が chara なら chara、unsigned char なら short を返します。  
-> * unsigned long long に対しては、（不本意ながら）long long を返します。  
+> `std::numeric_limits` を継承し、指定の型の限界値を、静的メンバー `MIN`(最小値),`MAX`(最大値) で取得できます。  
+> （`std::numeric_limits` は、`constexpr` に対応したコンパイラなら、`min()`,`max()` 関数を静的に扱えます。）  
+> また、「値全域を扱える符号付きの型」`contained_signed_type`、「値の範囲型」`range_type`,`signed_rnage_type` なども扱えます。  
+> 前者は、対象が符号なし型なら一段上の符号付き型を返し（例：`unsigned char` なら `short`、`char` なら `char`）、  
+> 後者は、同精度の符号無し型および一段上の符号付き型を返します（例：`char` なら `unsigned char`, `short`）。  
 
 > ＜資料＞  
 > * **[効果的なテンプレートテクニック.pdf][効果的なテンプレートテクニック.pdf]**  

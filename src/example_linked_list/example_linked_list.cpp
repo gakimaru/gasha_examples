@@ -592,7 +592,7 @@ void example_linked_list()
 		printf("[Test for linked_list::container(User defined type with custom operator type)]\n");
 
 		//双方向連結リストコンテナ生成
-		typedef linked_list::container<another_ope_t> container_t;
+		typedef linked_list::container<another_ope> container_t;
 		container_t con;
 
 		//データ登録１：push_back()メソッド

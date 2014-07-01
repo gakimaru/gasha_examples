@@ -107,7 +107,7 @@ struct ope : public hash_table::baseOpe<ope, data_t, crc32_t>
 
 //----------------------------------------
 //テストデータ操作クラス：ポインター型
-struct p_ope_t : public hash_table::baseOpe<p_ope_t, data_t*, int>
+struct ptr_ope : public hash_table::baseOpe<ptr_ope, data_t*, int>
 {
 	//データ置換属性
 	//※デフォルト（NEVER_REPLACE）のままとする
@@ -123,13 +123,13 @@ struct p_ope_t : public hash_table::baseOpe<p_ope_t, data_t*, int>
 
 //----------------------------------------
 //テストデータ操作クラス：関数型
-struct func_ope_t : public hash_table::baseOpe<func_ope_t, std::function<int(int, int)>, crc32_t>
+struct func_ope : public hash_table::baseOpe<func_ope, std::function<int(int, int)>, crc32_t>
 {
 };
 
 //----------------------------------------
 //テストデータ操作クラス：クラスメンバー関数型
-struct obj_ope_t : public hash_table::baseOpe<func_ope_t, std::function<int(calc_t&, int, int)>, crc32_t>
+struct obj_ope : public hash_table::baseOpe<func_ope, std::function<int(calc_t&, int, int)>, crc32_t>
 {
 };
 

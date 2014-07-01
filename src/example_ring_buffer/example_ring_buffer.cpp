@@ -122,7 +122,7 @@ void example_ring_buffer()
 
 		//コンテナ生成
 		//※既存の配列を渡してリングバッファコンテナとして扱う
-		ring_buffer::container<int_ope_t> con(arr);//配列要素数を自動取得
+		ring_buffer::container<int_ope> con(arr);//配列要素数を自動取得
 
 		//データを表示
 		auto printAll = [&con]()
@@ -1025,7 +1025,7 @@ void example_ring_buffer()
 		data_t array[20];
 
 		//リングバッファコンテナ生成
-		typedef ring_buffer::container<another_ope_t> container_t;
+		typedef ring_buffer::container<another_ope> container_t;
 		container_t con(array);
 
 		//コンテナのインスタンス生成時に配列を渡せない場合は、sertArray() を使用する

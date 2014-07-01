@@ -54,11 +54,11 @@ void example_simple_rb_tree()
 	printf("--- example_simple_linked_list ---\n");
 
 	{
-		simpleRBTree<short, int>::con con;//シンプル赤黒木コンテナ
-		simpleRBTree<short, int>::node data[3];
-		data[0].emplace(5, 15);
-		data[1].emplace(1, 11);
-		data[2].emplace(3, 13);
+		simpleRBTree<short>::con con;//シンプル赤黒木コンテナ
+		simpleRBTree<short>::node data[3];
+		data[0].emplace("KEY5", 15);
+		data[1].emplace("KEY1", 11);
+		data[2].emplace("KEY3", 13);
 		con.insert(data[0]);
 		con.insert(data[1]);
 		con.insert(data[2]);
@@ -67,13 +67,13 @@ void example_simple_rb_tree()
 			printf("data =");
 			for (auto& data : con)
 			{
-				printf(" {%d,%d}", data.key(), data.value());
+				printf(" {0x%08x,%d}", data.key(), data.value());
 			}
 			printf("\n");
 		};
 		print();
-		auto ite = con.find(5);
-		printf(".findValue(5): ite=%d\n", ite->m_value);
+		auto ite = con.find("KEY5");
+		printf(".findValue(\"KEY5\"): ite={0x%08x, %d}\n", ite->m_key, ite->m_value);
 	}
 	{
 		//ローカルクラス（関数内クラス）を使うと、明示的なインスタンス化ができない点に注意
@@ -100,12 +100,12 @@ void example_simple_rb_tree()
 				m_val1(0),
 				m_val2(0){}
 		};
-		typedef simpleRBTree<data_t, int> con_t;
+		typedef simpleRBTree<data_t> con_t;
 		con_t::con con;//シンプル赤黒木コンテナ
 		con_t::node data[3];
-		data[0].emplace(5, 56);
-		data[1].emplace(1, 1, 2);
-		data[2].emplace(3, 34);
+		data[0].emplace("KEY5", 56);
+		data[1].emplace("KEY1", 1, 2);
+		data[2].emplace("KEY3", 34);
 		con.insert(data[0]);
 		con.insert(data[1]);
 		con.insert(data[2]);
@@ -114,18 +114,18 @@ void example_simple_rb_tree()
 			printf("data =");
 			for (auto& data : con)
 			{
-				printf(" {%d,{%d,%d}}", data.m_key, data->m_val1, data->m_val2);
+				printf(" {0x%08x,{%d,%d}}", data.m_key, data->m_val1, data->m_val2);
 			}
 			printf("\n");
 		};
 		print();
-		auto ite = con.find(5);
-		printf(".findValue(5): ite={%d,{%d:%d}}\n", ite->m_key, ite->m_value.m_val1, ite->m_value.m_val2);
+		auto ite = con.find("KEY5");
+		printf(".findValue(\"KEY5\"): ite={0x%08x,{%d:%d}}\n", ite->m_key, ite->m_value.m_val1, ite->m_value.m_val2);
 	}
 }
 //明示的インスタンス化する場合
 //※専用マクロ使用
-INSTANCING_simpleRBTree(short, int);
-//INSTANCING_simpleRBTree(data_t, int);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
+INSTANCING_simpleRBTree(short);
+//INSTANCING_simpleRBTree(data_t);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
 
 // End of file
