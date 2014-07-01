@@ -59,14 +59,14 @@ data_t::~data_t()
 }
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
 //ムーブオペレータ
-data_t::data_t& operator=(data_t&& rhs)
+data_t& data_t::operator=(data_t&& rhs)
 {
 	memcpy(this, &rhs, sizeof(*this));
 	printf("data_t::move_operator\n");
 	return *this;
 }
 //コピーオペレータ
-data_t::data_t& operator=(const data_t& rhs)
+data_t& data_t::operator=(const data_t& rhs)
 {
 	memcpy(this, &rhs, sizeof(*this));
 	printf("data_t::copy_operator\n");
@@ -529,9 +529,10 @@ void example_dynamic_array()
 	#endif//USE_STL_ALGORITM
 		printAll();//全件表示
 
-#if 0
+	#ifdef TEST_ITERATOR_OPERATION
 		{
 			printf("\n");
+			printf("--------------------[iterator operattion:begin]\n");
 			printf("constructor\n");
 			container_t::iterator ite = con.begin();
 			container_t::reverse_iterator rite = con.rbegin();
@@ -549,6 +550,14 @@ void example_dynamic_array()
 			if (rite2.isExist()) printf("rite2:[%d] key=%d, value=%d\n", rite2.getIndex(), rite2->m_key, rite2->m_val);
 			if (ite2_end.isExist()) printf("ite2_end:[%d] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_key, ite2_end->m_val);
 			if (rite2_end.isExist()) printf("rite2_end:[%d] key=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_key, rite2_end->m_val);
+			printf("ite_end - ite = %d\n", ite_end - ite);
+			printf("ite - ite_end = %d\n", ite - ite_end);
+			printf("rite_end - rite = %d\n", rite_end - rite);
+			printf("rite - rite_end = %d\n", rite - rite_end);
+			printf("ite2 - ite = %d\n", ite2 - ite);
+			printf("ite - ite2 = %d\n", ite - ite2);
+			printf("rite2 - rite = %d\n", rite2 - rite);
+			printf("rite - rite2 = %d\n", rite - rite2);
 			printf("copy operator\n");
 			ite = con.begin();
 			rite = con.rbegin();
@@ -566,39 +575,30 @@ void example_dynamic_array()
 			if (rite2.isExist()) printf("rite2:[%d] key=%d, value=%d\n", rite2.getIndex(), rite2->m_key, rite2->m_val);
 			if (ite2_end.isExist()) printf("ite2_end:[%d] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_key, ite2_end->m_val);
 			if (rite2_end.isExist()) printf("rite2_end:[%d] key=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_key, rite2_end->m_val);
-			for (int i = 0; i <= 3; ++i)
+			printf("[base()]\n");
+			ite2 = rite.base();
+			ite2_end = rite_end.base();
+			if (ite2.isExist()) printf("ite2:[%d] key=%d, value=%d\n", ite2.getIndex(), ite2->m_key, ite2->m_val);
+			if (ite2_end.isExist()) printf("ite2_end:[%d] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_key, ite2_end->m_val);
+			for (int i = 0; i < 3; ++i)
 			{
 				printf("[%d]\n", i);
 				ite = ite[i];
 				rite = rite[i];
-				ite_end = ite_end[i];
-				rite_end = rite_end[i];
 				ite2 = ite2[i];
 				rite2 = rite2[i];
-				ite2_end = ite2_end[i];
-				rite2_end = rite2_end[i];
 				if (ite.isExist()) printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
 				if (rite.isExist()) printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
-				if (ite_end.isExist()) printf("ite_end:[%d] key=%d, value=%d\n", ite_end.getIndex(), ite_end->m_key, ite_end->m_val);
-				if (rite_end.isExist()) printf("rite_end:[%d] key=%d, value=%d\n", rite_end.getIndex(), rite_end->m_key, rite_end->m_val);
 				if (ite2.isExist()) printf("ite2:[%d] key=%d, value=%d\n", ite2.getIndex(), ite2->m_key, ite2->m_val);
 				if (rite2.isExist()) printf("rite2:[%d] key=%d, value=%d\n", rite2.getIndex(), rite2->m_key, rite2->m_val);
-				if (ite2_end.isExist()) printf("ite2_end:[%d] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_key, ite2_end->m_val);
-				if (rite2_end.isExist()) printf("rite2_end:[%d] key=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_key, rite2_end->m_val);
 			}
 			printf("+= 3\n");
 			ite += 3;
 			rite += 3;
-			ite_end += 3;
-			rite_end += 3;
 			ite2 += 3;
 			rite2 += 3;
-			ite2_end += 3;
-			rite2_end += 3;
 			if (ite.isExist()) printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
 			if (rite.isExist()) printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
-			if (ite_end.isExist()) printf("ite_end:[%d] key=%d, value=%d\n", ite_end.getIndex(), ite_end->m_key, ite_end->m_val);
-			if (rite_end.isExist()) printf("rite_end:[%d] key=%d, value=%d\n", rite_end.getIndex(), rite_end->m_key, rite_end->m_val);
 			if (ite2.isExist()) printf("ite2:[%d] key=%d, value=%d\n", ite2.getIndex(), ite2->m_key, ite2->m_val);
 			if (rite2.isExist()) printf("rite2:[%d] key=%d, value=%d\n", rite2.getIndex(), rite2->m_key, rite2->m_val);
 			if (ite2_end.isExist()) printf("ite2_end:[%d] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_key, ite2_end->m_val);
@@ -606,22 +606,30 @@ void example_dynamic_array()
 			printf("-= 3\n");
 			ite -= 3;
 			rite -= 3;
-			ite_end -= 3;
-			rite_end -= 3;
 			ite2 -= 3;
 			rite2 -= 3;
-			ite2_end -= 3;
-			rite2_end -= 3;
 			if (ite.isExist()) printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
 			if (rite.isExist()) printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
-			if (ite_end.isExist()) printf("ite_end:[%d] key=%d, value=%d\n", ite_end.getIndex(), ite_end->m_key, ite_end->m_val);
-			if (rite_end.isExist()) printf("rite_end:[%d] key=%d, value=%d\n", rite_end.getIndex(), rite_end->m_key, rite_end->m_val);
 			if (ite2.isExist()) printf("ite2:[%d] key=%d, value=%d\n", ite2.getIndex(), ite2->m_key, ite2->m_val);
 			if (rite2.isExist()) printf("rite2:[%d] key=%d, value=%d\n", rite2.getIndex(), rite2->m_key, rite2->m_val);
-			if (ite2_end.isExist()) printf("ite2_end:[%d] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_key, ite2_end->m_val);
-			if (rite2_end.isExist()) printf("rite2_end:[%d] key=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_key, rite2_end->m_val);
+			printf("ite_end - ite = %d\n", ite_end - ite);
+			printf("ite - ite_end = %d\n", ite - ite_end);
+			printf("rite_end - rite = %d\n", rite_end - rite);
+			printf("rite - rite_end = %d\n", rite - rite_end);
+			printf("ite2 - ite = %d\n", ite2 - ite);
+			printf("ite - ite2 = %d\n", ite - ite2);
+			printf("rite2 - rite = %d\n", rite2 - rite);
+			printf("rite - rite2 = %d\n", rite - rite2);
+			printf("[++end]\n");
+			++ite_end;
+			++rite_end;
+			printf("ite_end - ite = %d\n", ite_end - ite);
+			printf("ite - ite_end = %d\n", ite - ite_end);
+			printf("rite_end - rite = %d\n", rite_end - rite);
+			printf("rite - rite_end = %d\n", rite - rite_end);
+			printf("--------------------[iterator operattion:end]\n");
 		}
-#endif
+	#endif//TEST_ITERATOR_OPERATION
 
 		//末尾をポップ(1)
 		printf("\n");

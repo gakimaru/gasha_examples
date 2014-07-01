@@ -30,7 +30,7 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 #ifdef GASHA_OPTIMIZED
 
-static const int TEST_DATA_TABLE_SIZE = 500000;//テストデータテーブルサイズ
+static const int TEST_DATA_TABLE_SIZE = 50000;//テストデータテーブルサイズ
 
 //#define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
 //#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する

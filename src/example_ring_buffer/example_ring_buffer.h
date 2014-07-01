@@ -43,6 +43,7 @@ static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST
 
 #endif//GASHA_OPTIMIZED
 
+#define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
 //#define USE_STL_ALGORITM//ソート／線形探索／二分探索で、内部関数の代わりに STL を使用する場合は、このマクロを有効にする
 
 //----------------------------------------

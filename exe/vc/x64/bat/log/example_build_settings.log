@@ -1,18 +1,6 @@
-------------------------------------------------------------------------------
-Check build-settings suitable for runtime environment.
 
-cpu_string="Genunteline"
-[OK] SSE is supported.
-[OK] SSE2 is supported.
-[OK] SSE3 is supported.
-[--] SSE 4a is not used.
-[OK] SSE4.1 is NOT supported.
-[OK] SSE4.2 is supported.
-[OK] POPCNT is supported.
-[OK] AES is supported.
-[OK] AVX is supported.
-[--] AVX2 is not used.
-------------------------------------------------------------------------------
+================================================================================
+
 Compiler: name="VC++", Ver=[1800(0x00000708).0(0x00000000)]
     This compiler is "Visual C++"
 
@@ -21,23 +9,23 @@ Compiler-language: C++ (C++ Ver.=2003)
         C++ is implemented C++98.
         C++ is implemented C++03.
 
-Plataform: "Win"(x64 64bits, little-endian), Ver=[0(0x00000000).0(0x00000000)]
+Plataform: "Win"(x64 64bits, (unknown)-endian), Ver=[0(0x00000000).0(0x00000000)]
     Target plarform is "Windows"
 
 __FILE__="..\..\src\example_build_settings\example_build_settings.cpp"
-__LINE__=134
+__LINE__=138
 __FUNCTION__="example_build_settings::test::func"
 __PRETTY_FUNCTION__="void __cdecl example_build_settings::test::func(void)"
 __FUNCSIG__="void __cdecl example_build_settings::test::func(void)"
 __func__="example_build_settings::test::func"
 __FUNCDNAME__="?func@test@?1??example_build_settings@@YAXXZ@SAXXZ"
-__DATE__="Jun 25 2014"
-__TIME__="21:29:59"
-__TIMESTAMP__="Tue Jun 24 19:54:00 2014"
+__DATE__="Jul  1 2014"
+__TIME__="20:17:16"
+__TIMESTAMP__="Fri Jun 27 21:49:49 2014"
 
 GASHA_FUNC_NAME()="void __cdecl example_build_settings::test::func(void)"
-GASHA_FILE_LINE()="..\..\src\example_build_settings\example_build_settings.cpp(145)"
-GASHA_FILE_LINE_TIME()="..\..\src\example_build_settings\example_build_settings.cpp(146)[Tue Jun 24 19:54:00 2014]"
+GASHA_FILE_LINE()="..\..\src\example_build_settings\example_build_settings.cpp(149)"
+GASHA_FILE_LINE_TIME()="..\..\src\example_build_settings\example_build_settings.cpp(150)[Fri Jun 27 21:49:49 2014]"
 This is normal func.
 This is inline func.
 This is noinline func.
@@ -56,5 +44,71 @@ TLS Variable=123
 
 sizeof(data_t)=32
 alignof(data_t)=16
-_aligned_malloc(sizeof(data_t), alignof(data_t))=000000F585048BB0
+_aligned_malloc(sizeof(data_t), alignof(data_t))=0000006631698BB0
 _aligned_free(p)
+------------------------------------------------------------------------------
+[ Diagnose build-settings suitable for runtime environment ]
+
+cpu_string="Genunteline"
+[OK] SSE is supported.
+[OK] SSE2 is supported.
+[OK] SSE3 is supported.
+[--] SSE 4a is not used.
+[OK] SSE4.1 is NOT supported.
+[OK] SSE4.2 is supported.
+[OK] POPCNT is supported.
+[--] AES is not used.
+[--] AVX is not used.
+[--] AVX2 is not used.
+
+------------------------------------------------------------------------------
+[ Build-settings by compiled environment ]
+
+Platform: Win (Target Versionn=0.0)
+CPU Architecture: x64 (64 bit, (unknown) endian) [x86] [x64]
+
+Compiler: VC++ (Version=1800.0) ... Visual C++ 12.0 (Visual Studio 2013)
+Language: C++ (__cplusplus=199711) [C++98] [C++03]
+
+- nullptr ... is available.
+- override ... is available.
+- final ... is available.
+- auto ... is available.
+- decltype ... is available.
+- default/delete ... is available.
+- constexpr ... is DUMMY.
+- user-defined-literal ... is NOT available.
+- lambda expression ... is available.
+- range-based for ... is available.
+- enum class ... is available.
+- variadic template ... is available.
+- template aliases ... is available.
+- delegating constructors ... is available.
+- inheriting constructors ... is NOT available.
+- uniform initializer ... is available.
+- initializer list ... is available.
+- rvalue reference & std::move ... is available.
+- static_assert ... is available.
+- thread_local ... is PROXY available.
+- alignas ... is PROXY available.
+- alignof ... is PROXY available.
+
+- _aligned_malloc ... is available.
+- _aligned_free ... is available.
+- no_inline ... is available with commonized.
+- always_inline ... is available with commonized.
+
+------------------------------------------------------------------------------
+[ Build-configuratoin ]
+
+Configuration name: RELEASE
+
+- debug feature ... is NOT available.
+- assertion ... is DISABLED.
+- optimized ... MAX.
+- file-system ... for ROM.
+- unit-test ... is NOT available.
+- symbols ... STRIPPED.
+
+------------------------------------------------------------------------------
+message size = 2094 butes.

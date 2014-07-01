@@ -10,7 +10,7 @@ Compiler-language: C++ (C++ Ver.=2011)
         C++ is implemented C++03.
         C++ is implemented C++11.
 
-Plataform: "Cygin"(x86 32bits, little-endian), Ver=[0(0x00000000).0(0x00000000)]
+Plataform: "Cygin"(x86 32bits, (unknown)-endian), Ver=[0(0x00000000).0(0x00000000)]
     Target plarform is "Cygwin"
 
 __FILE__="../../src/example_build_settings/example_build_settings.cpp"
@@ -20,8 +20,8 @@ __PRETTY_FUNCTION__="static void example_build_settings()::test::func()"
 __FUNCSIG__="static void example_build_settings()::test::func()"
 __func__="func"
 __FUNCDNAME__=""
-__DATE__="Jun 28 2014"
-__TIME__="05:57:13"
+__DATE__="Jul  1 2014"
+__TIME__="20:18:14"
 __TIMESTAMP__="Fri Jun 27 21:49:49 2014"
 
 GASHA_FUNC_NAME()="static void example_build_settings()::test::func()"
@@ -55,9 +55,9 @@ _aligned_free(p)
     'alignas' is featured.
     'alignof' is featured.
 ------------------------------------------------------------------------------
-Checking build-settings suitable for runtime environment.
+[ Diagnose build-settings suitable for runtime environment ]
 
-cpu_string="ÿÿÿÿÿÿÿÿÿÿÿ"
+cpu_string="Genunteline"
 [OK] SSE is supported.
 [OK] SSE2 is supported.
 [OK] SSE3 is supported.
@@ -65,15 +65,15 @@ cpu_string="ÿÿÿÿÿÿÿÿÿÿÿ"
 [OK] SSE4.1 is NOT supported.
 [OK] SSE4.2 is supported.
 [OK] POPCNT is supported.
-[OK] AES is supported.
-[OK] AVX is supported.
+[--] AES is not used.
+[--] AVX is not used.
 [--] AVX2 is not used.
 
 ------------------------------------------------------------------------------
-Build-settings by compiled environment.
+[ Build-settings by compiled environment ]
 
 Platform: Cygin (Target Versionn=0.0)
-CPU Architecture: x86 (32 bit, little endian) [x86]
+CPU Architecture: x86 (32 bit, (unknown) endian) [x86]
 
 Compiler: GCC (Version=4.8)
 Language: C++ (__cplusplus=201103) [C++98] [C++03] [C++11]
@@ -87,9 +87,14 @@ Language: C++ (__cplusplus=201103) [C++98] [C++03] [C++11]
 - constexpr ... is available.
 - user-defined-literal ... is available.
 - lambda expression ... is available.
+- range-based for ... is available.
 - enum class ... is available.
 - variadic template ... is available.
 - template aliases ... is available.
+- delegating constructors ... is available.
+- inheriting constructors ... is available.
+- uniform initializer ... is available.
+- initializer list ... is available.
 - rvalue reference & std::move ... is available.
 - static_assert ... is available.
 - thread_local ... is available.
@@ -100,3 +105,18 @@ Language: C++ (__cplusplus=201103) [C++98] [C++03] [C++11]
 - _aligned_free ... is available with commonized.
 - no_inline ... is available with commonized.
 - always_inline ... is available with commonized.
+
+------------------------------------------------------------------------------
+[ Build-configuratoin ]
+
+Configuration name: RELEASE
+
+- debug feature ... is NOT available.
+- assertion ... is DISABLED.
+- optimized ... MAX.
+- file-system ... for ROM.
+- unit-test ... is NOT available.
+- symbols ... STRIPPED.
+
+------------------------------------------------------------------------------
+message size = 2063 butes.

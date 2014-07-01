@@ -1,17 +1,6 @@
-------------------------------------------------------------------------------
-Check build-settings suitable for runtime environment.
 
-[OK?] SSE is supported?
-[OK?] SSE2 is supported?
-[OK?] SSE3 is supported?
-[--] SSE4a is not used.
-[OK?] SSE4.1 is NOT supported?
-[OK?] SSE4.2 is supported?
-[OK?] POPCNT is supported?
-[OK?] AES is supported?
-[OK?] AVX is supported?
-[--] AVX2 is not used.
-------------------------------------------------------------------------------
+================================================================================
+
 Compiler: name="GCC", Ver=[4(0x00000004).8(0x00000008)]
     This compiler is "GCC"
 
@@ -21,23 +10,23 @@ Compiler-language: C++ (C++ Ver.=2011)
         C++ is implemented C++03.
         C++ is implemented C++11.
 
-Plataform: "Cygin"(x86 32bits, little-endian), Ver=[0(0x00000000).0(0x00000000)]
+Plataform: "Cygin"(x86 32bits, (unknown)-endian), Ver=[0(0x00000000).0(0x00000000)]
     Target plarform is "Cygwin"
 
 __FILE__="../../src/example_build_settings/example_build_settings.cpp"
-__LINE__=134
+__LINE__=138
 __FUNCTION__="func"
 __PRETTY_FUNCTION__="static void example_build_settings()::test::func()"
 __FUNCSIG__="static void example_build_settings()::test::func()"
 __func__="func"
 __FUNCDNAME__=""
-__DATE__="Jun 25 2014"
-__TIME__="21:30:26"
-__TIMESTAMP__="Tue Jun 24 19:54:00 2014"
+__DATE__="Jul  1 2014"
+__TIME__="20:19:17"
+__TIMESTAMP__="Fri Jun 27 21:49:49 2014"
 
 GASHA_FUNC_NAME()="static void example_build_settings()::test::func()"
-GASHA_FILE_LINE()="../../src/example_build_settings/example_build_settings.cpp(145)"
-GASHA_FILE_LINE_TIME()="../../src/example_build_settings/example_build_settings.cpp(146)[Tue Jun 24 19:54:00 2014]"
+GASHA_FILE_LINE()="../../src/example_build_settings/example_build_settings.cpp(149)"
+GASHA_FILE_LINE_TIME()="../../src/example_build_settings/example_build_settings.cpp(150)[Fri Jun 27 21:49:49 2014]"
 This is normal func.
 This is inline func.
 This is noinline func.
@@ -65,3 +54,69 @@ _aligned_malloc(sizeof(data_t), alignof(data_t))=0x800203e0
 _aligned_free(p)
     'alignas' is featured.
     'alignof' is featured.
+------------------------------------------------------------------------------
+[ Diagnose build-settings suitable for runtime environment ]
+
+cpu_string="Genunteline"
+[OK] SSE is supported.
+[OK] SSE2 is supported.
+[OK] SSE3 is supported.
+[--] SSE 4a is not used.
+[OK] SSE4.1 is NOT supported.
+[OK] SSE4.2 is supported.
+[OK] POPCNT is supported.
+[--] AES is not used.
+[--] AVX is not used.
+[--] AVX2 is not used.
+
+------------------------------------------------------------------------------
+[ Build-settings by compiled environment ]
+
+Platform: Cygin (Target Versionn=0.0)
+CPU Architecture: x86 (32 bit, (unknown) endian) [x86]
+
+Compiler: GCC (Version=4.8)
+Language: C++ (__cplusplus=201103) [C++98] [C++03] [C++11]
+
+- nullptr ... is available.
+- override ... is available.
+- final ... is available.
+- auto ... is available.
+- decltype ... is available.
+- default/delete ... is available.
+- constexpr ... is available.
+- user-defined-literal ... is available.
+- lambda expression ... is available.
+- range-based for ... is available.
+- enum class ... is available.
+- variadic template ... is available.
+- template aliases ... is available.
+- delegating constructors ... is available.
+- inheriting constructors ... is available.
+- uniform initializer ... is available.
+- initializer list ... is available.
+- rvalue reference & std::move ... is available.
+- static_assert ... is available.
+- thread_local ... is available.
+- alignas ... is available.
+- alignof ... is available.
+
+- _aligned_malloc ... is available with commonized.
+- _aligned_free ... is available with commonized.
+- no_inline ... is available with commonized.
+- always_inline ... is available with commonized.
+
+------------------------------------------------------------------------------
+[ Build-configuratoin ]
+
+Configuration name: FULL_DEBUG
+
+- debug feature ... is available.(VERBOSE)
+- assertion ... is enabled.
+- optimized ... none.
+- file-system ... flexible(ROM or local-PC).
+- unit-test ... is available.
+- symbols ... contained.
+
+------------------------------------------------------------------------------
+message size = 2086 butes.
