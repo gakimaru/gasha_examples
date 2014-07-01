@@ -28,13 +28,92 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //　（コンパイルへの影響を気にしないなら、ヘッダーファイルに
 //　インクルードしてしまっても良い）
 
-#if 0
+//明示的インスタンス化
+//※専用マクロを使用
+INSTANCING_hashTbl(ope, TEST_DATA_TABLE_SIZE);//template class hash_table::container<ope, TEST_DATA_TABLE_SIZE>; と同じ
+INSTANCING_hashTbl(p_ope_t, TEST_DATA_TABLE_SIZE_FOR_POINTER);//template class hash_table::container<p_ope_t, TEST_DATA_TABLE_SIZE_FOR_POINTER>; と同じ
+INSTANCING_hashTbl(func_ope_t, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class hash_table::container<func_ope_t, TEST_DATA_TABLE_SIZE_FOR_FUNC>; と同じ
+INSTANCING_hashTbl(obj_ope_t, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class hash_table::container<obj_ope_t, TEST_DATA_TABLE_SIZE_FOR_FUNC>; と同じ
 
-template class hash_table::container<int_ope_t>;
-template class hash_table::container<ope>;
-template class hash_table::container<another_ope_t>;
-template class hash_table::container<mt_ope_t>;
+//----------------------------------------
+//シンプル開番地法ハッシュテーブルコンテナテスト
+//※.inl と .cpp.h をインクルードした後は、明示的なインスタンス化をせずにコンテナを使用可能。
+//※シンプルコンテナを使用すると、コンテナ操作用構造体の定義も省略可能。
+//　ただし、ソート用関数や探索用関数の定義、ロックオブジェクトの指定といった細かいカスタマイズはできない。
+//　シンプルコンテナも明示的なインスタンス化は可能。
 
-#endif
+#include <stdio.h>//printf()
+
+//【VC++】例外を無効化した状態で <algorithm> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
+//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
+#pragma warning(disable: 4530)//C4530を抑える
+
+#include <algorithm>//std::find(), std::binary_search(), std::lower_bound()
+
+//シンプル開番地法ハッシュテーブルコンテナテスト
+void example_simple_hash_table()
+{
+	printf("\n");
+	printf("--- example_simple_hash_table ---\n");
+
+	{
+		simpleHashTbl<short, crc32_t, 100>::con con;//シンプル開番地法ハッシュテーブルコンテナ
+		con.insert("KEY5", 5);
+		con.insert("KEY1,", 1);
+		con.insert("KEY3", 3);
+		auto print = [&con]()
+		{
+			printf("data =");
+			for (auto data : con)
+			{
+				printf(" %d", data);
+			}
+			printf("\n");
+		};
+		print();
+		auto ite = con.find("KEY5");
+		printf(".find(\"KEY5\"): ite=%d\n",  *ite);
+	}
+	{
+		//ローカルクラス（関数内クラス）を使うと、明示的なインスタンス化ができない点に注意
+		struct data_t
+		{
+			int m_val1;
+			int m_val2;
+			data_t(const int val) :
+				m_val1(val / 10),
+				m_val2(val % 10)
+			{}
+			data_t(const int val1, const int val2) :
+				m_val1(val1),
+				m_val2(val2)
+			{}
+			data_t() :
+				m_val1(0),
+				m_val2(0){}
+		};
+		typedef simpleHashTbl<data_t, crc32_t, 100> con_t;
+		con_t::con con;//シンプル動的配列コンテナ
+		con.insert("KEY5", 56);
+		con.emplace("KEY1", 1, 2);
+		con.insert("KEY3", 34);
+		auto print = [&con]()
+		{
+			printf("data =");
+			for (auto& data : con)
+			{
+				printf(" {%d,%d}", data.m_val1, data.m_val2);
+			}
+			printf("\n");
+		};
+		print();
+		auto ite = con.find("KEY5");
+		printf(".find(\"KEY5\"): ite={%d,%d}\n", ite->m_val1, ite->m_val2);
+	}
+}
+//明示的インスタンス化する場合
+//※専用マクロ使用
+INSTANCING_simpleHashTbl(short, crc32_t, 100);
+//INSTANCING_simpleDArray(data_t, crc32_t, 100);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
 
 // End of file

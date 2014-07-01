@@ -16,29 +16,84 @@
 
 #include <utility>//C++11 std::forward
 #include <chrono>//C++11 std::chrono
-#include <forward_list>//std::forward_list（比較用）
 #include <stdio.h>//printf()
 
 #include <assert.h>//assert()
 
-//【VC++】例外を無効化した状態で <mutex> <functoinal> <algoritm> をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
+//【VC++】例外を無効化した状態で <unordered_map> <algoritm> をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
 #pragma warning(disable: 4530)//C4530を抑える
 
 #include <algorithm>//std::for_each()
+#include <unordered_map>//C++11 std::unordered_map（比較用）
+
+//【VC++】strncpy, sprintf を使用すると、error C4996 が発生する
+//  error C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+//  error C4996: 'sprintf': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+#pragma warning(disable: 4996)//C4996を抑える
+
+#include <string.h>//strcpy
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //--------------------------------------------------------------------------------
-//ハッシュテーブル＆素数計算テスト
+//ハッシュテーブルテスト
 //--------------------------------------------------------------------------------
 
-#include <chrono>//C++11 時間計測用
-#include <unordered_map>//C++11 std::unordered_map
-#include <map>//C++11 std::map
-#include <string.h>//strcpy用
-
-#if 0
+//コンストラクタ
+data_t::data_t(const char* name, const int value) :
+	m_key(calcCRC32(name)),
+	m_value(value)
+{
+	strncpy(m_name, name, sizeof(m_name)-1);
+	m_name[sizeof(m_name)-1] = '\0';
+#ifdef TEST_DATA_WATCH_CONSTRUCTOR
+	printf("data_t::constructor(\"%s\", value)\n", name, value);
+	//printf("    m_key=%d, m_name=[%s], m_value=%d\n", m_key, m_name, m_value);
+#endif//TEST_DATA_WATCH_CONSTRUCTOR
+}
+#ifdef TEST_DATA_WATCH_CONSTRUCTOR
+//ムーブオペレータ
+data_t& data_t::operator=(data_t&& rhs)
+{
+	memcpy(this, &rhs, sizeof(*this));
+	printf("data_t::move_operator\n");
+	return *this;
+}
+//コピーオペレータ
+data_t& data_t::operator=(const data_t& rhs)
+{
+	memcpy(this, &rhs, sizeof(*this));
+	printf("data_t::copy_operator\n");
+	return *this;
+}
+//ムーブコンストラクタ
+data_t::data_t(data_t&& src)
+{
+	memcpy(this, &src, sizeof(*this));
+	printf("data_t::move_constructor\n");
+}
+//コピーコンストラクタ
+data_t::data_t(const data_t& src)
+{
+	memcpy(this, &src, sizeof(*this));
+	printf("data_t::copy_constructor\n");
+}
+//デフォルトコンストラクタ
+data_t::data_t() :
+	m_key(0),
+	m_value(0)
+{
+	m_name[0] = '\0';
+	printf("data_t::constructor\n");
+}
+//デストラクタ
+data_t::~data_t()
+{
+	printf("data_t::destructor\n");
+	//printf("  m_key=%d, m_name=[%s]\n", m_key, m_name);
+}
+#endif//TEST_DATA_WATCH_CONSTRUCTOR
 
 //----------------------------------------
 //テスト用補助関数
@@ -53,140 +108,8 @@ inline int printf_detail(const char* fmt, ...){ return 0; }
 #endif//PRINT_TEST_DATA_DETAIL
 
 //----------------------------------------
-//文字列操作関数
-#ifdef USE_GCC
-inline char* strcpy_s(char* dst, const std::size_t size, const char* src)
-{
-	return strcpy(dst, src);
-}
-inline char* strncpy_s(char* dst, const std::size_t size, const char* src, const std::size_t max)
-{
-	return strncpy(dst, src, max);
-}
-template<typename... Tx>
-inline int sprintf_s(char* dst, const std::size_t size, const char* fmt, Tx&&... args)
-{
-	return sprintf(dst, fmt, std::forward<Tx>(args)...);
-}
-#endif//USE_GCC
-
-//----------------------------------------
-//【ランタイム版】素数判定／算出テスト
-void printPrime(const std::size_t min, const std::size_t max)
-{
-	if (max > min)
-		printPrime(min, max - 1);
-	printf("%6d is %s [prev=%6d(%6d), next=%6d(%6d)]\n", max, isPrime(max) ? "PRIME.    " : "NOT prime.", makePrimeLT(max), makePrimeLE(max), makePrimeGT(max), makePrimeGE(max));
-}
-
-//----------------------------------------
-//【メタプログラミング版】素数判定／算出テスト
-template<std::size_t N>
-void _printPrimeCommon()
-{
-	printf("%6d is %s [prev=%6d(%6d), next=%6d(%6d)]\n", N, isStaticPrime<N>::value ? "PRIME.    " : "NOT prime.", makeStaticPrimeLT<N>::value, makeStaticPrimeLE<N>::value, makeStaticPrimeGT<N>::value, makeStaticPrimeGE<N>::value);
-}
-template<std::size_t MIN, std::size_t MAX>
-struct printStaticPrime{
-	void operator()()
-	{
-		printStaticPrime<MIN, MAX - 1>()();
-		_printPrimeCommon<MAX>();
-	}
-};
-template<std::size_t MIN>
-struct printStaticPrime<MIN, MIN>{
-	void operator()()
-	{
-		_printPrimeCommon<MIN>();
-	}
-};
-
-//----------------------------------------
-//ハッシュテーブル用テストデータ
-struct data_t
-{
-	crc32_t m_key;//キー ※名前のハッシュ値
-	int m_value;//値
-	char m_name[20];//名前
-
-	//コンストラクタ
-	data_t(const char* name, const int value) :
-		m_key(calcCRC32(name)),
-		m_value(value)
-	{
-		strncpy_s(m_name, sizeof(m_name), name, sizeof(m_name) - 1);
-		m_name[sizeof(m_name)-1] = '\0';
-	#ifdef TEST_DATA_WATCH_CONSTRUCTOR
-		printf("data_t::constructor(\"%s\", value)\n", name, value);
-		//printf("    m_key=%d, m_name=[%s], m_value=%d\n", m_key, m_name, m_value);
-	#endif//TEST_DATA_WATCH_CONSTRUCTOR
-	}
-#ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	//ムーブオペレータ
-	data_t& operator=(data_t&& rhs)
-	{
-		memcpy(this, &rhs, sizeof(*this));
-		printf("data_t::move_operator\n");
-		return *this;
-	}
-	//コピーオペレータ
-	data_t& operator=(const data_t& rhs)
-	{
-		memcpy(this, &rhs, sizeof(*this));
-		printf("data_t::copy_operator\n");
-		return *this;
-	}
-	//ムーブコンストラクタ
-	data_t(data_t&& src)
-	{
-		memcpy(this, &src, sizeof(*this));
-		printf("data_t::move_constructor\n");
-	}
-	//コピーコンストラクタ
-	data_t(const data_t& src)
-	{
-		memcpy(this, &src, sizeof(*this));
-		printf("data_t::copy_constructor\n");
-	}
-	//デフォルトコンストラクタ
-	data_t():
-		m_key(0),
-		m_value(0)
-	{
-		m_name[0] = '\0';
-		printf("data_t::constructor\n");
-	}
-	//デストラクタ
-	~data_t()
-	{
-		printf("data_t::destructor\n");
-		//printf("  m_key=%d, m_name=[%s]\n", m_key, m_name);
-	}
-#endif//TEST_DATA_WATCH_CONSTRUCTOR
-};
-
-//----------------------------------------
-//テストデータ操作クラス
-#include <functional>//C++11 std::function
-#include <algorithm>//C++11 std::for_each
-struct ope : public hash_table::baseOpe<ope, crc32_t, data_t>
-{
-	//データ置換属性
-	//※デフォルト（NEVER_REPLACE）のままとする
-	//static const replace_attr_t REPLACE_ATTR = REPLACE;//キーが重複するデータは置換して登録する
-	
-	//キーを取得
-	inline static key_type getKey(const value_type& value){ return value.m_key; }
-
-	//ロック型
-	//※デフォルト（dummy_shared_lock）のままとする
-	//typedef shared_spin_lock lock_type;//ロックオブジェクト型
-};
-
-//----------------------------------------
-//テストメイン
-int main(const int argc, const char* argv[])
+//開番地法ハッシュテーブルコンテナテスト
+void example_hash_table()
 {
 	//時間計測
 	auto begin_time = std::chrono::system_clock::now();
@@ -199,16 +122,12 @@ int main(const int argc, const char* argv[])
 		const auto elapsed_time = static_cast<double>(duration.count()) / 1000000000.;
 		return elapsed_time;
 	};
-	auto getElapsedTime = [&calcElapsedTime](const std::chrono::system_clock::time_point& prev_time) -> double
-	{
-		return calcElapsedTime(std::chrono::system_clock::now(), prev_time);
-	};
 
 	//処理時間表示
 	auto printElapsedTimeDirect = [&calcElapsedTime](const double elapsed_time, const bool is_preint) -> std::chrono::system_clock::time_point
 	{
 		if (is_preint)
-			printf("*elapsed time=%.9llf sec.\n", elapsed_time);
+			printf("*elapsed time=%.9lf sec.\n", elapsed_time);
 		return std::chrono::system_clock::now();
 	};
 	auto printElapsedTime = [&calcElapsedTime, &printElapsedTimeDirect](const std::chrono::system_clock::time_point& prev_time, const bool is_print) -> std::chrono::system_clock::time_point
@@ -217,31 +136,6 @@ int main(const int argc, const char* argv[])
 		const auto elapsed_time = calcElapsedTime(now_time, prev_time);
 		return printElapsedTimeDirect(elapsed_time, is_print);
 	};
-
-#if 0
-	//--------------------
-	//素数コンパイル時計算の再帰レベル限界チェック
-	static const std::size_t x = 9999;
-	printf("x=%d\n", x);
-	printf("  isPrime=%s\n", isStaticPrime<x>::value ? "true" : "False");
-	printf("  prev=%d\n", makeStaticPrimeLT<x>::value);
-	printf("  next=%d\n", makeStaticPrimeGT<x>::value);
-	printf("  equalPrev=%d\n", makeStaticPrimeLE<x>::value);
-	printf("  equalNext=%d\n", makeStaticPrimeGE<x>::value);
-#endif
-
-#if 0
-	//--------------------
-	//素数計算のテスト
-	static const std::size_t MIN = 0;
-	static const std::size_t MAX = 10;
-	
-	printf("----- Check and Make Prime for Runtime -----\n");
-	printPrime(MIN, MAX);
-	
-	printf("----- Check and Make Prime for Meta-Programming -----\n");
-	printStaticPrime<MIN, MAX>()();
-#endif
 
 #if 0
 	//--------------------
@@ -277,72 +171,6 @@ int main(const int argc, const char* argv[])
 		}
 	}
 #endif
-
-#if 0
-	//--------------------
-	//ハッシュテーブルテスト（旧）
-	{
-		hash_table::container<ope, 20> con(hash_table::AUTO_WRITE_LOCK);
-		
-		data_t* result;
-		printf("- emplace -\n");
-		result = con.emplace(110, "123", 123);
-		data_t* obj = con[110];
-		obj->m_value = 1234567;
-		result = con.emplace(220, "456", 456);
-		result = con.emplace(330, "789", 789);
-		result = con.emplace(110, "123", 123);
-		for (auto& o : con)
-		{
-			printf("index=%d(%d), key=%08x, name=%s, value=%d, is_deleted=%s\n", o.m_index, con.calcIndex(o.m_key), o.m_key, o->m_name, o->m_value, o.m_isDeleted ? "TRUE" : "false");
-		}
-		printf(".size()=%d\n", con.size());
-		printf(".getUsingCount()=%d\n", con.getUsingCount());
-		printf(".getDeletedCount()=%d\n", con.getDeletedCount());
-		printf(".getMaxFindingCycle()=%d\n", con.getMaxFindingCycle());
-		printf("- erase -\n");
-		con.erase(220);
-		con.erase(330);
-		for (auto& o : con)
-		{
-			printf("index=%d(%d), key=%08x, name=%s, value=%d, is_deleted=%s\n", o.m_index, con.calcIndex(o.m_key), o.m_key, o->m_name, o->m_value, o.m_isDeleted ? "TRUE" : "false");
-		}
-		printf(".getUsingCount()=%d\n", con.getUsingCount());
-		printf(".getDeletedCount()=%d\n", con.getDeletedCount());
-		printf(".getMaxFindingCycle()=%d\n", con.getMaxFindingCycle());
-		printf("- emplace -\n");
-		result = con.emplace(220, "456!", 4567);
-		result = con.emplace("123", "123!!", 12345);
-		result = con.emplaceAuto("456!!", 45679);
-		result = con.emplace("789", "789!!", 78901);
-		for (auto& o : con)
-		{
-			printf("index=%d(%d), key=%08x, name=%s, value=%d, is_deleted=%s\n", o.m_index, con.calcIndex(o.m_key), o.m_key, o->m_name, o->m_value, o.m_isDeleted ? "TRUE" : "false");
-		}
-		printf(".getUsingCount()=%d\n", con.getUsingCount());
-		printf(".getDeletedCount()=%d\n", con.getDeletedCount());
-		printf(".getMaxFindingCycle()=%d\n", con.getMaxFindingCycle());
-		printf("- erase -\n");
-		con.erase(220);
-		con.erase(110);
-		for (auto& o : con)
-		{
-			printf("index=%d(%d), key=%08x, name=%s, value=%d, is_deleted=%s\n", o.m_index, con.calcIndex(o.m_key), o.m_key, o->m_name, o->m_value, o.m_isDeleted ? "TRUE" : "false");
-		}
-		printf(".getUsingCount()=%d\n", con.getUsingCount());
-		printf(".getDeletedCount()=%d\n", con.getDeletedCount());
-		printf(".getMaxFindingCycle()=%d\n", con.getMaxFindingCycle());
-		printf("- rehash -\n");
-		con.rehash();
-		for (auto& o : con)
-		{
-			printf("index=%d(%d), key=%08x, name=%s, value=%d, is_deleted=%s\n", o.m_index, con.calcIndex(o.m_key), o.m_key, o->m_name, o->m_value, o.m_isDeleted ? "TRUE" : "false");
-		}
-		printf(".getUsingCount()=%d\n", con.getUsingCount());
-		printf(".getDeletedCount()=%d\n", con.getDeletedCount());
-		printf(".getMaxFindingCycle()=%d\n", con.getMaxFindingCycle());
-	}
-#endif
 	
 	//--------------------
 	//ハッシュテーブルテスト
@@ -350,7 +178,7 @@ int main(const int argc, const char* argv[])
 	printf("--------------------------------------------------------------------------------\n");
 	printf("Hash Table Test\n");
 	printf("--------------------------------------------------------------------------------\n");
-	typedef hash_table::container<ope, TEST_DATA_TABLE_SIZE, 0, 0> container_t;//自動リハッシュなし, 検索巡回回数制限なし
+	typedef hash_table::container<ope, TEST_DATA_TABLE_SIZE> container_t;//自動リハッシュなし, 検索巡回回数制限なし
 	container_t* con = new container_t();
 
 	//ハッシュテーブルの基本情報表示
@@ -398,7 +226,7 @@ int main(const int argc, const char* argv[])
 		for (int i = begin; i < end; i += step)
 		{
 			char name[20];
-			sprintf_s(name, sizeof(name), "Name_%06d", i);
+			sprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			data_t* obj = nullptr;
 			#define USE_INSERT_TYPE 1
@@ -471,10 +299,12 @@ int main(const int argc, const char* argv[])
 		printf_detail("\n");
 		printf_detail("--- Print Table ---\n");
 		//for (container_t::set& set : *con)
-		for (auto& set : *con)
-		{
-			printf_detail("%c[%6d](%6d) key=%08x, name=\"%s\", value=%d (bucket=%d, bucket_size=%d)%s\n", set.isPrimaryIndex() ? ' ' : '*', set.m_index, set.m_primaryIndex, set.m_key, set->m_name, set->m_value, con->bucket(set.m_key), con->bucket_size(set.m_index), set.m_isDeleted ? " <DELETED>" : "");
-		}
+		//for (auto& set : *con)
+		iteratorForEach(*con, [&con](const container_t::iterator& ite)
+			{
+				printf_detail("%c[%6d](%6d) key=%08x, name=\"%s\", value=%d (bucket=%d, bucket_size=%d)%s\n", ite.isPrimaryIndex() ? ' ' : '*', ite.getIndex(), ite.getPrimaryIndex(), ite.getKey(), ite->m_name, ite->m_value, con->bucket(ite.getKey()), con->bucket_size(ite.getIndex()), ite.isDeleted() ? " <DELETED>" : "");
+			}
+		);
 		const bool is_print = false;
 		prev_time = printElapsedTime(prev_time, is_print);
 	};
@@ -483,9 +313,9 @@ int main(const int argc, const char* argv[])
 #if 0//イテレータとロック取得のテスト
 	{
 		printf_detail("--- Reverse Iterator ---\n");
-		std::for_each(con->rbegin(), con->rend(), [&con](container_t::set& set)
+		reverseIteratorForEach(*con, [&con](const container_t::iterator& ite)
 			{
-				printf_detail("%c[%6d](%6d) key=%08x, name=\"%s\", value=%d (bucket=%d, bucket_size=%d)%s\n", set.isPrimaryIndex() ? ' ' : '*', set.m_index, set.m_primaryIndex, set.m_key, set->m_name, set->m_value, con->bucket(set.m_key), con->bucket_size(set.m_index), set.m_isDeleted ? " <DELETED>" : "");
+				printf_detail("%c[%6d](%6d) key=%08x, name=\"%s\", value=%d (bucket=%d, bucket_size=%d)%s\n", ite.isPrimaryIndex() ? ' ' : '*', ite.getIndex(), ite.getPrimaryIndex(), ite.getKey(), ite->m_name, ite->m_value, con->bucket(ite.getKey()), con->bucket_size(ite.getIndex()), ite.isDeleted() ? " <DELETED>" : "");
 			}
 		);
 	}
@@ -592,12 +422,12 @@ int main(const int argc, const char* argv[])
 		for (int i = 0; i < TEST_DATA_TABLE_SIZE; ++i)
 		{
 			char name[20];
-			sprintf_s(name, sizeof(name), "Name_%06d", i);
+			sprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			data_t* obj;
 			crc32_t key;
-			int index;
-			int primary_index;
+			std::size_t index;
+			std::size_t primary_index;
 			bool is_primary_index;
 			bool is_deleted;
 			#define USE_FIND_TYPE 1
@@ -672,7 +502,7 @@ int main(const int argc, const char* argv[])
 		for (int i = begin; i < end; i += step)
 		{
 			char name[20];
-			sprintf_s(name, sizeof(name), "Name_%06d", i);
+			sprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			bool result = false;
 			#define USE_ERASE_TYPE 1
@@ -831,8 +661,8 @@ int main(const int argc, const char* argv[])
 		printf(".empty()=%u\n", stl_con->empty());
 		printf(".bucket_count()=%u\n", stl_con->bucket_count());
 		printf(".max_bucket_count()=%u\n", stl_con->max_bucket_count());
-		printf(".load_factor()=%u\n", stl_con->load_factor());
-		printf(".max_load_factor()=%u\n", stl_con->max_load_factor());
+		printf(".load_factor()=%.3f\n", stl_con->load_factor());
+		printf(".max_load_factor()=%.3f\n", stl_con->max_load_factor());
 	};
 	printSTLTableStatus();
 
@@ -846,7 +676,7 @@ int main(const int argc, const char* argv[])
 		for (int i = begin; i < end; i += step)
 		{
 			char name[20];
-			sprintf_s(name, sizeof(name), "Name_%06d", i);
+			sprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			data_t obj(name, i);
 			auto ite = stl_con->emplace(calcCRC32(name), obj);//キーとコンストラクタパラメータを渡して登録
@@ -897,7 +727,7 @@ int main(const int argc, const char* argv[])
 		for (int i = 0; i < TEST_DATA_TABLE_SIZE; ++i)
 		{
 			char name[20];
-			sprintf_s(name, sizeof(name), "Name_%06d", i);
+			sprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			crc32_t key = calcCRC32(name);
 			auto ite = stl_con->find(key);
@@ -930,7 +760,7 @@ int main(const int argc, const char* argv[])
 		for (int i = begin; i < end; i += step)
 		{
 			char name[20];
-			sprintf_s(name, sizeof(name), "Name_%06d", i);
+			sprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			crc32_t key = calcCRC32(name);
 			bool result = stl_con->erase(key) == 1;
@@ -1056,23 +886,8 @@ int main(const int argc, const char* argv[])
 		printf("Hash Table Test for Pointer\n");
 		printf("--------------------------------------------------------------------------------\n");
 
-		//操作型
-		struct p_ope_t : public hash_table::baseOpe<p_ope_t, int, data_t*>
-		{
-			//データ置換属性
-			//※デフォルト（NEVER_REPLACE）のままとする
-			//static const replace_attr_t REPLACE_ATTR = REPLACE;//キーが重複するデータは置換して登録する
-			
-			//キーを取得
-			inline static key_type getKey(const value_type& value){ return value->m_key; }
-
-			//ロック型
-			//※デフォルト（dummy_shared_lock）のままとする
-			//typedef shared_spin_lock lock_type;//ロックオブジェクト型
-		};
-
 		//ハッシュテーブル
-		hash_table::container<p_ope_t, 100> p_con;
+		hash_table::container<p_ope_t, TEST_DATA_TABLE_SIZE_FOR_POINTER> p_con;
 
 		//登録
 		data_t obj1("0010", 123);
@@ -1113,33 +928,9 @@ int main(const int argc, const char* argv[])
 		printf("Hash Table Test for Function\n");
 		printf("--------------------------------------------------------------------------------\n");
 		
-		//操作型 ※単純な関数呼び出し用
-		struct func_ope_t : public hash_table::baseOpe<func_ope_t, crc32_t, std::function<int(int, int)>>
-		{
-		};
-		
-		//オブジェクトメンバー関数呼び出しテスト用
-		struct data_t
-		{
-			int calc(int a, int b)
-			{
-				return (a + b) * m_val;
-			}
-			data_t(const int val) :
-				m_val(val)
-			{}
-		private:
-			int m_val;
-		};
-
-		//操作型 ※オブジェクトメンバー関数呼び出し用
-		struct obj_ope_t : public hash_table::baseOpe<func_ope_t, crc32_t, std::function<int(data_t&, int, int)>>
-		{
-		};
-
 		//ハッシュテーブル
-		hash_table::container<func_ope_t, 100> func_con;
-		hash_table::container<obj_ope_t, 100> obj_con;
+		hash_table::container<func_ope_t, TEST_DATA_TABLE_SIZE_FOR_FUNC> func_con;
+		hash_table::container<obj_ope_t, TEST_DATA_TABLE_SIZE_FOR_FUNC> obj_con;
 
 		//関数型ハッシュテーブルテスト用関数：通常関数
 		extern int func_add(int a, int b);
@@ -1169,18 +960,16 @@ int main(const int argc, const char* argv[])
 		func_con.emplace("-", func_sub());
 		func_con.emplace("*", func_mul);
 		func_con.emplace("/", std::bind(func_div, 50, 4));//std::bindを使用
-		obj_con.emplace("calc", std::mem_fn(&data_t::calc));//クラスメンバー関数の場合
+		obj_con.emplace("calc", std::mem_fn(&calc_t::calc));//クラスメンバー関数の場合
 
 		//検索して実行
 		printf("50 + 4 = %d\n", (*func_con["+"])(50, 4));
 		printf("50 - 4 = %d\n", (*func_con["-"])(50, 4));
 		printf("50 * 4 = %d\n", (*func_con["*"])(50, 4));
 		printf("50 / 4 = %d\n", (*func_con["/"])(0, 0));//std::bind()で事前にパラメータがセット済み
-		data_t obj(3);
+		calc_t obj(3);
 		printf("obj.calc(1, 2) = %d\n", (*obj_con["calc"])(obj, 1, 2));//クラスメンバー関数の場合、オブジェクトを渡す必要がある
 	}
-
-	return EXIT_SUCCESS;
 }
 
 //関数型ハッシュテーブルテスト用関数：通常関数
@@ -1188,13 +977,5 @@ int func_add(int a, int b)
 {
 	return a + b;
 };
-
-#endif
-
-//----------------------------------------
-//開番地法ハッシュテーブルコンテナテスト
-void example_hash_table()
-{
-}
 
 // End of file

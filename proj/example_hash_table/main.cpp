@@ -18,6 +18,9 @@ int main(const int argc, const char* argv[])
 	//開番地法ハッシュテーブルコンテナテスト
 	example_hash_table();
 	
+	//シンプル開番地法ハッシュテーブルコンテナテスト
+	example_simple_hash_table();
+
 	return EXIT_SUCCESS;
 }
 

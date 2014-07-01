@@ -65,7 +65,7 @@ void example_simple_rb_tree()
 		auto print = [&con]()
 		{
 			printf("data =");
-			for (auto data : con)
+			for (auto& data : con)
 			{
 				printf(" {%d,%d}", data.key(), data.value());
 			}
