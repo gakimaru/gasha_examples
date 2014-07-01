@@ -65,14 +65,14 @@ data_t::~data_t()
 }
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
 //ムーブオペレータ
-data_t::data_t& operator=(data_t&& rhs)
+data_t& data_t::operator=(data_t&& rhs)
 {
 	memcpy(this, &rhs, sizeof(*this));
 	printf("data_t::move_operator\n");
 	return *this;
 }
 //コピーオペレータ
-data_t::data_t& operator=(const data_t& rhs)
+data_t& data_t::operator=(const data_t& rhs)
 {
 	memcpy(this, &rhs, sizeof(*this));
 	printf("data_t::copy_operator\n");
@@ -310,7 +310,6 @@ void example_singly_linked_list()
 		printf("\n");
 		printf("[sort]\n");
 		con.sort();//通常ソート
-		//con.stableSort();//安定ソート
 		printAll();//全件表示
 
 		//逆順にソート ※カスタムプレディケート関数を使用
@@ -318,13 +317,28 @@ void example_singly_linked_list()
 		printf("[custom sort]\n");
 		auto reverse_pred = [](const data_t& lhs, const data_t& rhs) -> bool {return lhs.m_key > rhs.m_key; };
 		con.sort(reverse_pred);//通常ソート
-		//con.stableSort(reverse_pred);//安定ソート
 		printAll();//全件表示
 
-	#if 0
+	#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_STABLE_SORT
+		//安定ソ―ト
+		printf("\n");
+		printf("[stable_sort]\n");
+		con.stableSort();//安定ソート
+		printAll();//全件表示
+
+		//逆順にソート ※カスタムプレディケート関数を使用
+		printf("\n");
+		printf("[custom stable_sort]\n");
+		//auto reverse_pred = [](const data_t& lhs, const data_t& rhs) -> bool {return lhs.m_key > rhs.m_key; };
+		con.stableSort(reverse_pred);//安定ソート
+		printAll();//全件表示
+	#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_STABLE_SORT
+
+	#ifdef TEST_ITERATOR_OPERATION
 		{
 			printf("\n");
-			printf("constructor\n");
+			printf("--------------------[iterator operattion:begin]\n");
+			printf("[constructor]\n");
 			container_t::iterator ite_bb = con.before_begin();
 			container_t::iterator ite = con.begin();
 			container_t::reverse_iterator rite = con.rbegin();
@@ -345,7 +359,19 @@ void example_singly_linked_list()
 			if (rite2.isExist()) printf("rite2: key=%d, value=%d\n", rite2->m_key, rite2->m_val);
 			if (ite2_end.isExist()) printf("ite2_end: key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
 			if (rite2_end.isExist()) printf("rite2_end: key=%d, value=%d\n", rite2_end->m_key, rite2_end->m_val);
-			printf("copy operator\n");
+			printf("ite - ite_bb = %d\n", ite - ite_bb);
+			printf("ite_bb - ite = %d\n", ite_bb - ite);
+			printf("ite_end - ite = %d\n", ite_end - ite);
+			printf("ite - ite_end = %d\n", ite - ite_end);
+			printf("rite_end - rite = %d\n", rite_end - rite);
+			printf("rite - rite_end = %d\n", rite - rite_end);
+			printf("ite2 - ite = %d\n", ite2 - ite);
+			printf("ite - ite2 = %d\n", ite - ite2);
+			printf("rite2 - rite2_bb = %d\n", rite2 - rite2_bb);
+			printf("rite2_bb - rite2 = %d\n", rite2_bb - rite2);
+			printf("rite2 - rite = %d\n", rite2 - rite);
+			printf("rite - rite2 = %d\n", rite - rite2);
+			printf("[copy operator]\n");
 			ite_bb = con.before_begin();
 			ite = con.begin();
 			rite = con.rbegin();
@@ -366,104 +392,72 @@ void example_singly_linked_list()
 			if (rite2.isExist()) printf("rite2: key=%d, value=%d\n", rite2->m_key, rite2->m_val);
 			if (ite2_end.isExist()) printf("ite2_end: key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
 			if (rite2_end.isExist()) printf("rite2_end: key=%d, value=%d\n", rite2_end->m_key, rite2_end->m_val);
-			printf("++\n");
+			printf("[rite.base()]\n");
+			ite2 = rite.base();
+			ite2_end = rite_end.base();
+			if (ite2.isExist()) printf("ite2: key=%d, value=%d\n", ite2->m_key, ite2->m_val);
+			if (ite2_end.isExist()) printf("ite2_end: key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
+			printf("[++ite,--ie_end]\n");
 			++ite_bb;
 			++ite;
 			++rite;
-			++ite_end;
-			++rite_end;
-			++ite2;
-			++rite2_bb;
-			++rite2;
-			++ite2_end;
-			++rite2_end;
+			--ite_end;
+			--rite_end;
 			if (ite_bb.isExist()) printf("ite_bb: key=%d, value=%d\n", ite_bb->m_key, ite_bb->m_val);
 			if (ite.isExist()) printf("ite: key=%d, value=%d\n", ite->m_key, ite->m_val);
 			if (rite.isExist()) printf("rite: key=%d, value=%d\n", rite->m_key, rite->m_val);
 			if (ite_end.isExist()) printf("ite_end: key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
 			if (rite_end.isExist()) printf("rite_end: key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
-			if (ite2.isExist()) printf("ite2: key=%d, value=%d\n", ite2->m_key, ite2->m_val);
-			if (rite2_bb.isExist()) printf("rite2_bb: key=%d, value=%d\n", rite2_bb->m_key, rite2_bb->m_val);
-			if (rite2.isExist()) printf("rite2: key=%d, value=%d\n", rite2->m_key, rite2->m_val);
-			if (ite2_end.isExist()) printf("ite2_end: key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
-			if (rite2_end.isExist()) printf("rite2_end: key=%d, value=%d\n", rite2_end->m_key, rite2_end->m_val);
-			printf("--\n");
+			printf("[--ite,++ite_end]\n");
 			--ite_bb;
 			--ite;
 			--rite;
-			--ite_end;
-			--rite_end;
-			--ite2;
-			--rite2_bb;
-			--rite2;
-			--ite2_end;
-			--rite2_end;
+			++ite_end;
+			++rite_end;
 			if (ite_bb.isExist()) printf("ite_bb: key=%d, value=%d\n", ite_bb->m_key, ite_bb->m_val);
 			if (ite.isExist()) printf("ite: key=%d, value=%d\n", ite->m_key, ite->m_val);
 			if (rite.isExist()) printf("rite: key=%d, value=%d\n", rite->m_key, rite->m_val);
 			if (ite_end.isExist()) printf("ite_end: key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
 			if (rite_end.isExist()) printf("rite_end: key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
-			if (ite2.isExist()) printf("ite2: key=%d, value=%d\n", ite2->m_key, ite2->m_val);
-			if (rite2_bb.isExist()) printf("rite2_bb: key=%d, value=%d\n", rite2_bb->m_key, rite2_bb->m_val);
-			if (rite2.isExist()) printf("rite2: key=%d, value=%d\n", rite2->m_key, rite2->m_val);
-			if (ite2_end.isExist()) printf("ite2_end: key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
-			if (rite2_end.isExist()) printf("rite2_end: key=%d, value=%d\n", rite2_end->m_key, rite2_end->m_val);
-			for (int i = 0; i <= 3; ++i)
+			for (int i = 0; i < 3; ++i)
 			{
-				printf("[%d]\n", i);
+				printf("[ite[%d]]\n", i);
 				ite = ite[i];
 				rite = rite[i];
-				ite_end = ite_end[i];
-				rite_end = rite_end[i];
-				ite2 = ite2[i];
-				rite2 = rite2[i];
-				ite2_end = ite2_end[i];
-				rite2_end = rite2_end[i];
 				if (ite.isExist()) printf("ite: key=%d, value=%d\n", ite->m_key, ite->m_val);
 				if (rite.isExist()) printf("rite: key=%d, value=%d\n", rite->m_key, rite->m_val);
-				if (ite_end.isExist()) printf("ite_end: key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
-				if (rite_end.isExist()) printf("rite_end: key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
-				if (ite2.isExist()) printf("ite2: key=%d, value=%d\n", ite2->m_key, ite2->m_val);
-				if (rite2.isExist()) printf("rite2: key=%d, value=%d\n", rite2->m_key, rite2->m_val);
-				if (ite2_end.isExist()) printf("ite2_end: key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
-				if (rite2_end.isExist()) printf("rite2_end: key=%d, value=%d\n", rite2_end->m_key, rite2_end->m_val);
 			}
-			printf("+= 3\n");
+			printf("[ite+=3]\n");
 			ite += 3;
 			rite += 3;
-			ite_end += 3;
-			rite_end += 3;
-			ite2 += 3;
-			rite2 += 3;
-			ite2_end += 3;
-			rite2_end += 3;
 			if (ite.isExist()) printf("ite: key=%d, value=%d\n", ite->m_key, ite->m_val);
 			if (rite.isExist()) printf("rite: key=%d, value=%d\n", rite->m_key, rite->m_val);
-			if (ite_end.isExist()) printf("ite_end: key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
-			if (rite_end.isExist()) printf("rite_end: key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
-			if (ite2.isExist()) printf("ite2: key=%d, value=%d\n", ite2->m_key, ite2->m_val);
-			if (rite2.isExist()) printf("rite2: key=%d, value=%d\n", rite2->m_key, rite2->m_val);
-			if (ite2_end.isExist()) printf("ite2_end: key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
-			if (rite2_end.isExist()) printf("rite2_end: key=%d, value=%d\n", rite2_end->m_key, rite2_end->m_val);
-			printf("-= 3\n");
+			printf("[ite-=3]\n");
 			ite -= 3;
 			rite -= 3;
-			ite_end -= 3;
-			rite_end -= 3;
-			ite2 -= 3;
-			rite2 -= 3;
-			ite2_end -= 3;
-			rite2_end -= 3;
 			if (ite.isExist()) printf("ite: key=%d, value=%d\n", ite->m_key, ite->m_val);
 			if (rite.isExist()) printf("rite: key=%d, value=%d\n", rite->m_key, rite->m_val);
-			if (ite_end.isExist()) printf("ite_end: key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
-			if (rite_end.isExist()) printf("rite_end: key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
-			if (ite2.isExist()) printf("ite2: key=%d, value=%d\n", ite2->m_key, ite2->m_val);
-			if (rite2.isExist()) printf("rite2: key=%d, value=%d\n", rite2->m_key, rite2->m_val);
-			if (ite2_end.isExist()) printf("ite2_end: key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
-			if (rite2_end.isExist()) printf("rite2_end: key=%d, value=%d\n", rite2_end->m_key, rite2_end->m_val);
+			printf("ite_end - ite = %d\n", ite_end - ite);
+			printf("ite - ite_end = %d\n", ite - ite_end);
+			printf("rite_end - rite = %d\n", rite_end - rite);
+			printf("rite - rite_end = %d\n", rite - rite_end);
+			printf("[ite2-=2]\n");
+			ite2 -= 2;
+			rite2 -= 2;
+			printf("ite2 - ite = %d\n", ite2 - ite);
+			printf("ite - ite2 = %d\n", ite - ite2);
+			printf("rite2 - rite = %d\n", rite2 - rite);
+			printf("rite - rite2 = %d\n", rite - rite2);
+			printf("[++ite_end]\n");
+			++ite_end;
+			++rite_end;
+			printf("ite_end - ite = %d\n", ite_end - ite);
+			printf("ite - ite_end = %d\n", ite - ite_end);
+			printf("rite_end - rite = %d\n", rite_end - rite);
+			printf("rite - rite_end = %d\n", rite - rite_end);
+			printf("--------------------[iterator operattion:end]\n");
 		}
-	#endif
+	#endif//TEST_ITERATOR_OPERATION
 
 		//線形探索
 		printf("\n");
@@ -472,8 +466,11 @@ void example_singly_linked_list()
 		auto find = [&con](const int key)
 		{
 			printf("findValue(key=%d)=", key);
+		#ifdef USE_STL_ALGORITM
+			auto ite = std::find(con.begin(), con.end(), key);//線形探索(STL版)
+		#else//USE_STL_ALGORITM
 			auto ite = con.findValue(key);//線形探索
-			//auto ite = std::find(con.begin(), con.end(), key);//線形探索(STL版)
+		#endif//USE_STL_ALGORITM
 			if (ite.isExist())
 			{
 				printf(" [%d:%d]", ite->m_key, ite->m_val);
@@ -497,12 +494,15 @@ void example_singly_linked_list()
 		auto binary_search = [&con](const int key)
 		{
 			printf("binarySearchValue(key=%d)=", key);
+		#ifdef USE_STL_ALGORITM
+			if (std::binary_search(con.begin(), con.end(), key))//二分探索(STL版)
+			{
+				auto ite = std::lower_bound(con.begin(), con.end(), key);
+		#else//USE_STL_ALGORITM
 			auto ite = con.binarySearchValue(key);//二分探索
 			if (ite.isExist())
 			{
-			//if (std::binary_search(con.begin(), con.end(), key))//二分探索(STL版)
-			//{
-			//	auto ite = std::lower_bound(con.begin(), con.end(), key);
+		#endif//USE_STL_ALGORITM
 				printf(" [%d:%d]", ite->m_key, ite->m_val);
 				++ite;
 				if (ite.isExist())
@@ -524,24 +524,10 @@ void example_singly_linked_list()
 		binary_search(5);
 		binary_search(6);
 		binary_search(7);
-	#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
-
-	#if 0
+		
+		//※二分探索前の状態に戻す
 		con.sort(reverse_pred);//通常ソート
-		printAll();//全件表示
-		con.sort();//通常ソート
-		printAll();//全件表示
-		//con.stableSort(reverse_pred);//安定ソート
-		printAll();//全件表示
-		//con.stableSort();//安定ソート
-		printAll();//全件表示
-		find(1);
-		find(2);
-		find(3);
-		binary_search(1);
-		binary_search(2);
-		binary_search(3);
-	#endif
+	#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_BINARY_SEARCH
 
 		//削除１：削除ノードで指定
 		printf("\n");
@@ -999,6 +985,7 @@ void example_singly_linked_list()
 			prev_time = printElapsedTime(prev_time, true);
 		#endif//ENABLE_SORT_TEST
 
+		#ifdef ENABLE_REVERSE_ITERATOR_TEST
 		#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR
 			//リバースイテレータ
 			//【注意】低速処理
@@ -1022,8 +1009,9 @@ void example_singly_linked_list()
 			}
 			prev_time = printElapsedTime(prev_time, true);
 		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR
+		#endif//ENABLE_REVERSE_ITERATOR_TEST
 
-		#ifdef ENABLE_SORT_TEST
+		#ifdef ENABLE_STABLE_SORT_TEST
 		#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_STABLE_SORT
 			//逆順安定ソート
 			printf("\n");
@@ -1039,7 +1027,7 @@ void example_singly_linked_list()
 			assert(con->isOrdered());
 			prev_time = printElapsedTime(prev_time, true);
 		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_STABLE_SORT
-		#endif//ENABLE_SORT_TEST
+		#endif//ENABLE_STABLE_SORT_TEST
 
 			//線形探索
 			printf("\n");
@@ -1064,7 +1052,7 @@ void example_singly_linked_list()
 			printf("[binarySearchValue]\n");
 			{
 				int num = 0;
-				for (int i = 0; i < TEST_DATA_NUM; i += TEST_DATA_FIND_STEP)
+				for (int i = 0; i < TEST_DATA_NUM; i += TEST_DATA_BINARY_SEARCH_STEP)
 				{
 					container_t::iterator ite = std::move(con->binarySearchValue(i));
 					printf_detail(" [%d:%d]", ite->m_key, ite->m_val);
@@ -1183,43 +1171,25 @@ void example_singly_linked_list()
 			prev_time = printElapsedTime(prev_time, true);
 		#endif//ENABLE_SORT_TEST
 
+		#ifdef ENABLE_REVERSE_ITERATOR_TEST
 		#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR
 			//リバースイテレータ（非対応）
 			printf("\n");
-			printf("[iterator](has not reverse_iterator)\n");
-			{
-				printf_detail("max_size=%d\n", con->max_size());
-				printf_detail("array=");
-				if (con->empty())
-					printf_detail("(empty)");
-				int num = 0;
-				std::for_each(con->begin(), con->end(), [&num](const data_t& value)
-					{
-						printf_detail(" [%d:%d]", value.m_key, value.m_val);
-						++num;
-					}
-				);
-				printf_detail("\n");
-				printf("num=%d\n", num);
-			}
-			prev_time = printElapsedTime(prev_time, true);
+			printf("[reverse_iterator] ... is not available.\n");
 		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR
+		#endif//ENABLE_REVERSE_ITERATOR_TEST
 
-		#ifdef ENABLE_SORT_TEST
+		#ifdef ENABLE_STABLE_SORT_TEST
 		#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_STABLE_SORT
-			//逆順ソート　※安定ソートの代わり
+			//逆順安定ソート
 			printf("\n");
-			printf("[reverse (stable) sort]\n");
-			con->sort(reverse_sort);
-			prev_time = printElapsedTime(prev_time, true);
+			printf("[reverse stable sort] ... is not available.\n");
 
-			//正順ソート　※安定ソートの代わり
+			//正順安定ソート
 			printf("\n");
-			printf("[(stable) sort]\n");
-			con->sort();
-			prev_time = printElapsedTime(prev_time, true);
+			printf("[stable sort] ... is not available.\n");
 		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_STABLE_SORT
-		#endif//ENABLE_SORT_TEST
+		#endif//ENABLE_STABLE_SORT_TEST
 
 			//線形探索
 			printf("\n");
@@ -1243,7 +1213,7 @@ void example_singly_linked_list()
 			printf("[binarySearchValue]\n");
 			{
 				int num = 0;
-				for (int i = 0; i < TEST_DATA_NUM; i += TEST_DATA_FIND_STEP)
+				for (int i = 0; i < TEST_DATA_NUM; i += TEST_DATA_BINARY_SEARCH_STEP)
 				{
 					container_t::iterator ite = std::lower_bound(con->begin(), con->end(), i);
 					printf_detail(" [%d:%d]", ite->m_key, ite->m_val);

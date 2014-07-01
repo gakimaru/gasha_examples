@@ -165,52 +165,52 @@ list= [1:104] [3:103] [4:106] [5:101] [5:109] [7:105] [8:102] [10:108] [13:107]
 
 [custom sort]
 size=9
-list= [13:107] [10:108] [8:102] [7:105] [5:109] [5:101] [4:106] [3:103] [1:104]
+list= [13:107] [10:108] [8:102] [7:105] [5:101] [5:109] [4:106] [3:103] [1:104]
 
 [find]
 size=9
-list= [13:107] [10:108] [8:102] [7:105] [5:109] [5:101] [4:106] [3:103] [1:104]
-findValue(key=5)= [5:109] next=[5:101]
+list= [13:107] [10:108] [8:102] [7:105] [5:101] [5:109] [4:106] [3:103] [1:104]
+findValue(key=5)= [5:101] next=[5:109]
 findValue(key=6)=(not found)
-findValue(key=7)= [7:105] next=[5:109]
+findValue(key=7)= [7:105] next=[5:101]
 
 [binary search(before sort)]
 size=9
-list= [13:107] [10:108] [8:102] [7:105] [5:109] [5:101] [4:106] [3:103] [1:104]
-binarySearchValue(key=5)= [5:109] prev=[7:105]
+list= [13:107] [10:108] [8:102] [7:105] [5:101] [5:109] [4:106] [3:103] [1:104]
+binarySearchValue(key=5)= [5:101] prev=[7:105]
 binarySearchValue(key=6)=(not found)
 binarySearchValue(key=7)=(not found)
 
 [binary search(after sort)]
 size=9
-list= [1:104] [3:103] [4:106] [5:109] [5:101] [7:105] [8:102] [10:108] [13:107]
-binarySearchValue(key=5)= [5:109] prev=[4:106]
+list= [1:104] [3:103] [4:106] [5:101] [5:109] [7:105] [8:102] [10:108] [13:107]
+binarySearchValue(key=5)= [5:101] prev=[4:106]
 binarySearchValue(key=6)=(not found)
-binarySearchValue(key=7)= [7:105] prev=[5:101]
+binarySearchValue(key=7)= [7:105] prev=[5:109]
 
 [remove]
 size=8
-list= [1:104] [3:103] [5:109] [5:101] [7:105] [8:102] [10:108] [13:107]
+list= [13:107] [10:108] [7:105] [5:101] [5:109] [4:106] [3:103] [1:104]
 
 [erase(1)]
 size=7
-list= [1:104] [3:103] [5:109] [5:101] [8:102] [10:108] [13:107]
+list= [13:107] [10:108] [7:105] [5:101] [4:106] [3:103] [1:104]
 
 [erase(2)]
 size=5
-list= [1:104] [3:103] [5:109] [10:108] [13:107]
+list= [13:107] [10:108] [7:105] [3:103] [1:104]
 
 [erase(3)]
 size=3
-list= [1:104] [3:103] [5:109]
+list= [13:107] [10:108] [7:105]
 
 [insert]
 size=4
-list= [1:104] [3:103] [99:999] [5:109]
+list= [13:107] [10:108] [99:999] [7:105]
 
 [insert_before]
 size=5
-list= [1:104] [3:103] [99:999] [88:888] [5:109]
+list= [13:107] [10:108] [99:999] [88:888] [7:105]
 
 [clear]
 size=0
@@ -267,15 +267,21 @@ binarySearchValue(key=3)= [3:107]
 
 [push_back() * 20000]
 num=20000
-*elapsed_time=0.001000900 sec
+*elapsed_time=0.001000800 sec
 
 [iterator(1)]
 num=20000
 *elapsed_time=0.000000000 sec
 
+[reverse sort]
+*elapsed_time=0.595566400 sec
+
 [iterator(2)]
 num=20000
 *elapsed_time=0.000000000 sec
+
+[sort]
+*elapsed_time=0.570543600 sec
 
 [reverse_iterator]
 num=20000
@@ -283,17 +289,17 @@ num=20000
 
 [findValue]
 num=100
-*elapsed_time=0.003002600 sec
+*elapsed_time=0.003002900 sec
 
 [binarySearchValue]
-num=100
-*elapsed_time=0.011009400 sec
+num=10000
+*elapsed_time=1.104050200 sec
 
 [delete container]
-*elapsed_time=0.001001800 sec
+*elapsed_time=0.000000000 sec
 
 [finish]
-*elapsed_time=0.016014700 sec
+*elapsed_time=2.274163900 sec
 --------------------------------------------------------------------------------
 [Test for performance std::list]
 
@@ -302,14 +308,20 @@ num=100
 
 [push_back() * 20000]
 num=20000
-*elapsed_time=0.000000000 sec
+*elapsed_time=0.000999400 sec
 
 [iterator(1)]
 num=20000
-*elapsed_time=0.001001400 sec
+*elapsed_time=0.000000000 sec
+
+[reverse sort]
+*elapsed_time=0.001001500 sec
 
 [iterator(2)]
 num=20000
+*elapsed_time=0.000000000 sec
+
+[sort]
 *elapsed_time=0.000000000 sec
 
 [reverse_iterator]
@@ -318,17 +330,17 @@ num=20000
 
 [findValue]
 num=100
-*elapsed_time=0.003002700 sec
+*elapsed_time=0.004019000 sec
 
 [binarySearchValue]
-num=100
-*elapsed_time=0.015014300 sec
+num=10000
+*elapsed_time=1.492405900 sec
 
 [delete container]
 *elapsed_time=0.000000000 sec
 
 [finish]
-*elapsed_time=0.019018400 sec
+*elapsed_time=1.498425800 sec
 
 - end -
 

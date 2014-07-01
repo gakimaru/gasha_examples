@@ -167,6 +167,73 @@ list= [1:104] [3:103] [4:106] [5:109] [5:101] [7:105] [8:102] [10:108] [13:107]
 size=9
 list= [13:107] [10:108] [8:102] [7:105] [5:109] [5:101] [4:106] [3:103] [1:104]
 
+--------------------[iterator operattion:begin]
+[constructor]
+ite: key=13, value=107
+rite: key=1, value=104
+rite2_bb: key=13, value=107
+ite2_end: key=13, value=107
+rite2_end: key=1, value=104
+ite - ite_bb = 1
+ite_bb - ite = -1
+ite_end - ite = 9
+ite - ite_end = -9
+rite_end - rite = 9
+rite - rite_end = -9
+ite2 - ite = 9
+ite - ite2 = -9
+rite2 - rite2_bb = 1
+rite2_bb - rite2 = -1
+rite2 - rite = 9
+rite - rite2 = -9
+[copy operator]
+ite: key=13, value=107
+rite: key=1, value=104
+rite2_bb: key=13, value=107
+ite2_end: key=13, value=107
+rite2_end: key=1, value=104
+[rite.base()]
+ite2_end: key=13, value=107
+[++ite,--ie_end]
+ite_bb: key=13, value=107
+ite: key=10, value=108
+rite: key=3, value=103
+ite_end: key=1, value=104
+rite_end: key=13, value=107
+[--ite,++ite_end]
+ite: key=13, value=107
+rite: key=1, value=104
+[ite[0]]
+ite: key=13, value=107
+rite: key=1, value=104
+[ite[1]]
+ite: key=10, value=108
+rite: key=3, value=103
+[ite[2]]
+ite: key=7, value=105
+rite: key=5, value=101
+[ite+=3]
+ite: key=4, value=106
+rite: key=8, value=102
+[ite-=3]
+ite: key=7, value=105
+rite: key=5, value=101
+ite_end - ite = 6
+ite - ite_end = -6
+rite_end - rite = 6
+rite - rite_end = -6
+[ite2-=2]
+ite2 - ite = 4
+ite - ite2 = -4
+rite2 - rite = 4
+rite - rite2 = -4
+[++ite_end]
+ite_end - ite = 0
+ite - ite_end = 0
+rite_end - rite = 0
+rite - rite_end = 0
+--------------------[iterator operattion:end]
+
 [find]
 size=9
 list= [13:107] [10:108] [8:102] [7:105] [5:109] [5:101] [4:106] [3:103] [1:104]
@@ -190,47 +257,47 @@ binarySearchValue(key=7)= [7:105] next=[8:102]
 
 [remove]
 size=8
-list= [1:104] [3:103] [5:109] [5:101] [7:105] [8:102] [10:108] [13:107]
+list= [13:107] [10:108] [7:105] [5:109] [5:101] [4:106] [3:103] [1:104]
 
 [erase_after(1)]
 size=7
-list= [1:104] [3:103] [5:109] [5:101] [7:105] [10:108] [13:107]
+list= [13:107] [10:108] [7:105] [5:109] [5:101] [3:103] [1:104]
 
 [erase_after(2)]
-size=6
-list= [1:104] [3:103] [5:109] [5:101] [10:108] [13:107]
+size=5
+list= [13:107] [10:108] [7:105] [5:109] [1:104]
 
 [erase_after(3)]
-size=5
-list= [1:104] [3:103] [5:109] [10:108] [13:107]
+size=3
+list= [13:107] [10:108] [7:105]
 
 [insert_after]
-size=6
-list= [1:104] [3:103] [99:999] [5:109] [10:108] [13:107]
+size=4
+list= [13:107] [10:108] [99:999] [7:105]
 
 [before_begin + insert_after]
-size=7
-list= [88:888] [1:104] [3:103] [99:999] [5:109] [10:108] [13:107]
+size=5
+list= [88:888] [13:107] [10:108] [99:999] [7:105]
 
 [insert]
-size=8
-list= [88:888] [1:104] [3:103] [99:999] [77:777] [5:109] [10:108] [13:107]
+size=6
+list= [88:888] [13:107] [10:108] [99:999] [77:777] [7:105]
 
 [insert_before]
-size=9
-list= [88:888] [1:104] [66:666] [3:103] [99:999] [77:777] [5:109] [10:108] [13:107]
+size=7
+list= [88:888] [13:107] [66:666] [10:108] [99:999] [77:777] [7:105]
 
 [erase(1)]
-size=8
-list= [88:888] [1:104] [66:666] [99:999] [77:777] [5:109] [10:108] [13:107]
+size=6
+list= [88:888] [13:107] [66:666] [99:999] [77:777] [7:105]
 
 [erase(2)]
-size=6
-list= [88:888] [1:104] [66:666] [5:109] [10:108] [13:107]
+size=4
+list= [88:888] [13:107] [66:666] [7:105]
 
 [erase(3)]
 size=2
-list= [88:888] [1:104]
+list= [88:888] [13:107]
 
 [clear]
 size=0
@@ -313,12 +380,6 @@ list= [9:10000009] [8:10000008] [7:10000007] [6:10000006] [5:10000005] [4:100000
 num=10
 *elapsed_time=0.000000000 sec
 
-[reverse stable sort]
-*elapsed_time=0.000000000 sec
-
-[stable sort]
-*elapsed_time=0.000000000 sec
-
 [findValue]
  [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
 num=10
@@ -360,19 +421,9 @@ num=10
 *elapsed_time=0.000000000 sec
 
 [sort]
-*elapsed_time=0.001000900 sec
-
-[iterator](has not reverse_iterator)
-max_size=-1431655766
-array= [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
-num=10
 *elapsed_time=0.000000000 sec
 
-[reverse (stable) sort]
-*elapsed_time=0.000000000 sec
-
-[(stable) sort]
-*elapsed_time=0.000000000 sec
+[reverse_iterator] ... is not available.
 
 [findValue]
  [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
@@ -388,7 +439,7 @@ num=10
 *elapsed_time=0.000000000 sec
 
 [finish]
-*elapsed_time=0.001000900 sec
+*elapsed_time=0.000000000 sec
 
 - end -
 

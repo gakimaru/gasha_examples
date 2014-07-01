@@ -423,7 +423,7 @@ offset=10, size=15, max_size=20
 array= [1001:1001] [1001:1001] [1001:1001] [1000:1000] [1000:1000] [1000:1000] [13:107] [10:108] [8:102] [7:105] [5:109] [5:101] [4:106] [3:103] [1:104]
 
 --------------------[iterator operattion:begin]
-constructor
+[constructor]
 ite:[0(10)] key=1001, value=1001
 rite:[14(5)] key=1, value=104
 ite2_end:[0(10)] key=1001, value=1001
@@ -436,41 +436,46 @@ ite2 - ite = 15
 ite - ite2 = -15
 rite2 - rite = 15
 rite - rite2 = -15
-copy operator
+[copy operator]
 ite:[0(10)] key=1001, value=1001
 rite:[14(5)] key=1, value=104
 ite2_end:[0(10)] key=1001, value=1001
 rite2_end:[14(5)] key=1, value=104
-[base()]
+[rite.base()]
 ite2_end:[0(10)] key=1001, value=1001
-[0]
-ite:[0(10)] key=1001, value=1001
-rite:[14(5)] key=1, value=104
-[1]
+[++ite,--ie_end]
 ite:[1(11)] key=1001, value=1001
 rite:[13(4)] key=3, value=103
-[2]
+ite_end:[14(4)] key=1, value=104
+rite_end:[0(11)] key=1001, value=1001
+[--ite,++ie_end]
+ite:[0(10)] key=1001, value=1001
+rite:[14(5)] key=1, value=104
+[ite[0]]
+ite:[0(10)] key=1001, value=1001
+rite:[14(5)] key=1, value=104
+[ite[1]]
+ite:[1(11)] key=1001, value=1001
+rite:[13(4)] key=3, value=103
+[ite[2]]
 ite:[3(13)] key=1000, value=1000
 rite:[11(2)] key=5, value=101
-ite2:[1(11)] key=1001, value=1001
-+= 3
+[ite+=3]
 ite:[6(16)] key=13, value=107
 rite:[8(19)] key=8, value=102
-ite2:[4(14)] key=1000, value=1000
--= 3
+[ite-=3]
 ite:[3(13)] key=1000, value=1000
 rite:[11(2)] key=5, value=101
-ite2:[1(11)] key=1001, value=1001
-rite2:[1(12)] key=1001, value=1001
 ite_end - ite = 12
 ite - ite_end = -12
 rite_end - rite = 12
 rite - rite_end = -12
-ite2 - ite = -2
-ite - ite2 = 2
+[ite2-=2]
+ite2 - ite = 10
+ite - ite2 = -10
 rite2 - rite = 10
 rite - rite2 = -10
-[++end]
+[++ite_end]
 ite_end - ite = 0
 ite - ite_end = 0
 rite_end - rite = 0
@@ -599,10 +604,10 @@ array= [1:102] [1:101] [2:103] [2:104] [3:105] [3:106] [4:107] [4:108] [5:109] [
 [normal container]
 (before)
 offset=0, size=0, max_size=100
-array= [0:0] [4:4] [3:3] [7:7] [8:8] [5:5] [0:0] [0:0] [9:9]
+array= [5:5] [0:0] [7:7] [3:3] [9:9] [0:0] [8:8]
 (after)
 offset=0, size=9, max_size=100
-array= [4:4] [7:7] [9:9] [0:10] [1:11] [6:16] [7:17] [9:19] [2:12]
+array= [0:0] [0:0] [9:19] [9:17] [8:18] [4:14] [0:0] [3:13] [1:11]
 
 [multi-thread container]
 (before)
@@ -610,111 +615,111 @@ offset=0, size=0, max_size=100
 array=(empty)
 (after)
 offset=0, size=10, max_size=100
-array= [1:11] [5:15] [9:19] [6:16] [8:18] [3:13] [4:14] [2:12] [0:10] [7:17]
+array= [0:10] [7:17] [5:15] [1:11] [3:13] [8:18] [2:12] [4:14] [9:19] [6:16]
 --------------------------------------------------------------------------------
 [Test for performance ring_buffer]
 
 [create container & assign() * 10]
-*elapsed_time=0.000008000 sec
+*elapsed_time=0.000004000 sec
 
 [clear() * 10]
-*elapsed_time=0.000043000 sec
+*elapsed_time=0.000028000 sec
 
 [push_back() * 10]
 num=10
-*elapsed_time=0.000011000 sec
+*elapsed_time=0.000012000 sec
 
 [iterator(1)]
 offset=5, size=10, max_size=10
 array= [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
 num=10
-*elapsed_time=0.000017000 sec
+*elapsed_time=0.000020000 sec
 
 [reverse sort]
-*elapsed_time=0.000013000 sec
+*elapsed_time=0.000015000 sec
 
 [iterator(2)]
 offset=5, size=10, max_size=10
 array= [9:10000009] [8:10000008] [7:10000007] [6:10000006] [5:10000005] [4:10000004] [3:10000003] [2:10000002] [1:10000001] [0:10000000]
 num=10
-*elapsed_time=0.000012000 sec
+*elapsed_time=0.000019000 sec
 
 [sort]
-*elapsed_time=0.000011000 sec
+*elapsed_time=0.000014000 sec
 
 [reverse_iterator]
 offset=5, size=10, max_size=10
 array= [9:10000009] [8:10000008] [7:10000007] [6:10000006] [5:10000005] [4:10000004] [3:10000003] [2:10000002] [1:10000001] [0:10000000]
 num=10
-*elapsed_time=0.000013000 sec
+*elapsed_time=0.000021000 sec
 
 [findValue]
  [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
 num=10
-*elapsed_time=0.000014000 sec
+*elapsed_time=0.000025000 sec
 
 [binarySearchValue]
  [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
 num=10
-*elapsed_time=0.000016000 sec
+*elapsed_time=0.000022000 sec
 
 [delete container]
-*elapsed_time=0.000006000 sec
+*elapsed_time=0.000012000 sec
 
 [finish]
-*elapsed_time=0.000169000 sec
+*elapsed_time=0.000199000 sec
 --------------------------------------------------------------------------------
 [Test for performance std::deque]
 
 [create container & assign() * 10]
-*elapsed_time=0.000014000 sec
+*elapsed_time=0.000022000 sec
 
 [clear() * 10]
-*elapsed_time=0.000007000 sec
+*elapsed_time=0.000009000 sec
 
 [push_back() * 10]
 num=10
-*elapsed_time=0.000007000 sec
+*elapsed_time=0.000009000 sec
 
 [iterator(1)]
 size=10, max_size=536870911
 array= [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
 num=10
-*elapsed_time=0.000011000 sec
+*elapsed_time=0.000018000 sec
 
 [reverse sort]
-*elapsed_time=0.000009000 sec
+*elapsed_time=0.000011000 sec
 
 [iterator(2)]
 size=10, max_size=536870911
 array= [9:10000009] [8:10000008] [7:10000007] [6:10000006] [5:10000005] [4:10000004] [3:10000003] [2:10000002] [1:10000001] [0:10000000]
 num=10
-*elapsed_time=0.000011000 sec
+*elapsed_time=0.000019000 sec
 
 [sort]
-*elapsed_time=0.000008000 sec
+*elapsed_time=0.000011000 sec
 
 [reverse_iterator]
 size=10, max_size=536870911
 array= [9:10000009] [8:10000008] [7:10000007] [6:10000006] [5:10000005] [4:10000004] [3:10000003] [2:10000002] [1:10000001] [0:10000000]
 num=10
-*elapsed_time=0.000012000 sec
+*elapsed_time=0.000019000 sec
 
 [findValue]
  [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
 num=10
-*elapsed_time=0.000012000 sec
+*elapsed_time=0.000018000 sec
 
 [binarySearchValue]
  [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
 num=10
-*elapsed_time=0.000012000 sec
+*elapsed_time=0.000019000 sec
 
 [delete container]
-*elapsed_time=0.000005000 sec
+*elapsed_time=0.000008000 sec
 
 [finish]
-*elapsed_time=0.000113000 sec
+*elapsed_time=0.000171000 sec
 
 - end -
 

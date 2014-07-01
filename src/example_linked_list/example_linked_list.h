@@ -26,6 +26,15 @@ static const int TEST_DATA_NUM = 20000;//大量登録テストデータの登録
 static const int TEST_DATA_FIND_NUM = 100;//線形探索テストの回数
 static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST_DATA_NUM / TEST_DATA_FIND_NUM : 1;//線形探索テストの実行ステップ
 
+static const int TEST_DATA_BINARY_SEARCH_NUM = 10000;//二分探索テストの回数
+static const int TEST_DATA_BINARY_SEARCH_STEP = TEST_DATA_NUM > TEST_DATA_BINARY_SEARCH_NUM ? TEST_DATA_NUM / TEST_DATA_BINARY_SEARCH_NUM : 1;//二分探索テストの実行ステップ
+
+//#define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
+//#define USE_STL_ALGORITM//線形探索／二分探索で、内部関数の代わりに STL を使用する場合は、このマクロを有効にする ※ソートはSTL使用不可
+
+#define ENABLE_SORT_TEST//大量データテストで通常ソートを実行する場合、このマクロを有効化する
+#define ENABLE_STABLE_SORT_TEST//大量データテストで安定ソートを実行する場合、このマクロを有効化する
+
 //#define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
 //#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
 
@@ -36,12 +45,19 @@ static const int TEST_DATA_NUM = 10;//大量登録テストデータの登録数
 static const int TEST_DATA_FIND_NUM = 100;//線形探索テストの回数
 static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST_DATA_NUM / TEST_DATA_FIND_NUM : 1;//線形探索テストの実行ステップ
 
+static const int TEST_DATA_BINARY_SEARCH_NUM = 10000;//二分探索テストの回数
+static const int TEST_DATA_BINARY_SEARCH_STEP = TEST_DATA_NUM > TEST_DATA_BINARY_SEARCH_NUM ? TEST_DATA_NUM / TEST_DATA_BINARY_SEARCH_NUM : 1;//二分探索テストの実行ステップ
+
+#define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
+//#define USE_STL_ALGORITM//線形探索／二分探索で、内部関数の代わりに STL を使用する場合は、このマクロを有効にする ※ソートはSTL使用不可
+
+#define ENABLE_SORT_TEST//大量データテストで通常ソートを実行する場合、このマクロを有効化する
+#define ENABLE_STABLE_SORT_TEST//大量データテストで安定ソートを実行する場合、このマクロを有効化する
+
 #define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
 //#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
 
 #endif//GASHA_OPTIMIZED
-
-//#define USE_STL_ALGORITM//ソート／線形探索／二分探索で、内部関数の代わりに STL を使用する場合は、このマクロを有効にする
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

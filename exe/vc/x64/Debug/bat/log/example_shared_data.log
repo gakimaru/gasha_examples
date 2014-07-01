@@ -21,10 +21,10 @@ lf_queue_t::queue_ptr_t::TAG_SHIFT=56
 
 ================================================================================
 [Test for taggedPtr]
-p=0x000000AD0FEEFD34, tag=65535
-taggedPtr<int, 32, 32>: .value()=0x0000ffff0feefd34, .ptr()=0x000000000FEEFD34, .tag()=65535
-taggedPtr<int,  2,  0>: .value()=0x000000ad0feefd37, .ptr()=0x000000AD0FEEFD34, .tag()=3
-taggedPtr<int,  8, -8>: .value()=0xff0000ad0feefd34, .ptr()=0x000000AD0FEEFD34, .tag()=255
+p=0x0000001AFF77F9D4, tag=65535
+taggedPtr<int, 32, 32>: .value()=0x0000ffffff77f9d4, .ptr()=0x00000000FF77F9D4, .tag()=65535
+taggedPtr<int,  2,  0>: .value()=0x0000001aff77f9d7, .ptr()=0x0000001AFF77F9D4, .tag()=3
+taggedPtr<int,  8, -8>: .value()=0xff00001aff77f9d4, .ptr()=0x0000001AFF77F9D4, .tag()=255
 ================================================================================
 [Test for Lock-free pool-allocator/sharedStack/sharedQueue]
 --------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ taggedPtr<int,  8, -8>: .value()=0xff0000ad0feefd34, .ptr()=0x000000AD0FEEFD34, 
 *Test count                     = 10000
 *Allocate and free test threads = 1
 *Memory pool size               = 20
-[Shared Pool-allocator:END] elapsed_time=0.006005600 sec
+[Shared Pool-allocator:END] elapsed_time=0.005005600 sec
 --------------------------------------------------------------------------------
 ----- Debug Info for simplePoolAllocator -----
 POOL_SIZE=20, VALUE_SIZE=8, emptyHead=20
@@ -45,7 +45,7 @@ Recycable pool:
 *Test count                     = 10000
 *Allocate and free test threads = 1
 *Memory pool size               = 20
-[Lock-Free Pool-allocator:END] elapsed_time=0.007009100 sec
+[Lock-Free Pool-allocator:END] elapsed_time=0.008008200 sec
 --------------------------------------------------------------------------------
 ----- Debug Info for lfPoolAllocator -----
 POOL_SIZE=20, VALUE_SIZE=8, emptyHead=20
@@ -59,7 +59,7 @@ Recycable pool:
 *Push/Enqueue test threads = 1
 *Pop/Dequeue  test threads = 1
 *Memory pool size          = 20
-[Shared Stack:END] elapsed_time=0.007004400 sec
+[Shared Stack:END] elapsed_time=0.006005300 sec
 --------------------------------------------------------------------------------
 ----- Debug Info for stack -----
 Stack:
@@ -76,7 +76,7 @@ Recycable pool:
 *Push/Enqueue test threads = 1
 *Pop/Dequeue  test threads = 1
 *Memory pool size          = 20
-[Lock-Free Stack:END] elapsed_time=0.013012600 sec
+[Lock-Free Stack:END] elapsed_time=0.013012900 sec
 --------------------------------------------------------------------------------
 ----- Debug Info for lfStack -----
 Stack:
@@ -93,12 +93,12 @@ Recycable pool:
 *Push/Enqueue test threads = 1
 *Pop/Dequeue  test threads = 1
 *Memory pool size          = 20
-[Shared Queue:END] elapsed_time=0.006005500 sec
+[Shared Queue:END] elapsed_time=0.007005800 sec
 --------------------------------------------------------------------------------
 ----- Debug Info for queue -----
 Queue:
-[0](00007FF7CA23A7E0) temp=10000, value=0
-[tail](00007FF7CA23A7E0)temp=10000, value=0
+[0](00007FF764EBA7E0) temp=10000, value=0
+[tail](00007FF764EBA7E0)temp=10000, value=0
 ----------
 ----- Debug Info for simplePoolAllocator -----
 POOL_SIZE=20, VALUE_SIZE=16, emptyHead=20
@@ -113,12 +113,12 @@ Recycable pool:
 *Push/Enqueue test threads = 1
 *Pop/Dequeue  test threads = 1
 *Memory pool size          = 20
-[Lock-Free Queue:END] elapsed_time=0.017016200 sec
+[Lock-Free Queue:END] elapsed_time=0.017016700 sec
 --------------------------------------------------------------------------------
 ----- Debug Info for lfQueue -----
 Queue:
-[0(tag=16)](00007FF7CA23A950) temp=10000, value=0
-[tail(tag=16)](00007FF7CA23A950)temp=10000, value=0
+[0(tag=16)](00007FF764EBA950) temp=10000, value=0
+[tail(tag=16)](00007FF764EBA950)temp=10000, value=0
 ----------
 ----- Debug Info for lfPoolAllocator -----
 POOL_SIZE=20, VALUE_SIZE=16, emptyHead=20
@@ -145,23 +145,23 @@ Recycable pool:
 [Alloc: 3]:Start
 [Alloc: 4]:Start
 [Alloc: 0] alloc=0
-[Alloc: 1] alloc=2000
-[Alloc: 2] alloc=4000
-[Alloc: 0] alloc=6000
+[Alloc: 4] alloc=2000
+[Alloc: 0] alloc=4000
+[Alloc: 1] alloc=6000
 [Alloc: 2] alloc=8000
-[Alloc: 3]:End
-[Alloc: 1]:End
 [Alloc: 4]:End
+[Alloc: 3]:End
 [Alloc: 0] alloc=10000
-[Alloc: 0]:End
 [Alloc: 2]:End
-[Shared Pool-allocator:END] elapsed_time=0.010009400 sec
+[Alloc: 1]:End
+[Alloc: 0]:End
+[Shared Pool-allocator:END] elapsed_time=0.010011700 sec
 --------------------------------------------------------------------------------
 ----- Debug Info for simplePoolAllocator -----
 POOL_SIZE=20, VALUE_SIZE=8, emptyHead=20
 Using:
 Recycable pool:
- [4] [0] [3] [1] [2] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19]
+ [4] [2] [1] [3] [0] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19]
 ----------
 --------------------------------------------------------------------------------
 [Lock-Free Pool-allocator:START]
@@ -174,28 +174,28 @@ Recycable pool:
 [Alloc: 3]:Waiting...
 [Alloc: 4]:Waiting...
 [Alloc: 0]:Start
-[Alloc: 1]:Start
 [Alloc: 0] alloc=0
+[Alloc: 1]:Start
 [Alloc: 2]:Start
 [Alloc: 3]:Start
 [Alloc: 4]:Start
-[Alloc: 4] alloc=2000
+[Alloc: 3] alloc=2000
 [Alloc: 0] alloc=4000
-[Alloc: 0] alloc=6000
-[Alloc: 1] alloc=8000
-[Alloc: 0]:End
+[Alloc: 4] alloc=6000
+[Alloc: 3] alloc=8000
 [Alloc: 3]:End
-[Alloc: 2]:End
+[Alloc: 0] alloc=10000
 [Alloc: 1]:End
-[Alloc: 4] alloc=10000
+[Alloc: 0]:End
+[Alloc: 2]:End
 [Alloc: 4]:End
-[Lock-Free Pool-allocator:END] elapsed_time=0.006005600 sec
+[Lock-Free Pool-allocator:END] elapsed_time=0.005994700 sec
 --------------------------------------------------------------------------------
 ----- Debug Info for lfPoolAllocator -----
 POOL_SIZE=20, VALUE_SIZE=8, emptyHead=20
 Using:
 Recycable pool:
- [4(tag=34)] [0(tag=33)] [2(tag=32)] [1(tag=30)] [3(tag=4)] [5(tag=10)] [6(tag=9)] [7(tag=8)] [8(tag=7)] [9(tag=6)] [10(tag=5)] [11(tag=4)] [12(tag=3)] [13(tag=2)] [14(tag=1)] [15(tag=0)] [16(tag=255)] [17(tag=254)] [18(tag=253)] [19(tag=252)]
+ [0(tag=35)] [4(tag=34)] [2(tag=33)] [1(tag=28)] [3(tag=69)] [5(tag=10)] [6(tag=9)] [7(tag=8)] [8(tag=7)] [9(tag=6)] [10(tag=5)] [11(tag=4)] [12(tag=3)] [13(tag=2)] [14(tag=1)] [15(tag=0)] [16(tag=255)] [17(tag=254)] [18(tag=253)] [19(tag=252)]
 ----------
 --------------------------------------------------------------------------------
 [Shared Stack:START]
@@ -215,22 +215,22 @@ Recycable pool:
 [POP : 0]:Start
 [POP : 1]:Start
 [POP : 0] count=0
-[PUSH: 2] count=2000
-[POP : 1] count=2000
-[PUSH: 0] count=4000
+[PUSH: 1] count=2000
+[POP : 0] count=2000
+[PUSH: 1] count=4000
 [POP : 1] count=4000
-[PUSH: 0] count=6000
-[POP : 0] count=6000
-[PUSH: 1] count=8000
+[PUSH: 1] count=6000
+[POP : 1] count=6000
+[PUSH: 2] count=8000
 [POP : 1] count=8000
-[PUSH: 2] count=10000
-[PUSH: 1]:End
+[PUSH: 1] count=10000
 [PUSH: 2]:End
+[PUSH: 1]:End
 [PUSH: 0]:End
 [POP : 1] count=10000
 [POP : 0]:End
 [POP : 1]:End
-[Shared Stack:END] elapsed_time=0.013012000 sec
+[Shared Stack:END] elapsed_time=0.012010300 sec
 --------------------------------------------------------------------------------
 ----- Debug Info for stack -----
 Stack:
@@ -253,28 +253,28 @@ Recycable pool:
 [POP : 0]:Waiting...
 [POP : 1]:Waiting...
 [PUSH: 0]:Start
-[PUSH: 0] count=0
 [PUSH: 1]:Start
+[PUSH: 0] count=0
 [PUSH: 2]:Start
 [POP : 0]:Start
 [POP : 1]:Start
 [POP : 0] count=0
-[PUSH: 2] count=2000
-[POP : 0] count=2000
+[PUSH: 0] count=2000
+[POP : 1] count=2000
 [PUSH: 1] count=4000
-[POP : 0] count=4000
-[PUSH: 0] count=6000
-[POP : 0] count=6000
-[PUSH: 2] count=8000
+[POP : 1] count=4000
+[PUSH: 2] count=6000
+[POP : 1] count=6000
+[PUSH: 0] count=8000
 [POP : 0] count=8000
-[PUSH: 0] count=10000
-[POP : 1] count=10000
+[PUSH: 1] count=10000
 [PUSH: 2]:End
+[PUSH: 1]:End
+[POP : 0] count=10000
+[PUSH: 0]:End
 [POP : 0]:End
 [POP : 1]:End
-[PUSH: 0]:End
-[PUSH: 1]:End
-[Lock-Free Stack:END] elapsed_time=0.011009400 sec
+[Lock-Free Stack:END] elapsed_time=0.010010300 sec
 --------------------------------------------------------------------------------
 ----- Debug Info for lfStack -----
 Stack:
@@ -283,7 +283,7 @@ Stack:
 POOL_SIZE=20, VALUE_SIZE=16, emptyHead=20
 Using:
 Recycable pool:
- [0(tag=33)] [2(tag=32)] [4(tag=31)] [3(tag=29)] [1(tag=13)] [7(tag=250)] [14(tag=249)] [18(tag=221)] [10(tag=26)] [6(tag=16)] [11(tag=10)] [9(tag=6)] [12(tag=0)] [15(tag=252)] [5(tag=247)] [19(tag=216)] [13(tag=202)] [8(tag=196)] [16(tag=192)] [17(tag=186)]
+ [19(tag=33)] [6(tag=31)] [16(tag=85)] [3(tag=93)] [8(tag=246)] [17(tag=242)] [5(tag=241)] [4(tag=238)] [1(tag=236)] [15(tag=232)] [12(tag=229)] [2(tag=227)] [18(tag=223)] [14(tag=220)] [0(tag=216)] [10(tag=212)] [11(tag=211)] [13(tag=207)] [9(tag=204)] [7(tag=191)]
 ----------
 --------------------------------------------------------------------------------
 [Shared Queue:START]
@@ -297,40 +297,40 @@ Recycable pool:
 [DEQUEUE: 0]:Waiting...
 [DEQUEUE: 1]:Waiting...
 [ENQUEUE: 0]:Start
-[ENQUEUE: 1]:Start
 [ENQUEUE: 0] count=0
+[ENQUEUE: 1]:Start
 [ENQUEUE: 2]:Start
 [DEQUEUE: 0]:Start
 [DEQUEUE: 1]:Start
 [DEQUEUE: 0] count=0
-[ENQUEUE: 0] count=2000
-[DEQUEUE: 1] count=2000
+[ENQUEUE: 2] count=2000
+[DEQUEUE: 0] count=2000
 [ENQUEUE: 1] count=4000
 [DEQUEUE: 0] count=4000
-[ENQUEUE: 0] count=6000
-[DEQUEUE: 0] count=6000
-[ENQUEUE: 2] count=8000
+[ENQUEUE: 1] count=6000
+[DEQUEUE: 1] count=6000
+[ENQUEUE: 0] count=8000
 [DEQUEUE: 1] count=8000
+[ENQUEUE: 1] count=10000
+[DEQUEUE: 0] count=10000
 [ENQUEUE: 1]:End
-[ENQUEUE: 2] count=10000
-[ENQUEUE: 0]:End
-[ENQUEUE: 2]:End
-[DEQUEUE: 1] count=10000
 [DEQUEUE: 0]:End
+[ENQUEUE: 0]:End
 [DEQUEUE: 1]:End
-[Shared Queue:END] elapsed_time=0.013012400 sec
+[ENQUEUE: 2]:End
+[Shared Queue:END] elapsed_time=0.012012000 sec
 --------------------------------------------------------------------------------
 ----- Debug Info for queue -----
 Queue:
-[0](00007FF7CA23A8A0) temp=0, value=10000
-[tail](00007FF7CA23A8A0)temp=0, value=10000
+[0](00007FF764EBA800) temp=0, value=10000
+[tail](00007FF764EBA800)temp=0, value=10000
 ----------
 ----- Debug Info for simplePoolAllocator -----
 POOL_SIZE=20, VALUE_SIZE=16, emptyHead=20
 Using:
-[19] temp=0, value=10000
+[9] temp=0, value=10000
 Recycable pool:
- [13] [16] [14] [4] [5] [8] [1] [2] [0] [12] [9] [18] [17] [10] [6] [7] [3] [11] [15]
+ [19] [4] [6] [10] [17] [7] [13] [2] [16] [0] [11] [8] [1] [5] [15] [12] [14] [3] [18]
 ----------
 --------------------------------------------------------------------------------
 [Lock-Free Queue:START]
@@ -344,8 +344,8 @@ Recycable pool:
 [DEQUEUE: 0]:Waiting...
 [DEQUEUE: 1]:Waiting...
 [ENQUEUE: 0]:Start
-[ENQUEUE: 1]:Start
 [ENQUEUE: 0] count=0
+[ENQUEUE: 1]:Start
 [ENQUEUE: 2]:Start
 [DEQUEUE: 0]:Start
 [DEQUEUE: 1]:Start
@@ -354,28 +354,28 @@ Recycable pool:
 [DEQUEUE: 1] count=2000
 [ENQUEUE: 1] count=4000
 [DEQUEUE: 0] count=4000
-[ENQUEUE: 2] count=6000
-[DEQUEUE: 1] count=6000
-[ENQUEUE: 2] count=8000
-[DEQUEUE: 0] count=8000
-[ENQUEUE: 1] count=10000
+[ENQUEUE: 0] count=6000
+[DEQUEUE: 0] count=6000
+[ENQUEUE: 1] count=8000
+[DEQUEUE: 1] count=8000
+[ENQUEUE: 2] count=10000
+[ENQUEUE: 1]:End
 [ENQUEUE: 2]:End
 [ENQUEUE: 0]:End
-[ENQUEUE: 1]:End
-[DEQUEUE: 1] count=10000
 [DEQUEUE: 1]:End
+[DEQUEUE: 0] count=10000
 [DEQUEUE: 0]:End
-[Lock-Free Queue:END] elapsed_time=0.010009700 sec
+[Lock-Free Queue:END] elapsed_time=0.010008700 sec
 --------------------------------------------------------------------------------
 ----- Debug Info for lfQueue -----
 Queue:
-[0(tag=33)](00007FF7CA23A9F0) temp=0, value=10000
-[tail(tag=33)](00007FF7CA23A9F0)temp=0, value=10000
+[0(tag=33)](00007FF764EBA940) temp=0, value=10000
+[tail(tag=33)](00007FF764EBA940)temp=0, value=10000
 ----------
 ----- Debug Info for lfPoolAllocator -----
 POOL_SIZE=20, VALUE_SIZE=16, emptyHead=20
 Using:
-[17]temp=0, value=10000
+[6]temp=0, value=10000
 Recycable pool:
- [4(tag=33)] [12(tag=32)] [13(tag=31)] [16(tag=30)] [10(tag=29)] [11(tag=28)] [7(tag=27)] [9(tag=26)] [6(tag=25)] [3(tag=24)] [1(tag=23)] [0(tag=22)] [14(tag=21)] [15(tag=20)] [8(tag=19)] [18(tag=18)] [2(tag=17)] [19(tag=16)] [5(tag=15)]
+ [17(tag=33)] [3(tag=32)] [12(tag=31)] [0(tag=30)] [11(tag=29)] [8(tag=28)] [9(tag=27)] [19(tag=26)] [14(tag=25)] [2(tag=24)] [16(tag=23)] [5(tag=158)] [10(tag=122)] [1(tag=16)] [13(tag=105)] [18(tag=254)] [7(tag=211)] [4(tag=170)] [15(tag=41)]
 ----------

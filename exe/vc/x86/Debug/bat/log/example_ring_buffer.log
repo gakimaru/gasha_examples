@@ -423,7 +423,7 @@ offset=10, size=15, max_size=20
 array= [1001:1001] [1001:1001] [1001:1001] [1000:1000] [1000:1000] [1000:1000] [13:107] [10:108] [8:102] [7:105] [5:109] [5:101] [4:106] [3:103] [1:104]
 
 --------------------[iterator operattion:begin]
-constructor
+[constructor]
 ite:[0(10)] key=1001, value=1001
 rite:[14(5)] key=1, value=104
 ite2_end:[0(10)] key=1001, value=1001
@@ -436,41 +436,46 @@ ite2 - ite = 15
 ite - ite2 = -15
 rite2 - rite = 15
 rite - rite2 = -15
-copy operator
+[copy operator]
 ite:[0(10)] key=1001, value=1001
 rite:[14(5)] key=1, value=104
 ite2_end:[0(10)] key=1001, value=1001
 rite2_end:[14(5)] key=1, value=104
-[base()]
+[rite.base()]
 ite2_end:[0(10)] key=1001, value=1001
-[0]
-ite:[0(10)] key=1001, value=1001
-rite:[14(5)] key=1, value=104
-[1]
+[++ite,--ie_end]
 ite:[1(11)] key=1001, value=1001
 rite:[13(4)] key=3, value=103
-[2]
+ite_end:[14(4)] key=1, value=104
+rite_end:[0(11)] key=1001, value=1001
+[--ite,++ie_end]
+ite:[0(10)] key=1001, value=1001
+rite:[14(5)] key=1, value=104
+[ite[0]]
+ite:[0(10)] key=1001, value=1001
+rite:[14(5)] key=1, value=104
+[ite[1]]
+ite:[1(11)] key=1001, value=1001
+rite:[13(4)] key=3, value=103
+[ite[2]]
 ite:[3(13)] key=1000, value=1000
 rite:[11(2)] key=5, value=101
-ite2:[1(11)] key=1001, value=1001
-+= 3
+[ite+=3]
 ite:[6(16)] key=13, value=107
 rite:[8(19)] key=8, value=102
-ite2:[4(14)] key=1000, value=1000
--= 3
+[ite-=3]
 ite:[3(13)] key=1000, value=1000
 rite:[11(2)] key=5, value=101
-ite2:[1(11)] key=1001, value=1001
-rite2:[1(12)] key=1001, value=1001
 ite_end - ite = 12
 ite - ite_end = -12
 rite_end - rite = 12
 rite - rite_end = -12
-ite2 - ite = -2
-ite - ite2 = 2
+[ite2-=2]
+ite2 - ite = 10
+ite - ite2 = -10
 rite2 - rite = 10
 rite - rite2 = -10
-[++end]
+[++ite_end]
 ite_end - ite = 0
 ite - ite_end = 0
 rite_end - rite = 0
@@ -599,10 +604,10 @@ array= [1:102] [1:101] [2:103] [2:104] [3:105] [3:106] [4:107] [4:108] [5:109] [
 [normal container]
 (before)
 offset=0, size=0, max_size=100
-array= [0:0] [1:1] [2:2] [4:4] [0:0] [5:5] [6:6] [8:8] [7:7] [9:9]
+array= [2:2] [3:3] [4:4] [1:1] [5:5] [6:6] [7:7] [8:8] [0:0]
 (after)
-offset=0, size=11, max_size=100
-array= [1:1] [2:2] [0:0] [8:8] [7:7] [0:0] [2:12] [3:13] [9:19] [7:17] [8:18]
+offset=0, size=9, max_size=100
+array= [3:3] [1:1] [5:5] [0:0] [4:14] [0:0] [9:19] [0:0] [7:17]
 
 [multi-thread container]
 (before)
@@ -610,7 +615,7 @@ offset=0, size=0, max_size=100
 array=(empty)
 (after)
 offset=0, size=10, max_size=100
-array= [1:11] [3:13] [0:10] [8:18] [7:17] [2:12] [9:19] [4:14] [6:16] [5:15]
+array= [0:10] [5:15] [8:18] [9:19] [6:16] [4:14] [1:11] [3:13] [7:17] [2:12]
 --------------------------------------------------------------------------------
 [Test for performance ring_buffer]
 

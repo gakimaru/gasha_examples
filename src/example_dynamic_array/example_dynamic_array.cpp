@@ -420,34 +420,7 @@ void example_dynamic_array()
 			);
 			printf("\n");
 		};
-#if 0
-		{
-			con.push_back();
-			con.clear();
-			for (int i = 0; i < 100; ++i)
-			{
-				for (int j = 0; j <= i; ++j)
-				{
-					con.push_back(i, i * 100 + j);
-				}
-			}
-			printAll();
-			for (int i = 0; i < 100; ++i)
-			{
-				auto& ite = con.binarySearchValue(i);
-				printf("binary_search(%d)=", i);
-				if (ite.isExist())
-				{
-					printf("[%d:%d]", ite->m_key, ite->m_val);
-					if (ite->m_val % 100 != 0)
-						printf(" !!!\n");
-				}
-				printf("\n");
-			}
-			con.clear();
-		}
-#endif
-
+		
 		//データ登録１：push_back()メソッド＋コンストラクタパラメータ（コンストラクタ呼び出しを行う）
 		printf("\n");
 		printf("[push_back(1)]\n");
@@ -533,7 +506,7 @@ void example_dynamic_array()
 		{
 			printf("\n");
 			printf("--------------------[iterator operattion:begin]\n");
-			printf("constructor\n");
+			printf("[constructor]\n");
 			container_t::iterator ite = con.begin();
 			container_t::reverse_iterator rite = con.rbegin();
 			container_t::iterator ite_end = con.end();
@@ -558,7 +531,7 @@ void example_dynamic_array()
 			printf("ite - ite2 = %d\n", ite - ite2);
 			printf("rite2 - rite = %d\n", rite2 - rite);
 			printf("rite - rite2 = %d\n", rite - rite2);
-			printf("copy operator\n");
+			printf("[copy operator]\n");
 			ite = con.begin();
 			rite = con.rbegin();
 			ite_end = con.end();
@@ -575,52 +548,59 @@ void example_dynamic_array()
 			if (rite2.isExist()) printf("rite2:[%d] key=%d, value=%d\n", rite2.getIndex(), rite2->m_key, rite2->m_val);
 			if (ite2_end.isExist()) printf("ite2_end:[%d] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_key, ite2_end->m_val);
 			if (rite2_end.isExist()) printf("rite2_end:[%d] key=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_key, rite2_end->m_val);
-			printf("[base()]\n");
+			printf("[rite.base()]\n");
 			ite2 = rite.base();
 			ite2_end = rite_end.base();
 			if (ite2.isExist()) printf("ite2:[%d] key=%d, value=%d\n", ite2.getIndex(), ite2->m_key, ite2->m_val);
 			if (ite2_end.isExist()) printf("ite2_end:[%d] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_key, ite2_end->m_val);
+			printf("[++ite,--ie_end]\n");
+			++ite;
+			++rite;
+			--ite_end;
+			--rite_end;
+			if (ite.isExist()) printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
+			if (rite.isExist()) printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
+			if (ite_end.isExist()) printf("ite_end:[%d] key=%d, value=%d\n", ite_end.getIndex(), ite_end->m_key, ite_end->m_val);
+			if (rite_end.isExist()) printf("rite_end:[%d] key=%d, value=%d\n", rite_end.getIndex(), rite_end->m_key, rite_end->m_val);
+			printf("[--ite,++ie_end]\n");
+			--ite;
+			--rite;
+			++ite_end;
+			++rite_end;
+			if (ite.isExist()) printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
+			if (rite.isExist()) printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
+			if (ite_end.isExist()) printf("ite_end:[%d] key=%d, value=%d\n", ite_end.getIndex(), ite_end->m_key, ite_end->m_val);
+			if (rite_end.isExist()) printf("rite_end:[%d] key=%d, value=%d\n", rite_end.getIndex(), rite_end->m_key, rite_end->m_val);
 			for (int i = 0; i < 3; ++i)
 			{
-				printf("[%d]\n", i);
+				printf("[ite[%d]]\n", i);
 				ite = ite[i];
 				rite = rite[i];
-				ite2 = ite2[i];
-				rite2 = rite2[i];
 				if (ite.isExist()) printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
 				if (rite.isExist()) printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
-				if (ite2.isExist()) printf("ite2:[%d] key=%d, value=%d\n", ite2.getIndex(), ite2->m_key, ite2->m_val);
-				if (rite2.isExist()) printf("rite2:[%d] key=%d, value=%d\n", rite2.getIndex(), rite2->m_key, rite2->m_val);
 			}
-			printf("+= 3\n");
+			printf("[ite+=3]\n");
 			ite += 3;
 			rite += 3;
-			ite2 += 3;
-			rite2 += 3;
 			if (ite.isExist()) printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
 			if (rite.isExist()) printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
-			if (ite2.isExist()) printf("ite2:[%d] key=%d, value=%d\n", ite2.getIndex(), ite2->m_key, ite2->m_val);
-			if (rite2.isExist()) printf("rite2:[%d] key=%d, value=%d\n", rite2.getIndex(), rite2->m_key, rite2->m_val);
-			if (ite2_end.isExist()) printf("ite2_end:[%d] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_key, ite2_end->m_val);
-			if (rite2_end.isExist()) printf("rite2_end:[%d] key=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_key, rite2_end->m_val);
-			printf("-= 3\n");
+			printf("[ite-=3]\n");
 			ite -= 3;
 			rite -= 3;
-			ite2 -= 3;
-			rite2 -= 3;
 			if (ite.isExist()) printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
 			if (rite.isExist()) printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
-			if (ite2.isExist()) printf("ite2:[%d] key=%d, value=%d\n", ite2.getIndex(), ite2->m_key, ite2->m_val);
-			if (rite2.isExist()) printf("rite2:[%d] key=%d, value=%d\n", rite2.getIndex(), rite2->m_key, rite2->m_val);
 			printf("ite_end - ite = %d\n", ite_end - ite);
 			printf("ite - ite_end = %d\n", ite - ite_end);
 			printf("rite_end - rite = %d\n", rite_end - rite);
 			printf("rite - rite_end = %d\n", rite - rite_end);
+			printf("[ite2-=2]\n");
+			ite2 -= 2;
+			rite2 -= 2;
 			printf("ite2 - ite = %d\n", ite2 - ite);
 			printf("ite - ite2 = %d\n", ite - ite2);
 			printf("rite2 - rite = %d\n", rite2 - rite);
 			printf("rite - rite2 = %d\n", rite - rite2);
-			printf("[++end]\n");
+			printf("[++ite_end]\n");
 			++ite_end;
 			++rite_end;
 			printf("ite_end - ite = %d\n", ite_end - ite);

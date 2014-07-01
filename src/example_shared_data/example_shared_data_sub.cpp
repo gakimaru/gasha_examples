@@ -34,6 +34,8 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //　（コンパイルへの影響を気にしないなら、ヘッダーファイルに
 //　インクルードしてしまっても良い）
 
+//明示的インスタンス化
+
 template class sharedPoolAllocator<data_t, TEST_POOL_SIZE, lock_type>;//マルチスレッド共有プールアロケータ
 template class sharedStack<data_t, TEST_POOL_SIZE, lock_type>;//マルチスレッド共有スタック
 template class sharedQueue<data_t, TEST_POOL_SIZE, lock_type>;//マルチスレッド共有キュー

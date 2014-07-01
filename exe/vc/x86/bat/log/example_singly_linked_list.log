@@ -190,47 +190,47 @@ binarySearchValue(key=7)= [7:105] next=[8:102]
 
 [remove]
 size=8
-list= [1:104] [3:103] [5:109] [5:101] [7:105] [8:102] [10:108] [13:107]
+list= [13:107] [10:108] [7:105] [5:109] [5:101] [4:106] [3:103] [1:104]
 
 [erase_after(1)]
 size=7
-list= [1:104] [3:103] [5:109] [5:101] [7:105] [10:108] [13:107]
+list= [13:107] [10:108] [7:105] [5:109] [5:101] [3:103] [1:104]
 
 [erase_after(2)]
-size=6
-list= [1:104] [3:103] [5:109] [5:101] [10:108] [13:107]
+size=5
+list= [13:107] [10:108] [7:105] [5:109] [1:104]
 
 [erase_after(3)]
-size=5
-list= [1:104] [3:103] [5:109] [10:108] [13:107]
+size=3
+list= [13:107] [10:108] [7:105]
 
 [insert_after]
-size=6
-list= [1:104] [3:103] [99:999] [5:109] [10:108] [13:107]
+size=4
+list= [13:107] [10:108] [99:999] [7:105]
 
 [before_begin + insert_after]
-size=7
-list= [88:888] [1:104] [3:103] [99:999] [5:109] [10:108] [13:107]
+size=5
+list= [88:888] [13:107] [10:108] [99:999] [7:105]
 
 [insert]
-size=8
-list= [88:888] [1:104] [3:103] [99:999] [77:777] [5:109] [10:108] [13:107]
+size=6
+list= [88:888] [13:107] [10:108] [99:999] [77:777] [7:105]
 
 [insert_before]
-size=9
-list= [88:888] [1:104] [66:666] [3:103] [99:999] [77:777] [5:109] [10:108] [13:107]
+size=7
+list= [88:888] [13:107] [66:666] [10:108] [99:999] [77:777] [7:105]
 
 [erase(1)]
-size=8
-list= [88:888] [1:104] [66:666] [99:999] [77:777] [5:109] [10:108] [13:107]
+size=6
+list= [88:888] [13:107] [66:666] [99:999] [77:777] [7:105]
 
 [erase(2)]
-size=6
-list= [88:888] [1:104] [66:666] [5:109] [10:108] [13:107]
+size=4
+list= [88:888] [13:107] [66:666] [7:105]
 
 [erase(3)]
 size=2
-list= [88:888] [1:104]
+list= [88:888] [13:107]
 
 [clear]
 size=0
@@ -287,45 +287,35 @@ binarySearchValue(key=3)= [3:107]
 
 [push_front() * 50000]
 num=50000
-*elapsed_time=0.002001700 sec
+*elapsed_time=0.002002300 sec
 
 [iterator(1)]
 num=50000
 *elapsed_time=0.000000000 sec
 
 [reverse sort]
-*elapsed_time=0.000000000 sec
+*elapsed_time=0.001000900 sec
 
 [iterator(2)]
 num=50000
 *elapsed_time=0.000000000 sec
 
 [sort]
-*elapsed_time=0.001000900 sec
-
-[reverse_iterator]
-num=50000
-*elapsed_time=2.532410700 sec
-
-[reverse stable sort]
 *elapsed_time=0.000000000 sec
-
-[stable sort]
-*elapsed_time=0.001001200 sec
 
 [findValue]
 num=100
-*elapsed_time=0.006004900 sec
+*elapsed_time=0.007007000 sec
 
 [binarySearchValue]
-num=100
+num=10000
 *elapsed_time=0.000000000 sec
 
 [delete container]
-*elapsed_time=0.001000000 sec
+*elapsed_time=0.001000900 sec
 
 [finish]
-*elapsed_time=2.543419400 sec
+*elapsed_time=0.011011100 sec
 --------------------------------------------------------------------------------
 [Test for performance std::forward_list]
 
@@ -334,45 +324,35 @@ num=100
 
 [push_front() * 50000]
 num=50000
-*elapsed_time=0.003003300 sec
+*elapsed_time=0.003002700 sec
 
 [iterator(1)]
 num=50000
 *elapsed_time=0.000000000 sec
 
 [reverse sort]
-*elapsed_time=0.002001700 sec
+*elapsed_time=0.001001400 sec
 
 [iterator(2)]
 num=50000
 *elapsed_time=0.000000000 sec
 
 [sort]
-*elapsed_time=0.001001200 sec
-
-[iterator](has not reverse_iterator)
-num=50000
-*elapsed_time=0.001002100 sec
-
-[reverse (stable) sort]
-*elapsed_time=0.001000800 sec
-
-[(stable) sort]
 *elapsed_time=0.002002100 sec
 
 [findValue]
 num=100
-*elapsed_time=0.006005500 sec
+*elapsed_time=0.006006400 sec
 
 [binarySearchValue]
-num=100
-*elapsed_time=0.020019100 sec
+num=10000
+*elapsed_time=2.045944800 sec
 
 [delete container]
-*elapsed_time=0.001000000 sec
+*elapsed_time=0.002002000 sec
 
 [finish]
-*elapsed_time=0.037035800 sec
+*elapsed_time=2.059959400 sec
 
 - end -
 

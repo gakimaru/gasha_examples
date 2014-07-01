@@ -422,61 +422,6 @@ array= [1:104] [3:103] [4:106] [5:109] [5:101] [7:105] [8:102] [10:108] [13:107]
 offset=10, size=15, max_size=20
 array= [1001:1001] [1001:1001] [1001:1001] [1000:1000] [1000:1000] [1000:1000] [13:107] [10:108] [8:102] [7:105] [5:109] [5:101] [4:106] [3:103] [1:104]
 
---------------------[iterator operattion:begin]
-constructor
-ite:[0(10)] key=1001, value=1001
-rite:[14(5)] key=1, value=104
-ite2_end:[0(10)] key=1001, value=1001
-rite2_end:[14(5)] key=1, value=104
-ite_end - ite = 15
-ite - ite_end = -15
-rite_end - rite = 15
-rite - rite_end = -15
-ite2 - ite = 15
-ite - ite2 = -15
-rite2 - rite = 15
-rite - rite2 = -15
-copy operator
-ite:[0(10)] key=1001, value=1001
-rite:[14(5)] key=1, value=104
-ite2_end:[0(10)] key=1001, value=1001
-rite2_end:[14(5)] key=1, value=104
-[base()]
-ite2_end:[0(10)] key=1001, value=1001
-[0]
-ite:[0(10)] key=1001, value=1001
-rite:[14(5)] key=1, value=104
-[1]
-ite:[1(11)] key=1001, value=1001
-rite:[13(4)] key=3, value=103
-[2]
-ite:[3(13)] key=1000, value=1000
-rite:[11(2)] key=5, value=101
-ite2:[1(11)] key=1001, value=1001
-+= 3
-ite:[6(16)] key=13, value=107
-rite:[8(19)] key=8, value=102
-ite2:[4(14)] key=1000, value=1000
--= 3
-ite:[3(13)] key=1000, value=1000
-rite:[11(2)] key=5, value=101
-ite2:[1(11)] key=1001, value=1001
-rite2:[1(12)] key=1001, value=1001
-ite_end - ite = 12
-ite - ite_end = -12
-rite_end - rite = 12
-rite - rite_end = -12
-ite2 - ite = -2
-ite - ite2 = 2
-rite2 - rite = 10
-rite - rite2 = -10
-[++end]
-ite_end - ite = 0
-ite - ite_end = 0
-rite_end - rite = 0
-rite - rite_end = 0
---------------------[iterator operattion:end]
-
 [pop_back(1)]
 back=[1:104]
 offset=10, size=14, max_size=20
@@ -599,10 +544,10 @@ array= [1:102] [1:101] [2:103] [2:104] [3:105] [3:106] [4:107] [4:108] [5:109] [
 [normal container]
 (before)
 offset=0, size=0, max_size=100
-array= [0:0] [1:1] [2:2] [3:3] [4:4] [6:6] [7:7] [5:5] [8:8] [9:9]
+array= [1:1] [0:0] [3:3] [2:2] [7:7] [4:4] [8:8] [6:6] [5:5] [9:9]
 (after)
 offset=0, size=10, max_size=100
-array= [1:1] [3:3] [7:7] [5:5] [0:10] [1:11] [6:16] [4:14] [5:15] [9:19]
+array= [0:0] [2:2] [8:8] [5:5] [1:11] [7:17] [5:15] [6:16] [3:13] [9:19]
 
 [multi-thread container]
 (before)
@@ -610,95 +555,95 @@ offset=0, size=0, max_size=100
 array=(empty)
 (after)
 offset=0, size=10, max_size=100
-array= [3:13] [1:11] [4:14] [0:10] [2:12] [9:19] [7:17] [6:16] [5:15] [8:18]
+array= [6:16] [0:10] [3:13] [1:11] [7:17] [4:14] [5:15] [9:19] [2:12] [8:18]
 --------------------------------------------------------------------------------
 [Test for performance ring_buffer]
 
 [create container & assign() * 10000000]
-*elapsed_time=0.022021400 sec
+*elapsed_time=0.019016400 sec
 
 [clear() * 10000000]
-*elapsed_time=0.003002100 sec
+*elapsed_time=0.003002700 sec
 
 [push_back() * 10000000]
 num=10000000
-*elapsed_time=0.032031000 sec
+*elapsed_time=0.030029000 sec
 
 [iterator(1)]
 num=10000000
-*elapsed_time=0.049046300 sec
+*elapsed_time=0.043040400 sec
 
 [reverse sort]
-*elapsed_time=0.329313600 sec
+*elapsed_time=0.326312400 sec
 
 [iterator(2)]
 num=10000000
-*elapsed_time=0.035033100 sec
+*elapsed_time=0.032029900 sec
 
 [sort]
-*elapsed_time=0.345328700 sec
+*elapsed_time=0.327311200 sec
 
 [reverse_iterator]
 num=10000000
-*elapsed_time=0.037036100 sec
+*elapsed_time=0.040037800 sec
 
 [findValue]
 num=100
-*elapsed_time=1.003954900 sec
+*elapsed_time=0.952907400 sec
 
 [binarySearchValue]
 num=10000000
-*elapsed_time=1.196136400 sec
+*elapsed_time=1.442372000 sec
 
 [delete container]
-*elapsed_time=0.008007600 sec
+*elapsed_time=0.007006400 sec
 
 [finish]
-*elapsed_time=3.060911200 sec
+*elapsed_time=3.223065600 sec
 --------------------------------------------------------------------------------
 [Test for performance std::deque]
 
 [create container & assign() * 10000000]
-*elapsed_time=0.267255500 sec
+*elapsed_time=0.265252600 sec
 
 [clear() * 10000000]
-*elapsed_time=0.149141800 sec
+*elapsed_time=0.149140600 sec
 
 [push_back() * 10000000]
 num=10000000
-*elapsed_time=0.271266700 sec
+*elapsed_time=0.275263200 sec
 
 [iterator(1)]
 num=10000000
-*elapsed_time=0.029019000 sec
+*elapsed_time=0.029027500 sec
 
 [reverse sort]
-*elapsed_time=1.632553300 sec
+*elapsed_time=1.645567400 sec
 
 [iterator(2)]
 num=10000000
-*elapsed_time=0.016015200 sec
+*elapsed_time=0.016014300 sec
 
 [sort]
-*elapsed_time=1.628548100 sec
+*elapsed_time=1.631552200 sec
 
 [reverse_iterator]
 num=10000000
-*elapsed_time=0.016015200 sec
+*elapsed_time=0.016014600 sec
 
 [findValue]
 num=100
-*elapsed_time=1.315251800 sec
+*elapsed_time=1.332267900 sec
 
 [binarySearchValue]
 num=10000000
-*elapsed_time=1.809721500 sec
+*elapsed_time=1.846757200 sec
 
 [delete container]
-*elapsed_time=0.151143800 sec
+*elapsed_time=0.150142700 sec
 
 [finish]
-*elapsed_time=7.285931900 sec
+*elapsed_time=7.357000200 sec
 
 - end -
 
