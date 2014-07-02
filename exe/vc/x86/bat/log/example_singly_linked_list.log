@@ -287,7 +287,7 @@ binarySearchValue(key=3)= [3:107]
 
 [push_front() * 50000]
 num=50000
-*elapsed_time=0.002001200 sec
+*elapsed_time=0.002001800 sec
 
 [iterator(1)]
 num=50000
@@ -299,6 +299,43 @@ num=50000
 [iterator(2)]
 num=50000
 *elapsed_time=0.000000000 sec
+
+[sort]
+*elapsed_time=0.000000000 sec
+
+[findValue]
+num=100
+*elapsed_time=0.007006400 sec
+
+[binarySearchValue]
+num=10000
+*elapsed_time=0.000000000 sec
+
+[delete container]
+*elapsed_time=0.001001200 sec
+
+[finish]
+*elapsed_time=0.010009400 sec
+--------------------------------------------------------------------------------
+[Test for performance std::forward_list]
+
+[create container]
+*elapsed_time=0.000000000 sec
+
+[push_front() * 50000]
+num=50000
+*elapsed_time=0.003002900 sec
+
+[iterator(1)]
+num=50000
+*elapsed_time=0.000000000 sec
+
+[reverse sort]
+*elapsed_time=0.001000900 sec
+
+[iterator(2)]
+num=50000
+*elapsed_time=0.001000900 sec
 
 [sort]
 *elapsed_time=0.001000800 sec
@@ -309,50 +346,13 @@ num=100
 
 [binarySearchValue]
 num=10000
-*elapsed_time=0.000000000 sec
-
-[delete container]
-*elapsed_time=0.002002000 sec
-
-[finish]
-*elapsed_time=0.011009600 sec
---------------------------------------------------------------------------------
-[Test for performance std::forward_list]
-
-[create container]
-*elapsed_time=0.000000000 sec
-
-[push_front() * 50000]
-num=50000
-*elapsed_time=0.002001800 sec
-
-[iterator(1)]
-num=50000
-*elapsed_time=0.000000000 sec
-
-[reverse sort]
-*elapsed_time=0.002002100 sec
-
-[iterator(2)]
-num=50000
-*elapsed_time=0.000000000 sec
-
-[sort]
-*elapsed_time=0.002001700 sec
-
-[findValue]
-num=100
-*elapsed_time=0.005004700 sec
-
-[binarySearchValue]
-num=10000
-*elapsed_time=2.050951200 sec
+*elapsed_time=2.028930100 sec
 
 [delete container]
 *elapsed_time=0.001000900 sec
 
 [finish]
-*elapsed_time=2.062962400 sec
+*elapsed_time=2.041942100 sec
 
 - end -
 

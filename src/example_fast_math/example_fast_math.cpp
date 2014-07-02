@@ -106,7 +106,7 @@ void example_fast_math()
 	TEST_DIV_SET(10.f, 10000.f);
 	TEST_DIV_SET(10.f, 100000.f);
 	TEST_DIV_SET(10.f, 1000000.f);
-	
+
 	//各種高速平方根のテスト
 	printf("--------------------------------------------------------------------------------\n");
 	printf("[ Test for fast sqrt ]\n");
