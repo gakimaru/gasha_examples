@@ -334,6 +334,7 @@ void example_singly_linked_list()
 		printAll();//全件表示
 	#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_STABLE_SORT
 
+	#if defined(GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE) && defined(GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR)
 	#ifdef TEST_ITERATOR_OPERATION
 		{
 			printf("\n");
@@ -458,6 +459,7 @@ void example_singly_linked_list()
 			printf("--------------------[iterator operattion:end]\n");
 		}
 	#endif//TEST_ITERATOR_OPERATION
+	#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE, GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR
 
 		//線形探索
 		printf("\n");
@@ -534,7 +536,9 @@ void example_singly_linked_list()
 		printf("[remove]\n");
 		{
 			auto ite = con.begin();
+		#if defined(GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			ite += 2;
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			data_t* del = con.remove(*ite);//先頭から3つ目のノードを削除
 			if (del)
 				delete del;
@@ -546,7 +550,9 @@ void example_singly_linked_list()
 		printf("[erase_after(1)]\n");
 		{
 			auto ite = con.begin();
+		#if defined(GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			ite += 4;
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			data_t* del = con.erase_after(ite);//先頭から5つ目の位置の後ろのノードを削除
 			if (del)
 				delete del;
@@ -558,9 +564,13 @@ void example_singly_linked_list()
 		printf("[erase_after(2)]\n");
 		{
 			auto start = con.begin();
+		#if defined(GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			start += 3;
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			auto end = start;
+		#if defined(GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			end += 3;
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			const data_t* del = con.erase_after(start, end);//先頭から4つ目の位置の後ろから2つのノードを削除
 			while (del)
 			{
@@ -576,7 +586,9 @@ void example_singly_linked_list()
 		printf("[erase_after(3)]\n");
 		{
 			auto start = con.begin();
+		#if defined(GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			start += 2;
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			auto end = con.end();
 			const data_t* del = con.erase_after(start, end);//先頭から3つ目の位置の後ろから末尾までのノードを削除
 			while (del)
@@ -616,7 +628,9 @@ void example_singly_linked_list()
 		printf("[insert]\n");
 		{
 			auto ite = con.begin();
+		#if defined(GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			ite += 3;
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			data_t* data = new data_t(77, 777);
 			con.insert(ite, *data);//先頭から4つ目の位置に挿入
 			printAll();//全件表示
@@ -629,7 +643,9 @@ void example_singly_linked_list()
 		printf("[insert_before]\n");
 		{
 			auto ite = con.begin();
+		#if defined(GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			ite += 2;
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			data_t* data = new data_t(66, 666);
 			con.insert_before(ite, *data);//先頭から3つ目の位置の前に挿入
 			printAll();//全件表示
@@ -642,7 +658,9 @@ void example_singly_linked_list()
 		printf("[erase(1)]\n");
 		{
 			auto ite = con.begin();
+		#if defined(GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			ite += 3;
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			data_t* del = con.erase(ite);//先頭から4つ目の位置のノードを削除
 			if (del)
 				delete del;
@@ -656,9 +674,13 @@ void example_singly_linked_list()
 		printf("[erase(2)]\n");
 		{
 			auto start = con.begin();
+		#if defined(GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			start += 3;
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			auto end = start;
+		#if defined(GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			end += 2;
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			const data_t* del = con.erase(start, end);//先頭から4つ目の位置から2つのノードを削除
 			while (del)
 			{
@@ -676,7 +698,9 @@ void example_singly_linked_list()
 		printf("[erase(3)]\n");
 		{
 			auto start = con.begin();
+		#if defined(GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			start += 2;
+		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			auto end = con.end();
 			const data_t* del = con.erase(start, end);//先頭から3つ目の位置から末尾までのノードを削除
 			while (del)

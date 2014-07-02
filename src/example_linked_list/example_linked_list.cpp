@@ -329,6 +329,7 @@ void example_linked_list()
 		printAll();//全件表示
 	#endif//GASHA_LINKED_LIST_ENABLE_STABLE_SORT
 
+	#if defined(GASHA_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 	#ifdef TEST_ITERATOR_OPERATION
 		{
 			printf("\n");
@@ -437,6 +438,7 @@ void example_linked_list()
 			printf("--------------------[iterator operattion:end]\n");
 		}
 	#endif//TEST_ITERATOR_OPERATION
+	#endif//GASHA_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 
 		//線形探索
 		printf("\n");
@@ -513,7 +515,9 @@ void example_linked_list()
 		printf("[remove]\n");
 		{
 			auto ite = con.begin();
+		#if defined(GASHA_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			ite += 2;
+		#endif//GASHA_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			data_t* del = con.remove(*ite);//前から3つ目のノードを削除
 			if (del)
 				delete del;
@@ -525,7 +529,9 @@ void example_linked_list()
 		printf("[erase(1)]\n");
 		{
 			auto ite = con.end();
+		#if defined(GASHA_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			ite -= 4;
+		#endif//GASHA_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			data_t* del = con.erase(ite);//後ろから4つ目の位置のノードを削除
 			if (del)
 				delete del;
@@ -537,9 +543,13 @@ void example_linked_list()
 		printf("[erase(2)]\n");
 		{
 			auto start = con.end();
+		#if defined(GASHA_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			start -= 4;
+		#endif//GASHA_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			auto end = start;
+		#if defined(GASHA_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			end += 2;
+		#endif//GASHA_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			const data_t* del = con.erase(start, end);//後ろから4つ目の位置から2つのノードを削除
 			while (del)
 			{
@@ -555,7 +565,9 @@ void example_linked_list()
 		printf("[erase(3)]\n");
 		{
 			auto start = con.end();
+		#if defined(GASHA_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			start -= 2;
+		#endif//GASHA_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			auto end = con.end();
 			const data_t* del = con.erase(start, end);//後ろから2つ目の位置から末尾までのノードを削除
 			while (del)
@@ -583,7 +595,9 @@ void example_linked_list()
 		printf("[insert_before]\n");
 		{
 			auto ite = con.begin();
+		#if defined(GASHA_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE)
 			ite += 3;
+		#endif//GASHA_LINKED_LIST_ENABLE_RANDOM_ACCESS_INTERFACE
 			data_t* data = new data_t(88, 888);
 			con.insert_before(ite, *data);//先頭から4つ目の位置の前に挿入
 			printAll();//全件表示

@@ -1,7 +1,7 @@
 --- Make table ---
 [ 5:1000] [10:1001] [ 4:1002] [ 1:1003] [ 4:1004] [10:1005] [ 8:1006] [ 4:1007] [ 8:1008] [ 4:1009] [ 2:1010] [ 7:1011] [ 7:1012] [10:1013] [ 9:1014] [ 7:1015] [ 7:1016] [ 9:1017] [ 5:1018] [ 4:1019] 
 20 registered.
-*elapsed_time=0.001000900 sec
+*elapsed_time=0.000000000 sec
 --- Show tree (count=20) ---
 depth_max=5 (limit for showing=4)
                       .----------------------{ 4:B}----------------------.                      
@@ -95,7 +95,7 @@ ite - ite_end = 0
 rite_end - rite = 0
 rite - rite_end = 0
 --------------------[iterator operattion:end]
---- Search node ---
+--- Search each key nodes ---
  1(1):[ 1] 
  2(1):[ 2] 
  4(5):[ 4] [ 4] [ 4] [ 4] [ 4] 
@@ -104,12 +104,12 @@ rite - rite_end = 0
  8(2):[ 8] [ 8] 
  9(2):[ 9] [ 9] 
 10(3):[10] [10] [10] 
-*elapsed_time=0.001002900 sec
---- Search nearest node for smaller ---
+*elapsed_time=0.000000000 sec
+--- Search each nearest key nodes for smaller ---
  3:[ 2] [ 4] [ 4] [ 4] 
  6:[ 5] [ 7] [ 7] [ 7] 
 *elapsed_time=0.000000000 sec
---- Search nearest node for larger ---
+--- Search each nearest key nodes for larger ---
  3:[ 4] [ 4] [ 4] [ 4] 
  6:[ 7] [ 7] [ 7] [ 7] 
 *elapsed_time=0.000000000 sec
@@ -138,11 +138,11 @@ depth_max=4, width_max=16
 max: blacks=3, reds=2, total=5
 min: blacks=3, reds=0, total=3
 diff:blacks=0, reds=2, total=2 (illegal=0)
-*elapsed_time=0.000000000 sec
+*elapsed_time=0.001000900 sec
 --- Show nodes ascending (count=15) ---
 [ 1:1003] [ 2:1010] [ 4:1007] [ 4:1009] [ 4:1019] [ 5:1018] [ 7:1011] [ 7:1012] [ 7:1015] [ 7:1016] [ 8:1006] [ 8:1008] [ 9:1017] [10:1005] [10:1013] 
 *elapsed_time=0.000000000 sec
---- Remove each-key nodes ---
+--- Remove each key nodes ---
 [ 1] [ 2] [ 4] [ 5] [ 7] [ 8] [ 9] [10] 8 removed.
 *elapsed_time=0.000000000 sec
 --- Show tree (count=7) ---
@@ -182,7 +182,7 @@ diff:blacks=0, reds=0, total=0 (illegal=0)
 (nothing)
 *elapsed_time=0.000000000 sec
 --- end ---
-*elapsed_time=0.002003800 sec
+*elapsed_time=0.001000900 sec
 
 --- example_simple_linked_list ---
 data = {0xc02b79a5,15} {0xe68a9e4d,13} {0x07b1eeba,11}

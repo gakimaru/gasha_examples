@@ -77,8 +77,10 @@ void example_simple_linked_list()
 		print();
 		auto ite = con.findValue(5);
 		printf(".findValue(5): ite=%d\n", ite->m_value);
+	#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 		ite = con.binarySearchValue(3);
 		printf(".binarySearchValue(3): ite=%d\n", ite->m_value);
+	#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 		ite = std::find(con.begin(), con.end(), 5);
 		printf("std::find(.begin(), .end(), 5): ite=%d\n", ite->m_value);
 		if (std::binary_search(con.begin(), con.end(), 3))
@@ -133,8 +135,10 @@ void example_simple_linked_list()
 		print();
 		auto ite = con.findValue(5);
 		printf(".findValue(5): ite={%d,%d}\n", ite->m_value.m_val1, ite->m_value.m_val2);
+	#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 		ite = con.binarySearchValue(3);
 		printf(".binarySearchValue(3): ite={%d,%d}\n", ite->m_value.m_val1, ite->m_value.m_val2);
+	#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 		ite = std::find(con.begin(), con.end(), 5);
 		printf("std::find(.begin(), .end(), 5): ite={%d,%d}\n", ite->m_value.m_val1, ite->m_value.m_val2);
 		//if (std::binary_search(con.begin(), con.end(), 3))//operator<(const int, const data_t&) が定義できないのでNG

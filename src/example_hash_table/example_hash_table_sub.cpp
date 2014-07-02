@@ -32,6 +32,7 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //※専用マクロを使用
 INSTANCING_hTable(ope, TEST_DATA_TABLE_SIZE);//template class hash_table::container<ope, TEST_DATA_TABLE_SIZE>; と同じ
 INSTANCING_hTable(ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER);//template class hash_table::container<ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER>; と同じ
+INSTANCING_hTable(narrow_range_key_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class hash_table::container<narrow_range_key_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC>; と同じ
 INSTANCING_hTable(func_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class hash_table::container<func_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC>; と同じ
 INSTANCING_hTable(obj_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class hash_table::container<obj_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC>; と同じ
 

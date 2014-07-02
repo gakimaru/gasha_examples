@@ -8,8 +8,8 @@ Hash Table Test
 .getOriginalTableSize()=20
 .getTableSize()=23
 .getTableSizeExtended()=3
-.getAutoRehashRatio()=25
-.getAutoRehashSize()=5
+.getAutoRehashRatio()=0
+.getAutoRehashSize()=0
 .getFindingCycleLimit()=0
 .getKeyMin()=0
 .getKeyMax()=4294967294
@@ -37,7 +37,7 @@ name="Name_000007" ... OK
 name="Name_000008" ... OK
 name="Name_000009" ... OK
 success=10, failure=0
-*elapsed time=0.000000000 sec.
+*elapsed time=0.001000900 sec.
 
 --- Table Status ---
 .bucket_count()=23
@@ -60,6 +60,78 @@ success=10, failure=0
  [    14](    14) key=8da57c1f, name="Name_000000", value=0 (bucket=14, bucket_size=1)
  [    15](    15) key=596f18f4, name="Name_000007", value=7 (bucket=15, bucket_size=1)
 *[    17](    13) key=f517a7d3, name="Name_000009", value=9 (bucket=17, bucket_size=1)
+
+--- Print Table (reverse) ---
+*[    17](    13) key=f517a7d3, name="Name_000009", value=9 (bucket=17, bucket_size=1)
+ [    15](    15) key=596f18f4, name="Name_000007", value=7 (bucket=15, bucket_size=1)
+ [    14](    14) key=8da57c1f, name="Name_000000", value=0 (bucket=14, bucket_size=1)
+ [    13](    13) key=b8546803, name="Name_000005", value=5 (bucket=13, bucket_size=1)
+ [    11](    11) key=077c24d0, name="Name_000008", value=8 (bucket=11, bucket_size=1)
+*[     9](     6) key=ab049bf7, name="Name_000006", value=6 (bucket=9, bucket_size=1)
+*[     7](     4) key=4a3feb00, name="Name_000004", value=4 (bucket=7, bucket_size=1)
+ [     6](     6) key=6c9e0ce8, name="Name_000002", value=2 (bucket=6, bucket_size=1)
+ [     5](     5) key=9ef58feb, name="Name_000003", value=3 (bucket=5, bucket_size=1)
+ [     4](     4) key=7fceff1c, name="Name_000001", value=1 (bucket=4, bucket_size=1)
+
+--------------------[iterator operattion:begin]
+[constructor]
+ite: [4](4) key=0x7fceff1c, name="Name_000001", value=1
+rite: [17](13) key=0xf517a7d3, name="Name_000009", value=9
+ite2_end: [4](4) key=0x7fceff1c, name="Name_000001", value=1
+rite2_end: [17](13) key=0xf517a7d3, name="Name_000009", value=9
+ite_end - ite = 10
+ite - ite_end = -10
+rite_end - rite = 10
+rite - rite_end = -10
+ite2 - ite = 10
+ite - ite2 = -10
+rite2 - rite = 10
+rite - rite2 = -10
+[copy operator]
+ite: [4](4) key=0x7fceff1c, name="Name_000001", value=1
+rite: [17](13) key=0xf517a7d3, name="Name_000009", value=9
+ite2_end: [4](4) key=0x7fceff1c, name="Name_000001", value=1
+rite2_end: [17](13) key=0xf517a7d3, name="Name_000009", value=9
+[rite.base()]
+ite2_end: [4](4) key=0x7fceff1c, name="Name_000001", value=1
+[++ite,--ie_end]
+ite: [5](5) key=0x9ef58feb, name="Name_000003", value=3
+rite: [15](15) key=0x596f18f4, name="Name_000007", value=7
+ite_end: [17](13) key=0xf517a7d3, name="Name_000009", value=9
+rite_end: [4](4) key=0x7fceff1c, name="Name_000001", value=1
+[--ite,++ie_end]
+ite: [4](4) key=0x7fceff1c, name="Name_000001", value=1
+rite: [17](13) key=0xf517a7d3, name="Name_000009", value=9
+[ite[0]]
+ite: [4](4) key=0x7fceff1c, name="Name_000001", value=1
+rite: [17](13) key=0xf517a7d3, name="Name_000009", value=9
+[ite[1]]
+ite: [5](5) key=0x9ef58feb, name="Name_000003", value=3
+rite: [15](15) key=0x596f18f4, name="Name_000007", value=7
+[ite[2]]
+ite: [7](4) key=0x4a3feb00, name="Name_000004", value=4
+rite: [13](13) key=0xb8546803, name="Name_000005", value=5
++= 3
+ite: [13](13) key=0xb8546803, name="Name_000005", value=5
+rite: [7](4) key=0x4a3feb00, name="Name_000004", value=4
+-= 3
+ite: [7](4) key=0x4a3feb00, name="Name_000004", value=4
+rite: [13](13) key=0xb8546803, name="Name_000005", value=5
+ite_end - ite = 7
+ite - ite_end = -7
+rite_end - rite = 7
+rite - rite_end = -7
+[ite2-=2]
+ite2 - ite = 5
+ite - ite2 = -5
+rite2 - rite = 5
+rite - rite2 = -5
+[++ite_end]
+ite_end - ite = 0
+ite - ite_end = 0
+rite_end - rite = 0
+rite - rite_end = 0
+--------------------[iterator operattion:end]
 
 --- Find Data ---
 name="Name_000000" ... OK   [    14](    14) key=8da57c1f, name="Name_000000", value=0 (bucket=14, bucket_size=1)
@@ -104,15 +176,20 @@ success=5, failure=5
 .max_bucket_count()=23
 .size()=5
 .empty()=0
-.getUsingCount()=5
-.getDeletedCount()=0
+.getUsingCount()=10
+.getDeletedCount()=5
 .getMaxFindingCycle()=2
 .getNotOptimizedCount()=1
 
 --- Print Table ---
  [     4](     4) key=7fceff1c, name="Name_000001", value=1 (bucket=4, bucket_size=1)
  [     5](     5) key=9ef58feb, name="Name_000003", value=3 (bucket=5, bucket_size=1)
+ [     6](     6) key=6c9e0ce8, name="Name_000002", value=2 (bucket=-1, bucket_size=0) <DELETED>
+*[     7](     4) key=4a3feb00, name="Name_000004", value=4 (bucket=-1, bucket_size=0) <DELETED>
+*[     9](     6) key=ab049bf7, name="Name_000006", value=6 (bucket=-1, bucket_size=0) <DELETED>
+ [    11](    11) key=077c24d0, name="Name_000008", value=8 (bucket=-1, bucket_size=0) <DELETED>
  [    13](    13) key=b8546803, name="Name_000005", value=5 (bucket=13, bucket_size=1)
+ [    14](    14) key=8da57c1f, name="Name_000000", value=0 (bucket=-1, bucket_size=0) <DELETED>
  [    15](    15) key=596f18f4, name="Name_000007", value=7 (bucket=15, bucket_size=1)
 *[    17](    13) key=f517a7d3, name="Name_000009", value=9 (bucket=17, bucket_size=1)
 
@@ -159,8 +236,8 @@ success=5, failure=5
 .max_bucket_count()=23
 .size()=10
 .empty()=0
-.getUsingCount()=10
-.getDeletedCount()=0
+.getUsingCount()=13
+.getDeletedCount()=3
 .getMaxFindingCycle()=2
 .getNotOptimizedCount()=3
 
@@ -169,10 +246,13 @@ success=5, failure=5
  [     4](     4) key=7fceff1c, name="Name_000001", value=1 (bucket=4, bucket_size=1)
  [     5](     5) key=9ef58feb, name="Name_000003", value=3 (bucket=5, bucket_size=1)
 *[     6](     4) key=e6b53fa4, name="Name_000019", value=19 (bucket=6, bucket_size=1)
+*[     7](     4) key=4a3feb00, name="Name_000004", value=4 (bucket=-1, bucket_size=0) <DELETED>
  [     8](     8) key=8d57179c, name="Name_000013", value=13 (bucket=8, bucket_size=1)
+*[     9](     6) key=ab049bf7, name="Name_000006", value=6 (bucket=-1, bucket_size=0) <DELETED>
 *[    10](     8) key=abf6f074, name="Name_000015", value=15 (bucket=10, bucket_size=1)
  [    11](    11) key=4acd8083, name="Name_000017", value=17 (bucket=11, bucket_size=1)
  [    13](    13) key=b8546803, name="Name_000005", value=5 (bucket=13, bucket_size=1)
+ [    14](    14) key=8da57c1f, name="Name_000000", value=0 (bucket=-1, bucket_size=0) <DELETED>
  [    15](    15) key=596f18f4, name="Name_000007", value=7 (bucket=15, bucket_size=1)
 *[    17](    13) key=f517a7d3, name="Name_000009", value=9 (bucket=17, bucket_size=1)
 
@@ -198,7 +278,7 @@ name="Name_000017" ... OK   [    11](    11) key=4acd8083, name="Name_000017", v
 name="Name_000018" ... NG
 name="Name_000019" ... OK  *[     6](     4) key=e6b53fa4, name="Name_000019", value=19 (bucket=6, bucket_size=1)
 success=10, failure=10
-*elapsed time=0.001000800 sec.
+*elapsed time=0.000000000 sec.
 
 --- Rehash Table ---
 OK.
@@ -248,7 +328,7 @@ name="Name_000017" ... OK   [    11](    11) key=4acd8083, name="Name_000017", v
 name="Name_000018" ... NG
 name="Name_000019" ... OK  *[     6](     4) key=e6b53fa4, name="Name_000019", value=19 (bucket=6, bucket_size=1)
 success=10, failure=10
-*elapsed time=0.000000000 sec.
+*elapsed time=0.001000800 sec.
 
 --- Clear Table ---
 OK.
@@ -432,7 +512,7 @@ success=0, failure=20
 
 End
 ============================================================
-*elapsed time=0.001000800 sec.
+*elapsed time=0.002001700 sec.
 
 --------------------------------------------------------------------------------
 [STL] Hash Table Test
@@ -505,7 +585,7 @@ name="Name_000017" ... NG
 name="Name_000018" ... NG
 name="Name_000019" ... NG
 success=10, failure=10
-*elapsed time=0.001000900 sec.
+*elapsed time=0.000000000 sec.
 
 --- [STL] Erase Data ---
 name="Name_000000" ... OK
@@ -519,7 +599,7 @@ name="Name_000014" ... NG
 name="Name_000016" ... NG
 name="Name_000018" ... NG
 success=5, failure=5
-*elapsed time=0.000000000 sec.
+*elapsed time=0.001000900 sec.
 
 --- [STL] Table Status ---
 .size()=5
@@ -726,7 +806,7 @@ name="Name_000017" ... OK
 name="Name_000018" ... OK
 name="Name_000019" ... OK
 success=20, failure=0
-*elapsed time=0.001000900 sec.
+*elapsed time=0.001001200 sec.
 
 --- [STL] Table Status ---
 .size()=20
@@ -842,7 +922,7 @@ success=0, failure=20
 
 End
 ============================================================
-*elapsed time=0.002001800 sec.
+*elapsed time=0.002002100 sec.
 
 --------------------------------------------------------------------------------
 Hash Table Test for Pointer
@@ -852,6 +932,15 @@ Hash Table Test for Pointer
 [30] ... OK  name="0030", val=789
 [40] ... NG
 [20] ... OK  name="0020", val=456
+
+--------------------------------------------------------------------------------
+Hash Table Test for small-range key
+--------------------------------------------------------------------------------
+[ 0] key=-2, value=1001
+[20] key=-1, value=1002
+[40] key= 0, value=1003
+[60] key= 1, value=1004
+[80] key= 2, value=1005
 
 --------------------------------------------------------------------------------
 Hash Table Test for Function

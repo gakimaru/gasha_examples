@@ -32,6 +32,8 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 static const int TEST_DATA_TABLE_SIZE = 50000;//テストデータテーブルサイズ
 
+//#define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
+
 //#define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
 //#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
 
@@ -39,10 +41,24 @@ static const int TEST_DATA_TABLE_SIZE = 50000;//テストデータテーブル�
 
 static const int TEST_DATA_TABLE_SIZE = 20;//テストデータテーブルサイズ
 
+#define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
+
 #define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
 //#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
 
 #endif//GASHA_OPTIMIZED
+
+#define TEST_USE_INSERT_TYPE 1//テストで使用するデータ登録方法
+                              //1 ... 【推奨】emplace()メソッドにキーとコンストラクタパラメータを渡して登録する方法
+                              //2 ... emplaceAuto()メソッドにコンストラクタパラメータを渡して登録する方法 ※操作用クラス（baseOpe の派生クラス）で、getKey() を実装する必要あり
+                              //3 ... insert()メソッドにキーとオブジェクトを渡して登録する方法
+                              //4 ... insertAuto()メソッドにオブジェクトを渡して登録する方法 ※操作用クラス（baseOpe の派生クラス）で、getKey() を実装する必要あり
+                              //5 ... assign()メソッドで先にキーの割り付けを行った後、データを書き込む
+
+#define TEST_USE_FIND_TYPE 1//テストで使用するデータ検索方法
+                            //1 ... 【推奨】[]オペレータにキーを渡して検索する方法
+                            //2 ... at()メソッドにキーを渡して検索する方法
+                            //3 ... find()メソッドにキーを渡して検索する方法 ※イテレータを返す
 
 static const int TEST_DATA_TABLE_SIZE_FOR_POINTER = 100;//ポインター型テストデータテーブルサイズ
 static const int TEST_DATA_TABLE_SIZE_FOR_FUNC = 100;//関数型テストデータテーブルサイズ
@@ -103,6 +119,13 @@ struct ope : public hash_table::baseOpe<ope, data_t, crc32_t>
 	//ロック型
 	//※デフォルト（dummy_shared_lock）のままとする
 	//typedef shared_spin_lock lock_type;//ロックオブジェクト型
+	
+	//定数
+	//※任意に変更可能な設定
+	static const std::size_t AUTO_REHASH_RATIO = 0;//自動リハッシュ実行の基準割合(0～100) ※0で自動リハッシュなし
+	//static const std::size_t FINDING_CYCLE_LIMIT = 1;//検索時の巡回回数の制限 ※0で無制限 ※追加・削除時にも影響する
+	//static const std::size_t INDEX_STEP_BASE = 7;//検索巡回時のインデックスのス歩幅の基準値 ※必ず素数でなければならない
+	//static const replaceAttr_t REPLACE_ATTR = replaceAttr_t::REPLACE;//キーが重複するデータは置換する
 };
 
 //----------------------------------------
@@ -119,6 +142,15 @@ struct ptr_ope : public hash_table::baseOpe<ptr_ope, data_t*, int>
 	//ロック型
 	//※デフォルト（dummy_shared_lock）のままとする
 	//typedef shared_spin_lock lock_type;//ロックオブジェクト型
+};
+
+//----------------------------------------
+//テストデータ操作クラス：キーの範囲が小さいデータ
+struct narrow_range_key_ope : public hash_table::baseOpe<narrow_range_key_ope, int, char>
+{
+	static const key_type KEY_MIN = -2;//キーの最小値 ※範囲外のキーは登録不可
+	static const key_type KEY_MAX = 2;//キーの最大値 ※範囲外のキーは登録不可
+	static const key_type INVALID_KEY = -99;//不正なキー
 };
 
 //----------------------------------------

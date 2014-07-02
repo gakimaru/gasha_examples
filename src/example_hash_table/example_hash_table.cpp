@@ -229,23 +229,22 @@ void example_hash_table()
 			sprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			data_t* obj = nullptr;
-			#define USE_INSERT_TYPE 1
 			//【推奨】【登録方法①】emplace()メソッドにキーとコンストラクタパラメータを渡して登録する方法
 			//※オブジェクトのコピーは発生しない
-			#if USE_INSERT_TYPE == 1
+			#if TEST_USE_INSERT_TYPE == 1
 			{
 				obj = con->emplace(calcCRC32(name), name, i);//キーとコンストラクタパラメータを渡して登録
 			}
 			//【登録方法②】emplaceAuto()メソッドにコンストラクタパラメータを渡して登録する方法
 			//※オブジェクトのコピーが発生するので少し遅い
-			#elif USE_INSERT_TYPE == 2
+			#elif TEST_USE_INSERT_TYPE == 2
 			{
 				obj = con->emplaceAuto(name, i);//コンストラクタパラメータを渡して登録
 			}
 			//【登録方法③】insert()メソッドにキーとオブジェクトを渡して登録する方法
 			//※オブジェクトのコピーが発生するので少し遅い
 			//※操作用クラス baseOpe の派生クラスで、getKey() を実装する必要あり
-			#elif USE_INSERT_TYPE == 3
+			#elif TEST_USE_INSERT_TYPE == 3
 			{
 				data_t new_obj(name, i);
 				obj = con->insert(calcCRC32(name), new_obj);
@@ -253,14 +252,14 @@ void example_hash_table()
 			//【登録方法④】insertAuto()メソッドにオブジェクトを渡して登録する方法
 			//※オブジェクトのコピーが発生するので少し遅い
 			//※操作用クラス baseOpe の派生クラスで、getKey() を実装する必要あり
-			#elif USE_INSERT_TYPE == 4
+			#elif TEST_USE_INSERT_TYPE == 4
 			{
 				data_t new_obj(name, i);
 				obj = con->insertAuto(new_obj);
 			}
-			//【登録方法⑤】assign()メソッドでデータのポインタを取得し、そこに値を書き込む
+			//【登録方法⑤】assign()メソッドで先にキーの割り付けを行った後、データを書き込む
 			//※コンストラクタのないオブジェクトを扱う場合に有効
-			#elif USE_INSERT_TYPE == 5
+			#elif TEST_USE_INSERT_TYPE == 5
 			{
 				const crc32_t key = calcCRC32(name);
 				obj = con->assign(key);
@@ -272,7 +271,7 @@ void example_hash_table()
 					obj->m_value = i;
 				}
 			}
-			#endif//USE_INSERT_TYPE
+			#endif//TEST_USE_INSERT_TYPE
 			if (obj)
 			{
 				++insert_success;
@@ -298,8 +297,6 @@ void example_hash_table()
 	{
 		printf_detail("\n");
 		printf_detail("--- Print Table ---\n");
-		//for (container_t::set& set : *con)
-		//for (auto& set : *con)
 		iteratorForEach(*con, [&con](const container_t::iterator& ite)
 			{
 				printf_detail("%c[%6d](%6d) key=%08x, name=\"%s\", value=%d (bucket=%d, bucket_size=%d)%s\n", ite.isPrimaryIndex() ? ' ' : '*', ite.getIndex(), ite.getPrimaryIndex(), ite.getKey(), ite->m_name, ite->m_value, con->bucket(ite.getKey()), con->bucket_size(ite.getIndex()), ite.isDeleted() ? " <DELETED>" : "");
@@ -309,18 +306,27 @@ void example_hash_table()
 		prev_time = printElapsedTime(prev_time, is_print);
 	};
 	printTable();
-
-#if 0//イテレータとロック取得のテスト
+	
+#ifdef GASHA_HASH_TABLE_ENABLE_REVERSE_ITERATOR
+	auto printTableReversed = [&con, &printElapsedTime, &prev_time]()
 	{
-		printf_detail("--- Reverse Iterator ---\n");
-		reverseIteratorForEach(*con, [&con](const container_t::iterator& ite)
+		printf_detail("\n");
+		printf_detail("--- Print Table (reverse) ---\n");
+		iteratorReverseForEach(*con, [&con](const container_t::reverse_iterator& ite)
 			{
 				printf_detail("%c[%6d](%6d) key=%08x, name=\"%s\", value=%d (bucket=%d, bucket_size=%d)%s\n", ite.isPrimaryIndex() ? ' ' : '*', ite.getIndex(), ite.getPrimaryIndex(), ite.getKey(), ite->m_name, ite->m_value, con->bucket(ite.getKey()), con->bucket_size(ite.getIndex()), ite.isDeleted() ? " <DELETED>" : "");
 			}
 		);
-	}
+	};
+	printTableReversed();
+#endif//GASHA_HASH_TABLE_ENABLE_REVERSE_ITERATOR
+
+#if defined(GASHA_HASH_TABLE_ENABLE_RANDOM_ACCESS_INTERFACE) && defined(GASHA_HASH_TABLE_ENABLE_REVERSE_ITERATOR)
+#ifdef TEST_ITERATOR_OPERATION
 	{
-		shared_lock_guard<container_t::lock_type> lock(*con);
+		printf("\n");
+		printf("--------------------[iterator operattion:begin]\n");
+		printf("[constructor]\n");
 		container_t::iterator ite = con->begin();
 		container_t::reverse_iterator rite = con->rbegin();
 		container_t::iterator ite_end = con->end();
@@ -329,7 +335,6 @@ void example_hash_table()
 		container_t::reverse_iterator rite2 = con->begin();
 		container_t::iterator ite2_end = con->rend();
 		container_t::reverse_iterator rite2_end = con->end();
-		printf("constructor\n");
 		if (ite.isExist()) printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
 		if (rite.isExist()) printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
 		if (ite_end.isExist()) printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
@@ -338,7 +343,15 @@ void example_hash_table()
 		if (rite2.isExist()) printf("rite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2.isDeleted() ? '*' : ' ', rite2.getIndex(), rite2.getPrimaryIndex(), rite2->m_key, rite2->m_name, rite2->m_value);
 		if (ite2_end.isExist()) printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', ite2_end.getIndex(), ite2_end.getPrimaryIndex(), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
 		if (rite2_end.isExist()) printf("rite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2_end.isDeleted() ? '*' : ' ', rite2_end.getIndex(), rite2_end.getPrimaryIndex(), rite2_end->m_key, rite2_end->m_name, rite2_end->m_value);
-		printf("copy operator\n");
+		printf("ite_end - ite = %d\n", ite_end - ite);
+		printf("ite - ite_end = %d\n", ite - ite_end);
+		printf("rite_end - rite = %d\n", rite_end - rite);
+		printf("rite - rite_end = %d\n", rite - rite_end);
+		printf("ite2 - ite = %d\n", ite2 - ite);
+		printf("ite - ite2 = %d\n", ite - ite2);
+		printf("rite2 - rite = %d\n", rite2 - rite);
+		printf("rite - rite2 = %d\n", rite - rite2);
+		printf("[copy operator]\n");
 		ite = con->begin();
 		rite = con->rbegin();
 		ite_end = con->end();
@@ -355,62 +368,69 @@ void example_hash_table()
 		if (rite2.isExist()) printf("rite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2.isDeleted() ? '*' : ' ', rite2.getIndex(), rite2.getPrimaryIndex(), rite2->m_key, rite2->m_name, rite2->m_value);
 		if (ite2_end.isExist()) printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', ite2_end.getIndex(), ite2_end.getPrimaryIndex(), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
 		if (rite2_end.isExist()) printf("rite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2_end.isDeleted() ? '*' : ' ', rite2_end.getIndex(), rite2_end.getPrimaryIndex(), rite2_end->m_key, rite2_end->m_name, rite2_end->m_value);
-		for (int i = 0; i <= 3; ++i)
+		printf("[rite.base()]\n");
+		ite2 = rite.base();
+		ite2_end = rite_end.base();
+		if (ite2.isExist()) printf("ite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2.isDeleted() ? '*' : ' ', ite2.getIndex(), ite2.getPrimaryIndex(), ite2->m_key, ite2->m_name, ite2->m_value);
+		if (ite2_end.isExist()) printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', ite2_end.getIndex(), ite2_end.getPrimaryIndex(), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
+		printf("[++ite,--ie_end]\n");
+		++ite;
+		++rite;
+		--ite_end;
+		--rite_end;
+		if (ite.isExist()) printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
+		if (rite.isExist()) printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
+		if (ite_end.isExist()) printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
+		if (rite_end.isExist()) printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
+		printf("[--ite,++ie_end]\n");
+		--ite;
+		--rite;
+		++ite_end;
+		++rite_end;
+		if (ite.isExist()) printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
+		if (rite.isExist()) printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
+		if (ite_end.isExist()) printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
+		if (rite_end.isExist()) printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
+		for (int i = 0; i < 3; ++i)
 		{
-			printf("[%d]\n", i);
+			printf("[ite[%d]]\n", i);
 			ite = ite[i];
 			rite = rite[i];
-			ite_end = ite_end[i];
-			rite_end = rite_end[i];
-			ite2 = ite2[i];
-			rite2 = rite2[i];
-			ite2_end = ite2_end[i];
-			rite2_end = rite2_end[i];
 			if (ite.isExist()) printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
 			if (rite.isExist()) printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
-			if (ite_end.isExist()) printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
-			if (rite_end.isExist()) printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
-			if (ite2.isExist()) printf("ite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2.isDeleted() ? '*' : ' ', ite2.getIndex(), ite2.getPrimaryIndex(), ite2->m_key, ite2->m_name, ite2->m_value);
-			if (rite2.isExist()) printf("rite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2.isDeleted() ? '*' : ' ', rite2.getIndex(), rite2.getPrimaryIndex(), rite2->m_key, rite2->m_name, rite2->m_value);
-			if (ite2_end.isExist()) printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', ite2_end.getIndex(), ite2_end.getPrimaryIndex(), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
-			if (rite2_end.isExist()) printf("rite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2_end.isDeleted() ? '*' : ' ', rite2_end.getIndex(), rite2_end.getPrimaryIndex(), rite2_end->m_key, rite2_end->m_name, rite2_end->m_value);
 		}
 		printf("+= 3\n");
 		ite += 3;
 		rite += 3;
-		ite_end += 3;
-		rite_end += 3;
-		ite2 += 3;
-		rite2 += 3;
-		ite2_end += 3;
-		rite2_end += 3;
 		if (ite.isExist()) printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
 		if (rite.isExist()) printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
-		if (ite_end.isExist()) printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
-		if (rite_end.isExist()) printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
-		if (ite2.isExist()) printf("ite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2.isDeleted() ? '*' : ' ', ite2.getIndex(), ite2.getPrimaryIndex(), ite2->m_key, ite2->m_name, ite2->m_value);
-		if (rite2.isExist()) printf("rite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2.isDeleted() ? '*' : ' ', rite2.getIndex(), rite2.getPrimaryIndex(), rite2->m_key, rite2->m_name, rite2->m_value);
-		if (ite2_end.isExist()) printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', ite2_end.getIndex(), ite2_end.getPrimaryIndex(), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
-		if (rite2_end.isExist()) printf("rite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2_end.isDeleted() ? '*' : ' ', rite2_end.getIndex(), rite2_end.getPrimaryIndex(), rite2_end->m_key, rite2_end->m_name, rite2_end->m_value);
 		printf("-= 3\n");
 		ite -= 3;
 		rite -= 3;
-		ite_end -= 3;
-		rite_end -= 3;
-		ite2 -= 3;
-		rite2 -= 3;
-		ite2_end -= 3;
-		rite2_end -= 3;
 		if (ite.isExist()) printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
 		if (rite.isExist()) printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
-		if (ite_end.isExist()) printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
-		if (rite_end.isExist()) printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
-		if (ite2.isExist()) printf("ite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2.isDeleted() ? '*' : ' ', ite2.getIndex(), ite2.getPrimaryIndex(), ite2->m_key, ite2->m_name, ite2->m_value);
-		if (rite2.isExist()) printf("rite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2.isDeleted() ? '*' : ' ', rite2.getIndex(), rite2.getPrimaryIndex(), rite2->m_key, rite2->m_name, rite2->m_value);
-		if (ite2_end.isExist()) printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', ite2_end.getIndex(), ite2_end.getPrimaryIndex(), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
-		if (rite2_end.isExist()) printf("rite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2_end.isDeleted() ? '*' : ' ', rite2_end.getIndex(), rite2_end.getPrimaryIndex(), rite2_end->m_key, rite2_end->m_name, rite2_end->m_value);
+		printf("ite_end - ite = %d\n", ite_end - ite);
+		printf("ite - ite_end = %d\n", ite - ite_end);
+		printf("rite_end - rite = %d\n", rite_end - rite);
+		printf("rite - rite_end = %d\n", rite - rite_end);
+		printf("[ite2-=2]\n");
+		ite2 -= 2;
+		rite2 -= 2;
+		printf("ite2 - ite = %d\n", ite2 - ite);
+		printf("ite - ite2 = %d\n", ite - ite2);
+		printf("rite2 - rite = %d\n", rite2 - rite);
+		printf("rite - rite2 = %d\n", rite - rite2);
+		printf("[++ite_end]\n");
+		++ite_end;
+		++rite_end;
+		printf("ite_end - ite = %d\n", ite_end - ite);
+		printf("ite - ite_end = %d\n", ite - ite_end);
+		printf("rite_end - rite = %d\n", rite_end - rite);
+		printf("rite - rite_end = %d\n", rite - rite_end);
+		printf("--------------------[iterator operattion:end]\n");
 	}
-#endif
+#endif//TEST_ITERATOR_OPERATION
+#endif//GASHA_HASH_TABLE_ENABLE_RANDOM_ACCESS_INTERFACE, GASHA_HASH_TABLE_ENABLE_REVERSE_ITERATOR
 
 	//ハッシュテーブルアクセス
 	auto findTable = [&con, &printElapsedTime, &prev_time]()
@@ -430,10 +450,10 @@ void example_hash_table()
 			std::size_t primary_index;
 			bool is_primary_index;
 			bool is_deleted;
-			#define USE_FIND_TYPE 1
 			//【推奨】【検索方法①】[]オペレータにキーを渡して検索する方法
 			//※値を返す
-			#if USE_FIND_TYPE == 1
+			//※中身はfindValue()
+			#if TEST_USE_FIND_TYPE == 1
 			{
 				obj = (*con)[name];
 				if(obj)
@@ -446,8 +466,9 @@ void example_hash_table()
 				}
 			}
 			//【検索方法②】at()メソッドにキーを渡して検索する方法
-			//※値を返す（[]オペレータと同じ）
-			#elif USE_FIND_TYPE == 2
+			//※値を返す
+			//※中身はfindValue() ※[]オペレータと同じ
+			#elif TEST_USE_FIND_TYPE == 2
 			{
 				obj = con->at(name);
 				if(obj)
@@ -461,7 +482,7 @@ void example_hash_table()
 			}
 			//【検索方法③】find()メソッドにキーを渡して検索する方法
 			//※イテレータを返す
-			#elif USE_FIND_TYPE == 3
+			#elif TEST_USE_FIND_TYPE == 3
 			{
 				container_t::iterator ite = con->find(name);
 				obj = ite;
@@ -474,7 +495,7 @@ void example_hash_table()
 					is_deleted = ite.isDeleted();
 				}
 			}
-			#endif//USE_FIND_TYPE
+			#endif//TEST_USE_FIND_TYPE
 			if (obj)
 			{
 				printf_detail("OK  %c[%6d](%6d) key=%08x, name=\"%s\", value=%d (bucket=%d, bucket_size=%d)%s\n", is_primary_index ? ' ' : '*', index, primary_index, key, obj->m_name, obj->m_value, con->bucket(key), con->bucket_size(index), is_deleted ? " <DELETED>" : "");
@@ -513,7 +534,7 @@ void example_hash_table()
 			}
 			//【削除方法②】eraseAuto()メソッドにオブジェクトを渡して削除する方法
 			//※操作用クラス baseOpe の派生クラスで、getKey() を実装する必要あり
-			#elif USE_INSERT_TYPE == 2
+			#elif TEST_USE_INSERT_TYPE == 2
 			{
 				data_t obj(name, i);
 				result = con->eraseAuto(obj);//オブジェクトを渡して削除
@@ -917,6 +938,29 @@ void example_hash_table()
 			shared_lock_guard<ptr_ope::lock_type> lock(p_con);//共有ロック（リードロック）取得（処理ブロックを抜ける時に自動開放）
 			printObj(20);
 		}
+	}
+
+	//----------------------------------------------------------------------------------------------------
+	//キーの範囲が狭いハッシュテーブルのテスト
+	{
+		printf("\n");
+		printf("--------------------------------------------------------------------------------\n");
+		printf("Hash Table Test for small-range key\n");
+		printf("--------------------------------------------------------------------------------\n");
+
+		//ハッシュテーブル
+		typedef hash_table::container<narrow_range_key_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC> con_t;
+		 con_t con;
+		
+		//登録
+		//※範囲外のキーは登録に失敗する
+		for (int key = -3, val = 1000; key <= 3; ++key, ++val)
+			con.emplace(key, val);
+		iteratorForEach(con, [](con_t::iterator& ite)
+			{
+				printf_detail("[%2d] key=%2d, value=%d\n", ite.getIndex(), ite.getKey(), *ite);
+			}
+		);
 	}
 
 	//----------------------------------------------------------------------------------------------------

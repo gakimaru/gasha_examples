@@ -5,11 +5,11 @@ Result of calculation CRC of "abcdefghij" by user-defined-literal = 0xe6599437
 
 Result of calculation CRC of "ABCDEFGHIJ" by runtime-function = 0xd599aefd
 
-[calcCRC32_recursive() * 1000000 times]
-*elapsed time = 0.089609000 sec (crc_sum=0x1ec0bb80)
-[calcCRC32_loop() * 1000000 times]
-*elapsed time = 0.089773000 sec (crc_sum=0x1ec0bb80)
-[calcCRC32_table() * 1000000 times]
-*elapsed time = 0.013238000 sec (crc_sum=0x1ec0bb80)
-[calcCRC32_sse() * 1000000 times]
-*elapsed time = 0.007555000 sec (crc_sum=0x1ec0bb80)
+[calcCRC32_recursive() * 10000000 times]
+*elapsed time = 0.891357000 sec (crc_sum=0x33875300)
+[calcCRC32_loop() * 10000000 times]
+*elapsed time = 0.907726000 sec (crc_sum=0x33875300)
+[calcCRC32_table() * 10000000 times]
+*elapsed time = 0.132573000 sec (crc_sum=0x33875300)
+[calcCRC32_sse() * 10000000 times]
+*elapsed time = 0.075810000 sec (crc_sum=0x33875300)

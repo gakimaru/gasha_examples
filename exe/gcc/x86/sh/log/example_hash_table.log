@@ -8,8 +8,8 @@ Hash Table Test
 .getOriginalTableSize()=50000
 .getTableSize()=50021
 .getTableSizeExtended()=21
-.getAutoRehashRatio()=25
-.getAutoRehashSize()=12505
+.getAutoRehashRatio()=0
+.getAutoRehashSize()=0
 .getFindingCycleLimit()=0
 .getKeyMin()=0
 .getKeyMax()=4294967294
@@ -27,7 +27,7 @@ Hash Table Test
 
 --- Insert Data ---
 success=25000, failure=0
-*elapsed time=0.007510000 sec.
+*elapsed time=0.007999000 sec.
 
 --- Table Status ---
 .bucket_count()=50021
@@ -41,11 +41,11 @@ success=25000, failure=0
 
 --- Find Data ---
 success=25000, failure=25000
-*elapsed time=0.013859000 sec.
+*elapsed time=0.014398000 sec.
 
 --- Erase Data ---
 success=12500, failure=12500
-*elapsed time=0.006707000 sec.
+*elapsed time=0.006457000 sec.
 
 --- Table Status ---
 .bucket_count()=50021
@@ -59,11 +59,11 @@ success=12500, failure=12500
 
 --- Find Data ---
 success=12500, failure=37500
-*elapsed time=0.014000000 sec.
+*elapsed time=0.014275000 sec.
 
 --- Insert Data ---
 success=12500, failure=12500
-*elapsed time=0.007121000 sec.
+*elapsed time=0.007162000 sec.
 
 --- Table Status ---
 .bucket_count()=50021
@@ -77,11 +77,11 @@ success=12500, failure=12500
 
 --- Find Data ---
 success=25000, failure=25000
-*elapsed time=0.018714000 sec.
+*elapsed time=0.014309000 sec.
 
 --- Rehash Table ---
 OK.
-*elapsed time=0.001365000 sec.
+*elapsed time=0.001060000 sec.
 
 --- Table Status ---
 .bucket_count()=50021
@@ -95,11 +95,11 @@ OK.
 
 --- Find Data ---
 success=25000, failure=25000
-*elapsed time=0.023587000 sec.
+*elapsed time=0.013557000 sec.
 
 --- Clear Table ---
 OK.
-*elapsed time=0.000276000 sec.
+*elapsed time=0.000199000 sec.
 
 --- Table Status ---
 .bucket_count()=50021
@@ -113,11 +113,11 @@ OK.
 
 --- Find Data ---
 success=0, failure=50000
-*elapsed time=0.021208000 sec.
+*elapsed time=0.012002000 sec.
 
 --- Insert Data ---
 success=50000, failure=0
-*elapsed time=0.042414000 sec.
+*elapsed time=0.029968000 sec.
 
 --- Table Status ---
 .bucket_count()=50021
@@ -131,11 +131,11 @@ success=50000, failure=0
 
 --- Find Data ---
 success=50000, failure=0
-*elapsed time=0.039151000 sec.
+*elapsed time=0.037938000 sec.
 
 --- Erase Data ---
 success=50000, failure=0
-*elapsed time=1.187914000 sec.
+*elapsed time=0.021159000 sec.
 
 --- Table Status ---
 .bucket_count()=50021
@@ -149,11 +149,11 @@ success=50000, failure=0
 
 --- Find Data ---
 success=0, failure=50000
-*elapsed time=0.012138000 sec.
+*elapsed time=0.012104000 sec.
 
 End
 ============================================================
-*elapsed time=1.410103000 sec.
+*elapsed time=0.206331000 sec.
 
 --------------------------------------------------------------------------------
 [STL] Hash Table Test
@@ -172,7 +172,7 @@ End
 
 --- [STL] Insert Data ---
 success=25000, failure=0
-*elapsed time=0.010321000 sec.
+*elapsed time=0.010020000 sec.
 
 --- [STL] Table Status ---
 .size()=25000
@@ -184,11 +184,11 @@ success=25000, failure=0
 
 --- [STL] Find Data ---
 success=25000, failure=25000
-*elapsed time=0.013683000 sec.
+*elapsed time=0.013072000 sec.
 
 --- [STL] Erase Data ---
 success=12500, failure=12500
-*elapsed time=0.007999000 sec.
+*elapsed time=0.007952000 sec.
 
 --- [STL] Table Status ---
 .size()=12500
@@ -200,11 +200,11 @@ success=12500, failure=12500
 
 --- [STL] Find Data ---
 success=12500, failure=37500
-*elapsed time=0.013469000 sec.
+*elapsed time=0.012903000 sec.
 
 --- [STL] Insert Data ---
 success=12500, failure=12500
-*elapsed time=0.010869000 sec.
+*elapsed time=0.011080000 sec.
 
 --- [STL] Table Status ---
 .size()=25000
@@ -216,11 +216,11 @@ success=12500, failure=12500
 
 --- [STL] Find Data ---
 success=25000, failure=25000
-*elapsed time=0.013754000 sec.
+*elapsed time=0.023059000 sec.
 
 --- [STL] Rehash Table ---
 OK.
-*elapsed time=0.000001000 sec.
+*elapsed time=0.000002000 sec.
 
 --- [STL] Table Status ---
 .size()=25000
@@ -232,11 +232,11 @@ OK.
 
 --- [STL] Find Data ---
 success=25000, failure=25000
-*elapsed time=0.013477000 sec.
+*elapsed time=0.023040000 sec.
 
 --- [STL] Clear Table ---
 OK.
-*elapsed time=0.002260000 sec.
+*elapsed time=0.002738000 sec.
 
 --- [STL] Table Status ---
 .size()=0
@@ -248,11 +248,11 @@ OK.
 
 --- [STL] Find Data ---
 success=0, failure=50000
-*elapsed time=0.012502000 sec.
+*elapsed time=0.021718000 sec.
 
 --- [STL] Insert Data ---
 success=50000, failure=0
-*elapsed time=0.020230000 sec.
+*elapsed time=0.025725000 sec.
 
 --- [STL] Table Status ---
 .size()=50000
@@ -264,11 +264,11 @@ success=50000, failure=0
 
 --- [STL] Find Data ---
 success=50000, failure=0
-*elapsed time=0.013908000 sec.
+*elapsed time=0.014155000 sec.
 
 --- [STL] Erase Data ---
 success=50000, failure=0
-*elapsed time=0.019251000 sec.
+*elapsed time=0.019418000 sec.
 
 --- [STL] Table Status ---
 .size()=0
@@ -280,11 +280,11 @@ success=50000, failure=0
 
 --- [STL] Find Data ---
 success=0, failure=50000
-*elapsed time=0.012644000 sec.
+*elapsed time=0.012734000 sec.
 
 End
 ============================================================
-*elapsed time=0.165189000 sec.
+*elapsed time=0.198480000 sec.
 
 --------------------------------------------------------------------------------
 Hash Table Test for Pointer
@@ -294,6 +294,10 @@ Hash Table Test for Pointer
 [30] ... OK  name="0030", val=789
 [40] ... NG
 [20] ... OK  name="0020", val=456
+
+--------------------------------------------------------------------------------
+Hash Table Test for small-range key
+--------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 Hash Table Test for Function
