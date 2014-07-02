@@ -29,6 +29,7 @@ static const int TEST_DATA_FIND_NUM = 100;//線形探索テストの回数
 static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST_DATA_NUM / TEST_DATA_FIND_NUM : 1;//線形探索テストの実行ステップ
 
 //#define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
+//#define TEST_LOCK_OPERATION//ロック操作をテストする場合は、このマクロを有効にする
 //#define USE_STL_ALGORITM//ソート／線形探索／二分探索で、内部関数の代わりに STL を使用する場合は、このマクロを有効にする
 
 //#define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効にする
@@ -42,6 +43,7 @@ static const int TEST_DATA_FIND_NUM = 100;//線形探索テストの回数
 static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST_DATA_NUM / TEST_DATA_FIND_NUM : 1;//線形探索テストの実行ステップ
 
 #define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
+#define TEST_LOCK_OPERATION//ロック操作をテストする場合は、このマクロを有効にする
 //#define USE_STL_ALGORITM//ソート／線形探索／二分探索で、内部関数の代わりに STL を使用する場合は、このマクロを有効にする
 
 #define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効にする
@@ -136,6 +138,12 @@ struct another_ope : public ring_buffer::baseOpe<ope, data_t>
 	{
 		//何もしない
 	}
+
+#ifdef TEST_LOCK_OPERATION
+	//ロック型
+	//※デフォルトは dummySharedLock
+	typedef sharedSpinLock lock_type;//ロックオブジェクト型
+#endif//TEST_LOCK_OPERATION
 };
 
 //----------------------------------------

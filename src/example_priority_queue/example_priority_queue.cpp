@@ -60,14 +60,14 @@ data_t::data_t(const int val) :
 }
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
 //ムーブオペレータ
-data_t::data_t& operator=(data_t&& rhs)
+data_t& data_t::operator=(data_t&& rhs)
 {
 	memcpy(this, &rhs, sizeof(*this));
 	printf("data_t::move_operator\n");
 	return *this;
 }
 //コピーオペレータ
-data_t::data_t& operator=(const data_t& rhs)
+data_t& data_t::operator=(const data_t& rhs)
 {
 	memcpy(this, &rhs, sizeof(*this));
 	printf("data_t::copy_operator\n");
@@ -217,10 +217,9 @@ void example_priority_queue()
 		for (int val = 1; val < TEST_DATA_REG_NUM; ++val)
 		{
 			const PRIORITY priority = static_cast<PRIORITY>(rand_dist(rand_engine));
-		#define USE_ENQUEUE_TYPE 2
 			//【エンキュー方法①】オブジェクトを受け渡す方法
 			//※オブジェクトのコピーが発生するので少し遅い。
-		#if USE_ENQUEUE_TYPE == 1
+			#if TEST_USE_ENQUEUE_TYPE == 1
 			{
 				data_t new_obj(priority, val);
 				data_t* obj = con->enqueueCopying(new_obj);
@@ -229,31 +228,34 @@ void example_priority_queue()
 			//【推奨】【エンキュー方法②】コンストラクタパラメータを渡して登録する方法
 			//※オブジェクトのコピーは発生しない。
 			//※コンストラクタが呼び出される。
-		#elif USE_ENQUEUE_TYPE == 2
+			#elif TEST_USE_ENQUEUE_TYPE == 2
 			{
 				data_t* obj = con->enqueue(priority, val);//優先度とコンストラクタパラメータを渡して登録
 				printf_detail("[%d:%2d(seq=%d)]\n", obj->m_priority, obj->m_val, obj->m_seqNo);
 			}
 			//【エンキュー方法③】新規キュー（オブジェクト）の参照を受け取って値をセットする方法
 			//※オブジェクトのコピーは発生しない。
-			//※最初にコンストラクタが呼び出される。
-			//※明示的に終了処理を呼び出し、ロックを解放しなければならない点に注意。
-			//　（エンキュー／デキュー操作用クラスを使用することで、処理ブロックを抜ける時に自動敵にロックが解放される）
-			//※エンキュー終了時にはポインタが変わる点にも注意。
-		#elif USE_ENQUEUE_TYPE == 3
+			//※最初にコンストラクタ呼び出しを行うが、その時点でエンキューを完了せず、オブジェクトを操作できる。
+			//※単一操作オブジェクトを使用することで、誤った操作を防ぎ（二重エンキューやエンキュー中のデキューなど）、かつ、
+			//　処理ブロックを抜ける時に自動敵にエンキューを完了する。
+			//※明示的にエンキューを終了または取り消しすることも可能。
+			//※エンキューを開始してから完了するまでの間、ロックが取得される。
+			//※エンキュー終了時にはオブジェクトのポインタが変わる点に注意。
+			#elif TEST_USE_ENQUEUE_TYPE == 3
 			{
-				priority_queue::operation_guard<pqueue_t> ope(*con);//エンキュー／デキュー操作用クラス
-				data_t* obj = ope.enqueueBegin(priority);//この時点で優先度とシーケンス番号がセットされ、ロックが取得される
+				auto ope = con->operationUnique();//単一操作オブジェクト ※pqueue_t::uniqueOperation ope(*con); と書くのと同じ
+				data_t* obj = ope.enqueueBegin(priority, val);//この時点で優先度とシーケンス番号がセットされ、ロックが取得される
+				//※エンキュー途中の状態。この状態では、単一操作オブジェクトの他の操作が禁止される。
 				//※戻り値は、処理ブロック内でしか（enqueueEnd/enqueueCancel呼び出しまでしか）有効ではないポインタなので注意
 				obj->m_val = val;
 				printf_detail("[%d:%2d(seq=%d)]\n", obj->m_priority, obj->m_val, obj->m_seqNo);
 				//処理ブロックを抜ける時に自動的にデキューが終了し、ロックが解放される。
 				//※受け取ったポインタを処理ブロックの外で参照すると、誤った情報を参照することになるので注意。
 				//※明示的にエンキュー終了／取り消しを実行することも可能。
-				//obj = ope.enqueueEnd();//明示的なエンキュー終了を行うと、正しいオブジェクトの参照を取得できる
-				//ope.enqueueCancel();
+				//obj = ope.enqueueEnd();//明示的なエンキュー終了を行うと、正しいオブジェクトの参照を取得できる ※ロックが解除されるので、他のスレッドでデキューされる可能性がある事に注意
+				//ope.enqueueCancel();//エンキュー取り消し
 			}
-		#endif//USE_ENQUEUE_TYPE
+			#endif//TEST_USE_ENQUEUE_TYPE
 		}
 	};
 	enqueue();
@@ -271,53 +273,51 @@ void example_priority_queue()
 	};
 	prev_time = printElapsedTime(prev_time, true);
 
-#if 0
-	//範囲に基づくforループテスト
-	auto printNodesTest1 = [&con]()
-	{
-		printf("\n");
-		printf("--- Test for C++11 for(:) ---\n");
-		typedef pqueue_t::container_type container_t;
-		container_t& heap = *con;
-		for (const data_t& o : heap)
-			printf("[%1d:%2d] ", o.m_priority, o.m_val);
-		printf("\n");
-	};
-	printNodesTest1();
-#endif
+	//木を表示
+	showTree(con->getContainer());
+	prev_time = printElapsedTime(prev_time, false);//経過時間を表示
 
-#if 0
-	//std::for_eachテスト
-	auto printNodesTest2 = [&con]()
+	//キューのリストを表示
+	auto printTable = [&con, &printElapsedTime, &prev_time]()
 	{
-		printf("\n");
-		printf("--- Test for std::for_each() ---\n");
+		printf_detail("\n");
+		printf_detail("--- Print Queue List ---\n");
 		typedef pqueue_t::container_type container_t;
-		container_t& heap = *con;
-		printf("iterator:         ");
-		std::for_each(heap.begin(), heap.end(), [](data_t& o)
-		{
-			printf("[%1d:%2d] ", o.m_priority, o.m_val);
-		}
+		forEach(static_cast<container_t&>(*con), [&con](const data_t& obj)
+			{
+				printf_detail(" [%d,%d:%d]", obj.m_priority, obj.m_seqNo, obj.m_val);
+			}
 		);
-		printf("\n");
-		printf("reverse_iterator: ");
-		std::for_each(heap.rbegin(), heap.rend(), [](data_t& o)
-		{
-			printf("[%1d:%2d] ", o.m_priority, o.m_val);
-		}
-		);
-		printf("\n");
+		printf_detail("\n");
+		prev_time = printElapsedTime(prev_time, false);
 	};
-	printNodesTest2();
-#endif
+	printTable();
 
-#if 0//イテレータとロック取得のテスト
+#ifdef GASHA_BINARY_HEAP_ENABLE_REVERSE_ITERATOR
+	auto printTableReversed = [&con, &printElapsedTime, &prev_time]()
+	{
+		printf_detail("\n");
+		printf_detail("--- Print Queue List (reverse) ---\n");
+		typedef pqueue_t::container_type container_t;
+		reverseForEach(static_cast<container_t&>(*con), [&con](const data_t& obj)
+			{
+				printf_detail(" [%d,%d:%d]", obj.m_priority, obj.m_seqNo, obj.m_val);
+			}
+		);
+		printf_detail("\n");
+		prev_time = printElapsedTime(prev_time, false);
+	};
+	printTableReversed();
+#endif//GASHA_BINARY_HEAP_ENABLE_REVERSE_ITERATOR
+
+#if defined(GASHA_BINARY_HEAP_ENABLE_RANDOM_ACCESS_INTERFACE) && defined(GASHA_BINARY_HEAP_ENABLE_REVERSE_ITERATOR)
+#ifdef TEST_ITERATOR_OPERATION
 	{
 		printf("\n");
 		typedef pqueue_t::container_type container_t;
 		container_t& heap = *con;
-		lock_guard<container_t::lock_type> lock(heap);
+		printf("--------------------[iterator operattion:begin]\n");
+		printf("[constructor]\n");
 		container_t::iterator ite = heap.begin();
 		container_t::reverse_iterator rite = heap.rbegin();
 		container_t::iterator ite_end = heap.end();
@@ -326,7 +326,6 @@ void example_priority_queue()
 		container_t::reverse_iterator rite2 = heap.begin();
 		container_t::iterator ite2_end = heap.rend();
 		container_t::reverse_iterator rite2_end = heap.end();
-		printf("constructor\n");
 		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
 		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
 		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
@@ -335,7 +334,15 @@ void example_priority_queue()
 		if (rite2.isExist()) printf("rite2:[%d] priority=%d, seqNo=%d, value=%d\n", rite2.getIndex(), rite2->m_priority, rite2->m_seqNo, rite2->m_val);
 		if (ite2_end.isExist()) printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
 		if (rite2_end.isExist()) printf("rite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_priority, rite2_end->m_seqNo, rite2_end->m_val);
-		printf("copy operator\n");
+		printf("ite_end - ite = %d\n", ite_end - ite);
+		printf("ite - ite_end = %d\n", ite - ite_end);
+		printf("rite_end - rite = %d\n", rite_end - rite);
+		printf("rite - rite_end = %d\n", rite - rite_end);
+		printf("ite2 - ite = %d\n", ite2 - ite);
+		printf("ite - ite2 = %d\n", ite - ite2);
+		printf("rite2 - rite = %d\n", rite2 - rite);
+		printf("rite - rite2 = %d\n", rite - rite2);
+		printf("[copy operator]\n");
 		ite = heap.begin();
 		rite = heap.rbegin();
 		ite_end = heap.end();
@@ -352,66 +359,101 @@ void example_priority_queue()
 		if (rite2.isExist()) printf("rite2:[%d] priority=%d, seqNo=%d, value=%d\n", rite2.getIndex(), rite2->m_priority, rite2->m_seqNo, rite2->m_val);
 		if (ite2_end.isExist()) printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
 		if (rite2_end.isExist()) printf("rite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_priority, rite2_end->m_seqNo, rite2_end->m_val);
-		for (int i = 0; i <= 3; ++i)
+		printf("[rite.base()]\n");
+		ite2 = rite.base();
+		ite2_end = rite_end.base();
+		if (ite2.isExist()) printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
+		if (ite2_end.isExist()) printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
+		printf("[++ite,--ie_end]\n");
+		++ite;
+		++rite;
+		--ite_end;
+		--rite_end;
+		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
+		if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
+		printf("[--ite,++ie_end]\n");
+		--ite;
+		--rite;
+		++ite_end;
+		++rite_end;
+		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
+		if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
+		for (int i = 0; i < 3; ++i)
 		{
-			printf("[%d]\n", i);
+			printf("[ite[%d]]\n", i);
 			ite = ite[i];
 			rite = rite[i];
-			ite_end = ite_end[i];
-			rite_end = rite_end[i];
-			ite2 = ite2[i];
-			rite2 = rite2[i];
-			ite2_end = ite2_end[i];
-			rite2_end = rite2_end[i];
 			if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
 			if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
-			if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
-			if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
-			if (ite2.isExist()) printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
-			if (rite2.isExist()) printf("rite2:[%d] priority=%d, seqNo=%d, value=%d\n", rite2.getIndex(), rite2->m_priority, rite2->m_seqNo, rite2->m_val);
-			if (ite2_end.isExist()) printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
-			if (rite2_end.isExist()) printf("rite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_priority, rite2_end->m_seqNo, rite2_end->m_val);
 		}
-		printf("+= 3\n");
+		printf("[ite+=3]\n");
 		ite += 3;
 		rite += 3;
-		ite_end += 3;
-		rite_end += 3;
-		ite2 += 3;
-		rite2 += 3;
-		ite2_end += 3;
-		rite2_end += 3;
 		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
 		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
-		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
-		if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
-		if (ite2.isExist()) printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
-		if (rite2.isExist()) printf("rite2:[%d] priority=%d, seqNo=%d, value=%d\n", rite2.getIndex(), rite2->m_priority, rite2->m_seqNo, rite2->m_val);
-		if (ite2_end.isExist()) printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
-		if (rite2_end.isExist()) printf("rite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_priority, rite2_end->m_seqNo, rite2_end->m_val);
-		printf("-= 3\n");
+		printf("[ite-=3]\n");
 		ite -= 3;
 		rite -= 3;
-		ite_end -= 3;
-		rite_end -= 3;
-		ite2 -= 3;
-		rite2 -= 3;
-		ite2_end -= 3;
-		rite2_end -= 3;
 		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
 		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
-		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
-		if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
-		if (ite2.isExist()) printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
-		if (rite2.isExist()) printf("rite2:[%d] priority=%d, seqNo=%d, value=%d\n", rite2.getIndex(), rite2->m_priority, rite2->m_seqNo, rite2->m_val);
-		if (ite2_end.isExist()) printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
-		if (rite2_end.isExist()) printf("rite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_priority, rite2_end->m_seqNo, rite2_end->m_val);
+		printf("ite_end - ite = %d\n", ite_end - ite);
+		printf("ite - ite_end = %d\n", ite - ite_end);
+		printf("rite_end - rite = %d\n", rite_end - rite);
+		printf("rite - rite_end = %d\n", rite - rite_end);
+		printf("[ite2-=2]\n");
+		ite2 -= 2;
+		rite2 -= 2;
+		printf("ite2 - ite = %d\n", ite2 - ite);
+		printf("ite - ite2 = %d\n", ite - ite2);
+		printf("rite2 - rite = %d\n", rite2 - rite);
+		printf("rite - rite2 = %d\n", rite - rite2);
+		printf("[++ite_end]\n");
+		++ite_end;
+		++rite_end;
+		printf("ite_end - ite = %d\n", ite_end - ite);
+		printf("ite - ite_end = %d\n", ite - ite_end);
+		printf("rite_end - rite = %d\n", rite_end - rite);
+		printf("rite - rite_end = %d\n", rite - rite_end);
+		printf("--------------------[iterator operattion:end]\n");
 	}
-#endif
+#endif//TEST_ITERATOR_OPERATION
+#endif//GASHA_BINARY_HEAP_ENABLE_RANDOM_ACCESS_INTERFACE, GASHA_BINARY_HEAP_ENABLE_REVERSE_ITERATOR
 
-	//木を表示
-	showTree(con->getContainer());
-	prev_time = printElapsedTime(prev_time, false);//経過時間を表示
+#ifdef TEST_LOCK_OPERATION
+	//ロック操作テスト
+	printf("--------------------[lock operation:begin]\n");
+	{
+		auto lock(con->lockScoped());//lock_guard<container_t::lock_type> lock(*con);と同じ
+		printf(".lockScoped() ... OK\n");
+	}
+	{
+		auto lock(con->lockUnique());//unique_shared_lock<container_t::lock_type> lock(*con);と同じ
+		printf(".lockUnique() ... OK\n");
+	}
+	{
+		auto lock(con->lockUnique(with_lock));//unique_shared_lock<container_t::lock_type> lock(*con, with_lock);と同じ
+		printf(".lockUnique(with_lock) ... OK\n");
+	}
+	{
+		auto lock(con->lockUnique(try_lock));//unique_shared_lock<container_t::lock_type> lock(*con, try_lock);と同じ
+		printf(".lockUnique(try_lock) ... OK\n");
+	}
+	{
+		pqueue_t::lock_type& lock_obj = *con;
+		lock_obj.lock();
+		auto lock(con->lockUnique(adopt_lock));//unique_shared_lock<container_t::lock_type> lock(*con, adopt_lock);と同じ
+		printf(".lockUnique(adopt_lock) ... OK\n");
+	}
+	{
+		auto lock(con->lockUnique(defer_lock));//unique_shared_lock<container_t::lock_type> lock(*con, defer_lock);と同じ
+		printf(".lockUnique(defer_lock) ... OK\n");
+	}
+	printf("--------------------[lock operation:end]\n");
+#endif//TEST_LOCK_OPERATION
 
 	//デキュー
 	auto dequeue = [&con](const int pop_limit)
@@ -420,11 +462,10 @@ void example_priority_queue()
 		printf("--- Dequeue ---\n");
 		for (int i = 0; i < pop_limit; ++i)
 		{
-		#define USE_DEQUEUE_TYPE 1
 			//【推奨】【デキュー方法①】情報取得用のオブジェクトを受け渡す
 			//※オブジェクトのコピーが発生する。
 			//※デストラクタが呼び出される。（コピー後に実行）
-		#if USE_DEQUEUE_TYPE == 1
+			#if TEST_USE_DEQUEUE_TYPE == 1
 			{
 				data_t node;
 				const bool result = con->dequeueCopying(node);
@@ -434,13 +475,16 @@ void example_priority_queue()
 			}
 			//【デキュー方法②】キュー（オブジェクト）の参照を受け取る方法
 			//※オブジェクトのコピーは発生しない。
-			//※明示的に終了処理を呼び出し、ロックを解放しなければならない点に注意。
-			//　（エンキュー／デキュー操作用クラスを使用することで、処理ブロックを抜ける時に自動敵にロックが解放される）
+			//※単一操作オブジェクトを使用することで、誤った操作を防ぎ（二重デキューやデキュー中のエンキューなど）、かつ、
+			//　処理ブロックを抜ける時に自動敵にデキューを完了する。
+			//※明示的にデキューを終了または取り消しすることも可能。
+			//※デキューを開始してから完了するまでの間、ロックが取得される。
 			//※最後にデストラクタが呼び出される。
-		#elif USE_DEQUEUE_TYPE == 2
+			#elif TEST_USE_DEQUEUE_TYPE == 2
 			{
-				priority_queue::operation_guard<pqueue_t> ope(*con);//エンキュー／デキュー操作用クラス
+				auto ope = con->operationUnique();//単一操作オブジェクト ※pqueue_t::uniqueOperation ope(*con); と書くのと同じ
 				data_t* obj = ope.dequeueBegin();//この時点でロックが取得される
+				//※デキュー途中の状態。この状態では、単一操作オブジェクトの他の操作が禁止される。
 				//※戻り値は、処理ブロック内でしか（dequeueEnd/dequeueCancel呼び出しまでしか）有効ではないポインタなので注意
 				if (!obj)
 					break;
@@ -448,10 +492,10 @@ void example_priority_queue()
 				//処理ブロックを抜ける時に自動的にデキューが終了し、ロックが解放される。
 				//※受け取ったポインタを処理ブロックの外で参照すると、誤った情報を参照することになるので注意。
 				//※明示的にデキュー終了／取り消しを実行することも可能。
-				//ope.dequeueEnd();
-				//ope.dequeueCancel();
+				//ope.dequeueEnd();//デキュー完了
+				//ope.dequeueCancel();//デキュー取り消し
 			}
-		#endif//USE_DEQUEUE_TYPE
+			#endif//TEST_USE_DEQUEUE_TYPE
 		}
 		printf_detail("\n");
 	};
@@ -633,36 +677,48 @@ void example_binary_heap()
 		rand_engine.seed(0);
 		std::uniform_int_distribution<int> rand_dist(TEST_DATA_PRIOR_MIN, TEST_DATA_PRIOR_MAX);
 		{
-			data_t* obj =heap->push(NORMAL, 0);
+			data_t* obj = heap->push(NORMAL, 0);
 			printf_detail("[%d:%2d]\n", obj->m_priority, obj->m_val);
 		}
 		for (int val = 1; val < TEST_DATA_REG_NUM; ++val)
 		{
 			//※上記プライオリティキューで説明した、３種類のプッシュ方法が使える
 			const PRIORITY priority = static_cast<PRIORITY>(rand_dist(rand_engine));
-			#define USE_PUSH_TYPE 2
-			//【プッシュ方法①】
-			#if USE_PUSH_TYPE == 1
+			//【プッシュ方法①】オブジェクトを受け渡す方法
+			//※オブジェクトのコピーが発生するので少し遅い。
+			#if TEST_USE_PUSH_TYPE == 1
 			{
 				data_t new_obj(priority, val);
 				data_t* obj = heap->pushCopying(new_obj);
 				printf_detail("[%d:%2d]\n", obj->m_priority, obj->m_val);
 			}
-			//【推奨】【プッシュ方法②】
-			#elif USE_PUSH_TYPE == 2
+			//【推奨】【プッシュ方法②】コンストラクタパラメータを渡して登録する方法
+			//※オブジェクトのコピーは発生しない。
+			//※コンストラクタが呼び出される。
+			#elif TEST_USE_PUSH_TYPE == 2
 			{
 				data_t* obj = heap->push(priority, val);
 				printf_detail("[%d:%2d]\n", obj->m_priority, obj->m_val);
 			}
-			//【プッシュ方法③】
-			#elif USE_PUSH_TYPE == 3
+			//【プッシュ方法③】新規キュー（オブジェクト）の参照を受け取って値をセットする方法
+			//※オブジェクトのコピーは発生しない。
+			//※最初にコンストラクタ呼び出しを行うが、その時点でプッシュを完了せず、オブジェクトを操作できる。
+			//※単一操作オブジェクトを使用することで、誤った操作を防ぎ（二重プッシュやプッシュ中のポップなど）、かつ、
+			//　処理ブロックを抜ける時に自動敵にプッシュを完了する。
+			//※明示的にプッシュを終了または取り消しすることも可能。
+			//※プッシュを開始してから完了するまでの間、ロックが取得される。
+			//※プッシュ終了時にはオブジェクトのポインタが変わる点に注意。
+			#elif TEST_USE_PUSH_TYPE == 3
 			{
-				binary_heap::operation_guard<container_type> ope(*heap);
-				data_t* obj = ope.pushBegin(priority, val);//※戻り値は、処理ブロック内でしか（pushEnd/pushCancel呼び出しまでしか）有効ではないポインタなので注意
+				auto ope = heap->operationUnique();//単一操作オブジェクト ※heap_t::uniqueOperation ope(*heap); と書くのと同じ
+				data_t* obj = ope.pushBegin(priority, val);//この時点でロックが取得される
+				//※プッシュ途中の状態。この状態では、単一操作オブジェクトの他の操作が禁止される。
+				//※戻り値は、処理ブロック内でしか（pushEnd/pushCancel呼び出しまでしか）有効ではないポインタなので注意
 				printf_detail("[%d:%2d]\n", obj->m_priority, obj->m_val);
-				//obj = ope.popEnd();//明示的なポップ終了を行うと、正しいオブジェクトの参照を取得できる
+				//obj = ope.pushEnd();//明示的なプッシュ終了を行うと、正しいオブジェクトの参照を取得できる ※ロックが解除されるので、他のスレッドでポップされる可能性がある事に注意
+				//ope.pushCancel();//プッシュ取り消し
 			}
-			#endif//USE_PUSH_TYPE
+			#endif//TEST_USE_PUSH_TYPE
 		}
 	};
 	pushNodesBinHeap();
@@ -683,7 +739,181 @@ void example_binary_heap()
 	//木を表示
 	showTree(*heap);
 	prev_time = printElapsedTime(prev_time, false);//経過時間を表示
-	
+
+	//キューのリストを表示
+	auto printTable = [&heap, &printElapsedTime, &prev_time]()
+	{
+		printf_detail("\n");
+		printf_detail("--- Print Queue List ---\n");
+		forEach(*heap, [&heap](const data_t& obj)
+			{
+				printf_detail(" [%d,%d:%d]", obj.m_priority, obj.m_seqNo, obj.m_val);
+			}
+		);
+		printf_detail("\n");
+		prev_time = printElapsedTime(prev_time, false);
+	};
+	printTable();
+
+#ifdef GASHA_BINARY_HEAP_ENABLE_REVERSE_ITERATOR
+	auto printTableReversed = [&heap, &printElapsedTime, &prev_time]()
+	{
+		printf_detail("\n");
+		printf_detail("--- Print Queue List (reverse) ---\n");
+		reverseForEach(*heap, [&heap](const data_t& obj)
+			{
+				printf_detail(" [%d,%d:%d]", obj.m_priority, obj.m_seqNo, obj.m_val);
+			}
+		);
+		printf_detail("\n");
+		prev_time = printElapsedTime(prev_time, false);
+	};
+	printTableReversed();
+#endif//GASHA_BINARY_HEAP_ENABLE_REVERSE_ITERATOR
+
+#if defined(GASHA_BINARY_HEAP_ENABLE_RANDOM_ACCESS_INTERFACE) && defined(GASHA_BINARY_HEAP_ENABLE_REVERSE_ITERATOR)
+#ifdef TEST_ITERATOR_OPERATION
+	{
+		printf("\n");
+		printf("--------------------[iterator operattion:begin]\n");
+		printf("[constructor]\n");
+		heap_t::iterator ite = heap->begin();
+		heap_t::reverse_iterator rite = heap->rbegin();
+		heap_t::iterator ite_end = heap->end();
+		heap_t::reverse_iterator rite_end = heap->rend();
+		heap_t::iterator ite2 = heap->rbegin();
+		heap_t::reverse_iterator rite2 = heap->begin();
+		heap_t::iterator ite2_end = heap->rend();
+		heap_t::reverse_iterator rite2_end = heap->end();
+		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
+		if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
+		if (ite2.isExist()) printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
+		if (rite2.isExist()) printf("rite2:[%d] priority=%d, seqNo=%d, value=%d\n", rite2.getIndex(), rite2->m_priority, rite2->m_seqNo, rite2->m_val);
+		if (ite2_end.isExist()) printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
+		if (rite2_end.isExist()) printf("rite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_priority, rite2_end->m_seqNo, rite2_end->m_val);
+		printf("ite_end - ite = %d\n", ite_end - ite);
+		printf("ite - ite_end = %d\n", ite - ite_end);
+		printf("rite_end - rite = %d\n", rite_end - rite);
+		printf("rite - rite_end = %d\n", rite - rite_end);
+		printf("ite2 - ite = %d\n", ite2 - ite);
+		printf("ite - ite2 = %d\n", ite - ite2);
+		printf("rite2 - rite = %d\n", rite2 - rite);
+		printf("rite - rite2 = %d\n", rite - rite2);
+		printf("[copy operator]\n");
+		ite = heap->begin();
+		rite = heap->rbegin();
+		ite_end = heap->end();
+		rite_end = heap->rend();
+		ite2 = heap->rbegin();
+		rite2 = heap->begin();
+		ite2_end = heap->rend();
+		rite2_end = heap->end();
+		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
+		if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
+		if (ite2.isExist()) printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
+		if (rite2.isExist()) printf("rite2:[%d] priority=%d, seqNo=%d, value=%d\n", rite2.getIndex(), rite2->m_priority, rite2->m_seqNo, rite2->m_val);
+		if (ite2_end.isExist()) printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
+		if (rite2_end.isExist()) printf("rite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_priority, rite2_end->m_seqNo, rite2_end->m_val);
+		printf("[rite.base()]\n");
+		ite2 = rite.base();
+		ite2_end = rite_end.base();
+		if (ite2.isExist()) printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
+		if (ite2_end.isExist()) printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
+		printf("[++ite,--ie_end]\n");
+		++ite;
+		++rite;
+		--ite_end;
+		--rite_end;
+		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
+		if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
+		printf("[--ite,++ie_end]\n");
+		--ite;
+		--rite;
+		++ite_end;
+		++rite_end;
+		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
+		if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
+		for (int i = 0; i < 3; ++i)
+		{
+			printf("[ite[%d]]\n", i);
+			ite = ite[i];
+			rite = rite[i];
+			if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+			if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		}
+		printf("[ite+=3]\n");
+		ite += 3;
+		rite += 3;
+		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		printf("[ite-=3]\n");
+		ite -= 3;
+		rite -= 3;
+		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		printf("ite_end - ite = %d\n", ite_end - ite);
+		printf("ite - ite_end = %d\n", ite - ite_end);
+		printf("rite_end - rite = %d\n", rite_end - rite);
+		printf("rite - rite_end = %d\n", rite - rite_end);
+		printf("[ite2-=2]\n");
+		ite2 -= 2;
+		rite2 -= 2;
+		printf("ite2 - ite = %d\n", ite2 - ite);
+		printf("ite - ite2 = %d\n", ite - ite2);
+		printf("rite2 - rite = %d\n", rite2 - rite);
+		printf("rite - rite2 = %d\n", rite - rite2);
+		printf("[++ite_end]\n");
+		++ite_end;
+		++rite_end;
+		printf("ite_end - ite = %d\n", ite_end - ite);
+		printf("ite - ite_end = %d\n", ite - ite_end);
+		printf("rite_end - rite = %d\n", rite_end - rite);
+		printf("rite - rite_end = %d\n", rite - rite_end);
+		printf("--------------------[iterator operattion:end]\n");
+	}
+#endif//TEST_ITERATOR_OPERATION
+#endif//GASHA_BINARY_HEAP_ENABLE_RANDOM_ACCESS_INTERFACE, GASHA_BINARY_HEAP_ENABLE_REVERSE_ITERATOR
+
+#ifdef TEST_LOCK_OPERATION
+	//ロック操作テスト
+	printf("--------------------[lock operation:begin]\n");
+	{
+		auto lock(heap->lockScoped());//lock_guard<container_t::lock_type> lock(*heap);と同じ
+		printf(".lockScoped() ... OK\n");
+	}
+	{
+		auto lock(heap->lockUnique());//unique_shared_lock<container_t::lock_type> lock(*heap);と同じ
+		printf(".lockUnique() ... OK\n");
+	}
+	{
+		auto lock(heap->lockUnique(with_lock));//unique_shared_lock<container_t::lock_type> lock(*heap, with_lock);と同じ
+		printf(".lockUnique(with_lock) ... OK\n");
+	}
+	{
+		auto lock(heap->lockUnique(try_lock));//unique_shared_lock<container_t::lock_type> lock(*heap, try_lock);と同じ
+		printf(".lockUnique(try_lock) ... OK\n");
+	}
+	{
+		heap_t::lock_type& lock_obj = *heap;
+		lock_obj.lock();
+		auto lock(heap->lockUnique(adopt_lock));//unique_shared_lock<container_t::lock_type> lock(*heap, adopt_lock);と同じ
+		printf(".lockUnique(adopt_lock) ... OK\n");
+	}
+	{
+		auto lock(heap->lockUnique(defer_lock));//unique_shared_lock<container_t::lock_type> lock(*heap, defer_lock);と同じ
+		printf(".lockUnique(defer_lock) ... OK\n");
+	}
+	printf("--------------------[lock operation:end]\n");
+#endif//TEST_LOCK_OPERATION
+
 	//二分ヒープでノードをポップ
 	auto popNodesBinHeap  = [&heap](const int pop_limit)
 	{
@@ -692,9 +922,10 @@ void example_binary_heap()
 		for (int i = 0; i < pop_limit; ++i)
 		{
 			//※上記プライオリティキューで説明した、２種類のポップ方法が使える
-			#define USE_POP_TYPE 1
-			//【推奨】【ポップ方法①】
-			#if USE_POP_TYPE == 1
+			//【推奨】【ポップ方法①】情報取得用のオブジェクトを受け渡す
+			//※オブジェクトのコピーが発生する。
+			//※デストラクタが呼び出される。（コピー後に実行）
+			#if TEST_USE_POP_TYPE == 1
 			{
 				data_t node;
 				const bool result = heap->popCopying(node);
@@ -702,16 +933,26 @@ void example_binary_heap()
 					break;
 				printf_detail("[%1d:%2d] ", node.m_priority, node.m_val);
 			}
-			//【ポップ方法②】
-			#elif USE_POP_TYPE == 2
+			//【ポップ方法②】キュー（オブジェクト）の参照を受け取る方法
+			//※オブジェクトのコピーは発生しない。
+			//※単一操作オブジェクトを使用することで、誤った操作を防ぎ（二重ポップやポップ中のプッシュなど）、かつ、
+			//　処理ブロックを抜ける時に自動敵にポップを完了する。
+			//※明示的にポップを終了または取り消しすることも可能。
+			//※ポップを開始してから完了するまでの間、ロックが取得される。
+			//※最後にデストラクタが呼び出される。
+			#elif TEST_USE_POP_TYPE == 2
 			{
-				binary_heap::operation_guard<heap_t> ope(*heap);
-				data_t* obj = ope.popBegin();//※戻り値は、処理ブロック内でしか（popEnd/popCancel呼び出しまでしか）有効ではないポインタなので注意
+				auto ope = heap->operationUnique();//単一操作オブジェクト ※heap_t::uniqueOperation ope(*heap); と書くのと同じ
+				data_t* obj = ope.popBegin();//この時点でロックが取得される
+				//※ポップ途中の状態。この状態では、単一操作オブジェクトの他の操作が禁止される。
+				//※戻り値は、処理ブロック内でしか（popEnd/popCancel呼び出しまでしか）有効ではないポインタなので注意
 				if (!obj)
 					break;
 				printf_detail("[%1d:%2d] ", obj->m_priority, obj->m_val);
-			}
-			#endif//USE_POP_TYPE
+				//ope.popEnd();//ポップ終了
+				//ope.popCancel();//ポップ取り消し
+		}
+			#endif//TEST_USE_POP_TYPE
 		}
 		printf_detail("\n");
 	};

@@ -9,7 +9,7 @@ depth_max=5 (limit for showing=4)
          [ 1:B}----.             [ 4:B]             .----{ 7:B}----.        .----{10:B}----.    
                [ 2:R]                            .-{ 4:R}-.  .-{ 7:R}-.  .-{ 9:R}-.    [10:B}-. 
                                                 [ 4:B][ 5:B}[ 7:B][ 7:B][ 8:B][ 9:B]      [10:R]
-*elapsed_time=0.001001200 sec
+*elapsed_time=0.000998500 sec
 --- Show nodes count (count=20) ---
 depth_max=5, width_max=32
     0:[ 1] blacks=3, reds=0, total=3 (illegal=0)
@@ -95,6 +95,18 @@ ite - ite_end = 0
 rite_end - rite = 0
 rite - rite_end = 0
 --------------------[iterator operattion:end]
+--------------------[lock operation:begin]
+.lockScoped() ... OK
+.lockSharedScoped() ... OK
+.lockUnique() ... OK
+.lockUnique(with_lock) ... OK
+.lockUnique(with_lock_shared) ... OK
+.lockUnique(try_lock) ... OK
+.lockUnique(try_lock_shared) ... OK
+.lockUnique(adopt_lock) ... OK
+.lockUnique(adopt_shared_lock) ... OK
+.lockUnique(defer_lock) ... OK
+--------------------[lock operation:end]
 --- Search each key nodes ---
  1(1):[ 1] 
  2(1):[ 2] 
@@ -182,7 +194,7 @@ diff:blacks=0, reds=0, total=0 (illegal=0)
 (nothing)
 *elapsed_time=0.000000000 sec
 --- end ---
-*elapsed_time=0.001001200 sec
+*elapsed_time=0.000998500 sec
 
 --- example_simple_linked_list ---
 data = {0xc02b79a5,15} {0xe68a9e4d,13} {0x07b1eeba,11}

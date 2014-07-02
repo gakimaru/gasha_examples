@@ -30,6 +30,7 @@ static const int TEST_DATA_BINARY_SEARCH_NUM = 10000;//二分探索テストの�
 static const int TEST_DATA_BINARY_SEARCH_STEP = TEST_DATA_NUM > TEST_DATA_BINARY_SEARCH_NUM ? TEST_DATA_NUM / TEST_DATA_BINARY_SEARCH_NUM : 1;//二分探索テストの実行ステップ
 
 //#define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
+//#define TEST_LOCK_OPERATION//ロック操作をテストする場合は、このマクロを有効にする
 //#define USE_STL_ALGORITM//線形探索／二分探索で、内部関数の代わりに STL を使用する場合は、このマクロを有効にする ※ソートはSTL使用不可
 
 //#define ENABLE_REVERSE_ITERATOR_TEST//大量データテストでリバースイテレータを実行する場合、このマクロを有効化する
@@ -50,6 +51,7 @@ static const int TEST_DATA_BINARY_SEARCH_NUM = 10000;//二分探索テストの�
 static const int TEST_DATA_BINARY_SEARCH_STEP = TEST_DATA_NUM > TEST_DATA_BINARY_SEARCH_NUM ? TEST_DATA_NUM / TEST_DATA_BINARY_SEARCH_NUM : 1;//二分探索テストの実行ステップ
 
 #define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
+#define TEST_LOCK_OPERATION//ロック操作をテストする場合は、このマクロを有効にする
 //#define USE_STL_ALGORITM//線形探索／二分探索で、内部関数の代わりに STL を使用する場合は、このマクロを有効にする ※ソートはSTL使用不可
 
 #define ENABLE_REVERSE_ITERATOR_TEST//大量データテストでリバースイテレータを実行する場合、このマクロを有効化する
@@ -124,9 +126,11 @@ struct ope : public singly_linked_list::baseOpe<ope, data_t>
 	//次ノードを変更
 	inline static void setNext(node_type& node, const node_type* next){ node.m_next = next; }
 
+#ifdef TEST_LOCK_OPERATION
 	//ロック型
-	//※デフォルト（dummy_shared_lock）のままとする
-	//typedef shared_spin_lock lock_type;//ロックオブジェクト型
+	//※デフォルトは dummySharedLock
+	typedef sharedSpinLock lock_type;//ロックオブジェクト型
+#endif//TEST_LOCK_OPERATION
 };
 
 //----------------------------------------

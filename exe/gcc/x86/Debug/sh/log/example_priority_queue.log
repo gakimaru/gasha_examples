@@ -22,61 +22,135 @@
 [5:17(seq=17)]
 [2:18(seq=18)]
 [2:19(seq=19)]
-*elapsed_time=0.000104000 sec
+*elapsed_time=0.000097000 sec
 
 --- Show tree (count=20) ---
 depth_max=4 (limit for showing=4)
-                      .----------------------{1:16}----------------------.                      
-          .----------{2:19}----------.                    .----------{2:12}----------.          
-    .----{2:14}----.        .----{2:18}----.        .----{3: 1}----.        .----{3:13}----.    
- .-{3: 0}-.  .-{3: 7}-.  .-{3: 2]      [4:10]      [4: 5]      [4:11]      [5: 6]      [3: 9]   
-[5:15][4: 3][5: 8][5:17][5: 4]                                                                  
+                      .----------------------{5: 4}----------------------.                      
+          .----------{5: 8}----------.                    .----------{5: 6}----------.          
+    .----{5:15}----.        .----{4:10}----.        .----{4:11}----.        .----{4: 5}----.    
+ .-{4: 3}-.  .-{5:17}-.  .-{3: 9]      [3: 0]      [3: 2]      [2:12]      [3:13]      [2:14]   
+[3: 7][1:16][3: 1][2:18][2:19]                                                                  
+
+--- Print Queue List ---
+ [5,4:4] [5,8:8] [5,6:6] [5,15:15] [4,10:10] [4,11:11] [4,5:5] [4,3:3] [5,17:17] [3,9:9] [3,0:0] [3,2:2] [2,12:12] [3,13:13] [2,14:14] [3,7:7] [1,16:16] [3,1:1] [2,18:18] [2,19:19]
+
+--- Print Queue List (reverse) ---
+ [2,19:19] [2,18:18] [3,1:1] [1,16:16] [3,7:7] [2,14:14] [3,13:13] [2,12:12] [3,2:2] [3,0:0] [3,9:9] [5,17:17] [4,3:3] [4,5:5] [4,11:11] [4,10:10] [5,15:15] [5,6:6] [5,8:8] [5,4:4]
+
+--------------------[iterator operattion:begin]
+[constructor]
+ite:[0] priority=5, seqNo=4, value=4
+rite:[19] priority=2, seqNo=19, value=19
+ite2_end:[0] priority=5, seqNo=4, value=4
+rite2_end:[19] priority=2, seqNo=19, value=19
+ite_end - ite = 20
+ite - ite_end = -20
+rite_end - rite = 20
+rite - rite_end = -20
+ite2 - ite = 20
+ite - ite2 = -20
+rite2 - rite = 20
+rite - rite2 = -20
+[copy operator]
+ite:[0] priority=5, seqNo=4, value=4
+rite:[19] priority=2, seqNo=19, value=19
+ite2_end:[0] priority=5, seqNo=4, value=4
+rite2_end:[19] priority=2, seqNo=19, value=19
+[rite.base()]
+ite2_end:[0] priority=5, seqNo=4, value=4
+[++ite,--ie_end]
+ite:[1] priority=5, seqNo=8, value=8
+rite:[18] priority=2, seqNo=18, value=18
+ite_end:[19] priority=2, seqNo=19, value=19
+rite_end:[0] priority=5, seqNo=4, value=4
+[--ite,++ie_end]
+ite:[0] priority=5, seqNo=4, value=4
+rite:[19] priority=2, seqNo=19, value=19
+[ite[0]]
+ite:[0] priority=5, seqNo=4, value=4
+rite:[19] priority=2, seqNo=19, value=19
+[ite[1]]
+ite:[1] priority=5, seqNo=8, value=8
+rite:[18] priority=2, seqNo=18, value=18
+[ite[2]]
+ite:[3] priority=5, seqNo=15, value=15
+rite:[16] priority=1, seqNo=16, value=16
+[ite+=3]
+ite:[6] priority=4, seqNo=5, value=5
+rite:[13] priority=3, seqNo=13, value=13
+[ite-=3]
+ite:[3] priority=5, seqNo=15, value=15
+rite:[16] priority=1, seqNo=16, value=16
+ite_end - ite = 17
+ite - ite_end = -17
+rite_end - rite = 17
+rite - rite_end = -17
+[ite2-=2]
+ite2 - ite = 15
+ite - ite2 = -15
+rite2 - rite = 15
+rite - rite2 = -15
+[++ite_end]
+ite_end - ite = 0
+ite - ite_end = 0
+rite_end - rite = 0
+rite - rite_end = 0
+--------------------[iterator operattion:end]
+--------------------[lock operation:begin]
+.lockScoped() ... OK
+.lockUnique() ... OK
+.lockUnique(with_lock) ... OK
+.lockUnique(try_lock) ... OK
+.lockUnique(adopt_lock) ... OK
+.lockUnique(defer_lock) ... OK
+--------------------[lock operation:end]
 
 --- Dequeue ---
-[1:16] [2:19] [2:18] 
-*elapsed_time=0.000007000 sec
+[5: 4] [5: 6] [5: 8] 
+*elapsed_time=0.000045000 sec
 
 --- Show tree (count=17) ---
 depth_max=4 (limit for showing=4)
-                      .----------------------{2:14}----------------------.                      
-          .----------{3: 7}----------.                    .----------{2:12}----------.          
-    .----{3: 0}----.        .----{3: 2}----.        .----{3: 1}----.        .----{3:13}----.    
- .-{4: 3}-.    [5:17]      [5: 4]      [4:10]      [4: 5]      [4:11]      [5: 6]      [3: 9]   
-[5:15][5: 8]                                                                                    
+                      .----------------------{5:15}----------------------.                      
+          .----------{5:17}----------.                    .----------{4: 5}----------.          
+    .----{4: 3}----.        .----{4:10}----.        .----{4:11}----.        .----{3:13}----.    
+ .-{3: 7}-.    [3: 1]      [3: 9]      [3: 0]      [3: 2]      [2:12]      [2:19]      [2:14]   
+[2:18][1:16]                                                                                    
 
 --- Change Priority ---
-[2:14(seq=14)] -> [5:14(seq=20)]
-*elapsed_time=0.000003000 sec
+[5:15(seq=15)] -> [5:15(seq=20)]
+*elapsed_time=0.000002000 sec
 
 --- Change Priority ---
-[2:12(seq=12)] -> [2:12(seq=21)]
+[5:17(seq=17)] -> [2:17(seq=21)]
+*elapsed_time=0.000008000 sec
+
+--- Change Priority ---
+[5:15(seq=20)] -> [4:15(seq=22)]
 *elapsed_time=0.000006000 sec
 
---- Change Priority ---
-[2:12(seq=21)] -> [4:12(seq=22)]
-*elapsed_time=0.000007000 sec
-
 --- Show tree (count=17) ---
 depth_max=4 (limit for showing=4)
-                      .----------------------{3:13}----------------------.                      
-          .----------{3: 7}----------.                    .----------{3: 9}----------.          
-    .----{3: 0}----.        .----{3: 2}----.        .----{3: 1}----.        .----{4:12}----.    
- .-{4: 3}-.    [5:17]      [5: 4]      [4:10]      [4: 5]      [4:11]      [5: 6]      [5:14]   
-[5:15][5: 8]                                                                                    
+                      .----------------------{4: 3}----------------------.                      
+          .----------{4:10}----------.                    .----------{4: 5}----------.          
+    .----{3: 1}----.        .----{4:15}----.        .----{4:11}----.        .----{3:13}----.    
+ .-{3: 7}-.    [2:17]      [3: 9]      [3: 0]      [3: 2]      [2:12]      [2:19]      [2:14]   
+[2:18][1:16]                                                                                    
 
 --- Dequeue ---
-[3:13] [3: 9] [3: 7] [3: 2] [3: 1] [3: 0] [4:12] [4:11] [4:10] [4: 5] 
-*elapsed_time=0.000008000 sec
+[4: 3] [4: 5] [4:10] [4:11] [4:15] [3: 0] [3: 1] [3: 2] [3: 7] [3: 9] 
+*elapsed_time=0.000010000 sec
 
 --- Show tree (count=7) ---
 depth_max=2 (limit for showing=4)
-    .----{4: 3}----.    
- .-{5:14}-.  .-{5:17}-. 
-[5: 4][5:15][5: 8][5: 6]
+    .----{3:13}----.    
+ .-{2:14}-.  .-{2:12}-. 
+[2:17][2:19][1:16][2:18]
 
 --- Dequeue ---
-[4: 3] [5:14] [5:17] [5:15] [5: 8] [5: 6] [5: 4] 
-*elapsed_time=0.000005000 sec
+[3:13] [2:12] [2:14] [2:18] [2:19] [2:17] [1:16] 
+*elapsed_time=0.000008000 sec
 
 --- Show tree (count=0) ---
 depth_max=-1 (limit for showing=4)
@@ -105,15 +179,15 @@ depth_max=-1 (limit for showing=4)
 [5:17(seq=17)]
 [2:18(seq=18)]
 [2:19(seq=19)]
-*elapsed_time=0.000037000 sec
+*elapsed_time=0.000040000 sec
 
 --- Show tree (count=20) ---
 depth_max=4 (limit for showing=4)
-                      .----------------------{1:16}----------------------.                      
-          .----------{2:19}----------.                    .----------{2:12}----------.          
-    .----{2:14}----.        .----{2:18}----.        .----{3: 1}----.        .----{3:13}----.    
- .-{3: 0}-.  .-{3: 7}-.  .-{3: 2]      [4:10]      [4: 5]      [4:11]      [5: 6]      [3: 9]   
-[5:15][4: 3][5: 8][5:17][5: 4]                                                                  
+                      .----------------------{5: 4}----------------------.                      
+          .----------{5: 8}----------.                    .----------{5: 6}----------.          
+    .----{5:15}----.        .----{4:10}----.        .----{4:11}----.        .----{4: 5}----.    
+ .-{4: 3}-.  .-{5:17}-.  .-{3: 9]      [3: 0]      [3: 2]      [2:12]      [3:13]      [2:14]   
+[3: 7][1:16][3: 1][2:18][2:19]                                                                  
 
 --- Clear ---
 OK
@@ -125,11 +199,11 @@ depth_max=-1 (limit for showing=4)
 --------------------------------------------------------------------------------
 [Test for priority_queue::containerAdapter(Priority Queue)] *Pointer
 
-pop: [1: 5](seq=4)
-pop: [2: 3](seq=2)
-pop: [3: 1](seq=0)
-pop: [4: 2](seq=1)
 pop: [5: 4](seq=3)
+pop: [4: 2](seq=1)
+pop: [3: 1](seq=0)
+pop: [2: 3](seq=2)
+pop: [1: 5](seq=4)
 
 --------------------------------------------------------------------------------
 [Test for priority_queue::containerAdapter(Priority Queue)] *Second time
@@ -155,36 +229,36 @@ pop: [5: 4](seq=3)
 [5:17(seq=17)]
 [2:18(seq=18)]
 [2:19(seq=19)]
-*elapsed_time=0.000054000 sec
+*elapsed_time=0.000048000 sec
 
 --- Show tree (count=20) ---
 depth_max=4 (limit for showing=4)
-                      .----------------------{1:16}----------------------.                      
-          .----------{2:19}----------.                    .----------{2:12}----------.          
-    .----{2:14}----.        .----{2:18}----.        .----{3: 1}----.        .----{3:13}----.    
- .-{3: 0}-.  .-{3: 7}-.  .-{3: 2]      [4:10]      [4: 5]      [4:11]      [5: 6]      [3: 9]   
-[5:15][4: 3][5: 8][5:17][5: 4]                                                                  
+                      .----------------------{5: 4}----------------------.                      
+          .----------{5: 8}----------.                    .----------{5: 6}----------.          
+    .----{5:15}----.        .----{4:10}----.        .----{4:11}----.        .----{4: 5}----.    
+ .-{4: 3}-.  .-{5:17}-.  .-{3: 9]      [3: 0]      [3: 2]      [2:12]      [3:13]      [2:14]   
+[3: 7][1:16][3: 1][2:18][2:19]                                                                  
 
 --- Dequeue ---
-[1:16] [2:19] [2:18] [2:14] [2:12] [3:13] [3: 9] [3: 7] [3: 2] [3: 1] 
+[5: 4] [5: 6] [5: 8] [5:15] [5:17] [4: 3] [4: 5] [4:10] [4:11] [3: 0] 
 *elapsed_time=0.000010000 sec
 
 --- Show tree (count=10) ---
 depth_max=3 (limit for showing=4)
-          .----------{3: 0}----------.          
-    .----{4:10}----.        .----{4:11}----.    
- .-{4: 3}-.  .-{5: 6]      [4: 5]      [5:15]   
-[5: 8][5:17][5: 4]                              
+          .----------{3: 1}----------.          
+    .----{3: 7}----.        .----{3: 2}----.    
+ .-{2:14}-.  .-{3: 9]      [2:12]      [3:13]   
+[2:18][1:16][2:19]                              
 
 --- Dequeue ---
-[3: 0] [4:11] [4:10] [4: 5] [4: 3] [5:17] [5:15] [5: 8] [5: 6] [5: 4] 
+[3: 1] [3: 2] [3: 7] [3: 9] [3:13] [2:12] [2:14] [2:18] [2:19] [1:16] 
 *elapsed_time=0.000007000 sec
 
 --- Show tree (count=0) ---
 depth_max=-1 (limit for showing=4)
 
 --- end ---
-*elapsed_time=0.000887000 sec
+*elapsed_time=0.000985000 sec
 
 --------------------------------------------------------------------------------
 [Test for binary_heap::container(Binary Heap)]
@@ -210,7 +284,7 @@ depth_max=-1 (limit for showing=4)
 [5:17]
 [2:18]
 [2:19]
-*elapsed_time=0.000034000 sec
+*elapsed_time=0.000049000 sec
 
 --- Show tree (count=20) ---
 depth_max=4 (limit for showing=4)
@@ -220,9 +294,83 @@ depth_max=4 (limit for showing=4)
  .-{4: 3}-.  .-{5:17}-.  .-{3: 9]      [3: 0]      [3: 2]      [2:12]      [3:13]      [2:14]   
 [3: 7][1:16][3: 1][2:18][2:19]                                                                  
 
+--- Print Queue List ---
+ [5,0:4] [5,0:8] [5,0:6] [5,0:15] [4,0:10] [4,0:11] [4,0:5] [4,0:3] [5,0:17] [3,0:9] [3,0:0] [3,0:2] [2,0:12] [3,0:13] [2,0:14] [3,0:7] [1,0:16] [3,0:1] [2,0:18] [2,0:19]
+
+--- Print Queue List (reverse) ---
+ [2,0:19] [2,0:18] [3,0:1] [1,0:16] [3,0:7] [2,0:14] [3,0:13] [2,0:12] [3,0:2] [3,0:0] [3,0:9] [5,0:17] [4,0:3] [4,0:5] [4,0:11] [4,0:10] [5,0:15] [5,0:6] [5,0:8] [5,0:4]
+
+--------------------[iterator operattion:begin]
+[constructor]
+ite:[0] priority=5, seqNo=0, value=4
+rite:[19] priority=2, seqNo=0, value=19
+ite2_end:[0] priority=5, seqNo=0, value=4
+rite2_end:[19] priority=2, seqNo=0, value=19
+ite_end - ite = 20
+ite - ite_end = -20
+rite_end - rite = 20
+rite - rite_end = -20
+ite2 - ite = 20
+ite - ite2 = -20
+rite2 - rite = 20
+rite - rite2 = -20
+[copy operator]
+ite:[0] priority=5, seqNo=0, value=4
+rite:[19] priority=2, seqNo=0, value=19
+ite2_end:[0] priority=5, seqNo=0, value=4
+rite2_end:[19] priority=2, seqNo=0, value=19
+[rite.base()]
+ite2_end:[0] priority=5, seqNo=0, value=4
+[++ite,--ie_end]
+ite:[1] priority=5, seqNo=0, value=8
+rite:[18] priority=2, seqNo=0, value=18
+ite_end:[19] priority=2, seqNo=0, value=19
+rite_end:[0] priority=5, seqNo=0, value=4
+[--ite,++ie_end]
+ite:[0] priority=5, seqNo=0, value=4
+rite:[19] priority=2, seqNo=0, value=19
+[ite[0]]
+ite:[0] priority=5, seqNo=0, value=4
+rite:[19] priority=2, seqNo=0, value=19
+[ite[1]]
+ite:[1] priority=5, seqNo=0, value=8
+rite:[18] priority=2, seqNo=0, value=18
+[ite[2]]
+ite:[3] priority=5, seqNo=0, value=15
+rite:[16] priority=1, seqNo=0, value=16
+[ite+=3]
+ite:[6] priority=4, seqNo=0, value=5
+rite:[13] priority=3, seqNo=0, value=13
+[ite-=3]
+ite:[3] priority=5, seqNo=0, value=15
+rite:[16] priority=1, seqNo=0, value=16
+ite_end - ite = 17
+ite - ite_end = -17
+rite_end - rite = 17
+rite - rite_end = -17
+[ite2-=2]
+ite2 - ite = 15
+ite - ite2 = -15
+rite2 - rite = 15
+rite - rite2 = -15
+[++ite_end]
+ite_end - ite = 0
+ite - ite_end = 0
+rite_end - rite = 0
+rite - rite_end = 0
+--------------------[iterator operattion:end]
+--------------------[lock operation:begin]
+.lockScoped() ... OK
+.lockUnique() ... OK
+.lockUnique(with_lock) ... OK
+.lockUnique(try_lock) ... OK
+.lockUnique(adopt_lock) ... OK
+.lockUnique(defer_lock) ... OK
+--------------------[lock operation:end]
+
 --- Pop nodes(Binary Heap) ---
 [5: 4] [5: 6] [5: 8] [5:15] [5:17] [4: 5] [4:11] [4:10] [4: 3] [3:13] 
-*elapsed_time=0.000008000 sec
+*elapsed_time=0.000064000 sec
 
 --- Show tree (count=10) ---
 depth_max=3 (limit for showing=4)
@@ -233,7 +381,7 @@ depth_max=3 (limit for showing=4)
 
 --- Pop nodes(Binary Heap) ---
 [3: 2] [3: 0] [3: 9] [3: 1] [3: 7] [2:19] [2:18] [2:12] [2:14] [1:16] 
-*elapsed_time=0.000006000 sec
+*elapsed_time=0.000007000 sec
 
 --- Show tree (count=0) ---
 depth_max=-1 (limit for showing=4)
@@ -262,22 +410,22 @@ depth_max=-1 (limit for showing=4)
 [5:17]
 [2:18]
 [2:19]
-*elapsed_time=0.000040000 sec
+*elapsed_time=0.000047000 sec
 
 --- Pop nodes(STL) ---
 [5: 4] [5: 6] [5: 8] [5:15] [5:17] [4: 5] [4:11] [4:10] [4: 3] [3:13] 
-*elapsed_time=0.000013000 sec
+*elapsed_time=0.000018000 sec
 
 --- Pop nodes(STL) ---
 [3: 2] [3: 0] [3: 9] [3: 1] [3: 7] [2:19] [2:18] [2:12] [2:14] [1:16] 
 *elapsed_time=0.000011000 sec
 
 --- end ---
-*elapsed_time=0.000276000 sec
+*elapsed_time=0.000437000 sec
 
 --- example_simple_priority_queue ---
 data = 0 0 0
-data = {1, {0,2}} {3, {0,0}} {5, {0,0}}
+data = {5, {0,0}} {3, {0,0}} {1, {0,2}}
 
 --- example_simple_binary_heap ---
 data = 5 3 1

@@ -481,6 +481,18 @@ ite - ite_end = 0
 rite_end - rite = 0
 rite - rite_end = 0
 --------------------[iterator operattion:end]
+--------------------[lock operation:begin]
+.lockScoped() ... OK
+.lockSharedScoped() ... OK
+.lockUnique() ... OK
+.lockUnique(with_lock) ... OK
+.lockUnique(with_lock_shared) ... OK
+.lockUnique(try_lock) ... OK
+.lockUnique(try_lock_shared) ... OK
+.lockUnique(adopt_lock) ... OK
+.lockUnique(adopt_shared_lock) ... OK
+.lockUnique(defer_lock) ... OK
+--------------------[lock operation:end]
 
 [pop_back(1)]
 back=[1:104]
@@ -604,10 +616,10 @@ array= [1:102] [1:101] [2:103] [2:104] [3:105] [3:106] [4:107] [4:108] [5:109] [
 [normal container]
 (before)
 offset=0, size=0, max_size=100
-array= [1:1] [0:0] [2:2] [4:4] [5:5] [6:6] [7:7] [9:9] [8:8] [3:3]
+array= [0:0] [1:1] [2:2] [4:4] [5:5] [6:6] [3:3] [8:8]
 (after)
 offset=0, size=10, max_size=100
-array= [0:0] [4:4] [5:5] [7:7] [3:3] [0:10] [6:16] [0:0] [7:17] [3:13]
+array= [1:1] [4:4] [7:7] [0:10] [6:16] [5:15] [3:13] [4:14] [8:18] [9:19]
 
 [multi-thread container]
 (before)
@@ -615,7 +627,7 @@ offset=0, size=0, max_size=100
 array=(empty)
 (after)
 offset=0, size=10, max_size=100
-array= [0:10] [1:11] [6:16] [8:18] [3:13] [9:19] [7:17] [2:12] [4:14] [5:15]
+array= [5:15] [7:17] [3:13] [1:11] [8:18] [4:14] [0:10] [9:19] [2:12] [6:16]
 --------------------------------------------------------------------------------
 [Test for performance ring_buffer]
 

@@ -33,6 +33,7 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 static const int TEST_DATA_TABLE_SIZE = 50000;//テストデータテーブルサイズ
 
 //#define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
+//#define TEST_LOCK_OPERATION//ロック操作をテストする場合は、このマクロを有効にする
 
 //#define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
 //#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
@@ -42,11 +43,15 @@ static const int TEST_DATA_TABLE_SIZE = 50000;//テストデータテーブル�
 static const int TEST_DATA_TABLE_SIZE = 20;//テストデータテーブルサイズ
 
 #define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
+#define TEST_LOCK_OPERATION//ロック操作をテストする場合は、このマクロを有効にする
 
 #define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
 //#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
 
 #endif//GASHA_OPTIMIZED
+
+static const int TEST_DATA_TABLE_SIZE_FOR_POINTER = 100;//ポインター型テストデータテーブルサイズ
+static const int TEST_DATA_TABLE_SIZE_FOR_FUNC = 100;//関数型テストデータテーブルサイズ
 
 #define TEST_USE_INSERT_TYPE 1//テストで使用するデータ登録方法
                               //1 ... 【推奨】emplace()メソッドにキーとコンストラクタパラメータを渡して登録する方法
@@ -59,9 +64,6 @@ static const int TEST_DATA_TABLE_SIZE = 20;//テストデータテーブルサ�
                             //1 ... 【推奨】[]オペレータにキーを渡して検索する方法
                             //2 ... at()メソッドにキーを渡して検索する方法
                             //3 ... find()メソッドにキーを渡して検索する方法 ※イテレータを返す
-
-static const int TEST_DATA_TABLE_SIZE_FOR_POINTER = 100;//ポインター型テストデータテーブルサイズ
-static const int TEST_DATA_TABLE_SIZE_FOR_FUNC = 100;//関数型テストデータテーブルサイズ
 
 //----------------------------------------
 //開番地法ハッシュテーブル用テストデータ
@@ -116,10 +118,12 @@ struct ope : public hash_table::baseOpe<ope, data_t, crc32_t>
 	//キーを取得
 	inline static key_type getKey(const value_type& value){ return value.m_key; }
 
+#ifdef TEST_LOCK_OPERATION
 	//ロック型
-	//※デフォルト（dummy_shared_lock）のままとする
-	//typedef shared_spin_lock lock_type;//ロックオブジェクト型
-	
+	//※デフォルトは dummySharedLock
+	typedef sharedSpinLock lock_type;//ロックオブジェクト型
+#endif//TEST_LOCK_OPERATION
+
 	//定数
 	//※任意に変更可能な設定
 	static const std::size_t AUTO_REHASH_RATIO = 0;//自動リハッシュ実行の基準割合(0～100) ※0で自動リハッシュなし

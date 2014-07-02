@@ -27,6 +27,7 @@ static const int TEST_DATA_REG_NUM = 1000000;//テストデータの登録数
 static const int TEST_DATA_STACK_DEPTH_MAX = 40;//テストデータの赤黒木操作用スタックの最大の深さ（デフォルトは40で、平衡木なら100万件は扱える）
 
 //#define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
+//#define TEST_LOCK_OPERATION//ロック操作をテストする場合は、このマクロを有効にする
 
 //#define PRINT_TEST_DATA_TREE//テストデータの木を表示する場合は、このマクロを有効化する（表示しなくても検索は実行する）
 //#define PRINT_TEST_DATA_SEARCH//テストデーたの検索結果を表示する場合は、このマクロを有効化する（表示しなくても検索は実行する）
@@ -42,6 +43,7 @@ static const int TEST_DATA_REG_NUM = 20;//テストデータの登録数
 static const int TEST_DATA_STACK_DEPTH_MAX = 40;//テストデータの赤黒木操作用スタックの最大の深さ（デフォルトは40で、平衡木なら100万件は扱える）
 
 #define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
+#define TEST_LOCK_OPERATION//ロック操作をテストする場合は、このマクロを有効にする
 
 #define PRINT_TEST_DATA_TREE//テストデータの木を表示する場合は、このマクロを有効化する（表示しなくても検索は実行する）
 #define PRINT_TEST_DATA_SEARCH//テストデーたの検索結果を表示する場合は、このマクロを有効化する（表示しなくても検索は実行する）
@@ -113,9 +115,11 @@ struct ope : public rb_tree::baseOpe<ope, data_t, int, TEST_DATA_STACK_DEPTH_MAX
 	//※デフォルトのままとする
 	//inline static int compareKey(const key_type lhs, const key_type rhs);
 
+#ifdef TEST_LOCK_OPERATION
 	//ロック型
-	//※デフォルト（dummy_shared_lock）のままとする
-	//typedef shared_spin_lock lock_type;//ロックオブジェクト型
+	//※デフォルトは dummySharedLock
+	typedef sharedSpinLock lock_type;//ロックオブジェクト型
+#endif//TEST_LOCK_OPERATION
 };
 
 //----------------------------------------

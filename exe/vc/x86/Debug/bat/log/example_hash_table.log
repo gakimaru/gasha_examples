@@ -37,7 +37,7 @@ name="Name_000007" ... OK
 name="Name_000008" ... OK
 name="Name_000009" ... OK
 success=10, failure=0
-*elapsed time=0.001000900 sec.
+*elapsed time=0.024112400 sec.
 
 --- Table Status ---
 .bucket_count()=23
@@ -111,10 +111,10 @@ rite: [15](15) key=0x596f18f4, name="Name_000007", value=7
 [ite[2]]
 ite: [7](4) key=0x4a3feb00, name="Name_000004", value=4
 rite: [13](13) key=0xb8546803, name="Name_000005", value=5
-+= 3
+[ite+=3]
 ite: [13](13) key=0xb8546803, name="Name_000005", value=5
 rite: [7](4) key=0x4a3feb00, name="Name_000004", value=4
--= 3
+[ite-=3]
 ite: [7](4) key=0x4a3feb00, name="Name_000004", value=4
 rite: [13](13) key=0xb8546803, name="Name_000005", value=5
 ite_end - ite = 7
@@ -132,6 +132,18 @@ ite - ite_end = 0
 rite_end - rite = 0
 rite - rite_end = 0
 --------------------[iterator operattion:end]
+--------------------[lock operation:begin]
+.lockScoped() ... OK
+.lockSharedScoped() ... OK
+.lockUnique() ... OK
+.lockUnique(with_lock) ... OK
+.lockUnique(with_lock_shared) ... OK
+.lockUnique(try_lock) ... OK
+.lockUnique(try_lock_shared) ... OK
+.lockUnique(adopt_lock) ... OK
+.lockUnique(adopt_shared_lock) ... OK
+.lockUnique(defer_lock) ... OK
+--------------------[lock operation:end]
 
 --- Find Data ---
 name="Name_000000" ... OK   [    14](    14) key=8da57c1f, name="Name_000000", value=0 (bucket=14, bucket_size=1)
@@ -278,7 +290,7 @@ name="Name_000017" ... OK   [    11](    11) key=4acd8083, name="Name_000017", v
 name="Name_000018" ... NG
 name="Name_000019" ... OK  *[     6](     4) key=e6b53fa4, name="Name_000019", value=19 (bucket=6, bucket_size=1)
 success=10, failure=10
-*elapsed time=0.000000000 sec.
+*elapsed time=0.001002400 sec.
 
 --- Rehash Table ---
 OK.
@@ -328,7 +340,7 @@ name="Name_000017" ... OK   [    11](    11) key=4acd8083, name="Name_000017", v
 name="Name_000018" ... NG
 name="Name_000019" ... OK  *[     6](     4) key=e6b53fa4, name="Name_000019", value=19 (bucket=6, bucket_size=1)
 success=10, failure=10
-*elapsed time=0.001000800 sec.
+*elapsed time=0.000000000 sec.
 
 --- Clear Table ---
 OK.
@@ -512,7 +524,7 @@ success=0, failure=20
 
 End
 ============================================================
-*elapsed time=0.002001700 sec.
+*elapsed time=0.025114800 sec.
 
 --------------------------------------------------------------------------------
 [STL] Hash Table Test
@@ -585,7 +597,7 @@ name="Name_000017" ... NG
 name="Name_000018" ... NG
 name="Name_000019" ... NG
 success=10, failure=10
-*elapsed time=0.000000000 sec.
+*elapsed time=0.001000800 sec.
 
 --- [STL] Erase Data ---
 name="Name_000000" ... OK
@@ -599,7 +611,7 @@ name="Name_000014" ... NG
 name="Name_000016" ... NG
 name="Name_000018" ... NG
 success=5, failure=5
-*elapsed time=0.001000900 sec.
+*elapsed time=0.000000000 sec.
 
 --- [STL] Table Status ---
 .size()=5
@@ -806,7 +818,7 @@ name="Name_000017" ... OK
 name="Name_000018" ... OK
 name="Name_000019" ... OK
 success=20, failure=0
-*elapsed time=0.001001200 sec.
+*elapsed time=0.001000600 sec.
 
 --- [STL] Table Status ---
 .size()=20
@@ -922,7 +934,7 @@ success=0, failure=20
 
 End
 ============================================================
-*elapsed time=0.002002100 sec.
+*elapsed time=0.002001400 sec.
 
 --------------------------------------------------------------------------------
 Hash Table Test for Pointer

@@ -2,38 +2,38 @@
 [Test for priority_queue::containerAdapter(Priority Queue)]
 
 --- Enqueue ---
-*elapsed_time=0.052262000 sec
+*elapsed_time=0.146833000 sec
 
 --- Dequeue ---
-*elapsed_time=0.000006000 sec
+*elapsed_time=0.000010000 sec
 
 --- Change Priority ---
-[1:999984(seq=999984)] -> [5:999984(seq=1000000)]
-*elapsed_time=0.000007000 sec
+[5:15(seq=15)] -> [5:15(seq=5000000)]
+*elapsed_time=0.000004000 sec
 
 --- Change Priority ---
-[1:999983(seq=999983)] -> [2:999983(seq=1000001)]
+[5:17(seq=17)] -> [2:17(seq=5000001)]
 *elapsed_time=0.000008000 sec
 
 --- Change Priority ---
-[1:999965(seq=999965)] -> [4:999965(seq=1000002)]
+[5:22(seq=22)] -> [4:22(seq=5000002)]
 *elapsed_time=0.000007000 sec
 
 --- Dequeue ---
-*elapsed_time=0.119496000 sec
+*elapsed_time=0.665912000 sec
 
 --- Dequeue ---
-*elapsed_time=0.130507000 sec
+*elapsed_time=0.788845000 sec
 
 --------------------------------------------------------------------------------
 [Test for priority_queue::containerAdapter(Priority Queue)] *Clear
 
 --- Enqueue ---
-*elapsed_time=0.047992000 sec
+*elapsed_time=0.130252000 sec
 
 --- Clear ---
 OK
-*elapsed_time=0.001625000 sec
+*elapsed_time=0.008111000 sec
 
 --------------------------------------------------------------------------------
 [Test for priority_queue::containerAdapter(Priority Queue)] *Pointer
@@ -43,47 +43,47 @@ OK
 [Test for priority_queue::containerAdapter(Priority Queue)] *Second time
 
 --- Enqueue ---
-*elapsed_time=0.048313000 sec
+*elapsed_time=0.129903000 sec
 
 --- Dequeue ---
-*elapsed_time=0.144364000 sec
+*elapsed_time=0.669058000 sec
 
 --- Dequeue ---
-*elapsed_time=0.140776000 sec
+*elapsed_time=0.799848000 sec
 
 --- end ---
-*elapsed_time=0.690139000 sec
+*elapsed_time=3.381755000 sec
 
 --------------------------------------------------------------------------------
 [Test for binary_heap::container(Binary Heap)]
 
 --- Push nodes(Binary Heap) ---
-*elapsed_time=0.029150000 sec
+*elapsed_time=0.129998000 sec
 
 --- Pop nodes(Binary Heap) ---
-*elapsed_time=0.076033000 sec
+*elapsed_time=0.471831000 sec
 
 --- Pop nodes(Binary Heap) ---
-*elapsed_time=0.063395000 sec
+*elapsed_time=0.359381000 sec
 
 --------------------------------------------------------------------------------
 [Test for std::priority_queue(STL)]
 
 --- Push nodes(STL) ---
-*elapsed_time=0.039677000 sec
+*elapsed_time=0.226118000 sec
 
 --- Pop nodes(STL) ---
-*elapsed_time=0.057361000 sec
+*elapsed_time=0.296357000 sec
 
 --- Pop nodes(STL) ---
-*elapsed_time=0.056284000 sec
+*elapsed_time=0.298933000 sec
 
 --- end ---
-*elapsed_time=0.326589000 sec
+*elapsed_time=1.824119000 sec
 
 --- example_simple_priority_queue ---
 data = 0 0 0
-data = {1, {0,2}} {3, {0,0}} {5, {0,0}}
+data = {5, {0,0}} {3, {0,0}} {1, {0,2}}
 
 --- example_simple_binary_heap ---
 data = 5 3 1

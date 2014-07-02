@@ -26,8 +26,11 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 static const int TEST_DATA_PRIOR_MIN = 1;//テストデータの最小プライオリティ
 static const int TEST_DATA_PRIOR_MAX = 5;//テストデータの最大プライオリティ
-static const int TEST_DATA_MAX = 1000000;//テストデータの最大登録可能数
-static const int TEST_DATA_REG_NUM = 1000000;//テストデータの登録数
+static const int TEST_DATA_MAX = 5000000;//テストデータの最大登録可能数
+static const int TEST_DATA_REG_NUM = 5000000;//テストデータの登録数
+
+//#define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
+//#define TEST_LOCK_OPERATION//ロック操作をテストする場合は、このマクロを有効にする
 
 //#define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
 //#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
@@ -39,12 +42,33 @@ static const int TEST_DATA_PRIOR_MAX = 5;//テストデータの最大プライ�
 static const int TEST_DATA_MAX = 128;//テストデータの最大登録可能数
 static const int TEST_DATA_REG_NUM = 20;//テストデータの登録数
 
+#define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
+#define TEST_LOCK_OPERATION//ロック操作をテストする場合は、このマクロを有効にする
+
 #define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
 //#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
 
 #endif//GASHA_OPTIMIZED
 
 static const int TEST_DATA_TABLE_SIZE_FOR_POINTER = 100;//ポインター型テストデータテーブルサイズ
+
+#define TEST_USE_ENQUEUE_TYPE 2//優先度付きキューのテストで使用するエンキュー方法
+                               //1 ... オブジェクトを受け渡す方法
+                               //2 ... 【推奨】コンストラクタパラメータを渡して登録する方法
+                               //3 ... 新規キュー（オブジェクト）の参照を受け取って値をセットする方法
+
+#define TEST_USE_DEQUEUE_TYPE 1//優先度付きキューのテストで使用するデキュー方法
+                               //1 ... 【推奨】情報取得用のオブジェクトを受け渡す
+                               //2 ... キュー（オブジェクト）の参照を受け取る方法
+
+#define TEST_USE_PUSH_TYPE 2//二分ヒープのテストで使用するプッシュ方法
+                            //1 ... オブジェクトを受け渡す方法
+                            //2 ... 【推奨】コンストラクタパラメータを渡して登録する方法
+                            //3 ... 新規キュー（オブジェクト）の参照を受け取って値をセットする方法
+
+#define TEST_USE_POP_TYPE 1//二分ヒープのテストで使用するデキュー方法
+                           //1 ... 【推奨】情報取得用のオブジェクトを受け渡す
+                           //2 ... キュー（オブジェクト）の参照を受け取る方法
 
 //----------------------------------------
 //テストデータ
@@ -95,9 +119,11 @@ struct ope : public priority_queue::baseOpe<ope, data_t, PRIORITY, int>
 	//シーケンス番号を更新
 	inline static void setSeqNo(node_type& node, const seq_no_type seq_no){ node.m_seqNo = seq_no; }
 
+#ifdef TEST_LOCK_OPERATION
 	//ロック型
-	//※デフォルト（dummy_lock）のままとする
-	//typedef spin_lock lock_type;//ロックオブジェクト型
+	//※デフォルトは dummyLock
+	typedef spinLock lock_type;//ロックオブジェクト型
+#endif//TEST_LOCK_OPERATION
 };
 //----------------------------------------
 //テストデータ操作クラス：優先度付きキュー用（ポインター操作用）
@@ -127,9 +153,11 @@ struct heap_ope : public binary_heap::baseOpe<heap_ope, data_t>
 		}
 	};
 
+#ifdef TEST_LOCK_OPERATION
 	//ロック型
-	//※デフォルト（dummy_lock）のままとする
-	//typedef spin_lock lock_type;//ロックオブジェクト型
+	//※デフォルトは dummyLock
+	typedef spinLock lock_type;//ロックオブジェクト型
+#endif//TEST_LOCK_OPERATION
 };
 
 //----------------------------------------

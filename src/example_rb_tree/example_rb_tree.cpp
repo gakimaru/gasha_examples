@@ -375,7 +375,7 @@ void example_rb_tree()
 	showListDesc();
 	prev_time = printElapsedTime(prev_time);//経過時間を表示
 
-	#ifdef TEST_ITERATOR_OPERATION
+#ifdef TEST_ITERATOR_OPERATION
 	{
 		printf("\n");
 		printf("--------------------[iterator operattion:begin]\n");
@@ -484,6 +484,56 @@ void example_rb_tree()
 		printf("--------------------[iterator operattion:end]\n");
 	}
 #endif
+
+#ifdef TEST_LOCK_OPERATION
+	//ロック操作テスト
+	printf("--------------------[lock operation:begin]\n");
+	{
+		auto lock(con.lockScoped());//lock_guard<container_t::lock_type> lock(*con);と同じ
+		printf(".lockScoped() ... OK\n");
+	}
+	{
+		auto lock(con.lockSharedScoped());//shared_lock_guard<container_t::lock_type> lock(*con);と同じ
+		printf(".lockSharedScoped() ... OK\n");
+	}
+	{
+		auto lock(con.lockUnique());//unique_shared_lock<container_t::lock_type> lock(*con);と同じ
+		printf(".lockUnique() ... OK\n");
+	}
+	{
+		auto lock(con.lockUnique(with_lock));//unique_shared_lock<container_t::lock_type> lock(*con, with_lock);と同じ
+		printf(".lockUnique(with_lock) ... OK\n");
+	}
+	{
+		auto lock(con.lockUnique(with_lock_shared));//unique_shared_lock<container_t::lock_type> lock(*con, with_lock_shared);と同じ
+		printf(".lockUnique(with_lock_shared) ... OK\n");
+	}
+	{
+		auto lock(con.lockUnique(try_lock));//unique_shared_lock<container_t::lock_type> lock(*con, try_lock);と同じ
+		printf(".lockUnique(try_lock) ... OK\n");
+	}
+	{
+		auto lock(con.lockUnique(try_lock_shared));//unique_shared_lock<container_t::lock_type> lock(*con, try_lock_shared);と同じ
+		printf(".lockUnique(try_lock_shared) ... OK\n");
+	}
+	{
+		container_t::lock_type& lock_obj = con;
+		lock_obj.lock();
+		auto lock(con.lockUnique(adopt_lock));//unique_shared_lock<container_t::lock_type> lock(*con, adopt_lock);と同じ
+		printf(".lockUnique(adopt_lock) ... OK\n");
+	}
+	{
+		container_t::lock_type& lock_obj = con;
+		lock_obj.lock_shared();
+		auto lock(con.lockUnique(adopt_shared_lock));//unique_shared_lock<container_t::lock_type> lock(*con, adopt_shared_lock);と同じ
+		printf(".lockUnique(adopt_shared_lock) ... OK\n");
+	}
+	{
+		auto lock(con.lockUnique(defer_lock));//unique_shared_lock<container_t::lock_type> lock(*con, defer_lock);と同じ
+		printf(".lockUnique(defer_lock) ... OK\n");
+	}
+	printf("--------------------[lock operation:end]\n");
+#endif//TEST_LOCK_OPERATION
 
 	//指定のキーのノードを検索し、同じキーのノードをリストアップ
 	auto searchData = [&con]()
