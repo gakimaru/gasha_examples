@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
-// exmaple_fast_div.cpp
-// 高速除算テスト
+// main.cpp
+// 高速算術テスト - メイン
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -8,18 +8,17 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_fast_div.h"//高速除算テスト
+#include "example_fast_math.h"//高速算術テスト
 
-//#include <gasha/fast_div.h>//高速除算
+#include <stdio.h>
+#include <stdlib.h>
 
-#include <stdio.h>//printf()
-
-GASHA_USING_NAMESPACE;//ネームスペース使用
-
-//----------------------------------------
-//高速除算テスト
-void example_fast_div()
+int main(const int argc, const char* argv[])
 {
+	//高速算術テスト
+	example_fast_math();
+	
+	return EXIT_SUCCESS;
 }
 
 // End of file

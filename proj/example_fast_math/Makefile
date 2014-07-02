@@ -11,7 +11,7 @@
 #-------------------------------------------------------------------------------
 
 # 実行ファイル名
-PROG_NAME := example_fast_div
+PROG_NAME := example_fast_math
 
 # プロジェクトの先頭ディレクトリ
 PROJ_BASE_DIR := ..
@@ -23,7 +23,7 @@ PROJ_SRC_DIR := $(SRC_BASE_DIR)/$(PROG_NAME)
 # ソースファイル
 SRCS := \
 	main.cpp \
-	$(PROJ_SRC_DIR)/example_fast_div.cpp \
+	$(PROJ_SRC_DIR)/example_fast_math.cpp \
 
 # インクルードディレクトリ
 INCLIDE_DIRS := \

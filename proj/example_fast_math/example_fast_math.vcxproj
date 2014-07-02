@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{756E33F7-C99C-4D11-8B28-F938B30450A0}</ProjectGuid>
+    <ProjectGuid>{983D3315-429D-4133-A5D4-D9C07D3FCB7A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>example_fast_div</RootNamespace>
+    <RootNamespace>example_fast_math</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -93,7 +93,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.;$(ProjectDir);$(ProjectDir)../../src/example_fast_div;$(ProjectDir)../../sub/gasha/include;$(ProjectDir)../../sub/gasha_settings/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(ProjectDir);$(ProjectDir)../../src/example_fast_math;$(ProjectDir)../../sub/gasha/include;$(ProjectDir)../../sub/gasha_settings/include</AdditionalIncludeDirectories>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
       <FloatingPointExceptions>false</FloatingPointExceptions>
@@ -122,7 +122,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.;$(ProjectDir);$(ProjectDir)../../src/example_fast_div;$(ProjectDir)../../sub/gasha/include;$(ProjectDir)../../sub/gasha_settings/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(ProjectDir);$(ProjectDir)../../src/example_fast_math;$(ProjectDir)../../sub/gasha/include;$(ProjectDir)../../sub/gasha_settings/include</AdditionalIncludeDirectories>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
       <FloatingPointExceptions>false</FloatingPointExceptions>
@@ -153,7 +153,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.;$(ProjectDir);$(ProjectDir)../../src/example_fast_div;$(ProjectDir)../../sub/gasha/include;$(ProjectDir)../../sub/gasha_settings/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(ProjectDir);$(ProjectDir)../../src/example_fast_math;$(ProjectDir)../../sub/gasha/include;$(ProjectDir)../../sub/gasha_settings/include</AdditionalIncludeDirectories>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
@@ -187,7 +187,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.;$(ProjectDir);$(ProjectDir)../../src/example_fast_div;$(ProjectDir)../../sub/gasha/include;$(ProjectDir)../../sub/gasha_settings/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(ProjectDir);$(ProjectDir)../../src/example_fast_math;$(ProjectDir)../../sub/gasha/include;$(ProjectDir)../../sub/gasha_settings/include</AdditionalIncludeDirectories>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
@@ -213,7 +213,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\example_fast_div\example_fast_div.cpp" />
+    <ClCompile Include="..\..\src\example_fast_math\example_fast_math.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="standard.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -223,7 +223,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\example_fast_div\example_fast_div.h" />
+    <ClInclude Include="..\..\src\example_fast_math\example_fast_math.h" />
     <ClInclude Include="standard.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
