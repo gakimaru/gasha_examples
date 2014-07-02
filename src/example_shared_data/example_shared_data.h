@@ -53,27 +53,33 @@ static const int TEST_TAGGED_PTR_TAG_SHIFT = -8;//タグ位置=上位8bit       
 #define ENABLE_TEST_PRINT_DEBUG_INFO//スレッドテストの最後にデバッグ情報を表示する場合は、このマクロを有効化する
 //#define TEST_1_TIME//1回だけのテストを実行する場合は、このマクロを有効化する
 #ifdef TEST_1_TIME
+
 static const int TEST_COUNT = 1;//テスト回数
 static const int TEST_PRINT_COUNT = 0;//テスト中のメッセージ表示回数
 static const int TEST_PUSH_THREADS = 1;//テスト用のプッシュ／エンキュースレッド数
 static const int TEST_POP_THREADS = 1;//テスト用のポップ／デキュースレッド数
 static const int TEST_ALLOC_THREADS = 1;//テスト用のアロケートスレッド数
 static const int TEST_POOL_SIZE = 10;//テスト用プールアロケータのプールサイズ
+
 #else//TEST_1_TIME
 #ifdef GASHA_OPTIMIZED
-static const int TEST_COUNT = 5000000;//テスト回数
+
+static const int TEST_COUNT = 1000000;//テスト回数
 static const int TEST_PRINT_COUNT = 5;//テスト中のメッセージ表示回数
 static const int TEST_PUSH_THREADS = 3;//テスト用のプッシュ／エンキュースレッド数
 static const int TEST_POP_THREADS = 2;//テスト用のポップ／デキュースレッド数
 static const int TEST_ALLOC_THREADS = 5;//テスト用のアロケートスレッド数
 static const int TEST_POOL_SIZE = 20;//テスト用プールアロケータのプールサイズ
+
 #else//GASHA_OPTIMIZED
-static const int TEST_COUNT = 10000;//テスト回数
+
+static const int TEST_COUNT = 100;//テスト回数
 static const int TEST_PRINT_COUNT = 5;//テスト中のメッセージ表示回数
 static const int TEST_PUSH_THREADS = 3;//テスト用のプッシュ／エンキュースレッド数
 static const int TEST_POP_THREADS = 2;//テスト用のポップ／デキュースレッド数
 static const int TEST_ALLOC_THREADS = 5;//テスト用のアロケートスレッド数
 static const int TEST_POOL_SIZE = 20;//テスト用プールアロケータのプールサイズ
+
 #endif//GASHA_OPTIMIZED
 #endif//TEST_1_TIME
 #ifdef ENABLE_TEST_PRINT

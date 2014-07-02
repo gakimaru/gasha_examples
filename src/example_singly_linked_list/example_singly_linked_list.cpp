@@ -832,7 +832,7 @@ void example_singly_linked_list()
 		{
 			printf("binarySearchValue(key=%d, value=%d)=", key, value);
 			auto comparison = [&key, &value](const data_t& lhs) -> int { return key == lhs.m_key ? lhs.m_val - value : key > lhs.m_key ? 1 : -1; };
-			auto ite = con.binary_search(comparison);//二分探索
+			auto ite = con.binarySearch(comparison);//二分探索
 			if (ite.isExist())
 				printf(" [%d:%d]", ite->m_key, ite->m_val);
 			else

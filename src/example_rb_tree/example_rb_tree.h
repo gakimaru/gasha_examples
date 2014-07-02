@@ -18,37 +18,35 @@
 
 //--------------------------------------------------------------------------------
 //赤黒木テスト用設定とコンパイラスイッチ
-static const int TEST_DATA_KEY_MIN = 1;//テストデータの最小キー
-static const int TEST_DATA_KEY_MAX = 10;//テストデータの最大キー
-static const int TEST_DATA_REG_NUM = 20;//テストデータの登録数
-static const int TEST_DATA_STACK_DEPTH_MAX = 40;//テストデータの赤黒木操作用スタックの最大の深さ（デフォルトは40で、平衡木なら100万件は扱える）
 
 #ifdef GASHA_OPTIMIZED
 
-static const int TEST_DATA_NUM = 20000;//大量登録テストデータの登録数
+static const int TEST_DATA_KEY_MIN = 1;//テストデータの最小キー
+static const int TEST_DATA_KEY_MAX = 1000;//テストデータの最大キー
+static const int TEST_DATA_REG_NUM = 1000000;//テストデータの登録数
+static const int TEST_DATA_STACK_DEPTH_MAX = 40;//テストデータの赤黒木操作用スタックの最大の深さ（デフォルトは40で、平衡木なら100万件は扱える）
 
-static const int TEST_DATA_FIND_NUM = 100;//線形探索テストの回数
-static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST_DATA_NUM / TEST_DATA_FIND_NUM : 1;//線形探索テストの実行ステップ
+//#define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
 
 //#define PRINT_TEST_DATA_TREE//テストデータの木を表示する場合は、このマクロを有効化する（表示しなくても検索は実行する）
 //#define PRINT_TEST_DATA_SEARCH//テストデーたの検索結果を表示する場合は、このマクロを有効化する（表示しなくても検索は実行する）
 //#define PRINT_TEST_DATA_COLOR_COUNT//テストデータの赤黒カウント数計測を表示する場合は、このマクロを有効化する
 //#define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
-//#define ENABLE_CALC_COUNT_PERFORMANCE//データ件数カウントの処理時間を計測する場合は、このマクロを有効化する
 //#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
 
 #else//GASHA_OPTIMIZED
 
-static const int TEST_DATA_NUM = 10;//大量登録テストデータの登録数
+static const int TEST_DATA_KEY_MIN = 1;//テストデータの最小キー
+static const int TEST_DATA_KEY_MAX = 10;//テストデータの最大キー
+static const int TEST_DATA_REG_NUM = 20;//テストデータの登録数
+static const int TEST_DATA_STACK_DEPTH_MAX = 40;//テストデータの赤黒木操作用スタックの最大の深さ（デフォルトは40で、平衡木なら100万件は扱える）
 
-static const int TEST_DATA_FIND_NUM = 100;//線形探索テストの回数
-static const int TEST_DATA_FIND_STEP = TEST_DATA_NUM > TEST_DATA_FIND_NUM ? TEST_DATA_NUM / TEST_DATA_FIND_NUM : 1;//線形探索テストの実行ステップ
+#define TEST_ITERATOR_OPERATION//イテレータ操作をテストする場合は、このマクロを有効にする
 
 #define PRINT_TEST_DATA_TREE//テストデータの木を表示する場合は、このマクロを有効化する（表示しなくても検索は実行する）
 #define PRINT_TEST_DATA_SEARCH//テストデーたの検索結果を表示する場合は、このマクロを有効化する（表示しなくても検索は実行する）
 #define PRINT_TEST_DATA_COLOR_COUNT//テストデータの赤黒カウント数計測を表示する場合は、このマクロを有効化する
 #define PRINT_TEST_DATA_DETAIL//テストデータの詳細を表示する場合は、このマクロを有効化する
-//#define ENABLE_CALC_COUNT_PERFORMANCE//データ件数カウントの処理時間を計測する場合は、このマクロを有効化する
 //#define TEST_DATA_WATCH_CONSTRUCTOR//コンストラクタ／デストラクタ／代入演算子の動作を確認する場合、このマクロを有効化する
 
 #endif//GASHA_OPTIMIZED

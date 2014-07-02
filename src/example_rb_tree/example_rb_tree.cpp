@@ -139,9 +139,9 @@ void example_rb_tree()
 	auto regList = [&con]()
 	{
 		printf("--- Make table ---\n");
-		auto insert = [&con](const int key)
+		auto insert = [&con](const int key, const int val)
 		{
-			data_t* new_node = new data_t(key, 1000 + key);
+			data_t* new_node = new data_t(key, val);
 			printf_detail("[%2d:%d] ", new_node->m_key, new_node->m_val);
 			con.insert(*new_node);
 			rb_tree::printf_dbg_add("\n");
@@ -151,7 +151,7 @@ void example_rb_tree()
 		for (int i = 0; i < TEST_DATA_REG_NUM; ++i)
 		{
 			const int key = TEST_DATA_KEY_MIN + i % (TEST_DATA_KEY_MAX - TEST_DATA_KEY_MIN + 1);
-			insert(key);
+			insert(key, 1000 + i);
 		}
 	#else//REGIST_TEST_DATA_SEQUENTIALLY
 	#ifndef TEST_DATA_REGISTRATION_LIST
@@ -160,12 +160,15 @@ void example_rb_tree()
 		rand_engine.seed(0);
 		std::uniform_int_distribution<int> rand_dist(TEST_DATA_KEY_MIN, TEST_DATA_KEY_MAX);
 		for (int i = 0; i < TEST_DATA_REG_NUM; ++i)
-			insert(rand_dist(rand_engine));
+			insert(rand_dist(rand_engine), 1000 + i);
 	#else//TEST_DATA_REGISTRATION_LIST
 		//固定順にデータ登録
 		const int key_list[] = TEST_DATA_REGISTRATION_LIST;
-		for (int key : key_list)
-			insert(key);
+		{
+			int i = 0;
+			for (int key : key_list)
+				insert(key, 1000 + (i++));
+		}
 	#endif//TEST_DATA_REGISTRATION_LIST
 	#endif//REGIST_TEST_DATA_SEQUENTIALLY
 		printf_detail("\n");
@@ -253,21 +256,6 @@ void example_rb_tree()
 	showTree();
 	prev_time = printElapsedTime(prev_time);//経過時間を表示
 
-#ifdef ENABLE_CALC_COUNT_PERFORMANCE
-	//ノード数カウントの時間計測
-	auto calcNodesCount = [&con]()
-	{
-		static const int loop_max = 10000000;
-		printf("--- Calc count (%d times) ---\n", loop_max);
-		long long count = 0;
-		for (int i = 0; i < loop_max; ++i)
-			count += con.size();
-		printf("count=%lld\n", count);
-	};
-	calcNodesCount();
-	prev_time = printElapsedTime(prev_time);//経過時間を表示
-#endif//ENABLE_CALC_COUNT_PERFORMANCE
-
 	//各枝までのノード数を表示
 	//※条件③と条件④違反確認
 	auto showNodesCount = [&con]()
@@ -352,20 +340,12 @@ void example_rb_tree()
 	{
 		printf("--- Show nodes ascending (count=%d) ---\n", con.size());
 		bool is_found = false;
-		for (const data_t& obj : con)//※イテレータ（.begin() , .end()）が暗黙的に使用される
+		for (const data_t& obj : con)
 		{
 			if (!is_found)
 				is_found = true;
-			printf_detail("[%2d] ", obj.m_key);
+			printf_detail("[%2d:%4d] ", obj.m_key, obj.m_val);
 		}
-		//※イテレータの変数宣言と値の更新を分けた方が若干効率的
-		//const_reverse_iterator ite;con._begin(ite);
-		//const_reverse_iterator end;con._end(end);
-		//for (; ite != end; ++ite)
-		//{
-		//	const data_t& obj = *ite;
-		//	...
-		//}
 		if (is_found)
 			printf_detail("\n");
 		else
@@ -384,17 +364,9 @@ void example_rb_tree()
 			{
 				if (!is_found)
 					is_found = true;
-				printf_detail("[%2d] ", obj.m_key);
+				printf_detail("[%2d:%4d] ", obj.m_key, obj.m_val);
 			}
 		);
-		//※イテレータの変数宣言と値の更新を分けた方が効率的
-		//const_reverse_iterator ite;con._rbegin(ite);
-		//const_reverse_iterator end;con._rend(end);
-		//for (; ite != end; ++ite)
-		//{
-		//	const data_t& obj = *ite;
-		//	...
-		//}
 		if (is_found)
 			printf_detail("\n");
 		else
@@ -403,9 +375,11 @@ void example_rb_tree()
 	showListDesc();
 	prev_time = printElapsedTime(prev_time);//経過時間を表示
 
-#if 0//イテレータとロック取得のテスト
+	#ifdef TEST_ITERATOR_OPERATION
 	{
-		shared_lock_guard<container_t::lock_type> lock(con);
+		printf("\n");
+		printf("--------------------[iterator operattion:begin]\n");
+		printf("[constructor]\n");
 		container_t::iterator ite = con.begin();
 		container_t::reverse_iterator rite = con.rbegin();
 		container_t::iterator ite_end = con.end();
@@ -415,15 +389,23 @@ void example_rb_tree()
 		container_t::iterator ite2_end = con.rend();
 		container_t::reverse_iterator rite2_end = con.end();
 		printf("constructor\n");
-		if (ite.isExist()) printf("ite:key=%d\n", ite->m_key);
-		if (rite.isExist()) printf("rite:key=%d\n", rite->m_key);
-		if (ite_end.isExist()) printf("ite_end:key=%d\n", ite_end->m_key);
-		if (rite_end.isExist()) printf("rite_end:key=%d\n", rite_end->m_key);
-		if (ite2.isExist()) printf("ite2:key=%d\n", ite2->m_key);
-		if (rite2.isExist()) printf("rite2:key=%d\n", rite2->m_key);
-		if (ite2_end.isExist()) printf("ite2_end:key=%d\n", ite2_end->m_key);
-		if (rite2_end.isExist()) printf("rite2_end:key=%d\n", rite2_end->m_key);
-		printf("copy operator\n");
+		if (ite.isExist()) printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
+		if (rite.isExist()) printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
+		if (ite_end.isExist()) printf("ite_end:key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
+		if (rite_end.isExist()) printf("rite_end:key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
+		if (ite2.isExist()) printf("ite2:key=%d, value=%d\n", ite2->m_key, ite2->m_val);
+		if (rite2.isExist()) printf("rite2:key=%d, value=%d\n", rite2->m_key, rite2->m_val);
+		if (ite2_end.isExist()) printf("ite2_end:key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
+		if (rite2_end.isExist()) printf("rite2_end:key=%d, value=%d\n", rite2_end->m_key, rite2_end->m_val);
+		printf("ite_end - ite = %d\n", ite_end - ite);
+		printf("ite - ite_end = %d\n", ite - ite_end);
+		printf("rite_end - rite = %d\n", rite_end - rite);
+		printf("rite - rite_end = %d\n", rite - rite_end);
+		printf("ite2 - ite = %d\n", ite2 - ite);
+		printf("ite - ite2 = %d\n", ite - ite2);
+		printf("rite2 - rite = %d\n", rite2 - rite);
+		printf("rite - rite2 = %d\n", rite - rite2);
+		printf("[copy operator]\n");
 		ite = con.begin();
 		rite = con.rbegin();
 		ite_end = con.end();
@@ -432,75 +414,81 @@ void example_rb_tree()
 		rite2 = con.begin();
 		ite2_end = con.rend();
 		rite2_end = con.end();
-		if (ite.isExist()) printf("ite:key=%d\n", ite->m_key);
-		if (rite.isExist()) printf("rite:key=%d\n", rite->m_key);
-		if (ite_end.isExist()) printf("ite_end:key=%d\n", ite_end->m_key);
-		if (rite_end.isExist()) printf("rite_end:key=%d\n", rite_end->m_key);
-		if (ite2.isExist()) printf("ite2:key=%d\n", ite2->m_key);
-		if (rite2.isExist()) printf("rite2:key=%d\n", rite2->m_key);
-		if (ite2_end.isExist()) printf("ite2_end:key=%d\n", ite2_end->m_key);
-		if (rite2_end.isExist()) printf("rite2_end:key=%d\n", rite2_end->m_key);
-		for (int i = 0; i <= 3; ++i)
+		if (ite.isExist()) printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
+		if (rite.isExist()) printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
+		if (ite_end.isExist()) printf("ite_end:key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
+		if (rite_end.isExist()) printf("rite_end:key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
+		if (ite2.isExist()) printf("ite2:key=%d, value=%d\n", ite2->m_key, ite2->m_val);
+		if (rite2.isExist()) printf("rite2:key=%d, value=%d\n", rite2->m_key, rite2->m_val);
+		if (ite2_end.isExist()) printf("ite2_end:key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
+		if (rite2_end.isExist()) printf("rite2_end:key=%d, value=%d\n", rite2_end->m_key, rite2_end->m_val);
+		printf("[rite.base()]\n");
+		ite2 = rite.base();
+		ite2_end = rite_end.base();
+		if (ite2.isExist()) printf("ite2: key=%d, value=%d\n", ite2->m_key, ite2->m_val);
+		if (ite2_end.isExist()) printf("ite2_end: key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
+		printf("[++ite,--ie_end]\n");
+		++ite;
+		++rite;
+		--ite_end;
+		--rite_end;
+		if (ite.isExist()) printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
+		if (rite.isExist()) printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
+		if (ite_end.isExist()) printf("ite_end:key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
+		if (rite_end.isExist()) printf("rite_end:key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
+		printf("[--ite,++ite_end]\n");
+		--ite;
+		--rite;
+		++ite_end;
+		++rite_end;
+		if (ite.isExist()) printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
+		if (rite.isExist()) printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
+		if (ite_end.isExist()) printf("ite_end:key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
+		if (rite_end.isExist()) printf("rite_end:key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
+		for (int i = 0; i < 3; ++i)
 		{
-			printf("[%d]\n", i);
+			printf("[ite[%d]]\n", i);
 			ite = ite[i];
 			rite = rite[i];
-			ite_end = ite_end[i];
-			rite_end = rite_end[i];
-			ite2 = ite2[i];
-			rite2 = rite2[i];
-			ite2_end = ite2_end[i];
-			rite2_end = rite2_end[i];
-			if (ite.isExist()) printf("ite:key=%d\n", ite->m_key);
-			if (rite.isExist()) printf("rite:key=%d\n", rite->m_key);
-			if (ite_end.isExist()) printf("ite_end:key=%d\n", ite_end->m_key);
-			if (rite_end.isExist()) printf("rite_end:key=%d\n", rite_end->m_key);
-			if (ite2.isExist()) printf("ite2:key=%d\n", ite2->m_key);
-			if (rite2.isExist()) printf("rite2:key=%d\n", rite2->m_key);
-			if (ite2_end.isExist()) printf("ite2_end:key=%d\n", ite2_end->m_key);
-			if (rite2_end.isExist()) printf("rite2_end:key=%d\n", rite2_end->m_key);
+			if (ite.isExist()) printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
+			if (rite.isExist()) printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
 		}
-		printf("+= 7\n");
-		ite += 7;
-		rite += 7;
-		ite_end += 7;
-		rite_end += 7;
-		ite2 += 7;
-		rite2 += 7;
-		ite2_end += 7;
-		rite2_end += 7;
-		if (ite.isExist()) printf("ite:key=%d\n", ite->m_key);
-		if (rite.isExist()) printf("rite:key=%d\n", rite->m_key);
-		if (ite_end.isExist()) printf("ite_end:key=%d\n", ite_end->m_key);
-		if (rite_end.isExist()) printf("rite_end:key=%d\n", rite_end->m_key);
-		if (ite2.isExist()) printf("ite2:key=%d\n", ite2->m_key);
-		if (rite2.isExist()) printf("rite2:key=%d\n", rite2->m_key);
-		if (ite2_end.isExist()) printf("ite2_end:key=%d\n", ite2_end->m_key);
-		if (rite2_end.isExist()) printf("rite2_end:key=%d\n", rite2_end->m_key);
-		printf("-= 7\n");
-		ite -= 7;
-		rite -= 7;
-		ite_end -= 7;
-		rite_end -= 7;
-		ite2 -= 7;
-		rite2 -= 7;
-		ite2_end -= 7;
-		rite2_end -= 7;
-		if (ite.isExist()) printf("ite:key=%d\n", ite->m_key);
-		if (rite.isExist()) printf("rite:key=%d\n", rite->m_key);
-		if (ite_end.isExist()) printf("ite_end:key=%d\n", ite_end->m_key);
-		if (rite_end.isExist()) printf("rite_end:key=%d\n", rite_end->m_key);
-		if (ite2.isExist()) printf("ite2:key=%d\n", ite2->m_key);
-		if (rite2.isExist()) printf("rite2:key=%d\n", rite2->m_key);
-		if (ite2_end.isExist()) printf("ite2_end:key=%d\n", ite2_end->m_key);
-		if (rite2_end.isExist()) printf("rite2_end:key=%d\n", rite2_end->m_key);
+		printf("[ite+=3]\n");
+		ite += 3;
+		rite += 3;
+		if (ite.isExist()) printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
+		if (rite.isExist()) printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
+		printf("[ite-=3]\n");
+		ite -= 3;
+		rite -= 3;
+		if (ite.isExist()) printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
+		if (rite.isExist()) printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
+		printf("ite_end - ite = %d\n", ite_end - ite);
+		printf("ite - ite_end = %d\n", ite - ite_end);
+		printf("rite_end - rite = %d\n", rite_end - rite);
+		printf("rite - rite_end = %d\n", rite - rite_end);
+		printf("[ite2-=2]\n");
+		ite2 -= 2;
+		rite2 -= 2;
+		printf("ite2 - ite = %d\n", ite2 - ite);
+		printf("ite - ite2 = %d\n", ite - ite2);
+		printf("rite2 - rite = %d\n", rite2 - rite);
+		printf("rite - rite2 = %d\n", rite - rite2);
+		printf("[++ite_end]\n");
+		++ite_end;
+		++rite_end;
+		printf("ite_end - ite = %d\n", ite_end - ite);
+		printf("ite - ite_end = %d\n", ite - ite_end);
+		printf("rite_end - rite = %d\n", rite_end - rite);
+		printf("rite - rite_end = %d\n", rite - rite_end);
+		printf("--------------------[iterator operattion:end]\n");
 	}
 #endif
 
 	//指定のキーのノードを検索し、同じキーのノードをリストアップ
 	auto searchData = [&con]()
 	{
-		printf("--- Search node ---\n");
+		printf("--- Search each key nodes ---\n");
 		for (int search_key = TEST_DATA_KEY_MIN; search_key <= TEST_DATA_KEY_MAX; ++search_key)
 		{
 			static const int print_count_limit = 10;
@@ -521,14 +509,6 @@ void example_rb_tree()
 					++print_count;
 				}
 			);
-			//※イテレータの変数宣言と検索を分けた方が効率的
-			//const_iterator ite;con._find(ite, search_key);
-			//const_iterator end;con._equal_range(end, search_key);
-			//for (; ite != end; ++ite)
-			//{
-			//	const data_t& obj = *ite;
-			//	...
-			//}
 			if (is_found)
 				printf_dbg_search("\n");
 		}
@@ -541,12 +521,12 @@ void example_rb_tree()
 	//※最近ノードから数ノードを表示
 	auto searchNearestData = [&con](const rb_tree::match_type_t search_type)
 	{
-		printf("--- Search nearest node for %s ---\n", search_type == rb_tree::FOR_NEAREST_SMALLER ? "smaller" : search_type == rb_tree::FOR_NEAREST_LARGER ? "larger" : "same");
+		printf("--- Search each nearest key nodes for %s ---\n", search_type == rb_tree::FOR_NEAREST_SMALLER ? "smaller" : search_type == rb_tree::FOR_NEAREST_LARGER ? "larger" : "same");
 		for (int search_key = TEST_DATA_KEY_MIN; search_key <= TEST_DATA_KEY_MAX; ++search_key)
 		{
 			bool is_found = false;
-			const_iterator ite(con.find(search_key, search_type));
-			const_iterator end(con.end());
+			const iterator ite(con.find(search_key, search_type));
+			const iterator end(con.end());
 			for (int i = 0; ite != end && ite->m_key != search_key && i < 4; ++i, ++ite)
 			{
 				const data_t& obj = *ite;
@@ -557,10 +537,6 @@ void example_rb_tree()
 				}
 				printf_dbg_search("[%2d] ", obj.m_key);
 			}
-			//※イテレータの変数宣言と検索を分けた方が若干効率的
-			//const_iterator ite;con._find(ite, search_key, search_type);
-			//const_iterator end;con._end(end);
-			//...
 			if (is_found)
 				printf_dbg_search("\n");
 		}
@@ -635,15 +611,12 @@ void example_rb_tree()
 	//※すべての値のキーを一つずつ削除
 	auto removeEachKeyNodes = [&con]()
 	{
-		printf("--- Remove each-key nodes ---\n");
+		printf("--- Remove each key nodes ---\n");
 		int removed_count = 0;
 		for (int remove_key = TEST_DATA_KEY_MIN; remove_key <= TEST_DATA_KEY_MAX; ++remove_key)
 		{
-			const_iterator ite(con.find(remove_key));
+			iterator ite(con.find(remove_key));
 			data_t* removed_node = con.erase(ite);
-			//※イテレータの変数宣言と検索を分けた方が若干効率的
-			//const_iterator ite;con._find(ite, search_key);
-			//...
 			if (removed_node)
 			{
 				delete removed_node;
@@ -678,11 +651,8 @@ void example_rb_tree()
 		int removed_count = 0;
 		for (int remove_key = TEST_DATA_KEY_MIN; remove_key <= TEST_DATA_KEY_MAX;)
 		{
-			const_iterator ite(con.find(remove_key));
+			iterator ite(con.find(remove_key));
 			data_t* removed_node = con.erase(ite);
-			//※イテレータの変数宣言と検索を分けた方が若干効率的
-			//const_iterator ite;con._find(ite, search_key);
-			//...
 			if (removed_node)
 			{
 				delete removed_node;

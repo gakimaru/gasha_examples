@@ -16,10 +16,12 @@
 //ソートアルゴリズムテスト用設定とコンパイラスイッチ
 
 #ifdef GASHA_OPTIMIZED
+
 static const int TEST_DATA_COUNT = 10000;//テストデータ件数（最大）
 
 #else//GASHA_OPTIMIZED
-static const int TEST_DATA_COUNT = 1000;//テストデータ件数（最大）
+
+static const int TEST_DATA_COUNT = 100;//テストデータ件数（最大）
 
 #endif//GASHA_OPTIMIZED
 
