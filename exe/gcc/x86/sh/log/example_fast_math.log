@@ -782,74 +782,262 @@ sqrt(fastArith_d(value_d))      = 1000.000 (1000.000000000)
 sqrt(semifastArith_d(value_d))  = 1000.000 (1000.000000000)
 sqrt(fastestArith_d(value_d))   = 1000.000 (1000.000000000)
 --------------------------------------------------------------------------------
+[ Test for vector operation ]
+- 2D vector -
+vec2_1=[1.00000][2.00000]
+vec2_2=[3.00000][4.00000]
+norm(vec2_1)                             = 2.23607
+normSq(vec2_1)                           = 5.00000
+merge(vec2_result, vec2_1, vec2_2)       = [4.00000][6.00000]
+difference(vec2_result, vec2_1, vec2_2)  = [-2.00000][-2.00000]
+length(vec2_1, vec2_2)                   = 2.82843
+lengthSq(vec2_1, vec2_2)                 = 8.00000
+normalize(vec2_result, vec2_1)           = [0.44721][0.89443]
+mul(vec2_result, vec2_1, 10.f)           = [10.00000][20.00000]
+dot(vec2_1, vec2_2)                      = 11.00000
+normalizedDot(vec2_1, vec2_2)            = 0.98387
+norm(fastArith_2f(vec2_1))                                                         = 2.23607
+normSq(fastArith_2f(vec2_1))                                                       = 5.00000
+fastArith_2f vec2_result = merge(fastArith_2f(vec2_1), fastArith_2f(vec2_2))       = [4.00000][6.00000]
+fastArith_2f vec2_result = difference(fastArith_2f(vec2_1), fastArith_2f(vec2_2))  = [-2.00000][-2.00000]
+length(fastArith_2f(vec2_1), fastArith_2f(vec2_2))                                 = 2.82843
+lengthSq(fastArith_2f(vec2_1), fastArith_2f(vec2_2))                               = 8.00000
+fastArith_2f vec2_result = normalize(fastArith_2f(vec2_1))                         = [0.44721][0.89443]
+fastArith_2f vec2_result = mul(fastArith_2f(vec2_1), 10.f)                         = [10.00000][20.00000]
+dot(fastArith_2f(vec2_1), fastArith_2f(vec2_2))                                    = 11.00000
+normalizedDot(fastArith_2f(vec2_1), fastArith_2f(vec2_2))                          = 0.98387
+norm(fastestArith_2f(vec2_1))                                                               = 2.23607
+normSq(fastestArith_2f(vec2_1))                                                             = 5.00000
+fastestArith_2f vec2_result = merge(fastestArith_2f(vec2_1), fastestArith_2f(vec2_2))       = [4.00000][6.00000]
+fastestArith_2f vec2_result = difference(fastestArith_2f(vec2_1), fastestArith_2f(vec2_2))  = [-2.00000][-2.00000]
+length(fastestArith_2f(vec2_1), fastestArith_2f(vec2_2))                                    = 2.82843
+lengthSq(fastestArith_2f(vec2_1), fastestArith_2f(vec2_2))                                  = 8.00000
+fastestArith_2f vec2_result = normalize(fastestArith_2f(vec2_1))                            = [0.44721][0.89443]
+fastestArith_2f vec2_result = mul(fastestArith_2f(vec2_1), 10.f)                            = [10.00000][20.00000]
+dot(fastestArith_2f(vec2_1), fastestArith_2f(vec2_2))                                       = 11.00000
+normalizedDot(fastestArith_2f(vec2_1), fastestArith_2f(vec2_2))                             = 0.98387
+norm(semifastArith_2f(vec2_1))                                                                 = 2.23607
+normSq(semifastArith_2f(vec2_1))                                                               = 5.00000
+semifastArith_2f vec2_result = merge(semifastArith_2f(vec2_1), semifastArith_2f(vec2_2))       = [4.00000][6.00000]
+semifastArith_2f vec2_result = difference(semifastArith_2f(vec2_1), semifastArith_2f(vec2_2))  = [-2.00000][-2.00000]
+length(semifastArith_2f(vec2_1), semifastArith_2f(vec2_2))                                     = 2.82843
+lengthSq(semifastArith_2f(vec2_1), semifastArith_2f(vec2_2))                                   = 8.00000
+semifastArith_2f vec2_result = normalize(semifastArith_2f(vec2_1))                             = [0.44721][0.89443]
+semifastArith_2f vec2_result = mul(semifastArith_2f(vec2_1), 10.f)                             = [10.00000][20.00000]
+dot(semifastArith_2f(vec2_1), semifastArith_2f(vec2_2))                                        = 11.00000
+normalizedDot(semifastArith_2f(vec2_1), semifastArith_2f(vec2_2))                              = 0.98387
+norm(sseArith_2f(vec2_1))                                                       = 2.23607
+normSq(sseArith_2f(vec2_1))                                                     = 5.00000
+sseArith_2f vec2_result = merge(sseArith_2f(vec2_1), sseArith_2f(vec2_2))       = [4.00000][6.00000]
+sseArith_2f vec2_result = difference(sseArith_2f(vec2_1), sseArith_2f(vec2_2))  = [-2.00000][-2.00000]
+length(sseArith_2f(vec2_1), sseArith_2f(vec2_2))                                = 2.82843
+lengthSq(sseArith_2f(vec2_1), sseArith_2f(vec2_2))                              = 8.00000
+sseArith_2f vec2_result = normalize(sseArith_2f(vec2_1))                        = [0.44721][0.89443]
+sseArith_2f vec2_result = mul(sseArith_2f(vec2_1), 10.f)                        = [10.00000][20.00000]
+dot(sseArith_2f(vec2_1), sseArith_2f(vec2_2))                                   = 11.00000
+normalizedDot(sseArith_2f(vec2_1), sseArith_2f(vec2_2))                         = 0.98387
+norm(normalArith_2f(vec2_1))                                                             = 2.23607
+normSq(normalArith_2f(vec2_1))                                                           = 5.00000
+normalArith_2f vec2_result = merge(normalArith_2f(vec2_1), normalArith_2f(vec2_2))       = [4.00000][6.00000]
+normalArith_2f vec2_result = difference(normalArith_2f(vec2_1), normalArith_2f(vec2_2))  = [-2.00000][-2.00000]
+length(normalArith_2f(vec2_1), normalArith_2f(vec2_2))                                   = 2.82843
+lengthSq(normalArith_2f(vec2_1), normalArith_2f(vec2_2))                                 = 8.00000
+normalArith_2f vec2_result = normalize(normalArith_2f(vec2_1))                           = [0.44721][0.89443]
+normalArith_2f vec2_result = mul(normalArith_2f(vec2_1), 10.f)                           = [10.00000][20.00000]
+dot(normalArith_2f(vec2_1), normalArith_2f(vec2_2))                                      = 11.00000
+normalizedDot(normalArith_2f(vec2_1), normalArith_2f(vec2_2))                            = 0.98387
+norm(dummyArith_2f(vec2_1))                                            = 2.23607
+normSq(dummyArith_2f(vec2_1))                                          = 5.00000
+merge(vec2_result, dummyArith_2f(vec2_1), dummyArith_2f(vec2_2))       = [4.00000][6.00000]
+difference(vec2_result, dummyArith_2f(vec2_1), dummyArith_2f(vec2_2))  = [-2.00000][-2.00000]
+length(dummyArith_2f(vec2_1), dummyArith_2f(vec2_2))                   = 2.82843
+lengthSq(dummyArith_2f(vec2_1), dummyArith_2f(vec2_2))                 = 8.00000
+normalize(vec2_result, dummyArith_2f(vec2_1))                          = [0.44721][0.89443]
+mul(vec2_result, dummyArith_2f(vec2_1), 10.f)                          = [10.00000][20.00000]
+dot(dummyArith_2f(vec2_1), dummyArith_2f(vec2_2))                      = 11.00000
+normalizedDot(dummyArith_2f(vec2_1), dummyArith_2f(vec2_2))            = 0.98387
+- 3D vector -
+vec3_1=[1.00000][2.00000][3.00000]
+vec3_2=[4.00000][5.00000][6.00000]
+norm(vec3_1)                             = 3.74166
+normSq(vec3_1)                           = 14.00000
+merge(vec3_result, vec3_1, vec3_2)       = [5.00000][7.00000][9.00000]
+difference(vec3_result, vec3_1, vec3_2)  = [-3.00000][-3.00000][-3.00000]
+length(vec3_1, vec3_2)                   = 5.19615
+lengthSq(vec3_1, vec3_2)                 = 27.00000
+normalize(vec3_result, vec3_1)           = [0.26726][0.53452][0.80178]
+mul(vec3_result, vec3_1, 10.f)           = [10.00000][20.00000][30.00000]
+dot(vec3_1, vec3_2)                      = 32.00000
+normalizedDot(vec3_1, vec3_2)            = 0.97463
+cross(vec3_result, vec3_1, vec3_2)       = [-3.00000][6.00000][-5.00000]
+norm(fastArith_3f(vec3_1))                                                         = 3.74166
+normSq(fastArith_3f(vec3_1))                                                       = 14.00000
+fastArith_3f vec3_result = merge(fastArith_3f(vec3_1), fastArith_3f(vec3_2))       = [5.00000][7.00000][9.00000]
+fastArith_3f vec3_result = difference(fastArith_3f(vec3_1), fastArith_3f(vec3_2))  = [-3.00000][-3.00000][-3.00000]
+length(fastArith_3f(vec3_1), fastArith_3f(vec3_2))                                 = 5.19615
+lengthSq(fastArith_3f(vec3_1), fastArith_3f(vec3_2))                               = 27.00000
+fastArith_3f vec3_result = normalize(fastArith_3f(vec3_1))                         = [0.26726][0.53452][0.80178]
+fastArith_3f vec3_result = mul(fastArith_3f(vec3_1), 10.f)                         = [10.00000][20.00000][30.00000]
+dot(fastArith_3f(vec3_1), fastArith_3f(vec3_2))                                    = 32.00000
+normalizedDot(fastArith_3f(vec3_1), fastArith_3f(vec3_2))                          = 0.97463
+fastArith_3f vec3_result = cross(fastArith_3f(vec3_1), fastArith_3f(vec3_2))       = [-3.00000][6.00000][-3.00000]
+norm(fastestArith_3f(vec3_1))                                                               = 3.74166
+normSq(fastestArith_3f(vec3_1))                                                             = 14.00000
+fastestArith_3f vec3_result = merge(fastestArith_3f(vec3_1), fastestArith_3f(vec3_2))       = [5.00000][7.00000][9.00000]
+fastestArith_3f vec3_result = difference(fastestArith_3f(vec3_1), fastestArith_3f(vec3_2))  = [-3.00000][-3.00000][-3.00000]
+length(fastestArith_3f(vec3_1), fastestArith_3f(vec3_2))                                    = 5.19615
+lengthSq(fastestArith_3f(vec3_1), fastestArith_3f(vec3_2))                                  = 27.00000
+fastestArith_3f vec3_result = normalize(fastestArith_3f(vec3_1))                            = [0.26726][0.53452][0.80178]
+fastestArith_3f vec3_result = mul(fastestArith_3f(vec3_1), 10.f)                            = [10.00000][20.00000][30.00000]
+dot(fastestArith_3f(vec3_1), fastestArith_3f(vec3_2))                                       = 32.00000
+normalizedDot(fastestArith_3f(vec3_1), fastestArith_3f(vec3_2))                             = 0.97463
+fastestArith_3f vec3_result = cross(fastestArith_3f(vec3_1), fastestArith_3f(vec3_2))       = [-3.00000][6.00000][-3.00000]
+norm(semifastArith_3f(vec3_1))                                                                 = 3.74166
+normSq(semifastArith_3f(vec3_1))                                                               = 14.00000
+semifastArith_3f vec3_result = merge(semifastArith_3f(vec3_1), semifastArith_3f(vec3_2))       = [5.00000][7.00000][9.00000]
+semifastArith_3f vec3_result = difference(semifastArith_3f(vec3_1), semifastArith_3f(vec3_2))  = [-3.00000][-3.00000][-3.00000]
+length(semifastArith_3f(vec3_1), semifastArith_3f(vec3_2))                                     = 5.19615
+lengthSq(semifastArith_3f(vec3_1), semifastArith_3f(vec3_2))                                   = 27.00000
+semifastArith_3f vec3_result = normalize(semifastArith_3f(vec3_1))                             = [0.26726][0.53452][0.80178]
+semifastArith_3f vec3_result = mul(semifastArith_3f(vec3_1), 10.f)                             = [10.00000][20.00000][30.00000]
+dot(semifastArith_3f(vec3_1), semifastArith_3f(vec3_2))                                        = 32.00000
+normalizedDot(semifastArith_3f(vec3_1), semifastArith_3f(vec3_2))                              = 0.97463
+semifastArith_3f vec3_result = cross(semifastArith_3f(vec3_1), semifastArith_3f(vec3_2))       = [-3.00000][6.00000][-3.00000]
+norm(sseArith_3f(vec3_1))                                                       = 3.74166
+normSq(sseArith_3f(vec3_1))                                                     = 14.00000
+sseArith_3f vec3_result = merge(sseArith_3f(vec3_1), sseArith_3f(vec3_2))       = [5.00000][7.00000][9.00000]
+sseArith_3f vec3_result = difference(sseArith_3f(vec3_1), sseArith_3f(vec3_2))  = [-3.00000][-3.00000][-3.00000]
+length(sseArith_3f(vec3_1), sseArith_3f(vec3_2))                                = 5.19615
+lengthSq(sseArith_3f(vec3_1), sseArith_3f(vec3_2))                              = 27.00000
+sseArith_3f vec3_result = normalize(sseArith_3f(vec3_1))                        = [0.26726][0.53452][0.80178]
+sseArith_3f vec3_result = mul(sseArith_3f(vec3_1), 10.f)                        = [10.00000][20.00000][30.00000]
+dot(sseArith_3f(vec3_1), sseArith_3f(vec3_2))                                   = 32.00000
+normalizedDot(sseArith_3f(vec3_1), sseArith_3f(vec3_2))                         = 0.97463
+sseArith_3f vec3_result = cross(sseArith_3f(vec3_1), sseArith_3f(vec3_2))       = [-3.00000][6.00000][-3.00000]
+norm(normalArith_3f(vec3_1))                                                             = 3.74166
+normSq(normalArith_3f(vec3_1))                                                           = 14.00000
+normalArith_3f vec3_result = merge(normalArith_3f(vec3_1), normalArith_3f(vec3_2))       = [5.00000][7.00000][9.00000]
+normalArith_3f vec3_result = difference(normalArith_3f(vec3_1), normalArith_3f(vec3_2))  = [-3.00000][-3.00000][-3.00000]
+length(normalArith_3f(vec3_1), normalArith_3f(vec3_2))                                   = 5.19615
+lengthSq(normalArith_3f(vec3_1), normalArith_3f(vec3_2))                                 = 27.00000
+normalArith_3f vec3_result = normalize(normalArith_3f(vec3_1))                           = [0.26726][0.53452][0.80178]
+normalArith_3f vec3_result = mul(normalArith_3f(vec3_1), 10.f)                           = [10.00000][20.00000][30.00000]
+dot(normalArith_3f(vec3_1), normalArith_3f(vec3_2))                                      = 32.00000
+normalizedDot(normalArith_3f(vec3_1), normalArith_3f(vec3_2))                            = 0.97463
+normalArith_3f vec3_result = cross(normalArith_3f(vec3_1), normalArith_3f(vec3_2))       = [-3.00000][6.00000][-5.00000]
+norm(dummyArith_3f(vec3_1))                                            = 3.74166
+normSq(dummyArith_3f(vec3_1))                                          = 14.00000
+merge(vec3_result, dummyArith_3f(vec3_1), dummyArith_3f(vec3_2))       = [5.00000][7.00000][9.00000]
+difference(vec3_result, dummyArith_3f(vec3_1), dummyArith_3f(vec3_2))  = [-3.00000][-3.00000][-3.00000]
+length(dummyArith_3f(vec3_1), dummyArith_3f(vec3_2))                   = 5.19615
+lengthSq(dummyArith_3f(vec3_1), dummyArith_3f(vec3_2))                 = 27.00000
+normalize(vec3_result, dummyArith_3f(vec3_1))                          = [0.26726][0.53452][0.80178]
+mul(vec3_result, dummyArith_3f(vec3_1), 10.f)                          = [10.00000][20.00000][30.00000]
+dot(dummyArith_3f(vec3_1), dummyArith_3f(vec3_2))                      = 32.00000
+normalizedDot(dummyArith_3f(vec3_1), dummyArith_3f(vec3_2))            = 0.97463
+cross(vec3_result, dummyArith_3f(vec3_1), dummyArith_3f(vec3_2))       = [-3.00000][6.00000][-5.00000]
+--------------------------------------------------------------------------------
+[ Test for performance of operation : direct:float ] (* 10000000 times repeat)
+total = 7200092.000000000 : time=0.322456000 sec
+--------------------------------------------------------------------------------
 [ Test for performance of operation : dummy:float ] (* 10000000 times repeat)
-total = 7200092.000000000 : time=0.318340000 sec
+total = 7200092.000000000 : time=0.388742000 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : normal:float ] (* 10000000 times repeat)
-total = 7200091.500000000 : time=0.434076000 sec
+total = 7200091.500000000 : time=0.440329000 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : sse:float ] (* 10000000 times repeat)
-total = 7200091.500000000 : time=0.323889000 sec
+total = 7200091.500000000 : time=0.365406000 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : fast:float ] (* 10000000 times repeat)
-total = 7200091.500000000 : time=0.346515000 sec
+total = 7200091.500000000 : time=0.386609000 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : semifast:float ] (* 10000000 times repeat)
-total = 7200091.500000000 : time=0.384537000 sec
+total = 7200091.500000000 : time=0.395177000 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : fastest:float ] (* 10000000 times repeat)
-total = 7200136.000000000 : time=0.318337000 sec
+total = 7200136.000000000 : time=0.328407000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of operation : direct:dobule ] (* 10000000 times repeat)
+total = 7203426.737052019 : time=0.592359000 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : dummy:dobule ] (* 10000000 times repeat)
-total = 7203426.737052019 : time=0.590506000 sec
+total = 7203426.737052019 : time=0.614548000 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : normal:double ] (* 10000000 times repeat)
-total = 7203426.737052019 : time=0.588261000 sec
+total = 7203426.737052019 : time=0.594435000 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : sse:double ] (* 10000000 times repeat)
-total = 7203426.737052019 : time=0.613862000 sec
+total = 7203426.737052019 : time=0.646634000 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : fast:double ] (* 10000000 times repeat)
-total = 7203426.737052019 : time=0.611975000 sec
+total = 7203426.737052019 : time=0.630664000 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : semifast:double ] (* 10000000 times repeat)
-total = 7203426.737052019 : time=0.614109000 sec
+total = 7203426.737052019 : time=0.653478000 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : fastest:double ] (* 10000000 times repeat)
-total = 7203426.737052019 : time=0.612051000 sec
+total = 7203426.737052019 : time=0.652021000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : dummy:float ] (* 10000000 times repeat)
-total = 9069194.000000000 : time=0.087186000 sec
+[ Test for performance of sqrt : direct:float ] (* 1000000 times repeat)
+total = 862325.812500000 : time=0.008774000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : normal:float ] (* 10000000 times repeat)
-total = 9069194.000000000 : time=0.113056000 sec
+[ Test for performance of sqrt : dummy:float ] (* 1000000 times repeat)
+total = 862325.812500000 : time=0.008786000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : sse:float ] (* 10000000 times repeat)
-total = 9069194.000000000 : time=0.083255000 sec
+[ Test for performance of sqrt : normal:float ] (* 1000000 times repeat)
+total = 862325.812500000 : time=0.011005000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : fast:float ] (* 10000000 times repeat)
-total = 9069194.000000000 : time=0.096650000 sec
+[ Test for performance of sqrt : sse:float ] (* 1000000 times repeat)
+total = 862325.812500000 : time=0.008263000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : semifast:float ] (* 10000000 times repeat)
-total = 9069194.000000000 : time=0.120416000 sec
+[ Test for performance of sqrt : fast:float ] (* 1000000 times repeat)
+total = 862325.812500000 : time=0.009580000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : fastest:float ] (* 10000000 times repeat)
-total = 9069304.000000000 : time=0.080532000 sec
+[ Test for performance of sqrt : semifast:float ] (* 1000000 times repeat)
+total = 862325.812500000 : time=0.011816000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : dummy:dobule ] (* 10000000 times repeat)
-total = 8619392.096791834 : time=0.158144000 sec
+[ Test for performance of sqrt : fastest:float ] (* 1000000 times repeat)
+total = 862323.375000000 : time=0.008082000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : normal:double ] (* 10000000 times repeat)
-total = 8619392.096791834 : time=0.157780000 sec
+[ Test for performance of sqrt : direct:dobule ] (* 1000000 times repeat)
+total = 861987.864620759 : time=0.015848000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : sse:double ] (* 10000000 times repeat)
-total = 8619392.096791834 : time=0.172761000 sec
+[ Test for performance of sqrt : dummy:dobule ] (* 1000000 times repeat)
+total = 861987.864620759 : time=0.015781000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : fast:double ] (* 10000000 times repeat)
-total = 8619392.096791834 : time=0.173710000 sec
+[ Test for performance of sqrt : normal:double ] (* 1000000 times repeat)
+total = 861987.864620759 : time=0.015840000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : semifast:double ] (* 10000000 times repeat)
-total = 8619392.096791834 : time=0.174395000 sec
+[ Test for performance of sqrt : sse:double ] (* 1000000 times repeat)
+total = 861987.864620759 : time=0.017345000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : fastest:double ] (* 10000000 times repeat)
-total = 8619392.096791834 : time=0.174880000 sec
+[ Test for performance of sqrt : fast:double ] (* 1000000 times repeat)
+total = 861987.864620759 : time=0.017411000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of sqrt : semifast:double ] (* 1000000 times repeat)
+total = 861987.864620759 : time=0.017279000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of sqrt : fastest:double ] (* 1000000 times repeat)
+total = 861987.864620759 : time=0.017363000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : direct:float[3] ] (* 1000000 times repeat)
+total = 14083092.000000000 : time=0.103691000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : dummy:float[3] ] (* 1000000 times repeat)
+total = 14083092.000000000 : time=0.120284000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : normal:float[3] ] (* 1000000 times repeat)
+total = 14083092.000000000 : time=0.167966000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : sse:float[3] ] (* 1000000 times repeat)
+total = 14083011.000000000 : time=0.148244000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : fast:float[3] ] (* 1000000 times repeat)
+total = 14083011.000000000 : time=0.147564000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : semifast:float[3] ] (* 1000000 times repeat)
+total = 14083011.000000000 : time=0.148201000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : fastest:float[3] ] (* 1000000 times repeat)
+total = 14083011.000000000 : time=0.147529000 sec
