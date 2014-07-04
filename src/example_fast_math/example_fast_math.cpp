@@ -40,7 +40,7 @@ void testForOperationPerformance(const char* caption)
 	auto begin = std::chrono::system_clock::now();
 
 	TYPE total = 0.f;
-	for (int div = 1; div < TEST_OPERATION_REPEAT_NUM; ++div)
+	for (int repeat = 1; repeat < TEST_OPERATION_REPEAT_NUM; ++repeat)
 	{
 		const TYPE val1 = rnd_distribution(rnd_engine);
 		const TYPE val2 = rnd_distribution(rnd_engine);
@@ -67,7 +67,7 @@ void testForOperationPerformanceDirect(const char* caption)
 	auto begin = std::chrono::system_clock::now();
 
 	TYPE total = 0.f;
-	for (int div = 1; div < TEST_OPERATION_REPEAT_NUM; ++div)
+	for (int repeat = 1; repeat < TEST_OPERATION_REPEAT_NUM; ++repeat)
 	{
 		const TYPE val1 = rnd_distribution(rnd_engine);
 		const TYPE val2 = rnd_distribution(rnd_engine);
@@ -99,7 +99,7 @@ void testForSqrtPerformance(const char* caption)
 	auto begin = std::chrono::system_clock::now();
 
 	TYPE total = 0.f;
-	for (int div = 1; div < TEST_SQRT_REPEAT_NUM; ++div)
+	for (int repeat = 1; repeat < TEST_SQRT_REPEAT_NUM; ++repeat)
 	{
 		const TYPE value = rnd_distribution(rnd_engine);
 		const TYPE result = sqrt(fast_arith_class(value));
@@ -122,7 +122,7 @@ void testForSqrtPerformanceDirect(const char* caption)
 	auto begin = std::chrono::system_clock::now();
 
 	TYPE total = 0.f;
-	for (int div = 1; div < TEST_SQRT_REPEAT_NUM; ++div)
+	for (int repeat = 1; repeat < TEST_SQRT_REPEAT_NUM; ++repeat)
 	{
 		const TYPE value = rnd_distribution(rnd_engine);
 		const TYPE result = sqrt(value);
@@ -150,10 +150,15 @@ void testForVectorPerformance(const char* caption)
 	auto begin = std::chrono::system_clock::now();
 
 	TYPE total = 0.f;
-	for (int div = 1; div < TEST_VECTOR_REPEAT_NUM; ++div)
+	for (int repeat = 1; repeat < TEST_VECTOR_REPEAT_NUM; ++repeat)
 	{
-		const TYPE vec1[N] = { rnd_distribution(rnd_engine), rnd_distribution(rnd_engine), rnd_distribution(rnd_engine) };
-		const TYPE vec2[N] = { rnd_distribution(rnd_engine), rnd_distribution(rnd_engine), rnd_distribution(rnd_engine) };
+		TYPE vec1[N] = { 0 };
+		TYPE vec2[N] = { 0 };
+		for (int i = 0; i < N && i < 3; ++i)
+		{
+			vec1[i] = rnd_distribution(rnd_engine);
+			vec2[i] = rnd_distribution(rnd_engine);
+		}
 		const TYPE scalar = rnd_distribution(rnd_engine);
 		const TYPE result1 = norm(fast_arith_class(vec1));
 		const TYPE result2 = normSq(fast_arith_class(vec1));
@@ -165,20 +170,27 @@ void testForVectorPerformance(const char* caption)
 		const auto result8 = mul(fast_arith_class(vec1), scalar);
 		const TYPE result9 = dot(fast_arith_class(vec1), fast_arith_class(vec2));
 		const TYPE result10 = normalizedDot(fast_arith_class(vec1), fast_arith_class(vec2));
-		const auto result11 = cross(fast_arith_class(vec1), fast_arith_class(vec2));
 		total += (
-			result1 +
-			result2 +
-			result3[0] + result3[1] + result3[2] +
-			result4[0] + result4[1] + result4[2] +
-			result5 +
-			result6 +
-			result7[0] + result7[1] + result7[2] +
-			result8[0] + result8[1] + result8[2] +
-			result9 +
-			result10 +
-			result11[0] + result11[1] + result11[2]
+				result1 +
+				result2 +
+				result5 +
+				result6 +
+				result9 +
+				result10
 			);
+		for (int i = 0; i < N; ++i)
+			total += (
+				result3[i] +
+				result4[i] +
+				result7[i] +
+				result8[i]
+			);
+		if (N == 3 || N == 4)
+		{
+			const auto result11 = cross(fast_arith_class(vec1), fast_arith_class(vec2));
+			for (int i = 0; i < N; ++i)
+				total += result11[i];
+		}
 	}
 	auto end = std::chrono::system_clock::now();
 	auto duration = end - begin;
@@ -197,10 +209,15 @@ void testForVectorPerformanceDirect(const char* caption)
 	auto begin = std::chrono::system_clock::now();
 
 	TYPE total = 0.f;
-	for (int div = 1; div < TEST_VECTOR_REPEAT_NUM; ++div)
+	for (int repeat = 1; repeat < TEST_VECTOR_REPEAT_NUM; ++repeat)
 	{
-		const TYPE vec1[N] = { rnd_distribution(rnd_engine), rnd_distribution(rnd_engine), rnd_distribution(rnd_engine) };
-		const TYPE vec2[N] = { rnd_distribution(rnd_engine), rnd_distribution(rnd_engine), rnd_distribution(rnd_engine) };
+		TYPE vec1[N] = { 0 };
+		TYPE vec2[N] = { 0 };
+		for (int i = 0; i < N && i < 3; ++i)
+		{
+			vec1[i] = rnd_distribution(rnd_engine);
+			vec2[i] = rnd_distribution(rnd_engine);
+		}
 		const TYPE scalar = rnd_distribution(rnd_engine);
 		const TYPE result1 = norm(vec1);
 		const TYPE result2 = normSq(vec1);
@@ -212,20 +229,27 @@ void testForVectorPerformanceDirect(const char* caption)
 		TYPE result8[N] = { 0 }; mul(result8, vec1, scalar);
 		const TYPE result9 = dot(vec1, vec2);
 		const TYPE result10 = normalizedDot(vec1, vec2);
-		TYPE result11[N] = { 0 }; cross(result11, vec1, vec2);
 		total += (
 			result1 +
 			result2 +
-			result3[0] + result3[1] + result3[2] +
-			result4[0] + result4[1] + result4[2] +
 			result5 +
 			result6 +
-			result7[0] + result7[1] + result7[2] +
-			result8[0] + result8[1] + result8[2] +
 			result9 +
-			result10 +
-			result11[0] + result11[1] + result11[2]
+			result10
 			);
+		for (int i = 0; i < N; ++i)
+			total += (
+				result3[i] +
+				result4[i] +
+				result7[i] +
+				result8[i]
+			);
+		if (N == 3 || N == 4)
+		{
+			TYPE result11[N] = { 0 }; cross(result11, vec1, vec2);
+			for (int i = 0; i < N; ++i)
+				total += result11[i];
+		}
 	}
 	auto end = std::chrono::system_clock::now();
 	auto duration = end - begin;
@@ -246,10 +270,15 @@ void testForVectorPerformanceDummy(const char* caption)
 	auto begin = std::chrono::system_clock::now();
 
 	TYPE total = 0.f;
-	for (int div = 1; div < TEST_VECTOR_REPEAT_NUM; ++div)
+	for (int repeat = 1; repeat < TEST_VECTOR_REPEAT_NUM; ++repeat)
 	{
-		const TYPE vec1[N] = { rnd_distribution(rnd_engine), rnd_distribution(rnd_engine), rnd_distribution(rnd_engine) };
-		const TYPE vec2[N] = { rnd_distribution(rnd_engine), rnd_distribution(rnd_engine), rnd_distribution(rnd_engine) };
+		TYPE vec1[N] = { 0 };
+		TYPE vec2[N] = { 0 };
+		for (int i = 0; i < N && i < 3; ++i)
+		{
+			vec1[i] = rnd_distribution(rnd_engine);
+			vec2[i] = rnd_distribution(rnd_engine);
+		}
 		const TYPE scalar = rnd_distribution(rnd_engine);
 		const TYPE result1 = norm(fast_arith_class(vec1));
 		const TYPE result2 = normSq(fast_arith_class(vec1));
@@ -261,20 +290,27 @@ void testForVectorPerformanceDummy(const char* caption)
 		TYPE result8[N] = { 0 }; mul(result8, fast_arith_class(vec1), scalar);
 		const TYPE result9 = dot(fast_arith_class(vec1), fast_arith_class(vec2));
 		const TYPE result10 = normalizedDot(fast_arith_class(vec1), fast_arith_class(vec2));
-		TYPE result11[N] = { 0 }; cross(result11, fast_arith_class(vec1), fast_arith_class(vec2));
 		total += (
-			result1 +
-			result2 +
-			result3[0] + result3[1] + result3[2] +
-			result4[0] + result4[1] + result4[2] +
-			result5 +
-			result6 +
-			result7[0] + result7[1] + result7[2] +
-			result8[0] + result8[1] + result8[2] +
-			result9 +
-			result10 +
-			result11[0] + result11[1] + result11[2]
+				result1 +
+				result2 +
+				result5 +
+				result6 +
+				result9 +
+				result10
 			);
+		for (int i = 0; i < N; ++i)
+			total += (
+				result3[i] +
+				result4[i] +
+				result7[i] +
+				result8[i]
+			);
+		if (N == 3 || N == 4)
+		{
+			TYPE result11[N] = { 0 }; cross(result11, fast_arith_class(vec1), fast_arith_class(vec2));
+			for (int i = 0; i < N; ++i)
+				total += result11[i];
+		}
 	}
 	auto end = std::chrono::system_clock::now();
 	auto duration = end - begin;
@@ -328,6 +364,7 @@ void example_fast_math()
 	testForCalc<fastestArith_f, float>("fastest");
 	
 	//各種高速演算のテスト
+	printf("\n");
 	printf("--------------------------------------------------------------------------------\n");
 	printf("[ Test for fast operation ]\n");
 
@@ -458,6 +495,7 @@ void example_fast_math()
 	TEST_DIV_SET(10.f, 1000000.f);
 
 	//各種高速平方根のテスト
+	printf("\n");
 	printf("--------------------------------------------------------------------------------\n");
 	printf("[ Test for fast sqrt ]\n");
 
@@ -494,6 +532,7 @@ void example_fast_math()
 	TEST_SQRT_SET(1000000.f);
 
 	//高速ベクトル演算のテスト
+	printf("\n");
 	printf("--------------------------------------------------------------------------------\n");
 	printf("[ Test for vector operation ]\n");
 
@@ -501,6 +540,7 @@ void example_fast_math()
 		#define TEST_VECTOR_OPE1(expr, space)  { double result = static_cast<double>(expr); printf(#expr space " = %.5lf\n", result); }
 		#define TEST_VECTOR_OPE2(expr, space, result)  { expr; printf(#expr space " = [%.5lf][%.5f]\n", static_cast<double>(result[0]), static_cast<double>(result[1])); }
 		#define TEST_VECTOR_OPE3(expr, space, result)  { expr; printf(#expr space " = [%.5lf][%.5f][%.5f]\n", static_cast<double>(result[0]), static_cast<double>(result[1]), static_cast<double>(result[2])); }
+		printf("\n");
 		printf("- 2D vector -\n");
 		float vec2_1[2] = { 1.f, 2.f };
 		float vec2_2[2] = { 3.f, 4.f };
@@ -584,6 +624,7 @@ void example_fast_math()
 		TEST_VECTOR_OPE1(dot(dummyArith_2f(vec2_1), dummyArith_2f(vec2_2)), "                     ");
 		TEST_VECTOR_OPE1(normalizedDot(dummyArith_2f(vec2_1), dummyArith_2f(vec2_2)), "           ");
 
+		printf("\n");
 		printf("- 3D vector -\n");
 		float vec3_1[3] = { 1.f, 2.f, 3.f };
 		float vec3_2[3] = { 4.f, 5.f, 6.f };
@@ -673,8 +714,139 @@ void example_fast_math()
 		TEST_VECTOR_OPE1(dot(dummyArith_3f(vec3_1), dummyArith_3f(vec3_2)), "                     ");
 		TEST_VECTOR_OPE1(normalizedDot(dummyArith_3f(vec3_1), dummyArith_3f(vec3_2)), "           ");
 		TEST_VECTOR_OPE3(cross(vec3_result, dummyArith_3f(vec3_1), dummyArith_3f(vec3_2)), "      ", vec3_result);
+
+		printf("\n");
+		printf("- 4D vector -\n");
+		float vec4_1[4] = { 1.f, 2.f, 3.f, 0.f };
+		float vec4_2[4] = { 4.f, 5.f, 6.f, 0.f };
+		float vec4_result[4];
+		printf("vec4_1=[%.5f][%.5f][%.5f]\n", vec4_1[0], vec4_1[1], vec4_1[2]);
+		printf("vec4_2=[%.5f][%.5f][%.5f]\n", vec4_2[0], vec4_2[1], vec4_2[2]);
+		TEST_VECTOR_OPE1(norm(vec4_1), "                            ");
+		TEST_VECTOR_OPE1(normSq(vec4_1), "                          ");
+		TEST_VECTOR_OPE3(merge(vec4_result, vec4_1, vec4_2), "      ", vec4_result);
+		TEST_VECTOR_OPE3(difference(vec4_result, vec4_1, vec4_2), " ", vec4_result);
+		TEST_VECTOR_OPE1(length(vec4_1, vec4_2), "                  ");
+		TEST_VECTOR_OPE1(lengthSq(vec4_1, vec4_2), "                ");
+		TEST_VECTOR_OPE3(normalize(vec4_result, vec4_1), "          ", vec4_result);
+		TEST_VECTOR_OPE3(mul(vec4_result, vec4_1, 10.f), "          ", vec4_result);
+		TEST_VECTOR_OPE1(dot(vec4_1, vec4_2), "                     ");
+		TEST_VECTOR_OPE1(normalizedDot(vec4_1, vec4_2), "           ");
+		TEST_VECTOR_OPE3(cross(vec4_result, vec4_1, vec4_2), "      ", vec4_result);
+
+		TEST_VECTOR_OPE1(norm(fastArith_4f(vec4_1)), "                                                        ");
+		TEST_VECTOR_OPE1(normSq(fastArith_4f(vec4_1)), "                                                      ");
+		TEST_VECTOR_OPE3(fastArith_4f vec4_result = merge(fastArith_4f(vec4_1), fastArith_4f(vec4_2)), "      ", vec4_result);
+		TEST_VECTOR_OPE3(fastArith_4f vec4_result = difference(fastArith_4f(vec4_1), fastArith_4f(vec4_2)), " ", vec4_result);
+		TEST_VECTOR_OPE1(length(fastArith_4f(vec4_1), fastArith_4f(vec4_2)), "                                ");
+		TEST_VECTOR_OPE1(lengthSq(fastArith_4f(vec4_1), fastArith_4f(vec4_2)), "                              ");
+		TEST_VECTOR_OPE3(fastArith_4f vec4_result = normalize(fastArith_4f(vec4_1)), "                        ", vec4_result);
+		TEST_VECTOR_OPE3(fastArith_4f vec4_result = mul(fastArith_4f(vec4_1), 10.f), "                        ", vec4_result);
+		TEST_VECTOR_OPE1(dot(fastArith_4f(vec4_1), fastArith_4f(vec4_2)), "                                   ");
+		TEST_VECTOR_OPE1(normalizedDot(fastArith_4f(vec4_1), fastArith_4f(vec4_2)), "                         ");
+		TEST_VECTOR_OPE3(fastArith_4f vec4_result = cross(fastArith_4f(vec4_1), fastArith_4f(vec4_2)), "      ", vec4_result);
+
+		TEST_VECTOR_OPE1(norm(fastestArith_4f(vec4_1)), "                                                              ");
+		TEST_VECTOR_OPE1(normSq(fastestArith_4f(vec4_1)), "                                                            ");
+		TEST_VECTOR_OPE3(fastestArith_4f vec4_result = merge(fastestArith_4f(vec4_1), fastestArith_4f(vec4_2)), "      ", vec4_result);
+		TEST_VECTOR_OPE3(fastestArith_4f vec4_result = difference(fastestArith_4f(vec4_1), fastestArith_4f(vec4_2)), " ", vec4_result);
+		TEST_VECTOR_OPE1(length(fastestArith_4f(vec4_1), fastestArith_4f(vec4_2)), "                                   ");
+		TEST_VECTOR_OPE1(lengthSq(fastestArith_4f(vec4_1), fastestArith_4f(vec4_2)), "                                 ");
+		TEST_VECTOR_OPE3(fastestArith_4f vec4_result = normalize(fastestArith_4f(vec4_1)), "                           ", vec4_result);
+		TEST_VECTOR_OPE3(fastestArith_4f vec4_result = mul(fastestArith_4f(vec4_1), 10.f), "                           ", vec4_result);
+		TEST_VECTOR_OPE1(dot(fastestArith_4f(vec4_1), fastestArith_4f(vec4_2)), "                                      ");
+		TEST_VECTOR_OPE1(normalizedDot(fastestArith_4f(vec4_1), fastestArith_4f(vec4_2)), "                            ");
+		TEST_VECTOR_OPE3(fastestArith_4f vec4_result = cross(fastestArith_4f(vec4_1), fastestArith_4f(vec4_2)), "      ", vec4_result);
+
+		TEST_VECTOR_OPE1(norm(semifastArith_4f(vec4_1)), "                                                                ");
+		TEST_VECTOR_OPE1(normSq(semifastArith_4f(vec4_1)), "                                                              ");
+		TEST_VECTOR_OPE3(semifastArith_4f vec4_result = merge(semifastArith_4f(vec4_1), semifastArith_4f(vec4_2)), "      ", vec4_result);
+		TEST_VECTOR_OPE3(semifastArith_4f vec4_result = difference(semifastArith_4f(vec4_1), semifastArith_4f(vec4_2)), " ", vec4_result);
+		TEST_VECTOR_OPE1(length(semifastArith_4f(vec4_1), semifastArith_4f(vec4_2)), "                                    ");
+		TEST_VECTOR_OPE1(lengthSq(semifastArith_4f(vec4_1), semifastArith_4f(vec4_2)), "                                  ");
+		TEST_VECTOR_OPE3(semifastArith_4f vec4_result = normalize(semifastArith_4f(vec4_1)), "                            ", vec4_result);
+		TEST_VECTOR_OPE3(semifastArith_4f vec4_result = mul(semifastArith_4f(vec4_1), 10.f), "                            ", vec4_result);
+		TEST_VECTOR_OPE1(dot(semifastArith_4f(vec4_1), semifastArith_4f(vec4_2)), "                                       ");
+		TEST_VECTOR_OPE1(normalizedDot(semifastArith_4f(vec4_1), semifastArith_4f(vec4_2)), "                             ");
+		TEST_VECTOR_OPE3(semifastArith_4f vec4_result = cross(semifastArith_4f(vec4_1), semifastArith_4f(vec4_2)), "      ", vec4_result);
+
+		TEST_VECTOR_OPE1(norm(sseArith_4f(vec4_1)), "                                                      ");
+		TEST_VECTOR_OPE1(normSq(sseArith_4f(vec4_1)), "                                                    ");
+		TEST_VECTOR_OPE3(sseArith_4f vec4_result = merge(sseArith_4f(vec4_1), sseArith_4f(vec4_2)), "      ", vec4_result);
+		TEST_VECTOR_OPE3(sseArith_4f vec4_result = difference(sseArith_4f(vec4_1), sseArith_4f(vec4_2)), " ", vec4_result);
+		TEST_VECTOR_OPE1(length(sseArith_4f(vec4_1), sseArith_4f(vec4_2)), "                               ");
+		TEST_VECTOR_OPE1(lengthSq(sseArith_4f(vec4_1), sseArith_4f(vec4_2)), "                             ");
+		TEST_VECTOR_OPE3(sseArith_4f vec4_result = normalize(sseArith_4f(vec4_1)), "                       ", vec4_result);
+		TEST_VECTOR_OPE3(sseArith_4f vec4_result = mul(sseArith_4f(vec4_1), 10.f), "                       ", vec4_result);
+		TEST_VECTOR_OPE1(dot(sseArith_4f(vec4_1), sseArith_4f(vec4_2)), "                                  ");
+		TEST_VECTOR_OPE1(normalizedDot(sseArith_4f(vec4_1), sseArith_4f(vec4_2)), "                        ");
+		TEST_VECTOR_OPE3(sseArith_4f vec4_result = cross(sseArith_4f(vec4_1), sseArith_4f(vec4_2)), "      ", vec4_result);
+
+		TEST_VECTOR_OPE1(norm(normalArith_4f(vec4_1)), "                                                            ");
+		TEST_VECTOR_OPE1(normSq(normalArith_4f(vec4_1)), "                                                          ");
+		TEST_VECTOR_OPE3(normalArith_4f vec4_result = merge(normalArith_4f(vec4_1), normalArith_4f(vec4_2)), "      ", vec4_result);
+		TEST_VECTOR_OPE3(normalArith_4f vec4_result = difference(normalArith_4f(vec4_1), normalArith_4f(vec4_2)), " ", vec4_result);
+		TEST_VECTOR_OPE1(length(normalArith_4f(vec4_1), normalArith_4f(vec4_2)), "                                  ");
+		TEST_VECTOR_OPE1(lengthSq(normalArith_4f(vec4_1), normalArith_4f(vec4_2)), "                                ");
+		TEST_VECTOR_OPE3(normalArith_4f vec4_result = normalize(normalArith_4f(vec4_1)), "                          ", vec4_result);
+		TEST_VECTOR_OPE3(normalArith_4f vec4_result = mul(normalArith_4f(vec4_1), 10.f), "                          ", vec4_result);
+		TEST_VECTOR_OPE1(dot(normalArith_4f(vec4_1), normalArith_4f(vec4_2)), "                                     ");
+		TEST_VECTOR_OPE1(normalizedDot(normalArith_4f(vec4_1), normalArith_4f(vec4_2)), "                           ");
+		TEST_VECTOR_OPE3(normalArith_4f vec4_result = cross(normalArith_4f(vec4_1), normalArith_4f(vec4_2)), "      ", vec4_result);
+
+		TEST_VECTOR_OPE1(norm(dummyArith_4f(vec4_1)), "                                           ");
+		TEST_VECTOR_OPE1(normSq(dummyArith_4f(vec4_1)), "                                         ");
+		TEST_VECTOR_OPE3(merge(vec4_result, dummyArith_4f(vec4_1), dummyArith_4f(vec4_2)), "      ", vec4_result);
+		TEST_VECTOR_OPE3(difference(vec4_result, dummyArith_4f(vec4_1), dummyArith_4f(vec4_2)), " ", vec4_result);
+		TEST_VECTOR_OPE1(length(dummyArith_4f(vec4_1), dummyArith_4f(vec4_2)), "                  ");
+		TEST_VECTOR_OPE1(lengthSq(dummyArith_4f(vec4_1), dummyArith_4f(vec4_2)), "                ");
+		TEST_VECTOR_OPE3(normalize(vec4_result, dummyArith_4f(vec4_1)), "                         ", vec4_result);
+		TEST_VECTOR_OPE3(mul(vec4_result, dummyArith_4f(vec4_1), 10.f), "                         ", vec4_result);
+		TEST_VECTOR_OPE1(dot(dummyArith_4f(vec4_1), dummyArith_4f(vec4_2)), "                     ");
+		TEST_VECTOR_OPE1(normalizedDot(dummyArith_4f(vec4_1), dummyArith_4f(vec4_2)), "           ");
+		TEST_VECTOR_OPE3(cross(vec4_result, dummyArith_4f(vec4_1), dummyArith_4f(vec4_2)), "      ", vec4_result);
+
+		printf("\n");
+		printf("- 2D vector(double) -\n");
+		double vec2d_1[2] = { 1., 2. };
+		double vec2d_2[2] = { 3., 4. };
+		double vec2d_result[2];
+		printf("vec2d_1=[%.5lf][%.5lf]\n", vec2d_1[0], vec2d_1[1]);
+		printf("vec2d_2=[%.5lf][%.5lf]\n", vec2d_2[0], vec2d_2[1]);
+		TEST_VECTOR_OPE1(norm(vec2d_1), "                              ");
+		TEST_VECTOR_OPE1(normSq(vec2d_1), "                            ");
+		TEST_VECTOR_OPE2(merge(vec2d_result, vec2d_1, vec2d_2), "      ", vec2d_result);
+		TEST_VECTOR_OPE2(difference(vec2d_result, vec2d_1, vec2d_2), " ", vec2d_result);
+		TEST_VECTOR_OPE1(length(vec2d_1, vec2d_2), "                   ");
+		TEST_VECTOR_OPE1(lengthSq(vec2d_1, vec2d_2), "                 ");
+		TEST_VECTOR_OPE2(normalize(vec2d_result, vec2d_1), "           ", vec2d_result);
+		TEST_VECTOR_OPE2(mul(vec2d_result, vec2d_1, 10.), "            ", vec2d_result);
+		TEST_VECTOR_OPE1(dot(vec2d_1, vec2d_2), "                      ");
+		TEST_VECTOR_OPE1(normalizedDot(vec2d_1, vec2d_2), "            ");
+		
+		printf("\n");
+		printf("- 3D vector (double) -\n");
+		double vec3d_1[3] = { 1., 2., 3. };
+		double vec3d_2[3] = { 4., 5., 6. };
+		double vec3d_result[3];
+		printf("vec3dd_1=[%.5lf][%.5lf][%.5lf]\n", vec3d_1[0], vec3d_1[1], vec3d_1[2]);
+		printf("vec3dd_2=[%.5lf][%.5lf][%.5lf]\n", vec3d_2[0], vec3d_2[1], vec3d_2[2]);
+		TEST_VECTOR_OPE1(norm(vec3d_1), "                              ");
+		TEST_VECTOR_OPE1(normSq(vec3d_1), "                            ");
+		TEST_VECTOR_OPE3(merge(vec3d_result, vec3d_1, vec3d_2), "      ", vec3d_result);
+		TEST_VECTOR_OPE3(difference(vec3d_result, vec3d_1, vec3d_2), " ", vec3d_result);
+		TEST_VECTOR_OPE1(length(vec3d_1, vec3d_2), "                   ");
+		TEST_VECTOR_OPE1(lengthSq(vec3d_1, vec3d_2), "                 ");
+		TEST_VECTOR_OPE3(normalize(vec3d_result, vec3d_1), "           ", vec3d_result);
+		TEST_VECTOR_OPE3(mul(vec3d_result, vec3d_1, 10.), "            ", vec3d_result);
+		TEST_VECTOR_OPE1(dot(vec3d_1, vec3d_2), "                      ");
+		TEST_VECTOR_OPE1(normalizedDot(vec3d_1, vec3d_2), "            ");
+		TEST_VECTOR_OPE3(cross(vec3d_result, vec3d_1, vec3d_2), "      ", vec3d_result);
 	}
 
+	//パフォーマンス計測
+	printf("\n");
+	
 	//各種高速演算のパフォーマンス計測
 	testForOperationPerformanceDirect<float>("direct:float");
 	testForOperationPerformance<dummyArith_f, float>("dummy:float");
@@ -710,6 +882,14 @@ void example_fast_math()
 	testForSqrtPerformance<fastestArith_d, double>("fastest:double");
 
 	//各種高速ベクトル演算のパフォーマンス計測
+	testForVectorPerformanceDirect<float, 2>("direct:float[2]");
+	testForVectorPerformanceDummy<dummyArith_2f, float, 2>("dummy:float[2]");
+	testForVectorPerformance<normalArith_2f, float, 2>("normal:float[2]");
+	testForVectorPerformance<sseArith_2f, float, 2>("sse:float[2]");
+	testForVectorPerformance<fastArith_2f, float, 2>("fast:float[2]");
+	testForVectorPerformance<semifastArith_2f, float, 2>("semifast:float[2]");
+	testForVectorPerformance<fastestArith_2f, float, 2>("fastest:float[2]");
+
 	testForVectorPerformanceDirect<float, 3>("direct:float[3]");
 	testForVectorPerformanceDummy<dummyArith_3f, float, 3>("dummy:float[3]");
 	testForVectorPerformance<normalArith_3f, float, 3>("normal:float[3]");
@@ -717,6 +897,38 @@ void example_fast_math()
 	testForVectorPerformance<fastArith_3f, float, 3>("fast:float[3]");
 	testForVectorPerformance<semifastArith_3f, float, 3>("semifast:float[3]");
 	testForVectorPerformance<fastestArith_3f, float, 3>("fastest:float[3]");
+
+	testForVectorPerformanceDirect<float, 4>("direct:float[4]");
+	testForVectorPerformanceDummy<dummyArith_4f, float, 4>("dummy:float[4]");
+	testForVectorPerformance<normalArith_4f, float, 4>("normal:float[4]");
+	testForVectorPerformance<sseArith_4f, float, 4>("sse:float[4]");
+	testForVectorPerformance<fastArith_4f, float, 4>("fast:float[4]");
+	testForVectorPerformance<semifastArith_4f, float, 4>("semifast:float[4]");
+	testForVectorPerformance<fastestArith_4f, float, 4>("fastest:float[4]");
+
+	testForVectorPerformanceDirect<double, 2>("direct:double[2]");
+	testForVectorPerformanceDummy<dummyArith_2d, double, 2>("dummy:double[2]");
+	testForVectorPerformance<normalArith_2d, double, 2>("normal:double[2]");
+	testForVectorPerformance<sseArith_2d, double, 2>("sse:double[2]");
+	testForVectorPerformance<fastArith_2d, double, 2>("fast:double[2]");
+	testForVectorPerformance<semifastArith_2d, double, 2>("semifast:double[2]");
+	testForVectorPerformance<fastestArith_2d, double, 2>("fastest:double[2]");
+
+	testForVectorPerformanceDirect<double, 3>("direct:double[3]");
+	testForVectorPerformanceDummy<dummyArith_3d, double, 3>("dummy:double[3]");
+	testForVectorPerformance<normalArith_3d, double, 3>("normal:double[3]");
+	testForVectorPerformance<sseArith_3d, double, 3>("sse:double[3]");
+	testForVectorPerformance<fastArith_3d, double, 3>("fast:double[3]");
+	testForVectorPerformance<semifastArith_3d, double, 3>("semifast:double[3]");
+	testForVectorPerformance<fastestArith_3d, double, 3>("fastest:double[3]");
+
+	testForVectorPerformanceDirect<double, 4>("direct:double[4]");
+	testForVectorPerformanceDummy<dummyArith_4d, double, 4>("dummy:double[4]");
+	testForVectorPerformance<normalArith_4d, double, 4>("normal:double[4]");
+	testForVectorPerformance<sseArith_4d, double, 4>("sse:double[4]");
+	testForVectorPerformance<fastArith_4d, double, 4>("fast:double[4]");
+	testForVectorPerformance<semifastArith_4d, double, 4>("semifast:double[4]");
+	testForVectorPerformance<fastestArith_4d, double, 4>("fastest:double[4]");
 }
 
 // End of file
