@@ -7,849 +7,1281 @@
 [fast    ] 0.77441 + 0.796422 - 0.85759 * 0.92213 / 0.80138 = 0.58401
 [semifast] 0.77441 + 0.796422 - 0.85759 * 0.92213 / 0.80138 = 0.58401
 [fastest ] 0.77441 + 0.796422 - 0.85759 * 0.92213 / 0.80138 = 0.58405
+
 --------------------------------------------------------------------------------
 [ Test for fast operation ]
 
 10.f + 1.f                  = 11.000 (11.000000000)
-dummyArith_f(10.f) + 1.f    = 11.000 (11.000000000)
-normalArith_f(10.f) + 1.f   = 11.000 (11.000000000)
-sseArith_f(10.f) + 1.f      = 11.000 (11.000000000)
-fastArith_f(10.f) + 1.f     = 11.000 (11.000000000)
-semifastArith_f(10.f) + 1.f = 11.000 (11.000000000)
-fastestArith_f(10.f) + 1.f  = 11.000 (11.000000000)
-dummyArith_d(lvalue_d) + rvalue_d    = 11.000 (11.000000000)
-normalArith_d(lvalue_d) + rvalue_d   = 11.000 (11.000000000)
-sseArith_d(lvalue_d) + rvalue_d      = 11.000 (11.000000000)
-fastArith_d(lvalue_d) + rvalue_d     = 11.000 (11.000000000)
-semifastArith_d(lvalue_d) + rvalue_d = 11.000 (11.000000000)
-fastestArith_d(lvalue_d) + rvalue_d  = 11.000 (11.000000000)
+dummyA_f(10.f) + 1.f    = 11.000 (11.000000000)
+normA_f(10.f) + 1.f   = 11.000 (11.000000000)
+sseA_f(10.f) + 1.f      = 11.000 (11.000000000)
+fastA_f(10.f) + 1.f     = 11.000 (11.000000000)
+semiA_f(10.f) + 1.f = 11.000 (11.000000000)
+fastestA_f(10.f) + 1.f  = 11.000 (11.000000000)
+dummyA_d(lvalue_d) + rvalue_d    = 11.000 (11.000000000)
+normA_d(lvalue_d) + rvalue_d   = 11.000 (11.000000000)
+sseA_d(lvalue_d) + rvalue_d      = 11.000 (11.000000000)
+fastA_d(lvalue_d) + rvalue_d     = 11.000 (11.000000000)
+semiA_d(lvalue_d) + rvalue_d = 11.000 (11.000000000)
+fastestA_d(lvalue_d) + rvalue_d  = 11.000 (11.000000000)
 
 10.f + 2.f                  = 12.000 (12.000000000)
-dummyArith_f(10.f) + 2.f    = 12.000 (12.000000000)
-normalArith_f(10.f) + 2.f   = 12.000 (12.000000000)
-sseArith_f(10.f) + 2.f      = 12.000 (12.000000000)
-fastArith_f(10.f) + 2.f     = 12.000 (12.000000000)
-semifastArith_f(10.f) + 2.f = 12.000 (12.000000000)
-fastestArith_f(10.f) + 2.f  = 12.000 (12.000000000)
-dummyArith_d(lvalue_d) + rvalue_d    = 12.000 (12.000000000)
-normalArith_d(lvalue_d) + rvalue_d   = 12.000 (12.000000000)
-sseArith_d(lvalue_d) + rvalue_d      = 12.000 (12.000000000)
-fastArith_d(lvalue_d) + rvalue_d     = 12.000 (12.000000000)
-semifastArith_d(lvalue_d) + rvalue_d = 12.000 (12.000000000)
-fastestArith_d(lvalue_d) + rvalue_d  = 12.000 (12.000000000)
+dummyA_f(10.f) + 2.f    = 12.000 (12.000000000)
+normA_f(10.f) + 2.f   = 12.000 (12.000000000)
+sseA_f(10.f) + 2.f      = 12.000 (12.000000000)
+fastA_f(10.f) + 2.f     = 12.000 (12.000000000)
+semiA_f(10.f) + 2.f = 12.000 (12.000000000)
+fastestA_f(10.f) + 2.f  = 12.000 (12.000000000)
+dummyA_d(lvalue_d) + rvalue_d    = 12.000 (12.000000000)
+normA_d(lvalue_d) + rvalue_d   = 12.000 (12.000000000)
+sseA_d(lvalue_d) + rvalue_d      = 12.000 (12.000000000)
+fastA_d(lvalue_d) + rvalue_d     = 12.000 (12.000000000)
+semiA_d(lvalue_d) + rvalue_d = 12.000 (12.000000000)
+fastestA_d(lvalue_d) + rvalue_d  = 12.000 (12.000000000)
 
 10.f + 3.f                  = 13.000 (13.000000000)
-dummyArith_f(10.f) + 3.f    = 13.000 (13.000000000)
-normalArith_f(10.f) + 3.f   = 13.000 (13.000000000)
-sseArith_f(10.f) + 3.f      = 13.000 (13.000000000)
-fastArith_f(10.f) + 3.f     = 13.000 (13.000000000)
-semifastArith_f(10.f) + 3.f = 13.000 (13.000000000)
-fastestArith_f(10.f) + 3.f  = 13.000 (13.000000000)
-dummyArith_d(lvalue_d) + rvalue_d    = 13.000 (13.000000000)
-normalArith_d(lvalue_d) + rvalue_d   = 13.000 (13.000000000)
-sseArith_d(lvalue_d) + rvalue_d      = 13.000 (13.000000000)
-fastArith_d(lvalue_d) + rvalue_d     = 13.000 (13.000000000)
-semifastArith_d(lvalue_d) + rvalue_d = 13.000 (13.000000000)
-fastestArith_d(lvalue_d) + rvalue_d  = 13.000 (13.000000000)
+dummyA_f(10.f) + 3.f    = 13.000 (13.000000000)
+normA_f(10.f) + 3.f   = 13.000 (13.000000000)
+sseA_f(10.f) + 3.f      = 13.000 (13.000000000)
+fastA_f(10.f) + 3.f     = 13.000 (13.000000000)
+semiA_f(10.f) + 3.f = 13.000 (13.000000000)
+fastestA_f(10.f) + 3.f  = 13.000 (13.000000000)
+dummyA_d(lvalue_d) + rvalue_d    = 13.000 (13.000000000)
+normA_d(lvalue_d) + rvalue_d   = 13.000 (13.000000000)
+sseA_d(lvalue_d) + rvalue_d      = 13.000 (13.000000000)
+fastA_d(lvalue_d) + rvalue_d     = 13.000 (13.000000000)
+semiA_d(lvalue_d) + rvalue_d = 13.000 (13.000000000)
+fastestA_d(lvalue_d) + rvalue_d  = 13.000 (13.000000000)
 
 10.f + 4.f                  = 14.000 (14.000000000)
-dummyArith_f(10.f) + 4.f    = 14.000 (14.000000000)
-normalArith_f(10.f) + 4.f   = 14.000 (14.000000000)
-sseArith_f(10.f) + 4.f      = 14.000 (14.000000000)
-fastArith_f(10.f) + 4.f     = 14.000 (14.000000000)
-semifastArith_f(10.f) + 4.f = 14.000 (14.000000000)
-fastestArith_f(10.f) + 4.f  = 14.000 (14.000000000)
-dummyArith_d(lvalue_d) + rvalue_d    = 14.000 (14.000000000)
-normalArith_d(lvalue_d) + rvalue_d   = 14.000 (14.000000000)
-sseArith_d(lvalue_d) + rvalue_d      = 14.000 (14.000000000)
-fastArith_d(lvalue_d) + rvalue_d     = 14.000 (14.000000000)
-semifastArith_d(lvalue_d) + rvalue_d = 14.000 (14.000000000)
-fastestArith_d(lvalue_d) + rvalue_d  = 14.000 (14.000000000)
+dummyA_f(10.f) + 4.f    = 14.000 (14.000000000)
+normA_f(10.f) + 4.f   = 14.000 (14.000000000)
+sseA_f(10.f) + 4.f      = 14.000 (14.000000000)
+fastA_f(10.f) + 4.f     = 14.000 (14.000000000)
+semiA_f(10.f) + 4.f = 14.000 (14.000000000)
+fastestA_f(10.f) + 4.f  = 14.000 (14.000000000)
+dummyA_d(lvalue_d) + rvalue_d    = 14.000 (14.000000000)
+normA_d(lvalue_d) + rvalue_d   = 14.000 (14.000000000)
+sseA_d(lvalue_d) + rvalue_d      = 14.000 (14.000000000)
+fastA_d(lvalue_d) + rvalue_d     = 14.000 (14.000000000)
+semiA_d(lvalue_d) + rvalue_d = 14.000 (14.000000000)
+fastestA_d(lvalue_d) + rvalue_d  = 14.000 (14.000000000)
 
 10.f + 5.f                  = 15.000 (15.000000000)
-dummyArith_f(10.f) + 5.f    = 15.000 (15.000000000)
-normalArith_f(10.f) + 5.f   = 15.000 (15.000000000)
-sseArith_f(10.f) + 5.f      = 15.000 (15.000000000)
-fastArith_f(10.f) + 5.f     = 15.000 (15.000000000)
-semifastArith_f(10.f) + 5.f = 15.000 (15.000000000)
-fastestArith_f(10.f) + 5.f  = 15.000 (15.000000000)
-dummyArith_d(lvalue_d) + rvalue_d    = 15.000 (15.000000000)
-normalArith_d(lvalue_d) + rvalue_d   = 15.000 (15.000000000)
-sseArith_d(lvalue_d) + rvalue_d      = 15.000 (15.000000000)
-fastArith_d(lvalue_d) + rvalue_d     = 15.000 (15.000000000)
-semifastArith_d(lvalue_d) + rvalue_d = 15.000 (15.000000000)
-fastestArith_d(lvalue_d) + rvalue_d  = 15.000 (15.000000000)
+dummyA_f(10.f) + 5.f    = 15.000 (15.000000000)
+normA_f(10.f) + 5.f   = 15.000 (15.000000000)
+sseA_f(10.f) + 5.f      = 15.000 (15.000000000)
+fastA_f(10.f) + 5.f     = 15.000 (15.000000000)
+semiA_f(10.f) + 5.f = 15.000 (15.000000000)
+fastestA_f(10.f) + 5.f  = 15.000 (15.000000000)
+dummyA_d(lvalue_d) + rvalue_d    = 15.000 (15.000000000)
+normA_d(lvalue_d) + rvalue_d   = 15.000 (15.000000000)
+sseA_d(lvalue_d) + rvalue_d      = 15.000 (15.000000000)
+fastA_d(lvalue_d) + rvalue_d     = 15.000 (15.000000000)
+semiA_d(lvalue_d) + rvalue_d = 15.000 (15.000000000)
+fastestA_d(lvalue_d) + rvalue_d  = 15.000 (15.000000000)
 
 10.f + 10.f                  = 20.000 (20.000000000)
-dummyArith_f(10.f) + 10.f    = 20.000 (20.000000000)
-normalArith_f(10.f) + 10.f   = 20.000 (20.000000000)
-sseArith_f(10.f) + 10.f      = 20.000 (20.000000000)
-fastArith_f(10.f) + 10.f     = 20.000 (20.000000000)
-semifastArith_f(10.f) + 10.f = 20.000 (20.000000000)
-fastestArith_f(10.f) + 10.f  = 20.000 (20.000000000)
-dummyArith_d(lvalue_d) + rvalue_d    = 20.000 (20.000000000)
-normalArith_d(lvalue_d) + rvalue_d   = 20.000 (20.000000000)
-sseArith_d(lvalue_d) + rvalue_d      = 20.000 (20.000000000)
-fastArith_d(lvalue_d) + rvalue_d     = 20.000 (20.000000000)
-semifastArith_d(lvalue_d) + rvalue_d = 20.000 (20.000000000)
-fastestArith_d(lvalue_d) + rvalue_d  = 20.000 (20.000000000)
+dummyA_f(10.f) + 10.f    = 20.000 (20.000000000)
+normA_f(10.f) + 10.f   = 20.000 (20.000000000)
+sseA_f(10.f) + 10.f      = 20.000 (20.000000000)
+fastA_f(10.f) + 10.f     = 20.000 (20.000000000)
+semiA_f(10.f) + 10.f = 20.000 (20.000000000)
+fastestA_f(10.f) + 10.f  = 20.000 (20.000000000)
+dummyA_d(lvalue_d) + rvalue_d    = 20.000 (20.000000000)
+normA_d(lvalue_d) + rvalue_d   = 20.000 (20.000000000)
+sseA_d(lvalue_d) + rvalue_d      = 20.000 (20.000000000)
+fastA_d(lvalue_d) + rvalue_d     = 20.000 (20.000000000)
+semiA_d(lvalue_d) + rvalue_d = 20.000 (20.000000000)
+fastestA_d(lvalue_d) + rvalue_d  = 20.000 (20.000000000)
 
 10.f + 100.f                  = 110.000 (110.000000000)
-dummyArith_f(10.f) + 100.f    = 110.000 (110.000000000)
-normalArith_f(10.f) + 100.f   = 110.000 (110.000000000)
-sseArith_f(10.f) + 100.f      = 110.000 (110.000000000)
-fastArith_f(10.f) + 100.f     = 110.000 (110.000000000)
-semifastArith_f(10.f) + 100.f = 110.000 (110.000000000)
-fastestArith_f(10.f) + 100.f  = 110.000 (110.000000000)
-dummyArith_d(lvalue_d) + rvalue_d    = 110.000 (110.000000000)
-normalArith_d(lvalue_d) + rvalue_d   = 110.000 (110.000000000)
-sseArith_d(lvalue_d) + rvalue_d      = 110.000 (110.000000000)
-fastArith_d(lvalue_d) + rvalue_d     = 110.000 (110.000000000)
-semifastArith_d(lvalue_d) + rvalue_d = 110.000 (110.000000000)
-fastestArith_d(lvalue_d) + rvalue_d  = 110.000 (110.000000000)
+dummyA_f(10.f) + 100.f    = 110.000 (110.000000000)
+normA_f(10.f) + 100.f   = 110.000 (110.000000000)
+sseA_f(10.f) + 100.f      = 110.000 (110.000000000)
+fastA_f(10.f) + 100.f     = 110.000 (110.000000000)
+semiA_f(10.f) + 100.f = 110.000 (110.000000000)
+fastestA_f(10.f) + 100.f  = 110.000 (110.000000000)
+dummyA_d(lvalue_d) + rvalue_d    = 110.000 (110.000000000)
+normA_d(lvalue_d) + rvalue_d   = 110.000 (110.000000000)
+sseA_d(lvalue_d) + rvalue_d      = 110.000 (110.000000000)
+fastA_d(lvalue_d) + rvalue_d     = 110.000 (110.000000000)
+semiA_d(lvalue_d) + rvalue_d = 110.000 (110.000000000)
+fastestA_d(lvalue_d) + rvalue_d  = 110.000 (110.000000000)
 
 10.f + 1000.f                  = 1010.000 (1010.000000000)
-dummyArith_f(10.f) + 1000.f    = 1010.000 (1010.000000000)
-normalArith_f(10.f) + 1000.f   = 1010.000 (1010.000000000)
-sseArith_f(10.f) + 1000.f      = 1010.000 (1010.000000000)
-fastArith_f(10.f) + 1000.f     = 1010.000 (1010.000000000)
-semifastArith_f(10.f) + 1000.f = 1010.000 (1010.000000000)
-fastestArith_f(10.f) + 1000.f  = 1010.000 (1010.000000000)
-dummyArith_d(lvalue_d) + rvalue_d    = 1010.000 (1010.000000000)
-normalArith_d(lvalue_d) + rvalue_d   = 1010.000 (1010.000000000)
-sseArith_d(lvalue_d) + rvalue_d      = 1010.000 (1010.000000000)
-fastArith_d(lvalue_d) + rvalue_d     = 1010.000 (1010.000000000)
-semifastArith_d(lvalue_d) + rvalue_d = 1010.000 (1010.000000000)
-fastestArith_d(lvalue_d) + rvalue_d  = 1010.000 (1010.000000000)
+dummyA_f(10.f) + 1000.f    = 1010.000 (1010.000000000)
+normA_f(10.f) + 1000.f   = 1010.000 (1010.000000000)
+sseA_f(10.f) + 1000.f      = 1010.000 (1010.000000000)
+fastA_f(10.f) + 1000.f     = 1010.000 (1010.000000000)
+semiA_f(10.f) + 1000.f = 1010.000 (1010.000000000)
+fastestA_f(10.f) + 1000.f  = 1010.000 (1010.000000000)
+dummyA_d(lvalue_d) + rvalue_d    = 1010.000 (1010.000000000)
+normA_d(lvalue_d) + rvalue_d   = 1010.000 (1010.000000000)
+sseA_d(lvalue_d) + rvalue_d      = 1010.000 (1010.000000000)
+fastA_d(lvalue_d) + rvalue_d     = 1010.000 (1010.000000000)
+semiA_d(lvalue_d) + rvalue_d = 1010.000 (1010.000000000)
+fastestA_d(lvalue_d) + rvalue_d  = 1010.000 (1010.000000000)
 
 10.f + 10000.f                  = 10010.000 (10010.000000000)
-dummyArith_f(10.f) + 10000.f    = 10010.000 (10010.000000000)
-normalArith_f(10.f) + 10000.f   = 10010.000 (10010.000000000)
-sseArith_f(10.f) + 10000.f      = 10010.000 (10010.000000000)
-fastArith_f(10.f) + 10000.f     = 10010.000 (10010.000000000)
-semifastArith_f(10.f) + 10000.f = 10010.000 (10010.000000000)
-fastestArith_f(10.f) + 10000.f  = 10010.000 (10010.000000000)
-dummyArith_d(lvalue_d) + rvalue_d    = 10010.000 (10010.000000000)
-normalArith_d(lvalue_d) + rvalue_d   = 10010.000 (10010.000000000)
-sseArith_d(lvalue_d) + rvalue_d      = 10010.000 (10010.000000000)
-fastArith_d(lvalue_d) + rvalue_d     = 10010.000 (10010.000000000)
-semifastArith_d(lvalue_d) + rvalue_d = 10010.000 (10010.000000000)
-fastestArith_d(lvalue_d) + rvalue_d  = 10010.000 (10010.000000000)
+dummyA_f(10.f) + 10000.f    = 10010.000 (10010.000000000)
+normA_f(10.f) + 10000.f   = 10010.000 (10010.000000000)
+sseA_f(10.f) + 10000.f      = 10010.000 (10010.000000000)
+fastA_f(10.f) + 10000.f     = 10010.000 (10010.000000000)
+semiA_f(10.f) + 10000.f = 10010.000 (10010.000000000)
+fastestA_f(10.f) + 10000.f  = 10010.000 (10010.000000000)
+dummyA_d(lvalue_d) + rvalue_d    = 10010.000 (10010.000000000)
+normA_d(lvalue_d) + rvalue_d   = 10010.000 (10010.000000000)
+sseA_d(lvalue_d) + rvalue_d      = 10010.000 (10010.000000000)
+fastA_d(lvalue_d) + rvalue_d     = 10010.000 (10010.000000000)
+semiA_d(lvalue_d) + rvalue_d = 10010.000 (10010.000000000)
+fastestA_d(lvalue_d) + rvalue_d  = 10010.000 (10010.000000000)
 
 10.f + 100000.f                  = 100010.000 (100010.000000000)
-dummyArith_f(10.f) + 100000.f    = 100010.000 (100010.000000000)
-normalArith_f(10.f) + 100000.f   = 100010.000 (100010.000000000)
-sseArith_f(10.f) + 100000.f      = 100010.000 (100010.000000000)
-fastArith_f(10.f) + 100000.f     = 100010.000 (100010.000000000)
-semifastArith_f(10.f) + 100000.f = 100010.000 (100010.000000000)
-fastestArith_f(10.f) + 100000.f  = 100010.000 (100010.000000000)
-dummyArith_d(lvalue_d) + rvalue_d    = 100010.000 (100010.000000000)
-normalArith_d(lvalue_d) + rvalue_d   = 100010.000 (100010.000000000)
-sseArith_d(lvalue_d) + rvalue_d      = 100010.000 (100010.000000000)
-fastArith_d(lvalue_d) + rvalue_d     = 100010.000 (100010.000000000)
-semifastArith_d(lvalue_d) + rvalue_d = 100010.000 (100010.000000000)
-fastestArith_d(lvalue_d) + rvalue_d  = 100010.000 (100010.000000000)
+dummyA_f(10.f) + 100000.f    = 100010.000 (100010.000000000)
+normA_f(10.f) + 100000.f   = 100010.000 (100010.000000000)
+sseA_f(10.f) + 100000.f      = 100010.000 (100010.000000000)
+fastA_f(10.f) + 100000.f     = 100010.000 (100010.000000000)
+semiA_f(10.f) + 100000.f = 100010.000 (100010.000000000)
+fastestA_f(10.f) + 100000.f  = 100010.000 (100010.000000000)
+dummyA_d(lvalue_d) + rvalue_d    = 100010.000 (100010.000000000)
+normA_d(lvalue_d) + rvalue_d   = 100010.000 (100010.000000000)
+sseA_d(lvalue_d) + rvalue_d      = 100010.000 (100010.000000000)
+fastA_d(lvalue_d) + rvalue_d     = 100010.000 (100010.000000000)
+semiA_d(lvalue_d) + rvalue_d = 100010.000 (100010.000000000)
+fastestA_d(lvalue_d) + rvalue_d  = 100010.000 (100010.000000000)
 
 10.f + 1000000.f                  = 1000010.000 (1000010.000000000)
-dummyArith_f(10.f) + 1000000.f    = 1000010.000 (1000010.000000000)
-normalArith_f(10.f) + 1000000.f   = 1000010.000 (1000010.000000000)
-sseArith_f(10.f) + 1000000.f      = 1000010.000 (1000010.000000000)
-fastArith_f(10.f) + 1000000.f     = 1000010.000 (1000010.000000000)
-semifastArith_f(10.f) + 1000000.f = 1000010.000 (1000010.000000000)
-fastestArith_f(10.f) + 1000000.f  = 1000010.000 (1000010.000000000)
-dummyArith_d(lvalue_d) + rvalue_d    = 1000010.000 (1000010.000000000)
-normalArith_d(lvalue_d) + rvalue_d   = 1000010.000 (1000010.000000000)
-sseArith_d(lvalue_d) + rvalue_d      = 1000010.000 (1000010.000000000)
-fastArith_d(lvalue_d) + rvalue_d     = 1000010.000 (1000010.000000000)
-semifastArith_d(lvalue_d) + rvalue_d = 1000010.000 (1000010.000000000)
-fastestArith_d(lvalue_d) + rvalue_d  = 1000010.000 (1000010.000000000)
+dummyA_f(10.f) + 1000000.f    = 1000010.000 (1000010.000000000)
+normA_f(10.f) + 1000000.f   = 1000010.000 (1000010.000000000)
+sseA_f(10.f) + 1000000.f      = 1000010.000 (1000010.000000000)
+fastA_f(10.f) + 1000000.f     = 1000010.000 (1000010.000000000)
+semiA_f(10.f) + 1000000.f = 1000010.000 (1000010.000000000)
+fastestA_f(10.f) + 1000000.f  = 1000010.000 (1000010.000000000)
+dummyA_d(lvalue_d) + rvalue_d    = 1000010.000 (1000010.000000000)
+normA_d(lvalue_d) + rvalue_d   = 1000010.000 (1000010.000000000)
+sseA_d(lvalue_d) + rvalue_d      = 1000010.000 (1000010.000000000)
+fastA_d(lvalue_d) + rvalue_d     = 1000010.000 (1000010.000000000)
+semiA_d(lvalue_d) + rvalue_d = 1000010.000 (1000010.000000000)
+fastestA_d(lvalue_d) + rvalue_d  = 1000010.000 (1000010.000000000)
 
 10.f - 1.f                  = 9.000 (9.000000000)
-dummyArith_f(10.f) - 1.f    = 9.000 (9.000000000)
-normalArith_f(10.f) - 1.f   = 9.000 (9.000000000)
-sseArith_f(10.f) - 1.f      = 9.000 (9.000000000)
-fastArith_f(10.f) - 1.f     = 9.000 (9.000000000)
-semifastArith_f(10.f) - 1.f = 9.000 (9.000000000)
-fastestArith_f(10.f) - 1.f  = 9.000 (9.000000000)
-dummyArith_d(lvalue_d) - rvalue_d    = 9.000 (9.000000000)
-normalArith_d(lvalue_d) - rvalue_d   = 9.000 (9.000000000)
-sseArith_d(lvalue_d) - rvalue_d      = 9.000 (9.000000000)
-fastArith_d(lvalue_d) - rvalue_d     = 9.000 (9.000000000)
-semifastArith_d(lvalue_d) - rvalue_d = 9.000 (9.000000000)
-fastestArith_d(lvalue_d) - rvalue_d  = 9.000 (9.000000000)
+dummyA_f(10.f) - 1.f    = 9.000 (9.000000000)
+normA_f(10.f) - 1.f   = 9.000 (9.000000000)
+sseA_f(10.f) - 1.f      = 9.000 (9.000000000)
+fastA_f(10.f) - 1.f     = 9.000 (9.000000000)
+semiA_f(10.f) - 1.f = 9.000 (9.000000000)
+fastestA_f(10.f) - 1.f  = 9.000 (9.000000000)
+dummyA_d(lvalue_d) - rvalue_d    = 9.000 (9.000000000)
+normA_d(lvalue_d) - rvalue_d   = 9.000 (9.000000000)
+sseA_d(lvalue_d) - rvalue_d      = 9.000 (9.000000000)
+fastA_d(lvalue_d) - rvalue_d     = 9.000 (9.000000000)
+semiA_d(lvalue_d) - rvalue_d = 9.000 (9.000000000)
+fastestA_d(lvalue_d) - rvalue_d  = 9.000 (9.000000000)
 
 10.f - 2.f                  = 8.000 (8.000000000)
-dummyArith_f(10.f) - 2.f    = 8.000 (8.000000000)
-normalArith_f(10.f) - 2.f   = 8.000 (8.000000000)
-sseArith_f(10.f) - 2.f      = 8.000 (8.000000000)
-fastArith_f(10.f) - 2.f     = 8.000 (8.000000000)
-semifastArith_f(10.f) - 2.f = 8.000 (8.000000000)
-fastestArith_f(10.f) - 2.f  = 8.000 (8.000000000)
-dummyArith_d(lvalue_d) - rvalue_d    = 8.000 (8.000000000)
-normalArith_d(lvalue_d) - rvalue_d   = 8.000 (8.000000000)
-sseArith_d(lvalue_d) - rvalue_d      = 8.000 (8.000000000)
-fastArith_d(lvalue_d) - rvalue_d     = 8.000 (8.000000000)
-semifastArith_d(lvalue_d) - rvalue_d = 8.000 (8.000000000)
-fastestArith_d(lvalue_d) - rvalue_d  = 8.000 (8.000000000)
+dummyA_f(10.f) - 2.f    = 8.000 (8.000000000)
+normA_f(10.f) - 2.f   = 8.000 (8.000000000)
+sseA_f(10.f) - 2.f      = 8.000 (8.000000000)
+fastA_f(10.f) - 2.f     = 8.000 (8.000000000)
+semiA_f(10.f) - 2.f = 8.000 (8.000000000)
+fastestA_f(10.f) - 2.f  = 8.000 (8.000000000)
+dummyA_d(lvalue_d) - rvalue_d    = 8.000 (8.000000000)
+normA_d(lvalue_d) - rvalue_d   = 8.000 (8.000000000)
+sseA_d(lvalue_d) - rvalue_d      = 8.000 (8.000000000)
+fastA_d(lvalue_d) - rvalue_d     = 8.000 (8.000000000)
+semiA_d(lvalue_d) - rvalue_d = 8.000 (8.000000000)
+fastestA_d(lvalue_d) - rvalue_d  = 8.000 (8.000000000)
 
 10.f - 3.f                  = 7.000 (7.000000000)
-dummyArith_f(10.f) - 3.f    = 7.000 (7.000000000)
-normalArith_f(10.f) - 3.f   = 7.000 (7.000000000)
-sseArith_f(10.f) - 3.f      = 7.000 (7.000000000)
-fastArith_f(10.f) - 3.f     = 7.000 (7.000000000)
-semifastArith_f(10.f) - 3.f = 7.000 (7.000000000)
-fastestArith_f(10.f) - 3.f  = 7.000 (7.000000000)
-dummyArith_d(lvalue_d) - rvalue_d    = 7.000 (7.000000000)
-normalArith_d(lvalue_d) - rvalue_d   = 7.000 (7.000000000)
-sseArith_d(lvalue_d) - rvalue_d      = 7.000 (7.000000000)
-fastArith_d(lvalue_d) - rvalue_d     = 7.000 (7.000000000)
-semifastArith_d(lvalue_d) - rvalue_d = 7.000 (7.000000000)
-fastestArith_d(lvalue_d) - rvalue_d  = 7.000 (7.000000000)
+dummyA_f(10.f) - 3.f    = 7.000 (7.000000000)
+normA_f(10.f) - 3.f   = 7.000 (7.000000000)
+sseA_f(10.f) - 3.f      = 7.000 (7.000000000)
+fastA_f(10.f) - 3.f     = 7.000 (7.000000000)
+semiA_f(10.f) - 3.f = 7.000 (7.000000000)
+fastestA_f(10.f) - 3.f  = 7.000 (7.000000000)
+dummyA_d(lvalue_d) - rvalue_d    = 7.000 (7.000000000)
+normA_d(lvalue_d) - rvalue_d   = 7.000 (7.000000000)
+sseA_d(lvalue_d) - rvalue_d      = 7.000 (7.000000000)
+fastA_d(lvalue_d) - rvalue_d     = 7.000 (7.000000000)
+semiA_d(lvalue_d) - rvalue_d = 7.000 (7.000000000)
+fastestA_d(lvalue_d) - rvalue_d  = 7.000 (7.000000000)
 
 10.f - 4.f                  = 6.000 (6.000000000)
-dummyArith_f(10.f) - 4.f    = 6.000 (6.000000000)
-normalArith_f(10.f) - 4.f   = 6.000 (6.000000000)
-sseArith_f(10.f) - 4.f      = 6.000 (6.000000000)
-fastArith_f(10.f) - 4.f     = 6.000 (6.000000000)
-semifastArith_f(10.f) - 4.f = 6.000 (6.000000000)
-fastestArith_f(10.f) - 4.f  = 6.000 (6.000000000)
-dummyArith_d(lvalue_d) - rvalue_d    = 6.000 (6.000000000)
-normalArith_d(lvalue_d) - rvalue_d   = 6.000 (6.000000000)
-sseArith_d(lvalue_d) - rvalue_d      = 6.000 (6.000000000)
-fastArith_d(lvalue_d) - rvalue_d     = 6.000 (6.000000000)
-semifastArith_d(lvalue_d) - rvalue_d = 6.000 (6.000000000)
-fastestArith_d(lvalue_d) - rvalue_d  = 6.000 (6.000000000)
+dummyA_f(10.f) - 4.f    = 6.000 (6.000000000)
+normA_f(10.f) - 4.f   = 6.000 (6.000000000)
+sseA_f(10.f) - 4.f      = 6.000 (6.000000000)
+fastA_f(10.f) - 4.f     = 6.000 (6.000000000)
+semiA_f(10.f) - 4.f = 6.000 (6.000000000)
+fastestA_f(10.f) - 4.f  = 6.000 (6.000000000)
+dummyA_d(lvalue_d) - rvalue_d    = 6.000 (6.000000000)
+normA_d(lvalue_d) - rvalue_d   = 6.000 (6.000000000)
+sseA_d(lvalue_d) - rvalue_d      = 6.000 (6.000000000)
+fastA_d(lvalue_d) - rvalue_d     = 6.000 (6.000000000)
+semiA_d(lvalue_d) - rvalue_d = 6.000 (6.000000000)
+fastestA_d(lvalue_d) - rvalue_d  = 6.000 (6.000000000)
 
 10.f - 5.f                  = 5.000 (5.000000000)
-dummyArith_f(10.f) - 5.f    = 5.000 (5.000000000)
-normalArith_f(10.f) - 5.f   = 5.000 (5.000000000)
-sseArith_f(10.f) - 5.f      = 5.000 (5.000000000)
-fastArith_f(10.f) - 5.f     = 5.000 (5.000000000)
-semifastArith_f(10.f) - 5.f = 5.000 (5.000000000)
-fastestArith_f(10.f) - 5.f  = 5.000 (5.000000000)
-dummyArith_d(lvalue_d) - rvalue_d    = 5.000 (5.000000000)
-normalArith_d(lvalue_d) - rvalue_d   = 5.000 (5.000000000)
-sseArith_d(lvalue_d) - rvalue_d      = 5.000 (5.000000000)
-fastArith_d(lvalue_d) - rvalue_d     = 5.000 (5.000000000)
-semifastArith_d(lvalue_d) - rvalue_d = 5.000 (5.000000000)
-fastestArith_d(lvalue_d) - rvalue_d  = 5.000 (5.000000000)
+dummyA_f(10.f) - 5.f    = 5.000 (5.000000000)
+normA_f(10.f) - 5.f   = 5.000 (5.000000000)
+sseA_f(10.f) - 5.f      = 5.000 (5.000000000)
+fastA_f(10.f) - 5.f     = 5.000 (5.000000000)
+semiA_f(10.f) - 5.f = 5.000 (5.000000000)
+fastestA_f(10.f) - 5.f  = 5.000 (5.000000000)
+dummyA_d(lvalue_d) - rvalue_d    = 5.000 (5.000000000)
+normA_d(lvalue_d) - rvalue_d   = 5.000 (5.000000000)
+sseA_d(lvalue_d) - rvalue_d      = 5.000 (5.000000000)
+fastA_d(lvalue_d) - rvalue_d     = 5.000 (5.000000000)
+semiA_d(lvalue_d) - rvalue_d = 5.000 (5.000000000)
+fastestA_d(lvalue_d) - rvalue_d  = 5.000 (5.000000000)
 
 10.f - 10.f                  = 0.000 (0.000000000)
-dummyArith_f(10.f) - 10.f    = 0.000 (0.000000000)
-normalArith_f(10.f) - 10.f   = 0.000 (0.000000000)
-sseArith_f(10.f) - 10.f      = 0.000 (0.000000000)
-fastArith_f(10.f) - 10.f     = 0.000 (0.000000000)
-semifastArith_f(10.f) - 10.f = 0.000 (0.000000000)
-fastestArith_f(10.f) - 10.f  = 0.000 (0.000000000)
-dummyArith_d(lvalue_d) - rvalue_d    = 0.000 (0.000000000)
-normalArith_d(lvalue_d) - rvalue_d   = 0.000 (0.000000000)
-sseArith_d(lvalue_d) - rvalue_d      = 0.000 (0.000000000)
-fastArith_d(lvalue_d) - rvalue_d     = 0.000 (0.000000000)
-semifastArith_d(lvalue_d) - rvalue_d = 0.000 (0.000000000)
-fastestArith_d(lvalue_d) - rvalue_d  = 0.000 (0.000000000)
+dummyA_f(10.f) - 10.f    = 0.000 (0.000000000)
+normA_f(10.f) - 10.f   = 0.000 (0.000000000)
+sseA_f(10.f) - 10.f      = 0.000 (0.000000000)
+fastA_f(10.f) - 10.f     = 0.000 (0.000000000)
+semiA_f(10.f) - 10.f = 0.000 (0.000000000)
+fastestA_f(10.f) - 10.f  = 0.000 (0.000000000)
+dummyA_d(lvalue_d) - rvalue_d    = 0.000 (0.000000000)
+normA_d(lvalue_d) - rvalue_d   = 0.000 (0.000000000)
+sseA_d(lvalue_d) - rvalue_d      = 0.000 (0.000000000)
+fastA_d(lvalue_d) - rvalue_d     = 0.000 (0.000000000)
+semiA_d(lvalue_d) - rvalue_d = 0.000 (0.000000000)
+fastestA_d(lvalue_d) - rvalue_d  = 0.000 (0.000000000)
 
 10.f - 100.f                  = -90.000 (-90.000000000)
-dummyArith_f(10.f) - 100.f    = -90.000 (-90.000000000)
-normalArith_f(10.f) - 100.f   = -90.000 (-90.000000000)
-sseArith_f(10.f) - 100.f      = -90.000 (-90.000000000)
-fastArith_f(10.f) - 100.f     = -90.000 (-90.000000000)
-semifastArith_f(10.f) - 100.f = -90.000 (-90.000000000)
-fastestArith_f(10.f) - 100.f  = -90.000 (-90.000000000)
-dummyArith_d(lvalue_d) - rvalue_d    = -90.000 (-90.000000000)
-normalArith_d(lvalue_d) - rvalue_d   = -90.000 (-90.000000000)
-sseArith_d(lvalue_d) - rvalue_d      = -90.000 (-90.000000000)
-fastArith_d(lvalue_d) - rvalue_d     = -90.000 (-90.000000000)
-semifastArith_d(lvalue_d) - rvalue_d = -90.000 (-90.000000000)
-fastestArith_d(lvalue_d) - rvalue_d  = -90.000 (-90.000000000)
+dummyA_f(10.f) - 100.f    = -90.000 (-90.000000000)
+normA_f(10.f) - 100.f   = -90.000 (-90.000000000)
+sseA_f(10.f) - 100.f      = -90.000 (-90.000000000)
+fastA_f(10.f) - 100.f     = -90.000 (-90.000000000)
+semiA_f(10.f) - 100.f = -90.000 (-90.000000000)
+fastestA_f(10.f) - 100.f  = -90.000 (-90.000000000)
+dummyA_d(lvalue_d) - rvalue_d    = -90.000 (-90.000000000)
+normA_d(lvalue_d) - rvalue_d   = -90.000 (-90.000000000)
+sseA_d(lvalue_d) - rvalue_d      = -90.000 (-90.000000000)
+fastA_d(lvalue_d) - rvalue_d     = -90.000 (-90.000000000)
+semiA_d(lvalue_d) - rvalue_d = -90.000 (-90.000000000)
+fastestA_d(lvalue_d) - rvalue_d  = -90.000 (-90.000000000)
 
 10.f - 1000.f                  = -990.000 (-990.000000000)
-dummyArith_f(10.f) - 1000.f    = -990.000 (-990.000000000)
-normalArith_f(10.f) - 1000.f   = -990.000 (-990.000000000)
-sseArith_f(10.f) - 1000.f      = -990.000 (-990.000000000)
-fastArith_f(10.f) - 1000.f     = -990.000 (-990.000000000)
-semifastArith_f(10.f) - 1000.f = -990.000 (-990.000000000)
-fastestArith_f(10.f) - 1000.f  = -990.000 (-990.000000000)
-dummyArith_d(lvalue_d) - rvalue_d    = -990.000 (-990.000000000)
-normalArith_d(lvalue_d) - rvalue_d   = -990.000 (-990.000000000)
-sseArith_d(lvalue_d) - rvalue_d      = -990.000 (-990.000000000)
-fastArith_d(lvalue_d) - rvalue_d     = -990.000 (-990.000000000)
-semifastArith_d(lvalue_d) - rvalue_d = -990.000 (-990.000000000)
-fastestArith_d(lvalue_d) - rvalue_d  = -990.000 (-990.000000000)
+dummyA_f(10.f) - 1000.f    = -990.000 (-990.000000000)
+normA_f(10.f) - 1000.f   = -990.000 (-990.000000000)
+sseA_f(10.f) - 1000.f      = -990.000 (-990.000000000)
+fastA_f(10.f) - 1000.f     = -990.000 (-990.000000000)
+semiA_f(10.f) - 1000.f = -990.000 (-990.000000000)
+fastestA_f(10.f) - 1000.f  = -990.000 (-990.000000000)
+dummyA_d(lvalue_d) - rvalue_d    = -990.000 (-990.000000000)
+normA_d(lvalue_d) - rvalue_d   = -990.000 (-990.000000000)
+sseA_d(lvalue_d) - rvalue_d      = -990.000 (-990.000000000)
+fastA_d(lvalue_d) - rvalue_d     = -990.000 (-990.000000000)
+semiA_d(lvalue_d) - rvalue_d = -990.000 (-990.000000000)
+fastestA_d(lvalue_d) - rvalue_d  = -990.000 (-990.000000000)
 
 10.f - 10000.f                  = -9990.000 (-9990.000000000)
-dummyArith_f(10.f) - 10000.f    = -9990.000 (-9990.000000000)
-normalArith_f(10.f) - 10000.f   = -9990.000 (-9990.000000000)
-sseArith_f(10.f) - 10000.f      = -9990.000 (-9990.000000000)
-fastArith_f(10.f) - 10000.f     = -9990.000 (-9990.000000000)
-semifastArith_f(10.f) - 10000.f = -9990.000 (-9990.000000000)
-fastestArith_f(10.f) - 10000.f  = -9990.000 (-9990.000000000)
-dummyArith_d(lvalue_d) - rvalue_d    = -9990.000 (-9990.000000000)
-normalArith_d(lvalue_d) - rvalue_d   = -9990.000 (-9990.000000000)
-sseArith_d(lvalue_d) - rvalue_d      = -9990.000 (-9990.000000000)
-fastArith_d(lvalue_d) - rvalue_d     = -9990.000 (-9990.000000000)
-semifastArith_d(lvalue_d) - rvalue_d = -9990.000 (-9990.000000000)
-fastestArith_d(lvalue_d) - rvalue_d  = -9990.000 (-9990.000000000)
+dummyA_f(10.f) - 10000.f    = -9990.000 (-9990.000000000)
+normA_f(10.f) - 10000.f   = -9990.000 (-9990.000000000)
+sseA_f(10.f) - 10000.f      = -9990.000 (-9990.000000000)
+fastA_f(10.f) - 10000.f     = -9990.000 (-9990.000000000)
+semiA_f(10.f) - 10000.f = -9990.000 (-9990.000000000)
+fastestA_f(10.f) - 10000.f  = -9990.000 (-9990.000000000)
+dummyA_d(lvalue_d) - rvalue_d    = -9990.000 (-9990.000000000)
+normA_d(lvalue_d) - rvalue_d   = -9990.000 (-9990.000000000)
+sseA_d(lvalue_d) - rvalue_d      = -9990.000 (-9990.000000000)
+fastA_d(lvalue_d) - rvalue_d     = -9990.000 (-9990.000000000)
+semiA_d(lvalue_d) - rvalue_d = -9990.000 (-9990.000000000)
+fastestA_d(lvalue_d) - rvalue_d  = -9990.000 (-9990.000000000)
 
 10.f - 100000.f                  = -99990.000 (-99990.000000000)
-dummyArith_f(10.f) - 100000.f    = -99990.000 (-99990.000000000)
-normalArith_f(10.f) - 100000.f   = -99990.000 (-99990.000000000)
-sseArith_f(10.f) - 100000.f      = -99990.000 (-99990.000000000)
-fastArith_f(10.f) - 100000.f     = -99990.000 (-99990.000000000)
-semifastArith_f(10.f) - 100000.f = -99990.000 (-99990.000000000)
-fastestArith_f(10.f) - 100000.f  = -99990.000 (-99990.000000000)
-dummyArith_d(lvalue_d) - rvalue_d    = -99990.000 (-99990.000000000)
-normalArith_d(lvalue_d) - rvalue_d   = -99990.000 (-99990.000000000)
-sseArith_d(lvalue_d) - rvalue_d      = -99990.000 (-99990.000000000)
-fastArith_d(lvalue_d) - rvalue_d     = -99990.000 (-99990.000000000)
-semifastArith_d(lvalue_d) - rvalue_d = -99990.000 (-99990.000000000)
-fastestArith_d(lvalue_d) - rvalue_d  = -99990.000 (-99990.000000000)
+dummyA_f(10.f) - 100000.f    = -99990.000 (-99990.000000000)
+normA_f(10.f) - 100000.f   = -99990.000 (-99990.000000000)
+sseA_f(10.f) - 100000.f      = -99990.000 (-99990.000000000)
+fastA_f(10.f) - 100000.f     = -99990.000 (-99990.000000000)
+semiA_f(10.f) - 100000.f = -99990.000 (-99990.000000000)
+fastestA_f(10.f) - 100000.f  = -99990.000 (-99990.000000000)
+dummyA_d(lvalue_d) - rvalue_d    = -99990.000 (-99990.000000000)
+normA_d(lvalue_d) - rvalue_d   = -99990.000 (-99990.000000000)
+sseA_d(lvalue_d) - rvalue_d      = -99990.000 (-99990.000000000)
+fastA_d(lvalue_d) - rvalue_d     = -99990.000 (-99990.000000000)
+semiA_d(lvalue_d) - rvalue_d = -99990.000 (-99990.000000000)
+fastestA_d(lvalue_d) - rvalue_d  = -99990.000 (-99990.000000000)
 
 10.f - 1000000.f                  = -999990.000 (-999990.000000000)
-dummyArith_f(10.f) - 1000000.f    = -999990.000 (-999990.000000000)
-normalArith_f(10.f) - 1000000.f   = -999990.000 (-999990.000000000)
-sseArith_f(10.f) - 1000000.f      = -999990.000 (-999990.000000000)
-fastArith_f(10.f) - 1000000.f     = -999990.000 (-999990.000000000)
-semifastArith_f(10.f) - 1000000.f = -999990.000 (-999990.000000000)
-fastestArith_f(10.f) - 1000000.f  = -999990.000 (-999990.000000000)
-dummyArith_d(lvalue_d) - rvalue_d    = -999990.000 (-999990.000000000)
-normalArith_d(lvalue_d) - rvalue_d   = -999990.000 (-999990.000000000)
-sseArith_d(lvalue_d) - rvalue_d      = -999990.000 (-999990.000000000)
-fastArith_d(lvalue_d) - rvalue_d     = -999990.000 (-999990.000000000)
-semifastArith_d(lvalue_d) - rvalue_d = -999990.000 (-999990.000000000)
-fastestArith_d(lvalue_d) - rvalue_d  = -999990.000 (-999990.000000000)
+dummyA_f(10.f) - 1000000.f    = -999990.000 (-999990.000000000)
+normA_f(10.f) - 1000000.f   = -999990.000 (-999990.000000000)
+sseA_f(10.f) - 1000000.f      = -999990.000 (-999990.000000000)
+fastA_f(10.f) - 1000000.f     = -999990.000 (-999990.000000000)
+semiA_f(10.f) - 1000000.f = -999990.000 (-999990.000000000)
+fastestA_f(10.f) - 1000000.f  = -999990.000 (-999990.000000000)
+dummyA_d(lvalue_d) - rvalue_d    = -999990.000 (-999990.000000000)
+normA_d(lvalue_d) - rvalue_d   = -999990.000 (-999990.000000000)
+sseA_d(lvalue_d) - rvalue_d      = -999990.000 (-999990.000000000)
+fastA_d(lvalue_d) - rvalue_d     = -999990.000 (-999990.000000000)
+semiA_d(lvalue_d) - rvalue_d = -999990.000 (-999990.000000000)
+fastestA_d(lvalue_d) - rvalue_d  = -999990.000 (-999990.000000000)
 
 10.f * 1.f                  = 10.000 (10.000000000)
-dummyArith_f(10.f) * 1.f    = 10.000 (10.000000000)
-normalArith_f(10.f) * 1.f   = 10.000 (10.000000000)
-sseArith_f(10.f) * 1.f      = 10.000 (10.000000000)
-fastArith_f(10.f) * 1.f     = 10.000 (10.000000000)
-semifastArith_f(10.f) * 1.f = 10.000 (10.000000000)
-fastestArith_f(10.f) * 1.f  = 10.000 (10.000000000)
-dummyArith_d(lvalue_d) * rvalue_d    = 10.000 (10.000000000)
-normalArith_d(lvalue_d) * rvalue_d   = 10.000 (10.000000000)
-sseArith_d(lvalue_d) * rvalue_d      = 10.000 (10.000000000)
-fastArith_d(lvalue_d) * rvalue_d     = 10.000 (10.000000000)
-semifastArith_d(lvalue_d) * rvalue_d = 10.000 (10.000000000)
-fastestArith_d(lvalue_d) * rvalue_d  = 10.000 (10.000000000)
+dummyA_f(10.f) * 1.f    = 10.000 (10.000000000)
+normA_f(10.f) * 1.f   = 10.000 (10.000000000)
+sseA_f(10.f) * 1.f      = 10.000 (10.000000000)
+fastA_f(10.f) * 1.f     = 10.000 (10.000000000)
+semiA_f(10.f) * 1.f = 10.000 (10.000000000)
+fastestA_f(10.f) * 1.f  = 10.000 (10.000000000)
+dummyA_d(lvalue_d) * rvalue_d    = 10.000 (10.000000000)
+normA_d(lvalue_d) * rvalue_d   = 10.000 (10.000000000)
+sseA_d(lvalue_d) * rvalue_d      = 10.000 (10.000000000)
+fastA_d(lvalue_d) * rvalue_d     = 10.000 (10.000000000)
+semiA_d(lvalue_d) * rvalue_d = 10.000 (10.000000000)
+fastestA_d(lvalue_d) * rvalue_d  = 10.000 (10.000000000)
 
 10.f * 2.f                  = 20.000 (20.000000000)
-dummyArith_f(10.f) * 2.f    = 20.000 (20.000000000)
-normalArith_f(10.f) * 2.f   = 20.000 (20.000000000)
-sseArith_f(10.f) * 2.f      = 20.000 (20.000000000)
-fastArith_f(10.f) * 2.f     = 20.000 (20.000000000)
-semifastArith_f(10.f) * 2.f = 20.000 (20.000000000)
-fastestArith_f(10.f) * 2.f  = 20.000 (20.000000000)
-dummyArith_d(lvalue_d) * rvalue_d    = 20.000 (20.000000000)
-normalArith_d(lvalue_d) * rvalue_d   = 20.000 (20.000000000)
-sseArith_d(lvalue_d) * rvalue_d      = 20.000 (20.000000000)
-fastArith_d(lvalue_d) * rvalue_d     = 20.000 (20.000000000)
-semifastArith_d(lvalue_d) * rvalue_d = 20.000 (20.000000000)
-fastestArith_d(lvalue_d) * rvalue_d  = 20.000 (20.000000000)
+dummyA_f(10.f) * 2.f    = 20.000 (20.000000000)
+normA_f(10.f) * 2.f   = 20.000 (20.000000000)
+sseA_f(10.f) * 2.f      = 20.000 (20.000000000)
+fastA_f(10.f) * 2.f     = 20.000 (20.000000000)
+semiA_f(10.f) * 2.f = 20.000 (20.000000000)
+fastestA_f(10.f) * 2.f  = 20.000 (20.000000000)
+dummyA_d(lvalue_d) * rvalue_d    = 20.000 (20.000000000)
+normA_d(lvalue_d) * rvalue_d   = 20.000 (20.000000000)
+sseA_d(lvalue_d) * rvalue_d      = 20.000 (20.000000000)
+fastA_d(lvalue_d) * rvalue_d     = 20.000 (20.000000000)
+semiA_d(lvalue_d) * rvalue_d = 20.000 (20.000000000)
+fastestA_d(lvalue_d) * rvalue_d  = 20.000 (20.000000000)
 
 10.f * 3.f                  = 30.000 (30.000000000)
-dummyArith_f(10.f) * 3.f    = 30.000 (30.000000000)
-normalArith_f(10.f) * 3.f   = 30.000 (30.000000000)
-sseArith_f(10.f) * 3.f      = 30.000 (30.000000000)
-fastArith_f(10.f) * 3.f     = 30.000 (30.000000000)
-semifastArith_f(10.f) * 3.f = 30.000 (30.000000000)
-fastestArith_f(10.f) * 3.f  = 30.000 (30.000000000)
-dummyArith_d(lvalue_d) * rvalue_d    = 30.000 (30.000000000)
-normalArith_d(lvalue_d) * rvalue_d   = 30.000 (30.000000000)
-sseArith_d(lvalue_d) * rvalue_d      = 30.000 (30.000000000)
-fastArith_d(lvalue_d) * rvalue_d     = 30.000 (30.000000000)
-semifastArith_d(lvalue_d) * rvalue_d = 30.000 (30.000000000)
-fastestArith_d(lvalue_d) * rvalue_d  = 30.000 (30.000000000)
+dummyA_f(10.f) * 3.f    = 30.000 (30.000000000)
+normA_f(10.f) * 3.f   = 30.000 (30.000000000)
+sseA_f(10.f) * 3.f      = 30.000 (30.000000000)
+fastA_f(10.f) * 3.f     = 30.000 (30.000000000)
+semiA_f(10.f) * 3.f = 30.000 (30.000000000)
+fastestA_f(10.f) * 3.f  = 30.000 (30.000000000)
+dummyA_d(lvalue_d) * rvalue_d    = 30.000 (30.000000000)
+normA_d(lvalue_d) * rvalue_d   = 30.000 (30.000000000)
+sseA_d(lvalue_d) * rvalue_d      = 30.000 (30.000000000)
+fastA_d(lvalue_d) * rvalue_d     = 30.000 (30.000000000)
+semiA_d(lvalue_d) * rvalue_d = 30.000 (30.000000000)
+fastestA_d(lvalue_d) * rvalue_d  = 30.000 (30.000000000)
 
 10.f * 4.f                  = 40.000 (40.000000000)
-dummyArith_f(10.f) * 4.f    = 40.000 (40.000000000)
-normalArith_f(10.f) * 4.f   = 40.000 (40.000000000)
-sseArith_f(10.f) * 4.f      = 40.000 (40.000000000)
-fastArith_f(10.f) * 4.f     = 40.000 (40.000000000)
-semifastArith_f(10.f) * 4.f = 40.000 (40.000000000)
-fastestArith_f(10.f) * 4.f  = 40.000 (40.000000000)
-dummyArith_d(lvalue_d) * rvalue_d    = 40.000 (40.000000000)
-normalArith_d(lvalue_d) * rvalue_d   = 40.000 (40.000000000)
-sseArith_d(lvalue_d) * rvalue_d      = 40.000 (40.000000000)
-fastArith_d(lvalue_d) * rvalue_d     = 40.000 (40.000000000)
-semifastArith_d(lvalue_d) * rvalue_d = 40.000 (40.000000000)
-fastestArith_d(lvalue_d) * rvalue_d  = 40.000 (40.000000000)
+dummyA_f(10.f) * 4.f    = 40.000 (40.000000000)
+normA_f(10.f) * 4.f   = 40.000 (40.000000000)
+sseA_f(10.f) * 4.f      = 40.000 (40.000000000)
+fastA_f(10.f) * 4.f     = 40.000 (40.000000000)
+semiA_f(10.f) * 4.f = 40.000 (40.000000000)
+fastestA_f(10.f) * 4.f  = 40.000 (40.000000000)
+dummyA_d(lvalue_d) * rvalue_d    = 40.000 (40.000000000)
+normA_d(lvalue_d) * rvalue_d   = 40.000 (40.000000000)
+sseA_d(lvalue_d) * rvalue_d      = 40.000 (40.000000000)
+fastA_d(lvalue_d) * rvalue_d     = 40.000 (40.000000000)
+semiA_d(lvalue_d) * rvalue_d = 40.000 (40.000000000)
+fastestA_d(lvalue_d) * rvalue_d  = 40.000 (40.000000000)
 
 10.f * 5.f                  = 50.000 (50.000000000)
-dummyArith_f(10.f) * 5.f    = 50.000 (50.000000000)
-normalArith_f(10.f) * 5.f   = 50.000 (50.000000000)
-sseArith_f(10.f) * 5.f      = 50.000 (50.000000000)
-fastArith_f(10.f) * 5.f     = 50.000 (50.000000000)
-semifastArith_f(10.f) * 5.f = 50.000 (50.000000000)
-fastestArith_f(10.f) * 5.f  = 50.000 (50.000000000)
-dummyArith_d(lvalue_d) * rvalue_d    = 50.000 (50.000000000)
-normalArith_d(lvalue_d) * rvalue_d   = 50.000 (50.000000000)
-sseArith_d(lvalue_d) * rvalue_d      = 50.000 (50.000000000)
-fastArith_d(lvalue_d) * rvalue_d     = 50.000 (50.000000000)
-semifastArith_d(lvalue_d) * rvalue_d = 50.000 (50.000000000)
-fastestArith_d(lvalue_d) * rvalue_d  = 50.000 (50.000000000)
+dummyA_f(10.f) * 5.f    = 50.000 (50.000000000)
+normA_f(10.f) * 5.f   = 50.000 (50.000000000)
+sseA_f(10.f) * 5.f      = 50.000 (50.000000000)
+fastA_f(10.f) * 5.f     = 50.000 (50.000000000)
+semiA_f(10.f) * 5.f = 50.000 (50.000000000)
+fastestA_f(10.f) * 5.f  = 50.000 (50.000000000)
+dummyA_d(lvalue_d) * rvalue_d    = 50.000 (50.000000000)
+normA_d(lvalue_d) * rvalue_d   = 50.000 (50.000000000)
+sseA_d(lvalue_d) * rvalue_d      = 50.000 (50.000000000)
+fastA_d(lvalue_d) * rvalue_d     = 50.000 (50.000000000)
+semiA_d(lvalue_d) * rvalue_d = 50.000 (50.000000000)
+fastestA_d(lvalue_d) * rvalue_d  = 50.000 (50.000000000)
 
 10.f * 10.f                  = 100.000 (100.000000000)
-dummyArith_f(10.f) * 10.f    = 100.000 (100.000000000)
-normalArith_f(10.f) * 10.f   = 100.000 (100.000000000)
-sseArith_f(10.f) * 10.f      = 100.000 (100.000000000)
-fastArith_f(10.f) * 10.f     = 100.000 (100.000000000)
-semifastArith_f(10.f) * 10.f = 100.000 (100.000000000)
-fastestArith_f(10.f) * 10.f  = 100.000 (100.000000000)
-dummyArith_d(lvalue_d) * rvalue_d    = 100.000 (100.000000000)
-normalArith_d(lvalue_d) * rvalue_d   = 100.000 (100.000000000)
-sseArith_d(lvalue_d) * rvalue_d      = 100.000 (100.000000000)
-fastArith_d(lvalue_d) * rvalue_d     = 100.000 (100.000000000)
-semifastArith_d(lvalue_d) * rvalue_d = 100.000 (100.000000000)
-fastestArith_d(lvalue_d) * rvalue_d  = 100.000 (100.000000000)
+dummyA_f(10.f) * 10.f    = 100.000 (100.000000000)
+normA_f(10.f) * 10.f   = 100.000 (100.000000000)
+sseA_f(10.f) * 10.f      = 100.000 (100.000000000)
+fastA_f(10.f) * 10.f     = 100.000 (100.000000000)
+semiA_f(10.f) * 10.f = 100.000 (100.000000000)
+fastestA_f(10.f) * 10.f  = 100.000 (100.000000000)
+dummyA_d(lvalue_d) * rvalue_d    = 100.000 (100.000000000)
+normA_d(lvalue_d) * rvalue_d   = 100.000 (100.000000000)
+sseA_d(lvalue_d) * rvalue_d      = 100.000 (100.000000000)
+fastA_d(lvalue_d) * rvalue_d     = 100.000 (100.000000000)
+semiA_d(lvalue_d) * rvalue_d = 100.000 (100.000000000)
+fastestA_d(lvalue_d) * rvalue_d  = 100.000 (100.000000000)
 
 10.f * 100.f                  = 1000.000 (1000.000000000)
-dummyArith_f(10.f) * 100.f    = 1000.000 (1000.000000000)
-normalArith_f(10.f) * 100.f   = 1000.000 (1000.000000000)
-sseArith_f(10.f) * 100.f      = 1000.000 (1000.000000000)
-fastArith_f(10.f) * 100.f     = 1000.000 (1000.000000000)
-semifastArith_f(10.f) * 100.f = 1000.000 (1000.000000000)
-fastestArith_f(10.f) * 100.f  = 1000.000 (1000.000000000)
-dummyArith_d(lvalue_d) * rvalue_d    = 1000.000 (1000.000000000)
-normalArith_d(lvalue_d) * rvalue_d   = 1000.000 (1000.000000000)
-sseArith_d(lvalue_d) * rvalue_d      = 1000.000 (1000.000000000)
-fastArith_d(lvalue_d) * rvalue_d     = 1000.000 (1000.000000000)
-semifastArith_d(lvalue_d) * rvalue_d = 1000.000 (1000.000000000)
-fastestArith_d(lvalue_d) * rvalue_d  = 1000.000 (1000.000000000)
+dummyA_f(10.f) * 100.f    = 1000.000 (1000.000000000)
+normA_f(10.f) * 100.f   = 1000.000 (1000.000000000)
+sseA_f(10.f) * 100.f      = 1000.000 (1000.000000000)
+fastA_f(10.f) * 100.f     = 1000.000 (1000.000000000)
+semiA_f(10.f) * 100.f = 1000.000 (1000.000000000)
+fastestA_f(10.f) * 100.f  = 1000.000 (1000.000000000)
+dummyA_d(lvalue_d) * rvalue_d    = 1000.000 (1000.000000000)
+normA_d(lvalue_d) * rvalue_d   = 1000.000 (1000.000000000)
+sseA_d(lvalue_d) * rvalue_d      = 1000.000 (1000.000000000)
+fastA_d(lvalue_d) * rvalue_d     = 1000.000 (1000.000000000)
+semiA_d(lvalue_d) * rvalue_d = 1000.000 (1000.000000000)
+fastestA_d(lvalue_d) * rvalue_d  = 1000.000 (1000.000000000)
 
 10.f * 1000.f                  = 10000.000 (10000.000000000)
-dummyArith_f(10.f) * 1000.f    = 10000.000 (10000.000000000)
-normalArith_f(10.f) * 1000.f   = 10000.000 (10000.000000000)
-sseArith_f(10.f) * 1000.f      = 10000.000 (10000.000000000)
-fastArith_f(10.f) * 1000.f     = 10000.000 (10000.000000000)
-semifastArith_f(10.f) * 1000.f = 10000.000 (10000.000000000)
-fastestArith_f(10.f) * 1000.f  = 10000.000 (10000.000000000)
-dummyArith_d(lvalue_d) * rvalue_d    = 10000.000 (10000.000000000)
-normalArith_d(lvalue_d) * rvalue_d   = 10000.000 (10000.000000000)
-sseArith_d(lvalue_d) * rvalue_d      = 10000.000 (10000.000000000)
-fastArith_d(lvalue_d) * rvalue_d     = 10000.000 (10000.000000000)
-semifastArith_d(lvalue_d) * rvalue_d = 10000.000 (10000.000000000)
-fastestArith_d(lvalue_d) * rvalue_d  = 10000.000 (10000.000000000)
+dummyA_f(10.f) * 1000.f    = 10000.000 (10000.000000000)
+normA_f(10.f) * 1000.f   = 10000.000 (10000.000000000)
+sseA_f(10.f) * 1000.f      = 10000.000 (10000.000000000)
+fastA_f(10.f) * 1000.f     = 10000.000 (10000.000000000)
+semiA_f(10.f) * 1000.f = 10000.000 (10000.000000000)
+fastestA_f(10.f) * 1000.f  = 10000.000 (10000.000000000)
+dummyA_d(lvalue_d) * rvalue_d    = 10000.000 (10000.000000000)
+normA_d(lvalue_d) * rvalue_d   = 10000.000 (10000.000000000)
+sseA_d(lvalue_d) * rvalue_d      = 10000.000 (10000.000000000)
+fastA_d(lvalue_d) * rvalue_d     = 10000.000 (10000.000000000)
+semiA_d(lvalue_d) * rvalue_d = 10000.000 (10000.000000000)
+fastestA_d(lvalue_d) * rvalue_d  = 10000.000 (10000.000000000)
 
 10.f * 10000.f                  = 100000.000 (100000.000000000)
-dummyArith_f(10.f) * 10000.f    = 100000.000 (100000.000000000)
-normalArith_f(10.f) * 10000.f   = 100000.000 (100000.000000000)
-sseArith_f(10.f) * 10000.f      = 100000.000 (100000.000000000)
-fastArith_f(10.f) * 10000.f     = 100000.000 (100000.000000000)
-semifastArith_f(10.f) * 10000.f = 100000.000 (100000.000000000)
-fastestArith_f(10.f) * 10000.f  = 100000.000 (100000.000000000)
-dummyArith_d(lvalue_d) * rvalue_d    = 100000.000 (100000.000000000)
-normalArith_d(lvalue_d) * rvalue_d   = 100000.000 (100000.000000000)
-sseArith_d(lvalue_d) * rvalue_d      = 100000.000 (100000.000000000)
-fastArith_d(lvalue_d) * rvalue_d     = 100000.000 (100000.000000000)
-semifastArith_d(lvalue_d) * rvalue_d = 100000.000 (100000.000000000)
-fastestArith_d(lvalue_d) * rvalue_d  = 100000.000 (100000.000000000)
+dummyA_f(10.f) * 10000.f    = 100000.000 (100000.000000000)
+normA_f(10.f) * 10000.f   = 100000.000 (100000.000000000)
+sseA_f(10.f) * 10000.f      = 100000.000 (100000.000000000)
+fastA_f(10.f) * 10000.f     = 100000.000 (100000.000000000)
+semiA_f(10.f) * 10000.f = 100000.000 (100000.000000000)
+fastestA_f(10.f) * 10000.f  = 100000.000 (100000.000000000)
+dummyA_d(lvalue_d) * rvalue_d    = 100000.000 (100000.000000000)
+normA_d(lvalue_d) * rvalue_d   = 100000.000 (100000.000000000)
+sseA_d(lvalue_d) * rvalue_d      = 100000.000 (100000.000000000)
+fastA_d(lvalue_d) * rvalue_d     = 100000.000 (100000.000000000)
+semiA_d(lvalue_d) * rvalue_d = 100000.000 (100000.000000000)
+fastestA_d(lvalue_d) * rvalue_d  = 100000.000 (100000.000000000)
 
 10.f * 100000.f                  = 1000000.000 (1000000.000000000)
-dummyArith_f(10.f) * 100000.f    = 1000000.000 (1000000.000000000)
-normalArith_f(10.f) * 100000.f   = 1000000.000 (1000000.000000000)
-sseArith_f(10.f) * 100000.f      = 1000000.000 (1000000.000000000)
-fastArith_f(10.f) * 100000.f     = 1000000.000 (1000000.000000000)
-semifastArith_f(10.f) * 100000.f = 1000000.000 (1000000.000000000)
-fastestArith_f(10.f) * 100000.f  = 1000000.000 (1000000.000000000)
-dummyArith_d(lvalue_d) * rvalue_d    = 1000000.000 (1000000.000000000)
-normalArith_d(lvalue_d) * rvalue_d   = 1000000.000 (1000000.000000000)
-sseArith_d(lvalue_d) * rvalue_d      = 1000000.000 (1000000.000000000)
-fastArith_d(lvalue_d) * rvalue_d     = 1000000.000 (1000000.000000000)
-semifastArith_d(lvalue_d) * rvalue_d = 1000000.000 (1000000.000000000)
-fastestArith_d(lvalue_d) * rvalue_d  = 1000000.000 (1000000.000000000)
+dummyA_f(10.f) * 100000.f    = 1000000.000 (1000000.000000000)
+normA_f(10.f) * 100000.f   = 1000000.000 (1000000.000000000)
+sseA_f(10.f) * 100000.f      = 1000000.000 (1000000.000000000)
+fastA_f(10.f) * 100000.f     = 1000000.000 (1000000.000000000)
+semiA_f(10.f) * 100000.f = 1000000.000 (1000000.000000000)
+fastestA_f(10.f) * 100000.f  = 1000000.000 (1000000.000000000)
+dummyA_d(lvalue_d) * rvalue_d    = 1000000.000 (1000000.000000000)
+normA_d(lvalue_d) * rvalue_d   = 1000000.000 (1000000.000000000)
+sseA_d(lvalue_d) * rvalue_d      = 1000000.000 (1000000.000000000)
+fastA_d(lvalue_d) * rvalue_d     = 1000000.000 (1000000.000000000)
+semiA_d(lvalue_d) * rvalue_d = 1000000.000 (1000000.000000000)
+fastestA_d(lvalue_d) * rvalue_d  = 1000000.000 (1000000.000000000)
 
 10.f * 1000000.f                  = 10000000.000 (10000000.000000000)
-dummyArith_f(10.f) * 1000000.f    = 10000000.000 (10000000.000000000)
-normalArith_f(10.f) * 1000000.f   = 10000000.000 (10000000.000000000)
-sseArith_f(10.f) * 1000000.f      = 10000000.000 (10000000.000000000)
-fastArith_f(10.f) * 1000000.f     = 10000000.000 (10000000.000000000)
-semifastArith_f(10.f) * 1000000.f = 10000000.000 (10000000.000000000)
-fastestArith_f(10.f) * 1000000.f  = 10000000.000 (10000000.000000000)
-dummyArith_d(lvalue_d) * rvalue_d    = 10000000.000 (10000000.000000000)
-normalArith_d(lvalue_d) * rvalue_d   = 10000000.000 (10000000.000000000)
-sseArith_d(lvalue_d) * rvalue_d      = 10000000.000 (10000000.000000000)
-fastArith_d(lvalue_d) * rvalue_d     = 10000000.000 (10000000.000000000)
-semifastArith_d(lvalue_d) * rvalue_d = 10000000.000 (10000000.000000000)
-fastestArith_d(lvalue_d) * rvalue_d  = 10000000.000 (10000000.000000000)
+dummyA_f(10.f) * 1000000.f    = 10000000.000 (10000000.000000000)
+normA_f(10.f) * 1000000.f   = 10000000.000 (10000000.000000000)
+sseA_f(10.f) * 1000000.f      = 10000000.000 (10000000.000000000)
+fastA_f(10.f) * 1000000.f     = 10000000.000 (10000000.000000000)
+semiA_f(10.f) * 1000000.f = 10000000.000 (10000000.000000000)
+fastestA_f(10.f) * 1000000.f  = 10000000.000 (10000000.000000000)
+dummyA_d(lvalue_d) * rvalue_d    = 10000000.000 (10000000.000000000)
+normA_d(lvalue_d) * rvalue_d   = 10000000.000 (10000000.000000000)
+sseA_d(lvalue_d) * rvalue_d      = 10000000.000 (10000000.000000000)
+fastA_d(lvalue_d) * rvalue_d     = 10000000.000 (10000000.000000000)
+semiA_d(lvalue_d) * rvalue_d = 10000000.000 (10000000.000000000)
+fastestA_d(lvalue_d) * rvalue_d  = 10000000.000 (10000000.000000000)
 
 10.f / 1.f                  = 10.000 (10.000000000)
-dummyArith_f(10.f) / 1.f    = 10.000 (10.000000000)
-normalArith_f(10.f) / 1.f   = 10.000 (10.000000000)
-sseArith_f(10.f) / 1.f      = 10.000 (10.000000000)
-fastArith_f(10.f) / 1.f     = 10.000 (9.999999046)
-semifastArith_f(10.f) / 1.f = 10.000 (9.999999046)
-fastestArith_f(10.f) / 1.f  = 9.998 (9.997558594)
-dummyArith_d(lvalue_d) / rvalue_d    = 10.000 (10.000000000)
-normalArith_d(lvalue_d) / rvalue_d   = 10.000 (10.000000000)
-sseArith_d(lvalue_d) / rvalue_d      = 10.000 (10.000000000)
-fastArith_d(lvalue_d) / rvalue_d     = 10.000 (10.000000000)
-semifastArith_d(lvalue_d) / rvalue_d = 10.000 (10.000000000)
-fastestArith_d(lvalue_d) / rvalue_d  = 10.000 (10.000000000)
+dummyA_f(10.f) / 1.f    = 10.000 (10.000000000)
+normA_f(10.f) / 1.f   = 10.000 (10.000000000)
+sseA_f(10.f) / 1.f      = 10.000 (10.000000000)
+fastA_f(10.f) / 1.f     = 10.000 (9.999999046)
+semiA_f(10.f) / 1.f = 10.000 (9.999999046)
+fastestA_f(10.f) / 1.f  = 9.998 (9.997558594)
+dummyA_d(lvalue_d) / rvalue_d    = 10.000 (10.000000000)
+normA_d(lvalue_d) / rvalue_d   = 10.000 (10.000000000)
+sseA_d(lvalue_d) / rvalue_d      = 10.000 (10.000000000)
+fastA_d(lvalue_d) / rvalue_d     = 10.000 (10.000000000)
+semiA_d(lvalue_d) / rvalue_d = 10.000 (10.000000000)
+fastestA_d(lvalue_d) / rvalue_d  = 10.000 (10.000000000)
 
 10.f / 2.f                  = 5.000 (5.000000000)
-dummyArith_f(10.f) / 2.f    = 5.000 (5.000000000)
-normalArith_f(10.f) / 2.f   = 5.000 (5.000000000)
-sseArith_f(10.f) / 2.f      = 5.000 (5.000000000)
-fastArith_f(10.f) / 2.f     = 5.000 (4.999999523)
-semifastArith_f(10.f) / 2.f = 5.000 (4.999999523)
-fastestArith_f(10.f) / 2.f  = 4.999 (4.998779297)
-dummyArith_d(lvalue_d) / rvalue_d    = 5.000 (5.000000000)
-normalArith_d(lvalue_d) / rvalue_d   = 5.000 (5.000000000)
-sseArith_d(lvalue_d) / rvalue_d      = 5.000 (5.000000000)
-fastArith_d(lvalue_d) / rvalue_d     = 5.000 (5.000000000)
-semifastArith_d(lvalue_d) / rvalue_d = 5.000 (5.000000000)
-fastestArith_d(lvalue_d) / rvalue_d  = 5.000 (5.000000000)
+dummyA_f(10.f) / 2.f    = 5.000 (5.000000000)
+normA_f(10.f) / 2.f   = 5.000 (5.000000000)
+sseA_f(10.f) / 2.f      = 5.000 (5.000000000)
+fastA_f(10.f) / 2.f     = 5.000 (4.999999523)
+semiA_f(10.f) / 2.f = 5.000 (4.999999523)
+fastestA_f(10.f) / 2.f  = 4.999 (4.998779297)
+dummyA_d(lvalue_d) / rvalue_d    = 5.000 (5.000000000)
+normA_d(lvalue_d) / rvalue_d   = 5.000 (5.000000000)
+sseA_d(lvalue_d) / rvalue_d      = 5.000 (5.000000000)
+fastA_d(lvalue_d) / rvalue_d     = 5.000 (5.000000000)
+semiA_d(lvalue_d) / rvalue_d = 5.000 (5.000000000)
+fastestA_d(lvalue_d) / rvalue_d  = 5.000 (5.000000000)
 
 10.f / 3.f                  = 3.333 (3.333333254)
-dummyArith_f(10.f) / 3.f    = 3.333 (3.333333333)
-normalArith_f(10.f) / 3.f   = 3.333 (3.333333254)
-sseArith_f(10.f) / 3.f      = 3.333 (3.333333254)
-fastArith_f(10.f) / 3.f     = 3.333 (3.333333015)
-semifastArith_f(10.f) / 3.f = 3.333 (3.333333015)
-fastestArith_f(10.f) / 3.f  = 3.333 (3.332519531)
-dummyArith_d(lvalue_d) / rvalue_d    = 3.333 (3.333333333)
-normalArith_d(lvalue_d) / rvalue_d   = 3.333 (3.333333333)
-sseArith_d(lvalue_d) / rvalue_d      = 3.333 (3.333333333)
-fastArith_d(lvalue_d) / rvalue_d     = 3.333 (3.333333333)
-semifastArith_d(lvalue_d) / rvalue_d = 3.333 (3.333333333)
-fastestArith_d(lvalue_d) / rvalue_d  = 3.333 (3.333333333)
+dummyA_f(10.f) / 3.f    = 3.333 (3.333333333)
+normA_f(10.f) / 3.f   = 3.333 (3.333333254)
+sseA_f(10.f) / 3.f      = 3.333 (3.333333254)
+fastA_f(10.f) / 3.f     = 3.333 (3.333333015)
+semiA_f(10.f) / 3.f = 3.333 (3.333333015)
+fastestA_f(10.f) / 3.f  = 3.333 (3.332519531)
+dummyA_d(lvalue_d) / rvalue_d    = 3.333 (3.333333333)
+normA_d(lvalue_d) / rvalue_d   = 3.333 (3.333333333)
+sseA_d(lvalue_d) / rvalue_d      = 3.333 (3.333333333)
+fastA_d(lvalue_d) / rvalue_d     = 3.333 (3.333333333)
+semiA_d(lvalue_d) / rvalue_d = 3.333 (3.333333333)
+fastestA_d(lvalue_d) / rvalue_d  = 3.333 (3.333333333)
 
 10.f / 4.f                  = 2.500 (2.500000000)
-dummyArith_f(10.f) / 4.f    = 2.500 (2.500000000)
-normalArith_f(10.f) / 4.f   = 2.500 (2.500000000)
-sseArith_f(10.f) / 4.f      = 2.500 (2.500000000)
-fastArith_f(10.f) / 4.f     = 2.500 (2.499999762)
-semifastArith_f(10.f) / 4.f = 2.500 (2.499999762)
-fastestArith_f(10.f) / 4.f  = 2.499 (2.499389648)
-dummyArith_d(lvalue_d) / rvalue_d    = 2.500 (2.500000000)
-normalArith_d(lvalue_d) / rvalue_d   = 2.500 (2.500000000)
-sseArith_d(lvalue_d) / rvalue_d      = 2.500 (2.500000000)
-fastArith_d(lvalue_d) / rvalue_d     = 2.500 (2.500000000)
-semifastArith_d(lvalue_d) / rvalue_d = 2.500 (2.500000000)
-fastestArith_d(lvalue_d) / rvalue_d  = 2.500 (2.500000000)
+dummyA_f(10.f) / 4.f    = 2.500 (2.500000000)
+normA_f(10.f) / 4.f   = 2.500 (2.500000000)
+sseA_f(10.f) / 4.f      = 2.500 (2.500000000)
+fastA_f(10.f) / 4.f     = 2.500 (2.499999762)
+semiA_f(10.f) / 4.f = 2.500 (2.499999762)
+fastestA_f(10.f) / 4.f  = 2.499 (2.499389648)
+dummyA_d(lvalue_d) / rvalue_d    = 2.500 (2.500000000)
+normA_d(lvalue_d) / rvalue_d   = 2.500 (2.500000000)
+sseA_d(lvalue_d) / rvalue_d      = 2.500 (2.500000000)
+fastA_d(lvalue_d) / rvalue_d     = 2.500 (2.500000000)
+semiA_d(lvalue_d) / rvalue_d = 2.500 (2.500000000)
+fastestA_d(lvalue_d) / rvalue_d  = 2.500 (2.500000000)
 
 10.f / 5.f                  = 2.000 (2.000000000)
-dummyArith_f(10.f) / 5.f    = 2.000 (2.000000000)
-normalArith_f(10.f) / 5.f   = 2.000 (2.000000000)
-sseArith_f(10.f) / 5.f      = 2.000 (2.000000000)
-fastArith_f(10.f) / 5.f     = 2.000 (1.999999881)
-semifastArith_f(10.f) / 5.f = 2.000 (1.999999881)
-fastestArith_f(10.f) / 5.f  = 2.000 (1.999511719)
-dummyArith_d(lvalue_d) / rvalue_d    = 2.000 (2.000000000)
-normalArith_d(lvalue_d) / rvalue_d   = 2.000 (2.000000000)
-sseArith_d(lvalue_d) / rvalue_d      = 2.000 (2.000000000)
-fastArith_d(lvalue_d) / rvalue_d     = 2.000 (2.000000000)
-semifastArith_d(lvalue_d) / rvalue_d = 2.000 (2.000000000)
-fastestArith_d(lvalue_d) / rvalue_d  = 2.000 (2.000000000)
+dummyA_f(10.f) / 5.f    = 2.000 (2.000000000)
+normA_f(10.f) / 5.f   = 2.000 (2.000000000)
+sseA_f(10.f) / 5.f      = 2.000 (2.000000000)
+fastA_f(10.f) / 5.f     = 2.000 (1.999999881)
+semiA_f(10.f) / 5.f = 2.000 (1.999999881)
+fastestA_f(10.f) / 5.f  = 2.000 (1.999511719)
+dummyA_d(lvalue_d) / rvalue_d    = 2.000 (2.000000000)
+normA_d(lvalue_d) / rvalue_d   = 2.000 (2.000000000)
+sseA_d(lvalue_d) / rvalue_d      = 2.000 (2.000000000)
+fastA_d(lvalue_d) / rvalue_d     = 2.000 (2.000000000)
+semiA_d(lvalue_d) / rvalue_d = 2.000 (2.000000000)
+fastestA_d(lvalue_d) / rvalue_d  = 2.000 (2.000000000)
 
 10.f / 10.f                  = 1.000 (1.000000000)
-dummyArith_f(10.f) / 10.f    = 1.000 (1.000000000)
-normalArith_f(10.f) / 10.f   = 1.000 (1.000000000)
-sseArith_f(10.f) / 10.f      = 1.000 (1.000000000)
-fastArith_f(10.f) / 10.f     = 1.000 (0.999999940)
-semifastArith_f(10.f) / 10.f = 1.000 (0.999999940)
-fastestArith_f(10.f) / 10.f  = 1.000 (0.999755859)
-dummyArith_d(lvalue_d) / rvalue_d    = 1.000 (1.000000000)
-normalArith_d(lvalue_d) / rvalue_d   = 1.000 (1.000000000)
-sseArith_d(lvalue_d) / rvalue_d      = 1.000 (1.000000000)
-fastArith_d(lvalue_d) / rvalue_d     = 1.000 (1.000000000)
-semifastArith_d(lvalue_d) / rvalue_d = 1.000 (1.000000000)
-fastestArith_d(lvalue_d) / rvalue_d  = 1.000 (1.000000000)
+dummyA_f(10.f) / 10.f    = 1.000 (1.000000000)
+normA_f(10.f) / 10.f   = 1.000 (1.000000000)
+sseA_f(10.f) / 10.f      = 1.000 (1.000000000)
+fastA_f(10.f) / 10.f     = 1.000 (0.999999940)
+semiA_f(10.f) / 10.f = 1.000 (0.999999940)
+fastestA_f(10.f) / 10.f  = 1.000 (0.999755859)
+dummyA_d(lvalue_d) / rvalue_d    = 1.000 (1.000000000)
+normA_d(lvalue_d) / rvalue_d   = 1.000 (1.000000000)
+sseA_d(lvalue_d) / rvalue_d      = 1.000 (1.000000000)
+fastA_d(lvalue_d) / rvalue_d     = 1.000 (1.000000000)
+semiA_d(lvalue_d) / rvalue_d = 1.000 (1.000000000)
+fastestA_d(lvalue_d) / rvalue_d  = 1.000 (1.000000000)
 
 10.f / 100.f                  = 0.100 (0.100000001)
-dummyArith_f(10.f) / 100.f    = 0.100 (0.100000000)
-normalArith_f(10.f) / 100.f   = 0.100 (0.100000001)
-sseArith_f(10.f) / 100.f      = 0.100 (0.100000001)
-fastArith_f(10.f) / 100.f     = 0.100 (0.099999994)
-semifastArith_f(10.f) / 100.f = 0.100 (0.099999994)
-fastestArith_f(10.f) / 100.f  = 0.100 (0.099983215)
-dummyArith_d(lvalue_d) / rvalue_d    = 0.100 (0.100000000)
-normalArith_d(lvalue_d) / rvalue_d   = 0.100 (0.100000000)
-sseArith_d(lvalue_d) / rvalue_d      = 0.100 (0.100000000)
-fastArith_d(lvalue_d) / rvalue_d     = 0.100 (0.100000000)
-semifastArith_d(lvalue_d) / rvalue_d = 0.100 (0.100000000)
-fastestArith_d(lvalue_d) / rvalue_d  = 0.100 (0.100000000)
+dummyA_f(10.f) / 100.f    = 0.100 (0.100000000)
+normA_f(10.f) / 100.f   = 0.100 (0.100000001)
+sseA_f(10.f) / 100.f      = 0.100 (0.100000001)
+fastA_f(10.f) / 100.f     = 0.100 (0.099999994)
+semiA_f(10.f) / 100.f = 0.100 (0.099999994)
+fastestA_f(10.f) / 100.f  = 0.100 (0.099983215)
+dummyA_d(lvalue_d) / rvalue_d    = 0.100 (0.100000000)
+normA_d(lvalue_d) / rvalue_d   = 0.100 (0.100000000)
+sseA_d(lvalue_d) / rvalue_d      = 0.100 (0.100000000)
+fastA_d(lvalue_d) / rvalue_d     = 0.100 (0.100000000)
+semiA_d(lvalue_d) / rvalue_d = 0.100 (0.100000000)
+fastestA_d(lvalue_d) / rvalue_d  = 0.100 (0.100000000)
 
 10.f / 1000.f                  = 0.010 (0.010000000)
-dummyArith_f(10.f) / 1000.f    = 0.010 (0.010000000)
-normalArith_f(10.f) / 1000.f   = 0.010 (0.010000000)
-sseArith_f(10.f) / 1000.f      = 0.010 (0.010000000)
-fastArith_f(10.f) / 1000.f     = 0.010 (0.010000001)
-semifastArith_f(10.f) / 1000.f = 0.010 (0.010000001)
-fastestArith_f(10.f) / 1000.f  = 0.010 (0.009999275)
-dummyArith_d(lvalue_d) / rvalue_d    = 0.010 (0.010000000)
-normalArith_d(lvalue_d) / rvalue_d   = 0.010 (0.010000000)
-sseArith_d(lvalue_d) / rvalue_d      = 0.010 (0.010000000)
-fastArith_d(lvalue_d) / rvalue_d     = 0.010 (0.010000000)
-semifastArith_d(lvalue_d) / rvalue_d = 0.010 (0.010000000)
-fastestArith_d(lvalue_d) / rvalue_d  = 0.010 (0.010000000)
+dummyA_f(10.f) / 1000.f    = 0.010 (0.010000000)
+normA_f(10.f) / 1000.f   = 0.010 (0.010000000)
+sseA_f(10.f) / 1000.f      = 0.010 (0.010000000)
+fastA_f(10.f) / 1000.f     = 0.010 (0.010000001)
+semiA_f(10.f) / 1000.f = 0.010 (0.010000001)
+fastestA_f(10.f) / 1000.f  = 0.010 (0.009999275)
+dummyA_d(lvalue_d) / rvalue_d    = 0.010 (0.010000000)
+normA_d(lvalue_d) / rvalue_d   = 0.010 (0.010000000)
+sseA_d(lvalue_d) / rvalue_d      = 0.010 (0.010000000)
+fastA_d(lvalue_d) / rvalue_d     = 0.010 (0.010000000)
+semiA_d(lvalue_d) / rvalue_d = 0.010 (0.010000000)
+fastestA_d(lvalue_d) / rvalue_d  = 0.010 (0.010000000)
 
 10.f / 10000.f                  = 0.001 (0.001000000)
-dummyArith_f(10.f) / 10000.f    = 0.001 (0.001000000)
-normalArith_f(10.f) / 10000.f   = 0.001 (0.001000000)
-sseArith_f(10.f) / 10000.f      = 0.001 (0.001000000)
-fastArith_f(10.f) / 10000.f     = 0.001 (0.001000000)
-semifastArith_f(10.f) / 10000.f = 0.001 (0.001000000)
-fastestArith_f(10.f) / 10000.f  = 0.001 (0.000999868)
-dummyArith_d(lvalue_d) / rvalue_d    = 0.001 (0.001000000)
-normalArith_d(lvalue_d) / rvalue_d   = 0.001 (0.001000000)
-sseArith_d(lvalue_d) / rvalue_d      = 0.001 (0.001000000)
-fastArith_d(lvalue_d) / rvalue_d     = 0.001 (0.001000000)
-semifastArith_d(lvalue_d) / rvalue_d = 0.001 (0.001000000)
-fastestArith_d(lvalue_d) / rvalue_d  = 0.001 (0.001000000)
+dummyA_f(10.f) / 10000.f    = 0.001 (0.001000000)
+normA_f(10.f) / 10000.f   = 0.001 (0.001000000)
+sseA_f(10.f) / 10000.f      = 0.001 (0.001000000)
+fastA_f(10.f) / 10000.f     = 0.001 (0.001000000)
+semiA_f(10.f) / 10000.f = 0.001 (0.001000000)
+fastestA_f(10.f) / 10000.f  = 0.001 (0.000999868)
+dummyA_d(lvalue_d) / rvalue_d    = 0.001 (0.001000000)
+normA_d(lvalue_d) / rvalue_d   = 0.001 (0.001000000)
+sseA_d(lvalue_d) / rvalue_d      = 0.001 (0.001000000)
+fastA_d(lvalue_d) / rvalue_d     = 0.001 (0.001000000)
+semiA_d(lvalue_d) / rvalue_d = 0.001 (0.001000000)
+fastestA_d(lvalue_d) / rvalue_d  = 0.001 (0.001000000)
 
 10.f / 100000.f                  = 0.000 (0.000100000)
-dummyArith_f(10.f) / 100000.f    = 0.000 (0.000100000)
-normalArith_f(10.f) / 100000.f   = 0.000 (0.000100000)
-sseArith_f(10.f) / 100000.f      = 0.000 (0.000100000)
-fastArith_f(10.f) / 100000.f     = 0.000 (0.000100000)
-semifastArith_f(10.f) / 100000.f = 0.000 (0.000100000)
-fastestArith_f(10.f) / 100000.f  = 0.000 (0.000099987)
-dummyArith_d(lvalue_d) / rvalue_d    = 0.000 (0.000100000)
-normalArith_d(lvalue_d) / rvalue_d   = 0.000 (0.000100000)
-sseArith_d(lvalue_d) / rvalue_d      = 0.000 (0.000100000)
-fastArith_d(lvalue_d) / rvalue_d     = 0.000 (0.000100000)
-semifastArith_d(lvalue_d) / rvalue_d = 0.000 (0.000100000)
-fastestArith_d(lvalue_d) / rvalue_d  = 0.000 (0.000100000)
+dummyA_f(10.f) / 100000.f    = 0.000 (0.000100000)
+normA_f(10.f) / 100000.f   = 0.000 (0.000100000)
+sseA_f(10.f) / 100000.f      = 0.000 (0.000100000)
+fastA_f(10.f) / 100000.f     = 0.000 (0.000100000)
+semiA_f(10.f) / 100000.f = 0.000 (0.000100000)
+fastestA_f(10.f) / 100000.f  = 0.000 (0.000099987)
+dummyA_d(lvalue_d) / rvalue_d    = 0.000 (0.000100000)
+normA_d(lvalue_d) / rvalue_d   = 0.000 (0.000100000)
+sseA_d(lvalue_d) / rvalue_d      = 0.000 (0.000100000)
+fastA_d(lvalue_d) / rvalue_d     = 0.000 (0.000100000)
+semiA_d(lvalue_d) / rvalue_d = 0.000 (0.000100000)
+fastestA_d(lvalue_d) / rvalue_d  = 0.000 (0.000100000)
 
 10.f / 1000000.f                  = 0.000 (0.000010000)
-dummyArith_f(10.f) / 1000000.f    = 0.000 (0.000010000)
-normalArith_f(10.f) / 1000000.f   = 0.000 (0.000010000)
-sseArith_f(10.f) / 1000000.f      = 0.000 (0.000010000)
-fastArith_f(10.f) / 1000000.f     = 0.000 (0.000010000)
-semifastArith_f(10.f) / 1000000.f = 0.000 (0.000010000)
-fastestArith_f(10.f) / 1000000.f  = 0.000 (0.000010000)
-dummyArith_d(lvalue_d) / rvalue_d    = 0.000 (0.000010000)
-normalArith_d(lvalue_d) / rvalue_d   = 0.000 (0.000010000)
-sseArith_d(lvalue_d) / rvalue_d      = 0.000 (0.000010000)
-fastArith_d(lvalue_d) / rvalue_d     = 0.000 (0.000010000)
-semifastArith_d(lvalue_d) / rvalue_d = 0.000 (0.000010000)
-fastestArith_d(lvalue_d) / rvalue_d  = 0.000 (0.000010000)
+dummyA_f(10.f) / 1000000.f    = 0.000 (0.000010000)
+normA_f(10.f) / 1000000.f   = 0.000 (0.000010000)
+sseA_f(10.f) / 1000000.f      = 0.000 (0.000010000)
+fastA_f(10.f) / 1000000.f     = 0.000 (0.000010000)
+semiA_f(10.f) / 1000000.f = 0.000 (0.000010000)
+fastestA_f(10.f) / 1000000.f  = 0.000 (0.000010000)
+dummyA_d(lvalue_d) / rvalue_d    = 0.000 (0.000010000)
+normA_d(lvalue_d) / rvalue_d   = 0.000 (0.000010000)
+sseA_d(lvalue_d) / rvalue_d      = 0.000 (0.000010000)
+fastA_d(lvalue_d) / rvalue_d     = 0.000 (0.000010000)
+semiA_d(lvalue_d) / rvalue_d = 0.000 (0.000010000)
+fastestA_d(lvalue_d) / rvalue_d  = 0.000 (0.000010000)
+
 --------------------------------------------------------------------------------
 [ Test for fast sqrt ]
 
 std::sqrt(1.f)              = 1.000 (1.000000000)
-sqrt(dummyArith_f(1.f))     = 1.000 (1.000000000)
-sqrt(normalArith_f(1.f))    = 1.000 (1.000000000)
-sqrt(sseArith_f(1.f))       = 1.000 (1.000000000)
-sqrt(fastArith_f(1.f))      = 1.000 (0.999999940)
-sqrt(semifastArith_f(1.f))  = 1.000 (0.999999940)
-sqrt(fastestArith_f(1.f))   = 1.000 (0.999755859)
-sqrt(dummyArith_d(value_d))     = 1.000 (1.000000000)
-sqrt(normalArith_d(value_d))    = 1.000 (1.000000000)
-sqrt(sseArith_d(value_d))       = 1.000 (1.000000000)
-sqrt(fastArith_d(value_d))      = 1.000 (1.000000000)
-sqrt(semifastArith_d(value_d))  = 1.000 (1.000000000)
-sqrt(fastestArith_d(value_d))   = 1.000 (1.000000000)
+sqrt(dummyA_f(1.f))     = 1.000 (1.000000000)
+sqrt(normA_f(1.f))    = 1.000 (1.000000000)
+sqrt(sseA_f(1.f))       = 1.000 (1.000000000)
+sqrt(fastA_f(1.f))      = 1.000 (0.999999940)
+sqrt(semiA_f(1.f))  = 1.000 (0.999999940)
+sqrt(fastestA_f(1.f))   = 1.000 (0.999755859)
+sqrt(dummyA_d(value_d))     = 1.000 (1.000000000)
+sqrt(normA_d(value_d))    = 1.000 (1.000000000)
+sqrt(sseA_d(value_d))       = 1.000 (1.000000000)
+sqrt(fastA_d(value_d))      = 1.000 (1.000000000)
+sqrt(semiA_d(value_d))  = 1.000 (1.000000000)
+sqrt(fastestA_d(value_d))   = 1.000 (1.000000000)
 
 std::sqrt(2.f)              = 1.414 (1.414213538)
-sqrt(dummyArith_f(2.f))     = 1.414 (1.414213538)
-sqrt(normalArith_f(2.f))    = 1.414 (1.414213538)
-sqrt(sseArith_f(2.f))       = 1.414 (1.414213538)
-sqrt(fastArith_f(2.f))      = 1.414 (1.414213419)
-sqrt(semifastArith_f(2.f))  = 1.414 (1.414213538)
-sqrt(fastestArith_f(2.f))   = 1.414 (1.413818359)
-sqrt(dummyArith_d(value_d))     = 1.414 (1.414213562)
-sqrt(normalArith_d(value_d))    = 1.414 (1.414213562)
-sqrt(sseArith_d(value_d))       = 1.414 (1.414213562)
-sqrt(fastArith_d(value_d))      = 1.414 (1.414213562)
-sqrt(semifastArith_d(value_d))  = 1.414 (1.414213562)
-sqrt(fastestArith_d(value_d))   = 1.414 (1.414213562)
+sqrt(dummyA_f(2.f))     = 1.414 (1.414213538)
+sqrt(normA_f(2.f))    = 1.414 (1.414213538)
+sqrt(sseA_f(2.f))       = 1.414 (1.414213538)
+sqrt(fastA_f(2.f))      = 1.414 (1.414213419)
+sqrt(semiA_f(2.f))  = 1.414 (1.414213538)
+sqrt(fastestA_f(2.f))   = 1.414 (1.413818359)
+sqrt(dummyA_d(value_d))     = 1.414 (1.414213562)
+sqrt(normA_d(value_d))    = 1.414 (1.414213562)
+sqrt(sseA_d(value_d))       = 1.414 (1.414213562)
+sqrt(fastA_d(value_d))      = 1.414 (1.414213562)
+sqrt(semiA_d(value_d))  = 1.414 (1.414213562)
+sqrt(fastestA_d(value_d))   = 1.414 (1.414213562)
 
 std::sqrt(3.f)              = 1.732 (1.732050776)
-sqrt(dummyArith_f(3.f))     = 1.732 (1.732050776)
-sqrt(normalArith_f(3.f))    = 1.732 (1.732050776)
-sqrt(sseArith_f(3.f))       = 1.732 (1.732050776)
-sqrt(fastArith_f(3.f))      = 1.732 (1.732050776)
-sqrt(semifastArith_f(3.f))  = 1.732 (1.732050776)
-sqrt(fastestArith_f(3.f))   = 1.732 (1.731811523)
-sqrt(dummyArith_d(value_d))     = 1.732 (1.732050808)
-sqrt(normalArith_d(value_d))    = 1.732 (1.732050808)
-sqrt(sseArith_d(value_d))       = 1.732 (1.732050808)
-sqrt(fastArith_d(value_d))      = 1.732 (1.732050808)
-sqrt(semifastArith_d(value_d))  = 1.732 (1.732050808)
-sqrt(fastestArith_d(value_d))   = 1.732 (1.732050808)
+sqrt(dummyA_f(3.f))     = 1.732 (1.732050776)
+sqrt(normA_f(3.f))    = 1.732 (1.732050776)
+sqrt(sseA_f(3.f))       = 1.732 (1.732050776)
+sqrt(fastA_f(3.f))      = 1.732 (1.732050776)
+sqrt(semiA_f(3.f))  = 1.732 (1.732050776)
+sqrt(fastestA_f(3.f))   = 1.732 (1.731811523)
+sqrt(dummyA_d(value_d))     = 1.732 (1.732050808)
+sqrt(normA_d(value_d))    = 1.732 (1.732050808)
+sqrt(sseA_d(value_d))       = 1.732 (1.732050808)
+sqrt(fastA_d(value_d))      = 1.732 (1.732050808)
+sqrt(semiA_d(value_d))  = 1.732 (1.732050808)
+sqrt(fastestA_d(value_d))   = 1.732 (1.732050808)
 
 std::sqrt(4.f)              = 2.000 (2.000000000)
-sqrt(dummyArith_f(4.f))     = 2.000 (2.000000000)
-sqrt(normalArith_f(4.f))    = 2.000 (2.000000000)
-sqrt(sseArith_f(4.f))       = 2.000 (2.000000000)
-sqrt(fastArith_f(4.f))      = 2.000 (1.999999881)
-sqrt(semifastArith_f(4.f))  = 2.000 (1.999999881)
-sqrt(fastestArith_f(4.f))   = 2.000 (1.999511719)
-sqrt(dummyArith_d(value_d))     = 2.000 (2.000000000)
-sqrt(normalArith_d(value_d))    = 2.000 (2.000000000)
-sqrt(sseArith_d(value_d))       = 2.000 (2.000000000)
-sqrt(fastArith_d(value_d))      = 2.000 (2.000000000)
-sqrt(semifastArith_d(value_d))  = 2.000 (2.000000000)
-sqrt(fastestArith_d(value_d))   = 2.000 (2.000000000)
+sqrt(dummyA_f(4.f))     = 2.000 (2.000000000)
+sqrt(normA_f(4.f))    = 2.000 (2.000000000)
+sqrt(sseA_f(4.f))       = 2.000 (2.000000000)
+sqrt(fastA_f(4.f))      = 2.000 (1.999999881)
+sqrt(semiA_f(4.f))  = 2.000 (1.999999881)
+sqrt(fastestA_f(4.f))   = 2.000 (1.999511719)
+sqrt(dummyA_d(value_d))     = 2.000 (2.000000000)
+sqrt(normA_d(value_d))    = 2.000 (2.000000000)
+sqrt(sseA_d(value_d))       = 2.000 (2.000000000)
+sqrt(fastA_d(value_d))      = 2.000 (2.000000000)
+sqrt(semiA_d(value_d))  = 2.000 (2.000000000)
+sqrt(fastestA_d(value_d))   = 2.000 (2.000000000)
 
 std::sqrt(5.f)              = 2.236 (2.236068010)
-sqrt(dummyArith_f(5.f))     = 2.236 (2.236068010)
-sqrt(normalArith_f(5.f))    = 2.236 (2.236068010)
-sqrt(sseArith_f(5.f))       = 2.236 (2.236068010)
-sqrt(fastArith_f(5.f))      = 2.236 (2.236068010)
-sqrt(semifastArith_f(5.f))  = 2.236 (2.236068010)
-sqrt(fastestArith_f(5.f))   = 2.236 (2.235717773)
-sqrt(dummyArith_d(value_d))     = 2.236 (2.236067977)
-sqrt(normalArith_d(value_d))    = 2.236 (2.236067977)
-sqrt(sseArith_d(value_d))       = 2.236 (2.236067977)
-sqrt(fastArith_d(value_d))      = 2.236 (2.236067977)
-sqrt(semifastArith_d(value_d))  = 2.236 (2.236067977)
-sqrt(fastestArith_d(value_d))   = 2.236 (2.236067977)
+sqrt(dummyA_f(5.f))     = 2.236 (2.236068010)
+sqrt(normA_f(5.f))    = 2.236 (2.236068010)
+sqrt(sseA_f(5.f))       = 2.236 (2.236068010)
+sqrt(fastA_f(5.f))      = 2.236 (2.236068010)
+sqrt(semiA_f(5.f))  = 2.236 (2.236068010)
+sqrt(fastestA_f(5.f))   = 2.236 (2.235717773)
+sqrt(dummyA_d(value_d))     = 2.236 (2.236067977)
+sqrt(normA_d(value_d))    = 2.236 (2.236067977)
+sqrt(sseA_d(value_d))       = 2.236 (2.236067977)
+sqrt(fastA_d(value_d))      = 2.236 (2.236067977)
+sqrt(semiA_d(value_d))  = 2.236 (2.236067977)
+sqrt(fastestA_d(value_d))   = 2.236 (2.236067977)
 
 std::sqrt(10.f)              = 3.162 (3.162277699)
-sqrt(dummyArith_f(10.f))     = 3.162 (3.162277699)
-sqrt(normalArith_f(10.f))    = 3.162 (3.162277699)
-sqrt(sseArith_f(10.f))       = 3.162 (3.162277699)
-sqrt(fastArith_f(10.f))      = 3.162 (3.162277699)
-sqrt(semifastArith_f(10.f))  = 3.162 (3.162277699)
-sqrt(fastestArith_f(10.f))   = 3.162 (3.161621094)
-sqrt(dummyArith_d(value_d))     = 3.162 (3.162277660)
-sqrt(normalArith_d(value_d))    = 3.162 (3.162277660)
-sqrt(sseArith_d(value_d))       = 3.162 (3.162277660)
-sqrt(fastArith_d(value_d))      = 3.162 (3.162277660)
-sqrt(semifastArith_d(value_d))  = 3.162 (3.162277660)
-sqrt(fastestArith_d(value_d))   = 3.162 (3.162277660)
+sqrt(dummyA_f(10.f))     = 3.162 (3.162277699)
+sqrt(normA_f(10.f))    = 3.162 (3.162277699)
+sqrt(sseA_f(10.f))       = 3.162 (3.162277699)
+sqrt(fastA_f(10.f))      = 3.162 (3.162277699)
+sqrt(semiA_f(10.f))  = 3.162 (3.162277699)
+sqrt(fastestA_f(10.f))   = 3.162 (3.161621094)
+sqrt(dummyA_d(value_d))     = 3.162 (3.162277660)
+sqrt(normA_d(value_d))    = 3.162 (3.162277660)
+sqrt(sseA_d(value_d))       = 3.162 (3.162277660)
+sqrt(fastA_d(value_d))      = 3.162 (3.162277660)
+sqrt(semiA_d(value_d))  = 3.162 (3.162277660)
+sqrt(fastestA_d(value_d))   = 3.162 (3.162277660)
 
 std::sqrt(100.f)              = 10.000 (10.000000000)
-sqrt(dummyArith_f(100.f))     = 10.000 (10.000000000)
-sqrt(normalArith_f(100.f))    = 10.000 (10.000000000)
-sqrt(sseArith_f(100.f))       = 10.000 (10.000000000)
-sqrt(fastArith_f(100.f))      = 10.000 (10.000000000)
-sqrt(semifastArith_f(100.f))  = 10.000 (9.999999046)
-sqrt(fastestArith_f(100.f))   = 9.999 (9.999084473)
-sqrt(dummyArith_d(value_d))     = 10.000 (10.000000000)
-sqrt(normalArith_d(value_d))    = 10.000 (10.000000000)
-sqrt(sseArith_d(value_d))       = 10.000 (10.000000000)
-sqrt(fastArith_d(value_d))      = 10.000 (10.000000000)
-sqrt(semifastArith_d(value_d))  = 10.000 (10.000000000)
-sqrt(fastestArith_d(value_d))   = 10.000 (10.000000000)
+sqrt(dummyA_f(100.f))     = 10.000 (10.000000000)
+sqrt(normA_f(100.f))    = 10.000 (10.000000000)
+sqrt(sseA_f(100.f))       = 10.000 (10.000000000)
+sqrt(fastA_f(100.f))      = 10.000 (10.000000000)
+sqrt(semiA_f(100.f))  = 10.000 (9.999999046)
+sqrt(fastestA_f(100.f))   = 9.999 (9.999084473)
+sqrt(dummyA_d(value_d))     = 10.000 (10.000000000)
+sqrt(normA_d(value_d))    = 10.000 (10.000000000)
+sqrt(sseA_d(value_d))       = 10.000 (10.000000000)
+sqrt(fastA_d(value_d))      = 10.000 (10.000000000)
+sqrt(semiA_d(value_d))  = 10.000 (10.000000000)
+sqrt(fastestA_d(value_d))   = 10.000 (10.000000000)
 
 std::sqrt(1000.f)              = 31.623 (31.622776031)
-sqrt(dummyArith_f(1000.f))     = 31.623 (31.622776031)
-sqrt(normalArith_f(1000.f))    = 31.623 (31.622776031)
-sqrt(sseArith_f(1000.f))       = 31.623 (31.622776031)
-sqrt(fastArith_f(1000.f))      = 31.623 (31.622774124)
-sqrt(semifastArith_f(1000.f))  = 31.623 (31.622774124)
-sqrt(fastestArith_f(1000.f))   = 31.616 (31.616210938)
-sqrt(dummyArith_d(value_d))     = 31.623 (31.622776602)
-sqrt(normalArith_d(value_d))    = 31.623 (31.622776602)
-sqrt(sseArith_d(value_d))       = 31.623 (31.622776602)
-sqrt(fastArith_d(value_d))      = 31.623 (31.622776602)
-sqrt(semifastArith_d(value_d))  = 31.623 (31.622776602)
-sqrt(fastestArith_d(value_d))   = 31.623 (31.622776602)
+sqrt(dummyA_f(1000.f))     = 31.623 (31.622776031)
+sqrt(normA_f(1000.f))    = 31.623 (31.622776031)
+sqrt(sseA_f(1000.f))       = 31.623 (31.622776031)
+sqrt(fastA_f(1000.f))      = 31.623 (31.622774124)
+sqrt(semiA_f(1000.f))  = 31.623 (31.622774124)
+sqrt(fastestA_f(1000.f))   = 31.616 (31.616210938)
+sqrt(dummyA_d(value_d))     = 31.623 (31.622776602)
+sqrt(normA_d(value_d))    = 31.623 (31.622776602)
+sqrt(sseA_d(value_d))       = 31.623 (31.622776602)
+sqrt(fastA_d(value_d))      = 31.623 (31.622776602)
+sqrt(semiA_d(value_d))  = 31.623 (31.622776602)
+sqrt(fastestA_d(value_d))   = 31.623 (31.622776602)
 
 std::sqrt(10000.f)              = 100.000 (100.000000000)
-sqrt(dummyArith_f(10000.f))     = 100.000 (100.000000000)
-sqrt(normalArith_f(10000.f))    = 100.000 (100.000000000)
-sqrt(sseArith_f(10000.f))       = 100.000 (100.000000000)
-sqrt(fastArith_f(10000.f))      = 100.000 (100.000000000)
-sqrt(semifastArith_f(10000.f))  = 100.000 (100.000000000)
-sqrt(fastestArith_f(10000.f))   = 99.983 (99.983215332)
-sqrt(dummyArith_d(value_d))     = 100.000 (100.000000000)
-sqrt(normalArith_d(value_d))    = 100.000 (100.000000000)
-sqrt(sseArith_d(value_d))       = 100.000 (100.000000000)
-sqrt(fastArith_d(value_d))      = 100.000 (100.000000000)
-sqrt(semifastArith_d(value_d))  = 100.000 (100.000000000)
-sqrt(fastestArith_d(value_d))   = 100.000 (100.000000000)
+sqrt(dummyA_f(10000.f))     = 100.000 (100.000000000)
+sqrt(normA_f(10000.f))    = 100.000 (100.000000000)
+sqrt(sseA_f(10000.f))       = 100.000 (100.000000000)
+sqrt(fastA_f(10000.f))      = 100.000 (100.000000000)
+sqrt(semiA_f(10000.f))  = 100.000 (100.000000000)
+sqrt(fastestA_f(10000.f))   = 99.983 (99.983215332)
+sqrt(dummyA_d(value_d))     = 100.000 (100.000000000)
+sqrt(normA_d(value_d))    = 100.000 (100.000000000)
+sqrt(sseA_d(value_d))       = 100.000 (100.000000000)
+sqrt(fastA_d(value_d))      = 100.000 (100.000000000)
+sqrt(semiA_d(value_d))  = 100.000 (100.000000000)
+sqrt(fastestA_d(value_d))   = 100.000 (100.000000000)
 
 std::sqrt(100000.f)              = 316.228 (316.227752686)
-sqrt(dummyArith_f(100000.f))     = 316.228 (316.227752686)
-sqrt(normalArith_f(100000.f))    = 316.228 (316.227752686)
-sqrt(sseArith_f(100000.f))       = 316.228 (316.227752686)
-sqrt(fastArith_f(100000.f))      = 316.228 (316.227752686)
-sqrt(semifastArith_f(100000.f))  = 316.228 (316.227752686)
-sqrt(fastestArith_f(100000.f))   = 316.238 (316.238403320)
-sqrt(dummyArith_d(value_d))     = 316.228 (316.227766017)
-sqrt(normalArith_d(value_d))    = 316.228 (316.227766017)
-sqrt(sseArith_d(value_d))       = 316.228 (316.227766017)
-sqrt(fastArith_d(value_d))      = 316.228 (316.227766017)
-sqrt(semifastArith_d(value_d))  = 316.228 (316.227766017)
-sqrt(fastestArith_d(value_d))   = 316.228 (316.227766017)
+sqrt(dummyA_f(100000.f))     = 316.228 (316.227752686)
+sqrt(normA_f(100000.f))    = 316.228 (316.227752686)
+sqrt(sseA_f(100000.f))       = 316.228 (316.227752686)
+sqrt(fastA_f(100000.f))      = 316.228 (316.227752686)
+sqrt(semiA_f(100000.f))  = 316.228 (316.227752686)
+sqrt(fastestA_f(100000.f))   = 316.238 (316.238403320)
+sqrt(dummyA_d(value_d))     = 316.228 (316.227766017)
+sqrt(normA_d(value_d))    = 316.228 (316.227766017)
+sqrt(sseA_d(value_d))       = 316.228 (316.227766017)
+sqrt(fastA_d(value_d))      = 316.228 (316.227766017)
+sqrt(semiA_d(value_d))  = 316.228 (316.227766017)
+sqrt(fastestA_d(value_d))   = 316.228 (316.227766017)
 
 std::sqrt(1000000.f)              = 1000.000 (1000.000000000)
-sqrt(dummyArith_f(1000000.f))     = 1000.000 (1000.000000000)
-sqrt(normalArith_f(1000000.f))    = 1000.000 (1000.000000000)
-sqrt(sseArith_f(1000000.f))       = 1000.000 (1000.000000000)
-sqrt(fastArith_f(1000000.f))      = 1000.000 (1000.000061035)
-sqrt(semifastArith_f(1000000.f))  = 1000.000 (999.999938965)
-sqrt(fastestArith_f(1000000.f))   = 999.927 (999.927490234)
-sqrt(dummyArith_d(value_d))     = 1000.000 (1000.000000000)
-sqrt(normalArith_d(value_d))    = 1000.000 (1000.000000000)
-sqrt(sseArith_d(value_d))       = 1000.000 (1000.000000000)
-sqrt(fastArith_d(value_d))      = 1000.000 (1000.000000000)
-sqrt(semifastArith_d(value_d))  = 1000.000 (1000.000000000)
-sqrt(fastestArith_d(value_d))   = 1000.000 (1000.000000000)
+sqrt(dummyA_f(1000000.f))     = 1000.000 (1000.000000000)
+sqrt(normA_f(1000000.f))    = 1000.000 (1000.000000000)
+sqrt(sseA_f(1000000.f))       = 1000.000 (1000.000000000)
+sqrt(fastA_f(1000000.f))      = 1000.000 (1000.000061035)
+sqrt(semiA_f(1000000.f))  = 1000.000 (999.999938965)
+sqrt(fastestA_f(1000000.f))   = 999.927 (999.927490234)
+sqrt(dummyA_d(value_d))     = 1000.000 (1000.000000000)
+sqrt(normA_d(value_d))    = 1000.000 (1000.000000000)
+sqrt(sseA_d(value_d))       = 1000.000 (1000.000000000)
+sqrt(fastA_d(value_d))      = 1000.000 (1000.000000000)
+sqrt(semiA_d(value_d))  = 1000.000 (1000.000000000)
+sqrt(fastestA_d(value_d))   = 1000.000 (1000.000000000)
+
 --------------------------------------------------------------------------------
-[ Test for performance of operation : dummy:float ] (* 1000 times repeat)
-total = 709.088195801 : time=0.000578000 sec
+[ Test for vector operation ]
+
+- 2D vector -
+vec2_1=[1.00000][2.00000]
+vec2_2=[3.00000][4.00000]
+norm(vec2_1)                             = 2.23607
+normSq(vec2_1)                           = 5.00000
+merge(vec2_result, vec2_1, vec2_2)       = [4.00000][6.00000]
+difference(vec2_result, vec2_1, vec2_2)  = [-2.00000][-2.00000]
+length(vec2_1, vec2_2)                   = 2.82843
+lengthSq(vec2_1, vec2_2)                 = 8.00000
+normalize(vec2_result, vec2_1)           = [0.44721][0.89443]
+mul(vec2_result, vec2_1, 10.f)           = [10.00000][20.00000]
+forward(vec2_result, vec2_1, 10.f)       = [5.47214][10.94427]
+dot(vec2_1, vec2_2)                      = 11.00000
+normalizedDot(vec2_1, vec2_2)            = 0.98387
+norm(fastA_2f(vec2_1))                                                 = 2.23607
+normSq(fastA_2f(vec2_1))                                               = 5.00000
+fastA_2f vec2_result = merge(fastA_2f(vec2_1), fastA_2f(vec2_2))       = [4.00000][6.00000]
+fastA_2f vec2_result = difference(fastA_2f(vec2_1), fastA_2f(vec2_2))  = [-2.00000][-2.00000]
+length(fastA_2f(vec2_1), fastA_2f(vec2_2))                             = 2.82843
+lengthSq(fastA_2f(vec2_1), fastA_2f(vec2_2))                           = 8.00000
+fastA_2f vec2_result = normalize(fastA_2f(vec2_1))                     = [0.44721][0.89443]
+fastA_2f vec2_result = mul(fastA_2f(vec2_1), 10.f)                     = [10.00000][20.00000]
+fastA_2f vec2_result = forward(fastA_2f(vec2_1), 10.f)                 = [5.47214][10.94427]
+dot(fastA_2f(vec2_1), fastA_2f(vec2_2))                                = 11.00000
+normalizedDot(fastA_2f(vec2_1), fastA_2f(vec2_2))                      = 0.98387
+norm(fastestA_2f(vec2_1))                                                       = 2.23607
+normSq(fastestA_2f(vec2_1))                                                     = 5.00000
+fastestA_2f vec2_result = merge(fastestA_2f(vec2_1), fastestA_2f(vec2_2))       = [4.00000][6.00000]
+fastestA_2f vec2_result = difference(fastestA_2f(vec2_1), fastestA_2f(vec2_2))  = [-2.00000][-2.00000]
+length(fastestA_2f(vec2_1), fastestA_2f(vec2_2))                                = 2.82843
+lengthSq(fastestA_2f(vec2_1), fastestA_2f(vec2_2))                              = 8.00000
+fastestA_2f vec2_result = normalize(fastestA_2f(vec2_1))                        = [0.44721][0.89443]
+fastestA_2f vec2_result = mul(fastestA_2f(vec2_1), 10.f)                        = [10.00000][20.00000]
+fastestA_2f vec2_result = forward(fastestA_2f(vec2_1), 10.f)                    = [5.47214][10.94427]
+dot(fastestA_2f(vec2_1), fastestA_2f(vec2_2))                                   = 11.00000
+normalizedDot(fastestA_2f(vec2_1), fastestA_2f(vec2_2))                         = 0.98387
+norm(semiA_2f(vec2_1))                                                 = 2.23607
+normSq(semiA_2f(vec2_1))                                               = 5.00000
+semiA_2f vec2_result = merge(semiA_2f(vec2_1), semiA_2f(vec2_2))       = [4.00000][6.00000]
+semiA_2f vec2_result = difference(semiA_2f(vec2_1), semiA_2f(vec2_2))  = [-2.00000][-2.00000]
+length(semiA_2f(vec2_1), semiA_2f(vec2_2))                             = 2.82843
+lengthSq(semiA_2f(vec2_1), semiA_2f(vec2_2))                           = 8.00000
+semiA_2f vec2_result = normalize(semiA_2f(vec2_1))                     = [0.44721][0.89443]
+semiA_2f vec2_result = mul(semiA_2f(vec2_1), 10.f)                     = [10.00000][20.00000]
+semiA_2f vec2_result = forward(semiA_2f(vec2_1), 10.f)                 = [5.47214][10.94427]
+dot(semiA_2f(vec2_1), semiA_2f(vec2_2))                                = 11.00000
+normalizedDot(semiA_2f(vec2_1), semiA_2f(vec2_2))                      = 0.98387
+norm(sseA_2f(vec2_1))                                               = 2.23607
+normSq(sseA_2f(vec2_1))                                             = 5.00000
+sseA_2f vec2_result = merge(sseA_2f(vec2_1), sseA_2f(vec2_2))       = [4.00000][6.00000]
+sseA_2f vec2_result = difference(sseA_2f(vec2_1), sseA_2f(vec2_2))  = [-2.00000][-2.00000]
+length(sseA_2f(vec2_1), sseA_2f(vec2_2))                            = 2.82843
+lengthSq(sseA_2f(vec2_1), sseA_2f(vec2_2))                          = 8.00000
+sseA_2f vec2_result = normalize(sseA_2f(vec2_1))                    = [0.44721][0.89443]
+sseA_2f vec2_result = mul(sseA_2f(vec2_1), 10.f)                    = [10.00000][20.00000]
+sseA_2f vec2_result = forward(sseA_2f(vec2_1), 10.f)                = [5.47214][10.94427]
+dot(sseA_2f(vec2_1), sseA_2f(vec2_2))                               = 11.00000
+normalizedDot(sseA_2f(vec2_1), sseA_2f(vec2_2))                     = 0.98387
+norm(normA_2f(vec2_1))                                                 = 2.23607
+normSq(normA_2f(vec2_1))                                               = 5.00000
+normA_2f vec2_result = merge(normA_2f(vec2_1), normA_2f(vec2_2))       = [4.00000][6.00000]
+normA_2f vec2_result = difference(normA_2f(vec2_1), normA_2f(vec2_2))  = [-2.00000][-2.00000]
+length(normA_2f(vec2_1), normA_2f(vec2_2))                             = 2.82843
+lengthSq(normA_2f(vec2_1), normA_2f(vec2_2))                           = 8.00000
+normA_2f vec2_result = normalize(normA_2f(vec2_1))                     = [0.44721][0.89443]
+normA_2f vec2_result = mul(normA_2f(vec2_1), 10.f)                     = [10.00000][20.00000]
+normA_2f vec2_result = forward(normA_2f(vec2_1), 10.f)                 = [5.47214][10.94427]
+dot(normA_2f(vec2_1), normA_2f(vec2_2))                                = 11.00000
+normalizedDot(normA_2f(vec2_1), normA_2f(vec2_2))                      = 0.98387
+norm(dummyA_2f(vec2_1))                                        = 2.23607
+normSq(dummyA_2f(vec2_1))                                      = 5.00000
+merge(vec2_result, dummyA_2f(vec2_1), dummyA_2f(vec2_2))       = [4.00000][6.00000]
+difference(vec2_result, dummyA_2f(vec2_1), dummyA_2f(vec2_2))  = [-2.00000][-2.00000]
+length(dummyA_2f(vec2_1), dummyA_2f(vec2_2))                   = 2.82843
+lengthSq(dummyA_2f(vec2_1), dummyA_2f(vec2_2))                 = 8.00000
+normalize(vec2_result, dummyA_2f(vec2_1))                      = [0.44721][0.89443]
+mul(vec2_result, dummyA_2f(vec2_1), 10.f)                      = [10.00000][20.00000]
+forward(vec2_result, dummyA_2f(vec2_1), 10.f)                  = [5.47214][10.94427]
+dot(dummyA_2f(vec2_1), dummyA_2f(vec2_2))                      = 11.00000
+normalizedDot(dummyA_2f(vec2_1), dummyA_2f(vec2_2))            = 0.98387
+
+- 3D vector -
+vec3_1=[1.00000][2.00000][3.00000]
+vec3_2=[4.00000][5.00000][6.00000]
+norm(vec3_1)                             = 3.74166
+normSq(vec3_1)                           = 14.00000
+merge(vec3_result, vec3_1, vec3_2)       = [5.00000][7.00000][9.00000]
+difference(vec3_result, vec3_1, vec3_2)  = [-3.00000][-3.00000][-3.00000]
+length(vec3_1, vec3_2)                   = 5.19615
+lengthSq(vec3_1, vec3_2)                 = 27.00000
+normalize(vec3_result, vec3_1)           = [0.26726][0.53452][0.80178]
+mul(vec3_result, vec3_1, 10.f)           = [10.00000][20.00000][30.00000]
+forward(vec3_result, vec3_1, 10.f)       = [3.67261][7.34522][11.01784]
+dot(vec3_1, vec3_2)                      = 32.00000
+normalizedDot(vec3_1, vec3_2)            = 0.97463
+cross(vec3_result, vec3_1, vec3_2)       = [-3.00000][6.00000][-3.00000]
+norm(fastA_3f(vec3_1))                                                 = 3.74166
+normSq(fastA_3f(vec3_1))                                               = 14.00000
+fastA_3f vec3_result = merge(fastA_3f(vec3_1), fastA_3f(vec3_2))       = [5.00000][7.00000][9.00000]
+fastA_3f vec3_result = difference(fastA_3f(vec3_1), fastA_3f(vec3_2))  = [-3.00000][-3.00000][-3.00000]
+length(fastA_3f(vec3_1), fastA_3f(vec3_2))                             = 5.19615
+lengthSq(fastA_3f(vec3_1), fastA_3f(vec3_2))                           = 27.00000
+fastA_3f vec3_result = normalize(fastA_3f(vec3_1))                     = [0.26726][0.53452][0.80178]
+fastA_3f vec3_result = mul(fastA_3f(vec3_1), 10.f)                     = [10.00000][20.00000][30.00000]
+fastA_3f vec3_result = forward(fastA_3f(vec3_1), 10.f)                 = [3.67261][7.34522][11.01784]
+dot(fastA_3f(vec3_1), fastA_3f(vec3_2))                                = 32.00000
+normalizedDot(fastA_3f(vec3_1), fastA_3f(vec3_2))                      = 0.97463
+fastA_3f vec3_result = cross(fastA_3f(vec3_1), fastA_3f(vec3_2))       = [-3.00000][6.00000][-3.00000]
+norm(fastestA_3f(vec3_1))                                                       = 3.74166
+normSq(fastestA_3f(vec3_1))                                                     = 14.00000
+fastestA_3f vec3_result = merge(fastestA_3f(vec3_1), fastestA_3f(vec3_2))       = [5.00000][7.00000][9.00000]
+fastestA_3f vec3_result = difference(fastestA_3f(vec3_1), fastestA_3f(vec3_2))  = [-3.00000][-3.00000][-3.00000]
+length(fastestA_3f(vec3_1), fastestA_3f(vec3_2))                                = 5.19615
+lengthSq(fastestA_3f(vec3_1), fastestA_3f(vec3_2))                              = 27.00000
+fastestA_3f vec3_result = normalize(fastestA_3f(vec3_1))                        = [0.26726][0.53452][0.80178]
+fastestA_3f vec3_result = mul(fastestA_3f(vec3_1), 10.f)                        = [10.00000][20.00000][30.00000]
+fastestA_3f vec3_result = forward(fastestA_3f(vec3_1), 10.f)                    = [3.67261][7.34522][11.01784]
+dot(fastestA_3f(vec3_1), fastestA_3f(vec3_2))                                   = 32.00000
+normalizedDot(fastestA_3f(vec3_1), fastestA_3f(vec3_2))                         = 0.97463
+fastestA_3f vec3_result = cross(fastestA_3f(vec3_1), fastestA_3f(vec3_2))       = [-3.00000][6.00000][-3.00000]
+norm(semiA_3f(vec3_1))                                                 = 3.74166
+normSq(semiA_3f(vec3_1))                                               = 14.00000
+semiA_3f vec3_result = merge(semiA_3f(vec3_1), semiA_3f(vec3_2))       = [5.00000][7.00000][9.00000]
+semiA_3f vec3_result = difference(semiA_3f(vec3_1), semiA_3f(vec3_2))  = [-3.00000][-3.00000][-3.00000]
+length(semiA_3f(vec3_1), semiA_3f(vec3_2))                             = 5.19615
+lengthSq(semiA_3f(vec3_1), semiA_3f(vec3_2))                           = 27.00000
+semiA_3f vec3_result = normalize(semiA_3f(vec3_1))                     = [0.26726][0.53452][0.80178]
+semiA_3f vec3_result = mul(semiA_3f(vec3_1), 10.f)                     = [10.00000][20.00000][30.00000]
+semiA_3f vec3_result = forward(semiA_3f(vec3_1), 10.f)                 = [3.67261][7.34522][11.01784]
+dot(semiA_3f(vec3_1), semiA_3f(vec3_2))                                = 32.00000
+normalizedDot(semiA_3f(vec3_1), semiA_3f(vec3_2))                      = 0.97463
+semiA_3f vec3_result = cross(semiA_3f(vec3_1), semiA_3f(vec3_2))       = [-3.00000][6.00000][-3.00000]
+norm(sseA_3f(vec3_1))                                               = 3.74166
+normSq(sseA_3f(vec3_1))                                             = 14.00000
+sseA_3f vec3_result = merge(sseA_3f(vec3_1), sseA_3f(vec3_2))       = [5.00000][7.00000][9.00000]
+sseA_3f vec3_result = difference(sseA_3f(vec3_1), sseA_3f(vec3_2))  = [-3.00000][-3.00000][-3.00000]
+length(sseA_3f(vec3_1), sseA_3f(vec3_2))                            = 5.19615
+lengthSq(sseA_3f(vec3_1), sseA_3f(vec3_2))                          = 27.00000
+sseA_3f vec3_result = normalize(sseA_3f(vec3_1))                    = [0.26726][0.53452][0.80178]
+sseA_3f vec3_result = mul(sseA_3f(vec3_1), 10.f)                    = [10.00000][20.00000][30.00000]
+sseA_3f vec3_result = forward(sseA_3f(vec3_1), 10.f)                = [3.67261][7.34522][11.01784]
+dot(sseA_3f(vec3_1), sseA_3f(vec3_2))                               = 32.00000
+normalizedDot(sseA_3f(vec3_1), sseA_3f(vec3_2))                     = 0.97463
+sseA_3f vec3_result = cross(sseA_3f(vec3_1), sseA_3f(vec3_2))       = [-3.00000][6.00000][-3.00000]
+norm(normA_3f(vec3_1))                                                 = 3.74166
+normSq(normA_3f(vec3_1))                                               = 14.00000
+normA_3f vec3_result = merge(normA_3f(vec3_1), normA_3f(vec3_2))       = [5.00000][7.00000][9.00000]
+normA_3f vec3_result = difference(normA_3f(vec3_1), normA_3f(vec3_2))  = [-3.00000][-3.00000][-3.00000]
+length(normA_3f(vec3_1), normA_3f(vec3_2))                             = 5.19615
+lengthSq(normA_3f(vec3_1), normA_3f(vec3_2))                           = 27.00000
+normA_3f vec3_result = normalize(normA_3f(vec3_1))                     = [0.26726][0.53452][0.80178]
+normA_3f vec3_result = mul(normA_3f(vec3_1), 10.f)                     = [10.00000][20.00000][30.00000]
+normA_3f vec3_result = forward(normA_3f(vec3_1), 10.f)                 = [3.67261][7.34522][11.01784]
+dot(normA_3f(vec3_1), normA_3f(vec3_2))                                = 32.00000
+normalizedDot(normA_3f(vec3_1), normA_3f(vec3_2))                      = 0.97463
+normA_3f vec3_result = cross(normA_3f(vec3_1), normA_3f(vec3_2))       = [-3.00000][6.00000][-3.00000]
+norm(dummyA_3f(vec3_1))                                        = 3.74166
+normSq(dummyA_3f(vec3_1))                                      = 14.00000
+merge(vec3_result, dummyA_3f(vec3_1), dummyA_3f(vec3_2))       = [5.00000][7.00000][9.00000]
+difference(vec3_result, dummyA_3f(vec3_1), dummyA_3f(vec3_2))  = [-3.00000][-3.00000][-3.00000]
+length(dummyA_3f(vec3_1), dummyA_3f(vec3_2))                   = 5.19615
+lengthSq(dummyA_3f(vec3_1), dummyA_3f(vec3_2))                 = 27.00000
+normalize(vec3_result, dummyA_3f(vec3_1))                      = [0.26726][0.53452][0.80178]
+mul(vec3_result, dummyA_3f(vec3_1), 10.f)                      = [10.00000][20.00000][30.00000]
+forward(vec3_result, dummyA_3f(vec3_1), 10.f)                  = [3.67261][7.34522][11.01784]
+dot(dummyA_3f(vec3_1), dummyA_3f(vec3_2))                      = 32.00000
+normalizedDot(dummyA_3f(vec3_1), dummyA_3f(vec3_2))            = 0.97463
+cross(vec3_result, dummyA_3f(vec3_1), dummyA_3f(vec3_2))       = [-3.00000][6.00000][-3.00000]
+
+- 4D vector -
+vec4_1=[1.00000][2.00000][3.00000]
+vec4_2=[4.00000][5.00000][6.00000]
+norm(vec4_1)                             = 3.74166
+normSq(vec4_1)                           = 14.00000
+merge(vec4_result, vec4_1, vec4_2)       = [5.00000][7.00000][9.00000]
+difference(vec4_result, vec4_1, vec4_2)  = [-3.00000][-3.00000][-3.00000]
+length(vec4_1, vec4_2)                   = 5.19615
+lengthSq(vec4_1, vec4_2)                 = 27.00000
+normalize(vec4_result, vec4_1)           = [0.26726][0.53452][0.80178]
+mul(vec4_result, vec4_1, 10.f)           = [10.00000][20.00000][30.00000]
+forward(vec4_result, vec4_1, 10.f)       = [3.67261][7.34522][11.01784]
+dot(vec4_1, vec4_2)                      = 32.00000
+normalizedDot(vec4_1, vec4_2)            = 0.97463
+cross(vec4_result, vec4_1, vec4_2)       = [-3.00000][6.00000][-3.00000]
+norm(fastA_4f(vec4_1))                                                 = 3.74166
+normSq(fastA_4f(vec4_1))                                               = 14.00000
+fastA_4f vec4_result = merge(fastA_4f(vec4_1), fastA_4f(vec4_2))       = [5.00000][7.00000][9.00000]
+fastA_4f vec4_result = difference(fastA_4f(vec4_1), fastA_4f(vec4_2))  = [-3.00000][-3.00000][-3.00000]
+length(fastA_4f(vec4_1), fastA_4f(vec4_2))                             = 5.19615
+lengthSq(fastA_4f(vec4_1), fastA_4f(vec4_2))                           = 27.00000
+fastA_4f vec4_result = normalize(fastA_4f(vec4_1))                     = [0.26726][0.53452][0.80178]
+fastA_4f vec4_result = mul(fastA_4f(vec4_1), 10.f)                     = [10.00000][20.00000][30.00000]
+fastA_4f vec4_result = forward(fastA_4f(vec4_1), 10.f)                 = [3.67261][7.34522][11.01784]
+dot(fastA_4f(vec4_1), fastA_4f(vec4_2))                                = 32.00000
+normalizedDot(fastA_4f(vec4_1), fastA_4f(vec4_2))                      = 0.97463
+fastA_4f vec4_result = cross(fastA_4f(vec4_1), fastA_4f(vec4_2))       = [-3.00000][6.00000][-3.00000]
+norm(fastestA_4f(vec4_1))                                                       = 3.74166
+normSq(fastestA_4f(vec4_1))                                                     = 14.00000
+fastestA_4f vec4_result = merge(fastestA_4f(vec4_1), fastestA_4f(vec4_2))       = [5.00000][7.00000][9.00000]
+fastestA_4f vec4_result = difference(fastestA_4f(vec4_1), fastestA_4f(vec4_2))  = [-3.00000][-3.00000][-3.00000]
+length(fastestA_4f(vec4_1), fastestA_4f(vec4_2))                                = 5.19615
+lengthSq(fastestA_4f(vec4_1), fastestA_4f(vec4_2))                              = 27.00000
+fastestA_4f vec4_result = normalize(fastestA_4f(vec4_1))                        = [0.26726][0.53452][0.80178]
+fastestA_4f vec4_result = mul(fastestA_4f(vec4_1), 10.f)                        = [10.00000][20.00000][30.00000]
+fastestA_4f vec4_result = forward(fastestA_4f(vec4_1), 10.f)                    = [3.67261][7.34522][11.01784]
+dot(fastestA_4f(vec4_1), fastestA_4f(vec4_2))                                   = 32.00000
+normalizedDot(fastestA_4f(vec4_1), fastestA_4f(vec4_2))                         = 0.97463
+fastestA_4f vec4_result = cross(fastestA_4f(vec4_1), fastestA_4f(vec4_2))       = [-3.00000][6.00000][-3.00000]
+norm(semiA_4f(vec4_1))                                                 = 3.74166
+normSq(semiA_4f(vec4_1))                                               = 14.00000
+semiA_4f vec4_result = merge(semiA_4f(vec4_1), semiA_4f(vec4_2))       = [5.00000][7.00000][9.00000]
+semiA_4f vec4_result = difference(semiA_4f(vec4_1), semiA_4f(vec4_2))  = [-3.00000][-3.00000][-3.00000]
+length(semiA_4f(vec4_1), semiA_4f(vec4_2))                             = 5.19615
+lengthSq(semiA_4f(vec4_1), semiA_4f(vec4_2))                           = 27.00000
+semiA_4f vec4_result = normalize(semiA_4f(vec4_1))                     = [0.26726][0.53452][0.80178]
+semiA_4f vec4_result = mul(semiA_4f(vec4_1), 10.f)                     = [10.00000][20.00000][30.00000]
+semiA_4f vec4_result = forward(semiA_4f(vec4_1), 10.f)                 = [3.67261][7.34522][11.01784]
+dot(semiA_4f(vec4_1), semiA_4f(vec4_2))                                = 32.00000
+normalizedDot(semiA_4f(vec4_1), semiA_4f(vec4_2))                      = 0.97463
+semiA_4f vec4_result = cross(semiA_4f(vec4_1), semiA_4f(vec4_2))       = [-3.00000][6.00000][-3.00000]
+norm(sseA_4f(vec4_1))                                               = 3.74166
+normSq(sseA_4f(vec4_1))                                             = 14.00000
+sseA_4f vec4_result = merge(sseA_4f(vec4_1), sseA_4f(vec4_2))       = [5.00000][7.00000][9.00000]
+sseA_4f vec4_result = difference(sseA_4f(vec4_1), sseA_4f(vec4_2))  = [-3.00000][-3.00000][-3.00000]
+length(sseA_4f(vec4_1), sseA_4f(vec4_2))                            = 5.19615
+lengthSq(sseA_4f(vec4_1), sseA_4f(vec4_2))                          = 27.00000
+sseA_4f vec4_result = normalize(sseA_4f(vec4_1))                    = [0.26726][0.53452][0.80178]
+sseA_4f vec4_result = mul(sseA_4f(vec4_1), 10.f)                    = [10.00000][20.00000][30.00000]
+sseA_4f vec4_result = forward(sseA_4f(vec4_1), 10.f)                = [3.67261][7.34522][11.01784]
+dot(sseA_4f(vec4_1), sseA_4f(vec4_2))                               = 32.00000
+normalizedDot(sseA_4f(vec4_1), sseA_4f(vec4_2))                     = 0.97463
+sseA_4f vec4_result = cross(sseA_4f(vec4_1), sseA_4f(vec4_2))       = [-3.00000][6.00000][-3.00000]
+norm(normA_4f(vec4_1))                                                 = 3.74166
+normSq(normA_4f(vec4_1))                                               = 14.00000
+normA_4f vec4_result = merge(normA_4f(vec4_1), normA_4f(vec4_2))       = [5.00000][7.00000][9.00000]
+normA_4f vec4_result = difference(normA_4f(vec4_1), normA_4f(vec4_2))  = [-3.00000][-3.00000][-3.00000]
+length(normA_4f(vec4_1), normA_4f(vec4_2))                             = 5.19615
+lengthSq(normA_4f(vec4_1), normA_4f(vec4_2))                           = 27.00000
+normA_4f vec4_result = normalize(normA_4f(vec4_1))                     = [0.26726][0.53452][0.80178]
+normA_4f vec4_result = mul(normA_4f(vec4_1), 10.f)                     = [10.00000][20.00000][30.00000]
+normA_4f vec4_result = forward(normA_4f(vec4_1), 10.f)                 = [3.67261][7.34522][11.01784]
+dot(normA_4f(vec4_1), normA_4f(vec4_2))                                = 32.00000
+normalizedDot(normA_4f(vec4_1), normA_4f(vec4_2))                      = 0.97463
+normA_4f vec4_result = cross(normA_4f(vec4_1), normA_4f(vec4_2))       = [-3.00000][6.00000][-3.00000]
+norm(dummyA_4f(vec4_1))                                        = 3.74166
+normSq(dummyA_4f(vec4_1))                                      = 14.00000
+merge(vec4_result, dummyA_4f(vec4_1), dummyA_4f(vec4_2))       = [5.00000][7.00000][9.00000]
+difference(vec4_result, dummyA_4f(vec4_1), dummyA_4f(vec4_2))  = [-3.00000][-3.00000][-3.00000]
+length(dummyA_4f(vec4_1), dummyA_4f(vec4_2))                   = 5.19615
+lengthSq(dummyA_4f(vec4_1), dummyA_4f(vec4_2))                 = 27.00000
+normalize(vec4_result, dummyA_4f(vec4_1))                      = [0.26726][0.53452][0.80178]
+mul(vec4_result, dummyA_4f(vec4_1), 10.f)                      = [10.00000][20.00000][30.00000]
+forward(vec4_result, dummyA_4f(vec4_1), 10.f)                  = [3.67261][7.34522][11.01784]
+dot(dummyA_4f(vec4_1), dummyA_4f(vec4_2))                      = 32.00000
+normalizedDot(dummyA_4f(vec4_1), dummyA_4f(vec4_2))            = 0.97463
+cross(vec4_result, dummyA_4f(vec4_1), dummyA_4f(vec4_2))       = [-3.00000][6.00000][-3.00000]
+
+- 2D vector(double) -
+vec2d_1=[1.00000][2.00000]
+vec2d_2=[3.00000][4.00000]
+norm(vec2d_1)                               = 2.23607
+normSq(vec2d_1)                             = 5.00000
+merge(vec2d_result, vec2d_1, vec2d_2)       = [4.00000][6.00000]
+difference(vec2d_result, vec2d_1, vec2d_2)  = [-2.00000][-2.00000]
+length(vec2d_1, vec2d_2)                    = 2.82843
+lengthSq(vec2d_1, vec2d_2)                  = 8.00000
+normalize(vec2d_result, vec2d_1)            = [0.44721][0.89443]
+mul(vec2d_result, vec2d_1, 10.)             = [10.00000][20.00000]
+forward(vec2d_result, vec2d_1, 10.)         = [5.47214][10.94427]
+dot(vec2d_1, vec2d_2)                       = 11.00000
+normalizedDot(vec2d_1, vec2d_2)             = 0.98387
+
+- 3D vector (double) -
+vec3dd_1=[1.00000][2.00000][3.00000]
+vec3dd_2=[4.00000][5.00000][6.00000]
+norm(vec3d_1)                               = 3.74166
+normSq(vec3d_1)                             = 14.00000
+merge(vec3d_result, vec3d_1, vec3d_2)       = [5.00000][7.00000][9.00000]
+difference(vec3d_result, vec3d_1, vec3d_2)  = [-3.00000][-3.00000][-3.00000]
+length(vec3d_1, vec3d_2)                    = 5.19615
+lengthSq(vec3d_1, vec3d_2)                  = 27.00000
+normalize(vec3d_result, vec3d_1)            = [0.26726][0.53452][0.80178]
+mul(vec3d_result, vec3d_1, 10.)             = [10.00000][20.00000][30.00000]
+forward(vec3d_result, vec3d_1, 10.)         = [3.67261][7.34522][11.01784]
+dot(vec3d_1, vec3d_2)                       = 32.00000
+normalizedDot(vec3d_1, vec3d_2)             = 0.97463
+cross(vec3d_result, vec3d_1, vec3d_2)       = [-3.00000][6.00000][-3.00000]
+
 --------------------------------------------------------------------------------
-[ Test for performance of operation : normal:float ] (* 1000 times repeat)
-total = 709.088256836 : time=0.000633000 sec
+[ Test for performance of operation : direct:float ] (* 100 times repeat)
+total = 74.666442871 : time=0.000057000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of operation : sse:float ] (* 1000 times repeat)
-total = 709.088256836 : time=0.000612000 sec
+[ Test for performance of operation : dummy:float ] (* 100 times repeat)
+total = 74.666435242 : time=0.000059000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of operation : fast:float ] (* 1000 times repeat)
-total = 709.088256836 : time=0.000648000 sec
+[ Test for performance of operation : normal:float ] (* 100 times repeat)
+total = 74.666450500 : time=0.000064000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of operation : semifast:float ] (* 1000 times repeat)
-total = 709.088256836 : time=0.000661000 sec
+[ Test for performance of operation : sse:float ] (* 100 times repeat)
+total = 74.666450500 : time=0.000062000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of operation : fastest:float ] (* 1000 times repeat)
-total = 709.089782715 : time=0.000748000 sec
+[ Test for performance of operation : fast:float ] (* 100 times repeat)
+total = 74.666442871 : time=0.000063000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of operation : dummy:dobule ] (* 1000 times repeat)
-total = 733.356536489 : time=0.000707000 sec
+[ Test for performance of operation : semifast:float ] (* 100 times repeat)
+total = 74.666450500 : time=0.000065000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of operation : normal:double ] (* 1000 times repeat)
-total = 733.356536489 : time=0.000774000 sec
+[ Test for performance of operation : fastest:float ] (* 100 times repeat)
+total = 74.667358398 : time=0.000071000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of operation : sse:double ] (* 1000 times repeat)
-total = 733.356536489 : time=0.000739000 sec
+[ Test for performance of operation : direct:dobule ] (* 100 times repeat)
+total = 78.724692777 : time=0.000064000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of operation : fast:double ] (* 1000 times repeat)
-total = 733.356536489 : time=0.000731000 sec
+[ Test for performance of operation : dummy:dobule ] (* 100 times repeat)
+total = 78.724692777 : time=0.000067000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of operation : semifast:double ] (* 1000 times repeat)
-total = 733.356536489 : time=0.000732000 sec
+[ Test for performance of operation : normal:double ] (* 100 times repeat)
+total = 78.724692777 : time=0.000075000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of operation : fastest:double ] (* 1000 times repeat)
-total = 733.356536489 : time=0.000757000 sec
+[ Test for performance of operation : sse:double ] (* 100 times repeat)
+total = 78.724692777 : time=0.000071000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : dummy:float ] (* 1000 times repeat)
-total = 861.933349609 : time=0.000126000 sec
+[ Test for performance of operation : fast:double ] (* 100 times repeat)
+total = 78.724692777 : time=0.000071000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : normal:float ] (* 1000 times repeat)
-total = 861.933349609 : time=0.000141000 sec
+[ Test for performance of operation : semifast:double ] (* 100 times repeat)
+total = 78.724692777 : time=0.000071000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : sse:float ] (* 1000 times repeat)
-total = 861.933349609 : time=0.000128000 sec
+[ Test for performance of operation : fastest:double ] (* 100 times repeat)
+total = 78.724692777 : time=0.000071000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : fast:float ] (* 1000 times repeat)
-total = 861.933349609 : time=0.000148000 sec
+[ Test for performance of sqrt : direct:float ] (* 100 times repeat)
+total = 86.249015808 : time=0.000015000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : semifast:float ] (* 1000 times repeat)
-total = 861.933288574 : time=0.000165000 sec
+[ Test for performance of sqrt : dummy:float ] (* 100 times repeat)
+total = 86.249015808 : time=0.000016000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : fastest:float ] (* 1000 times repeat)
-total = 861.932556152 : time=0.000129000 sec
+[ Test for performance of sqrt : normal:float ] (* 100 times repeat)
+total = 86.249015808 : time=0.000017000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : dummy:dobule ] (* 1000 times repeat)
-total = 863.563520395 : time=0.000400000 sec
+[ Test for performance of sqrt : sse:float ] (* 100 times repeat)
+total = 86.249015808 : time=0.000015000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : normal:double ] (* 1000 times repeat)
-total = 863.563520395 : time=0.000422000 sec
+[ Test for performance of sqrt : fast:float ] (* 100 times repeat)
+total = 86.249015808 : time=0.000027000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : sse:double ] (* 1000 times repeat)
-total = 863.563520395 : time=0.000160000 sec
+[ Test for performance of sqrt : semifast:float ] (* 100 times repeat)
+total = 86.249023438 : time=0.000019000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : fast:double ] (* 1000 times repeat)
-total = 863.563520395 : time=0.000160000 sec
+[ Test for performance of sqrt : fastest:float ] (* 100 times repeat)
+total = 86.249031067 : time=0.000016000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : semifast:double ] (* 1000 times repeat)
-total = 863.563520395 : time=0.000160000 sec
+[ Test for performance of sqrt : direct:dobule ] (* 100 times repeat)
+total = 86.381641627 : time=0.000040000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of sqrt : fastest:double ] (* 1000 times repeat)
-total = 863.563520395 : time=0.000159000 sec
+[ Test for performance of sqrt : dummy:dobule ] (* 100 times repeat)
+total = 86.381641627 : time=0.000050000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of sqrt : normal:double ] (* 100 times repeat)
+total = 86.381641627 : time=0.000041000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of sqrt : sse:double ] (* 100 times repeat)
+total = 86.381641627 : time=0.000018000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of sqrt : fast:double ] (* 100 times repeat)
+total = 86.381641627 : time=0.000017000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of sqrt : semifast:double ] (* 100 times repeat)
+total = 86.381641627 : time=0.000017000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of sqrt : fastest:double ] (* 100 times repeat)
+total = 86.381641627 : time=0.000018000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : direct:float[2] ] (* 100 times repeat)
+total = 1260.708740234 : time=0.000071000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : dummy:float[2] ] (* 100 times repeat)
+total = 1260.708740234 : time=0.000086000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : normal:float[2] ] (* 100 times repeat)
+total = 1260.708740234 : time=0.000114000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : sse:float[2] ] (* 100 times repeat)
+total = 1260.708740234 : time=0.000117000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : fast:float[2] ] (* 100 times repeat)
+total = 1260.708740234 : time=0.000127000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : semifast:float[2] ] (* 100 times repeat)
+total = 1260.708740234 : time=0.000115000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : fastest:float[2] ] (* 100 times repeat)
+total = 1260.708740234 : time=0.000113000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : direct:float[3] ] (* 100 times repeat)
+total = 1744.802734375 : time=0.000101000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : dummy:float[3] ] (* 100 times repeat)
+total = 1744.802734375 : time=0.000117000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : normal:float[3] ] (* 100 times repeat)
+total = 1744.802612305 : time=0.000121000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : sse:float[3] ] (* 100 times repeat)
+total = 1744.802612305 : time=0.000159000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : fast:float[3] ] (* 100 times repeat)
+total = 1744.802612305 : time=0.000146000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : semifast:float[3] ] (* 100 times repeat)
+total = 1744.802612305 : time=0.000142000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : fastest:float[3] ] (* 100 times repeat)
+total = 1744.802612305 : time=0.000144000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : direct:float[4] ] (* 100 times repeat)
+total = 1744.802734375 : time=0.000106000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : dummy:float[4] ] (* 100 times repeat)
+total = 1744.802734375 : time=0.000135000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : normal:float[4] ] (* 100 times repeat)
+total = 1744.802612305 : time=0.000147000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : sse:float[4] ] (* 100 times repeat)
+total = 1744.802612305 : time=0.000126000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : fast:float[4] ] (* 100 times repeat)
+total = 1744.802612305 : time=0.000139000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : semifast:float[4] ] (* 100 times repeat)
+total = 1744.802612305 : time=0.000155000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : fastest:float[4] ] (* 100 times repeat)
+total = 1744.802612305 : time=0.000164000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : direct:double[2] ] (* 100 times repeat)
+total = 1268.169186787 : time=0.000227000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : dummy:double[2] ] (* 100 times repeat)
+total = 1268.169186787 : time=0.000251000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : normal:double[2] ] (* 100 times repeat)
+total = 1268.169186787 : time=0.000270000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : sse:double[2] ] (* 100 times repeat)
+total = 1268.169186787 : time=0.000267000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : fast:double[2] ] (* 100 times repeat)
+total = 1268.169186787 : time=0.000272000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : semifast:double[2] ] (* 100 times repeat)
+total = 1268.169186787 : time=0.000268000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : fastest:double[2] ] (* 100 times repeat)
+total = 1268.169186787 : time=0.000266000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : direct:double[3] ] (* 100 times repeat)
+total = 1732.681572027 : time=0.000268000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : dummy:double[3] ] (* 100 times repeat)
+total = 1732.681572027 : time=0.000280000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : normal:double[3] ] (* 100 times repeat)
+total = 1732.681572027 : time=0.000315000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : sse:double[3] ] (* 100 times repeat)
+total = 1732.681572027 : time=0.000320000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : fast:double[3] ] (* 100 times repeat)
+total = 1732.681572027 : time=0.000351000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : semifast:double[3] ] (* 100 times repeat)
+total = 1732.681572027 : time=0.000319000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : fastest:double[3] ] (* 100 times repeat)
+total = 1732.681572027 : time=0.000338000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : direct:double[4] ] (* 100 times repeat)
+total = 1732.681572027 : time=0.000293000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : dummy:double[4] ] (* 100 times repeat)
+total = 1732.681572027 : time=0.000273000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : normal:double[4] ] (* 100 times repeat)
+total = 1732.681572027 : time=0.000364000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : sse:double[4] ] (* 100 times repeat)
+total = 1732.681572027 : time=0.000307000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : fast:double[4] ] (* 100 times repeat)
+total = 1732.681572027 : time=0.000325000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : semifast:double[4] ] (* 100 times repeat)
+total = 1732.681572027 : time=0.000318000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of vector : fastest:double[4] ] (* 100 times repeat)
+total = 1732.681572027 : time=0.000336000 sec
