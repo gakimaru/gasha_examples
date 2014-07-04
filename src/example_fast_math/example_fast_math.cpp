@@ -39,7 +39,7 @@ void testForOperationPerformance(const char* caption)
 
 	auto begin = std::chrono::system_clock::now();
 
-	TYPE total = 0.f;
+	TYPE total = static_cast<TYPE>(0);
 	for (int repeat = 1; repeat < TEST_OPERATION_REPEAT_NUM; ++repeat)
 	{
 		const TYPE val1 = rnd_distribution(rnd_engine);
@@ -66,7 +66,7 @@ void testForOperationPerformanceDirect(const char* caption)
 
 	auto begin = std::chrono::system_clock::now();
 
-	TYPE total = 0.f;
+	TYPE total = static_cast<TYPE>(0);
 	for (int repeat = 1; repeat < TEST_OPERATION_REPEAT_NUM; ++repeat)
 	{
 		const TYPE val1 = rnd_distribution(rnd_engine);
@@ -98,7 +98,7 @@ void testForSqrtPerformance(const char* caption)
 
 	auto begin = std::chrono::system_clock::now();
 
-	TYPE total = 0.f;
+	TYPE total = static_cast<TYPE>(0);
 	for (int repeat = 1; repeat < TEST_SQRT_REPEAT_NUM; ++repeat)
 	{
 		const TYPE value = rnd_distribution(rnd_engine);
@@ -121,7 +121,7 @@ void testForSqrtPerformanceDirect(const char* caption)
 
 	auto begin = std::chrono::system_clock::now();
 
-	TYPE total = 0.f;
+	TYPE total = static_cast<TYPE>(0);
 	for (int repeat = 1; repeat < TEST_SQRT_REPEAT_NUM; ++repeat)
 	{
 		const TYPE value = rnd_distribution(rnd_engine);
@@ -149,7 +149,7 @@ void testForVectorPerformance(const char* caption)
 
 	auto begin = std::chrono::system_clock::now();
 
-	TYPE total = 0.f;
+	TYPE total = static_cast<TYPE>(0);
 	for (int repeat = 1; repeat < TEST_VECTOR_REPEAT_NUM; ++repeat)
 	{
 		TYPE vec1[N] = { 0 };
@@ -210,7 +210,7 @@ void testForVectorPerformanceDirect(const char* caption)
 
 	auto begin = std::chrono::system_clock::now();
 
-	TYPE total = 0.f;
+	TYPE total = static_cast<TYPE>(0);
 	for (int repeat = 1; repeat < TEST_VECTOR_REPEAT_NUM; ++repeat)
 	{
 		TYPE vec1[N] = { 0 };
@@ -273,7 +273,7 @@ void testForVectorPerformanceDummy(const char* caption)
 
 	auto begin = std::chrono::system_clock::now();
 
-	TYPE total = 0.f;
+	TYPE total = static_cast<TYPE>(0);
 	for (int repeat = 1; repeat < TEST_VECTOR_REPEAT_NUM; ++repeat)
 	{
 		TYPE vec1[N] = { 0 };
@@ -316,6 +316,213 @@ void testForVectorPerformanceDummy(const char* caption)
 			TYPE result12[N] = { 0 }; cross(result12, fast_arith_class(vec1), fast_arith_class(vec2));
 			for (int i = 0; i < N; ++i)
 				total += result12[i];
+		}
+	}
+	auto end = std::chrono::system_clock::now();
+	auto duration = end - begin;
+	double elapsed_time = static_cast<double>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count()) / 1000000000;
+	printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
+}
+
+//----------------------------------------
+//高速行列演算のパフォーマンス計測
+template<class FAST_ARITH, typename TYPE, std::size_t N, std::size_t M>
+void testForMatrixPerformance(const char* caption)
+{
+	typedef FAST_ARITH fast_arith_class;
+
+	printf("--------------------------------------------------------------------------------\n");
+	printf("[ Test for performance of matrix : %s ] (* %d times repeat)\n", caption, TEST_MATRIX_REPEAT_NUM);
+
+	std::mt19937 rnd_engine(0);
+	std::uniform_real_distribution<TYPE> rnd_distribution(0.5f, 1.f);
+
+	auto begin = std::chrono::system_clock::now();
+
+	TYPE total = static_cast<TYPE>(0);
+	for (int repeat = 1; repeat < TEST_MATRIX_REPEAT_NUM; ++repeat)
+	{
+		TYPE mat1[N][M] = { 0 };
+		TYPE mat2[N][M] = { 0 };
+		for (int i = 0; i < N; ++i)
+		{
+			for (int j = 0; j < M; ++j)
+			{
+				mat1[i][j] = rnd_distribution(rnd_engine);
+				mat2[i][j] = rnd_distribution(rnd_engine);
+			}
+		}
+		const TYPE scalar = rnd_distribution(rnd_engine);
+		const auto result1 = add(fast_arith_class(mat1), fast_arith_class(mat2));
+		const auto result2 = sub(fast_arith_class(mat1), fast_arith_class(mat2));
+		const auto result3 = mul(fast_arith_class(mat1), scalar);
+		const auto result4 = mul(fast_arith_class(mat1), fast_arith_class(mat2));
+		for (int i = 0; i < N; ++i)
+		{
+			for (int j = 0; j < M; ++j)
+			{
+				total += (
+					result1[i][j] +
+					result2[i][j] +
+					result3[i][j] +
+					result4[i][j]
+					);
+			}
+		}
+	}
+	auto end = std::chrono::system_clock::now();
+	auto duration = end - begin;
+	double elapsed_time = static_cast<double>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count()) / 1000000000;
+	printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
+}
+template<typename TYPE, std::size_t N, std::size_t M>
+void testForMatrixPerformanceDirect(const char* caption)
+{
+	printf("--------------------------------------------------------------------------------\n");
+	printf("[ Test for performance of matrix : %s ] (* %d times repeat)\n", caption, TEST_MATRIX_REPEAT_NUM);
+
+	std::mt19937 rnd_engine(0);
+	std::uniform_real_distribution<TYPE> rnd_distribution(0.5f, 1.f);
+
+	auto begin = std::chrono::system_clock::now();
+
+	TYPE total = static_cast<TYPE>(0);
+	for (int repeat = 1; repeat < TEST_MATRIX_REPEAT_NUM; ++repeat)
+	{
+		TYPE mat1[N][M] = { 0 };
+		TYPE mat2[N][M] = { 0 };
+		for (int i = 0; i < N; ++i)
+		{
+			for (int j = 0; j < M; ++j)
+			{
+				mat1[i][j] = rnd_distribution(rnd_engine);
+				mat2[i][j] = rnd_distribution(rnd_engine);
+			}
+		}
+		TYPE scalar = rnd_distribution(rnd_engine);
+		TYPE result1[N][M] = { 0 };
+		TYPE result2[N][M] = { 0 };
+		TYPE result3[N][M] = { 0 };
+		TYPE result4[N][M] = { 0 };
+		add(result1, mat1, mat2);
+		sub(result2, mat1, mat2);
+		mul(result3, mat1, scalar);
+		mul(result4, mat1, mat2);
+		for (int i = 0; i < N; ++i)
+		{
+			for (int j = 0; j < M; ++j)
+			{
+				total += (
+						result1[i][j] +
+						result2[i][j] +
+						result3[i][j] +
+						result4[i][j]
+					);
+			}
+		}
+	}
+	auto end = std::chrono::system_clock::now();
+	auto duration = end - begin;
+	double elapsed_time = static_cast<double>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count()) / 1000000000;
+	printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
+}
+template<typename TYPE, std::size_t N, std::size_t M>
+void testForMatrixPerformanceDirectRU(const char* caption)
+{
+	printf("--------------------------------------------------------------------------------\n");
+	printf("[ Test for performance of matrix : %s ] (* %d times repeat)\n", caption, TEST_MATRIX_REPEAT_NUM);
+
+	std::mt19937 rnd_engine(0);
+	std::uniform_real_distribution<TYPE> rnd_distribution(0.5f, 1.f);
+
+	auto begin = std::chrono::system_clock::now();
+
+	TYPE total = static_cast<TYPE>(0);
+	for (int repeat = 1; repeat < TEST_MATRIX_REPEAT_NUM; ++repeat)
+	{
+		TYPE mat1[N][M] = { 0 };
+		TYPE mat2[N][M] = { 0 };
+		for (int i = 0; i < N; ++i)
+		{
+			for (int j = 0; j < M; ++j)
+			{
+				mat1[i][j] = rnd_distribution(rnd_engine);
+				mat2[i][j] = rnd_distribution(rnd_engine);
+			}
+		}
+		TYPE scalar = rnd_distribution(rnd_engine);
+		TYPE result1[N][M] = { 0 };
+		TYPE result2[N][M] = { 0 };
+		TYPE result3[N][M] = { 0 };
+		TYPE result4[N][M] = { 0 };
+		addRU(result1, mat1, mat2);
+		subRU(result2, mat1, mat2);
+		mulRU(result3, mat1, scalar);
+		mulRU(result4, mat1, mat2);
+		for (int i = 0; i < N; ++i)
+		{
+			for (int j = 0; j < M; ++j)
+			{
+				total += (
+					result1[i][j] +
+					result2[i][j] +
+					result3[i][j] +
+					result4[i][j]
+					);
+			}
+		}
+	}
+	auto end = std::chrono::system_clock::now();
+	auto duration = end - begin;
+	double elapsed_time = static_cast<double>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count()) / 1000000000;
+	printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
+}
+template<class FAST_ARITH, typename TYPE, std::size_t N, std::size_t M>
+void testForMatrixPerformanceDummy(const char* caption)
+{
+	typedef FAST_ARITH fast_arith_class;
+
+	printf("--------------------------------------------------------------------------------\n");
+	printf("[ Test for performance of matrix : %s ] (* %d times repeat)\n", caption, TEST_MATRIX_REPEAT_NUM);
+
+	std::mt19937 rnd_engine(0);
+	std::uniform_real_distribution<TYPE> rnd_distribution(0.5f, 1.f);
+
+	auto begin = std::chrono::system_clock::now();
+
+	TYPE total = static_cast<TYPE>(0);
+	for (int repeat = 1; repeat < TEST_MATRIX_REPEAT_NUM; ++repeat)
+	{
+		TYPE mat1[N][M] = { 0 };
+		TYPE mat2[N][M] = { 0 };
+		for (int i = 0; i < N; ++i)
+		{
+			for (int j = 0; j < M; ++j)
+			{
+				mat1[i][j] = rnd_distribution(rnd_engine);
+				mat2[i][j] = rnd_distribution(rnd_engine);
+			}
+		}
+		TYPE scalar = rnd_distribution(rnd_engine);
+		TYPE result1[N][M] = { 0 };
+		TYPE result2[N][M] = { 0 };
+		TYPE result3[N][M] = { 0 };
+		TYPE result4[N][M] = { 0 };
+		add(result1, fast_arith_class(mat1), fast_arith_class(mat2));
+		sub(result2, fast_arith_class(mat1), fast_arith_class(mat2));
+		mul(result3, fast_arith_class(mat1), scalar);
+		mul(result4, fast_arith_class(mat1), fast_arith_class(mat2));
+		for (int i = 0; i < N; ++i)
+		{
+			for (int j = 0; j < M; ++j)
+			{
+				total += (
+					result1[i][j] +
+					result2[i][j] +
+					result3[i][j] +
+					result4[i][j]
+					);
+			}
 		}
 	}
 	auto end = std::chrono::system_clock::now();
@@ -873,6 +1080,54 @@ void example_fast_math()
 		TEST_VECTOR_OPE3(cross(vec3d_result, vec3d_1, vec3d_2), "      ", vec3d_result);
 	}
 
+	//テンプレート行列演算のテスト
+	printf("\n");
+	printf("--------------------------------------------------------------------------------\n");
+	printf("[ Test for matrix operation ]\n");
+
+	{
+		float x1[4][4] = { { 1.f, 2.f, 3.f, 4.f }, { 5.f, 6.f, 7.f, 8.f }, { 9.f, 10.f, 11.f, 12.f }, { 13.f, 14.f, 15.f, 16.f } };
+		float x2[4][4] = { { .1f, .2f, .3f, .4f }, { .5f, .6f, .7f, .8f }, { .9f, .10f, .11f, .12f }, { .13f, .14f, .15f, .16f } };
+		float x3[4][4];
+		add(x3, x1, x2);
+		printf("add:   x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		addRU(x3, x1, x2);
+		printf("addRU: x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		sub(x3, x1, x2);
+		printf("sub:   x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		subRU(x3, x1, x2);
+		printf("subRU: x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		mul(x3, x1, 10.f);
+		printf("mul:   x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		mulRU(x3, x1, 10.f);
+		printf("mulRU: x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		mul(x3, x1, x2);
+		printf("mul:   x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		mulRU(x3, x1, x2);
+		printf("mulRU: x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+	}
+{
+		double x1[3][3] = { { 1., 2., 3. }, { 4., 5., 6. }, { 7., 8., 9. } };
+		double x2[3][3] = { { .1, .2, .3 }, { .4, .5, .6 }, { .7, .8, .9 } };
+		double x3[3][3];
+		add(x3, x1, x2);
+		printf("add:   x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		addRU(x3, x1, x2);
+		printf("addRU: x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		sub(x3, x1, x2);
+		printf("sub:   x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		subRU(x3, x1, x2);
+		printf("subRU: x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		mul(x3, x1, 10.);
+		printf("mul:   x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		mulRU(x3, x1, 10.);
+		printf("mulRU: x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		mul(x3, x1, x2);
+		printf("mul:   x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		mulRU(x3, x1, x2);
+		printf("mulRU: x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+	}
+
 	//パフォーマンス計測
 	printf("\n");
 	
@@ -910,7 +1165,7 @@ void example_fast_math()
 	testForSqrtPerformance<semiA_d, double>("semifast:double");
 	testForSqrtPerformance<fastestA_d, double>("fastest:double");
 
-	//各種高速ベクトル演算のパフォーマンス計測
+	//ベクトル演算のパフォーマンス計測
 	testForVectorPerformanceDirect<float, 2>("direct:float[2]");
 	testForVectorPerformanceDummy<dummyA_2f, float, 2>("dummy:float[2]");
 	testForVectorPerformance<normA_2f, float, 2>("normal:float[2]");
@@ -958,6 +1213,61 @@ void example_fast_math()
 	testForVectorPerformance<fastA_4d, double, 4>("fast:double[4]");
 	testForVectorPerformance<semiA_4d, double, 4>("semifast:double[4]");
 	testForVectorPerformance<fastestA_4d, double, 4>("fastest:double[4]");
+
+	//行列演算のパフォーマンス計測
+	testForMatrixPerformanceDirect<float, 2, 2>("diredt:float[2][2]");
+	testForMatrixPerformanceDirectRU<float, 2, 2>("diredt(RU):float[2][2](RU)");
+	testForMatrixPerformanceDummy<dummyA_22f, float, 2, 2>("dummy:float[2][2]");
+	testForMatrixPerformance<normA_22f, float, 2, 2>("normal:float[2][2]");
+	testForMatrixPerformance<sseA_22f, float, 2, 2>("sse:float[2][2]");
+	testForMatrixPerformance<fastA_22f, float, 2, 2>("fast:float[2][2]");
+	testForMatrixPerformance<fastestA_22f, float, 2, 2>("fastest:float[2][2]");
+	testForMatrixPerformance<semiA_22f, float, 2, 2>("semifast:float[2][2]");
+
+	testForMatrixPerformanceDirect<float, 3, 3>("diredt:float[3][3]");
+	testForMatrixPerformanceDirectRU<float, 3, 3>("diredt(RU):float[3][3](RU)");
+	testForMatrixPerformanceDummy<dummyA_33f, float, 3, 3>("dummy:float[3][3]");
+	testForMatrixPerformance<normA_33f, float, 3, 3>("normal:float[3][3]");
+	testForMatrixPerformance<sseA_33f, float, 3, 3>("sse:float[3][3]");
+	testForMatrixPerformance<fastA_33f, float, 3, 3>("fast:float[3][3]");
+	testForMatrixPerformance<fastestA_33f, float, 3, 3>("fastest:float[3][3]");
+	testForMatrixPerformance<semiA_33f, float, 3, 3>("semifast:float[3][3]");
+
+	testForMatrixPerformanceDirect<float, 4, 4>("diredt:float[4][4]");
+	testForMatrixPerformanceDirectRU<float, 4, 4>("diredt(RU):float[4][4](RU)");
+	testForMatrixPerformanceDummy<dummyA_44f, float, 4, 4>("dummy:float[4][4]");
+	testForMatrixPerformance<normA_44f, float, 4, 4>("normal:float[4][4]");
+	testForMatrixPerformance<sseA_44f, float, 4, 4>("sse:float[4][4]");
+	testForMatrixPerformance<fastA_44f, float, 4, 4>("fast:float[4][4]");
+	testForMatrixPerformance<fastestA_44f, float, 4, 4>("fastest:float[4][4]");
+	testForMatrixPerformance<semiA_44f, float, 4, 4>("semifast:float[4][4]");
+
+	testForMatrixPerformanceDirect<double, 2, 2>("diredt:double[2][2]");
+	testForMatrixPerformanceDirectRU<double, 2, 2>("diredt(RU):double[2][2](RU)");
+	testForMatrixPerformanceDummy<dummyA_22d, double, 2, 2>("dummy:double[2][2]");
+	testForMatrixPerformance<normA_22d, double, 2, 2>("normal:double[2][2]");
+	testForMatrixPerformance<sseA_22d, double, 2, 2>("sse:double[2][2]");
+	testForMatrixPerformance<fastA_22d, double, 2, 2>("fast:double[2][2]");
+	testForMatrixPerformance<fastestA_22d, double, 2, 2>("fastest:double[2][2]");
+	testForMatrixPerformance<semiA_22d, double, 2, 2>("semifast:double[2][2]");
+
+	testForMatrixPerformanceDirect<double, 3, 3>("diredt:double[3][3]");
+	testForMatrixPerformanceDirectRU<double, 3, 3>("diredt(RU):double[3][3](RU)");
+	testForMatrixPerformanceDummy<dummyA_33d, double, 3, 3>("dummy:double[3][3]");
+	testForMatrixPerformance<normA_33d, double, 3, 3>("normal:double[3][3]");
+	testForMatrixPerformance<sseA_33d, double, 3, 3>("sse:double[3][3]");
+	testForMatrixPerformance<fastA_33d, double, 3, 3>("fast:double[3][3]");
+	testForMatrixPerformance<fastestA_33d, double, 3, 3>("fastest:double[3][3]");
+	testForMatrixPerformance<semiA_33d, double, 3, 3>("semifast:double[3][3]");
+
+	testForMatrixPerformanceDirect<double, 4, 4>("diredt:double[4][4]");
+	testForMatrixPerformanceDirectRU<double, 4, 4>("diredt(RU):double[4][4](RU)");
+	testForMatrixPerformanceDummy<dummyA_44d, double, 4, 4>("dummy:double[4][4]");
+	testForMatrixPerformance<normA_44d, double, 4, 4>("normal:double[4][4]");
+	testForMatrixPerformance<sseA_44d, double, 4, 4>("sse:double[4][4]");
+	testForMatrixPerformance<fastA_44d, double, 4, 4>("fast:double[4][4]");
+	testForMatrixPerformance<fastestA_44d, double, 4, 4>("fastest:double[4][4]");
+	testForMatrixPerformance<semiA_44d, double, 4, 4>("semifast:double[4][4]");
 }
 
 // End of file

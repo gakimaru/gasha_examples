@@ -19,13 +19,15 @@
 
 static const int TEST_OPERATION_REPEAT_NUM = 10000000;//四則演算パフォーマンステストの実行回数
 static const int TEST_SQRT_REPEAT_NUM = 1000000;//平方根パフォーマンステストの実行回数
-static const int TEST_VECTOR_REPEAT_NUM = 1000000;//ベクトル演算パフォーマンステストの実行回数
+static const int TEST_VECTOR_REPEAT_NUM = 100000;//ベクトル演算パフォーマンステストの実行回数
+static const int TEST_MATRIX_REPEAT_NUM = 100000;//行列演算パフォーマンステストの実行回数
 
 #else//GASHA_OPTIMIZED
 
 static const int TEST_OPERATION_REPEAT_NUM = 100;//四則演算パフォーマンステストの実行回数
 static const int TEST_SQRT_REPEAT_NUM = 100;//平方根パフォーマンステストの実行回数
 static const int TEST_VECTOR_REPEAT_NUM = 100;//ベクトル演算パフォーマンステストの実行回数
+static const int TEST_MATRIX_REPEAT_NUM = 100;//行列演算パフォーマンステストの実行回数
 
 #endif//GASHA_OPTIMIZED
 

@@ -1076,77 +1076,96 @@ normalizedDot(vec3d_1, vec3d_2)             = 0.97463
 cross(vec3d_result, vec3d_1, vec3d_2)       = [-3.00000][6.00000][-3.00000]
 
 --------------------------------------------------------------------------------
+[ Test for matrix operation ]
+add:   x3 = { {1.1, 2.2, 3.3, 4.4}, {5.5, 6.6, 7.7, 8.8}, {9.9, 10.1, 11.1, 12.1}, {13.1, 14.1, 15.1, 16.2} }
+addRU: x3 = { {1.1, 2.2, 3.3, 4.4}, {5.5, 6.6, 7.7, 8.8}, {9.9, 10.1, 11.1, 12.1}, {13.1, 14.1, 15.1, 16.2} }
+sub:   x3 = { {0.9, 1.8, 2.7, 3.6}, {4.5, 5.4, 6.3, 7.2}, {8.1, 9.9, 10.9, 11.9}, {12.9, 13.9, 14.9, 15.8} }
+subRU: x3 = { {0.9, 1.8, 2.7, 3.6}, {4.5, 5.4, 6.3, 7.2}, {8.1, 9.9, 10.9, 11.9}, {12.9, 13.9, 14.9, 15.8} }
+mul:   x3 = { {10.0, 20.0, 30.0, 40.0}, {50.0, 60.0, 70.0, 80.0}, {90.0, 100.0, 110.0, 120.0}, {130.0, 140.0, 150.0, 160.0} }
+mulRU: x3 = { {10.0, 20.0, 30.0, 40.0}, {50.0, 60.0, 70.0, 80.0}, {90.0, 100.0, 110.0, 120.0}, {130.0, 140.0, 150.0, 160.0} }
+mul:   x3 = { {4.3, 2.3, 2.6, 3.0}, {10.8, 6.4, 7.7, 8.9}, {17.4, 10.6, 12.7, 14.8}, {23.9, 14.7, 17.8, 20.8} }
+mulRU: x3 = { {4.3, 2.3, 2.6, 3.0}, {10.8, 6.4, 7.7, 8.9}, {17.4, 10.6, 12.7, 14.8}, {23.9, 14.7, 17.8, 20.8} }
+add:   x3 = { {1.1, 2.2, 3.3}, {4.4, 5.5, 6.6}, {7.7, 8.8, 9.9} }
+addRU: x3 = { {1.1, 2.2, 3.3}, {4.4, 5.5, 6.6}, {7.7, 8.8, 9.9} }
+sub:   x3 = { {0.9, 1.8, 2.7}, {3.6, 4.5, 5.4}, {6.3, 7.2, 8.1} }
+subRU: x3 = { {0.9, 1.8, 2.7}, {3.6, 4.5, 5.4}, {6.3, 7.2, 8.1} }
+mul:   x3 = { {10.0, 20.0, 30.0}, {40.0, 50.0, 60.0}, {70.0, 80.0, 90.0} }
+mulRU: x3 = { {10.0, 20.0, 30.0}, {40.0, 50.0, 60.0}, {70.0, 80.0, 90.0} }
+mul:   x3 = { {3.0, 3.6, 4.2}, {6.6, 8.1, 9.6}, {10.2, 12.6, 15.0} }
+mulRU: x3 = { {3.0, 3.6, 4.2}, {6.6, 8.1, 9.6}, {10.2, 12.6, 15.0} }
+
+--------------------------------------------------------------------------------
 [ Test for performance of operation : direct:float ] (* 10000000 times repeat)
-total = 7200091.000000000 : time=0.224214500 sec
+total = 7200091.000000000 : time=0.221212700 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : dummy:float ] (* 10000000 times repeat)
-total = 7200091.000000000 : time=0.217206800 sec
+total = 7200091.000000000 : time=0.299284600 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : normal:float ] (* 10000000 times repeat)
-total = 7200091.000000000 : time=0.305290100 sec
+total = 7200091.000000000 : time=0.398379900 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : sse:float ] (* 10000000 times repeat)
-total = 7200091.000000000 : time=0.231220100 sec
+total = 7200091.000000000 : time=0.260247900 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : fast:float ] (* 10000000 times repeat)
-total = 7200091.000000000 : time=0.304289000 sec
+total = 7200091.000000000 : time=0.318301600 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : semifast:float ] (* 10000000 times repeat)
-total = 7200091.000000000 : time=0.345330900 sec
+total = 7200091.000000000 : time=0.266254700 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : fastest:float ] (* 10000000 times repeat)
-total = 7200136.000000000 : time=0.263250500 sec
+total = 7200136.000000000 : time=0.223212400 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : direct:dobule ] (* 10000000 times repeat)
-total = 7200563.765478109 : time=0.233220400 sec
+total = 7200563.765478109 : time=0.290276600 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : dummy:dobule ] (* 10000000 times repeat)
-total = 7200563.765478109 : time=0.222212700 sec
+total = 7200563.765478109 : time=0.301287300 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : normal:double ] (* 10000000 times repeat)
-total = 7200563.765478109 : time=0.270257600 sec
+total = 7200563.765478109 : time=0.294280100 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : sse:double ] (* 10000000 times repeat)
-total = 7200563.765478109 : time=0.319305100 sec
+total = 7200563.765478109 : time=0.234221800 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : fast:double ] (* 10000000 times repeat)
-total = 7200563.765478109 : time=0.247233300 sec
+total = 7200563.765478109 : time=0.232222400 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : semifast:double ] (* 10000000 times repeat)
-total = 7200563.765478109 : time=0.243232900 sec
+total = 7200563.765478109 : time=0.234223000 sec
 --------------------------------------------------------------------------------
 [ Test for performance of operation : fastest:double ] (* 10000000 times repeat)
-total = 7200563.765478109 : time=0.285271700 sec
+total = 7200563.765478109 : time=0.285272500 sec
 --------------------------------------------------------------------------------
 [ Test for performance of sqrt : direct:float ] (* 1000000 times repeat)
-total = 862325.812500000 : time=0.007006400 sec
+total = 862325.812500000 : time=0.066062500 sec
 --------------------------------------------------------------------------------
 [ Test for performance of sqrt : dummy:float ] (* 1000000 times repeat)
-total = 862325.812500000 : time=0.007006800 sec
+total = 862325.812500000 : time=0.063059900 sec
 --------------------------------------------------------------------------------
 [ Test for performance of sqrt : normal:float ] (* 1000000 times repeat)
-total = 862325.812500000 : time=0.008007300 sec
+total = 862325.812500000 : time=0.063060100 sec
 --------------------------------------------------------------------------------
 [ Test for performance of sqrt : sse:float ] (* 1000000 times repeat)
-total = 862325.812500000 : time=0.005004400 sec
+total = 862325.812500000 : time=0.005004700 sec
 --------------------------------------------------------------------------------
 [ Test for performance of sqrt : fast:float ] (* 1000000 times repeat)
-total = 862325.812500000 : time=0.007008200 sec
+total = 862325.812500000 : time=0.007006800 sec
 --------------------------------------------------------------------------------
 [ Test for performance of sqrt : semifast:float ] (* 1000000 times repeat)
-total = 862325.812500000 : time=0.008006800 sec
+total = 862325.812500000 : time=0.008007600 sec
 --------------------------------------------------------------------------------
 [ Test for performance of sqrt : fastest:float ] (* 1000000 times repeat)
-total = 862323.375000000 : time=0.005004700 sec
+total = 862323.375000000 : time=0.005005000 sec
 --------------------------------------------------------------------------------
 [ Test for performance of sqrt : direct:dobule ] (* 1000000 times repeat)
-total = 861960.898391904 : time=0.007006700 sec
+total = 861960.898391904 : time=0.062058900 sec
 --------------------------------------------------------------------------------
 [ Test for performance of sqrt : dummy:dobule ] (* 1000000 times repeat)
-total = 861960.898391904 : time=0.008007700 sec
+total = 861960.898391904 : time=0.062059000 sec
 --------------------------------------------------------------------------------
 [ Test for performance of sqrt : normal:double ] (* 1000000 times repeat)
-total = 861960.898391904 : time=0.008007600 sec
+total = 861960.898391904 : time=0.062059000 sec
 --------------------------------------------------------------------------------
 [ Test for performance of sqrt : sse:double ] (* 1000000 times repeat)
 total = 861960.898391904 : time=0.005004700 sec
@@ -1155,133 +1174,277 @@ total = 861960.898391904 : time=0.005004700 sec
 total = 861960.898391904 : time=0.006005800 sec
 --------------------------------------------------------------------------------
 [ Test for performance of sqrt : semifast:double ] (* 1000000 times repeat)
-total = 861960.898391904 : time=0.005004500 sec
+total = 861960.898391904 : time=0.005004700 sec
 --------------------------------------------------------------------------------
 [ Test for performance of sqrt : fastest:double ] (* 1000000 times repeat)
-total = 861960.898391904 : time=0.006005800 sec
+total = 861960.898391904 : time=0.006005600 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : direct:float[2] ] (* 1000000 times repeat)
-total = 12765367.000000000 : time=0.069066000 sec
+[ Test for performance of vector : direct:float[2] ] (* 100000 times repeat)
+total = 1276338.625000000 : time=0.038036400 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : dummy:float[2] ] (* 1000000 times repeat)
-total = 12765367.000000000 : time=0.071067800 sec
+[ Test for performance of vector : dummy:float[2] ] (* 100000 times repeat)
+total = 1276338.625000000 : time=0.038036400 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : normal:float[2] ] (* 1000000 times repeat)
-total = 12765367.000000000 : time=0.087082700 sec
+[ Test for performance of vector : normal:float[2] ] (* 100000 times repeat)
+total = 1276338.625000000 : time=0.041039000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : sse:float[2] ] (* 1000000 times repeat)
-total = 12765367.000000000 : time=0.086081900 sec
+[ Test for performance of vector : sse:float[2] ] (* 100000 times repeat)
+total = 1276338.625000000 : time=0.041039000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : fast:float[2] ] (* 1000000 times repeat)
-total = 12765367.000000000 : time=0.085081500 sec
+[ Test for performance of vector : fast:float[2] ] (* 100000 times repeat)
+total = 1276338.625000000 : time=0.042039900 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : semifast:float[2] ] (* 1000000 times repeat)
-total = 12765367.000000000 : time=0.086081600 sec
+[ Test for performance of vector : semifast:float[2] ] (* 100000 times repeat)
+total = 1276338.625000000 : time=0.041039300 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : fastest:float[2] ] (* 1000000 times repeat)
-total = 12765367.000000000 : time=0.086083000 sec
+[ Test for performance of vector : fastest:float[2] ] (* 100000 times repeat)
+total = 1276338.625000000 : time=0.042040200 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : direct:float[3] ] (* 1000000 times repeat)
-total = 17624992.000000000 : time=0.098092400 sec
+[ Test for performance of vector : direct:float[3] ] (* 100000 times repeat)
+total = 1760969.000000000 : time=0.041039000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : dummy:float[3] ] (* 1000000 times repeat)
-total = 17624992.000000000 : time=0.098094500 sec
+[ Test for performance of vector : dummy:float[3] ] (* 100000 times repeat)
+total = 1760969.000000000 : time=0.041039100 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : normal:float[3] ] (* 1000000 times repeat)
-total = 17624992.000000000 : time=0.120114400 sec
+[ Test for performance of vector : normal:float[3] ] (* 100000 times repeat)
+total = 1760969.000000000 : time=0.044041900 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : sse:float[3] ] (* 1000000 times repeat)
-total = 17624992.000000000 : time=0.064060400 sec
+[ Test for performance of vector : sse:float[3] ] (* 100000 times repeat)
+total = 1760969.000000000 : time=0.006005600 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : fast:float[3] ] (* 1000000 times repeat)
-total = 17624992.000000000 : time=0.064063400 sec
+[ Test for performance of vector : fast:float[3] ] (* 100000 times repeat)
+total = 1760969.000000000 : time=0.006005800 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : semifast:float[3] ] (* 1000000 times repeat)
-total = 17624992.000000000 : time=0.063059600 sec
+[ Test for performance of vector : semifast:float[3] ] (* 100000 times repeat)
+total = 1760969.000000000 : time=0.007006500 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : fastest:float[3] ] (* 1000000 times repeat)
-total = 17624992.000000000 : time=0.069063300 sec
+[ Test for performance of vector : fastest:float[3] ] (* 100000 times repeat)
+total = 1760969.000000000 : time=0.006005900 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : direct:float[4] ] (* 1000000 times repeat)
-total = 17624992.000000000 : time=0.103099800 sec
+[ Test for performance of vector : direct:float[4] ] (* 100000 times repeat)
+total = 1760969.000000000 : time=0.041039000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : dummy:float[4] ] (* 1000000 times repeat)
-total = 17624992.000000000 : time=0.108100900 sec
+[ Test for performance of vector : dummy:float[4] ] (* 100000 times repeat)
+total = 1760969.000000000 : time=0.042040200 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : normal:float[4] ] (* 1000000 times repeat)
-total = 17624992.000000000 : time=0.121115600 sec
+[ Test for performance of vector : normal:float[4] ] (* 100000 times repeat)
+total = 1760969.000000000 : time=0.044041900 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : sse:float[4] ] (* 1000000 times repeat)
-total = 17624992.000000000 : time=0.065062500 sec
+[ Test for performance of vector : sse:float[4] ] (* 100000 times repeat)
+total = 1760969.000000000 : time=0.006005900 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : fast:float[4] ] (* 1000000 times repeat)
-total = 17624992.000000000 : time=0.076072500 sec
+[ Test for performance of vector : fast:float[4] ] (* 100000 times repeat)
+total = 1760969.000000000 : time=0.007006500 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : semifast:float[4] ] (* 1000000 times repeat)
-total = 17624992.000000000 : time=0.072068900 sec
+[ Test for performance of vector : semifast:float[4] ] (* 100000 times repeat)
+total = 1760969.000000000 : time=0.006005800 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : fastest:float[4] ] (* 1000000 times repeat)
-total = 17624992.000000000 : time=0.099094200 sec
+[ Test for performance of vector : fastest:float[4] ] (* 100000 times repeat)
+total = 1760969.000000000 : time=0.007006500 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : direct:double[2] ] (* 1000000 times repeat)
-total = 12766738.007655602 : time=0.100095300 sec
+[ Test for performance of vector : direct:double[2] ] (* 100000 times repeat)
+total = 1276328.608382450 : time=0.037035500 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : dummy:double[2] ] (* 1000000 times repeat)
-total = 12766738.007655602 : time=0.113107100 sec
+[ Test for performance of vector : dummy:double[2] ] (* 100000 times repeat)
+total = 1276328.608382450 : time=0.039036100 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : normal:double[2] ] (* 1000000 times repeat)
-total = 12766738.007655602 : time=0.217206600 sec
+[ Test for performance of vector : normal:double[2] ] (* 100000 times repeat)
+total = 1276328.608382450 : time=0.042040200 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : sse:double[2] ] (* 1000000 times repeat)
-total = 12766738.007655602 : time=0.207198600 sec
+[ Test for performance of vector : sse:double[2] ] (* 100000 times repeat)
+total = 1276328.608382450 : time=0.043040700 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : fast:double[2] ] (* 1000000 times repeat)
-total = 12766738.007655602 : time=0.208197100 sec
+[ Test for performance of vector : fast:double[2] ] (* 100000 times repeat)
+total = 1276328.608382450 : time=0.043041100 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : semifast:double[2] ] (* 1000000 times repeat)
-total = 12766738.007655602 : time=0.215206000 sec
+[ Test for performance of vector : semifast:double[2] ] (* 100000 times repeat)
+total = 1276328.608382450 : time=0.043041100 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : fastest:double[2] ] (* 1000000 times repeat)
-total = 12766738.007655602 : time=0.227216500 sec
+[ Test for performance of vector : fastest:double[2] ] (* 100000 times repeat)
+total = 1276328.608382450 : time=0.043040800 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : direct:double[3] ] (* 1000000 times repeat)
-total = 17615166.630478334 : time=0.143137300 sec
+[ Test for performance of vector : direct:double[3] ] (* 100000 times repeat)
+total = 1760971.680145730 : time=0.042041000 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : dummy:double[3] ] (* 1000000 times repeat)
-total = 17615166.630478334 : time=0.133125000 sec
+[ Test for performance of vector : dummy:double[3] ] (* 100000 times repeat)
+total = 1760971.680145730 : time=0.042040200 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : normal:double[3] ] (* 1000000 times repeat)
-total = 17615166.630478334 : time=0.182174800 sec
+[ Test for performance of vector : normal:double[3] ] (* 100000 times repeat)
+total = 1760971.680145730 : time=0.052049900 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : sse:double[3] ] (* 1000000 times repeat)
-total = 17615166.630478334 : time=0.139131200 sec
+[ Test for performance of vector : sse:double[3] ] (* 100000 times repeat)
+total = 1760971.680145730 : time=0.047044600 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : fast:double[3] ] (* 1000000 times repeat)
-total = 17615166.630478334 : time=0.131124700 sec
+[ Test for performance of vector : fast:double[3] ] (* 100000 times repeat)
+total = 1760971.680145730 : time=0.046042800 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : semifast:double[3] ] (* 1000000 times repeat)
-total = 17615166.630478334 : time=0.169162200 sec
+[ Test for performance of vector : semifast:double[3] ] (* 100000 times repeat)
+total = 1760971.680145730 : time=0.060058100 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : fastest:double[3] ] (* 1000000 times repeat)
-total = 17615166.630478334 : time=0.180171600 sec
+[ Test for performance of vector : fastest:double[3] ] (* 100000 times repeat)
+total = 1760971.680145730 : time=0.047044900 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : direct:double[4] ] (* 1000000 times repeat)
-total = 17615166.630478334 : time=0.130124100 sec
+[ Test for performance of vector : direct:double[4] ] (* 100000 times repeat)
+total = 1760971.680145730 : time=0.013012300 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : dummy:double[4] ] (* 1000000 times repeat)
-total = 17615166.630478334 : time=0.168160200 sec
+[ Test for performance of vector : dummy:double[4] ] (* 100000 times repeat)
+total = 1760971.680145730 : time=0.013011800 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : normal:double[4] ] (* 1000000 times repeat)
-total = 17615166.630478334 : time=0.164155200 sec
+[ Test for performance of vector : normal:double[4] ] (* 100000 times repeat)
+total = 1760971.680145730 : time=0.021019900 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : sse:double[4] ] (* 1000000 times repeat)
-total = 17615166.630478334 : time=0.181173700 sec
+[ Test for performance of vector : sse:double[4] ] (* 100000 times repeat)
+total = 1760971.680145730 : time=0.021020300 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : fast:double[4] ] (* 1000000 times repeat)
-total = 17615166.630478334 : time=0.173164000 sec
+[ Test for performance of vector : fast:double[4] ] (* 100000 times repeat)
+total = 1760971.680145730 : time=0.020019300 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : semifast:double[4] ] (* 1000000 times repeat)
-total = 17615166.630478334 : time=0.170162800 sec
+[ Test for performance of vector : semifast:double[4] ] (* 100000 times repeat)
+total = 1760971.680145730 : time=0.021020600 sec
 --------------------------------------------------------------------------------
-[ Test for performance of vector : fastest:double[4] ] (* 1000000 times repeat)
-total = 17615166.630478334 : time=0.158150500 sec
+[ Test for performance of vector : fastest:double[4] ] (* 100000 times repeat)
+total = 1760971.680145730 : time=0.033031900 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : diredt:float[2][2] ] (* 100000 times repeat)
+total = 1274982.500000000 : time=0.011009700 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : diredt(RU):float[2][2](RU) ] (* 100000 times repeat)
+total = 1274982.500000000 : time=0.005004700 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : dummy:float[2][2] ] (* 100000 times repeat)
+total = 1274982.500000000 : time=0.007006800 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : normal:float[2][2] ] (* 100000 times repeat)
+total = 1274982.500000000 : time=0.011009600 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : sse:float[2][2] ] (* 100000 times repeat)
+total = 1274982.500000000 : time=0.010009400 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : fast:float[2][2] ] (* 100000 times repeat)
+total = 1274982.500000000 : time=0.010010600 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : fastest:float[2][2] ] (* 100000 times repeat)
+total = 1274982.500000000 : time=0.010009700 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : semifast:float[2][2] ] (* 100000 times repeat)
+total = 1274982.500000000 : time=0.010010200 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : diredt:float[3][3] ] (* 100000 times repeat)
+total = 3376328.750000000 : time=0.016014700 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : diredt(RU):float[3][3](RU) ] (* 100000 times repeat)
+total = 3376328.750000000 : time=0.013012300 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : dummy:float[3][3] ] (* 100000 times repeat)
+total = 3376328.750000000 : time=0.015014100 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : normal:float[3][3] ] (* 100000 times repeat)
+total = 3376328.750000000 : time=0.022021100 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : sse:float[3][3] ] (* 100000 times repeat)
+total = 3376328.750000000 : time=0.022020800 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : fast:float[3][3] ] (* 100000 times repeat)
+total = 3376328.750000000 : time=0.022021200 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : fastest:float[3][3] ] (* 100000 times repeat)
+total = 3376328.750000000 : time=0.023022000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : semifast:float[3][3] ] (* 100000 times repeat)
+total = 3376328.750000000 : time=0.021019900 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : diredt:float[4][4] ] (* 100000 times repeat)
+total = 6901432.500000000 : time=0.027025800 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : diredt(RU):float[4][4](RU) ] (* 100000 times repeat)
+total = 6901433.000000000 : time=0.021020000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : dummy:float[4][4] ] (* 100000 times repeat)
+total = 6901432.500000000 : time=0.025024000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : normal:float[4][4] ] (* 100000 times repeat)
+total = 6901432.500000000 : time=0.027025600 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : sse:float[4][4] ] (* 100000 times repeat)
+total = 6001979.500000000 : time=0.018017300 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : fast:float[4][4] ] (* 100000 times repeat)
+total = 6001979.500000000 : time=0.019017900 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : fastest:float[4][4] ] (* 100000 times repeat)
+total = 6001979.500000000 : time=0.019017900 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : semifast:float[4][4] ] (* 100000 times repeat)
+total = 6001979.500000000 : time=0.019018400 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : diredt:double[2][2] ] (* 100000 times repeat)
+total = 1274985.451236097 : time=0.007006800 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : diredt(RU):double[2][2](RU) ] (* 100000 times repeat)
+total = 1274985.451236097 : time=0.005003800 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : dummy:double[2][2] ] (* 100000 times repeat)
+total = 1274985.451236097 : time=0.006006500 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : normal:double[2][2] ] (* 100000 times repeat)
+total = 1274985.451236097 : time=0.011010500 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : sse:double[2][2] ] (* 100000 times repeat)
+total = 1274985.451236097 : time=0.011010600 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : fast:double[2][2] ] (* 100000 times repeat)
+total = 1274985.451236097 : time=0.010009400 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : fastest:double[2][2] ] (* 100000 times repeat)
+total = 1274985.451236097 : time=0.011010500 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : semifast:double[2][2] ] (* 100000 times repeat)
+total = 1274985.451236097 : time=0.010009400 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : diredt:double[3][3] ] (* 100000 times repeat)
+total = 3376320.291303343 : time=0.015014700 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : diredt(RU):double[3][3](RU) ] (* 100000 times repeat)
+total = 3376320.291303343 : time=0.013012000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : dummy:double[3][3] ] (* 100000 times repeat)
+total = 3376320.291303343 : time=0.015014100 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : normal:double[3][3] ] (* 100000 times repeat)
+total = 3376320.291303343 : time=0.023022000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : sse:double[3][3] ] (* 100000 times repeat)
+total = 3376320.291303343 : time=0.021020200 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : fast:double[3][3] ] (* 100000 times repeat)
+total = 3376320.291303343 : time=0.022020800 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : fastest:double[3][3] ] (* 100000 times repeat)
+total = 3376320.291303343 : time=0.021019700 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : semifast:double[3][3] ] (* 100000 times repeat)
+total = 3376320.291303343 : time=0.022020800 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : diredt:double[4][4] ] (* 100000 times repeat)
+total = 6901625.928097707 : time=0.031029600 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : diredt(RU):double[4][4](RU) ] (* 100000 times repeat)
+total = 6901625.928097707 : time=0.027024700 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : dummy:double[4][4] ] (* 100000 times repeat)
+total = 6901625.928097707 : time=0.031030500 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : normal:double[4][4] ] (* 100000 times repeat)
+total = 6901625.928097707 : time=0.040038100 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : sse:double[4][4] ] (* 100000 times repeat)
+total = 6901625.928097707 : time=0.039037300 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : fast:double[4][4] ] (* 100000 times repeat)
+total = 6901625.928097707 : time=0.041038700 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : fastest:double[4][4] ] (* 100000 times repeat)
+total = 6901625.928097707 : time=0.050049000 sec
+--------------------------------------------------------------------------------
+[ Test for performance of matrix : semifast:double[4][4] ] (* 100000 times repeat)
+total = 6901625.928097707 : time=0.039036400 sec
