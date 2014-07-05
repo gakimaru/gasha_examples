@@ -30,16 +30,16 @@
 #include <gasha/type_traits.h>//型特性ユーティリティ：extentof
 
 #include <utility>//C++11 std::move
-#include <stdio.h>//printf()
 #include <condition_variable>//C++11 std::condition_variable
+#include <chrono>//C++11 std::chrono
+#include <stdio.h>//printf()
 
-//【VC++】例外を無効化した状態で <mutex> <thread> <chrono> <function >をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
+//【VC++】例外を無効化した状態で <mutex> <thread> <function >をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
 #pragma warning(disable: 4530)//C4530を抑える
 
 #include <mutex>//C++11 std::mutex
 #include <thread>//C++11 std::thread
-#include <chrono>//C++11 std::chrono
 #include <functional>//C++11 std::function
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
