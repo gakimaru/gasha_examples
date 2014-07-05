@@ -26,17 +26,21 @@
 #include <gasha/unshared_spin_lock.h>//非共有スピンロック
 #include <gasha/dummy_shared_lock.h>//ダミー共有ロック
 
-#include <gasha/type_traits.h>//型特性ユーティリティ
+#include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
+#include <gasha/type_traits.h>//型特性ユーティリティ：extentof
 
 #include <utility>//C++11 std::move
-#include <chrono>//C++11 std::chrono
 #include <stdio.h>//printf()
+#include <condition_variable>//C++11 std::condition_variable
 
-//【VC++】例外を無効化した状態で <mutex> をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
+//【VC++】例外を無効化した状態で <mutex> <thread> <chrono> <function >をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
 #pragma warning(disable: 4530)//C4530を抑える
 
 #include <mutex>//C++11 std::mutex
+#include <thread>//C++11 std::thread
+#include <chrono>//C++11 std::chrono
+#include <functional>//C++11 std::function
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
@@ -197,7 +201,7 @@ void easyTest()
 		printf("*Test count                     = %d\n", TEST_COUNT);
 		printf("*Allocate and free test threads = %d\n", 1);
 		printf("*Memory pool size               = %d\n", TEST_POOL_SIZE);
-		const auto begin_time = std::chrono::system_clock::now();
+		const auto begin_time = nowTime();
 		sharedPoolAllocator<data_t, TEST_POOL_SIZE> allocator;
 		data_t* data[TEST_POOL_SIZE + 1] = { 0 };
 		int count = 0;
@@ -224,9 +228,7 @@ void easyTest()
 			if (count > TEST_COUNT)
 				break;
 		}
-		const auto end_time = std::chrono::system_clock::now();
-		const auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - begin_time);
-		const double elapsed_time = static_cast<double>(duration.count()) / 1000000000.;
+		const double elapsed_time = calcElapsedTime(begin_time);
 		printf("[%s:END] elapsed_time=%.9lf sec\n", caption, elapsed_time);
 		printf("--------------------------------------------------------------------------------\n");
 	};
@@ -242,7 +244,7 @@ void easyTest()
 		printf("*Push/Enqueue test threads = %d\n", 1);
 		printf("*Pop/Dequeue  test threads = %d\n", 1);
 		printf("*Memory pool size          = %d\n", TEST_POOL_SIZE);
-		const auto begin_time = std::chrono::system_clock::now();
+		const auto begin_time = nowTime();
 		int count = 0;
 		while (true)
 		{
@@ -267,9 +269,7 @@ void easyTest()
 			if (count > TEST_COUNT)
 				break;
 		}
-		const auto end_time = std::chrono::system_clock::now();
-		const auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - begin_time);
-		const double elapsed_time = static_cast<double>(duration.count()) / 1000000000.;
+		const double elapsed_time = calcElapsedTime(begin_time);
 		printf("[%s:END] elapsed_time=%.9lf sec\n", caption, elapsed_time);
 		printf("--------------------------------------------------------------------------------\n");
 	};
@@ -402,10 +402,6 @@ void easyTest()
 #ifdef ENABLE_THREAD_TEST
 //----------------------------------------
 //スレッドを使ったテスト
-#include <thread>//C++11 std::thread
-#include <condition_variable>//C++11 std::condition_variable
-#include <chrono>//C++11 std::chrono
-#include <functional>//C++11 std::function
 void thread_test()
 {
 	printf("================================================================================\n");
@@ -498,7 +494,7 @@ void thread_test()
 			}
 			std::this_thread::sleep_for(std::chrono::milliseconds(1));
 		}
-		const auto begin_time = std::chrono::system_clock::now();
+		const auto begin_time = nowTime();
 		{
 			is_ready = true;
 			while (true)
@@ -517,9 +513,7 @@ void thread_test()
 				th[i] = nullptr;
 			}
 		}
-		const auto end_time = std::chrono::system_clock::now();
-		const auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - begin_time);
-		const double elapsed_time = static_cast<double>(duration.count()) / 1000000000.;
+		const double elapsed_time = calcElapsedTime(begin_time);
 		printf("[%s:END] elapsed_time=%.9lf sec\n", caption, elapsed_time);
 		printf("--------------------------------------------------------------------------------\n");
 	};
@@ -669,7 +663,7 @@ void thread_test()
 			}
 			std::this_thread::sleep_for(std::chrono::microseconds(1));
 		}
-		const auto begin_time = std::chrono::system_clock::now();
+		const auto begin_time = nowTime();
 		{
 			is_ready = true;
 			while (true)
@@ -694,9 +688,7 @@ void thread_test()
 				th2[i] = nullptr;
 			}
 		}
-		const auto end_time = std::chrono::system_clock::now();
-		const auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - begin_time);
-		const double elapsed_time = static_cast<double>(duration.count()) / 1000000000.;
+		const double elapsed_time = calcElapsedTime(begin_time);
 		printf("[%s:END] elapsed_time=%.9lf sec\n", caption, elapsed_time);
 		printf("--------------------------------------------------------------------------------\n");
 	};

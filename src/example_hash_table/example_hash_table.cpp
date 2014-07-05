@@ -13,9 +13,9 @@
 #include <gasha/hash_table.inl>//開番地法ハッシュテーブルコンテナ【インライン関数／テンプレート関数定義部】
 
 #include <gasha/iterator.h>//イテレータ操作
+#include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
 
 #include <utility>//C++11 std::forward
-#include <chrono>//C++11 std::chrono
 #include <stdio.h>//printf()
 
 #include <assert.h>//assert()
@@ -112,28 +112,19 @@ inline int printf_detail(const char* fmt, ...){ return 0; }
 void example_hash_table()
 {
 	//時間計測
-	auto begin_time = std::chrono::system_clock::now();
+	auto begin_time = nowTime();
 	auto prev_time = begin_time;
 
-	//処理時間計測
-	auto calcElapsedTime = [](const std::chrono::system_clock::time_point& now_time, const std::chrono::system_clock::time_point& prev_time) -> double
-	{
-		const auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(now_time - prev_time);
-		const auto elapsed_time = static_cast<double>(duration.count()) / 1000000000.;
-		return elapsed_time;
-	};
-
 	//処理時間表示
-	auto printElapsedTimeDirect = [&calcElapsedTime](const double elapsed_time, const bool is_preint) -> std::chrono::system_clock::time_point
+	auto printElapsedTimeDirect = [](const double elapsed_time, const bool is_preint) -> std::chrono::system_clock::time_point
 	{
 		if (is_preint)
 			printf("*elapsed time=%.9lf sec.\n", elapsed_time);
-		return std::chrono::system_clock::now();
+		return nowTime();
 	};
-	auto printElapsedTime = [&calcElapsedTime, &printElapsedTimeDirect](const std::chrono::system_clock::time_point& prev_time, const bool is_print) -> std::chrono::system_clock::time_point
+	auto printElapsedTime = [&printElapsedTimeDirect](const std::chrono::system_clock::time_point& prev_time, const bool is_print) -> std::chrono::system_clock::time_point
 	{
-		const auto now_time = std::chrono::system_clock::now();
-		const auto elapsed_time = calcElapsedTime(now_time, prev_time);
+		const auto elapsed_time = calcElapsedTime(prev_time);
 		return printElapsedTimeDirect(elapsed_time, is_print);
 	};
 

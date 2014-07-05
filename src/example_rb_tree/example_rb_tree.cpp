@@ -13,11 +13,10 @@
 #include <gasha/rb_tree.inl>//赤黒木コンテナ【インライン関数／テンプレート関数定義部】
 
 #include <gasha/iterator.h>//イテレータ操作
+#include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
 
 #include <utility>//C++11 std::forward
 #include <random>//C++11 std::random
-#include <chrono>//C++11 std::chrono
-
 #include <stdio.h>//printf()
 
 //【VC++】例外を無効化した状態で <algorithm> <map> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
@@ -132,8 +131,8 @@ void example_rb_tree()
 	container_t con;
 
 	//処理時間計測開始
-	const std::chrono::system_clock::time_point begin_time = std::chrono::system_clock::now();
-	std::chrono::system_clock::time_point prev_time = begin_time;
+	const auto begin_time = nowTime();
+	auto prev_time = begin_time;
 
 	//データを登録
 	auto regList = [&con]()
@@ -180,9 +179,8 @@ void example_rb_tree()
 	auto printElapsedTime = [](const std::chrono::system_clock::time_point& prev_time) -> std::chrono::system_clock::time_point
 	{
 		//最終経過時間表示
-		const auto now_time = std::chrono::system_clock::now();
-		const auto duration = now_time - prev_time;
-		const double elapsed_time = static_cast<double>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count()) / 1000000000.;
+		const auto now_time = nowTime();
+		const double elapsed_time = calcElapsedTime(prev_time, now_time);
 		printf("*elapsed_time=%.9lf sec\n", elapsed_time);
 		return now_time;
 	};

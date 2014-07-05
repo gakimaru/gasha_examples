@@ -13,9 +13,9 @@
 #include <gasha/linked_list.inl>//双方向連結リストコンテナ【インライン関数／テンプレート関数定義部】
 
 #include <gasha/iterator.h>//イテレータ操作
+#include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
 
 #include <utility>//C++11 std::move, std::forward
-#include <chrono>//C++11 std::chrono
 #include <stdio.h>//printf()
 
 #include <assert.h>//assert()
@@ -853,9 +853,8 @@ void example_linked_list()
 		auto printElapsedTime = [](const std::chrono::system_clock::time_point& prev_time, const bool is_show) -> std::chrono::system_clock::time_point
 		{
 			//最終経過時間表示
-			const auto now_time = std::chrono::system_clock::now();
-			const auto duration = now_time - prev_time;
-			const double elapsed_time = static_cast<double>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count()) / 1000000000.;
+			const auto now_time = nowTime();
+			const double elapsed_time = calcElapsedTime(prev_time, now_time);
 			if (is_show)
 				printf("*elapsed_time=%.9lf sec\n", elapsed_time);
 			return now_time;
@@ -865,8 +864,8 @@ void example_linked_list()
 			printf("--------------------------------------------------------------------------------\n");
 			printf("[Test for performance linked_list]\n");
 
-			const std::chrono::system_clock::time_point begin_time = std::chrono::system_clock::now();
-			std::chrono::system_clock::time_point prev_time = begin_time;
+			const auto begin_time = nowTime();
+			auto prev_time = begin_time;
 
 			//データを初期化
 			printf("\n");
@@ -1046,8 +1045,8 @@ void example_linked_list()
 			printf("--------------------------------------------------------------------------------\n");
 			printf("[Test for performance std::list]\n");
 
-			const std::chrono::system_clock::time_point begin_time = std::chrono::system_clock::now();
-			std::chrono::system_clock::time_point prev_time = begin_time;
+			const auto begin_time = nowTime();
+			auto prev_time = begin_time;
 
 			//データを初期化
 			printf("\n");

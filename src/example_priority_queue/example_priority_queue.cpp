@@ -14,9 +14,9 @@
 #include <gasha/priority_queue.inl>//優先度付きキューコンテナアダプタ【インライン関数／テンプレート関数定義部】
 
 #include <gasha/iterator.h>//イテレータ操作
+#include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
 
 #include <utility>//C++11 std::forward
-#include <chrono>//C++11 std::chrono
 #include <stdio.h>//printf()
 
 #include <assert.h>//assert()
@@ -194,8 +194,8 @@ void example_priority_queue()
 	pqueue_t* con = new pqueue_t();
 
 	//処理時間計測開始
-	const std::chrono::system_clock::time_point begin_time = std::chrono::system_clock::now();
-	std::chrono::system_clock::time_point prev_time = begin_time;
+	const auto begin_time = nowTime();
+	auto prev_time = begin_time;
 
 	//--------------------
 	//プライオリティキューのテスト
@@ -264,9 +264,8 @@ void example_priority_queue()
 	auto printElapsedTime = [](const std::chrono::system_clock::time_point& prev_time, const bool is_show) -> std::chrono::system_clock::time_point
 	{
 		//最終経過時間表示
-		const auto now_time = std::chrono::system_clock::now();
-		const auto duration = now_time - prev_time;
-		const double elapsed_time = static_cast<double>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count()) / 1000000000.;
+		auto now_time = nowTime();
+		const double elapsed_time = calcElapsedTime(prev_time, now_time);
 		if (is_show)
 			printf("*elapsed_time=%.9lf sec\n", elapsed_time);
 		return now_time;
@@ -658,8 +657,8 @@ void example_binary_heap()
 	heap_t* heap = new heap_t();
 
 	//処理時間計測開始
-	const std::chrono::system_clock::time_point begin_time = std::chrono::system_clock::now();
-	std::chrono::system_clock::time_point prev_time = begin_time;
+	const auto begin_time = nowTime();
+	auto prev_time = begin_time;
 	
 	//--------------------
 	//【挙動比較用】二分ヒープのテスト
@@ -727,9 +726,8 @@ void example_binary_heap()
 	auto printElapsedTime = [](const std::chrono::system_clock::time_point& prev_time, const bool is_show) -> std::chrono::system_clock::time_point
 	{
 		//最終経過時間表示
-		const auto now_time = std::chrono::system_clock::now();
-		const auto duration = now_time - prev_time;
-		const double elapsed_time = static_cast<double>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count()) / 1000000000.;
+		auto now_time = nowTime();
+		const double elapsed_time = calcElapsedTime(prev_time, now_time);
 		if (is_show)
 			printf("*elapsed_time=%.9lf sec\n", elapsed_time);
 		return now_time;

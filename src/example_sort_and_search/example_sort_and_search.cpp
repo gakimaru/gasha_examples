@@ -38,8 +38,9 @@
 #include <gasha/linear_search.h>//線形探索
 #include <gasha/binary_search.h>//二分探索
 
+#include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
+
 #include <random>//C++11 std::random
-#include <chrono>//C++11 std::chrono
 #include <cstdint>//C++11 std::intptr_t
 
 //【VC++】例外を無効化した状態で <algorithm> <functional> <bitset> をインクルードすると、warning C4530 が発生する
@@ -110,32 +111,25 @@ inline bool operator==(const data_t& lhs, const int rhs){ return lhs.m_key == rh
 void example_sort_and_search()
 {
 	//時間計測
-	auto begin_time = std::chrono::system_clock::now();
+	auto begin_time = nowTime();
 	auto prev_time = begin_time;
 
 	//処理時間計測
-	auto calcElapsedTime = [](const std::chrono::system_clock::time_point& now_time, const std::chrono::system_clock::time_point& prev_time) -> double
+	auto getElapsedTime = [](const std::chrono::system_clock::time_point& prev_time) -> double
 	{
-		const auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(now_time - prev_time);
-		const auto elapsed_time = static_cast<double>(duration.count()) / 1000000000.;
-		return elapsed_time;
-	};
-	auto getElapsedTime = [&calcElapsedTime](const std::chrono::system_clock::time_point& prev_time) -> double
-	{
-		return calcElapsedTime(std::chrono::system_clock::now(), prev_time);
+		return calcElapsedTime(prev_time);
 	};
 
 	//処理時間表示
-	auto printElapsedTimeDirect = [&calcElapsedTime](const double elapsed_time, const bool is_preint) -> std::chrono::system_clock::time_point
+	auto printElapsedTimeDirect = [](const double elapsed_time, const bool is_preint) -> std::chrono::system_clock::time_point
 	{
 		if (is_preint)
 			printf("*elapsed time=%.9lf sec.\n", elapsed_time);
-		return std::chrono::system_clock::now();
+		return nowTime();
 	};
-	auto printElapsedTime = [&calcElapsedTime, &printElapsedTimeDirect](const std::chrono::system_clock::time_point& prev_time, const bool is_print) -> std::chrono::system_clock::time_point
+	auto printElapsedTime = [&printElapsedTimeDirect](const std::chrono::system_clock::time_point& prev_time, const bool is_print) -> std::chrono::system_clock::time_point
 	{
-		const auto now_time = std::chrono::system_clock::now();
-		const auto elapsed_time = calcElapsedTime(now_time, prev_time);
+		const auto elapsed_time = calcElapsedTime(prev_time);
 		return printElapsedTimeDirect(elapsed_time, is_print);
 	};
 
@@ -364,7 +358,7 @@ void example_sort_and_search()
 	#ifdef TEST_DATA_WATCH_CONSTRUCTOR
 		printf("----- Sort -----\n");
 	#endif//TEST_DATA_WATCH_CONSTRUCTOR
-		prev_time = std::chrono::system_clock::now();
+		prev_time = nowTime();
 		swapped_count = sort_proc(array);
 		elapsed_time = getElapsedTime(prev_time);
 		const bool is_print = true;

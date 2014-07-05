@@ -11,9 +11,9 @@
 #include "example_basic_math.h"//基本算術処理テスト
 
 #include <gasha/basic_math.h>//基本算術
+#include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
 
 #include <stdio.h>//printf()
-#include <chrono>//C++11 std::chrono
 #include<stdarg.h>//va_list
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
@@ -173,7 +173,7 @@ void example_basic_math()
 	{
 		printf("\n");
 		printf("----- Performance test for coutnBits() -----\n");
-		auto prev_time = std::chrono::system_clock::now();
+		auto prev_time = nowTime();
 		unsigned int bit_count_sum;
 		{
 			printf("[countBits_custom() * %d times]\n", TEST_BITCOUNT_MAX);
@@ -183,14 +183,12 @@ void example_basic_math()
 		}
 		auto print_elapsed_time = [](const std::chrono::system_clock::time_point prev_time, const unsigned int bit_count_sum)
 		{
-			const auto end_time = std::chrono::system_clock::now();
-			const auto duration_time = end_time - prev_time;
-			const double elapsed_time = static_cast<double>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration_time).count()) / 1000000000.;
+			const double elapsed_time = calcElapsedTime(prev_time);
 			printf("*elapsed time = %.9lf sec (bit_count_sum=0x%08x)\n", elapsed_time, bit_count_sum);
 		};
 	#ifdef ENABLE_BUILTIN_POPCNT
 		print_elapsed_time(prev_time, bit_count_sum);
-		prev_time = std::chrono::system_clock::now();
+		prev_time = nowTime();
 		{
 			printf("[countBits_builtin() * %d times]\n", TEST_BITCOUNT_MAX);
 			bit_count_sum = 0;
@@ -200,7 +198,7 @@ void example_basic_math()
 		print_elapsed_time(prev_time, bit_count_sum);
 	#endif//ENABLE_BUILTIN_POPCNT
 	#ifdef ENABLE_SSE_POPCNT
-		prev_time = std::chrono::system_clock::now();
+		prev_time = nowTime();
 		{
 			printf("[countBits_sse() * %d times]\n", TEST_BITCOUNT_MAX);
 			bit_count_sum = 0;

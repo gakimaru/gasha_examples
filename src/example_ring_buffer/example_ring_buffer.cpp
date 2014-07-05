@@ -13,17 +13,22 @@
 #include <gasha/ring_buffer.inl>//リングバッファコンテナ【インライン関数／テンプレート関数定義部】
 
 #include <gasha/iterator.h>//イテレータ操作
+#include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
 
 #include <utility>//C++11 std::move, std::forward
-#include <chrono>//C++11 std::chrono
-#include <stdio.h>//printf()
+#include <condition_variable>//C++11 std::condition_variable用
+#include <atomic>//C++11 std::atomic用
 
+#include <stdio.h>//printf()
 #include <assert.h>//assert()
 
-//【VC++】例外を無効化した状態で <algorithm> <deque> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
+//【VC++】例外を無効化した状態で <thread> <mutex> <chrono> <algorithm> <deque> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
 #pragma warning(disable: 4530)//C4530を抑える
 
+#include <thread>//C++11 std::thread用
+#include <mutex>//C++11 std::mutex用
+#include <chrono>//C++11 std::chrono用
 #include <algorithm>//std::for_each()
 #include <deque>//std::deque（比較用）
 
@@ -1304,9 +1309,8 @@ void example_ring_buffer()
 		auto printElapsedTime = [](const std::chrono::system_clock::time_point& prev_time, const bool is_show) -> std::chrono::system_clock::time_point
 		{
 			//最終経過時間表示
-			const auto now_time = std::chrono::system_clock::now();
-			const auto duration = now_time - prev_time;
-			const double elapsed_time = static_cast<double>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count()) / 1000000000.;
+			const auto now_time = nowTime();
+			const double elapsed_time = calcElapsedTime(prev_time, now_time);
 			if (is_show)
 				printf("*elapsed_time=%.9lf sec\n", elapsed_time);
 			return now_time;
@@ -1316,8 +1320,8 @@ void example_ring_buffer()
 			printf("--------------------------------------------------------------------------------\n");
 			printf("[Test for performance ring_buffer]\n");
 			
-			const std::chrono::system_clock::time_point begin_time = std::chrono::system_clock::now();
-			std::chrono::system_clock::time_point prev_time = begin_time;
+			const auto begin_time = nowTime();
+			auto prev_time = begin_time;
 
 			//データを初期化
 			printf("\n");
@@ -1499,8 +1503,8 @@ void example_ring_buffer()
 			printf("--------------------------------------------------------------------------------\n");
 			printf("[Test for performance std::deque]\n");
 
-			const std::chrono::system_clock::time_point begin_time = std::chrono::system_clock::now();
-			std::chrono::system_clock::time_point prev_time = begin_time;
+			const auto begin_time = nowTime();
+			auto prev_time = begin_time;
 
 			//データを初期化
 			printf("\n");
@@ -1684,12 +1688,6 @@ void example_ring_buffer()
 //--------------------
 //テスト⑤：ロック制御を行う
 //※動的配列のテストとほとんど同じ
-
-#include <thread>//C++11 std::thread用
-#include <mutex>//C++11 std::mutex用
-#include <condition_variable>//C++11 std::condition_variable用
-#include <atomic>//C++11 std::atomic用
-#include <chrono>//C++11 std::chrono用
 
 template <class C>
 void testThread(const char* container_type)
