@@ -28,3 +28,20 @@ arr1_t[1][0][0][0](Rank=1)
 arr2_t[2][3][0][0](Rank=2)
 arr3_t[4][5][6][0](Rank=3)
 arr4_t[7][8][9][10](Rank=4)
+
+----- Test for toStr -----
+bool: toStr()="true", toNumStr()="1", toHexStr()="1", toByteStr()=""
+char: toStr()="A", toNumStr()="65", toHexStr()="0x41", toByteStr()="A"
+unsigned char: toStr()="65", toNumStr()="65", toHexStr()="0x41", toByteStr()="A"
+short: toStr()="16706", toNumStr()="16706", toHexStr()="0x4142", toByteStr()="BA"
+unsigned short: toStr()="16706", toNumStr()="16706", toHexStr()="0x4142", toByteStr()="BA"
+int: toStr()="1094861636", toNumStr()="1094861636", toHexStr()="0x41424344", toByteStr()="DCBA"
+unsigned int: toStr()="1094861636", toNumStr()="1094861636", toHexStr()="0x41424344", toByteStr()="DCBA"
+long: toStr()="1094861636", toNumStr()="1094861636", toHexStr()="0x41424344", toByteStr()="DCBA"
+unsigned long: toStr()="1094861636", toNumStr()="1094861636", toHexStr()="0x41424344", toByteStr()="DCBA"
+long long: toStr()="4702394921427289928", toNumStr()="4702394921427289928", toHexStr()="0x4142434445464748", toByteStr()="HGFEDCBA"
+unsigned long long: toStr()="4702394921427289928", toNumStr()="4702394921427289928", toHexStr()="0x4142434445464748", toByteStr()="HGFEDCBA"
+float: toStr()="123.456001", toNumStr()="123.456001", toHexStr()="0x42f6e979", toByteStr()="yéöB"
+double: toStr()="123.456000", toNumStr()="123.456000", toHexStr()="0x405edd2f1a9fbe77", toByteStr()="w¾Ÿ/Ý^@"
+
+- end -

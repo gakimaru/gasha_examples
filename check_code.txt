@@ -23,6 +23,7 @@ ASCII (LF) ... ./exe/gcc/x86/Debug/sh/example_ring_buffer.sh
 ASCII (LF) ... ./exe/gcc/x86/Debug/sh/example_shared_data.sh
 ASCII (LF) ... ./exe/gcc/x86/Debug/sh/example_singly_linked_list.sh
 ASCII (LF) ... ./exe/gcc/x86/Debug/sh/example_sort_and_search.sh
+ASCII (LF) ... ./exe/gcc/x86/Debug/sh/example_thread_id.sh
 ASCII (LF) ... ./exe/gcc/x86/Debug/sh/example_type_traits.sh
 ASCII (LF) ... ./exe/gcc/x86/Debug/sh/example_utility.sh
 ASCII (LF) ... ./exe/gcc/x86/Debug/sh/make_all_sh.sh
@@ -45,6 +46,7 @@ ASCII (LF) ... ./exe/gcc/x86/sh/example_ring_buffer.sh
 ASCII (LF) ... ./exe/gcc/x86/sh/example_shared_data.sh
 ASCII (LF) ... ./exe/gcc/x86/sh/example_singly_linked_list.sh
 ASCII (LF) ... ./exe/gcc/x86/sh/example_sort_and_search.sh
+ASCII (LF) ... ./exe/gcc/x86/sh/example_thread_id.sh
 ASCII (LF) ... ./exe/gcc/x86/sh/example_type_traits.sh
 ASCII (LF) ... ./exe/gcc/x86/sh/example_utility.sh
 ASCII (LF) ... ./exe/gcc/x86/sh/make_all_sh.sh
@@ -93,6 +95,9 @@ UTF-8 (BOM) (LF) ... ./proj/example_singly_linked_list/standard.h
 UTF-8 (BOM) (LF) ... ./proj/example_sort_and_search/main.cpp
 UTF-8 (BOM) (LF) ... ./proj/example_sort_and_search/standard.cpp
 UTF-8 (BOM) (LF) ... ./proj/example_sort_and_search/standard.h
+UTF-8 (BOM) (LF) ... ./proj/example_thread_id/main.cpp
+UTF-8 (BOM) (LF) ... ./proj/example_thread_id/standard.cpp
+UTF-8 (BOM) (LF) ... ./proj/example_thread_id/standard.h
 UTF-8 (BOM) (LF) ... ./proj/example_type_traits/main.cpp
 UTF-8 (BOM) (LF) ... ./proj/example_type_traits/standard.cpp
 UTF-8 (BOM) (LF) ... ./proj/example_type_traits/standard.h
@@ -138,6 +143,8 @@ UTF-8 (BOM) (LF) ... ./src/example_singly_linked_list/example_singly_linked_list
 UTF-8 (BOM) (LF) ... ./src/example_sort_and_search/example_sort_and_search.cpp
 UTF-8 (BOM) (LF) ... ./src/example_sort_and_search/example_sort_and_search.h
 UTF-8 (BOM) (LF) ... ./src/example_sort_and_search/example_sort_and_search_sub.cpp
+UTF-8 (BOM) (LF) ... ./src/example_thread_id/example_thread_id.cpp
+UTF-8 (BOM) (LF) ... ./src/example_thread_id/example_thread_id.h
 UTF-8 (BOM) (LF) ... ./src/example_type_traits/example_type_traits.cpp
 UTF-8 (BOM) (LF) ... ./src/example_type_traits/example_type_traits.h
 UTF-8 (BOM) (LF) ... ./src/example_utility/example_utility.cpp
@@ -250,6 +257,7 @@ UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/shell_sort.h
 UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/shell_sort.inl
 UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/simple_shared_spin_lock.h
 UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/simple_shared_spin_lock.inl
+UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/singleton.inl
 UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/singly_linked_list.cpp.h
 UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/singly_linked_list.h
 UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/singly_linked_list.inl
@@ -258,6 +266,8 @@ UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/spin_lock.h
 UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/spin_lock.inl
 UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/tagged_ptr.h
 UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/tagged_ptr.inl
+UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/thread_id.h
+UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/thread_id.inl
 UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/type_traits.h
 UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/type_traits.inl
 UTF-8 (BOM) (LF) ... ./sub/gasha/include/gasha/unique_lock.h
@@ -275,6 +285,7 @@ UTF-8 (BOM) (LF) ... ./sub/gasha_src/proj/standard.h
 UTF-8 (BOM) (LF) ... ./sub/gasha_src/src/build_settings/build_settings.cpp
 UTF-8 (BOM) (LF) ... ./sub/gasha_src/src/math/basic_math.cpp
 UTF-8 (BOM) (LF) ... ./sub/gasha_src/src/math/crc32.cpp
+UTF-8 (BOM) (LF) ... ./sub/gasha_src/src/singleton/singleton.cpp
 UTF-8 (BOM) (LF) ... ./sub/gasha_src/src/string/fast_string.cpp
 UTF-8 (BOM) (LF) ... ./sub/gasha_src/src/thread/lock/lock_common.cpp
 UTF-8 (BOM) (LF) ... ./sub/gasha_src/src/thread/lock/lw_spin_lock.cpp
@@ -282,7 +293,10 @@ UTF-8 (BOM) (LF) ... ./sub/gasha_src/src/thread/lock/shared_spin_lock.cpp
 UTF-8 (BOM) (LF) ... ./sub/gasha_src/src/thread/lock/simple_shared_spin_lock.cpp
 UTF-8 (BOM) (LF) ... ./sub/gasha_src/src/thread/lock/spin_lock.cpp
 UTF-8 (BOM) (LF) ... ./sub/gasha_src/src/thread/lock/unshared_spin_lock.cpp
+UTF-8 (BOM) (LF) ... ./sub/gasha_src/src/thread/thread_id.cpp
 UTF-8 (BOM) (LF) ... ./sub/gasha_src/src/utility/cpuid.cpp
+UTF-8 (BOM) (LF) ... ./sub/gasha_src/src/utility/type_traits.cpp
+UTF-8 (BOM) (MIXED NL) ... ./sub/gasha/include/gasha/singleton.h
 UTF-8 (LF) ... ./proj/example_basic_math/mk.sh
 UTF-8 (LF) ... ./proj/example_build_settings/mk.sh
 UTF-8 (LF) ... ./proj/example_crc32/mk.sh
@@ -297,6 +311,7 @@ UTF-8 (LF) ... ./proj/example_ring_buffer/mk.sh
 UTF-8 (LF) ... ./proj/example_shared_data/mk.sh
 UTF-8 (LF) ... ./proj/example_singly_linked_list/mk.sh
 UTF-8 (LF) ... ./proj/example_sort_and_search/mk.sh
+UTF-8 (LF) ... ./proj/example_thread_id/mk.sh
 UTF-8 (LF) ... ./proj/example_type_traits/mk.sh
 UTF-8 (LF) ... ./proj/example_utility/mk.sh
 UTF-8 (LF) ... ./proj/mk_all.sh

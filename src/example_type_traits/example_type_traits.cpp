@@ -8,9 +8,9 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_type_traits.h"//型特性ユーティリティ
+#include "example_type_traits.h"//型特性ユーティリティテスト
 
-#include <gasha/type_traits.h>//rankof(), sizeof(), sizeofelemof()
+#include <gasha/type_traits.h>//型特性ユーティリティ：rankof(), sizeof(), sizeofelemof()
 
 #include <type_traits>//std::rank, std::extent
 #include <stdio.h>//printf()
@@ -42,19 +42,19 @@ void example_type_traits()
 		printf("var4[%d][%d][%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", extent1of(var4), extent2of(var4), extent3of(var4), extent4of(var4), rankof(var4), extentof(var4), sizeofelemof(var4));
 	}
 	{
-		printf("\n");
-		printf("----- Test for sizeofvalueof -----\n");
-		struct data_t
-		{
-			char m_val[128];
-		};
-		data_t var1;
-		data_t* var2;
-		var1.m_val[0] = 0;
-		var2 = &var1;
-		printf("sizeof(var1)=%d, sizeof(var2)=%d\n", sizeof(var1), sizeof(var2));
-		printf("sizeofvalueof(var1)=%d, sizeofvalueof(var2)=%d\n", sizeofvalueof(var1), sizeofvalueof(var2));
-	}
+	printf("\n");
+	printf("----- Test for sizeofvalueof -----\n");
+	struct data_t
+	{
+		char m_val[128];
+	};
+	data_t var1;
+	data_t* var2;
+	var1.m_val[0] = 0;
+	var2 = &var1;
+	printf("sizeof(var1)=%d, sizeof(var2)=%d\n", sizeof(var1), sizeof(var2));
+	printf("sizeofvalueof(var1)=%d, sizeofvalueof(var2)=%d\n", sizeofvalueof(var1), sizeofvalueof(var2));
+}
 
 	//比較用：std::rank, std::extent
 	{
@@ -77,6 +77,42 @@ void example_type_traits()
 		printf("arr3_t[%d][%d][%d][%d](Rank=%d)\n", std::extent<arr3_t, 0>::value, std::extent<arr3_t, 1>::value, std::extent<arr3_t, 2>::value, std::extent<arr3_t, 3>::value, std::rank<arr3_t>::value);
 		printf("arr4_t[%d][%d][%d][%d](Rank=%d)\n", std::extent<arr4_t, 0>::value, std::extent<arr4_t, 1>::value, std::extent<arr4_t, 2>::value, std::extent<arr4_t, 3>::value, std::rank<arr4_t>::value);
 	}
+
+	//文字列化
+	{
+		printf("\n");
+		printf("----- Test for toStr -----\n");
+		bool val_bool = true;
+		char val_char = 65;
+		unsigned char val_uchar = 65;
+		short val_short = (65 << 8) | 66;
+		unsigned short val_ushort = (65 << 8) | 66;
+		int val_int = (65 << 24) | (66 << 16) | (67 << 8) | 68;
+		unsigned int val_uint = (65 << 24) | (66 << 16) | (67 << 8) | 68;
+		long val_long = (65 << 24) | (66 << 16) | (67 << 8) | 68;
+		unsigned long val_ulong = (65 << 24) | (66 << 16) | (67 << 8) | 68;
+		long long val_llong = (65ll << 56) | (66ll << 48) | (67ll << 40) | (68ll << 32) | (69ll << 24) | (70ll << 16) | (71ll << 8) | 72ll;
+		unsigned long long val_ullong = (65ll << 56) | (66ll << 48) | (67ll << 40) | (68ll << 32) | (69ll << 24) | (70ll << 16) | (71ll << 8) | 72ll;
+		float val_float = 123.456f;
+		double val_double = 123.456;
+		char buff1[32], buff2[32], buff3[32], buff4[32];
+		printf("bool: toStr()=\"%s\", toNumStr()=\"%s\", toHexStr()=\"%s\", toByteStr()=\"%s\"\n", toStr(buff1, val_bool), toNumStr(buff2, val_bool), toHexStr(buff3, val_bool), toByteStr(buff4, val_bool));
+		printf("char: toStr()=\"%s\", toNumStr()=\"%s\", toHexStr()=\"%s\", toByteStr()=\"%s\"\n", toStr(buff1, val_char), toNumStr(buff2, val_char), toHexStr(buff3, val_char), toByteStr(buff4, val_char));
+		printf("unsigned char: toStr()=\"%s\", toNumStr()=\"%s\", toHexStr()=\"%s\", toByteStr()=\"%s\"\n", toStr(buff1, val_uchar), toNumStr(buff2, val_uchar), toHexStr(buff3, val_uchar), toByteStr(buff4, val_uchar));
+		printf("short: toStr()=\"%s\", toNumStr()=\"%s\", toHexStr()=\"%s\", toByteStr()=\"%s\"\n", toStr(buff1, val_short), toNumStr(buff2, val_short), toHexStr(buff3, val_short), toByteStr(buff4, val_short));
+		printf("unsigned short: toStr()=\"%s\", toNumStr()=\"%s\", toHexStr()=\"%s\", toByteStr()=\"%s\"\n", toStr(buff1, val_ushort), toNumStr(buff2, val_ushort), toHexStr(buff3, val_ushort), toByteStr(buff4, val_ushort));
+		printf("int: toStr()=\"%s\", toNumStr()=\"%s\", toHexStr()=\"%s\", toByteStr()=\"%s\"\n", toStr(buff1, val_int), toNumStr(buff2, val_int), toHexStr(buff3, val_int), toByteStr(buff4, val_int));
+		printf("unsigned int: toStr()=\"%s\", toNumStr()=\"%s\", toHexStr()=\"%s\", toByteStr()=\"%s\"\n", toStr(buff1, val_uint), toNumStr(buff2, val_uint), toHexStr(buff3, val_uint), toByteStr(buff4, val_uint));
+		printf("long: toStr()=\"%s\", toNumStr()=\"%s\", toHexStr()=\"%s\", toByteStr()=\"%s\"\n", toStr(buff1, val_long), toNumStr(buff2, val_long), toHexStr(buff3, val_long), toByteStr(buff4, val_long));
+		printf("unsigned long: toStr()=\"%s\", toNumStr()=\"%s\", toHexStr()=\"%s\", toByteStr()=\"%s\"\n", toStr(buff1, val_ulong), toNumStr(buff2, val_ulong), toHexStr(buff3, val_ulong), toByteStr(buff4, val_ulong));
+		printf("long long: toStr()=\"%s\", toNumStr()=\"%s\", toHexStr()=\"%s\", toByteStr()=\"%s\"\n", toStr(buff1, val_llong), toNumStr(buff2, val_llong), toHexStr(buff3, val_llong), toByteStr(buff4, val_llong));
+		printf("unsigned long long: toStr()=\"%s\", toNumStr()=\"%s\", toHexStr()=\"%s\", toByteStr()=\"%s\"\n", toStr(buff1, val_ullong), toNumStr(buff2, val_ullong), toHexStr(buff3, val_ullong), toByteStr(buff4, val_ullong));
+		printf("float: toStr()=\"%s\", toNumStr()=\"%s\", toHexStr()=\"%s\", toByteStr()=\"%s\"\n", toStr(buff1, val_float), toNumStr(buff2, val_float), toHexStr(buff3, val_float), toByteStr(buff4, val_float));
+		printf("double: toStr()=\"%s\", toNumStr()=\"%s\", toHexStr()=\"%s\", toByteStr()=\"%s\"\n", toStr(buff1, val_double), toNumStr(buff2, val_double), toHexStr(buff3, val_double), toByteStr(buff4, val_double));
+	}
+	
+	printf("\n");
+	printf("- end -\n");
 }
 
 // End of file
