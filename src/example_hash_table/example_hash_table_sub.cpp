@@ -30,11 +30,11 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //明示的インスタンス化
 //※専用マクロを使用
-INSTANCING_hTable(ope, TEST_DATA_TABLE_SIZE);//template class hash_table::container<ope, TEST_DATA_TABLE_SIZE>; と同じ
-INSTANCING_hTable(ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER);//template class hash_table::container<ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER>; と同じ
-INSTANCING_hTable(narrow_range_key_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class hash_table::container<narrow_range_key_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC>; と同じ
-INSTANCING_hTable(func_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class hash_table::container<func_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC>; と同じ
-INSTANCING_hTable(obj_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class hash_table::container<obj_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC>; と同じ
+GASHA_INSTANCING_hTable(ope, TEST_DATA_TABLE_SIZE);//template class hash_table::container<ope, TEST_DATA_TABLE_SIZE>; と同じ
+GASHA_INSTANCING_hTable(ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER);//template class hash_table::container<ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER>; と同じ
+GASHA_INSTANCING_hTable(narrow_range_key_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class hash_table::container<narrow_range_key_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC>; と同じ
+GASHA_INSTANCING_hTable(func_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class hash_table::container<func_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC>; と同じ
+GASHA_INSTANCING_hTable(obj_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class hash_table::container<obj_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC>; と同じ
 
 //----------------------------------------
 //シンプル開番地法ハッシュテーブルコンテナテスト
@@ -114,7 +114,7 @@ void example_simple_hash_table()
 }
 //明示的インスタンス化する場合
 //※専用マクロ使用
-INSTANCING_simpleHTable(short, 100);
-//INSTANCING_simpleDArray(data_t, 100);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
+GASHA_INSTANCING_simpleHTable(short, 100);
+GASHA_INSTANCING_simpleHTable(data_t, 100);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
 
 // End of file

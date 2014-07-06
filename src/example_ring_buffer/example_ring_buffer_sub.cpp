@@ -30,10 +30,10 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //明示的インスタンス化
 //※専用マクロを使用
-INSTANCING_rBuff(int_ope);//template class ring_buffer::container<int_ope>; と同じ
-INSTANCING_rBuff(ope);//template class ring_buffer::container<ope>; と同じ
-INSTANCING_rBuff(another_ope);//template class ring_buffer::container<another_ope>; と同じ
-INSTANCING_rBuff(mt_ope_t);//template class ring_buffer::container<mt_ope_t>; と同じ
+GASHA_INSTANCING_rBuff(int_ope);//template class ring_buffer::container<int_ope>; と同じ
+GASHA_INSTANCING_rBuff(ope);//template class ring_buffer::container<ope>; と同じ
+GASHA_INSTANCING_rBuff(another_ope);//template class ring_buffer::container<another_ope>; と同じ
+GASHA_INSTANCING_rBuff(mt_ope_t);//template class ring_buffer::container<mt_ope_t>; と同じ
 
 //----------------------------------------
 //シンプルリングバッファコンテナテスト
@@ -140,8 +140,8 @@ void example_simple_ring_buffer()
 }
 //明示的インスタンス化する場合
 //※専用マクロ使用
-INSTANCING_simpleRBuff(short);
-//INSTANCING_simpleRBuff(data_t);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
+GASHA_INSTANCING_simpleRBuff(short);
+//GASHA_INSTANCING_simpleRBuff(data_t);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
 
 #if 1
 //明示的インスタンス化のテスト
@@ -161,7 +161,7 @@ bool func()
 	b.m_primaryData = 1;
 	return a == b;
 }
-INSTANCING_simpleRBuff(derived);
+GASHA_INSTANCING_simpleRBuff(derived);
 
 #endif
 

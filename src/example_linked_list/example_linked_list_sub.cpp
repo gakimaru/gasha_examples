@@ -30,8 +30,8 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //明示的インスタンス化
 //※専用マクロを使用
-INSTANCING_lList(ope);//template class linked_list::container<ope>; と同じ
-INSTANCING_lList(another_ope);//template class linked_list::container<another_ope>; と同じ
+GASHA_INSTANCING_lList(ope);//template class linked_list::container<ope>; と同じ
+GASHA_INSTANCING_lList(another_ope);//template class linked_list::container<another_ope>; と同じ
 
 //----------------------------------------
 //シンプル双方向連結リストコンテナテスト
@@ -149,8 +149,8 @@ void example_simple_linked_list()
 }
 //明示的インスタンス化する場合
 //※専用マクロ使用
-INSTANCING_simpleLList(short);
-//INSTANCING_simpleLList(data_t);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
+GASHA_INSTANCING_simpleLList(short);
+//GASHA_INSTANCING_simpleLList(data_t);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
 
 #if 1
 //明示的インスタンス化のテスト
@@ -170,7 +170,7 @@ bool funct()
 	b.m_primaryData = 1;
 	return a == b;
 }
-INSTANCING_simpleLList(derived);
+GASHA_INSTANCING_simpleLList(derived);
 #endif
 
 // End of file

@@ -30,7 +30,7 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //明示的インスタンス化
 //※専用マクロを使用
-INSTANCING_rbTree(ope);//template class rb_tree::stack_t<OPE_TYPE>; template class rb_tree::container<ope>; と同じ
+GASHA_INSTANCING_rbTree(ope);//template class rb_tree::stack_t<OPE_TYPE>; template class rb_tree::container<ope>; と同じ
 
 //----------------------------------------
 //シンプル双方向連結リストコンテナテスト
@@ -125,7 +125,7 @@ void example_simple_rb_tree()
 }
 //明示的インスタンス化する場合
 //※専用マクロ使用
-INSTANCING_simpleRBTree(short);
-//INSTANCING_simpleRBTree(data_t);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
+GASHA_INSTANCING_simpleRBTree(short);
+//GASHA_INSTANCING_simpleRBTree(data_t);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
 
 // End of file

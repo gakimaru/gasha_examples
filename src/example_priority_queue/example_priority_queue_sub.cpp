@@ -33,7 +33,7 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //※専用マクロを使用
 GASHA_INSTANCING_pQueue_withBHeap(ope, TEST_DATA_MAX);//template class priority_queue::container<ope, TEST_DATA_MAX>; と同じ
 GASHA_INSTANCING_pQueue_withBHeap(ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER);//template class priority_queue::container<ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER>; と同じ
-INSTANCING_bHeap(heap_ope, TEST_DATA_MAX);//template class binary_heap::container<heap_ope, TEST_DATA_MAX>; と同じ
+GASHA_INSTANCING_bHeap(heap_ope, TEST_DATA_MAX);//template class binary_heap::container<heap_ope, TEST_DATA_MAX>; と同じ
 
 //----------------------------------------
 //シンプル優先度付きキューコンテナアダプタ／二分ヒープコンテナテスト
@@ -176,7 +176,7 @@ void example_simple_binary_heap()
 }
 //明示的インスタンス化する場合
 //※専用マクロ使用
-INSTANCING_simpleBHeap(short, 100);
-//INSTANCING_simpleBHeap(data_t, 100);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
+GASHA_INSTANCING_simpleBHeap(short, 100);
+//GASHA_INSTANCING_simpleBHeap(data_t, 100);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
 
 // End of file

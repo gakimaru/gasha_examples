@@ -32,10 +32,10 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //明示的インスタンス化
 //※専用マクロを使用
-INSTANCING_dArray(int_ope);//template class dynamic_array::container<int_ope>; と同じ
-INSTANCING_dArray(ope);//template class dynamic_array::container<ope>; と同じ
-INSTANCING_dArray(another_ope);//template class dynamic_array::container<another_ope>; と同じ
-INSTANCING_dArray(mt_ope_t);//template class dynamic_array::container<mt_ope_t>; と同じ
+GASHA_INSTANCING_dArray(int_ope);//template class dynamic_array::container<int_ope>; と同じ
+GASHA_INSTANCING_dArray(ope);//template class dynamic_array::container<ope>; と同じ
+GASHA_INSTANCING_dArray(another_ope);//template class dynamic_array::container<another_ope>; と同じ
+GASHA_INSTANCING_dArray(mt_ope_t);//template class dynamic_array::container<mt_ope_t>; と同じ
 
 //----------------------------------------
 //シンプル動的配列コンテナテスト
@@ -142,8 +142,8 @@ void example_simple_dynamic_array()
 }
 //明示的インスタンス化する場合
 //※専用マクロ使用
-INSTANCING_simpleDArray(short);
-//INSTANCING_simpleDArray(data_t);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
+GASHA_INSTANCING_simpleDArray(short);
+//GASHA_INSTANCING_simpleDArray(data_t);//ローカルクラス（関数内クラス）を使ったものは、明示的なインスタンス化ができない
 
 #if 1
 //明示的インスタンス化のテスト
@@ -163,7 +163,7 @@ bool funct()
 	b.m_primaryData = 1;
 	return a == b;
 }
-INSTANCING_simpleDArray(derived);
+GASHA_INSTANCING_simpleDArray(derived);
 #endif
 
 // End of file
