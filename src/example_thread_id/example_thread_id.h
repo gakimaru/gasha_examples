@@ -4,7 +4,7 @@
 
 //--------------------------------------------------------------------------------
 // exmaple_thread_id.h
-//スレッドIDテスト
+// スレッドIDテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -12,6 +12,7 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
+//----------------------------------------
 //スレッドIDテスト
 void example_thread_id();
 

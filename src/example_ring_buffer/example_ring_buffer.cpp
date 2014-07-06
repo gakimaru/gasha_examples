@@ -862,12 +862,12 @@ void example_ring_buffer()
 			printf(".lockUnique(with_lock_shared) ... OK\n");
 		}
 		{
-			auto lock(con.lockUnique(try_lock));//unique_shared_lock<container_t::lock_type> lock(*con, try_lock);と同じ
-			printf(".lockUnique(try_lock) ... OK\n");
+			auto lock(con.lockUnique(try_to_lock));//unique_shared_lock<container_t::lock_type> lock(*con, try_to_lock);と同じ
+			printf(".lockUnique(try_to_lock) ... OK\n");
 		}
 		{
-			auto lock(con.lockUnique(try_lock_shared));//unique_shared_lock<container_t::lock_type> lock(*con, try_lock_shared);と同じ
-			printf(".lockUnique(try_lock_shared) ... OK\n");
+			auto lock(con.lockUnique(try_to_lock_shared));//unique_shared_lock<container_t::lock_type> lock(*con, try_to_lock_shared);と同じ
+			printf(".lockUnique(try_to_lock_shared) ... OK\n");
 		}
 		{
 			container_t::lock_type& lock_obj = con;

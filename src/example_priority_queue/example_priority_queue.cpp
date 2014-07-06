@@ -438,8 +438,8 @@ void example_priority_queue()
 		printf(".lockUnique(with_lock) ... OK\n");
 	}
 	{
-		auto lock(con->lockUnique(try_lock));//unique_shared_lock<container_t::lock_type> lock(*con, try_lock);と同じ
-		printf(".lockUnique(try_lock) ... OK\n");
+		auto lock(con->lockUnique(try_to_lock));//unique_shared_lock<container_t::lock_type> lock(*con, try_to_lock);と同じ
+		printf(".lockUnique(try_to_lock) ... OK\n");
 	}
 	{
 		pqueue_t::lock_type& lock_obj = *con;
@@ -896,8 +896,8 @@ void example_binary_heap()
 		printf(".lockUnique(with_lock) ... OK\n");
 	}
 	{
-		auto lock(heap->lockUnique(try_lock));//unique_shared_lock<container_t::lock_type> lock(*heap, try_lock);と同じ
-		printf(".lockUnique(try_lock) ... OK\n");
+		auto lock(heap->lockUnique(try_to_lock));//unique_shared_lock<container_t::lock_type> lock(*heap, try_lock);と同じ
+		printf(".lockUnique(try_to_lock) ... OK\n");
 	}
 	{
 		heap_t::lock_type& lock_obj = *heap;

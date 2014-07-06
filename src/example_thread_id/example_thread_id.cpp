@@ -11,7 +11,8 @@
 #include "example_thread_id.h"//スレッドIDテスト
 
 #include <gasha/thread_id.h>//スレッドID
-#include <gasha/type_traits.h>//スレッドID
+
+#include <gasha/type_traits.h>//型特性ユーティリティ：toStr()
 
 #include <stdio.h>//printf()
 

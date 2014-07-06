@@ -187,8 +187,8 @@ rite - rite_end = 0
 .lockUnique() ... OK
 .lockUnique(with_lock) ... OK
 .lockUnique(with_lock_shared) ... OK
-.lockUnique(try_lock) ... OK
-.lockUnique(try_lock_shared) ... OK
+.lockUnique(try_to_lock) ... OK
+.lockUnique(try_to_lock_shared) ... OK
 .lockUnique(adopt_lock) ... OK
 .lockUnique(adopt_shared_lock) ... OK
 .lockUnique(defer_lock) ... OK
@@ -320,10 +320,10 @@ array= [1:102] [1:101] [2:103] [2:104] [3:105] [3:106] [4:107] [4:108] [5:109] [
 [normal container]
 (before)
 size=0, max_size=100(100)
-array= [5:5] [0:0] [3:3] [0:0] [0:0] [7:7] [6:6] [0:0]
+array= [6:6] [0:0] [0:0] [0:0] [7:7] [4:4]
 (after)
-size=13, max_size=100(100)
-array= [0:0] [0:0] [7:7] [8:8] [2:2] [1:11] [9:19] [6:16] [2:12] [7:17] [8:18] [0:0] [3:13]
+size=11, max_size=100(100)
+array= [0:0] [0:0] [7:7] [4:4] [8:8] [3:3] [6:17] [1:11] [3:13] [0:0] [9:19]
 
 [multi-thread container]
 (before)
@@ -331,12 +331,12 @@ size=0, max_size=100(100)
 array=(empty)
 (after)
 size=10, max_size=100(100)
-array= [7:17] [2:12] [6:16] [9:19] [3:13] [5:15] [1:11] [4:14] [8:18] [0:10]
+array= [2:12] [5:15] [6:16] [8:18] [7:17] [3:13] [1:11] [9:19] [0:10] [4:14]
 --------------------------------------------------------------------------------
 [Test for performance dynamic_array]
 
 [create container & assign() * 10]
-*elapsed_time=0.000004000 sec
+*elapsed_time=0.000003000 sec
 
 [clear() * 10]
 *elapsed_time=0.000022000 sec
@@ -361,7 +361,7 @@ num=10
 *elapsed_time=0.000022000 sec
 
 [sort]
-*elapsed_time=0.000008000 sec
+*elapsed_time=0.000009000 sec
 
 [reverse_iterator]
 size=10, max_size=10(10)
@@ -372,7 +372,7 @@ num=10
 [findValue]
  [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
 num=10
-*elapsed_time=0.000013000 sec
+*elapsed_time=0.000012000 sec
 
 [binarySearchValue]
  [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
@@ -380,10 +380,10 @@ num=10
 *elapsed_time=0.000012000 sec
 
 [delete container]
-*elapsed_time=0.000006000 sec
+*elapsed_time=0.000005000 sec
 
 [finish]
-*elapsed_time=0.000132000 sec
+*elapsed_time=0.000131000 sec
 --------------------------------------------------------------------------------
 [Test for performance std::vector]
 
@@ -395,13 +395,13 @@ num=10
 
 [push_back() * 10]
 num=10
-*elapsed_time=0.000005000 sec
+*elapsed_time=0.000006000 sec
 
 [iterator(1)]
 size=10, max_size=536870911
 array= [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
 num=10
-*elapsed_time=0.000011000 sec
+*elapsed_time=0.000010000 sec
 
 [reverse sort]
 *elapsed_time=0.000007000 sec
@@ -431,7 +431,7 @@ num=10
 *elapsed_time=0.000012000 sec
 
 [delete container]
-*elapsed_time=0.000004000 sec
+*elapsed_time=0.000005000 sec
 
 [finish]
 *elapsed_time=0.000091000 sec

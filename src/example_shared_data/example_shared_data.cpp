@@ -842,7 +842,7 @@ void testScopedLock()
 		auto lk = lock.lockUnique(with_lock);
 	}
 	{
-		auto lk = lock.lockUnique(try_lock);
+		auto lk = lock.lockUnique(try_to_lock);
 	}
 	{
 		lock.lock();
@@ -866,7 +866,7 @@ void testScopedLockStandard()
 		GASHA_ unique_lock<T> lk(lock, with_lock);
 	}
 	{
-		GASHA_ unique_lock<T> lk(lock, try_lock);
+		GASHA_ unique_lock<T> lk(lock, try_to_lock);
 	}
 	{
 		lock.lock();
@@ -896,10 +896,10 @@ void testScopedSharedLock()
 		auto lk = lock.lockUnique(with_lock_shared);
 	}
 	{
-		auto lk = lock.lockUnique(try_lock);
+		auto lk = lock.lockUnique(try_to_lock);
 	}
 	{
-		auto lk = lock.lockUnique(try_lock_shared);
+		auto lk = lock.lockUnique(try_to_lock_shared);
 	}
 	{
 		lock.lock();

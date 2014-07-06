@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
 // main.cpp
-//スレッドIDテスト - メイン
+// スレッドIDテスト - メイン
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
