@@ -10,7 +10,7 @@
 
 #include "example_shared_data.h"//マルチスレッド共有データテスト
 
-#include <gasha/shared_pool_allocator.inl>//マルチスレッド共有プールアロケータ【インライン関数／テンプレート関数定義部】
+#include <gasha/pool_allocator.inl>//プールアロケータ【インライン関数／テンプレート関数定義部】
 #include <gasha/shared_stack.inl>//マルチスレッド共有スタック【インライン関数／テンプレート関数定義部】
 #include <gasha/shared_queue.inl>//マルチスレッド共有キュー【インライン関数／テンプレート関数定義部】
 
@@ -42,22 +42,26 @@
 #include <thread>//C++11 std::thread
 #include <functional>//C++11 std::function
 
+//【VC++】sprintf を使用すると、error C4996 が発生する
+//  error C4996: 'sprintf': This function or variable may be unsafe. Consider using strncpy_fast_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+#pragma warning(disable: 4996)//C4996を抑える
+
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //--------------------------------------------------------------------------------
-//マルチスレッド共有プールアロケータテスト
+//プールアロケータテスト
 
-static shared_pool_allocator_t s_poolAllocator;//マルチスレッド共有プールアロケータ
+static shared_pool_allocator_t s_poolAllocator;//プールアロケータ
 
-//マルチスレッド共有プールアロケータからアロケート
+//プールアロケータからアロケート
 data_t* allocNormal()
 {
-	return s_poolAllocator.newObj();
+	return s_poolAllocator.newDefault();
 }
-//マルチスレッド共有プールアロケータからフリー
+//プールアロケータからフリー
 bool freeNormal(data_t* value)
 {
-	return s_poolAllocator.deleteObj(value);
+	return s_poolAllocator.deleteDefault(value);
 }
 
 //--------------------------------------------------------------------------------
@@ -68,7 +72,7 @@ static lf_pool_allocator_t s_lfPoolAllocator;//ロックフリープールアロ
 //ロックフリープールアロケータからアロケート
 data_t* allocLockFree()
 {
-	return s_lfPoolAllocator.newObj();
+	return s_lfPoolAllocator.newObj<data_t>();
 }
 //ロックフリープールアロケータからフリー
 bool freeLockFree(data_t* value)
@@ -202,7 +206,7 @@ void easyTest()
 		printf("*Allocate and free test threads = %d\n", 1);
 		printf("*Memory pool size               = %d\n", TEST_POOL_SIZE);
 		const auto begin_time = nowTime();
-		sharedPoolAllocator<data_t, TEST_POOL_SIZE> allocator;
+		poolAllocator_withType<data_t, TEST_POOL_SIZE> allocator;
 		data_t* data[TEST_POOL_SIZE + 1] = { 0 };
 		int count = 0;
 		while(true)
@@ -277,14 +281,14 @@ void easyTest()
 
 #ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 	//デバッグ情報表示用処理
-	auto debug_print_info = [](const data_t& data)
+	auto debug_print_info = [](char* message, const data_t& data) -> std::size_t
 	{
-		printf("temp=%d, value=%d", data.m_temp, data.m_value);
+		return sprintf(message, "temp=%d, value=%d", data.m_temp, data.m_value);
 	};
 #endif//ENABLE_TEST_PRINT_DEBUG_INFO
 
 #ifdef ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR
-	//マルチスレッド共有プールアロケータのテスト
+	//プールアロケータのテスト
 	{
 		auto alloc = []() -> data_t*
 		{
@@ -297,7 +301,9 @@ void easyTest()
 		test_pool_allocator("Shared Pool-allocator", alloc, free);
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
-		s_poolAllocator.printDebugInfo(debug_print_info);
+		char message[2048];
+		s_poolAllocator.debugInfo<data_t>(message, debug_print_info);
+		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR
@@ -316,7 +322,9 @@ void easyTest()
 		test_pool_allocator("Lock-Free Pool-allocator", alloc, free);
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
-		s_lfPoolAllocator.printDebugInfo(debug_print_info);
+		char message[2048];
+		s_lfPoolAllocator.debugInfo<data_t>(message, debug_print_info);
+		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_POOL_ALLOCATOR
@@ -335,7 +343,9 @@ void easyTest()
 		test_stack_queue("Shared Stack", push, pop);
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
-		s_stack.printDebugInfo(debug_print_info);
+		char message[2048];
+		s_stack.debugInfo(message, debug_print_info);
+		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_STACK
@@ -354,7 +364,9 @@ void easyTest()
 		test_stack_queue("Lock-Free Stack", push, pop);
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
-		s_lfStack.printDebugInfo(debug_print_info);
+		char message[2048];
+		s_lfStack.debugInfo(message, debug_print_info);
+		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_STACK
@@ -373,7 +385,9 @@ void easyTest()
 		test_stack_queue("Shared Queue", push, pop);
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
-		s_queue.printDebugInfo(debug_print_info);
+		char message[2048];
+		s_queue.debugInfo(message, debug_print_info);
+		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_QUEUE
@@ -392,7 +406,9 @@ void easyTest()
 		test_stack_queue("Lock-Free Queue", push, pop);
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
-		s_lfQueue.printDebugInfo(debug_print_info);
+		char message[2048];
+		s_lfQueue.debugInfo(message, debug_print_info);
+		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_QUEUE
@@ -696,14 +712,14 @@ void thread_test()
 
 #ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 	//デバッグ情報表示用処理
-	auto debug_print_info = [](const data_t& data)
+	auto debug_print_info = [](char* message, const data_t& data) -> std::size_t
 	{
-		printf("temp=%d, value=%d", data.m_temp, data.m_value);
+		return sprintf(message, "temp=%d, value=%d", data.m_temp, data.m_value);
 	};
 #endif//ENABLE_TEST_PRINT_DEBUG_INFO
 
 #ifdef ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR
-	//マルチスレッド共有プールアロケータのテスト
+	//プールアロケータのテスト
 	{
 		auto alloc = []() -> data_t*
 		{
@@ -716,7 +732,9 @@ void thread_test()
 		test_pool_allocator("Shared Pool-allocator", alloc, free);
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
-		s_poolAllocator.printDebugInfo(debug_print_info);
+		char message[2048];
+		s_poolAllocator.debugInfo<data_t>(message, debug_print_info);
+		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR
@@ -735,7 +753,9 @@ void thread_test()
 		test_pool_allocator("Lock-Free Pool-allocator", alloc, free);
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
-		s_lfPoolAllocator.printDebugInfo(debug_print_info);
+		char message[2048];
+		s_lfPoolAllocator.debugInfo<data_t>(message, debug_print_info);
+		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_POOL_ALLOCATOR
@@ -754,7 +774,9 @@ void thread_test()
 		test_stack_queue("Shared Stack", "PUSH", "POP ", push, pop);
 		
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
-		s_stack.printDebugInfo(debug_print_info);
+		char message[2048];
+		s_stack.debugInfo(message, debug_print_info);
+		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_STACK
@@ -773,7 +795,9 @@ void thread_test()
 		test_stack_queue("Lock-Free Stack", "PUSH", "POP ", push, pop);
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
-		s_lfStack.printDebugInfo(debug_print_info);
+		char message[2048];
+		s_lfStack.debugInfo(message, debug_print_info);
+		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_STACK
@@ -792,7 +816,9 @@ void thread_test()
 		test_stack_queue("Shared Queue", "ENQUEUE", "DEQUEUE", push, pop);
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
-		s_queue.printDebugInfo(debug_print_info);
+		char message[2048];
+		s_queue.debugInfo(message, debug_print_info);
+		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_QUEUE
@@ -811,7 +837,9 @@ void thread_test()
 		test_stack_queue("Lock-Free Queue", "ENQUEUE", "DEQUEUE", push, pop);
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
-		s_lfQueue.printDebugInfo(debug_print_info);
+		char message[2048];
+		s_lfQueue.debugInfo(message, debug_print_info);
+		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_QUEUE
@@ -918,9 +946,8 @@ void testScopedSharedLock()
 //マルチスレッド共有データテスト
 void example_shared_data()
 {
-	printf("----- Basin information -----\n");
+	printf("----- Basic information -----\n");
 	printf("alignof(data_t)=%d\n", alignof(data_t));
-	printf("calcStaticMSB<alignof(data_t)>::value=%d\n", calcStaticMSB<alignof(data_t)>::value);
 	printf("sizeof(lf_stack_t)=%d\n", sizeof(lf_stack_t));
 	printf("alignof(lf_stack_t)=%d\n", alignof(lf_stack_t));
 	printf("sizeof(lf_stack_t::stack_t)=%d\n", sizeof(lf_stack_t::stack_t));

@@ -22,7 +22,7 @@
 #define ENABLE_EASY_TEST//簡易テストを実行する場合は、このマクロを有効化する
 #define ENABLE_THREAD_TEST//スレッドテストを実行する場合は、このマクロを有効化する
 
-#define ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR//マルチスレッド共有プールアロケータのテストを有効にする場合は、このマクロを有効化する
+#define ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR//プールアロケータのテストを有効にする場合は、このマクロを有効化する
 #define ENABLE_TEST_FOR_LF_POOL_ALLOCATOR//ロックフリープールアロケータのテストを有効にする場合は、このマクロを有効化する
 #define ENABLE_TEST_FOR_SHARED_STACK//マルチスレッド共有スタックのテストを有効にする場合は、このマクロを有効化する
 #define ENABLE_TEST_FOR_LF_STACK//ロックフリースタックのテストを有効にする場合は、このマクロを有効化する
@@ -126,11 +126,11 @@ typedef GASHA_ dummyLock lock_type;//共有データのロックに dummyLock �
 //----------------------------------------
 //マルチスレッド共有データ
 
-#include <gasha/shared_pool_allocator.h>//マルチスレッド共有プールアロケータ【宣言部】
+#include <gasha/pool_allocator.h>//プールアロケータ【宣言部】
 #include <gasha/shared_stack.h>//マルチスレッド共有スタック【宣言部】
 #include <gasha/shared_queue.h>//マルチスレッド共有キュー【宣言部】
 
-typedef GASHA_ sharedPoolAllocator<data_t, TEST_POOL_SIZE, lock_type> shared_pool_allocator_t;//マルチスレッド共有プールアロケータ
+typedef GASHA_ poolAllocator_withType<data_t, TEST_POOL_SIZE, lock_type> shared_pool_allocator_t;//プールアロケータ
 typedef GASHA_ sharedStack<data_t, TEST_POOL_SIZE, lock_type> shared_stack_t;//マルチスレッド共有スタック
 typedef GASHA_ sharedQueue<data_t, TEST_POOL_SIZE, lock_type> shared_queue_t;//マルチスレッド共有キュー
 
@@ -141,7 +141,7 @@ typedef GASHA_ sharedQueue<data_t, TEST_POOL_SIZE, lock_type> shared_queue_t;//�
 #include <gasha/lf_stack.h>//ロックフリースタック【宣言部】
 #include <gasha/lf_queue.h>//ロックフリーキュー【宣言部】
 
-typedef GASHA_ lfPoolAllocator<data_t, TEST_POOL_SIZE> lf_pool_allocator_t;//ロックフリープールアロケータ
+typedef GASHA_ lfPoolAllocator_withType<data_t, TEST_POOL_SIZE> lf_pool_allocator_t;//ロックフリープールアロケータ
 typedef GASHA_ lfStack<data_t, TEST_POOL_SIZE, TEST_TAGGED_PTR_TAG_SIZE, TEST_TAGGED_PTR_TAG_SHIFT> lf_stack_t;//ロックフリースタック
 typedef GASHA_ lfQueue<data_t, TEST_POOL_SIZE, TEST_TAGGED_PTR_TAG_SIZE, TEST_TAGGED_PTR_TAG_SHIFT> lf_queue_t;//ロックフリーキュー
 

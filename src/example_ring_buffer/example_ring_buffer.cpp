@@ -20,6 +20,7 @@
 #include <atomic>//C++11 std::atomic用
 #include <chrono>//C++11 std::chrono用
 #include <stdio.h>//printf()
+
 #include <assert.h>//assert()
 
 //【VC++】例外を無効化した状態で <thread> <mutex> <algorithm> <deque> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する

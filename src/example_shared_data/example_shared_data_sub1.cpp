@@ -1,5 +1,5 @@
 ﻿//--------------------------------------------------------------------------------
-// exmaple_shared_data.cpp
+// exmaple_shared_data1.cpp
 // マルチスレッド共有データテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
@@ -15,13 +15,9 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //----------------------------------------
 //テンプレートの明示的なインスタンス化
 
-#include <gasha/shared_pool_allocator.cpp.h>//マルチスレッド共有プールアロケータ【関数定義部】
-#include <gasha/shared_stack.cpp.h>//マルチスレッド共有スタック【関数定義部】
-#include <gasha/shared_queue.cpp.h>//マルチスレッド共有キュー【関数定義部】
+#include <gasha/pool_allocator.cpp.h>//プールアロケータ【関数定義部】
 
 #include <gasha/lf_pool_allocator.cpp.h>//ロックフリープールアロケータ【関数定義部】
-#include <gasha/lf_stack.cpp.h>//ロックフリースタック【関数定義部】
-#include <gasha/lf_queue.cpp.h>//ロックフリーキュー【関数定義部】
 
 //※コンパイル速度の劣化や、ソース改変時の広範囲な再コンパイルの影響を抑えるために、
 //　コンテナのヘッダーファイルを三つに分割。
@@ -36,12 +32,8 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //明示的インスタンス化
 
-template class sharedPoolAllocator<data_t, TEST_POOL_SIZE, lock_type>;//マルチスレッド共有プールアロケータ
-template class sharedStack<data_t, TEST_POOL_SIZE, lock_type>;//マルチスレッド共有スタック
-template class sharedQueue<data_t, TEST_POOL_SIZE, lock_type>;//マルチスレッド共有キュー
+GASHA_INSTANCING_poolAllocator_withType_withLock(data_t, TEST_POOL_SIZE, lock_type);//プールアロケータ ※template class poolAllocator_withType<data_t, TEST_POOL_SIZE, lock_type>; と同じ
 
-template class lfPoolAllocator<data_t, TEST_POOL_SIZE>;//ロックフリープールアロケータ
-template class lfStack<data_t, TEST_POOL_SIZE, TEST_TAGGED_PTR_TAG_SIZE, TEST_TAGGED_PTR_TAG_SHIFT>;//ロックフリースタック
-template class lfQueue<data_t, TEST_POOL_SIZE, TEST_TAGGED_PTR_TAG_SIZE, TEST_TAGGED_PTR_TAG_SHIFT>;//ロックフリーキュー
+GASHA_INSTANCING_lfPoolAllocator_withType(data_t, TEST_POOL_SIZE);//ロックフリープールアロケータ ※template class lfPoolAllocator_withType<data_t, TEST_POOL_SIZE>; と同じ
 
 // End of file

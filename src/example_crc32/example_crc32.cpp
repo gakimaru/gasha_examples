@@ -14,6 +14,7 @@
 #include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
 
 #include <stdio.h>//printf()
+
 #include <assert.h>//assert()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用

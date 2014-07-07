@@ -24,7 +24,9 @@ PROJ_SRC_DIR := $(SRC_BASE_DIR)/$(PROG_NAME)
 SRCS := \
 	main.cpp \
 	$(PROJ_SRC_DIR)/example_shared_data.cpp \
-	$(PROJ_SRC_DIR)/example_shared_data_sub.cpp \
+	$(PROJ_SRC_DIR)/example_shared_data_sub1.cpp \
+	$(PROJ_SRC_DIR)/example_shared_data_sub2.cpp \
+	$(PROJ_SRC_DIR)/example_shared_data_sub3.cpp \
 
 # インクルードディレクトリ
 INCLIDE_DIRS := \

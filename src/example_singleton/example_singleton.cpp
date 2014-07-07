@@ -235,26 +235,13 @@ void example_singleton()
 	//10ミリ秒待ち
 	std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
-#ifdef GASHA_SINGLETON_DEBUG_ENABLED
 	//シングルトンアクセス中情報を表示
 	{
-		printf("[ Singleton Access Info ]\n");
+		char message[2048];
 		singleton<common_data1_t> data("test1-E", with_lock_shared);
-		auto& debug = data.debug();
-		printf("accessCount=%d\n", debug.accessCount());
-		printf("created=%.9lf sec, \"%s\"\n", debug.createdSysTime(), debug.createdProcedureName());
-		printf("destroy=%.9lf sec, \"%s\"\n", debug.destroyedSysTime(), debug.destroyedProcedureName());
-		auto& list = debug.list();
-		{
-			auto lock = list.lockSharedScoped();
-			printf("  Access Info: (Count=%d)\n", list.size());
-			for (auto& info : list)
-			{
-				printf("  - [%d] %.9lf sec, \"%s\": thread=\"%s\"(0x%08x)\n", info.m_seqNo, info.m_sysTime, info.m_procedureName, info.m_threadId.name(), info.m_threadId.id());
-			}
-		}
+		data.debugInfo(message);
+		printf(message);
 	}
-#endif//GASHA_SINGLETON_DEBUG_ENABLED
 
 	//スレッド終了待ち
 	for (std::size_t i = 0; i < extentof(th); ++i)
