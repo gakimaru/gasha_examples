@@ -9,7 +9,7 @@ Compiler-language: C++ (C++ Ver.=2003)
         C++ is implemented C++98.
         C++ is implemented C++03.
 
-Plataform: "Win"(x86 32bits, (unknown)-endian), Ver=[0(0x00000000).0(0x00000000)]
+Plataform: "Win"(x86 32bits, little-endian), Ver=[0(0x00000000).0(0x00000000)]
     Target plarform is "Windows"
 
 __FILE__="..\..\src\example_build_settings\example_build_settings.cpp"
@@ -19,8 +19,8 @@ __PRETTY_FUNCTION__="void __cdecl example_build_settings::test::func(void)"
 __FUNCSIG__="void __cdecl example_build_settings::test::func(void)"
 __func__="example_build_settings::test::func"
 __FUNCDNAME__="?func@test@?1??example_build_settings@@YAXXZ@SAXXZ"
-__DATE__="Jul  7 2014"
-__TIME__="20:45:29"
+__DATE__="Jul  8 2014"
+__TIME__="04:20:49"
 __TIMESTAMP__="Fri Jun 27 21:49:49 2014"
 
 GASHA_FUNC_NAME()="void __cdecl example_build_settings::test::func(void)"
@@ -44,8 +44,13 @@ TLS Variable=123
 
 sizeof(data_t)=32
 alignof(data_t)=16
-_aligned_malloc(sizeof(data_t), alignof(data_t))=009E97E0
+_aligned_malloc(sizeof(data_t), alignof(data_t))=006597E0
 _aligned_free(p)
+
+==============================================================================
+Diagnosis Mode: Library
+==============================================================================
+
 ------------------------------------------------------------------------------
 [ Diagnose build-settings suitable for runtime environment ]
 
@@ -57,7 +62,7 @@ cpu_string="Genunteline"
 [OK] SSE4.1 is NOT supported.
 [OK] SSE4.2 is supported.
 [OK] POPCNT is supported.
-[OK] AES is supported.
+[--] AES is not used.
 [OK] AVX is supported.
 [--] AVX2 is not used.
 
@@ -65,7 +70,7 @@ cpu_string="Genunteline"
 [ Build-settings by compiled environment ]
 
 Platform: Win (Target Versionn=0.0)
-CPU Architecture: x86 (32 bit, (unknown) endian) [x86]
+CPU Architecture: x86 (32 bit, little endian) [x86]
 
 Compiler: VC++ (Version=1800.0) ... Visual C++ 12.0 (Visual Studio 2013)
 Language: C++ (__cplusplus=199711) [C++98] [C++03]
@@ -92,6 +97,7 @@ Language: C++ (__cplusplus=199711) [C++98] [C++03]
 - thread_local ... is PROXY available.
 - alignas ... is PROXY available.
 - alignof ... is PROXY available.
+- alignas(alignof(T)) ... is NOT available.
 
 - _aligned_malloc ... is available.
 - _aligned_free ... is available.
@@ -111,4 +117,78 @@ Configuration name: RELEASE
 - symbols ... STRIPPED.
 
 ------------------------------------------------------------------------------
-message size = 2090 butes.
+message size = 2313 butes.
+
+==============================================================================
+Diagnosis Mode: Current
+==============================================================================
+
+------------------------------------------------------------------------------
+[ Diagnose build-settings suitable for runtime environment ]
+
+cpu_string="Genunteline"
+[OK] SSE is supported.
+[OK] SSE2 is supported.
+[OK] SSE3 is supported.
+[--] SSE 4a is not used.
+[OK] SSE4.1 is NOT supported.
+[OK] SSE4.2 is supported.
+[OK] POPCNT is supported.
+[--] AES is not used.
+[OK] AVX is supported.
+[--] AVX2 is not used.
+
+------------------------------------------------------------------------------
+[ Build-settings by compiled environment ]
+
+Platform: Win (Target Versionn=0.0)
+CPU Architecture: x86 (32 bit, little endian) [x86]
+
+Compiler: VC++ (Version=1800.0) ... Visual C++ 12.0 (Visual Studio 2013)
+Language: C++ (__cplusplus=199711) [C++98] [C++03]
+
+- nullptr ... is available.
+- override ... is available.
+- final ... is available.
+- auto ... is available.
+- decltype ... is available.
+- default/delete ... is available.
+- constexpr ... is DUMMY.
+- user-defined-literal ... is NOT available.
+- lambda expression ... is available.
+- range-based for ... is available.
+- enum class ... is available.
+- variadic template ... is available.
+- template aliases ... is available.
+- delegating constructors ... is available.
+- inheriting constructors ... is NOT available.
+- uniform initializer ... is available.
+- initializer list ... is available.
+- rvalue reference & std::move ... is available.
+- static_assert ... is available.
+- thread_local ... is PROXY available.
+- alignas ... is PROXY available.
+- alignof ... is PROXY available.
+- alignas(alignof(T)) ... is NOT available.
+
+- _aligned_malloc ... is available.
+- _aligned_free ... is available.
+- no_inline ... is available with commonized.
+- always_inline ... is available with commonized.
+
+------------------------------------------------------------------------------
+[ Build-configuratoin ]
+
+Configuration name: RELEASE
+
+- debug feature ... is NOT available.
+- assertion ... is DISABLED.
+- optimized ... MAX.
+- file-system ... for ROM.
+- unit-test ... is NOT available.
+- symbols ... STRIPPED.
+
+------------------------------------------------------------------------------
+message size = 2313 butes.
+
+- End -

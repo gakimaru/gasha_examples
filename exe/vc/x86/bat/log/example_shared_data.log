@@ -20,10 +20,10 @@ lf_queue_t::queue_ptr_t::TAG_SHIFT=32
 
 ================================================================================
 [Test for taggedPtr]
-p=0x00D7FA48, tag=65535
-taggedPtr<int, 32, 32>: .value()=0x0000ffff00d7fa48, .ptr()=0x00D7FA48, .tag()=65535
-taggedPtr<int,  2,  0>: .value()=0x0000000000d7fa4b, .ptr()=0x00D7FA48, .tag()=3
-taggedPtr<int,  8, -8>: .value()=0xff00000000d7fa48, .ptr()=0x00D7FA48, .tag()=255
+p=0x002DFDF0, tag=65535
+taggedPtr<int, 32, 32>: .value()=0x0000ffff002dfdf0, .ptr()=0x002DFDF0, .tag()=65535
+taggedPtr<int,  2,  0>: .value()=0x00000000002dfdf3, .ptr()=0x002DFDF0, .tag()=3
+taggedPtr<int,  8, -8>: .value()=0xff000000002dfdf0, .ptr()=0x002DFDF0, .tag()=255
 ================================================================================
 [Test for Lock-free pool-allocator/sharedStack/sharedQueue]
 --------------------------------------------------------------------------------
@@ -31,14 +31,14 @@ taggedPtr<int,  8, -8>: .value()=0xff00000000d7fa48, .ptr()=0x00D7FA48, .tag()=2
 *Test count                     = 1000000
 *Allocate and free test threads = 1
 *Memory pool size               = 20
-[Shared Pool-allocator:END] elapsed_time=0.043040600 sec
+[Shared Pool-allocator:END] elapsed_time=0.043040700 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Lock-Free Pool-allocator:START]
 *Test count                     = 1000000
 *Allocate and free test threads = 1
 *Memory pool size               = 20
-[Lock-Free Pool-allocator:END] elapsed_time=0.048045800 sec
+[Lock-Free Pool-allocator:END] elapsed_time=0.047045200 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Shared Stack:START]
@@ -46,7 +46,7 @@ taggedPtr<int,  8, -8>: .value()=0xff00000000d7fa48, .ptr()=0x00D7FA48, .tag()=2
 *Push/Enqueue test threads = 1
 *Pop/Dequeue  test threads = 1
 *Memory pool size          = 20
-[Shared Stack:END] elapsed_time=0.045043100 sec
+[Shared Stack:END] elapsed_time=0.044042200 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Lock-Free Stack:START]
@@ -54,7 +54,7 @@ taggedPtr<int,  8, -8>: .value()=0xff00000000d7fa48, .ptr()=0x00D7FA48, .tag()=2
 *Push/Enqueue test threads = 1
 *Pop/Dequeue  test threads = 1
 *Memory pool size          = 20
-[Lock-Free Stack:END] elapsed_time=0.126121000 sec
+[Lock-Free Stack:END] elapsed_time=0.121116400 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Shared Queue:START]
@@ -62,7 +62,7 @@ taggedPtr<int,  8, -8>: .value()=0xff00000000d7fa48, .ptr()=0x00D7FA48, .tag()=2
 *Push/Enqueue test threads = 1
 *Pop/Dequeue  test threads = 1
 *Memory pool size          = 20
-[Shared Queue:END] elapsed_time=0.046043200 sec
+[Shared Queue:END] elapsed_time=0.046041900 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Lock-Free Queue:START]
@@ -70,7 +70,7 @@ taggedPtr<int,  8, -8>: .value()=0xff00000000d7fa48, .ptr()=0x00D7FA48, .tag()=2
 *Push/Enqueue test threads = 1
 *Pop/Dequeue  test threads = 1
 *Memory pool size          = 20
-[Lock-Free Queue:END] elapsed_time=0.187180300 sec
+[Lock-Free Queue:END] elapsed_time=0.187178300 sec
 --------------------------------------------------------------------------------
 ================================================================================
 [Test for Lock-free pool-allocator/sharedStack/sharedQueue with threads]
@@ -85,22 +85,22 @@ taggedPtr<int,  8, -8>: .value()=0xff00000000d7fa48, .ptr()=0x00D7FA48, .tag()=2
 [Alloc: 3]:Waiting...
 [Alloc: 4]:Waiting...
 [Alloc: 0]:Start
-[Alloc: 0] alloc=0
 [Alloc: 1]:Start
+[Alloc: 0] alloc=0
 [Alloc: 2]:Start
 [Alloc: 3]:Start
 [Alloc: 4]:Start
 [Alloc: 0] alloc=200000
-[Alloc: 2] alloc=400000
-[Alloc: 3] alloc=600000
+[Alloc: 3] alloc=400000
+[Alloc: 4] alloc=600000
 [Alloc: 3] alloc=800000
+[Alloc: 0]:End
 [Alloc: 2]:End
+[Alloc: 1]:End
 [Alloc: 3]:End
 [Alloc: 4] alloc=1000000
 [Alloc: 4]:End
-[Alloc: 0]:End
-[Alloc: 1]:End
-[Shared Pool-allocator:END] elapsed_time=0.397377400 sec
+[Shared Pool-allocator:END] elapsed_time=0.598255500 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Lock-Free Pool-allocator:START]
@@ -119,16 +119,16 @@ taggedPtr<int,  8, -8>: .value()=0xff00000000d7fa48, .ptr()=0x00D7FA48, .tag()=2
 [Alloc: 3]:Start
 [Alloc: 4]:Start
 [Alloc: 1] alloc=200000
-[Alloc: 1] alloc=400000
-[Alloc: 0] alloc=600000
-[Alloc: 4] alloc=800000
-[Alloc: 0]:End
-[Alloc: 4] alloc=1000000
-[Alloc: 2]:End
-[Alloc: 1]:End
+[Alloc: 3] alloc=400000
+[Alloc: 3] alloc=600000
+[Alloc: 0] alloc=800000
 [Alloc: 4]:End
+[Alloc: 0]:End
+[Alloc: 2] alloc=1000000
+[Alloc: 1]:End
+[Alloc: 2]:End
 [Alloc: 3]:End
-[Lock-Free Pool-allocator:END] elapsed_time=0.264251700 sec
+[Lock-Free Pool-allocator:END] elapsed_time=0.315812600 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Shared Stack:START]
@@ -148,22 +148,22 @@ taggedPtr<int,  8, -8>: .value()=0xff00000000d7fa48, .ptr()=0x00D7FA48, .tag()=2
 [POP : 0]:Start
 [POP : 0] count=0
 [POP : 1]:Start
+[PUSH: 2] count=200000
 [POP : 0] count=200000
-[PUSH: 1] count=200000
-[PUSH: 2] count=400000
-[POP : 1] count=400000
+[PUSH: 0] count=400000
+[POP : 0] count=400000
 [PUSH: 2] count=600000
-[POP : 1] count=600000
-[PUSH: 0] count=800000
-[POP : 1] count=800000
-[PUSH: 2]:End
-[PUSH: 0] count=1000000
-[PUSH: 1]:End
-[POP : 0]:End
-[POP : 1] count=1000000
+[POP : 0] count=600000
+[PUSH: 1] count=800000
+[POP : 0] count=800000
+[PUSH: 1] count=1000000
 [PUSH: 0]:End
+[POP : 0] count=1000000
+[PUSH: 2]:End
+[POP : 0]:End
 [POP : 1]:End
-[Shared Stack:END] elapsed_time=0.642613100 sec
+[PUSH: 1]:End
+[Shared Stack:END] elapsed_time=0.647615400 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Lock-Free Stack:START]
@@ -183,22 +183,22 @@ taggedPtr<int,  8, -8>: .value()=0xff00000000d7fa48, .ptr()=0x00D7FA48, .tag()=2
 [POP : 0]:Start
 [POP : 0] count=0
 [POP : 1]:Start
-[PUSH: 0] count=200000
+[PUSH: 1] count=200000
 [POP : 1] count=200000
-[PUSH: 0] count=400000
-[POP : 1] count=400000
-[PUSH: 0] count=600000
+[PUSH: 2] count=400000
+[POP : 0] count=400000
+[PUSH: 1] count=600000
 [POP : 1] count=600000
-[PUSH: 1] count=800000
-[POP : 0] count=800000
-[PUSH: 1] count=1000000
+[PUSH: 0] count=800000
+[POP : 1] count=800000
+[PUSH: 2] count=1000000
+[POP : 1] count=1000000
 [PUSH: 0]:End
-[PUSH: 1]:End
 [POP : 1]:End
-[POP : 0] count=1000000
 [PUSH: 2]:End
 [POP : 0]:End
-[Lock-Free Stack:END] elapsed_time=0.349332700 sec
+[PUSH: 1]:End
+[Lock-Free Stack:END] elapsed_time=0.386365700 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Shared Queue:START]
@@ -216,24 +216,24 @@ taggedPtr<int,  8, -8>: .value()=0xff00000000d7fa48, .ptr()=0x00D7FA48, .tag()=2
 [ENQUEUE: 1]:Start
 [ENQUEUE: 2]:Start
 [DEQUEUE: 0]:Start
-[DEQUEUE: 0] count=0
 [DEQUEUE: 1]:Start
+[DEQUEUE: 0] count=0
 [ENQUEUE: 0] count=200000
-[DEQUEUE: 0] count=200000
-[ENQUEUE: 0] count=400000
-[DEQUEUE: 1] count=400000
-[ENQUEUE: 1] count=600000
-[DEQUEUE: 0] count=600000
-[ENQUEUE: 1] count=800000
+[DEQUEUE: 1] count=200000
+[ENQUEUE: 1] count=400000
+[DEQUEUE: 0] count=400000
+[ENQUEUE: 2] count=600000
+[DEQUEUE: 1] count=600000
+[ENQUEUE: 2] count=800000
 [DEQUEUE: 0] count=800000
-[ENQUEUE: 0]:End
-[ENQUEUE: 1] count=1000000
-[DEQUEUE: 0]:End
-[ENQUEUE: 1]:End
 [ENQUEUE: 2]:End
-[DEQUEUE: 1] count=1000000
+[ENQUEUE: 1] count=1000000
+[DEQUEUE: 0] count=1000000
+[ENQUEUE: 0]:End
+[ENQUEUE: 1]:End
 [DEQUEUE: 1]:End
-[Shared Queue:END] elapsed_time=0.666635700 sec
+[DEQUEUE: 0]:End
+[Shared Queue:END] elapsed_time=0.667634500 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Lock-Free Queue:START]
@@ -253,20 +253,20 @@ taggedPtr<int,  8, -8>: .value()=0xff00000000d7fa48, .ptr()=0x00D7FA48, .tag()=2
 [DEQUEUE: 0]:Start
 [DEQUEUE: 0] count=0
 [DEQUEUE: 1]:Start
-[ENQUEUE: 2] count=200000
+[ENQUEUE: 1] count=200000
 [DEQUEUE: 0] count=200000
 [ENQUEUE: 1] count=400000
-[DEQUEUE: 0] count=400000
-[ENQUEUE: 2] count=600000
+[DEQUEUE: 1] count=400000
+[ENQUEUE: 0] count=600000
 [DEQUEUE: 1] count=600000
 [ENQUEUE: 1] count=800000
 [DEQUEUE: 0] count=800000
-[ENQUEUE: 0]:End
 [ENQUEUE: 2] count=1000000
-[DEQUEUE: 0] count=1000000
+[DEQUEUE: 0]:End
 [ENQUEUE: 2]:End
+[DEQUEUE: 1] count=1000000
+[ENQUEUE: 0]:End
 [ENQUEUE: 1]:End
 [DEQUEUE: 1]:End
-[DEQUEUE: 0]:End
-[Lock-Free Queue:END] elapsed_time=0.665634000 sec
+[Lock-Free Queue:END] elapsed_time=0.666636800 sec
 --------------------------------------------------------------------------------

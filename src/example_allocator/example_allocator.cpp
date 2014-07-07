@@ -18,6 +18,9 @@
 //アロケータアダプタ
 //多態アロケータ
 
+#include <gasha/pool_allocator.cpp.h>//プールアロケータ
+#include <gasha/lf_pool_allocator.cpp.h>//ロックフリープールアロケータ
+
 #include <stdio.h>//printf()
 
 //【VC++】例外を無効化した状態で <thread> をインクルードすると、warning C4530 が発生する
@@ -34,6 +37,15 @@ void example_allocator()
 {
 	printf("----- Test for allocator -----\n");
 
+	//仮
+	{
+		int x[10];
+		poolAllocator<10> x1(x);
+		lfPoolAllocator<10> x2(x);
+
+		poolAllocator<10> x3(x, sizeof(x));
+		lfPoolAllocator<10> x4(x, sizeof(x));
+	}
 
 	printf("- end -\n");
 }
