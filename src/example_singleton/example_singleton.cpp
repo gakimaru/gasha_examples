@@ -149,7 +149,7 @@ void example_singleton()
 	}
 
 	//スレッド用関数１Ａ
-	auto thread_func1a = [](const int thread_no)
+	auto thread_func1a = [](const std::size_t thread_no)
 	{
 		char name[20];
 		sprintf(name, "Thread1A(%d)", thread_no);
@@ -176,7 +176,7 @@ void example_singleton()
 	};
 
 	//スレッド用関数１Ｂ
-	auto thread_func1b = [](const int thread_no)
+	auto thread_func1b = [](const std::size_t thread_no)
 	{
 		char name[20];
 		sprintf(name, "Thread1B(%d)", thread_no);
@@ -191,7 +191,7 @@ void example_singleton()
 	};
 
 	//スレッド用関数２
-	auto thread_func2 = [](const int thread_no)
+	auto thread_func2 = [](const std::size_t thread_no)
 	{
 		char name[20];
 		sprintf(name, "Thread2(%d)", thread_no);

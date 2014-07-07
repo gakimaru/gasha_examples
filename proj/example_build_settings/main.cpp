@@ -24,10 +24,22 @@ int main(const int argc, const char* argv[])
 	{
 		char message[4096];
 		std::size_t size = 0;
-		diagnoseBuildSettings(message, size);
+
+		//ライブラリビルド時のビルド設定を診断
+		printf("\n");
+		diagnoseBuildSettings(message, size, diagnosisModeForLibrary);
+		printf(message);
+		printf("message size = %d butes.\n", size);
+
+		//現在のビルド設定を診断
+		printf("\n");
+		diagnoseBuildSettings(message, size, diagnosisModeForCurrent);
 		printf(message);
 		printf("message size = %d butes.\n", size);
 	}
+
+	printf("\n");
+	printf("- End -\n");
 
 	return EXIT_SUCCESS;
 }
