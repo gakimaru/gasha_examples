@@ -42,6 +42,7 @@
 
 #include <random>//C++11 std::random
 #include <cstdint>//C++11 std::intptr_t
+#include <memory.h>//memcpy()
 
 //【VC++】例外を無効化した状態で <algorithm> <functional> <bitset> をインクルードすると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。

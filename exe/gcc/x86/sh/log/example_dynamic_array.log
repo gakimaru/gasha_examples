@@ -248,10 +248,10 @@ array= [1:102] [1:101] [2:103] [2:104] [3:105] [3:106] [4:107] [4:108] [5:109] [
 [normal container]
 (before)
 size=0, max_size=100(100)
-array= [0:0] [5:5] [1:1] [4:4] [6:6] [8:8] [9:9] [7:7] [2:2]
+array= [0:0] [3:3] [6:6] [4:4] [5:5] [2:2] [7:7] [8:8] [9:9]
 (after)
 size=10, max_size=100(100)
-array= [5:5] [6:6] [9:9] [7:7] [9:19] [7:17] [3:13] [2:12] [5:15] [6:16]
+array= [3:3] [4:4] [7:7] [1:1] [4:18] [1:11] [0:11] [0:0] [3:0] [2:12]
 
 [multi-thread container]
 (before)
@@ -259,77 +259,77 @@ size=0, max_size=100(100)
 array=(empty)
 (after)
 size=10, max_size=100(100)
-array= [2:12] [3:13] [4:14] [6:16] [7:17] [5:15] [9:19] [1:11] [8:18] [0:10]
+array= [8:18] [5:15] [4:14] [3:13] [7:17] [9:19] [6:16] [0:10] [1:11] [2:12]
 --------------------------------------------------------------------------------
 [Test for performance dynamic_array]
 
 [create container & assign() * 10000000]
-*elapsed_time=0.020114000 sec
+*elapsed_time=0.019608000 sec
 
 [clear() * 10000000]
-*elapsed_time=0.016581000 sec
+*elapsed_time=0.016505000 sec
 
 [push_back() * 10000000]
 num=10000000
-*elapsed_time=0.014479000 sec
+*elapsed_time=0.014701000 sec
 
 [iterator(1)]
 num=10000000
-*elapsed_time=0.024793000 sec
+*elapsed_time=0.024739000 sec
 
 [reverse sort]
-*elapsed_time=0.126090000 sec
+*elapsed_time=0.129946000 sec
 
 [iterator(2)]
 num=10000000
-*elapsed_time=0.024999000 sec
+*elapsed_time=0.024873000 sec
 
 [sort]
-*elapsed_time=0.131125000 sec
+*elapsed_time=0.133707000 sec
 
 [reverse_iterator]
 num=10000000
-*elapsed_time=0.025223000 sec
+*elapsed_time=0.028646000 sec
 
 [findValue]
 num=100
-*elapsed_time=0.299031000 sec
+*elapsed_time=0.305148000 sec
 
 [binarySearchValue]
 num=10000000
-*elapsed_time=0.608680000 sec
+*elapsed_time=0.616841000 sec
 
 [delete container]
-*elapsed_time=0.030372000 sec
+*elapsed_time=0.030325000 sec
 
 [finish]
-*elapsed_time=1.321509000 sec
+*elapsed_time=1.345061000 sec
 --------------------------------------------------------------------------------
 [Test for performance std::vector]
 
 [create container & assign() * 10000000]
-*elapsed_time=0.019945000 sec
+*elapsed_time=0.019205000 sec
 
 [clear() * 10000000]
 *elapsed_time=0.000019000 sec
 
 [push_back() * 10000000]
 num=10000000
-*elapsed_time=0.020620000 sec
+*elapsed_time=0.020544000 sec
 
 [iterator(1)]
 num=10000000
 *elapsed_time=0.000014000 sec
 
 [reverse sort]
-*elapsed_time=0.117726000 sec
+*elapsed_time=0.128967000 sec
 
 [iterator(2)]
 num=10000000
-*elapsed_time=0.000020000 sec
+*elapsed_time=0.000021000 sec
 
 [sort]
-*elapsed_time=0.118069000 sec
+*elapsed_time=0.118503000 sec
 
 [reverse_iterator]
 num=10000000
@@ -341,13 +341,13 @@ num=100
 
 [binarySearchValue]
 num=10000000
-*elapsed_time=0.431886000 sec
+*elapsed_time=0.448601000 sec
 
 [delete container]
-*elapsed_time=0.013783000 sec
+*elapsed_time=0.013579000 sec
 
 [finish]
-*elapsed_time=0.722124000 sec
+*elapsed_time=0.749492000 sec
 
 - end -
 

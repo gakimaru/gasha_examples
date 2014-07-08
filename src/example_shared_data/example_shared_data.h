@@ -12,6 +12,8 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
+#include <cstddef>//std::size_t
+
 //【VC++】ワーニング設定を退避
 #pragma warning(push)
 

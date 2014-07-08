@@ -21,12 +21,12 @@ __FUNCSIG__="static void example_build_settings()::test::func()"
 __func__="func"
 __FUNCDNAME__=""
 __DATE__="Jul  8 2014"
-__TIME__="04:21:01"
-__TIMESTAMP__="Fri Jun 27 21:49:49 2014"
+__TIME__="17:12:28"
+__TIMESTAMP__="Tue Jul  8 15:50:35 2014"
 
 GASHA_FUNC_NAME()="static void example_build_settings()::test::func()"
 GASHA_FILE_LINE()="../../src/example_build_settings/example_build_settings.cpp(149)"
-GASHA_FILE_LINE_TIME()="../../src/example_build_settings/example_build_settings.cpp(150)[Fri Jun 27 21:49:49 2014]"
+GASHA_FILE_LINE_TIME()="../../src/example_build_settings/example_build_settings.cpp(150)[Tue Jul  8 15:50:35 2014]"
 This is normal func.
 This is inline func.
 This is noinline func.
@@ -48,19 +48,12 @@ user_defined_literal_var=10
 TLS Variable=123
     'thread_local' is featured.
 
-sizeof(data_t)=32
-alignof(data_t)=16
-_aligned_malloc(sizeof(data_t), alignof(data_t))=0x800203e0
-_aligned_free(p)
-    'alignas' is featured.
-    'alignof' is featured.
-
 ==============================================================================
-Diagnosis Mode: Library
+Diagnostic Mode: Library
 ==============================================================================
 
 ------------------------------------------------------------------------------
-[ Diagnose build-settings suitable for runtime environment ]
+[ Build-settings diagnostic test ]
 
 cpu_string="Genunteline"
 [OK] SSE is supported.
@@ -75,7 +68,7 @@ cpu_string="Genunteline"
 [--] AVX2 is not used.
 
 ------------------------------------------------------------------------------
-[ Build-settings by compiled environment ]
+[ Compiler specification ]
 
 Platform: Cygin (Target Versionn=0.0)
 CPU Architecture: x86 (32 bit, little endian) [x86]
@@ -103,6 +96,7 @@ Language: C++ (__cplusplus=201103) [C++98] [C++03] [C++11]
 - rvalue reference & std::move ... is available.
 - static_assert ... is available.
 - thread_local ... is available.
+- noexcept ... is available.
 - alignas ... is available.
 - alignof ... is available.
 - alignas(alignof(T)) ... is available.
@@ -125,14 +119,14 @@ Configuration name: RELEASE
 - symbols ... STRIPPED.
 
 ------------------------------------------------------------------------------
-message size = 2284 butes.
+message size = 2272 butes.
 
 ==============================================================================
-Diagnosis Mode: Current
+Diagnostic Mode: Current
 ==============================================================================
 
 ------------------------------------------------------------------------------
-[ Diagnose build-settings suitable for runtime environment ]
+[ Build-settings diagnostic test ]
 
 cpu_string="Genunteline"
 [OK] SSE is supported.
@@ -147,7 +141,7 @@ cpu_string="Genunteline"
 [--] AVX2 is not used.
 
 ------------------------------------------------------------------------------
-[ Build-settings by compiled environment ]
+[ Compiler specification ]
 
 Platform: Cygin (Target Versionn=0.0)
 CPU Architecture: x86 (32 bit, little endian) [x86]
@@ -175,6 +169,7 @@ Language: C++ (__cplusplus=201103) [C++98] [C++03] [C++11]
 - rvalue reference & std::move ... is available.
 - static_assert ... is available.
 - thread_local ... is available.
+- noexcept ... is available.
 - alignas ... is available.
 - alignof ... is available.
 - alignas(alignof(T)) ... is available.
@@ -197,6 +192,6 @@ Configuration name: RELEASE
 - symbols ... STRIPPED.
 
 ------------------------------------------------------------------------------
-message size = 2284 butes.
+message size = 2272 butes.
 
 - End -

@@ -10,6 +10,8 @@
 
 #include "example_sort_and_search.h"//ソート＆探索処理テスト
 
+#include <gasha/memory.h>//メモリ操作：_aligned_malloc(), _aligned_free()
+
 //----------------------------------------
 //テスト用構造体
 
@@ -53,7 +55,6 @@ data_t::~data_t()
 //----------------------------------------
 //テスト用構造体の配列型
 
-#include <malloc.h>//_aligned_malloc(), memalign()
 void*  array_t::operator new(const size_t size)
 {
 	return _aligned_malloc(sizeof(array_t), alignof(array_t));

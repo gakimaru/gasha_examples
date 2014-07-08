@@ -12,6 +12,8 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
+#include <cstddef>//std::size_t
+
 #ifdef GASHA_OPTIMIZED
 
 static const int TEST_STRLEN_REPEAT_NUM = 10000;//strlenパフォーマンステストの実行回数

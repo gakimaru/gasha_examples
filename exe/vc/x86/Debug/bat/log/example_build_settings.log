@@ -20,12 +20,12 @@ __FUNCSIG__="void __cdecl example_build_settings::test::func(void)"
 __func__="example_build_settings::test::func"
 __FUNCDNAME__="?func@test@?1??example_build_settings@@YAXXZ@SAXXZ"
 __DATE__="Jul  8 2014"
-__TIME__="04:20:51"
-__TIMESTAMP__="Fri Jun 27 21:49:49 2014"
+__TIME__="17:12:47"
+__TIMESTAMP__="Tue Jul  8 15:50:35 2014"
 
 GASHA_FUNC_NAME()="void __cdecl example_build_settings::test::func(void)"
 GASHA_FILE_LINE()="e:\work\github\gasha_examples\src\example_build_settings\example_build_settings.cpp(149)"
-GASHA_FILE_LINE_TIME()="e:\work\github\gasha_examples\src\example_build_settings\example_build_settings.cpp(150)[Fri Jun 27 21:49:49 2014]"
+GASHA_FILE_LINE_TIME()="e:\work\github\gasha_examples\src\example_build_settings\example_build_settings.cpp(150)[Tue Jul  8 15:50:35 2014]"
 This is normal func.
 This is inline func.
 This is noinline func.
@@ -42,17 +42,12 @@ constexpr_calc(1, 2)=3
 
 TLS Variable=123
 
-sizeof(data_t)=32
-alignof(data_t)=16
-_aligned_malloc(sizeof(data_t), alignof(data_t))=00849760
-_aligned_free(p)
-
 ==============================================================================
-Diagnosis Mode: Library
+Diagnostic Mode: Library
 ==============================================================================
 
 ------------------------------------------------------------------------------
-[ Diagnose build-settings suitable for runtime environment ]
+[ Build-settings diagnostic test ]
 
 cpu_string="Genunteline"
 [OK] SSE is supported.
@@ -67,7 +62,7 @@ cpu_string="Genunteline"
 [--] AVX2 is not used.
 
 ------------------------------------------------------------------------------
-[ Build-settings by compiled environment ]
+[ Compiler specification ]
 
 Platform: Win (Target Versionn=0.0)
 CPU Architecture: x86 (32 bit, little endian) [x86]
@@ -95,6 +90,7 @@ Language: C++ (__cplusplus=199711) [C++98] [C++03]
 - rvalue reference & std::move ... is available.
 - static_assert ... is available.
 - thread_local ... is PROXY available.
+- noexcept ... is NOT available.
 - alignas ... is PROXY available.
 - alignof ... is PROXY available.
 - alignas(alignof(T)) ... is NOT available.
@@ -117,14 +113,14 @@ Configuration name: FULL_DEBUG
 - symbols ... contained.
 
 ------------------------------------------------------------------------------
-message size = 2336 butes.
+message size = 2328 butes.
 
 ==============================================================================
-Diagnosis Mode: Current
+Diagnostic Mode: Current
 ==============================================================================
 
 ------------------------------------------------------------------------------
-[ Diagnose build-settings suitable for runtime environment ]
+[ Build-settings diagnostic test ]
 
 cpu_string="Genunteline"
 [OK] SSE is supported.
@@ -139,7 +135,7 @@ cpu_string="Genunteline"
 [--] AVX2 is not used.
 
 ------------------------------------------------------------------------------
-[ Build-settings by compiled environment ]
+[ Compiler specification ]
 
 Platform: Win (Target Versionn=0.0)
 CPU Architecture: x86 (32 bit, little endian) [x86]
@@ -167,6 +163,7 @@ Language: C++ (__cplusplus=199711) [C++98] [C++03]
 - rvalue reference & std::move ... is available.
 - static_assert ... is available.
 - thread_local ... is PROXY available.
+- noexcept ... is NOT available.
 - alignas ... is PROXY available.
 - alignof ... is PROXY available.
 - alignas(alignof(T)) ... is NOT available.
@@ -189,6 +186,6 @@ Configuration name: FULL_DEBUG
 - symbols ... contained.
 
 ------------------------------------------------------------------------------
-message size = 2336 butes.
+message size = 2328 butes.
 
 - End -

@@ -195,21 +195,6 @@ void example_build_settings()
 #ifdef GASHA_HAS_THREAD_LOCAL
 	printf("    'thread_local' is featured.\n");
 #endif//GASHA_HAS_THREAD_LOCAL
-
-	//【C++11仕様】アラインメント指定／取得／指定付メモリ確保と解放テスト
-	printf("\n");
-	printf("sizeof(data_t)=%d\n", sizeof(data_t));
-	printf("alignof(data_t)=%d\n", alignof(data_t));//アラインメント取得テスト
-	data_t* p = reinterpret_cast<data_t*>(_aligned_malloc(sizeof(data_t), alignof(data_t)));
-	printf("_aligned_malloc(sizeof(data_t), alignof(data_t))=%p\n", p);
-	_aligned_free(p);
-	printf("_aligned_free(p)\n");
-#ifdef GASHA_HAS_ALIGNAS
-	printf("    'alignas' is featured.\n");
-#endif//GASHA_HAS_ALIGNAS
-#ifdef GASHA_HAS_ALIGNOF
-	printf("    'alignof' is featured.\n");
-#endif//GASHA_HAS_ALIGNOF
 }
 
 // End of file

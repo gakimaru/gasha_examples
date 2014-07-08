@@ -31,14 +31,14 @@ taggedPtr<int,  8, -8>: .value()=0xff0000000028ac0c, .ptr()=0x0x28ac0c, .tag()=2
 *Test count                     = 1000000
 *Allocate and free test threads = 1
 *Memory pool size               = 20
-[Shared Pool-allocator:END] elapsed_time=0.059646000 sec
+[Shared Pool-allocator:END] elapsed_time=0.062051000 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Lock-Free Pool-allocator:START]
 *Test count                     = 1000000
 *Allocate and free test threads = 1
 *Memory pool size               = 20
-[Lock-Free Pool-allocator:END] elapsed_time=0.065364000 sec
+[Lock-Free Pool-allocator:END] elapsed_time=0.066672000 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Shared Stack:START]
@@ -46,7 +46,7 @@ taggedPtr<int,  8, -8>: .value()=0xff0000000028ac0c, .ptr()=0x0x28ac0c, .tag()=2
 *Push/Enqueue test threads = 1
 *Pop/Dequeue  test threads = 1
 *Memory pool size          = 20
-[Shared Stack:END] elapsed_time=0.059878000 sec
+[Shared Stack:END] elapsed_time=0.060425000 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Lock-Free Stack:START]
@@ -54,7 +54,7 @@ taggedPtr<int,  8, -8>: .value()=0xff0000000028ac0c, .ptr()=0x0x28ac0c, .tag()=2
 *Push/Enqueue test threads = 1
 *Pop/Dequeue  test threads = 1
 *Memory pool size          = 20
-[Lock-Free Stack:END] elapsed_time=0.100725000 sec
+[Lock-Free Stack:END] elapsed_time=0.103802000 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Shared Queue:START]
@@ -62,7 +62,7 @@ taggedPtr<int,  8, -8>: .value()=0xff0000000028ac0c, .ptr()=0x0x28ac0c, .tag()=2
 *Push/Enqueue test threads = 1
 *Pop/Dequeue  test threads = 1
 *Memory pool size          = 20
-[Shared Queue:END] elapsed_time=0.060469000 sec
+[Shared Queue:END] elapsed_time=0.060983000 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Lock-Free Queue:START]
@@ -70,7 +70,7 @@ taggedPtr<int,  8, -8>: .value()=0xff0000000028ac0c, .ptr()=0x0x28ac0c, .tag()=2
 *Push/Enqueue test threads = 1
 *Pop/Dequeue  test threads = 1
 *Memory pool size          = 20
-[Lock-Free Queue:END] elapsed_time=0.150432000 sec
+[Lock-Free Queue:END] elapsed_time=0.154695000 sec
 --------------------------------------------------------------------------------
 ================================================================================
 [Test for Lock-free pool-allocator/sharedStack/sharedQueue with threads]
@@ -85,22 +85,22 @@ taggedPtr<int,  8, -8>: .value()=0xff0000000028ac0c, .ptr()=0x0x28ac0c, .tag()=2
 [Alloc: 3]:Waiting...
 [Alloc: 4]:Waiting...
 [Alloc: 0]:Start
-[Alloc: 1]:Start
 [Alloc: 0] alloc=0
+[Alloc: 1]:Start
 [Alloc: 2]:Start
 [Alloc: 3]:Start
 [Alloc: 4]:Start
 [Alloc: 3] alloc=200000
-[Alloc: 3] alloc=400000
-[Alloc: 3] alloc=600000
-[Alloc: 0] alloc=800000
-[Alloc: 2]:End
-[Alloc: 3]:End
-[Alloc: 0]:End
-[Alloc: 1] alloc=1000000
+[Alloc: 4] alloc=400000
+[Alloc: 2] alloc=600000
+[Alloc: 4] alloc=800000
 [Alloc: 4]:End
+[Alloc: 0]:End
+[Alloc: 3]:End
+[Alloc: 1] alloc=1000000
+[Alloc: 2]:End
 [Alloc: 1]:End
-[Shared Pool-allocator:END] elapsed_time=0.839937000 sec
+[Shared Pool-allocator:END] elapsed_time=0.827785000 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Lock-Free Pool-allocator:START]
@@ -118,20 +118,55 @@ taggedPtr<int,  8, -8>: .value()=0xff0000000028ac0c, .ptr()=0x0x28ac0c, .tag()=2
 [Alloc: 2]:Start
 [Alloc: 3]:Start
 [Alloc: 4]:Start
-[Alloc: 0] alloc=200000
-[Alloc: 1] alloc=400000
-[Alloc: 0] alloc=600000
-[Alloc: 3] alloc=800000
-[Alloc: 4]:End
+[Alloc: 4] alloc=200000
+[Alloc: 0] alloc=400000
+[Alloc: 3] alloc=600000
+[Alloc: 4] alloc=800000
 [Alloc: 2]:End
-[Alloc: 3]:End
-[Alloc: 1] alloc=1000000
-[Alloc: 0]:End
 [Alloc: 1]:End
-[Lock-Free Pool-allocator:END] elapsed_time=0.840707000 sec
+[Alloc: 0]:End
+[Alloc: 4] alloc=1000000
+[Alloc: 3]:End
+[Alloc: 4]:End
+[Lock-Free Pool-allocator:END] elapsed_time=0.828990000 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Shared Stack:START]
+*Test count                = 1000000
+*Push/Enqueue test threads = 3
+*Pop/Dequeue  test threads = 2
+*Memory pool size          = 20
+[PUSH: 0]:Waiting...
+[PUSH: 1]:Waiting...
+[PUSH: 2]:Waiting...
+[POP : 0]:Waiting...
+[POP : 1]:Waiting...
+[PUSH: 0]:Start
+[PUSH: 0] count=0
+[PUSH: 1]:Start
+[PUSH: 2]:Start
+[POP : 0]:Start
+[POP : 0] count=0
+[POP : 1]:Start
+[PUSH: 0] count=200000
+[POP : 1] count=200000
+[PUSH: 2] count=400000
+[POP : 0] count=400000
+[PUSH: 0] count=600000
+[POP : 1] count=600000
+[PUSH: 2] count=800000
+[POP : 0] count=800000
+[PUSH: 1] count=1000000
+[PUSH: 2]:End
+[PUSH: 0]:End
+[PUSH: 1]:End
+[POP : 0] count=1000000
+[POP : 1]:End
+[POP : 0]:End
+[Shared Stack:END] elapsed_time=1.013379000 sec
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+[Lock-Free Stack:START]
 *Test count                = 1000000
 *Push/Enqueue test threads = 3
 *Pop/Dequeue  test threads = 2
@@ -150,93 +185,23 @@ taggedPtr<int,  8, -8>: .value()=0xff0000000028ac0c, .ptr()=0x0x28ac0c, .tag()=2
 [POP : 1]:Start
 [PUSH: 1] count=200000
 [POP : 0] count=200000
-[PUSH: 2] count=400000
-[POP : 1] count=400000
-[PUSH: 2] count=600000
-[POP : 1] count=600000
-[PUSH: 1] count=800000
-[POP : 1] count=800000
-[PUSH: 1]:End
-[PUSH: 2] count=1000000
-[PUSH: 0]:End
-[PUSH: 2]:End
-[POP : 1] count=1000000
-[POP : 0]:End
-[POP : 1]:End
-[Shared Stack:END] elapsed_time=1.039240000 sec
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-[Lock-Free Stack:START]
-*Test count                = 1000000
-*Push/Enqueue test threads = 3
-*Pop/Dequeue  test threads = 2
-*Memory pool size          = 20
-[PUSH: 0]:Waiting...
-[PUSH: 1]:Waiting...
-[PUSH: 2]:Waiting...
-[POP : 0]:Waiting...
-[POP : 1]:Waiting...
-[PUSH: 0]:Start
-[PUSH: 0] count=0
-[PUSH: 1]:Start
-[PUSH: 2]:Start
-[POP : 0]:Start
-[POP : 0] count=0
-[POP : 1]:Start
-[PUSH: 0] count=200000
-[POP : 0] count=200000
 [PUSH: 1] count=400000
 [POP : 0] count=400000
 [PUSH: 2] count=600000
-[POP : 1] count=600000
+[POP : 0] count=600000
 [PUSH: 2] count=800000
 [POP : 1] count=800000
+[PUSH: 0] count=1000000
+[PUSH: 1]:End
 [PUSH: 2]:End
-[PUSH: 1] count=1000000
 [PUSH: 0]:End
 [POP : 0] count=1000000
 [POP : 1]:End
-[PUSH: 1]:End
 [POP : 0]:End
-[Lock-Free Stack:END] elapsed_time=1.058578000 sec
+[Lock-Free Stack:END] elapsed_time=1.072578000 sec
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 [Shared Queue:START]
-*Test count                = 1000000
-*Push/Enqueue test threads = 3
-*Pop/Dequeue  test threads = 2
-*Memory pool size          = 20
-[ENQUEUE: 0]:Waiting...
-[ENQUEUE: 1]:Waiting...
-[ENQUEUE: 2]:Waiting...
-[DEQUEUE: 0]:Waiting...
-[DEQUEUE: 1]:Waiting...
-[ENQUEUE: 0]:Start
-[ENQUEUE: 0] count=0
-[ENQUEUE: 1]:Start
-[ENQUEUE: 2]:Start
-[DEQUEUE: 0]:Start
-[DEQUEUE: 0] count=0
-[DEQUEUE: 1]:Start
-[ENQUEUE: 1] count=200000
-[DEQUEUE: 0] count=200000
-[ENQUEUE: 2] count=400000
-[DEQUEUE: 0] count=400000
-[ENQUEUE: 2] count=600000
-[DEQUEUE: 0] count=600000
-[ENQUEUE: 2] count=800000
-[DEQUEUE: 0] count=800000
-[ENQUEUE: 0]:End
-[ENQUEUE: 2] count=1000000
-[ENQUEUE: 1]:End
-[DEQUEUE: 0]:End
-[DEQUEUE: 1] count=1000000
-[ENQUEUE: 2]:End
-[DEQUEUE: 1]:End
-[Shared Queue:END] elapsed_time=0.981065000 sec
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-[Lock-Free Queue:START]
 *Test count                = 1000000
 *Push/Enqueue test threads = 3
 *Pop/Dequeue  test threads = 2
@@ -256,17 +221,52 @@ taggedPtr<int,  8, -8>: .value()=0xff0000000028ac0c, .ptr()=0x0x28ac0c, .tag()=2
 [ENQUEUE: 0] count=200000
 [DEQUEUE: 0] count=200000
 [ENQUEUE: 2] count=400000
-[DEQUEUE: 0] count=400000
-[ENQUEUE: 2] count=600000
-[DEQUEUE: 1] count=600000
+[DEQUEUE: 1] count=400000
+[ENQUEUE: 0] count=600000
+[DEQUEUE: 0] count=600000
 [ENQUEUE: 1] count=800000
 [DEQUEUE: 1] count=800000
-[ENQUEUE: 2] count=1000000
-[ENQUEUE: 1]:End
-[ENQUEUE: 0]:End
+[ENQUEUE: 1] count=1000000
 [ENQUEUE: 2]:End
-[DEQUEUE: 1] count=1000000
-[DEQUEUE: 0]:End
+[ENQUEUE: 0]:End
+[ENQUEUE: 1]:End
+[DEQUEUE: 0] count=1000000
 [DEQUEUE: 1]:End
-[Lock-Free Queue:END] elapsed_time=1.062199000 sec
+[DEQUEUE: 0]:End
+[Shared Queue:END] elapsed_time=1.014798000 sec
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+[Lock-Free Queue:START]
+*Test count                = 1000000
+*Push/Enqueue test threads = 3
+*Pop/Dequeue  test threads = 2
+*Memory pool size          = 20
+[ENQUEUE: 0]:Waiting...
+[ENQUEUE: 1]:Waiting...
+[ENQUEUE: 2]:Waiting...
+[DEQUEUE: 0]:Waiting...
+[DEQUEUE: 1]:Waiting...
+[ENQUEUE: 0]:Start
+[ENQUEUE: 0] count=0
+[ENQUEUE: 1]:Start
+[ENQUEUE: 2]:Start
+[DEQUEUE: 0]:Start
+[DEQUEUE: 0] count=0
+[DEQUEUE: 1]:Start
+[ENQUEUE: 2] count=200000
+[DEQUEUE: 0] count=200000
+[ENQUEUE: 0] count=400000
+[DEQUEUE: 1] count=400000
+[ENQUEUE: 1] count=600000
+[DEQUEUE: 1] count=600000
+[ENQUEUE: 0] count=800000
+[DEQUEUE: 1] count=800000
+[ENQUEUE: 1]:End
+[ENQUEUE: 2]:End
+[ENQUEUE: 0] count=1000000
+[ENQUEUE: 0]:End
+[DEQUEUE: 0] count=1000000
+[DEQUEUE: 1]:End
+[DEQUEUE: 0]:End
+[Lock-Free Queue:END] elapsed_time=1.035660000 sec
 --------------------------------------------------------------------------------
