@@ -31,13 +31,13 @@ int main(const int argc, const char* argv[])
 		printf("\n");
 		buildSettingsDiagnosticTest(message, size, diagForLibrary);
 		printf(message);
-		printf("message size = %d butes.\n", size);
+		printf("message size = %d bytes.\n", size);
 
 		//現在のビルド設定を診断
 		printf("\n");
 		buildSettingsDiagnosticTest(message, size, diagForProject);
 		printf(message);
-		printf("message size = %d butes.\n", size);
+		printf("message size = %d bytes.\n", size);
 	}
 
 	printf("\n");

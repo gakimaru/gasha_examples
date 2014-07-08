@@ -21,12 +21,12 @@ __FUNCSIG__="static void example_build_settings()::test::func()"
 __func__="func"
 __FUNCDNAME__=""
 __DATE__="Jul  8 2014"
-__TIME__="17:13:57"
-__TIMESTAMP__="Tue Jul  8 15:50:35 2014"
+__TIME__="21:19:45"
+__TIMESTAMP__="Tue Jul  8 21:05:47 2014"
 
 GASHA_FUNC_NAME()="static void example_build_settings()::test::func()"
 GASHA_FILE_LINE()="../../src/example_build_settings/example_build_settings.cpp(149)"
-GASHA_FILE_LINE_TIME()="../../src/example_build_settings/example_build_settings.cpp(150)[Tue Jul  8 15:50:35 2014]"
+GASHA_FILE_LINE_TIME()="../../src/example_build_settings/example_build_settings.cpp(150)[Tue Jul  8 21:05:47 2014]"
 This is normal func.
 This is inline func.
 This is noinline func.
@@ -56,16 +56,16 @@ Diagnostic Mode: Library
 [ Build-settings diagnostic test ]
 
 cpu_string="Genunteline"
-[OK] SSE is supported.
-[OK] SSE2 is supported.
-[OK] SSE3 is supported.
-[--] SSE 4a is not used.
-[OK] SSE4.1 is NOT supported.
-[OK] SSE4.2 is supported.
-[OK] POPCNT is supported.
-[--] AES is not used.
-[OK] AVX is supported.
-[--] AVX2 is not used.
+[OK] 'SSE' is SUPPORTED.
+[OK] 'SSE2' is SUPPORTED.
+[OK] 'SSE3' is SUPPORTED.
+[--] 'SSE4a' is not used.
+[OK] 'SSE4.1' is SUPPORTED.
+[OK] 'SSE4.2' is SUPPORTED.
+[OK] 'POPCNT' is SUPPORTED.
+[--] 'AES' is not used.
+[OK] 'AVX' is SUPPORTED.
+[--] 'AVX2' is not used.
 
 ------------------------------------------------------------------------------
 [ Compiler specification ]
@@ -76,50 +76,50 @@ CPU Architecture: x86 (32 bit, little endian) [x86]
 Compiler: GCC (Version=4.8)
 Language: C++ (__cplusplus=201103) [C++98] [C++03] [C++11]
 
-- nullptr ... is available.
-- override ... is available.
-- final ... is available.
-- auto ... is available.
-- decltype ... is available.
-- default/delete ... is available.
-- constexpr ... is available.
-- user-defined-literal ... is available.
-- lambda expression ... is available.
-- range-based for ... is available.
-- enum class ... is available.
-- variadic template ... is available.
-- template aliases ... is available.
-- delegating constructors ... is available.
-- inheriting constructors ... is available.
-- uniform initializer ... is available.
-- initializer list ... is available.
-- rvalue reference & std::move ... is available.
-- static_assert ... is available.
-- thread_local ... is available.
-- noexcept ... is available.
-- alignas ... is available.
-- alignof ... is available.
-- alignas(alignof(T)) ... is available.
+[Yes]       `nullptr` is AVAILABLE.
+[Yes]       `override` is AVAILABLE.
+[Yes]       `final` is AVAILABLE.
+[Yes]       `auto` is AVAILABLE.
+[Yes]       `decltype()` is AVAILABLE.
+[Yes]       `default` & `delete` is AVAILABLE.
+[Yes]       `constexpr` is AVAILABLE.
+[Yes]       'User-defined-literal' is AVAILABLE.
+[Yes]       'Lambda-expression' is AVAILABLE.
+[Yes]       'Range-based `for`' is AVAILABLE.
+[Yes]       '`enum` class' is AVAILABLE.
+[Yes]       'Variadic-template' is AVAILABLE.
+[Yes]       'Template-aliases' is AVAILABLE.
+[Yes]       'Delegating-constructors' is AVAILABLE.
+[Yes]       'Inheriting-constructors' is AVAILABLE.
+[Yes]       'Uniform-initializer' is AVAILABLE.
+[Yes]       'Initializer-list' is AVAILABLE.
+[Yes]       'Rvalue-reference' & 'std::move' is AVAILABLE.
+[Yes]       `static_assert()` is AVAILABLE.
+[Yes]       `thread_local` is AVAILABLE.
+[Yes]       `noexcept` is AVAILABLE. -> [Yes] `GASHA_NOEXCEPT` is AVAILABLE.
+[Yes]       `alignas()` is AVAILABLE.
+[Yes]       `alignof()` is AVAILABLE.
+[Yes]       `alignas(alignof())` is AVAILABLE. -> [Yes] `GASHA_ALIGNAS_OF()` is AVAILABLE.
 
-- _aligned_malloc ... is available with commonized.
-- _aligned_free ... is available with commonized.
-- no_inline ... is available with commonized.
-- always_inline ... is available with commonized.
+[Camouflage]`_aligned_malloc()`(VC++ style) is available.
+[Camouflage]`_aligned_free()`(VC++ style) is available.
+[Camouflage]`GASHA_NOINLINE` is available.
+[Camouflage]`GASHA_ALWAYS_INLINE` is available.
 
 ------------------------------------------------------------------------------
 [ Build-configuratoin ]
 
 Configuration name: FULL_DEBUG
 
-- debug feature ... is available.(VERBOSE)
-- assertion ... is enabled.
-- optimized ... none.
-- file-system ... flexible(ROM or local-PC).
-- unit-test ... is available.
-- symbols ... contained.
+[Yes] 'Debug-feature' is AVAILABLE. (with VERBOSE mode)
+[Yes] 'Assertion' is ENABLED.
+[No]  'Optimize' is none.
+[---] 'File-system' is flexible (for ROM or for local-PC).
+[Yes] 'Unit-test' is AVAILABLE.
+[Yes] 'Symbols' are contained.
 
 ------------------------------------------------------------------------------
-message size = 2295 butes.
+message size = 2651 bytes.
 
 ==============================================================================
 Diagnostic Mode: Current
@@ -129,16 +129,16 @@ Diagnostic Mode: Current
 [ Build-settings diagnostic test ]
 
 cpu_string="Genunteline"
-[OK] SSE is supported.
-[OK] SSE2 is supported.
-[OK] SSE3 is supported.
-[--] SSE 4a is not used.
-[OK] SSE4.1 is NOT supported.
-[OK] SSE4.2 is supported.
-[OK] POPCNT is supported.
-[--] AES is not used.
-[OK] AVX is supported.
-[--] AVX2 is not used.
+[OK] 'SSE' is SUPPORTED.
+[OK] 'SSE2' is SUPPORTED.
+[OK] 'SSE3' is SUPPORTED.
+[--] 'SSE4a' is not used.
+[OK] 'SSE4.1' is SUPPORTED.
+[OK] 'SSE4.2' is SUPPORTED.
+[OK] 'POPCNT' is SUPPORTED.
+[--] 'AES' is not used.
+[OK] 'AVX' is SUPPORTED.
+[--] 'AVX2' is not used.
 
 ------------------------------------------------------------------------------
 [ Compiler specification ]
@@ -149,49 +149,49 @@ CPU Architecture: x86 (32 bit, little endian) [x86]
 Compiler: GCC (Version=4.8)
 Language: C++ (__cplusplus=201103) [C++98] [C++03] [C++11]
 
-- nullptr ... is available.
-- override ... is available.
-- final ... is available.
-- auto ... is available.
-- decltype ... is available.
-- default/delete ... is available.
-- constexpr ... is available.
-- user-defined-literal ... is available.
-- lambda expression ... is available.
-- range-based for ... is available.
-- enum class ... is available.
-- variadic template ... is available.
-- template aliases ... is available.
-- delegating constructors ... is available.
-- inheriting constructors ... is available.
-- uniform initializer ... is available.
-- initializer list ... is available.
-- rvalue reference & std::move ... is available.
-- static_assert ... is available.
-- thread_local ... is available.
-- noexcept ... is available.
-- alignas ... is available.
-- alignof ... is available.
-- alignas(alignof(T)) ... is available.
+[Yes]       `nullptr` is AVAILABLE.
+[Yes]       `override` is AVAILABLE.
+[Yes]       `final` is AVAILABLE.
+[Yes]       `auto` is AVAILABLE.
+[Yes]       `decltype()` is AVAILABLE.
+[Yes]       `default` & `delete` is AVAILABLE.
+[Yes]       `constexpr` is AVAILABLE.
+[Yes]       'User-defined-literal' is AVAILABLE.
+[Yes]       'Lambda-expression' is AVAILABLE.
+[Yes]       'Range-based `for`' is AVAILABLE.
+[Yes]       '`enum` class' is AVAILABLE.
+[Yes]       'Variadic-template' is AVAILABLE.
+[Yes]       'Template-aliases' is AVAILABLE.
+[Yes]       'Delegating-constructors' is AVAILABLE.
+[Yes]       'Inheriting-constructors' is AVAILABLE.
+[Yes]       'Uniform-initializer' is AVAILABLE.
+[Yes]       'Initializer-list' is AVAILABLE.
+[Yes]       'Rvalue-reference' & 'std::move' is AVAILABLE.
+[Yes]       `static_assert()` is AVAILABLE.
+[Yes]       `thread_local` is AVAILABLE.
+[Yes]       `noexcept` is AVAILABLE. -> [Yes] `GASHA_NOEXCEPT` is AVAILABLE.
+[Yes]       `alignas()` is AVAILABLE.
+[Yes]       `alignof()` is AVAILABLE.
+[Yes]       `alignas(alignof())` is AVAILABLE. -> [Yes] `GASHA_ALIGNAS_OF()` is AVAILABLE.
 
-- _aligned_malloc ... is available with commonized.
-- _aligned_free ... is available with commonized.
-- no_inline ... is available with commonized.
-- always_inline ... is available with commonized.
+[Camouflage]`_aligned_malloc()`(VC++ style) is available.
+[Camouflage]`_aligned_free()`(VC++ style) is available.
+[Camouflage]`GASHA_NOINLINE` is available.
+[Camouflage]`GASHA_ALWAYS_INLINE` is available.
 
 ------------------------------------------------------------------------------
 [ Build-configuratoin ]
 
 Configuration name: FULL_DEBUG
 
-- debug feature ... is available.(VERBOSE)
-- assertion ... is enabled.
-- optimized ... none.
-- file-system ... flexible(ROM or local-PC).
-- unit-test ... is available.
-- symbols ... contained.
+[Yes] 'Debug-feature' is AVAILABLE. (with VERBOSE mode)
+[Yes] 'Assertion' is ENABLED.
+[No]  'Optimize' is none.
+[---] 'File-system' is flexible (for ROM or for local-PC).
+[Yes] 'Unit-test' is AVAILABLE.
+[Yes] 'Symbols' are contained.
 
 ------------------------------------------------------------------------------
-message size = 2295 butes.
+message size = 2651 bytes.
 
 - End -

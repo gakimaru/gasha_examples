@@ -25,11 +25,11 @@ inline void func_inline()
 {
 	printf("This is inline func.\n");
 }
-no_inline void func_noinline()
+GASHA_NOINLINE void func_noinline()
 {
 	printf("This is noinline func.\n");
 }
-always_inline void func_always_inline()
+GASHA_ALWAYS_INLINE void func_always_inline()
 {
 	printf("This is always inline func.\n");
 }
