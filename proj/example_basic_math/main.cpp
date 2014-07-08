@@ -10,9 +10,6 @@
 
 #include "example_basic_math.h"//基本算術処理テスト
 
-#include <gasha/tagged_ptr.h>
-
-
 #include <stdio.h>
 #include <stdlib.h>
 

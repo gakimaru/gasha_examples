@@ -226,7 +226,7 @@ Released under the [MIT license][MIT].
 > また、「値全域を扱える符号付きの型」`contained_signed_type`、「値の範囲型」`range_type`,`signed_rnage_type` なども扱えます。  
 > 前者は、対象が符号なし型なら一段上の符号付き型を返し（例：`unsigned char` なら `short`、`char` なら `char`）、  
 > 後者は、同精度の符号無し型および一段上の符号付き型を返します（例：`char` なら `unsigned char`, `short`）。  
-> * **※4**：処理時間計測を簡単にするための関数 `elapsedTime` などを扱います。  
+> * **※4**：処理時間計測を簡単にするためのクラス `elapsedTime` などを扱います。  
 > プログラムが起動してからの経過時間を取得する関数 `nowElapsedTime` もあります。  
 > * **※5**：x86系CPUの `cpuid` 命令を実行します。  
 > VC++には `__cpuid()` 関数が存在していますが、そのインターフェースに合わせて、GCC用でも使用できるようにしています。  
