@@ -41,8 +41,8 @@
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
-//GASHA_INSTANCING_stackAllocator();
-//GASHA_INSTANCING_smartStackAllocator();
+GASHA_INSTANCING_stackAllocator();
+GASHA_INSTANCING_smartStackAllocator();
 //GASHA_INSTANCING_stackAllocator_withLock(spinLock);
 //GASHA_INSTANCING_smartStackAllocator_withLock(spinLock);
 //GASHA_INSTANCING_stackAllocator_withBuff(80);
@@ -52,22 +52,36 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //GASHA_INSTANCING_stackAllocator_withType(int, 20);
 //GASHA_INSTANCING_smartStackAllocator_withType(int, 20);
 //GASHA_INSTANCING_stackAllocator_withType_withLock(int, 20, spinLock);
-GASHA_INSTANCING_smartStackAllocator_withType_withLock(int, 20, spinLock);
+//GASHA_INSTANCING_smartStackAllocator_withType_withLock(int, 20, spinLock);
 
-struct a{ int x; a(){ printf("a::a()\n"); } };
-struct b{ int x; b(){ printf("b::b()\n"); }~b(){} };
+struct st_a0{ int x; st_a0(){ printf("st_a0::st_a0()\n"); } ~st_a0(){ printf("st_a0::~st_a0()\n"); } };
+struct alignas(4) st_a4{ int x; st_a4(){ printf("st_a4::st_a4()\n"); } ~st_a4(){ printf("st_a4::~st_a4()\n"); } };
+struct alignas(8) st_a8{ int x; st_a8(){ printf("st_a8::st_a8()\n"); } ~st_a8(){ printf("st_a8::~st_a8()\n"); } };
+struct alignas(16) st_a16{ int x; st_a16(){ printf("st_a16::st_a16()\n"); } ~st_a16(){ printf("st_a16::~st_a16()\n"); } };
+struct alignas(32) st_a32{ int x; st_a32(){ printf("st_a32::st_a32()\n"); } ~st_a32(){ printf("st_a32::~st_a32()\n"); } };
 
 char buff[1024];
-void* operator new[](std::size_t size, std::size_t align, std::size_t& real_size) GASHA_NOEXCEPT
+void* operator new(std::size_t size, std::size_t id, std::size_t& real_size) GASHA_NOEXCEPT
 {
 	real_size = size;
-	printf("size=%d, align=%d, real_size=%d\n", size, align, real_size);
+	printf("new: size=%d, id=%d, real_size=%d\n", size, id, real_size);
 	return nullptr;
 	//return buff;
 }
-void operator delete(void* p, std::size_t align, std::size_t& real_size)
+void operator delete(void* p, std::size_t id, std::size_t& real_size)
 {
-	printf("p=%p, align=%d, real_size=%d\n", p, align, real_size);
+	printf("delete: p=%p, id=%d, real_size=%d\n", p, id, real_size);
+}
+void* operator new[](std::size_t size, std::size_t id, std::size_t& real_size) GASHA_NOEXCEPT
+{
+	real_size = size;
+	printf("new[]: size=%d, id=%d, real_size=%d\n", size, id, real_size);
+	return nullptr;
+	//return buff;
+}
+void operator delete[](void* p, std::size_t id, std::size_t& real_size)
+{
+	printf("delete[]: p=%p, id=%d, real_size=%d\n", p, id, real_size);
 }
 
 //----------------------------------------
@@ -78,31 +92,54 @@ void example_allocator()
 
 	//仮：配置newテスト
 	{
-		printf("a[10]=%d\n", sizeof(a[10]));
-		printf("b[10]=%d\n", sizeof(b[10]));
+		printf("sizeof(st_a0)=%d, alignof(st_a0)=%d\n", sizeof(st_a0), alignof(st_a0));
+		printf("sizeof(st_a4)=%d, alignof(st_a4)=%d\n", sizeof(st_a4), alignof(st_a4));
+		printf("sizeof(st_a8)=%d, alignof(st_a8)=%d\n", sizeof(st_a8), alignof(st_a8));
+		printf("sizeof(st_a16)=%d, alignof(st_a16)=%d\n", sizeof(st_a16), alignof(st_a16));
+		printf("sizeof(st_a32)=%d, alignof(st_a32)=%d\n", sizeof(st_a32), alignof(st_a32));
 		std::size_t real_size;
-		new(1, real_size)a[10];
-		new(2, real_size)b[10];
+		new(1, real_size)st_a0;
+		new(2, real_size)st_a4;
+		new(3, real_size)st_a8;
+		new(4, real_size)st_a16;
+		new(5, real_size)st_a32;
+		new(6, real_size)st_a0[2];
+		new(7, real_size)st_a4[2];
+		new(8, real_size)st_a8[2];
+		new(9, real_size)st_a16[2];
+		new(10, real_size)st_a32[2];
 	}
 
 	//スタックアロケータテスト
 	{
-		smartStackAllocator_withType<int, 60, spinLock> allocator;
-		void* p1 = allocator.alloc(1, 1);
-		void* p2 = allocator.alloc(1, 1);
-		int* i = allocator.template newObj<int>();
-		double* d3 = allocator.template newArray<double>(3);
-		int* i2 = allocator.newDefault();
 		char message[2048];
-		allocator.debugInfo(message);
-		printf(message);
-		allocator.free(p1);
-		allocator.free(p2);
-		allocator.deleteObj(i);
-		allocator.deleteObj(i2);
-		allocator.deleteArray(d3, 3);
-		allocator.debugInfo(message);
-		printf(message);
+		smartStackAllocator_withType<int, 9, spinLock> allocator; allocator.debugInfo(message); printf(message);
+		void* p1 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
+		void* p2 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
+		int* i = allocator.template newObj<int>();                allocator.debugInfo(message); printf(message);
+		double* d3 = allocator.template newArray<double>(3);      allocator.debugInfo(message); printf(message);
+		int* i2 = allocator.newDefault();                         allocator.debugInfo(message); printf(message);
+		double* d = allocator.template newObj<double>();          allocator.debugInfo(message); printf(message);
+		void* p3 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
+		st_a0* a0 = allocator.template newObj<st_a0>();           allocator.debugInfo(message); printf(message);
+		st_a4* a4 = allocator.template newObj<st_a4>();           allocator.debugInfo(message); printf(message);
+		st_a8* a8 = allocator.template newObj<st_a8>();           allocator.debugInfo(message); printf(message);
+		st_a16* a16 = allocator.template newObj<st_a16>();        allocator.debugInfo(message); printf(message);
+		st_a32* a32 = allocator.template newObj<st_a32>();        allocator.debugInfo(message); printf(message);
+		void* p4 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
+		allocator.free(p1);                                       allocator.debugInfo(message); printf(message);
+		allocator.free(p2);                                       allocator.debugInfo(message); printf(message);
+		allocator.free(p3);                                       allocator.debugInfo(message); printf(message);
+		allocator.free(p4);                                       allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a0);                                  allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a4);                                  allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a8);                                  allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a16);                                 allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a32);                                 allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(i);                                   allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(i2);                                  allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(d);                                   allocator.debugInfo(message); printf(message);
+		allocator.deleteArray(d3, 3);                             allocator.debugInfo(message); printf(message);
 	}
 
 	//仮：プールアロケータ
