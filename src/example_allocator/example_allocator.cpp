@@ -11,7 +11,7 @@
 #include "example_allocator.h"//アロケータテスト
 
 //#include <gasha/mono_allocator.h>//モノアロケータ
-//#include <gasha/stack_allocator.h>//スタックアロケータ
+#include <gasha/stack_allocator.h>//スタックアロケータ
 //#include <gasha/stack_allocator.h>//双方向スタックアロケータ
 //#include <gasha/stack_allocator.h>//ロックフリースタックアロケータ
 //#include <gasha/stack_allocator.h>//スコープスタックアロケータ
@@ -24,6 +24,9 @@
 
 #include <gasha/pool_allocator.cpp.h>//プールアロケータ
 #include <gasha/lf_pool_allocator.cpp.h>//ロックフリープールアロケータ
+#include <gasha/stack_allocator.cpp.h>//スタックアロケータ
+
+#include <gasha/type_traits.h>//型特性ユーティリティ：extentof
 
 #include <gasha/spin_lock.h>//スピンロック
 
@@ -37,6 +40,19 @@
 #include <new>
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
+
+//GASHA_INSTANCING_stackAllocator();
+//GASHA_INSTANCING_smartStackAllocator();
+//GASHA_INSTANCING_stackAllocator_withLock(spinLock);
+//GASHA_INSTANCING_smartStackAllocator_withLock(spinLock);
+//GASHA_INSTANCING_stackAllocator_withBuff(80);
+//GASHA_INSTANCING_smartStackAllocator_withBuff(80);
+//GASHA_INSTANCING_stackAllocator_withBuff_withLock(80, spinLock);
+//GASHA_INSTANCING_smartStackAllocator_withBuff_withLock(80, spinLock);
+//GASHA_INSTANCING_stackAllocator_withType(int, 20);
+//GASHA_INSTANCING_smartStackAllocator_withType(int, 20);
+//GASHA_INSTANCING_stackAllocator_withType_withLock(int, 20, spinLock);
+GASHA_INSTANCING_smartStackAllocator_withType_withLock(int, 20, spinLock);
 
 struct a{ int x; a(){ printf("a::a()\n"); } };
 struct b{ int x; b(){ printf("b::b()\n"); }~b(){} };
@@ -60,13 +76,34 @@ void example_allocator()
 {
 	printf("----- Test for allocator -----\n");
 
-	//スタックアロケータ
-	//smartStackAllocator_withType<int, 20, spinLock> x;
-	printf("a[10]=%d\n", sizeof(a[10]));
-	printf("b[10]=%d\n", sizeof(b[10]));
-	std::size_t real_size;
-	new(1, real_size)a[10];
-	new(2, real_size)b[10];
+	//仮：配置newテスト
+	{
+		printf("a[10]=%d\n", sizeof(a[10]));
+		printf("b[10]=%d\n", sizeof(b[10]));
+		std::size_t real_size;
+		new(1, real_size)a[10];
+		new(2, real_size)b[10];
+	}
+
+	//スタックアロケータテスト
+	{
+		smartStackAllocator_withType<int, 60, spinLock> allocator;
+		void* p1 = allocator.alloc(1, 1);
+		void* p2 = allocator.alloc(1, 1);
+		int* i = allocator.template newObj<int>();
+		double* d3 = allocator.template newArray<double>(3);
+		int* i2 = allocator.newDefault();
+		char message[2048];
+		allocator.debugInfo(message);
+		printf(message);
+		allocator.free(p1);
+		allocator.free(p2);
+		allocator.deleteObj(i);
+		allocator.deleteObj(i2);
+		allocator.deleteArray(d3, 3);
+		allocator.debugInfo(message);
+		printf(message);
+	}
 
 	//仮：プールアロケータ
 	{
@@ -82,6 +119,9 @@ void example_allocator()
 		st3(int n) :m(n){ printf("st3::st3()\n"); }
 		~st3(){ printf("st3::~st3()\n"); }
 		};
+		
+		char message[2048];
+		
 		poolAllocator_withType<st, 10> x1;
 		lfPoolAllocator<10> x2(x);
 		st* s1 = x1.newDefault();
@@ -91,10 +131,12 @@ void example_allocator()
 		st2b* s2b = x1.template newObj<st2b>(99);
 		x1.deleteObj(s2b);
 		st3* s3 = x1.template newArray<st3>(3, 99);
+		x1.debugInfo(message);
+		printf(message);
 		x1.deleteArray(s3, 3);
 
 		poolAllocator_withType<st, 10> x3;
-		lfPoolAllocator<10> x4(x, sizeof(x));
+		lfPoolAllocator<10> x4(x, extentof(x));
 		s1 = x3.newDefault();
 		x3.deleteDefault(s1);
 		s2a = x3.template newObj<st2a>(99);
@@ -102,6 +144,8 @@ void example_allocator()
 		s2b = x3.template newObj<st2b>(99);
 		x3.deleteObj(s2b);
 		s3 = x3.template newArray<st3>(3, 99);
+		x3.debugInfo(message);
+		printf(message);
 		x3.deleteArray(s3, 3);
 	}
 
