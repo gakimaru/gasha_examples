@@ -38,7 +38,7 @@
 #include <gasha/linear_search.h>//線形探索
 #include <gasha/binary_search.h>//二分探索
 
-#include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
+#include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
 
 #include <random>//C++11 std::random
 #include <cstdint>//C++11 std::intptr_t

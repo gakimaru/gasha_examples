@@ -26,7 +26,7 @@
 #include <gasha/unshared_spin_lock.h>//非共有スピンロック
 #include <gasha/dummy_shared_lock.h>//ダミー共有ロック
 
-#include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
+#include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
 #include <gasha/type_traits.h>//型特性ユーティリティ：extentof
 
 #include <utility>//C++11 std::move

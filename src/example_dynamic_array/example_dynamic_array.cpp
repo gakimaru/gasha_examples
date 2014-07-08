@@ -13,7 +13,7 @@
 #include <gasha/dynamic_array.inl>//動的配列コンテナ【インライン関数／テンプレート関数定義部】
 
 #include <gasha/iterator.h>//イテレータ操作
-#include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
+#include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
 
 #include <utility>//C++11 std::move, std::forward
 #include <condition_variable>//C++11 std::condition_variable用

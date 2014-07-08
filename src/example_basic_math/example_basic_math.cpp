@@ -11,7 +11,8 @@
 #include "example_basic_math.h"//基本算術処理テスト
 
 #include <gasha/basic_math.h>//基本算術
-#include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
+#include <gasha/memory.h>//メモリ操作：アライメント計算
+#include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
 
 #include <stdio.h>//printf()
 #include<stdarg.h>//va_list

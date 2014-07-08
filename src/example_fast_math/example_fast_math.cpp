@@ -11,7 +11,7 @@
 #include "example_fast_math.h"//高速算術テスト
 
 #include <gasha/fast_math.h>//高速算術
-#include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
+#include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
 
 #include <cmath>//std::sqrt()
 #include <stdio.h>//printf()

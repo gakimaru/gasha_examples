@@ -11,7 +11,7 @@
 #include "example_fast_string.h"//高速文字列操作テスト
 
 #include <gasha/fast_string.h>//高速文字列処理
-#include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
+#include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
 #include <gasha/crc32.h>//CRC32計算
 #include <gasha/type_traits.h>//型特性ユーティリティ：extentof()
 

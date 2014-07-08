@@ -13,7 +13,7 @@
 #include <gasha/rb_tree.inl>//赤黒木コンテナ【インライン関数／テンプレート関数定義部】
 
 #include <gasha/iterator.h>//イテレータ操作
-#include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
+#include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
 
 #include <utility>//C++11 std::forward
 #include <random>//C++11 std::random

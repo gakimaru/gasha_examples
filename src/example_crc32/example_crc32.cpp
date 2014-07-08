@@ -11,7 +11,7 @@
 #include "example_crc32.h"//CRC32計算処理テスト
 
 #include <gasha/crc32.h>//CRC32計算
-#include <gasha/utility.h>//汎用ユーティリティ：nowTime(), calcElapsedTime()
+#include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
 
 #include <stdio.h>//printf()
 

@@ -10,6 +10,8 @@
 
 #include "example_build_settings.h"//ビルド設定処理テスト
 
+#include <gasha/build_settings/build_settings_diag.h>//ビルド設定診断
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -27,13 +29,13 @@ int main(const int argc, const char* argv[])
 
 		//ライブラリビルド時のビルド設定を診断
 		printf("\n");
-		diagnoseBuildSettings(message, size, diagnosisModeForLibrary);
+		buildSettingsDiagnosticTest(message, size, diagForLibrary);
 		printf(message);
 		printf("message size = %d butes.\n", size);
 
 		//現在のビルド設定を診断
 		printf("\n");
-		diagnoseBuildSettings(message, size, diagnosisModeForCurrent);
+		buildSettingsDiagnosticTest(message, size, diagForProject);
 		printf(message);
 		printf("message size = %d butes.\n", size);
 	}
