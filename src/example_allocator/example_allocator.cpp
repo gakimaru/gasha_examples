@@ -14,23 +14,23 @@
 #include <gasha/lf_mono_allocator.h>//ロックフリー単一アロケータ
 #include <gasha/stack_allocator.h>//スタックアロケータ
 #include <gasha/stack_allocator.h>//ロックフリースタックアロケータ
-//#include <gasha/stack_allocator.h>//双方向スタックアロケータ
-//#include <gasha/stack_allocator.h>//スコープスタックアロケータ
-//#include <gasha/stack_allocator.h>//スコープ双方向スタックアロケータ
+#include <gasha/dual_stack_allocator.h>//双方向スタックアロケータ
+//#include <gasha/lf_dual_stack_allocator.h>//ロックフリー双方向スタックアロケータ
 #include <gasha/pool_allocator.h>//プールアロケータ
 #include <gasha/lf_pool_allocator.h>//ロックフリープールアロケータ
 //アロケータアダプタ
 //多態アロケータ
-//スコープ多態アロケータ
+//スコープアロケータ
 
 #include <gasha/pool_allocator.cpp.h>//プールアロケータ
 #include <gasha/lf_pool_allocator.cpp.h>//ロックフリープールアロケータ
 #include <gasha/stack_allocator.cpp.h>//スタックアロケータ
 #include <gasha/lf_stack_allocator.cpp.h>//ロックフリースタックアロケータ
+#include <gasha/dual_stack_allocator.cpp.h>//双方向スタックアロケータ
+//#include <gasha/lf_dual_stack_allocator.cpp.h>//ロックフリー双方向スタックアロケータ
 #include <gasha/mono_allocator.cpp.h>//単一アロケータ
 
 #include <gasha/type_traits.h>//型特性ユーティリティ：extentof
-
 #include <gasha/spin_lock.h>//スピンロック
 
 #include <stdio.h>//printf()
@@ -56,6 +56,19 @@ GASHA_INSTANCING_smartStackAllocator();
 //GASHA_INSTANCING_smartStackAllocator_withType(int, 20);
 //GASHA_INSTANCING_stackAllocator_withType_withLock(int, 20, spinLock);
 //GASHA_INSTANCING_smartStackAllocator_withType_withLock(int, 20, spinLock);
+
+GASHA_INSTANCING_dualStackAllocator();
+GASHA_INSTANCING_smartDualStackAllocator();
+//GASHA_INSTANCING_dualStackAllocator_withLock(spinLock);
+//GASHA_INSTANCING_smartDualStackAllocator_withLock(spinLock);
+//GASHA_INSTANCING_dualStackAllocator_withBuff(80);
+//GASHA_INSTANCING_smartDualStackAllocator_withBuff(80);
+//GASHA_INSTANCING_dualStackAllocator_withBuff_withLock(80, spinLock);
+//GASHA_INSTANCING_smartDualStackAllocator_withBuff_withLock(80, spinLock);
+//GASHA_INSTANCING_dualStackAllocator_withType(int, 20);
+//GASHA_INSTANCING_smartDualStackAllocator_withType(int, 20);
+//GASHA_INSTANCING_dualStackAllocator_withType_withLock(int, 20, spinLock);
+//GASHA_INSTANCING_smartDualStackAllocator_withType_withLock(int, 20, spinLock);
 
 GASHA_INSTANCING_lfStackAllocator();
 GASHA_INSTANCING_lfSmartStackAllocator();
@@ -172,6 +185,69 @@ void example_allocator()
 		allocator.clear();                                        allocator.debugInfo(message); printf(message);
 	}
 
+	//双方向スタックアロケータテスト
+	{
+		char message[1024];
+		//dualStackAllocator_withType<int, 9>                       allocator; allocator.debugInfo(message); printf(message);
+		//lfDualStackAllocator_withType<int, 9>                     allocator; allocator.debugInfo(message); printf(message);
+		smartDualStackAllocator_withType<int, 9>                  allocator; allocator.debugInfo(message); printf(message);
+		//lfDualSmartStackAllocator_withType<int, 9>                allocator; allocator.debugInfo(message); printf(message);
+		allocator.reversewAllocateOrder();
+		void* p1 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
+		void* p2 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
+		int* i = allocator.template newObj<int>();                allocator.debugInfo(message); printf(message);
+		double* d3 = allocator.template newArray<double>(3);      allocator.debugInfo(message); printf(message);
+		int* i2 = allocator.newDefault();                         allocator.debugInfo(message); printf(message);
+		double* d = allocator.template newObj<double>();          allocator.debugInfo(message); printf(message);
+		void* p3 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
+		st_a0* a0 = allocator.template newObj<st_a0>();           allocator.debugInfo(message); printf(message);
+		st_a4* a4 = allocator.template newObj<st_a4>();           allocator.debugInfo(message); printf(message);
+		st_a8* a8 = allocator.template newObj<st_a8>();           allocator.debugInfo(message); printf(message);
+		st_a16* a16 = allocator.template newObj<st_a16>();        allocator.debugInfo(message); printf(message);
+		st_a32* a32 = allocator.template newObj<st_a32>();        allocator.debugInfo(message); printf(message);
+		void* p4 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
+		void* p5 = allocator.alloc(0, 16);                        allocator.debugInfo(message); printf(message);
+		allocator.free(p1);                                       allocator.debugInfo(message); printf(message);
+		allocator.free(p2);                                       allocator.debugInfo(message); printf(message);
+		allocator.free(p3);                                       allocator.debugInfo(message); printf(message);
+		allocator.free(p4);                                       allocator.debugInfo(message); printf(message);
+		allocator.free(p5);                                       allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a0);                                  allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a4);                                  allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a8);                                  allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a16);                                 allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a32);                                 allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(i);                                   allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(i2);                                  allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(d);                                   allocator.debugInfo(message); printf(message);
+		allocator.deleteArray(d3, 3);                             allocator.debugInfo(message); printf(message);//自動クリア
+		allocator.reversewAllocateOrder();
+		p1 = allocator.alloc(1, 1);                               allocator.debugInfo(message); printf(message);
+		allocator.free(p5);                                       allocator.debugInfo(message); printf(message);//二重解放
+		allocator.free(p1);                                       allocator.debugInfo(message); printf(message);
+		allocator.clear();                                        allocator.debugInfo(message); printf(message);
+		a16 = allocator.template newObj<st_a16>();                allocator.debugInfo(message); printf(message);
+		allocator.rewind(8);                                      allocator.debugInfo(message); printf(message);
+		allocator.rewind(16);                                     allocator.debugInfo(message); printf(message);
+		allocator.clear();                                        allocator.debugInfo(message); printf(message);
+		p1 = allocator.allocOrdinal(ALLOC_ASC, 1, 1);             allocator.debugInfo(message); printf(message);
+		p2 = allocator.allocOrdinal(ALLOC_DESC, 1, 1);            allocator.debugInfo(message); printf(message);
+		i = allocator.template newObjOrdinal<int>(ALLOC_ASC);     allocator.debugInfo(message); printf(message);
+		i2 = allocator.template newObjOrdinal<int>(ALLOC_DESC);   allocator.debugInfo(message); printf(message);
+		short* i3 = allocator.template newArrayOrdinal<short>(ALLOC_ASC, 2);  allocator.debugInfo(message); printf(message);
+		short* i4 = allocator.template newArrayOrdinal<short>(ALLOC_DESC, 2); allocator.debugInfo(message); printf(message);
+		int* i5 = allocator.newDefaultOrdinal(ALLOC_ASC);         allocator.debugInfo(message); printf(message);
+		int* i6 = allocator.newDefaultOrdinal(ALLOC_DESC);        allocator.debugInfo(message); printf(message);
+		allocator.free(p1);                                       allocator.debugInfo(message); printf(message);
+		allocator.free(p2);                                       allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(i);                                   allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(i2);                                  allocator.debugInfo(message); printf(message);
+		allocator.deleteArray(i3, 2);                             allocator.debugInfo(message); printf(message);
+		allocator.deleteArray(i4, 2);                             allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(i5);                                  allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(i6);                                  allocator.debugInfo(message); printf(message);
+	}
+
 	//単一アロケータテスト
 	{
 		char message[1024];
@@ -204,7 +280,75 @@ void example_allocator()
 		a32 = allocator.template newObj<st_a32>();                allocator.debugInfo(message); printf(message);
 		allocator.deleteObj(a32);                                 allocator.debugInfo(message); printf(message);
 	}
+	//プールアロケータテスト
+	{
+		struct st{
+			char m[35];
+			st(){ m[0] = 'a'; m[1] = 'b'; m[2] = 'c'; printf("st::st()\n"); }
+			~st(){ printf("st::~st()\n"); }
+			st(const st&){ printf("(copy consstructor)\n"); }
+			st(st&&){ printf("(move consstructor)\n"); }
+		};
+		st x[10];
+		struct alignas(16) st2a{ int m; st2a(int n) :m(n){ printf("st2a::st2a()\n"); } ~st2a(){ printf("st2a::~st2a()\n"); } };
+		struct alignas(32) st2b{ int m; st2b(int n) :m(n){ printf("st2b::st2b()\n"); } ~st2b(){ printf("st2b::~st2b()\n"); } };
+		struct st3{
+			int m;
+			st3(int n) :m(n){ printf("st3::st3()\n"); }
+			~st3(){ printf("st3::~st3()\n"); }
+		};
 
+		char message[2048];
+
+		poolAllocator_withType<st, 10> x1;
+		lfPoolAllocator<10> x2(x);
+		st* s1 = x1.newDefault();
+		st* s1c = x1.newDefault(*s1);
+		st* s1m = x1.newDefault(std::move(*s1));
+		x1.deleteDefault(s1);
+		x1.deleteDefault(s1c);
+		x1.deleteDefault(s1m);
+		st2a* s2a = x1.template newObj<st2a>(99);
+		x1.deleteObj(s2a);
+		st2b* s2b = x1.template newObj<st2b>(99);
+		x1.deleteObj(s2b);
+		st3* s3 = x1.template newArray<st3>(3, 99);
+		x1.debugInfo(message, false); printf(message);
+		x1.deleteArray(s3, 3);
+
+		poolAllocator_withType<st, 10> x3;
+		lfPoolAllocator<10> x4(x, extentof(x));
+		s1 = x3.newDefault();
+		x3.deleteDefault(s1);
+		s2a = x3.template newObj<st2a>(99);
+		x3.deleteObj(s2a);
+		s2b = x3.template newObj<st2b>(99);
+		x3.deleteObj(s2b);
+		s3 = x3.template newArray<st3>(3, 99);
+		x3.debugInfo(message, false); printf(message);
+		x3.deleteArray(s3, 3);
+
+		struct st_p1 { int a; st_p1() :a(1){ printf("st_p1::st_p1():a=%d\n", a); } ~st_p1(){ printf("st_p1::~st_p1():a=%d\n", a); } };
+		struct st_p2 { int b; st_p2() :b(2){ printf("st_p2::st_p2():b=%d\n", b); } ~st_p2(){ printf("st_p2::~st_p2():b=%d\n", b); } };
+		struct st_c : st_p1, st_p2 { int c; st_c() :c(3){ printf("st_c::st_c():c=%d\n", c); } ~st_c(){ printf("st_c::~st_c():c=%d\n", c); } };
+
+		poolAllocator_withType<st_c, 10> x5;
+		st_c* p1 = x5.newDefault();
+		st_p1* p2 = x5.newDefault();
+		st_p2* p3 = x5.newDefault();
+		st_p1* p1_1 = p1;
+		st_p2* p1_2 = p1;
+		st_c* p2_c = static_cast<st_c*>(p2);
+		st_c* p3_c = static_cast<st_c*>(p3);
+		x5.debugInfo(message, false); printf(message);
+		x5.deleteObj(static_cast<st_c*>(p1_2));
+		x5.deleteObj(static_cast<st_c*>(p1_1));
+		x5.deleteObj(p1);
+		x5.deleteObj(p2_c);
+		x5.deleteObj(p3_c);
+		x5.debugInfo(message, false); printf(message);
+	}
+	//マルチスレッドテスト
 	{
 		static const std::size_t alloc_size = 4;
 		static const std::size_t align_size = 4;
@@ -242,6 +386,7 @@ void example_allocator()
 		char buff[buff_size];
 		smartStackAllocator<spinLock> stack_allocator(buff);
 		lfSmartStackAllocator lfstack_allocator(buff);
+		smartDualStackAllocator<spinLock> dual_stack_allocator(buff);
 		monoAllocator<spinLock> mono_allocator(buff);
 		lfMonoAllocator lfmono_allocator(buff);
 		poolAllocator<pool_size, spinLock> pool_allocator(buff, buff_size, alloc_size);
@@ -272,6 +417,21 @@ void example_allocator()
 		{
 			char message[1024];
 			lfstack_allocator.debugInfo(message);
+			printf(message);
+		};
+		auto alloc_dual_stack = [&dual_stack_allocator](const std::size_t size, const std::size_t align) -> void*
+		{
+			dual_stack_allocator.reversewAllocateOrder();
+			return dual_stack_allocator.alloc(size, align);
+		};
+		auto free_dual_stack = [&dual_stack_allocator](void* p)
+		{
+			dual_stack_allocator.free(p);
+		};
+		auto print_dual_stack = [&dual_stack_allocator]()
+		{
+			char message[1024];
+			dual_stack_allocator.debugInfo(message);
 			printf(message);
 		};
 		auto alloc_mono = [&mono_allocator](const std::size_t size, const std::size_t align) -> void*
@@ -332,78 +492,11 @@ void example_allocator()
 		};
 		thread_test(alloc_stack, free_stack, print_stack);
 		thread_test(alloc_lfstack, free_lfstack, print_lfstack);
+		thread_test(alloc_dual_stack, free_dual_stack, print_dual_stack);
 		thread_test(alloc_mono, free_mono, print_mono);
 		thread_test(alloc_lfmono, free_lfmono, print_lfmono);
 		thread_test(alloc_pool, free_pool, print_pool);
 		thread_test(alloc_lfpool, free_lfpool, print_lfpool);
-	}
-	//仮：プールアロケータ
-	{
-		struct st{
-			char m[35];
-			st(){ m[0] = 'a'; m[1] = 'b'; m[2] = 'c'; printf("st::st()\n"); }
-			~st(){ printf("st::~st()\n"); }
-			st(const st&){ printf("(copy consstructor)\n"); }
-			st(st&&){ printf("(move consstructor)\n"); }
-		};
-		st x[10];
-		struct alignas(16) st2a{ int m; st2a(int n) :m(n){ printf("st2a::st2a()\n"); } ~st2a(){ printf("st2a::~st2a()\n"); } };
-		struct alignas(32) st2b{ int m; st2b(int n) :m(n){ printf("st2b::st2b()\n"); } ~st2b(){ printf("st2b::~st2b()\n"); } };
-		struct st3{
-			int m;
-		st3(int n) :m(n){ printf("st3::st3()\n"); }
-		~st3(){ printf("st3::~st3()\n"); }
-		};
-		
-		char message[2048];
-		
-		poolAllocator_withType<st, 10> x1;
-		lfPoolAllocator<10> x2(x);
-		st* s1 = x1.newDefault();
-		st* s1c = x1.newDefault(*s1);
-		st* s1m = x1.newDefault(std::move(*s1));
-		x1.deleteDefault(s1);
-		x1.deleteDefault(s1c);
-		x1.deleteDefault(s1m);
-		st2a* s2a = x1.template newObj<st2a>(99);
-		x1.deleteObj(s2a);
-		st2b* s2b = x1.template newObj<st2b>(99);
-		x1.deleteObj(s2b);
-		st3* s3 = x1.template newArray<st3>(3, 99);
-		x1.debugInfo(message, false); printf(message);
-		x1.deleteArray(s3, 3);
-
-		poolAllocator_withType<st, 10> x3;
-		lfPoolAllocator<10> x4(x, extentof(x));
-		s1 = x3.newDefault();
-		x3.deleteDefault(s1);
-		s2a = x3.template newObj<st2a>(99);
-		x3.deleteObj(s2a);
-		s2b = x3.template newObj<st2b>(99);
-		x3.deleteObj(s2b);
-		s3 = x3.template newArray<st3>(3, 99);
-		x3.debugInfo(message, false); printf(message);
-		x3.deleteArray(s3, 3);
-
-		struct st_p1 { int a; st_p1():a(1){ printf("st_p1::st_p1():a=%d\n", a); } ~st_p1(){ printf("st_p1::~st_p1():a=%d\n", a); } };
-		struct st_p2 { int b; st_p2():b(2){ printf("st_p2::st_p2():b=%d\n", b); } ~st_p2(){ printf("st_p2::~st_p2():b=%d\n", b); } };
-		struct st_c : st_p1, st_p2 { int c; st_c():c(3){ printf("st_c::st_c():c=%d\n", c); } ~st_c(){ printf("st_c::~st_c():c=%d\n", c); } };
-
-		poolAllocator_withType<st_c, 10> x5;
-		st_c* p1 = x5.newDefault();
-		st_p1* p2 = x5.newDefault();
-		st_p2* p3 = x5.newDefault();
-		st_p1* p1_1 = p1;
-		st_p2* p1_2 = p1;
-		st_c* p2_c = static_cast<st_c*>(p2);
-		st_c* p3_c = static_cast<st_c*>(p3);
-		x5.debugInfo(message, false); printf(message);
-		x5.deleteObj(static_cast<st_c*>(p1_2));
-		x5.deleteObj(static_cast<st_c*>(p1_1));
-		x5.deleteObj(p1);
-		x5.deleteObj(p2_c);
-		x5.deleteObj(p3_c);
-		x5.debugInfo(message, false); printf(message);
 	}
 
 	printf("- end -\n");
