@@ -15,7 +15,7 @@
 #include <gasha/stack_allocator.h>//スタックアロケータ
 #include <gasha/stack_allocator.h>//ロックフリースタックアロケータ
 #include <gasha/dual_stack_allocator.h>//双方向スタックアロケータ
-//#include <gasha/lf_dual_stack_allocator.h>//ロックフリー双方向スタックアロケータ
+#include <gasha/lf_dual_stack_allocator.h>//ロックフリー双方向スタックアロケータ
 #include <gasha/pool_allocator.h>//プールアロケータ
 #include <gasha/lf_pool_allocator.h>//ロックフリープールアロケータ
 //アロケータアダプタ
@@ -27,7 +27,7 @@
 #include <gasha/stack_allocator.cpp.h>//スタックアロケータ
 #include <gasha/lf_stack_allocator.cpp.h>//ロックフリースタックアロケータ
 #include <gasha/dual_stack_allocator.cpp.h>//双方向スタックアロケータ
-//#include <gasha/lf_dual_stack_allocator.cpp.h>//ロックフリー双方向スタックアロケータ
+#include <gasha/lf_dual_stack_allocator.cpp.h>//ロックフリー双方向スタックアロケータ
 #include <gasha/mono_allocator.cpp.h>//単一アロケータ
 
 #include <gasha/type_traits.h>//型特性ユーティリティ：extentof
@@ -46,8 +46,8 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 GASHA_INSTANCING_stackAllocator();
 GASHA_INSTANCING_smartStackAllocator();
-//GASHA_INSTANCING_stackAllocator_withLock(spinLock);
-//GASHA_INSTANCING_smartStackAllocator_withLock(spinLock);
+GASHA_INSTANCING_stackAllocator_withLock(spinLock);
+GASHA_INSTANCING_smartStackAllocator_withLock(spinLock);
 //GASHA_INSTANCING_stackAllocator_withBuff(80);
 //GASHA_INSTANCING_smartStackAllocator_withBuff(80);
 //GASHA_INSTANCING_stackAllocator_withBuff_withLock(80, spinLock);
@@ -57,10 +57,17 @@ GASHA_INSTANCING_smartStackAllocator();
 //GASHA_INSTANCING_stackAllocator_withType_withLock(int, 20, spinLock);
 //GASHA_INSTANCING_smartStackAllocator_withType_withLock(int, 20, spinLock);
 
+GASHA_INSTANCING_lfStackAllocator();
+GASHA_INSTANCING_lfSmartStackAllocator();
+//GASHA_INSTANCING_lfStackAllocator_withBuff(80);
+//GASHA_INSTANCING_lfSmartStackAllocator_withBuff(80);
+//GASHA_INSTANCING_lfStackAllocator_withType(int, 20);
+//GASHA_INSTANCING_lfSmartStackAllocator_withType(int, 20);
+
 GASHA_INSTANCING_dualStackAllocator();
 GASHA_INSTANCING_smartDualStackAllocator();
-//GASHA_INSTANCING_dualStackAllocator_withLock(spinLock);
-//GASHA_INSTANCING_smartDualStackAllocator_withLock(spinLock);
+GASHA_INSTANCING_dualStackAllocator_withLock(spinLock);
+GASHA_INSTANCING_smartDualStackAllocator_withLock(spinLock);
 //GASHA_INSTANCING_dualStackAllocator_withBuff(80);
 //GASHA_INSTANCING_smartDualStackAllocator_withBuff(80);
 //GASHA_INSTANCING_dualStackAllocator_withBuff_withLock(80, spinLock);
@@ -70,12 +77,12 @@ GASHA_INSTANCING_smartDualStackAllocator();
 //GASHA_INSTANCING_dualStackAllocator_withType_withLock(int, 20, spinLock);
 //GASHA_INSTANCING_smartDualStackAllocator_withType_withLock(int, 20, spinLock);
 
-GASHA_INSTANCING_lfStackAllocator();
-GASHA_INSTANCING_lfSmartStackAllocator();
-//GASHA_INSTANCING_lfStackAllocator_withBuff(80);
-//GASHA_INSTANCING_lfSmartStackAllocator_withBuff(80);
-//GASHA_INSTANCING_lfStackAllocator_withType(int, 20);
-//GASHA_INSTANCING_lfSmartStackAllocator_withType(int, 20);
+GASHA_INSTANCING_lfDualStackAllocator();
+GASHA_INSTANCING_lfSmartDualStackAllocator();
+//GASHA_INSTANCING_lfDualStackAllocator_withBuff(80);
+//GASHA_INSTANCING_lfSmartDualStackAllocator_withBuff(80);
+//GASHA_INSTANCING_lfDualStackAllocator_withType(int, 20);
+//GASHA_INSTANCING_lfSmartDualStackAllocator_withType(int, 20);
 
 GASHA_INSTANCING_monoAllocator();
 GASHA_INSTANCING_monoAllocator_withLock(spinLock);
@@ -145,8 +152,8 @@ void example_allocator()
 		char message[1024];
 		//stackAllocator_withType<int, 9>                           allocator; allocator.debugInfo(message); printf(message);
 		//lfStackAllocator_withType<int, 9>                         allocator; allocator.debugInfo(message); printf(message);
-		smartStackAllocator_withType<int, 9>                      allocator; allocator.debugInfo(message); printf(message);
-		//lfSmartStackAllocator_withType<int, 9>                    allocator; allocator.debugInfo(message); printf(message);
+		//smartStackAllocator_withType<int, 9>                      allocator; allocator.debugInfo(message); printf(message);
+		lfSmartStackAllocator_withType<int, 9>                    allocator; allocator.debugInfo(message); printf(message);
 		void* p1 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
 		void* p2 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
 		int* i = allocator.template newObj<int>();                allocator.debugInfo(message); printf(message);
@@ -190,8 +197,8 @@ void example_allocator()
 		char message[1024];
 		//dualStackAllocator_withType<int, 9>                       allocator; allocator.debugInfo(message); printf(message);
 		//lfDualStackAllocator_withType<int, 9>                     allocator; allocator.debugInfo(message); printf(message);
-		smartDualStackAllocator_withType<int, 9>                  allocator; allocator.debugInfo(message); printf(message);
-		//lfDualSmartStackAllocator_withType<int, 9>                allocator; allocator.debugInfo(message); printf(message);
+		//smartDualStackAllocator_withType<int, 9>                  allocator; allocator.debugInfo(message); printf(message);
+		lfSmartDualStackAllocator_withType<int, 9>                allocator; allocator.debugInfo(message); printf(message);
 		allocator.reversewAllocateOrder();
 		void* p1 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
 		void* p2 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
@@ -353,6 +360,7 @@ void example_allocator()
 		static const std::size_t alloc_size = 4;
 		static const std::size_t align_size = 4;
 		static const std::size_t alloc_num = 100;
+		static const std::size_t alloc_error_num = 0;
 		static const std::size_t thread_num = 10;
 		static const std::size_t repeat_num = 100;
 		static const std::size_t pool_size = alloc_num * thread_num;
@@ -361,12 +369,12 @@ void example_allocator()
 		{
 			for (std::size_t i = 0; i < repeat_num; ++i)
 			{
-				void* ptr[alloc_num + 10] = { nullptr };
+				void* ptr[alloc_num + alloc_error_num] = { nullptr };
 				std::this_thread::sleep_for(std::chrono::microseconds(1));
-				for (std::size_t i = 0; i < alloc_num + 10; ++i)
+				for (std::size_t i = 0; i < extentof(ptr); ++i)
 					ptr[i] = alloc_func(i % (alloc_size + 1), align_size);
 				std::this_thread::sleep_for(std::chrono::microseconds(1));
-				for (std::size_t i = 0; i < alloc_num + 10; ++i)
+				for (std::size_t i = 0; i < extentof(ptr); ++i)
 					free_func(ptr[i]);
 			}
 		};
@@ -385,12 +393,13 @@ void example_allocator()
 		};
 		char buff[buff_size];
 		smartStackAllocator<spinLock> stack_allocator(buff);
-		lfSmartStackAllocator lfstack_allocator(buff);
+		lfSmartStackAllocator lf_stack_allocator(buff);
 		smartDualStackAllocator<spinLock> dual_stack_allocator(buff);
+		lfSmartDualStackAllocator<spinLock> lf_dual_stack_allocator(buff);
 		monoAllocator<spinLock> mono_allocator(buff);
-		lfMonoAllocator lfmono_allocator(buff);
+		lfMonoAllocator lf_mono_allocator(buff);
 		poolAllocator<pool_size, spinLock> pool_allocator(buff, buff_size, alloc_size);
-		lfPoolAllocator<pool_size> lfpool_allocator(buff, buff_size, alloc_size);
+		lfPoolAllocator<pool_size> lf_pool_allocator(buff, buff_size, alloc_size);
 		auto alloc_stack = [&stack_allocator](const std::size_t size, const std::size_t align) -> void*
 		{
 			return stack_allocator.alloc(size, align);
@@ -405,33 +414,48 @@ void example_allocator()
 			stack_allocator.debugInfo(message);
 			printf(message);
 		};
-		auto alloc_lfstack = [&lfstack_allocator](const std::size_t size, const std::size_t align) -> void*
+		auto alloc_lfstack = [&lf_stack_allocator](const std::size_t size, const std::size_t align) -> void*
 		{
-			return lfstack_allocator.alloc(size, align);
+			return lf_stack_allocator.alloc(size, align);
 		};
-		auto free_lfstack = [&lfstack_allocator](void* p)
+		auto free_lfstack = [&lf_stack_allocator](void* p)
 		{
-			lfstack_allocator.free(p);
+			lf_stack_allocator.free(p);
 		};
-		auto print_lfstack = [&lfstack_allocator]()
+		auto print_lfstack = [&lf_stack_allocator]()
 		{
 			char message[1024];
-			lfstack_allocator.debugInfo(message);
+			lf_stack_allocator.debugInfo(message);
 			printf(message);
 		};
-		auto alloc_dual_stack = [&dual_stack_allocator](const std::size_t size, const std::size_t align) -> void*
+		auto alloc_dstack = [&dual_stack_allocator](const std::size_t size, const std::size_t align) -> void*
 		{
 			dual_stack_allocator.reversewAllocateOrder();
 			return dual_stack_allocator.alloc(size, align);
 		};
-		auto free_dual_stack = [&dual_stack_allocator](void* p)
+		auto free_dstack = [&dual_stack_allocator](void* p)
 		{
 			dual_stack_allocator.free(p);
 		};
-		auto print_dual_stack = [&dual_stack_allocator]()
+		auto print_dstack = [&dual_stack_allocator]()
 		{
 			char message[1024];
 			dual_stack_allocator.debugInfo(message);
+			printf(message);
+		};
+		auto alloc_lfdstack = [&lf_dual_stack_allocator](const std::size_t size, const std::size_t align) -> void*
+		{
+			lf_dual_stack_allocator.reversewAllocateOrder();
+			return lf_dual_stack_allocator.alloc(size, align);
+		};
+		auto free_lfdstack = [&lf_dual_stack_allocator](void* p)
+		{
+			lf_dual_stack_allocator.free(p);
+		};
+		auto print_lfdstack = [&lf_dual_stack_allocator]()
+		{
+			char message[1024];
+			lf_dual_stack_allocator.debugInfo(message);
 			printf(message);
 		};
 		auto alloc_mono = [&mono_allocator](const std::size_t size, const std::size_t align) -> void*
@@ -448,18 +472,18 @@ void example_allocator()
 			mono_allocator.debugInfo(message);
 			printf(message);
 		};
-		auto alloc_lfmono = [&lfmono_allocator](const std::size_t size, const std::size_t align) -> void*
+		auto alloc_lfmono = [&lf_mono_allocator](const std::size_t size, const std::size_t align) -> void*
 		{
-			return lfmono_allocator.alloc(size, align);
+			return lf_mono_allocator.alloc(size, align);
 		};
-		auto free_lfmono = [&lfmono_allocator](void* p)
+		auto free_lfmono = [&lf_mono_allocator](void* p)
 		{
-			lfmono_allocator.free(p);
+			lf_mono_allocator.free(p);
 		};
-		auto print_lfmono = [&lfmono_allocator]()
+		auto print_lfmono = [&lf_mono_allocator]()
 		{
 			char message[1024];
-			lfmono_allocator.debugInfo(message);
+			lf_mono_allocator.debugInfo(message);
 			printf(message);
 		};
 		auto alloc_pool = [&pool_allocator](const std::size_t size, const std::size_t align) -> void*
@@ -476,28 +500,36 @@ void example_allocator()
 			pool_allocator.debugInfo(message, false);
 			printf(message);
 		};
-		auto alloc_lfpool = [&lfpool_allocator](const std::size_t size, const std::size_t align) -> void*
+		auto alloc_lfpool = [&lf_pool_allocator](const std::size_t size, const std::size_t align) -> void*
 		{
-			return lfpool_allocator.alloc(size, align);
+			return lf_pool_allocator.alloc(size, align);
 		};
-		auto free_lfpool = [&lfpool_allocator](void* p)
+		auto free_lfpool = [&lf_pool_allocator](void* p)
 		{
-			lfpool_allocator.free(p);
+			lf_pool_allocator.free(p);
 		};
-		auto print_lfpool = [&lfpool_allocator]()
+		auto print_lfpool = [&lf_pool_allocator]()
 		{
 			char message[1024];
-			lfpool_allocator.debugInfo(message, false);
+			lf_pool_allocator.debugInfo(message, false);
 			printf(message);
 		};
 		thread_test(alloc_stack, free_stack, print_stack);
 		thread_test(alloc_lfstack, free_lfstack, print_lfstack);
-		thread_test(alloc_dual_stack, free_dual_stack, print_dual_stack);
+		thread_test(alloc_dstack, free_dstack, print_dstack);
+		thread_test(alloc_lfdstack, free_lfdstack, print_lfdstack);
 		thread_test(alloc_mono, free_mono, print_mono);
 		thread_test(alloc_lfmono, free_lfmono, print_lfmono);
 		thread_test(alloc_pool, free_pool, print_pool);
 		thread_test(alloc_lfpool, free_lfpool, print_lfpool);
 	}
+#if 0
+	lfSmartDualStackAllocator_withBuff<2> al;
+	void* pp1 = al.allocOrdinal(ALLOC_ASC, 1, 1); al.debugInfo(message); printf(message);
+	void* pp2 = al.allocOrdinal(ALLOC_DESC, 1, 1); al.debugInfo(message); printf(message);
+	al.free(pp2); al.debugInfo(message); printf(message);
+	al.free(pp1); al.debugInfo(message); printf(message);
+#endif
 
 	printf("- end -\n");
 }
