@@ -168,8 +168,7 @@ void example_allocator()
 		st2b* s2b = x1.template newObj<st2b>(99);
 		x1.deleteObj(s2b);
 		st3* s3 = x1.template newArray<st3>(3, 99);
-		x1.debugInfo(message);
-		printf(message);
+		x1.debugInfo(message); printf(message);
 		x1.deleteArray(s3, 3);
 
 		poolAllocator_withType<st, 10> x3;
@@ -181,9 +180,28 @@ void example_allocator()
 		s2b = x3.template newObj<st2b>(99);
 		x3.deleteObj(s2b);
 		s3 = x3.template newArray<st3>(3, 99);
-		x3.debugInfo(message);
-		printf(message);
+		x3.debugInfo(message); printf(message);
 		x3.deleteArray(s3, 3);
+
+		struct st_p1 { int a; st_p1():a(1){ printf("st_p1::st_p1():a=%d\n", a); } ~st_p1(){ printf("st_p1::~st_p1():a=%d\n", a); } };
+		struct st_p2 { int b; st_p2():b(2){ printf("st_p2::st_p2():b=%d\n", b); } ~st_p2(){ printf("st_p2::~st_p2():b=%d\n", b); } };
+		struct st_c : st_p1, st_p2 { int c; st_c():c(3){ printf("st_c::st_c():c=%d\n", c); } ~st_c(){ printf("st_c::~st_c():c=%d\n", c); } };
+
+		poolAllocator_withType<st_c, 10> x5;
+		st_c* p1 = x5.newDefault();
+		st_p1* p2 = x5.newDefault();
+		st_p2* p3 = x5.newDefault();
+		st_p1* p1_1 = p1;
+		st_p2* p1_2 = p1;
+		st_c* p2_c = static_cast<st_c*>(p2);
+		st_c* p3_c = static_cast<st_c*>(p3);
+		x5.debugInfo(message); printf(message);
+		x5.deleteObj(static_cast<st_c*>(p1_2));
+		x5.deleteObj(static_cast<st_c*>(p1_1));
+		x5.deleteObj(p1);
+		x5.deleteObj(p2_c);
+		x5.deleteObj(p3_c);
+		x5.debugInfo(message); printf(message);
 	}
 
 	printf("- end -\n");
