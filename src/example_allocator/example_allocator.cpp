@@ -10,8 +10,8 @@
 
 #include "example_allocator.h"//アロケータテスト
 
-//#include <gasha/mono_allocator.h>//モノアロケータ
-//#include <gasha/lf_mono_allocator.h>//ロックフリーモノアロケータ
+#include <gasha/mono_allocator.h>//単一アロケータ
+#include <gasha/lf_mono_allocator.h>//ロックフリー単一アロケータ
 #include <gasha/stack_allocator.h>//スタックアロケータ
 #include <gasha/stack_allocator.h>//ロックフリースタックアロケータ
 //#include <gasha/stack_allocator.h>//双方向スタックアロケータ
@@ -27,6 +27,7 @@
 #include <gasha/lf_pool_allocator.cpp.h>//ロックフリープールアロケータ
 #include <gasha/stack_allocator.cpp.h>//スタックアロケータ
 #include <gasha/lf_stack_allocator.cpp.h>//ロックフリースタックアロケータ
+#include <gasha/mono_allocator.cpp.h>//単一アロケータ
 
 #include <gasha/type_traits.h>//型特性ユーティリティ：extentof
 
@@ -62,6 +63,13 @@ GASHA_INSTANCING_lfSmartStackAllocator();
 //GASHA_INSTANCING_lfSmartStackAllocator_withBuff(80);
 //GASHA_INSTANCING_lfStackAllocator_withType(int, 20);
 //GASHA_INSTANCING_lfSmartStackAllocator_withType(int, 20);
+
+GASHA_INSTANCING_monoAllocator();
+GASHA_INSTANCING_monoAllocator_withLock(spinLock);
+//GASHA_INSTANCING_monoAllocator_withBuff(80);
+//GASHA_INSTANCING_monoAllocator_withBuff_withLock(80, spinLock);
+//GASHA_INSTANCING_monoAllocator_withType(int, 20);
+//GASHA_INSTANCING_monoAllocator_withType_withLock(int, 20, spinLock);
 
 struct st_a0{ int x; st_a0(){ printf("st_a0::st_a0()\n"); } ~st_a0(){ printf("st_a0::~st_a0()\n"); } };
 struct alignas(4) st_a4{ int x; st_a4(){ printf("st_a4::st_a4()\n"); } ~st_a4(){ printf("st_a4::~st_a4()\n"); } };
@@ -121,7 +129,7 @@ void example_allocator()
 
 	//スタックアロケータテスト
 	{
-		char message[2048];
+		char message[1024];
 		//stackAllocator_withType<int, 9>                           allocator; allocator.debugInfo(message); printf(message);
 		//lfStackAllocator_withType<int, 9>                         allocator; allocator.debugInfo(message); printf(message);
 		smartStackAllocator_withType<int, 9>                      allocator; allocator.debugInfo(message); printf(message);
@@ -163,6 +171,40 @@ void example_allocator()
 		allocator.rewind(16);                                     allocator.debugInfo(message); printf(message);
 		allocator.clear();                                        allocator.debugInfo(message); printf(message);
 	}
+
+	//単一アロケータテスト
+	{
+		char message[1024];
+		//monoAllocator_withType<int, 9>                            allocator; allocator.debugInfo(message); printf(message);
+		lfMonoAllocator_withType<int, 9>                         allocator; allocator.debugInfo(message); printf(message);
+		void* p1 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
+		int* i = allocator.template newObj<int>();                allocator.debugInfo(message); printf(message);
+		double* d3 = allocator.template newArray<double>(3);      allocator.debugInfo(message); printf(message);
+		int* i2 = allocator.newDefault();                         allocator.debugInfo(message); printf(message);
+		st_a0* a0 = allocator.template newObj<st_a0>();           allocator.debugInfo(message); printf(message);
+		st_a4* a4 = allocator.template newObj<st_a4>();           allocator.debugInfo(message); printf(message);
+		st_a8* a8 = allocator.template newObj<st_a8>();           allocator.debugInfo(message); printf(message);
+		st_a16* a16 = allocator.template newObj<st_a16>();        allocator.debugInfo(message); printf(message);
+		st_a32* a32 = allocator.template newObj<st_a32>();        allocator.debugInfo(message); printf(message);
+		allocator.free(p1);                                       allocator.debugInfo(message); printf(message);
+		i = allocator.template newObj<int>();                     allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(i);                                   allocator.debugInfo(message); printf(message);
+		d3 = allocator.template newArray<double>(3);              allocator.debugInfo(message); printf(message);
+		allocator.deleteArray(d3, 3);                             allocator.debugInfo(message); printf(message);
+		i2 = allocator.newDefault();                              allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(i2);                                  allocator.debugInfo(message); printf(message);
+		a0 = allocator.template newObj<st_a0>();                  allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a0);                                  allocator.debugInfo(message); printf(message);
+		a4 = allocator.template newObj<st_a4>();                  allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a4);                                  allocator.debugInfo(message); printf(message);
+		a8 = allocator.template newObj<st_a8>();                  allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a8);                                  allocator.debugInfo(message); printf(message);
+		a16 = allocator.template newObj<st_a16>();                allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a16);                                 allocator.debugInfo(message); printf(message);
+		a32 = allocator.template newObj<st_a32>();                allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a32);                                 allocator.debugInfo(message); printf(message);
+	}
+
 	{
 		static const std::size_t alloc_size = 4;
 		static const std::size_t align_size = 4;
@@ -200,6 +242,8 @@ void example_allocator()
 		char buff[buff_size];
 		smartStackAllocator<spinLock> stack_allocator(buff);
 		lfSmartStackAllocator lfstack_allocator(buff);
+		monoAllocator<spinLock> mono_allocator(buff);
+		lfMonoAllocator lfmono_allocator(buff);
 		poolAllocator<pool_size, spinLock> pool_allocator(buff, buff_size, alloc_size);
 		lfPoolAllocator<pool_size> lfpool_allocator(buff, buff_size, alloc_size);
 		auto alloc_stack = [&stack_allocator](const std::size_t size, const std::size_t align) -> void*
@@ -228,6 +272,34 @@ void example_allocator()
 		{
 			char message[1024];
 			lfstack_allocator.debugInfo(message);
+			printf(message);
+		};
+		auto alloc_mono = [&mono_allocator](const std::size_t size, const std::size_t align) -> void*
+		{
+			return mono_allocator.alloc(size, align);
+		};
+		auto free_mono = [&mono_allocator](void* p)
+		{
+			mono_allocator.free(p);
+		};
+		auto print_mono = [&mono_allocator]()
+		{
+			char message[1024];
+			mono_allocator.debugInfo(message);
+			printf(message);
+		};
+		auto alloc_lfmono = [&lfmono_allocator](const std::size_t size, const std::size_t align) -> void*
+		{
+			return lfmono_allocator.alloc(size, align);
+		};
+		auto free_lfmono = [&lfmono_allocator](void* p)
+		{
+			lfmono_allocator.free(p);
+		};
+		auto print_lfmono = [&lfmono_allocator]()
+		{
+			char message[1024];
+			lfmono_allocator.debugInfo(message);
 			printf(message);
 		};
 		auto alloc_pool = [&pool_allocator](const std::size_t size, const std::size_t align) -> void*
@@ -260,14 +332,19 @@ void example_allocator()
 		};
 		thread_test(alloc_stack, free_stack, print_stack);
 		thread_test(alloc_lfstack, free_lfstack, print_lfstack);
+		thread_test(alloc_mono, free_mono, print_mono);
+		thread_test(alloc_lfmono, free_lfmono, print_lfmono);
 		thread_test(alloc_pool, free_pool, print_pool);
 		thread_test(alloc_lfpool, free_lfpool, print_lfpool);
 	}
 	//仮：プールアロケータ
 	{
 		struct st{
-			char m[35]; st(){ m[0] = 'a'; m[1] = 'b'; m[2] = 'c'; printf("st::st()\n"); }
+			char m[35];
+			st(){ m[0] = 'a'; m[1] = 'b'; m[2] = 'c'; printf("st::st()\n"); }
 			~st(){ printf("st::~st()\n"); }
+			st(const st&){ printf("(copy consstructor)\n"); }
+			st(st&&){ printf("(move consstructor)\n"); }
 		};
 		st x[10];
 		struct alignas(16) st2a{ int m; st2a(int n) :m(n){ printf("st2a::st2a()\n"); } ~st2a(){ printf("st2a::~st2a()\n"); } };
@@ -283,7 +360,11 @@ void example_allocator()
 		poolAllocator_withType<st, 10> x1;
 		lfPoolAllocator<10> x2(x);
 		st* s1 = x1.newDefault();
+		st* s1c = x1.newDefault(*s1);
+		st* s1m = x1.newDefault(std::move(*s1));
 		x1.deleteDefault(s1);
+		x1.deleteDefault(s1c);
+		x1.deleteDefault(s1m);
 		st2a* s2a = x1.template newObj<st2a>(99);
 		x1.deleteObj(s2a);
 		st2b* s2b = x1.template newObj<st2b>(99);

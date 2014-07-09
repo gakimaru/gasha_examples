@@ -32,8 +32,10 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //明示的インスタンス化
 
-GASHA_INSTANCING_poolAllocator_withType_withLock(data_t, TEST_POOL_SIZE, lock_type);//プールアロケータ ※template class poolAllocator_withType<data_t, TEST_POOL_SIZE, lock_type>; と同じ
+//GASHA_INSTANCING_poolAllocator_withType_withLock(data_t, TEST_POOL_SIZE, lock_type);//プールアロケータ ※template class poolAllocator_withType<data_t, TEST_POOL_SIZE, lock_type>; と同じ
+GASHA_INSTANCING_poolAllocator_withLock(TEST_POOL_SIZE, lock_type);//プールアロケータ ※template class poolAllocator<TEST_POOL_SIZE, lock_type>; と同じ
 
-GASHA_INSTANCING_lfPoolAllocator_withType(data_t, TEST_POOL_SIZE);//ロックフリープールアロケータ ※template class lfPoolAllocator_withType<data_t, TEST_POOL_SIZE>; と同じ
+//GASHA_INSTANCING_lfPoolAllocator_withType(data_t, TEST_POOL_SIZE);//ロックフリープールアロケータ ※template class lfPoolAllocator_withType<data_t, TEST_POOL_SIZE>; と同じ
+GASHA_INSTANCING_lfPoolAllocator(TEST_POOL_SIZE);//ロックフリープールアロケータ ※template class lfPoolAllocator<TEST_POOL_SIZE>; と同じ
 
 // End of file
