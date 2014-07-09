@@ -11,9 +11,10 @@
 #include "example_allocator.h"//アロケータテスト
 
 //#include <gasha/mono_allocator.h>//モノアロケータ
+//#include <gasha/lf_mono_allocator.h>//ロックフリーモノアロケータ
 #include <gasha/stack_allocator.h>//スタックアロケータ
+#include <gasha/stack_allocator.h>//ロックフリースタックアロケータ
 //#include <gasha/stack_allocator.h>//双方向スタックアロケータ
-//#include <gasha/stack_allocator.h>//ロックフリースタックアロケータ
 //#include <gasha/stack_allocator.h>//スコープスタックアロケータ
 //#include <gasha/stack_allocator.h>//スコープ双方向スタックアロケータ
 #include <gasha/pool_allocator.h>//プールアロケータ
@@ -25,6 +26,7 @@
 #include <gasha/pool_allocator.cpp.h>//プールアロケータ
 #include <gasha/lf_pool_allocator.cpp.h>//ロックフリープールアロケータ
 #include <gasha/stack_allocator.cpp.h>//スタックアロケータ
+#include <gasha/lf_stack_allocator.cpp.h>//ロックフリースタックアロケータ
 
 #include <gasha/type_traits.h>//型特性ユーティリティ：extentof
 
@@ -53,6 +55,13 @@ GASHA_INSTANCING_smartStackAllocator();
 //GASHA_INSTANCING_smartStackAllocator_withType(int, 20);
 //GASHA_INSTANCING_stackAllocator_withType_withLock(int, 20, spinLock);
 //GASHA_INSTANCING_smartStackAllocator_withType_withLock(int, 20, spinLock);
+
+GASHA_INSTANCING_lfStackAllocator();
+GASHA_INSTANCING_lfSmartStackAllocator();
+//GASHA_INSTANCING_lfStackAllocator_withBuff(80);
+//GASHA_INSTANCING_lfSmartStackAllocator_withBuff(80);
+//GASHA_INSTANCING_lfStackAllocator_withType(int, 20);
+//GASHA_INSTANCING_lfSmartStackAllocator_withType(int, 20);
 
 struct st_a0{ int x; st_a0(){ printf("st_a0::st_a0()\n"); } ~st_a0(){ printf("st_a0::~st_a0()\n"); } };
 struct alignas(4) st_a4{ int x; st_a4(){ printf("st_a4::st_a4()\n"); } ~st_a4(){ printf("st_a4::~st_a4()\n"); } };
@@ -113,7 +122,10 @@ void example_allocator()
 	//スタックアロケータテスト
 	{
 		char message[2048];
-		smartStackAllocator_withType<int, 9, spinLock> allocator; allocator.debugInfo(message); printf(message);
+		//stackAllocator_withType<int, 9>                           allocator; allocator.debugInfo(message); printf(message);
+		//lfStackAllocator_withType<int, 9>                         allocator; allocator.debugInfo(message); printf(message);
+		smartStackAllocator_withType<int, 9>                      allocator; allocator.debugInfo(message); printf(message);
+		//lfSmartStackAllocator_withType<int, 9>                    allocator; allocator.debugInfo(message); printf(message);
 		void* p1 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
 		void* p2 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
 		int* i = allocator.template newObj<int>();                allocator.debugInfo(message); printf(message);
@@ -127,10 +139,12 @@ void example_allocator()
 		st_a16* a16 = allocator.template newObj<st_a16>();        allocator.debugInfo(message); printf(message);
 		st_a32* a32 = allocator.template newObj<st_a32>();        allocator.debugInfo(message); printf(message);
 		void* p4 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
+		void* p5 = allocator.alloc(0, 16);                        allocator.debugInfo(message); printf(message);
 		allocator.free(p1);                                       allocator.debugInfo(message); printf(message);
 		allocator.free(p2);                                       allocator.debugInfo(message); printf(message);
 		allocator.free(p3);                                       allocator.debugInfo(message); printf(message);
 		allocator.free(p4);                                       allocator.debugInfo(message); printf(message);
+		allocator.free(p5);                                       allocator.debugInfo(message); printf(message);
 		allocator.deleteObj(a0);                                  allocator.debugInfo(message); printf(message);
 		allocator.deleteObj(a4);                                  allocator.debugInfo(message); printf(message);
 		allocator.deleteObj(a8);                                  allocator.debugInfo(message); printf(message);
@@ -139,9 +153,116 @@ void example_allocator()
 		allocator.deleteObj(i);                                   allocator.debugInfo(message); printf(message);
 		allocator.deleteObj(i2);                                  allocator.debugInfo(message); printf(message);
 		allocator.deleteObj(d);                                   allocator.debugInfo(message); printf(message);
-		allocator.deleteArray(d3, 3);                             allocator.debugInfo(message); printf(message);
+		allocator.deleteArray(d3, 3);                             allocator.debugInfo(message); printf(message);//自動クリア
+		p1 = allocator.alloc(1, 1);                               allocator.debugInfo(message); printf(message);
+		allocator.free(p5);                                       allocator.debugInfo(message); printf(message);//二重解放
+		allocator.free(p1);                                       allocator.debugInfo(message); printf(message);
+		allocator.clear();                                        allocator.debugInfo(message); printf(message);
+		a16 = allocator.template newObj<st_a16>();                allocator.debugInfo(message); printf(message);
+		allocator.rewind(8);                                      allocator.debugInfo(message); printf(message);
+		allocator.rewind(16);                                     allocator.debugInfo(message); printf(message);
+		allocator.clear();                                        allocator.debugInfo(message); printf(message);
 	}
-
+	{
+		static const std::size_t alloc_size = 4;
+		static const std::size_t align_size = 4;
+		static const std::size_t alloc_num = 100;
+		static const std::size_t thread_num = 10;
+		static const std::size_t repeat_num = 100;
+		static const std::size_t pool_size = alloc_num * thread_num;
+		static const std::size_t buff_size = alloc_size * pool_size;
+		auto alloc_thread = [](std::function<void*(const std::size_t, const std::size_t)> alloc_func, std::function<void(void*)> free_func)
+		{
+			for (std::size_t i = 0; i < repeat_num; ++i)
+			{
+				void* ptr[alloc_num + 10] = { nullptr };
+				std::this_thread::sleep_for(std::chrono::microseconds(1));
+				for (std::size_t i = 0; i < alloc_num + 10; ++i)
+					ptr[i] = alloc_func(i % (alloc_size + 1), align_size);
+				std::this_thread::sleep_for(std::chrono::microseconds(1));
+				for (std::size_t i = 0; i < alloc_num + 10; ++i)
+					free_func(ptr[i]);
+			}
+		};
+		auto thread_test = [&alloc_thread](std::function<void*(const std::size_t, const std::size_t)> alloc_func, std::function<void(void*)> free_func, std::function<void()> print_func)
+		{
+			std::thread* th[thread_num];
+			for (std::size_t i = 0; i < thread_num; ++i)
+				th[i] = new std::thread(alloc_thread, alloc_func, free_func);
+			for (std::size_t i = 0; i < thread_num; ++i)
+			{
+				th[i]->join();
+				delete th[i];
+				th[i] = nullptr;
+			}
+			print_func();
+		};
+		char buff[buff_size];
+		smartStackAllocator<spinLock> stack_allocator(buff);
+		lfSmartStackAllocator lfstack_allocator(buff);
+		poolAllocator<pool_size, spinLock> pool_allocator(buff, buff_size, alloc_size);
+		lfPoolAllocator<pool_size> lfpool_allocator(buff, buff_size, alloc_size);
+		auto alloc_stack = [&stack_allocator](const std::size_t size, const std::size_t align) -> void*
+		{
+			return stack_allocator.alloc(size, align);
+		};
+		auto free_stack = [&stack_allocator](void* p)
+		{
+			stack_allocator.free(p);
+		};
+		auto print_stack = [&stack_allocator]()
+		{
+			char message[1024];
+			stack_allocator.debugInfo(message);
+			printf(message);
+		};
+		auto alloc_lfstack = [&lfstack_allocator](const std::size_t size, const std::size_t align) -> void*
+		{
+			return lfstack_allocator.alloc(size, align);
+		};
+		auto free_lfstack = [&lfstack_allocator](void* p)
+		{
+			lfstack_allocator.free(p);
+		};
+		auto print_lfstack = [&lfstack_allocator]()
+		{
+			char message[1024];
+			lfstack_allocator.debugInfo(message);
+			printf(message);
+		};
+		auto alloc_pool = [&pool_allocator](const std::size_t size, const std::size_t align) -> void*
+		{
+			return pool_allocator.alloc(size, align);
+		};
+		auto free_pool = [&pool_allocator](void* p)
+		{
+			pool_allocator.free(p);
+		};
+		auto print_pool = [&pool_allocator]()
+		{
+			char message[1024];
+			pool_allocator.debugInfo(message, false);
+			printf(message);
+		};
+		auto alloc_lfpool = [&lfpool_allocator](const std::size_t size, const std::size_t align) -> void*
+		{
+			return lfpool_allocator.alloc(size, align);
+		};
+		auto free_lfpool = [&lfpool_allocator](void* p)
+		{
+			lfpool_allocator.free(p);
+		};
+		auto print_lfpool = [&lfpool_allocator]()
+		{
+			char message[1024];
+			lfpool_allocator.debugInfo(message, false);
+			printf(message);
+		};
+		thread_test(alloc_stack, free_stack, print_stack);
+		thread_test(alloc_lfstack, free_lfstack, print_lfstack);
+		thread_test(alloc_pool, free_pool, print_pool);
+		thread_test(alloc_lfpool, free_lfpool, print_lfpool);
+	}
 	//仮：プールアロケータ
 	{
 		struct st{
@@ -168,7 +289,7 @@ void example_allocator()
 		st2b* s2b = x1.template newObj<st2b>(99);
 		x1.deleteObj(s2b);
 		st3* s3 = x1.template newArray<st3>(3, 99);
-		x1.debugInfo(message); printf(message);
+		x1.debugInfo(message, false); printf(message);
 		x1.deleteArray(s3, 3);
 
 		poolAllocator_withType<st, 10> x3;
@@ -180,7 +301,7 @@ void example_allocator()
 		s2b = x3.template newObj<st2b>(99);
 		x3.deleteObj(s2b);
 		s3 = x3.template newArray<st3>(3, 99);
-		x3.debugInfo(message); printf(message);
+		x3.debugInfo(message, false); printf(message);
 		x3.deleteArray(s3, 3);
 
 		struct st_p1 { int a; st_p1():a(1){ printf("st_p1::st_p1():a=%d\n", a); } ~st_p1(){ printf("st_p1::~st_p1():a=%d\n", a); } };
@@ -195,13 +316,13 @@ void example_allocator()
 		st_p2* p1_2 = p1;
 		st_c* p2_c = static_cast<st_c*>(p2);
 		st_c* p3_c = static_cast<st_c*>(p3);
-		x5.debugInfo(message); printf(message);
+		x5.debugInfo(message, false); printf(message);
 		x5.deleteObj(static_cast<st_c*>(p1_2));
 		x5.deleteObj(static_cast<st_c*>(p1_1));
 		x5.deleteObj(p1);
 		x5.deleteObj(p2_c);
 		x5.deleteObj(p3_c);
-		x5.debugInfo(message); printf(message);
+		x5.debugInfo(message, false); printf(message);
 	}
 
 	printf("- end -\n");

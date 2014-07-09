@@ -1,8 +1,127 @@
 ----- Test for allocator -----
-a[10]=40
-b[10]=40
-size=40, align=1, real_size=40
-size=44, align=2, real_size=44
+sizeof(st_a0)=4, alignof(st_a0)=4
+sizeof(st_a4)=4, alignof(st_a4)=4
+sizeof(st_a8)=8, alignof(st_a8)=8
+sizeof(st_a16)=16, alignof(st_a16)=16
+sizeof(st_a32)=32, alignof(st_a32)=32
+new: size=4, id=1, real_size=4
+new: size=4, id=2, real_size=4
+new: size=8, id=3, real_size=8
+new: size=16, id=4, real_size=16
+new: size=32, id=5, real_size=32
+new[]: size=12, id=6, real_size=12
+new[]: size=12, id=7, real_size=12
+new[]: size=24, id=8, real_size=24
+new[]: size=48, id=9, real_size=48
+new[]: size=96, id=10, real_size=96
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=0, remain=40, allocatedCount=0
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=1, remain=39, allocatedCount=1
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=2, remain=38, allocatedCount=2
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=8, remain=32, allocatedCount=3
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=36, remain=4, allocatedCount=4
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=5
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=5
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=5
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=5
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=5
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=5
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=5
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=5
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=5
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=5
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=4
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=3
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=3
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=3
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=3
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=3
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=3
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=3
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=3
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=3
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=2
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=1
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=40, remain=0, allocatedCount=1
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=0, remain=40, allocatedCount=0
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=1, remain=39, allocatedCount=1
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=1, remain=39, allocatedCount=1
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x2896d4, maxSize=40, size=0, remain=40, allocatedCount=0
+----------
+----- Debug Info for stackAllocator -----
+buffRef=0x289ad4, maxSize=4000, size=0, remain=4000, allocatedCount=0
+----------
+----- Debug Info for lfStackAllocator -----
+buffRef=0x289ad4, maxSize=4000, size=0, remain=4000, allocatedCount=0
+----------
+----- Debug Info for poolAllocator -----
+buffRef=0x289ad4, offset=0, maxSize=4000, blockSize=4, blockAlign=4, poolSize=1000, usingPoolSize=0, poolRemain=1000, size=0, remain=4000, vacantHead=1000
+----------
+----- Debug Info for lfPoolAllocator -----
+buffRef=0x289ad4, offset=0, maxSize=4000, blockSize=4, blockAlign=4, poolSize=1000, usingPoolSize=0, poolRemain=1000, size=0, remain=4000, vacantHead=1001
+----------
 st::st()
 st::st()
 st::st()
@@ -20,6 +139,9 @@ st2a::~st2a()
 st3::st3()
 st3::st3()
 st3::st3()
+----- Debug Info for poolAllocator -----
+buffRef=0x289565, offset=0, maxSize=351, blockSize=35, blockAlign=1, poolSize=10, usingPoolSize=1, poolRemain=9, size=35, remain=316, vacantHead=3
+----------
 st3::~st3()
 st3::~st3()
 st3::~st3()
@@ -30,9 +152,36 @@ st2a::~st2a()
 st3::st3()
 st3::st3()
 st3::st3()
+----- Debug Info for poolAllocator -----
+buffRef=0x2896ed, offset=0, maxSize=351, blockSize=35, blockAlign=1, poolSize=10, usingPoolSize=1, poolRemain=9, size=35, remain=316, vacantHead=3
+----------
 st3::~st3()
 st3::~st3()
 st3::~st3()
+st_p1::st_p1():a=1
+st_p2::st_p2():b=2
+st_c::st_c():c=3
+st_p1::st_p1():a=1
+st_p2::st_p2():b=2
+st_c::st_c():c=3
+st_p1::st_p1():a=1
+st_p2::st_p2():b=2
+st_c::st_c():c=3
+----- Debug Info for poolAllocator -----
+buffRef=0x289360, offset=0, maxSize=124, blockSize=12, blockAlign=4, poolSize=10, usingPoolSize=3, poolRemain=7, size=36, remain=88, vacantHead=3
+----------
+st_c::~st_c():c=3
+st_p2::~st_p2():b=2
+st_p1::~st_p1():a=1
+st_c::~st_c():c=3
+st_p2::~st_p2():b=2
+st_p1::~st_p1():a=1
+st_c::~st_c():c=3
+st_p2::~st_p2():b=2
+st_p1::~st_p1():a=1
+----- Debug Info for poolAllocator -----
+buffRef=0x289360, offset=0, maxSize=124, blockSize=12, blockAlign=4, poolSize=10, usingPoolSize=0, poolRemain=10, size=0, remain=124, vacantHead=3
+----------
 st::~st()
 st::~st()
 st::~st()

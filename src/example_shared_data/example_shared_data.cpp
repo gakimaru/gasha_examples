@@ -302,7 +302,7 @@ void easyTest()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_poolAllocator.template debugInfo<data_t>(message, debug_print_info);
+		s_poolAllocator.template debugInfo<data_t>(message, true, debug_print_info);
 		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -323,7 +323,7 @@ void easyTest()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_lfPoolAllocator.template debugInfo<data_t>(message, debug_print_info);
+		s_lfPoolAllocator.template debugInfo<data_t>(message, true, debug_print_info);
 		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -344,7 +344,7 @@ void easyTest()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_stack.debugInfo(message, debug_print_info);
+		s_stack.debugInfo(message, true, debug_print_info);
 		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -365,7 +365,7 @@ void easyTest()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_lfStack.debugInfo(message, debug_print_info);
+		s_lfStack.debugInfo(message, true, debug_print_info);
 		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -386,7 +386,7 @@ void easyTest()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_queue.debugInfo(message, debug_print_info);
+		s_queue.debugInfo(message, true, debug_print_info);
 		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -407,7 +407,7 @@ void easyTest()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_lfQueue.debugInfo(message, debug_print_info);
+		s_lfQueue.debugInfo(message, true, debug_print_info);
 		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -733,7 +733,7 @@ void thread_test()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_poolAllocator.debugInfo<data_t>(message, debug_print_info);
+		s_poolAllocator.debugInfo<data_t>(message, true, debug_print_info);
 		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -754,7 +754,7 @@ void thread_test()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_lfPoolAllocator.debugInfo<data_t>(message, debug_print_info);
+		s_lfPoolAllocator.debugInfo<data_t>(message, true, debug_print_info);
 		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -775,7 +775,7 @@ void thread_test()
 		
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_stack.debugInfo(message, debug_print_info);
+		s_stack.debugInfo(message, true, debug_print_info);
 		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -796,7 +796,7 @@ void thread_test()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_lfStack.debugInfo(message, debug_print_info);
+		s_lfStack.debugInfo(message, true, debug_print_info);
 		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -817,7 +817,7 @@ void thread_test()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_queue.debugInfo(message, debug_print_info);
+		s_queue.debugInfo(message, true, debug_print_info);
 		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -838,7 +838,7 @@ void thread_test()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_lfQueue.debugInfo(message, debug_print_info);
+		s_lfQueue.debugInfo(message, true, debug_print_info);
 		printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
