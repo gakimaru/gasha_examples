@@ -23,7 +23,8 @@
 #include <gasha/scoped_stack_allocator.h>//スコープスタックアロケータ
 #include <gasha/scoped_dual_stack_allocator.h>//双方向スコープスタックアロケータ
 
-//アロケータアダプタ
+#include <gasha/allocator_adapter.h>//アロケータアダプター
+
 //多態アロケータ
 //スコープ多態アロケータ
 
@@ -498,6 +499,15 @@ void example_allocator()
 		lfPoolAllocator<pool_size> lf_pool_allocator(buff, buff_size, alloc_size);
 		globalAllocator<> global_allocator;
 		//globalAllocator<spinLock> global_allocator;
+		auto allocator_adapter_impl1 = stack_allocator.adapter();
+		auto allocator_adapter_impl2 = lf_stack_allocator.adapter();
+		auto allocator_adapter_impl3 = dual_stack_allocator.adapter();
+		auto allocator_adapter_impl4 = lf_dual_stack_allocator.adapter();
+		auto allocator_adapter_impl5 = mono_allocator.adapter();
+		auto allocator_adapter_impl6 = lf_mono_allocator.adapter();
+		auto allocator_adapter_impl7 = pool_allocator.adapter();
+		auto allocator_adapter_impl8 = global_allocator.adapter();
+		IAllocatorAdapter* allocator_adapter = &allocator_adapter_impl8;
 		auto alloc_stack = [&stack_allocator](const std::size_t size, const std::size_t align) -> void*
 		{
 			return stack_allocator.alloc(size, align);
@@ -626,6 +636,20 @@ void example_allocator()
 			global_allocator.debugInfo(message);
 			printf(message);
 		};
+		auto alloc_adapter = [&allocator_adapter](const std::size_t size, const std::size_t align) -> void*
+		{
+			return allocator_adapter->alloc(size, align);
+		};
+		auto free_adapter = [&allocator_adapter](void* p)
+		{
+			allocator_adapter->free(p);
+		};
+		auto print_adapter = [&allocator_adapter]()
+		{
+			char message[1024];
+			allocator_adapter->debugInfo(message);
+			printf(message);
+		};
 		thread_test(alloc_stack, free_stack, print_stack);
 		thread_test(alloc_lfstack, free_lfstack, print_lfstack);
 		thread_test(alloc_dstack, free_dstack, print_dstack);
@@ -635,6 +659,7 @@ void example_allocator()
 		thread_test(alloc_pool, free_pool, print_pool);
 		thread_test(alloc_lfpool, free_lfpool, print_lfpool);
 		thread_test(alloc_global, free_global, print_global);
+		thread_test(alloc_adapter, free_adapter, print_adapter);
 	}
 #if 0
 	lfSmartDualStackAllocator_withBuff<2> al;
