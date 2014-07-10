@@ -97,8 +97,10 @@ GASHA_INSTANCING_monoAllocator_withLock(spinLock);
 //GASHA_INSTANCING_monoAllocator_withType(int, 20);
 //GASHA_INSTANCING_monoAllocator_withType_withLock(int, 20, spinLock);
 
-GASHA_INSTANCING_globalAllocator();
-GASHA_INSTANCING_globalAllocator_withLock(spinLock);
+GASHA_INSTANCING_stdAllocator();
+GASHA_INSTANCING_stdAllocator_withLock(spinLock);
+GASHA_INSTANCING_stdAlignAllocator();
+GASHA_INSTANCING_stdAlignAllocator_withLock(spinLock);
 
 struct st_a0{ int x; st_a0(){ printf("st_a0::st_a0()\n"); } ~st_a0(){ printf("st_a0::~st_a0()\n"); } };
 struct alignas(4) st_a4{ int x; st_a4(){ printf("st_a4::st_a4()\n"); } ~st_a4(){ printf("st_a4::~st_a4()\n"); } };
@@ -134,11 +136,6 @@ void operator delete[](void* p, std::size_t id, std::size_t& real_size)
 //アロケータテスト
 void example_allocator()
 {
-	printf("getConstFleName=\"%s\"\n", getStaticFileName("aaa/bbb/ccc/ddd.x"));
-	printf("getConstFleName=\"%s\"\n", getStaticFileName("bbb/ccc/ddd.x"));
-	printf("getConstFleName=\"%s\"\n", getStaticFileName("ccc/ddd.x"));
-	printf("getConstFleName=\"%s\"\n", getStaticFileName("ddd.x"));
-
 	char message[2048];
 	
 	printf("----- Test for allocator -----\n");
