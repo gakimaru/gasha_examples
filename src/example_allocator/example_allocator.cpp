@@ -18,15 +18,15 @@
 #include <gasha/lf_dual_stack_allocator.h>//ロックフリー双方向スタックアロケータ
 #include <gasha/pool_allocator.h>//プールアロケータ
 #include <gasha/lf_pool_allocator.h>//ロックフリープールアロケータ
-#include <gasha/global_allocator.h>//グローバルプールアロケータ
+#include <gasha/std_allocator.h>//標準アロケータ
 
 #include <gasha/scoped_stack_allocator.h>//スコープスタックアロケータ
 #include <gasha/scoped_dual_stack_allocator.h>//双方向スコープスタックアロケータ
 
 #include <gasha/allocator_adapter.h>//アロケータアダプター
 
-//多態アロケータ
-//スコープ多態アロケータ
+#include <gasha/poly_allocator.h>//多態アロケータ
+#include <gasha/new.h>//new/delete操作
 
 #include <gasha/stack_allocator.cpp.h>//スタックアロケータ
 #include <gasha/lf_stack_allocator.cpp.h>//ロックフリースタックアロケータ
@@ -35,7 +35,7 @@
 #include <gasha/mono_allocator.cpp.h>//単一アロケータ
 #include <gasha/pool_allocator.cpp.h>//プールアロケータ
 #include <gasha/lf_pool_allocator.cpp.h>//ロックフリープールアロケータ
-#include <gasha/global_allocator.cpp.h>//グローバルアロケータ
+#include <gasha/std_allocator.cpp.h>//標準アロケータ
 
 #include <gasha/type_traits.h>//型特性ユーティリティ：extentof
 #include <gasha/spin_lock.h>//スピンロック
@@ -47,7 +47,6 @@
 #pragma warning(disable: 4530)//C4530を抑える
 
 #include <thread>//C++11 std::thread
-#include <new>
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
@@ -135,6 +134,11 @@ void operator delete[](void* p, std::size_t id, std::size_t& real_size)
 //アロケータテスト
 void example_allocator()
 {
+	printf("getConstFleName=\"%s\"\n", getStaticFileName("aaa/bbb/ccc/ddd.x"));
+	printf("getConstFleName=\"%s\"\n", getStaticFileName("bbb/ccc/ddd.x"));
+	printf("getConstFleName=\"%s\"\n", getStaticFileName("ccc/ddd.x"));
+	printf("getConstFleName=\"%s\"\n", getStaticFileName("ddd.x"));
+
 	char message[2048];
 	
 	printf("----- Test for allocator -----\n");
@@ -421,9 +425,9 @@ void example_allocator()
 		x5.debugInfo(message, false); printf(message);
 	}
 
-	//グローバルアロケータテスト
+	//標準アロケータテスト
 	{
-		globalAllocator<>                                         allocator; allocator.debugInfo(message); printf(message);
+		stdAllocator<>                                           allocator; allocator.debugInfo(message); printf(message);
 		void* p1 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
 		int* i = allocator.template newObj<int>();                allocator.debugInfo(message); printf(message);
 		double* d3 = allocator.template newArray<double>(3);      allocator.debugInfo(message); printf(message);
@@ -497,8 +501,8 @@ void example_allocator()
 		lfMonoAllocator lf_mono_allocator(buff);
 		poolAllocator<pool_size, spinLock> pool_allocator(buff, buff_size, alloc_size);
 		lfPoolAllocator<pool_size> lf_pool_allocator(buff, buff_size, alloc_size);
-		globalAllocator<> global_allocator;
-		//globalAllocator<spinLock> global_allocator;
+		stdAllocator<> std_allocator;
+		//stdAllocator<spinLock> std_allocator;
 		auto allocator_adapter_impl1 = stack_allocator.adapter();
 		auto allocator_adapter_impl2 = lf_stack_allocator.adapter();
 		auto allocator_adapter_impl3 = dual_stack_allocator.adapter();
@@ -506,7 +510,7 @@ void example_allocator()
 		auto allocator_adapter_impl5 = mono_allocator.adapter();
 		auto allocator_adapter_impl6 = lf_mono_allocator.adapter();
 		auto allocator_adapter_impl7 = pool_allocator.adapter();
-		auto allocator_adapter_impl8 = global_allocator.adapter();
+		auto allocator_adapter_impl8 = std_allocator.adapter();
 		IAllocatorAdapter* allocator_adapter = &allocator_adapter_impl8;
 		auto alloc_stack = [&stack_allocator](const std::size_t size, const std::size_t align) -> void*
 		{
@@ -622,18 +626,18 @@ void example_allocator()
 			lf_pool_allocator.debugInfo(message, false);
 			printf(message);
 		};
-		auto alloc_global = [&global_allocator](const std::size_t size, const std::size_t align) -> void*
+		auto alloc_global = [&std_allocator](const std::size_t size, const std::size_t align) -> void*
 		{
-			return global_allocator.alloc(size, align);
+			return std_allocator.alloc(size, align);
 		};
-		auto free_global = [&global_allocator](void* p)
+		auto free_global = [&std_allocator](void* p)
 		{
-			global_allocator.free(p);
+			std_allocator.free(p);
 		};
-		auto print_global = [&global_allocator]()
+		auto print_global = [&std_allocator]()
 		{
 			char message[1024];
-			global_allocator.debugInfo(message);
+			std_allocator.debugInfo(message);
 			printf(message);
 		};
 		auto alloc_adapter = [&allocator_adapter](const std::size_t size, const std::size_t align) -> void*

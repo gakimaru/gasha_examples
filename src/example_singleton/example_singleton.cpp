@@ -52,7 +52,7 @@ common_data1_t::common_data1_t(const int val1, const int val2) :
 common_data1_t::~common_data1_t()
 {
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("common_data1_t::constructor(): m_val1=%d, m_val2=%d\n", m_val1, m_val2);
+	printf("common_data1_t::destructor(): m_val1=%d, m_val2=%d\n", m_val1, m_val2);
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 
@@ -79,7 +79,7 @@ common_data2_t::common_data2_t() :
 common_data2_t::~common_data2_t()
 {
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("common_data2_t::constructor(): m_val1=%d, m_val2=%d\n", m_val1, m_val2);
+	printf("common_data2_t::destructor(): m_val1=%d, m_val2=%d\n", m_val1, m_val2);
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 

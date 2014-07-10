@@ -24,7 +24,7 @@ int main(const int argc, const char* argv[])
 
 	//ビルド設定が正しく実行環境に適合するかチェック
 	{
-		char message[4096];
+		char message[8192];
 		std::size_t size = 0;
 
 		//ライブラリビルド時のビルド設定を診断

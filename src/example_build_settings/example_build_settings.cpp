@@ -146,8 +146,8 @@ void example_build_settings()
 			printf("__TIMESTAMP__=\"%s\"\n", __TIMESTAMP__);
 			printf("\n");
 			printf("GASHA_FUNC_NAME()=\"%s\"\n", GASHA_FUNC_NAME());
-			printf("GASHA_FILE_LINE()=\"%s\"\n", GASHA_FILE_LINE());
-			printf("GASHA_FILE_LINE_TIME()=\"%s\"\n", GASHA_FILE_LINE_TIME());
+			printf("GASHA_SRC_FILE_LINE()=\"%s\"\n", GASHA_SRC_FILE_LINE());
+			printf("GASHA_SRC_FILE_LINE_TIME()=\"%s\"\n", GASHA_SRC_FILE_LINE_TIME());
 		}
 	};
 	test::func();
