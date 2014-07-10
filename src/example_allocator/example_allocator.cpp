@@ -18,18 +18,23 @@
 #include <gasha/lf_dual_stack_allocator.h>//ロックフリー双方向スタックアロケータ
 #include <gasha/pool_allocator.h>//プールアロケータ
 #include <gasha/lf_pool_allocator.h>//ロックフリープールアロケータ
+#include <gasha/global_allocator.h>//グローバルプールアロケータ
+
 #include <gasha/scoped_stack_allocator.h>//スコープスタックアロケータ
 #include <gasha/scoped_dual_stack_allocator.h>//双方向スコープスタックアロケータ
+
 //アロケータアダプタ
 //多態アロケータ
+//スコープ多態アロケータ
 
-#include <gasha/pool_allocator.cpp.h>//プールアロケータ
-#include <gasha/lf_pool_allocator.cpp.h>//ロックフリープールアロケータ
 #include <gasha/stack_allocator.cpp.h>//スタックアロケータ
 #include <gasha/lf_stack_allocator.cpp.h>//ロックフリースタックアロケータ
 #include <gasha/dual_stack_allocator.cpp.h>//双方向スタックアロケータ
 #include <gasha/lf_dual_stack_allocator.cpp.h>//ロックフリー双方向スタックアロケータ
 #include <gasha/mono_allocator.cpp.h>//単一アロケータ
+#include <gasha/pool_allocator.cpp.h>//プールアロケータ
+#include <gasha/lf_pool_allocator.cpp.h>//ロックフリープールアロケータ
+#include <gasha/global_allocator.cpp.h>//グローバルアロケータ
 
 #include <gasha/type_traits.h>//型特性ユーティリティ：extentof
 #include <gasha/spin_lock.h>//スピンロック
@@ -91,6 +96,9 @@ GASHA_INSTANCING_monoAllocator_withLock(spinLock);
 //GASHA_INSTANCING_monoAllocator_withBuff_withLock(80, spinLock);
 //GASHA_INSTANCING_monoAllocator_withType(int, 20);
 //GASHA_INSTANCING_monoAllocator_withType_withLock(int, 20, spinLock);
+
+GASHA_INSTANCING_globalAllocator();
+GASHA_INSTANCING_globalAllocator_withLock(spinLock);
 
 struct st_a0{ int x; st_a0(){ printf("st_a0::st_a0()\n"); } ~st_a0(){ printf("st_a0::~st_a0()\n"); } };
 struct alignas(4) st_a4{ int x; st_a4(){ printf("st_a4::st_a4()\n"); } ~st_a4(){ printf("st_a4::~st_a4()\n"); } };
@@ -344,6 +352,7 @@ void example_allocator()
 		a32 = allocator.template newObj<st_a32>();                allocator.debugInfo(message); printf(message);
 		allocator.deleteObj(a32);                                 allocator.debugInfo(message); printf(message);
 	}
+	
 	//プールアロケータテスト
 	{
 		struct st{
@@ -410,6 +419,38 @@ void example_allocator()
 		x5.deleteObj(p3_c);
 		x5.debugInfo(message, false); printf(message);
 	}
+
+	//グローバルアロケータテスト
+	{
+		globalAllocator<>                                         allocator; allocator.debugInfo(message); printf(message);
+		void* p1 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
+		int* i = allocator.template newObj<int>();                allocator.debugInfo(message); printf(message);
+		double* d3 = allocator.template newArray<double>(3);      allocator.debugInfo(message); printf(message);
+		int* i2 = allocator.template newObj<int>();               allocator.debugInfo(message); printf(message);
+		st_a0* a0 = allocator.template newObj<st_a0>();           allocator.debugInfo(message); printf(message);
+		st_a4* a4 = allocator.template newObj<st_a4>();           allocator.debugInfo(message); printf(message);
+		st_a8* a8 = allocator.template newObj<st_a8>();           allocator.debugInfo(message); printf(message);
+		st_a16* a16 = allocator.template newObj<st_a16>();        allocator.debugInfo(message); printf(message);
+		st_a32* a32 = allocator.template newObj<st_a32>();        allocator.debugInfo(message); printf(message);
+		allocator.free(p1);                                       allocator.debugInfo(message); printf(message);
+		i = allocator.template newObj<int>();                     allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(i);                                   allocator.debugInfo(message); printf(message);
+		d3 = allocator.template newArray<double>(3);              allocator.debugInfo(message); printf(message);
+		allocator.deleteArray(d3, 3);                             allocator.debugInfo(message); printf(message);
+		i2 = allocator.template newObj<int>();                    allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(i2);                                  allocator.debugInfo(message); printf(message);
+		a0 = allocator.template newObj<st_a0>();                  allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a0);                                  allocator.debugInfo(message); printf(message);
+		a4 = allocator.template newObj<st_a4>();                  allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a4);                                  allocator.debugInfo(message); printf(message);
+		a8 = allocator.template newObj<st_a8>();                  allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a8);                                  allocator.debugInfo(message); printf(message);
+		a16 = allocator.template newObj<st_a16>();                allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a16);                                 allocator.debugInfo(message); printf(message);
+		a32 = allocator.template newObj<st_a32>();                allocator.debugInfo(message); printf(message);
+		allocator.deleteObj(a32);                                 allocator.debugInfo(message); printf(message);
+	}
+
 	//マルチスレッドテスト
 	{
 		static const std::size_t alloc_size = 4;
@@ -455,6 +496,8 @@ void example_allocator()
 		lfMonoAllocator lf_mono_allocator(buff);
 		poolAllocator<pool_size, spinLock> pool_allocator(buff, buff_size, alloc_size);
 		lfPoolAllocator<pool_size> lf_pool_allocator(buff, buff_size, alloc_size);
+		globalAllocator<> global_allocator;
+		//globalAllocator<spinLock> global_allocator;
 		auto alloc_stack = [&stack_allocator](const std::size_t size, const std::size_t align) -> void*
 		{
 			return stack_allocator.alloc(size, align);
@@ -569,6 +612,20 @@ void example_allocator()
 			lf_pool_allocator.debugInfo(message, false);
 			printf(message);
 		};
+		auto alloc_global = [&global_allocator](const std::size_t size, const std::size_t align) -> void*
+		{
+			return global_allocator.alloc(size, align);
+		};
+		auto free_global = [&global_allocator](void* p)
+		{
+			global_allocator.free(p);
+		};
+		auto print_global = [&global_allocator]()
+		{
+			char message[1024];
+			global_allocator.debugInfo(message);
+			printf(message);
+		};
 		thread_test(alloc_stack, free_stack, print_stack);
 		thread_test(alloc_lfstack, free_lfstack, print_lfstack);
 		thread_test(alloc_dstack, free_dstack, print_dstack);
@@ -577,6 +634,7 @@ void example_allocator()
 		thread_test(alloc_lfmono, free_lfmono, print_lfmono);
 		thread_test(alloc_pool, free_pool, print_pool);
 		thread_test(alloc_lfpool, free_lfpool, print_lfpool);
+		thread_test(alloc_global, free_global, print_global);
 	}
 #if 0
 	lfSmartDualStackAllocator_withBuff<2> al;
