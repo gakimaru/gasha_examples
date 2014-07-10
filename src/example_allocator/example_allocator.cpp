@@ -646,6 +646,7 @@ void example_allocator()
 		};
 		auto print_adapter = [&allocator_adapter]()
 		{
+			printf("[ allocator adapter : %s ]\n", allocator_adapter->name());
 			char message[1024];
 			allocator_adapter->debugInfo(message);
 			printf(message);
