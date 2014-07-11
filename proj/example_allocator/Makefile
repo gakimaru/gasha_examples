@@ -24,6 +24,14 @@ PROJ_SRC_DIR := $(SRC_BASE_DIR)/$(PROG_NAME)
 SRCS := \
 	main.cpp \
 	$(PROJ_SRC_DIR)/example_allocator.cpp \
+	$(PROJ_SRC_DIR)/example_allocator_sub.cpp \
+	$(PROJ_SRC_DIR)/example_stack_allocator.cpp \
+	$(PROJ_SRC_DIR)/example_dual_stack_allocator.cpp \
+	$(PROJ_SRC_DIR)/example_mono_allocator.cpp \
+	$(PROJ_SRC_DIR)/example_pool_allocator.cpp \
+	$(PROJ_SRC_DIR)/example_std_allocator.cpp \
+	$(PROJ_SRC_DIR)/example_poly_allocator.cpp \
+	$(PROJ_SRC_DIR)/example_allocator_performance.cpp \
 
 # インクルードディレクトリ
 INCLIDE_DIRS := \

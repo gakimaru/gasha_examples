@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
-// exmaple_allocator.cpp
-// アロケータテスト
+// exmaple_mono_allocator.cpp
+// 単一アロケータテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -10,175 +10,25 @@
 
 #include "example_allocator.h"//アロケータテスト
 
-#include <stdio.h>//printf()
-
-//----------------------------------------
-//テスト用構造体
-
-//デフォルトコンストラクタ
-data_t::data_t() :
-	m_val(0)
-{
-	printf("data_t::data_t(): m_val=%d\n", m_val);
-}
-
-//コンストラクタ
-data_t::data_t(const int val) :
-	m_val(val)
-{
-	printf("data_t::data_t(%d): m_val=%d\n", val, m_val);
-}
-
-//ムーブコンストラクタ
-data_t::data_t(data_t&& obj) :
-	m_val(obj.m_val)
-{
-	printf("data_t::data_t(data_t&&): m_val=%d\n", m_val);
-}
-
-//コピーコンストラクタ
-data_t::data_t(const data_t& obj) :
-	m_val(obj.m_val)
-{
-	printf("data_t::data_t(const data_t&): m_val=%d\n", m_val);
-}
-
-//デストラクタ
-data_t::~data_t()
-{
-	printf("data_t::~data_t(): m_val=%d\n", m_val);
-}
-
-#if 0
-
-#include "example_allocator.h"//アロケータテスト
-
 #include <gasha/mono_allocator.h>//単一アロケータ
-#include <gasha/lf_mono_allocator.h>//ロックフリー単一アロケータ
-#include <gasha/stack_allocator.h>//スタックアロケータ
-#include <gasha/stack_allocator.h>//ロックフリースタックアロケータ
-#include <gasha/dual_stack_allocator.h>//双方向スタックアロケータ
-#include <gasha/lf_dual_stack_allocator.h>//ロックフリー双方向スタックアロケータ
-#include <gasha/pool_allocator.h>//プールアロケータ
-#include <gasha/lf_pool_allocator.h>//ロックフリープールアロケータ
-#include <gasha/std_allocator.h>//標準アロケータ
-
-#include <gasha/scoped_stack_allocator.h>//スコープスタックアロケータ
-#include <gasha/scoped_dual_stack_allocator.h>//双方向スコープスタックアロケータ
 
 #include <gasha/allocator_adapter.h>//アロケータアダプター
 
 #include <gasha/poly_allocator.h>//多態アロケータ
 #include <gasha/new.h>//new/delete操作
 
-#include <gasha/stack_allocator.cpp.h>//スタックアロケータ
-#include <gasha/lf_stack_allocator.cpp.h>//ロックフリースタックアロケータ
-#include <gasha/dual_stack_allocator.cpp.h>//双方向スタックアロケータ
-#include <gasha/lf_dual_stack_allocator.cpp.h>//ロックフリー双方向スタックアロケータ
-#include <gasha/mono_allocator.cpp.h>//単一アロケータ
-#include <gasha/pool_allocator.cpp.h>//プールアロケータ
-#include <gasha/lf_pool_allocator.cpp.h>//ロックフリープールアロケータ
-#include <gasha/std_allocator.cpp.h>//標準アロケータ
-
 #include <gasha/type_traits.h>//型特性ユーティリティ：extentof
 #include <gasha/spin_lock.h>//スピンロック
 
 #include <stdio.h>//printf()
 
-//【VC++】例外を無効化した状態で <thread> をインクルードすると、warning C4530 が発生する
-//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
-#pragma warning(disable: 4530)//C4530を抑える
-
-#include <thread>//C++11 std::thread
-
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
-GASHA_INSTANCING_stackAllocator();
-GASHA_INSTANCING_smartStackAllocator();
-GASHA_INSTANCING_stackAllocator_withLock(spinLock);
-GASHA_INSTANCING_smartStackAllocator_withLock(spinLock);
-//GASHA_INSTANCING_stackAllocator_withBuff(80);
-//GASHA_INSTANCING_smartStackAllocator_withBuff(80);
-//GASHA_INSTANCING_stackAllocator_withBuff_withLock(80, spinLock);
-//GASHA_INSTANCING_smartStackAllocator_withBuff_withLock(80, spinLock);
-//GASHA_INSTANCING_stackAllocator_withType(int, 20);
-//GASHA_INSTANCING_smartStackAllocator_withType(int, 20);
-//GASHA_INSTANCING_stackAllocator_withType_withLock(int, 20, spinLock);
-//GASHA_INSTANCING_smartStackAllocator_withType_withLock(int, 20, spinLock);
-
-GASHA_INSTANCING_lfStackAllocator();
-GASHA_INSTANCING_lfSmartStackAllocator();
-//GASHA_INSTANCING_lfStackAllocator_withBuff(80);
-//GASHA_INSTANCING_lfSmartStackAllocator_withBuff(80);
-//GASHA_INSTANCING_lfStackAllocator_withType(int, 20);
-//GASHA_INSTANCING_lfSmartStackAllocator_withType(int, 20);
-
-GASHA_INSTANCING_dualStackAllocator();
-GASHA_INSTANCING_smartDualStackAllocator();
-GASHA_INSTANCING_dualStackAllocator_withLock(spinLock);
-GASHA_INSTANCING_smartDualStackAllocator_withLock(spinLock);
-//GASHA_INSTANCING_dualStackAllocator_withBuff(80);
-//GASHA_INSTANCING_smartDualStackAllocator_withBuff(80);
-//GASHA_INSTANCING_dualStackAllocator_withBuff_withLock(80, spinLock);
-//GASHA_INSTANCING_smartDualStackAllocator_withBuff_withLock(80, spinLock);
-//GASHA_INSTANCING_dualStackAllocator_withType(int, 20);
-//GASHA_INSTANCING_smartDualStackAllocator_withType(int, 20);
-//GASHA_INSTANCING_dualStackAllocator_withType_withLock(int, 20, spinLock);
-//GASHA_INSTANCING_smartDualStackAllocator_withType_withLock(int, 20, spinLock);
-
-GASHA_INSTANCING_lfDualStackAllocator();
-GASHA_INSTANCING_lfSmartDualStackAllocator();
-//GASHA_INSTANCING_lfDualStackAllocator_withBuff(80);
-//GASHA_INSTANCING_lfSmartDualStackAllocator_withBuff(80);
-//GASHA_INSTANCING_lfDualStackAllocator_withType(int, 20);
-//GASHA_INSTANCING_lfSmartDualStackAllocator_withType(int, 20);
-
-GASHA_INSTANCING_monoAllocator();
-GASHA_INSTANCING_monoAllocator_withLock(spinLock);
-//GASHA_INSTANCING_monoAllocator_withBuff(80);
-//GASHA_INSTANCING_monoAllocator_withBuff_withLock(80, spinLock);
-//GASHA_INSTANCING_monoAllocator_withType(int, 20);
-//GASHA_INSTANCING_monoAllocator_withType_withLock(int, 20, spinLock);
-
-GASHA_INSTANCING_stdAllocator();
-GASHA_INSTANCING_stdAllocator_withLock(spinLock);
-GASHA_INSTANCING_stdAlignAllocator();
-GASHA_INSTANCING_stdAlignAllocator_withLock(spinLock);
-
-struct st_a0{ int x; st_a0(){ printf("st_a0::st_a0()\n"); } ~st_a0(){ printf("st_a0::~st_a0()\n"); } };
-struct alignas(4) st_a4{ int x; st_a4(){ printf("st_a4::st_a4()\n"); } ~st_a4(){ printf("st_a4::~st_a4()\n"); } };
-struct alignas(8) st_a8{ int x; st_a8(){ printf("st_a8::st_a8()\n"); } ~st_a8(){ printf("st_a8::~st_a8()\n"); } };
-struct alignas(16) st_a16{ int x; st_a16(){ printf("st_a16::st_a16()\n"); } ~st_a16(){ printf("st_a16::~st_a16()\n"); } };
-struct alignas(32) st_a32{ int x; st_a32(){ printf("st_a32::st_a32()\n"); } ~st_a32(){ printf("st_a32::~st_a32()\n"); } };
-
-char buff[1024];
-void* operator new(std::size_t size, std::size_t id, std::size_t& real_size) GASHA_NOEXCEPT
-{
-	real_size = size;
-	printf("new: size=%d, id=%d, real_size=%d\n", size, id, real_size);
-	return nullptr;
-	//return buff;
-}
-void operator delete(void* p, std::size_t id, std::size_t& real_size)
-{
-	printf("delete: p=%p, id=%d, real_size=%d\n", p, id, real_size);
-}
-void* operator new[](std::size_t size, std::size_t id, std::size_t& real_size) GASHA_NOEXCEPT
-{
-	real_size = size;
-	printf("new[]: size=%d, id=%d, real_size=%d\n", size, id, real_size);
-	return nullptr;
-	//return buff;
-}
-void operator delete[](void* p, std::size_t id, std::size_t& real_size)
-{
-	printf("delete[]: p=%p, id=%d, real_size=%d\n", p, id, real_size);
-}
-
 //----------------------------------------
-//アロケータテスト
-void example_allocator()
+//単一アロケータテスト
+void example_mono_allocator()
 {
+#if 0
 	char message[2048];
 	
 	printf("----- Test for allocator -----\n");
@@ -715,8 +565,7 @@ void example_allocator()
 #endif
 
 	printf("- end -\n");
-}
-
 #endif
+}
 
 // End of file
