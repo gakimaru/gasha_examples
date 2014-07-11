@@ -69,7 +69,7 @@ void example_fast_string()
 			}
 			if (test_mode == 0 || test_mode == 3)
 			{
-				ret3 = strlen(getStr(src_buff, i, loop));
+				ret3 = GASHA_ strlen(getStr(src_buff, i, loop));
 				if (test_mode == 0)
 					printf("strlen(     str[%d]): ret=%d\n", i, ret3);
 			}
@@ -115,7 +115,7 @@ void example_fast_string()
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
-					ret3 = strnlen(getStr(src_buff, i, loop), max_len);
+					ret3 = GASHA_ strnlen(getStr(src_buff, i, loop), max_len);
 					if (test_mode == 0)
 						printf("strnlen(     str[%d], %d): ret=%d (strlen=%d)\n", i, max_len, ret3, getStrLen(i, loop));
 				}
@@ -162,7 +162,7 @@ void example_fast_string()
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
-					ret3 = strcmp(getStr(src_buff, i, loop), pattern);
+					ret3 = GASHA_ strcmp(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
 						printf("strcmp(     str[%d], \"%s\"): ret=%d\n", i, pattern, ret3);
 				}
@@ -214,7 +214,7 @@ void example_fast_string()
 					}
 					if (test_mode == 0 || test_mode == 3)
 					{
-						ret3 = strncmp(getStr(src_buff, i, loop), pattern, max_len);
+						ret3 = GASHA_ strncmp(getStr(src_buff, i, loop), pattern, max_len);
 						if (test_mode == 0)
 							printf("strncmp(     str[%d], \"%s\", %d): ret=%d\n", i, pattern, max_len, ret3);
 					}
@@ -356,7 +356,7 @@ void example_fast_string()
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
-					ret3 = strstr(getStr(src_buff, i, loop), pattern);
+					ret3 = GASHA_ strstr(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
 						printf("strstr(     str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret3, ret3);
 				}
@@ -523,7 +523,7 @@ void example_fast_string()
 			if (test_mode == 0 || test_mode == 3)
 			{
 				reset_buff();
-				ret3 = strcpy(buff, getStr(src_buff, i, loop));
+				ret3 = GASHA_ strcpy(buff, getStr(src_buff, i, loop));
 				if (test_mode == 0)
 				{
 					crc3 = calcCRC32(ret3);
@@ -584,7 +584,7 @@ void example_fast_string()
 				if (test_mode == 0 || test_mode == 3)
 				{
 					reset_buff();
-					ret3 = strncpy(buff, getStr(src_buff, i, loop), max_len);
+					ret3 = GASHA_ strncpy(buff, getStr(src_buff, i, loop), max_len);
 					if (test_mode == 0)
 					{
 						crc3 = calcCRC32(ret3);

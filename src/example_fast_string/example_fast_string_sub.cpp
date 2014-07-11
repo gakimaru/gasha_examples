@@ -113,7 +113,7 @@ static std::size_t s_strLen[STR_SET_NUM];//constexprが使えるなら extent1of
 void initStrSet()
 {
 	for (std::size_t i = 0; i < STR_SET_NUM; ++i)
-		s_strLen[i] = strlen(s_str[i]);
+		s_strLen[i] = GASHA_ strlen(s_str[i]);
 }
 
 //テスト用データ数取得

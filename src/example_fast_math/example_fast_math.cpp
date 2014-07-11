@@ -86,7 +86,7 @@ void testForSqrtPerformance(const char* caption)
 	typedef FAST_ARITH fast_arith_class;
 	
 	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for performance of sqrt : %s ] (* %d times repeat)\n", caption, TEST_SQRT_REPEAT_NUM);
+	printf("[ Test for performance of sqr : %s ] (* %d times repeat)\n", caption, TEST_SQRT_REPEAT_NUM);
 
 	std::mt19937 rnd_engine(0);
 	std::uniform_real_distribution<TYPE> rnd_distribution(0.5f, 1.f);
@@ -97,7 +97,7 @@ void testForSqrtPerformance(const char* caption)
 	for (int repeat = 1; repeat < TEST_SQRT_REPEAT_NUM; ++repeat)
 	{
 		const TYPE value = rnd_distribution(rnd_engine);
-		const TYPE result = sqrt(fast_arith_class(value));
+		const TYPE result = sqr(fast_arith_class(value));
 		total += result;
 	}
 	double elapsed_time = calcElapsedTime(begin);
@@ -107,7 +107,7 @@ template<typename TYPE>
 void testForSqrtPerformanceDirect(const char* caption)
 {
 	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for performance of sqrt : %s ] (* %d times repeat)\n", caption, TEST_SQRT_REPEAT_NUM);
+	printf("[ Test for performance of sqr : %s ] (* %d times repeat)\n", caption, TEST_SQRT_REPEAT_NUM);
 
 	std::mt19937 rnd_engine(0);
 	std::uniform_real_distribution<TYPE> rnd_distribution(0.5f, 1.f);
@@ -118,7 +118,7 @@ void testForSqrtPerformanceDirect(const char* caption)
 	for (int repeat = 1; repeat < TEST_SQRT_REPEAT_NUM; ++repeat)
 	{
 		const TYPE value = rnd_distribution(rnd_engine);
-		const TYPE result = sqrt(value);
+		const TYPE result = sqr(value);
 		total += result;
 	}
 	double elapsed_time = calcElapsedTime(begin);
@@ -687,7 +687,7 @@ void example_fast_math()
 	//各種高速平方根のテスト
 	printf("\n");
 	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for fast sqrt ]\n");
+	printf("[ Test for fast sqr ]\n");
 
 	#define TEST_SQRT(expr, space) { double result = static_cast<double>(expr); printf(#expr space " = %.3lf (%.9lf)\n", result, result); }
 	#define TEST_SQRT_SET(value) \
@@ -695,18 +695,18 @@ void example_fast_math()
 			const double value_d = value; \
 			printf("\n"); \
 			TEST_SQRT(std::sqrt(value), "             "); \
-			TEST_SQRT(sqrt(dummyA_f(value)), "    "); \
-			TEST_SQRT(sqrt(normA_f(value)), "   "); \
-			TEST_SQRT(sqrt(sseA_f(value)), "      "); \
-			TEST_SQRT(sqrt(fastA_f(value)), "     "); \
-			TEST_SQRT(sqrt(semiA_f(value)), " "); \
-			TEST_SQRT(sqrt(fastestA_f(value)), "  "); \
-			TEST_SQRT(sqrt(dummyA_d(value_d)), "    "); \
-			TEST_SQRT(sqrt(normA_d(value_d)), "   "); \
-			TEST_SQRT(sqrt(sseA_d(value_d)), "      "); \
-			TEST_SQRT(sqrt(fastA_d(value_d)), "     "); \
-			TEST_SQRT(sqrt(semiA_d(value_d)), " "); \
-			TEST_SQRT(sqrt(fastestA_d(value_d)), "  "); \
+			TEST_SQRT(sqr(dummyA_f(value)), "    "); \
+			TEST_SQRT(sqr(normA_f(value)), "   "); \
+			TEST_SQRT(sqr(sseA_f(value)), "      "); \
+			TEST_SQRT(sqr(fastA_f(value)), "     "); \
+			TEST_SQRT(sqr(semiA_f(value)), " "); \
+			TEST_SQRT(sqr(fastestA_f(value)), "  "); \
+			TEST_SQRT(sqr(dummyA_d(value_d)), "    "); \
+			TEST_SQRT(sqr(normA_d(value_d)), "   "); \
+			TEST_SQRT(sqr(sseA_d(value_d)), "      "); \
+			TEST_SQRT(sqr(fastA_d(value_d)), "     "); \
+			TEST_SQRT(sqr(semiA_d(value_d)), " "); \
+			TEST_SQRT(sqr(fastestA_d(value_d)), "  "); \
 		}
 
 	TEST_SQRT_SET(1.f);
