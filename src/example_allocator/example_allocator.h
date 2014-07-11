@@ -17,6 +17,9 @@
 
 #define ENABLE_TEST_FOR_STACK_ALLOATOR//スタックアロケータのテストを有効にする場合は、このマクロを有効化する
 #define ENABLE_TEST_FOR_DUAL_STACK_ALLOATOR//スタックアロケータのテストを有効にする場合は、このマクロを有効化する
+#define ENABLE_TEST_FOR_MONO_ALLOATOR//単一アロケータのテストを有効にする場合は、このマクロを有効化する
+#define ENABLE_TEST_FOR_POOL_ALLOATOR//プールアロケータのテストを有効にする場合は、このマクロを有効化する
+#define ENABLE_TEST_FOR_STD_ALLOATOR//標準アロケータのテストを有効にする場合は、このマクロを有効化する
 
 #define USE_LOCK_TYPE 0//共有データのロックに dummyLock を使用する場合は、このマクロを有効化する（ロックしなくなる）（デフォルト）
 //#define USE_LOCK_TYPE 1//共有データのロックに spinLock を使用する場合は、このマクロを有効化する
@@ -33,6 +36,12 @@ struct alignas(16) data_t
 	data_t(data_t&& obj);//ムーブコンストラクタ
 	data_t(const data_t& obj);//コピーコンストラクタ
 	~data_t();//デストラクタ
+};
+//テスト用構造体
+//※32バイトアラインメント
+struct alignas(32) data2_t
+{
+	int m_val;//値
 };
 
 //--------------------------------------------------------------------------------
@@ -66,8 +75,8 @@ typedef GASHA_ dummyLock lock_type;//共有データのロックに dummyLock �
 //アロケータテスト
 void example_stack_allocator();//スタックアロケータテスト
 void example_dual_stack_allocator();//双方向スタックアロケータテスト
-void example_pool_allocator();//プールアロケータテスト
 void example_mono_allocator();//単一アロケータテスト
+void example_pool_allocator();//プールアロケータテスト
 void example_std_allocator();//標準アロケータテスト
 void example_poly_allocator();//多態アロケータテスト
 void example_allocator_performance();//アロケータパフォーマンステスト

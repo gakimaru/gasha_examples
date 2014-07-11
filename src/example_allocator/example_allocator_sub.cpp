@@ -25,21 +25,26 @@
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
+#if 1
+
 GASHA_INSTANCING_stackAllocator_withLock(lock_type);
 GASHA_INSTANCING_smartStackAllocator_withLock(lock_type);
-
 GASHA_INSTANCING_lfStackAllocator();
 GASHA_INSTANCING_lfSmartStackAllocator();
 
 GASHA_INSTANCING_dualStackAllocator_withLock(lock_type);
 GASHA_INSTANCING_smartDualStackAllocator_withLock(lock_type);
-
 GASHA_INSTANCING_lfDualStackAllocator();
 GASHA_INSTANCING_lfSmartDualStackAllocator();
+
+GASHA_INSTANCING_poolAllocator_withLock(16, lock_type);
+GASHA_INSTANCING_lfPoolAllocator(16);
 
 GASHA_INSTANCING_monoAllocator_withLock(lock_type);
 
 GASHA_INSTANCING_stdAllocator_withLock(lock_type);
 GASHA_INSTANCING_stdAlignAllocator_withLock(lock_type);
+
+#endif
 
 // End of file

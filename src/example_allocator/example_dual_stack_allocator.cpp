@@ -67,7 +67,7 @@ static void testDualStack(ALLOCATOR& stack)
 		EXPR(p10, data_t* p10 = stack.template newObj<data_t>(123););
 		EXPR(p11, data_t* p11 = stack.template newArray<data_t>(3););
 		EXPR(p12, data_t* p12 = stack.template newArray<data_t>(3, 456););
-		EXPR(p13, void* p13 = stack.alloc(1000););
+		EXPR(p13, void* p13 = stack.alloc(1000););//アロケート失敗（サイズオーバー）
 		EXPR(p14, void* p14 = stack.alloc(10););
 		EXPR_PLAIN(stack.debugInfo(message); printf(message););
 		EXPR(p1, stack.free(p1););
@@ -148,7 +148,7 @@ static void testScopedStack(ALLOCATOR& stack)
 			EXPR_SCOPED(p10, data_t* p10 = scoped_stack.template newObj<data_t>(123););
 			EXPR_SCOPED(p11, data_t* p11 = scoped_stack.template newArray<data_t>(3););
 			EXPR_SCOPED(p12, data_t* p12 = scoped_stack.template newArray<data_t>(3, 456););
-			EXPR_SCOPED(p13, void* p13 = scoped_stack.alloc(1000););
+			EXPR_SCOPED(p13, void* p13 = scoped_stack.alloc(1000););//アロケート失敗（サイズオーバー）
 			EXPR_SCOPED(p14, void* p14 = scoped_stack.alloc(10););
 			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
 			EXPR_SCOPED(p1, scoped_stack.free(p1););
@@ -192,6 +192,9 @@ template<class ALLOCATOR>
 static void testScopedDualStack(ALLOCATOR& stack)
 {
 	printf("\n");
+	printf("================================================================================\n");
+
+	printf("\n");
 	char message[1024];
 	EXPR_PLAIN(stack.debugInfo(message); printf(message););
 	for (int i = 0; i < 2; ++i)
@@ -234,7 +237,7 @@ static void testScopedDualStack(ALLOCATOR& stack)
 				EXPR_SCOPED_DUAL(p10, data_t* p10 = scoped_stack.template newObj<data_t>(123););
 				EXPR_SCOPED_DUAL(p11, data_t* p11 = scoped_stack.template newArray<data_t>(3););
 				EXPR_SCOPED_DUAL(p12, data_t* p12 = scoped_stack.template newArray<data_t>(3, 456););
-				EXPR_SCOPED_DUAL(p13, void* p13 = scoped_stack.alloc(1000););
+				EXPR_SCOPED_DUAL(p13, void* p13 = scoped_stack.alloc(1000););//アロケート失敗（サイズオーバー）
 				EXPR_SCOPED_DUAL(p14, void* p14 = scoped_stack.alloc(10););
 				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); printf(message););
 				EXPR_SCOPED_DUAL(p1, scoped_stack.free(p1););
