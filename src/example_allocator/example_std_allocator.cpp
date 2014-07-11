@@ -21,8 +21,8 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //テスト用マクロ
 #define EXPR_PLAIN(...) printf("%s\n", #__VA_ARGS__); __VA_ARGS__
-#define EXPR_WITH_INFO(...) __VA_ARGS__ printf("%s\t\tsize=%d, remain=%d\n", #__VA_ARGS__, std_allocator.size(), std_allocator.remain())
-#define EXPR(P, ...) __VA_ARGS__ printf("%s\t\t%s=%p, size=%d, remain=%d\n", #__VA_ARGS__, #P, P, std_allocator.size(), std_allocator.remain())
+#define EXPR_WITH_INFO(...) __VA_ARGS__ printf("> %s\t\size=%d, remain=%d\n", #__VA_ARGS__, std_allocator.size(), std_allocator.remain())
+#define EXPR(p, ...) __VA_ARGS__ printf("> %s\t%s=%p, size=%d, remain=%d\n", #__VA_ARGS__, #p, p, std_allocator.size(), std_allocator.remain())
 
 //標準アロケータのテスト（共通処理）
 template<class ALLOCATOR>

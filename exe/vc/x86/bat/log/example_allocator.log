@@ -1,812 +1,148 @@
 
---------------------------------------------------------------------------------
-[ Test for stackAllocator ]
---------------------------------------------------------------------------------
-
-----------------------------------------
-stackAllocator<> stack(buff);
-----------------------------------------
-
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
------------------------------------------
-void* p1 = stack.alloc(1);		p1=006DF6B0, size=1, remain=1023, count=1
-void* p2 = stack.alloc(1, 1);		p2=006DF6B1, size=2, remain=1022, count=2
-void* p3 = stack.alloc(1, 1);		p3=006DF6B2, size=3, remain=1021, count=3
-void* p4 = stack.alloc(1);		p4=006DF6B4, size=5, remain=1019, count=4
-void* p5 = stack.alloc(10, 32);		p5=006DF6C0, size=26, remain=998, count=5
-int* p6 = stack.template newObj<int>();		p6=006DF6CC, size=32, remain=992, count=6
-double* p7 = stack.template newArray<double>(3);		p7=006DF6D0, size=56, remain=968, count=7
-int* p8 = stack.template newObj<int>();		p8=006DF6E8, size=60, remain=964, count=8
-data_t::data_t(): m_val=0
-data_t* p9 = stack.template newObj<data_t>();		p9=006DF6F0, size=80, remain=944, count=9
-data_t::data_t(123): m_val=123
-data_t* p10 = stack.template newObj<data_t>(123);		p10=006DF700, size=96, remain=928, count=10
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-data_t* p11 = stack.template newArray<data_t>(3);		p11=006DF710, size=144, remain=880, count=11
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-data_t* p12 = stack.template newArray<data_t>(3, 456);		p12=006DF740, size=192, remain=832, count=12
-void* p13 = stack.alloc(1000);		p13=00000000, size=192, remain=832, count=12
-void* p14 = stack.alloc(10);		p14=006DF770, size=202, remain=822, count=13
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=202, remain=822, count=13
------------------------------------------
-stack.free(p1);		p1=006DF6B0, size=202, remain=822, count=12
-stack.free(p2);		p2=006DF6B1, size=202, remain=822, count=11
-stack.free(p3);		p3=006DF6B2, size=202, remain=822, count=10
-stack.free(p4);		p4=006DF6B4, size=202, remain=822, count=9
-stack.free(p5);		p5=006DF6C0, size=202, remain=822, count=8
-stack.deleteObj(p6);		p6=006DF6CC, size=202, remain=822, count=7
-stack.deleteArray(p7, 3);		p7=006DF6D0, size=202, remain=822, count=6
-stack.deleteObj(p8);		p8=006DF6E8, size=202, remain=822, count=5
-data_t::~data_t(): m_val=0
-stack.deleteObj(p9);		p9=006DF6F0, size=202, remain=822, count=4
-data_t::~data_t(): m_val=123
-stack.deleteObj(p10);		p10=006DF700, size=202, remain=822, count=3
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-stack.deleteArray(p11, 3);		p11=006DF710, size=202, remain=822, count=2
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-stack.deleteArray(p12, 3);		p12=006DF740, size=202, remain=822, count=1
-stack.free(p13);		p13=00000000, size=202, remain=822, count=1
-stack.free(p14);		p14=006DF770, size=202, remain=822, count=0
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=202, remain=822, count=0
------------------------------------------
-stack.rewind(900);		size=202, remain=822, count=0
-stack.rewind(20);		size=20, remain=1004, count=0
-void* p100 = stack.alloc(10);		p100=006DF6C4, size=30, remain=994, count=1
-void* p101 = stack.alloc(20);		p101=006DF6D0, size=52, remain=972, count=2
-stack.clear();		size=0, remain=1024, count=0
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
------------------------------------------
-
-----------------------------------------
-smartStackAllocator<> stack(buff);
-----------------------------------------
-
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
------------------------------------------
-void* p1 = stack.alloc(1);		p1=006DF6B0, size=1, remain=1023, count=1
-void* p2 = stack.alloc(1, 1);		p2=006DF6B1, size=2, remain=1022, count=2
-void* p3 = stack.alloc(1, 1);		p3=006DF6B2, size=3, remain=1021, count=3
-void* p4 = stack.alloc(1);		p4=006DF6B4, size=5, remain=1019, count=4
-void* p5 = stack.alloc(10, 32);		p5=006DF6C0, size=26, remain=998, count=5
-int* p6 = stack.template newObj<int>();		p6=006DF6CC, size=32, remain=992, count=6
-double* p7 = stack.template newArray<double>(3);		p7=006DF6D0, size=56, remain=968, count=7
-int* p8 = stack.template newObj<int>();		p8=006DF6E8, size=60, remain=964, count=8
-data_t::data_t(): m_val=0
-data_t* p9 = stack.template newObj<data_t>();		p9=006DF6F0, size=80, remain=944, count=9
-data_t::data_t(123): m_val=123
-data_t* p10 = stack.template newObj<data_t>(123);		p10=006DF700, size=96, remain=928, count=10
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-data_t* p11 = stack.template newArray<data_t>(3);		p11=006DF710, size=144, remain=880, count=11
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-data_t* p12 = stack.template newArray<data_t>(3, 456);		p12=006DF740, size=192, remain=832, count=12
-void* p13 = stack.alloc(1000);		p13=00000000, size=192, remain=832, count=12
-void* p14 = stack.alloc(10);		p14=006DF770, size=202, remain=822, count=13
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=202, remain=822, count=13
------------------------------------------
-stack.free(p1);		p1=006DF6B0, size=202, remain=822, count=12
-stack.free(p2);		p2=006DF6B1, size=202, remain=822, count=11
-stack.free(p3);		p3=006DF6B2, size=202, remain=822, count=10
-stack.free(p4);		p4=006DF6B4, size=202, remain=822, count=9
-stack.free(p5);		p5=006DF6C0, size=202, remain=822, count=8
-stack.deleteObj(p6);		p6=006DF6CC, size=202, remain=822, count=7
-stack.deleteArray(p7, 3);		p7=006DF6D0, size=202, remain=822, count=6
-stack.deleteObj(p8);		p8=006DF6E8, size=202, remain=822, count=5
-data_t::~data_t(): m_val=0
-stack.deleteObj(p9);		p9=006DF6F0, size=202, remain=822, count=4
-data_t::~data_t(): m_val=123
-stack.deleteObj(p10);		p10=006DF700, size=202, remain=822, count=3
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-stack.deleteArray(p11, 3);		p11=006DF710, size=202, remain=822, count=2
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-stack.deleteArray(p12, 3);		p12=006DF740, size=202, remain=822, count=1
-stack.free(p13);		p13=00000000, size=202, remain=822, count=1
-stack.free(p14);		p14=006DF770, size=0, remain=1024, count=0
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
------------------------------------------
-stack.rewind(900);		size=0, remain=1024, count=0
-stack.rewind(20);		size=0, remain=1024, count=0
-void* p100 = stack.alloc(10);		p100=006DF6B0, size=10, remain=1014, count=1
-void* p101 = stack.alloc(20);		p101=006DF6BC, size=32, remain=992, count=2
-stack.clear();		size=0, remain=1024, count=0
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
------------------------------------------
-
-----------------------------------------
-stackAllocator<spinLock> stack(buff);
-----------------------------------------
-
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
------------------------------------------
-void* p1 = stack.alloc(1);		p1=006DF6B0, size=1, remain=1023, count=1
-void* p2 = stack.alloc(1, 1);		p2=006DF6B1, size=2, remain=1022, count=2
-void* p3 = stack.alloc(1, 1);		p3=006DF6B2, size=3, remain=1021, count=3
-void* p4 = stack.alloc(1);		p4=006DF6B4, size=5, remain=1019, count=4
-void* p5 = stack.alloc(10, 32);		p5=006DF6C0, size=26, remain=998, count=5
-int* p6 = stack.template newObj<int>();		p6=006DF6CC, size=32, remain=992, count=6
-double* p7 = stack.template newArray<double>(3);		p7=006DF6D0, size=56, remain=968, count=7
-int* p8 = stack.template newObj<int>();		p8=006DF6E8, size=60, remain=964, count=8
-data_t::data_t(): m_val=0
-data_t* p9 = stack.template newObj<data_t>();		p9=006DF6F0, size=80, remain=944, count=9
-data_t::data_t(123): m_val=123
-data_t* p10 = stack.template newObj<data_t>(123);		p10=006DF700, size=96, remain=928, count=10
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-data_t* p11 = stack.template newArray<data_t>(3);		p11=006DF710, size=144, remain=880, count=11
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-data_t* p12 = stack.template newArray<data_t>(3, 456);		p12=006DF740, size=192, remain=832, count=12
-void* p13 = stack.alloc(1000);		p13=00000000, size=192, remain=832, count=12
-void* p14 = stack.alloc(10);		p14=006DF770, size=202, remain=822, count=13
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=202, remain=822, count=13
------------------------------------------
-stack.free(p1);		p1=006DF6B0, size=202, remain=822, count=12
-stack.free(p2);		p2=006DF6B1, size=202, remain=822, count=11
-stack.free(p3);		p3=006DF6B2, size=202, remain=822, count=10
-stack.free(p4);		p4=006DF6B4, size=202, remain=822, count=9
-stack.free(p5);		p5=006DF6C0, size=202, remain=822, count=8
-stack.deleteObj(p6);		p6=006DF6CC, size=202, remain=822, count=7
-stack.deleteArray(p7, 3);		p7=006DF6D0, size=202, remain=822, count=6
-stack.deleteObj(p8);		p8=006DF6E8, size=202, remain=822, count=5
-data_t::~data_t(): m_val=0
-stack.deleteObj(p9);		p9=006DF6F0, size=202, remain=822, count=4
-data_t::~data_t(): m_val=123
-stack.deleteObj(p10);		p10=006DF700, size=202, remain=822, count=3
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-stack.deleteArray(p11, 3);		p11=006DF710, size=202, remain=822, count=2
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-stack.deleteArray(p12, 3);		p12=006DF740, size=202, remain=822, count=1
-stack.free(p13);		p13=00000000, size=202, remain=822, count=1
-stack.free(p14);		p14=006DF770, size=202, remain=822, count=0
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=202, remain=822, count=0
------------------------------------------
-stack.rewind(900);		size=202, remain=822, count=0
-stack.rewind(20);		size=20, remain=1004, count=0
-void* p100 = stack.alloc(10);		p100=006DF6C4, size=30, remain=994, count=1
-void* p101 = stack.alloc(20);		p101=006DF6D0, size=52, remain=972, count=2
-stack.clear();		size=0, remain=1024, count=0
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
------------------------------------------
-
-----------------------------------------
-smartStackAllocator<spinLock> stack(buff);
-----------------------------------------
-
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
------------------------------------------
-void* p1 = stack.alloc(1);		p1=006DF6B0, size=1, remain=1023, count=1
-void* p2 = stack.alloc(1, 1);		p2=006DF6B1, size=2, remain=1022, count=2
-void* p3 = stack.alloc(1, 1);		p3=006DF6B2, size=3, remain=1021, count=3
-void* p4 = stack.alloc(1);		p4=006DF6B4, size=5, remain=1019, count=4
-void* p5 = stack.alloc(10, 32);		p5=006DF6C0, size=26, remain=998, count=5
-int* p6 = stack.template newObj<int>();		p6=006DF6CC, size=32, remain=992, count=6
-double* p7 = stack.template newArray<double>(3);		p7=006DF6D0, size=56, remain=968, count=7
-int* p8 = stack.template newObj<int>();		p8=006DF6E8, size=60, remain=964, count=8
-data_t::data_t(): m_val=0
-data_t* p9 = stack.template newObj<data_t>();		p9=006DF6F0, size=80, remain=944, count=9
-data_t::data_t(123): m_val=123
-data_t* p10 = stack.template newObj<data_t>(123);		p10=006DF700, size=96, remain=928, count=10
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-data_t* p11 = stack.template newArray<data_t>(3);		p11=006DF710, size=144, remain=880, count=11
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-data_t* p12 = stack.template newArray<data_t>(3, 456);		p12=006DF740, size=192, remain=832, count=12
-void* p13 = stack.alloc(1000);		p13=00000000, size=192, remain=832, count=12
-void* p14 = stack.alloc(10);		p14=006DF770, size=202, remain=822, count=13
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=202, remain=822, count=13
------------------------------------------
-stack.free(p1);		p1=006DF6B0, size=202, remain=822, count=12
-stack.free(p2);		p2=006DF6B1, size=202, remain=822, count=11
-stack.free(p3);		p3=006DF6B2, size=202, remain=822, count=10
-stack.free(p4);		p4=006DF6B4, size=202, remain=822, count=9
-stack.free(p5);		p5=006DF6C0, size=202, remain=822, count=8
-stack.deleteObj(p6);		p6=006DF6CC, size=202, remain=822, count=7
-stack.deleteArray(p7, 3);		p7=006DF6D0, size=202, remain=822, count=6
-stack.deleteObj(p8);		p8=006DF6E8, size=202, remain=822, count=5
-data_t::~data_t(): m_val=0
-stack.deleteObj(p9);		p9=006DF6F0, size=202, remain=822, count=4
-data_t::~data_t(): m_val=123
-stack.deleteObj(p10);		p10=006DF700, size=202, remain=822, count=3
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-stack.deleteArray(p11, 3);		p11=006DF710, size=202, remain=822, count=2
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-stack.deleteArray(p12, 3);		p12=006DF740, size=202, remain=822, count=1
-stack.free(p13);		p13=00000000, size=202, remain=822, count=1
-stack.free(p14);		p14=006DF770, size=0, remain=1024, count=0
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
------------------------------------------
-stack.rewind(900);		size=0, remain=1024, count=0
-stack.rewind(20);		size=0, remain=1024, count=0
-void* p100 = stack.alloc(10);		p100=006DF6B0, size=10, remain=1014, count=1
-void* p101 = stack.alloc(20);		p101=006DF6BC, size=32, remain=992, count=2
-stack.clear();		size=0, remain=1024, count=0
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
------------------------------------------
-
-----------------------------------------
-stackAllocator_withBuff<1024> stack;
-----------------------------------------
-
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DEEAC, maxSize=1024, size=0, remain=1024, count=0
------------------------------------------
-
-----------------------------------------
-stackAllocator_withType<long long, 128> stack;
-----------------------------------------
-
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DE264, maxSize=1032, size=0, remain=1032, count=0
------------------------------------------
-long long* p = stack.newDefault();		p=006DE268, size=12, remain=1020, count=1
-stack.deleteDefault(p);		p=006DE268, size=12, remain=1020, count=0
+================================================================================
 
 --------------------------------------------------------------------------------
-[ Test for lfStackAllocator ]
+[ Test for stdAllocator ]
 --------------------------------------------------------------------------------
 
 ----------------------------------------
-lfStackAllocator<> stack(buff);
+stdAllocator<lock_type> std_allocator;
 ----------------------------------------
 
-stack.debugInfo(message); printf(message);
------ Debug Info for lfStackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
--------------------------------------------
-void* p1 = stack.alloc(1);		p1=006DF6B0, size=1, remain=1023, count=1
-void* p2 = stack.alloc(1, 1);		p2=006DF6B1, size=2, remain=1022, count=2
-void* p3 = stack.alloc(1, 1);		p3=006DF6B2, size=3, remain=1021, count=3
-void* p4 = stack.alloc(1);		p4=006DF6B4, size=5, remain=1019, count=4
-void* p5 = stack.alloc(10, 32);		p5=006DF6C0, size=26, remain=998, count=5
-int* p6 = stack.template newObj<int>();		p6=006DF6CC, size=32, remain=992, count=6
-double* p7 = stack.template newArray<double>(3);		p7=006DF6D0, size=56, remain=968, count=7
-int* p8 = stack.template newObj<int>();		p8=006DF6E8, size=60, remain=964, count=8
+std_allocator.debugInfo(message); printf(message);
+----- Debug Info for stdAllocator -----
+maxSize=0, size=0, remain=0
+---------------------------------------
+void* p1 = std_allocator.alloc(1);		p1=00455040, size=0, remain=0
+void* p2 = std_allocator.alloc(1, 1);		p2=00458FD0, size=0, remain=0
+void* p3 = std_allocator.alloc(1, 1);		p3=00458FE0, size=0, remain=0
+void* p4 = std_allocator.alloc(1);		p4=00458FF0, size=0, remain=0
+void* p5 = std_allocator.alloc(10, 32);		p5=00459000, size=0, remain=0
+int* p6 = std_allocator.template newObj<int>();		p6=00459018, size=0, remain=0
+double* p7 = std_allocator.template newArray<double>(3);		p7=00459028, size=0, remain=0
+int* p8 = std_allocator.template newObj<int>();		p8=00459048, size=0, remain=0
 data_t::data_t(): m_val=0
-data_t* p9 = stack.template newObj<data_t>();		p9=006DF6F0, size=80, remain=944, count=9
+data_t* p9 = std_allocator.template newObj<data_t>();		p9=00459058, size=0, remain=0
+int* p10 = std_allocator.template newObj<int>();		p10=00459070, size=0, remain=0
 data_t::data_t(123): m_val=123
-data_t* p10 = stack.template newObj<data_t>(123);		p10=006DF700, size=96, remain=928, count=10
+data_t* p11 = std_allocator.template newObj<data_t>(123);		p11=00459080, size=0, remain=0
+int* p12 = std_allocator.template newObj<int>();		p12=00459098, size=0, remain=0
 data_t::data_t(): m_val=0
 data_t::data_t(): m_val=0
 data_t::data_t(): m_val=0
-data_t* p11 = stack.template newArray<data_t>(3);		p11=006DF710, size=144, remain=880, count=11
+data_t* p13 = std_allocator.template newArray<data_t>(3);		p13=004590A8, size=0, remain=0
 data_t::data_t(456): m_val=456
 data_t::data_t(456): m_val=456
 data_t::data_t(456): m_val=456
-data_t* p12 = stack.template newArray<data_t>(3, 456);		p12=006DF740, size=192, remain=832, count=12
-void* p13 = stack.alloc(1000);		p13=00000000, size=192, remain=832, count=12
-void* p14 = stack.alloc(10);		p14=006DF770, size=202, remain=822, count=13
-stack.debugInfo(message); printf(message);
------ Debug Info for lfStackAllocator -----
-buff=006DF6B0, maxSize=1024, size=202, remain=822, count=13
--------------------------------------------
-stack.free(p1);		p1=006DF6B0, size=202, remain=822, count=12
-stack.free(p2);		p2=006DF6B1, size=202, remain=822, count=11
-stack.free(p3);		p3=006DF6B2, size=202, remain=822, count=10
-stack.free(p4);		p4=006DF6B4, size=202, remain=822, count=9
-stack.free(p5);		p5=006DF6C0, size=202, remain=822, count=8
-stack.deleteObj(p6);		p6=006DF6CC, size=202, remain=822, count=7
-stack.deleteArray(p7, 3);		p7=006DF6D0, size=202, remain=822, count=6
-stack.deleteObj(p8);		p8=006DF6E8, size=202, remain=822, count=5
+data_t* p14 = std_allocator.template newArray<data_t>(3, 456);		p14=004590E0, size=0, remain=0
+void* p15 = std_allocator.alloc(2000);		p15=00459FE8, size=0, remain=0
+void* p16 = std_allocator.alloc(10);		p16=00459118, size=0, remain=0
+data2_t* p17 = std_allocator.template newObj<data2_t>();		p17=00459130, size=0, remain=0
+int* p18 = std_allocator.template newObj<int>();		p18=00459158, size=0, remain=0
+data2_t* p19 = std_allocator.template newObj<data2_t>();		p19=00459168, size=0, remain=0
+int* p20 = std_allocator.template newObj<int>();		p20=00459190, size=0, remain=0
+data2_t* p21 = std_allocator.template newObj<data2_t>();		p21=004591A0, size=0, remain=0
+std_allocator.debugInfo(message); printf(message);
+----- Debug Info for stdAllocator -----
+maxSize=0, size=0, remain=0
+---------------------------------------
+std_allocator.free(p1);		p1=00455040, size=0, remain=0
+std_allocator.free(p2);		p2=00458FD0, size=0, remain=0
+std_allocator.free(p3);		p3=00458FE0, size=0, remain=0
+std_allocator.free(p4);		p4=00458FF0, size=0, remain=0
+std_allocator.free(p5);		p5=00459000, size=0, remain=0
+std_allocator.deleteObj(p6);		p6=00459018, size=0, remain=0
+std_allocator.deleteArray(p7, 3);		p7=00459028, size=0, remain=0
+std_allocator.deleteObj(p8);		p8=00459048, size=0, remain=0
 data_t::~data_t(): m_val=0
-stack.deleteObj(p9);		p9=006DF6F0, size=202, remain=822, count=4
+std_allocator.deleteObj(p9);		p9=00459058, size=0, remain=0
+std_allocator.deleteObj(p10);		p10=00459070, size=0, remain=0
 data_t::~data_t(): m_val=123
-stack.deleteObj(p10);		p10=006DF700, size=202, remain=822, count=3
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-stack.deleteArray(p11, 3);		p11=006DF710, size=202, remain=822, count=2
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-stack.deleteArray(p12, 3);		p12=006DF740, size=202, remain=822, count=1
-stack.free(p13);		p13=00000000, size=202, remain=822, count=1
-stack.free(p14);		p14=006DF770, size=202, remain=822, count=0
-stack.debugInfo(message); printf(message);
------ Debug Info for lfStackAllocator -----
-buff=006DF6B0, maxSize=1024, size=202, remain=822, count=0
--------------------------------------------
-stack.rewind(900);		size=202, remain=822, count=0
-stack.rewind(20);		size=20, remain=1004, count=0
-void* p100 = stack.alloc(10);		p100=006DF6C4, size=30, remain=994, count=1
-void* p101 = stack.alloc(20);		p101=006DF6D0, size=52, remain=972, count=2
-stack.clear();		size=0, remain=1024, count=0
-stack.debugInfo(message); printf(message);
------ Debug Info for lfStackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
--------------------------------------------
+data_t::~data_t(): m_val=649208349
+data_t::~data_t(): m_val=598876696
+std_allocator.deleteArray(p11, 3);		p11=00459080, size=0, remain=0
+std_allocator.deleteArray(p12, 3);		p12=00459098, size=0, remain=0
+std_allocator.free(p13);		p13=004590A8, size=0, remain=0
+std_allocator.free(p14);		p14=004590E0, size=0, remain=0
+std_allocator.free(p15);		p15=00459FE8, size=0, remain=0
+std_allocator.free(p16);		p16=00459118, size=0, remain=0
+std_allocator.free(p17);		p17=00459130, size=0, remain=0
+std_allocator.free(p18);		p18=00459158, size=0, remain=0
+std_allocator.free(p19);		p19=00459168, size=0, remain=0
+std_allocator.free(p20);		p20=00459190, size=0, remain=0
+std_allocator.free(p21);		p21=004591A0, size=0, remain=0
+std_allocator.debugInfo(message); printf(message);
+----- Debug Info for stdAllocator -----
+maxSize=0, size=0, remain=0
+---------------------------------------
 
 ----------------------------------------
-lfSmartStackAllocator stack(buff);
+stdAlignAllocator<lock_type> std_allocator;
 ----------------------------------------
 
-stack.debugInfo(message); printf(message);
------ Debug Info for lfStackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
--------------------------------------------
-void* p1 = stack.alloc(1);		p1=006DF6B0, size=1, remain=1023, count=1
-void* p2 = stack.alloc(1, 1);		p2=006DF6B1, size=2, remain=1022, count=2
-void* p3 = stack.alloc(1, 1);		p3=006DF6B2, size=3, remain=1021, count=3
-void* p4 = stack.alloc(1);		p4=006DF6B4, size=5, remain=1019, count=4
-void* p5 = stack.alloc(10, 32);		p5=006DF6C0, size=26, remain=998, count=5
-int* p6 = stack.template newObj<int>();		p6=006DF6CC, size=32, remain=992, count=6
-double* p7 = stack.template newArray<double>(3);		p7=006DF6D0, size=56, remain=968, count=7
-int* p8 = stack.template newObj<int>();		p8=006DF6E8, size=60, remain=964, count=8
+std_allocator.debugInfo(message); printf(message);
+----- Debug Info for stdAllocator -----
+maxSize=0, size=0, remain=0
+---------------------------------------
+void* p1 = std_allocator.alloc(1);		p1=00455044, size=0, remain=0
+void* p2 = std_allocator.alloc(1, 1);		p2=00458FD4, size=0, remain=0
+void* p3 = std_allocator.alloc(1, 1);		p3=00458FE4, size=0, remain=0
+void* p4 = std_allocator.alloc(1);		p4=00458FF4, size=0, remain=0
+void* p5 = std_allocator.alloc(10, 32);		p5=00459020, size=0, remain=0
+int* p6 = std_allocator.template newObj<int>();		p6=0045903C, size=0, remain=0
+double* p7 = std_allocator.template newArray<double>(3);		p7=00459058, size=0, remain=0
+int* p8 = std_allocator.template newObj<int>();		p8=00459084, size=0, remain=0
 data_t::data_t(): m_val=0
-data_t* p9 = stack.template newObj<data_t>();		p9=006DF6F0, size=80, remain=944, count=9
+data_t* p9 = std_allocator.template newObj<data_t>();		p9=004590A0, size=0, remain=0
+int* p10 = std_allocator.template newObj<int>();		p10=004590CC, size=0, remain=0
 data_t::data_t(123): m_val=123
-data_t* p10 = stack.template newObj<data_t>(123);		p10=006DF700, size=96, remain=928, count=10
+data_t* p11 = std_allocator.template newObj<data_t>(123);		p11=004590F0, size=0, remain=0
+int* p12 = std_allocator.template newObj<int>();		p12=00459114, size=0, remain=0
 data_t::data_t(): m_val=0
 data_t::data_t(): m_val=0
 data_t::data_t(): m_val=0
-data_t* p11 = stack.template newArray<data_t>(3);		p11=006DF710, size=144, remain=880, count=11
+data_t* p13 = std_allocator.template newArray<data_t>(3);		p13=00459130, size=0, remain=0
 data_t::data_t(456): m_val=456
 data_t::data_t(456): m_val=456
 data_t::data_t(456): m_val=456
-data_t* p12 = stack.template newArray<data_t>(3, 456);		p12=006DF740, size=192, remain=832, count=12
-void* p13 = stack.alloc(1000);		p13=00000000, size=192, remain=832, count=12
-void* p14 = stack.alloc(10);		p14=006DF770, size=202, remain=822, count=13
-stack.debugInfo(message); printf(message);
------ Debug Info for lfStackAllocator -----
-buff=006DF6B0, maxSize=1024, size=202, remain=822, count=13
--------------------------------------------
-stack.free(p1);		p1=006DF6B0, size=202, remain=822, count=12
-stack.free(p2);		p2=006DF6B1, size=202, remain=822, count=11
-stack.free(p3);		p3=006DF6B2, size=202, remain=822, count=10
-stack.free(p4);		p4=006DF6B4, size=202, remain=822, count=9
-stack.free(p5);		p5=006DF6C0, size=202, remain=822, count=8
-stack.deleteObj(p6);		p6=006DF6CC, size=202, remain=822, count=7
-stack.deleteArray(p7, 3);		p7=006DF6D0, size=202, remain=822, count=6
-stack.deleteObj(p8);		p8=006DF6E8, size=202, remain=822, count=5
+data_t* p14 = std_allocator.template newArray<data_t>(3, 456);		p14=00459180, size=0, remain=0
+void* p15 = std_allocator.alloc(2000);		p15=00459FEC, size=0, remain=0
+void* p16 = std_allocator.alloc(10);		p16=004591CC, size=0, remain=0
+data2_t* p17 = std_allocator.template newObj<data2_t>();		p17=00459200, size=0, remain=0
+int* p18 = std_allocator.template newObj<int>();		p18=0045923C, size=0, remain=0
+data2_t* p19 = std_allocator.template newObj<data2_t>();		p19=00459260, size=0, remain=0
+int* p20 = std_allocator.template newObj<int>();		p20=004592A4, size=0, remain=0
+data2_t* p21 = std_allocator.template newObj<data2_t>();		p21=004592C0, size=0, remain=0
+std_allocator.debugInfo(message); printf(message);
+----- Debug Info for stdAllocator -----
+maxSize=0, size=0, remain=0
+---------------------------------------
+std_allocator.free(p1);		p1=00455044, size=0, remain=0
+std_allocator.free(p2);		p2=00458FD4, size=0, remain=0
+std_allocator.free(p3);		p3=00458FE4, size=0, remain=0
+std_allocator.free(p4);		p4=00458FF4, size=0, remain=0
+std_allocator.free(p5);		p5=00459020, size=0, remain=0
+std_allocator.deleteObj(p6);		p6=0045903C, size=0, remain=0
+std_allocator.deleteArray(p7, 3);		p7=00459058, size=0, remain=0
+std_allocator.deleteObj(p8);		p8=00459084, size=0, remain=0
 data_t::~data_t(): m_val=0
-stack.deleteObj(p9);		p9=006DF6F0, size=202, remain=822, count=4
+std_allocator.deleteObj(p9);		p9=004590A0, size=0, remain=0
+std_allocator.deleteObj(p10);		p10=004590CC, size=0, remain=0
 data_t::~data_t(): m_val=123
-stack.deleteObj(p10);		p10=006DF700, size=202, remain=822, count=3
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-stack.deleteArray(p11, 3);		p11=006DF710, size=202, remain=822, count=2
 data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-stack.deleteArray(p12, 3);		p12=006DF740, size=202, remain=822, count=1
-stack.free(p13);		p13=00000000, size=202, remain=822, count=1
-stack.free(p14);		p14=006DF770, size=0, remain=1024, count=0
-stack.debugInfo(message); printf(message);
------ Debug Info for lfStackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
--------------------------------------------
-stack.rewind(900);		size=0, remain=1024, count=0
-stack.rewind(20);		size=0, remain=1024, count=0
-void* p100 = stack.alloc(10);		p100=006DF6B0, size=10, remain=1014, count=1
-void* p101 = stack.alloc(20);		p101=006DF6BC, size=32, remain=992, count=2
-stack.clear();		size=0, remain=1024, count=0
-stack.debugInfo(message); printf(message);
------ Debug Info for lfStackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
--------------------------------------------
-
-----------------------------------------
-lfStackAllocator_withBuff<1024> stack;
-----------------------------------------
-
-stack.debugInfo(message); printf(message);
------ Debug Info for lfStackAllocator -----
-buff=006DEA98, maxSize=1024, size=0, remain=1024, count=0
--------------------------------------------
-
-----------------------------------------
-lfStackAllocator_withType<long long, 128> stack;
-----------------------------------------
-
-stack.debugInfo(message); printf(message);
------ Debug Info for lfStackAllocator -----
-buff=006DE680, maxSize=1032, size=0, remain=1032, count=0
--------------------------------------------
-long long* p = stack.newDefault();		p=006DE680, size=8, remain=1024, count=1
-stack.deleteDefault(p);		p=006DE680, size=8, remain=1024, count=0
-
---------------------------------------------------------------------------------
-[ Test for scoepdStackAllocator ]
---------------------------------------------------------------------------------
-
-----------------------------------------
-stackAllocator<> stack(buff);
-----------------------------------------
-
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
------------------------------------------
-void* p = stack.alloc(100);		p=006DF6B0, size=100, remain=924, count=1
-***** Begin : Scoped stack allocator *****
-	auto scoped_stack = stack.scopedAllocator();
-	scoped_stack.debugInfo(message); printf(message);
------ Debug Info for scopedStackAllocator -----
-maxSize=924, size=0, remain=924, count=0 (buff=006DF6B0, initSize=100, initCount=1)
------------------------------------------------
-	void* p1 = scoped_stack.alloc(1);		p1=006DF714, size=1, remain=923, count=1
-	void* p2 = scoped_stack.alloc(1, 1);		p2=006DF715, size=2, remain=922, count=2
-	void* p3 = scoped_stack.alloc(1, 1);		p3=006DF716, size=3, remain=921, count=3
-	void* p4 = scoped_stack.alloc(1);		p4=006DF718, size=5, remain=919, count=4
-	void* p5 = scoped_stack.alloc(10, 32);		p5=006DF720, size=22, remain=902, count=5
-	int* p6 = scoped_stack.template newObj<int>();		p6=006DF72C, size=28, remain=896, count=6
-	double* p7 = scoped_stack.template newArray<double>(3);		p7=006DF730, size=52, remain=872, count=7
-	int* p8 = scoped_stack.template newObj<int>();		p8=006DF748, size=56, remain=868, count=8
-data_t::data_t(): m_val=0
-	data_t* p9 = scoped_stack.template newObj<data_t>();		p9=006DF750, size=76, remain=848, count=9
-data_t::data_t(123): m_val=123
-	data_t* p10 = scoped_stack.template newObj<data_t>(123);		p10=006DF760, size=92, remain=832, count=10
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-	data_t* p11 = scoped_stack.template newArray<data_t>(3);		p11=006DF770, size=140, remain=784, count=11
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-	data_t* p12 = scoped_stack.template newArray<data_t>(3, 456);		p12=006DF7A0, size=188, remain=736, count=12
-	void* p13 = scoped_stack.alloc(1000);		p13=00000000, size=188, remain=736, count=12
-	void* p14 = scoped_stack.alloc(10);		p14=006DF7D0, size=198, remain=726, count=13
-	scoped_stack.debugInfo(message); printf(message);
------ Debug Info for scopedStackAllocator -----
-maxSize=924, size=198, remain=726, count=13 (buff=006DF6B0, initSize=100, initCount=1)
------------------------------------------------
-	scoped_stack.free(p1);		p1=006DF714, size=198, remain=726, count=12
-	scoped_stack.free(p2);		p2=006DF715, size=198, remain=726, count=11
-	scoped_stack.free(p3);		p3=006DF716, size=198, remain=726, count=10
-	scoped_stack.free(p4);		p4=006DF718, size=198, remain=726, count=9
-	scoped_stack.free(p5);		p5=006DF720, size=198, remain=726, count=8
-	scoped_stack.deleteObj(p6);		p6=006DF72C, size=198, remain=726, count=7
-	scoped_stack.deleteArray(p7, 3);		p7=006DF730, size=198, remain=726, count=6
-	scoped_stack.deleteObj(p8);		p8=006DF748, size=198, remain=726, count=5
-data_t::~data_t(): m_val=0
-	scoped_stack.deleteObj(p9);		p9=006DF750, size=198, remain=726, count=4
-data_t::~data_t(): m_val=123
-	scoped_stack.deleteObj(p10);		p10=006DF760, size=198, remain=726, count=3
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-	scoped_stack.deleteArray(p11, 3);		p11=006DF770, size=198, remain=726, count=2
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-	scoped_stack.deleteArray(p12, 3);		p12=006DF7A0, size=198, remain=726, count=1
-	scoped_stack.free(p13);		p13=00000000, size=198, remain=726, count=1
-	scoped_stack.free(p14);		p14=006DF7D0, size=198, remain=726, count=0
-	scoped_stack.debugInfo(message); printf(message);
------ Debug Info for scopedStackAllocator -----
-maxSize=924, size=198, remain=726, count=0 (buff=006DF6B0, initSize=100, initCount=1)
------------------------------------------------
-	scoped_stack.rewind(900);		size=198, remain=726, count=0
-	scoped_stack.rewind(20);		size=20, remain=904, count=0
-	void* p100 = scoped_stack.alloc(10);		p100=006DF728, size=30, remain=894, count=1
-	void* p101 = scoped_stack.alloc(20);		p101=006DF734, size=52, remain=872, count=2
-	scoped_stack.clear();		size=0, remain=924, count=0
-	void* p102 = scoped_stack.alloc(30);		p102=006DF714, size=30, remain=894, count=1
-	void* p103 = scoped_stack.alloc(40);		p103=006DF734, size=72, remain=852, count=2
-***** End : Scoped stack allocator *****
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=100, remain=924, count=1
------------------------------------------
-stack.free(p);		p=006DF6B0, size=100, remain=924, count=0
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=100, remain=924, count=0
------------------------------------------
-
-----------------------------------------
-lfStackAllocator<> stack(buff);
-----------------------------------------
-
-stack.debugInfo(message); printf(message);
------ Debug Info for lfStackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
--------------------------------------------
-void* p = stack.alloc(100);		p=006DF6B0, size=100, remain=924, count=1
-***** Begin : Scoped stack allocator *****
-	auto scoped_stack = stack.scopedAllocator();
-	scoped_stack.debugInfo(message); printf(message);
------ Debug Info for scopedStackAllocator -----
-maxSize=924, size=0, remain=924, count=0 (buff=006DF6B0, initSize=100, initCount=1)
------------------------------------------------
-	void* p1 = scoped_stack.alloc(1);		p1=006DF714, size=1, remain=923, count=1
-	void* p2 = scoped_stack.alloc(1, 1);		p2=006DF715, size=2, remain=922, count=2
-	void* p3 = scoped_stack.alloc(1, 1);		p3=006DF716, size=3, remain=921, count=3
-	void* p4 = scoped_stack.alloc(1);		p4=006DF718, size=5, remain=919, count=4
-	void* p5 = scoped_stack.alloc(10, 32);		p5=006DF720, size=22, remain=902, count=5
-	int* p6 = scoped_stack.template newObj<int>();		p6=006DF72C, size=28, remain=896, count=6
-	double* p7 = scoped_stack.template newArray<double>(3);		p7=006DF730, size=52, remain=872, count=7
-	int* p8 = scoped_stack.template newObj<int>();		p8=006DF748, size=56, remain=868, count=8
-data_t::data_t(): m_val=0
-	data_t* p9 = scoped_stack.template newObj<data_t>();		p9=006DF750, size=76, remain=848, count=9
-data_t::data_t(123): m_val=123
-	data_t* p10 = scoped_stack.template newObj<data_t>(123);		p10=006DF760, size=92, remain=832, count=10
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-	data_t* p11 = scoped_stack.template newArray<data_t>(3);		p11=006DF770, size=140, remain=784, count=11
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-	data_t* p12 = scoped_stack.template newArray<data_t>(3, 456);		p12=006DF7A0, size=188, remain=736, count=12
-	void* p13 = scoped_stack.alloc(1000);		p13=00000000, size=188, remain=736, count=12
-	void* p14 = scoped_stack.alloc(10);		p14=006DF7D0, size=198, remain=726, count=13
-	scoped_stack.debugInfo(message); printf(message);
------ Debug Info for scopedStackAllocator -----
-maxSize=924, size=198, remain=726, count=13 (buff=006DF6B0, initSize=100, initCount=1)
------------------------------------------------
-	scoped_stack.free(p1);		p1=006DF714, size=198, remain=726, count=12
-	scoped_stack.free(p2);		p2=006DF715, size=198, remain=726, count=11
-	scoped_stack.free(p3);		p3=006DF716, size=198, remain=726, count=10
-	scoped_stack.free(p4);		p4=006DF718, size=198, remain=726, count=9
-	scoped_stack.free(p5);		p5=006DF720, size=198, remain=726, count=8
-	scoped_stack.deleteObj(p6);		p6=006DF72C, size=198, remain=726, count=7
-	scoped_stack.deleteArray(p7, 3);		p7=006DF730, size=198, remain=726, count=6
-	scoped_stack.deleteObj(p8);		p8=006DF748, size=198, remain=726, count=5
-data_t::~data_t(): m_val=0
-	scoped_stack.deleteObj(p9);		p9=006DF750, size=198, remain=726, count=4
-data_t::~data_t(): m_val=123
-	scoped_stack.deleteObj(p10);		p10=006DF760, size=198, remain=726, count=3
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-	scoped_stack.deleteArray(p11, 3);		p11=006DF770, size=198, remain=726, count=2
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-	scoped_stack.deleteArray(p12, 3);		p12=006DF7A0, size=198, remain=726, count=1
-	scoped_stack.free(p13);		p13=00000000, size=198, remain=726, count=1
-	scoped_stack.free(p14);		p14=006DF7D0, size=198, remain=726, count=0
-	scoped_stack.debugInfo(message); printf(message);
------ Debug Info for scopedStackAllocator -----
-maxSize=924, size=198, remain=726, count=0 (buff=006DF6B0, initSize=100, initCount=1)
------------------------------------------------
-	scoped_stack.rewind(900);		size=198, remain=726, count=0
-	scoped_stack.rewind(20);		size=20, remain=904, count=0
-	void* p100 = scoped_stack.alloc(10);		p100=006DF728, size=30, remain=894, count=1
-	void* p101 = scoped_stack.alloc(20);		p101=006DF734, size=52, remain=872, count=2
-	scoped_stack.clear();		size=0, remain=924, count=0
-	void* p102 = scoped_stack.alloc(30);		p102=006DF714, size=30, remain=894, count=1
-	void* p103 = scoped_stack.alloc(40);		p103=006DF734, size=72, remain=852, count=2
-***** End : Scoped stack allocator *****
-stack.debugInfo(message); printf(message);
------ Debug Info for lfStackAllocator -----
-buff=006DF6B0, maxSize=1024, size=100, remain=924, count=1
--------------------------------------------
-stack.free(p);		p=006DF6B0, size=100, remain=924, count=0
-stack.debugInfo(message); printf(message);
------ Debug Info for lfStackAllocator -----
-buff=006DF6B0, maxSize=1024, size=100, remain=924, count=0
--------------------------------------------
-
-----------------------------------------
-smartStackAllocator<> stack(buff);
-----------------------------------------
-
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
------------------------------------------
-void* p = stack.alloc(100);		p=006DF6B0, size=100, remain=924, count=1
-***** Begin : Scoped stack allocator *****
-	auto scoped_stack = stack.scopedAllocator();
-	scoped_stack.debugInfo(message); printf(message);
------ Debug Info for scopedStackAllocator -----
-maxSize=924, size=0, remain=924, count=0 (buff=006DF6B0, initSize=100, initCount=1)
------------------------------------------------
-	void* p1 = scoped_stack.alloc(1);		p1=006DF714, size=1, remain=923, count=1
-	void* p2 = scoped_stack.alloc(1, 1);		p2=006DF715, size=2, remain=922, count=2
-	void* p3 = scoped_stack.alloc(1, 1);		p3=006DF716, size=3, remain=921, count=3
-	void* p4 = scoped_stack.alloc(1);		p4=006DF718, size=5, remain=919, count=4
-	void* p5 = scoped_stack.alloc(10, 32);		p5=006DF720, size=22, remain=902, count=5
-	int* p6 = scoped_stack.template newObj<int>();		p6=006DF72C, size=28, remain=896, count=6
-	double* p7 = scoped_stack.template newArray<double>(3);		p7=006DF730, size=52, remain=872, count=7
-	int* p8 = scoped_stack.template newObj<int>();		p8=006DF748, size=56, remain=868, count=8
-data_t::data_t(): m_val=0
-	data_t* p9 = scoped_stack.template newObj<data_t>();		p9=006DF750, size=76, remain=848, count=9
-data_t::data_t(123): m_val=123
-	data_t* p10 = scoped_stack.template newObj<data_t>(123);		p10=006DF760, size=92, remain=832, count=10
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-	data_t* p11 = scoped_stack.template newArray<data_t>(3);		p11=006DF770, size=140, remain=784, count=11
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-	data_t* p12 = scoped_stack.template newArray<data_t>(3, 456);		p12=006DF7A0, size=188, remain=736, count=12
-	void* p13 = scoped_stack.alloc(1000);		p13=00000000, size=188, remain=736, count=12
-	void* p14 = scoped_stack.alloc(10);		p14=006DF7D0, size=198, remain=726, count=13
-	scoped_stack.debugInfo(message); printf(message);
------ Debug Info for scopedStackAllocator -----
-maxSize=924, size=198, remain=726, count=13 (buff=006DF6B0, initSize=100, initCount=1)
------------------------------------------------
-	scoped_stack.free(p1);		p1=006DF714, size=198, remain=726, count=12
-	scoped_stack.free(p2);		p2=006DF715, size=198, remain=726, count=11
-	scoped_stack.free(p3);		p3=006DF716, size=198, remain=726, count=10
-	scoped_stack.free(p4);		p4=006DF718, size=198, remain=726, count=9
-	scoped_stack.free(p5);		p5=006DF720, size=198, remain=726, count=8
-	scoped_stack.deleteObj(p6);		p6=006DF72C, size=198, remain=726, count=7
-	scoped_stack.deleteArray(p7, 3);		p7=006DF730, size=198, remain=726, count=6
-	scoped_stack.deleteObj(p8);		p8=006DF748, size=198, remain=726, count=5
-data_t::~data_t(): m_val=0
-	scoped_stack.deleteObj(p9);		p9=006DF750, size=198, remain=726, count=4
-data_t::~data_t(): m_val=123
-	scoped_stack.deleteObj(p10);		p10=006DF760, size=198, remain=726, count=3
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-	scoped_stack.deleteArray(p11, 3);		p11=006DF770, size=198, remain=726, count=2
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-	scoped_stack.deleteArray(p12, 3);		p12=006DF7A0, size=198, remain=726, count=1
-	scoped_stack.free(p13);		p13=00000000, size=198, remain=726, count=1
-	scoped_stack.free(p14);		p14=006DF7D0, size=198, remain=726, count=0
-	scoped_stack.debugInfo(message); printf(message);
------ Debug Info for scopedStackAllocator -----
-maxSize=924, size=198, remain=726, count=0 (buff=006DF6B0, initSize=100, initCount=1)
------------------------------------------------
-	scoped_stack.rewind(900);		size=198, remain=726, count=0
-	scoped_stack.rewind(20);		size=20, remain=904, count=0
-	void* p100 = scoped_stack.alloc(10);		p100=006DF728, size=30, remain=894, count=1
-	void* p101 = scoped_stack.alloc(20);		p101=006DF734, size=52, remain=872, count=2
-	scoped_stack.clear();		size=0, remain=924, count=0
-	void* p102 = scoped_stack.alloc(30);		p102=006DF714, size=30, remain=894, count=1
-	void* p103 = scoped_stack.alloc(40);		p103=006DF734, size=72, remain=852, count=2
-***** End : Scoped stack allocator *****
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=100, remain=924, count=1
------------------------------------------
-stack.free(p);		p=006DF6B0, size=0, remain=1024, count=0
-stack.debugInfo(message); printf(message);
------ Debug Info for stackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
------------------------------------------
-
-----------------------------------------
-lfSmartStackAllocator stack(buff);
-----------------------------------------
-
-stack.debugInfo(message); printf(message);
------ Debug Info for lfStackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
--------------------------------------------
-void* p = stack.alloc(100);		p=006DF6B0, size=100, remain=924, count=1
-***** Begin : Scoped stack allocator *****
-	auto scoped_stack = stack.scopedAllocator();
-	scoped_stack.debugInfo(message); printf(message);
------ Debug Info for scopedStackAllocator -----
-maxSize=924, size=0, remain=924, count=0 (buff=006DF6B0, initSize=100, initCount=1)
------------------------------------------------
-	void* p1 = scoped_stack.alloc(1);		p1=006DF714, size=1, remain=923, count=1
-	void* p2 = scoped_stack.alloc(1, 1);		p2=006DF715, size=2, remain=922, count=2
-	void* p3 = scoped_stack.alloc(1, 1);		p3=006DF716, size=3, remain=921, count=3
-	void* p4 = scoped_stack.alloc(1);		p4=006DF718, size=5, remain=919, count=4
-	void* p5 = scoped_stack.alloc(10, 32);		p5=006DF720, size=22, remain=902, count=5
-	int* p6 = scoped_stack.template newObj<int>();		p6=006DF72C, size=28, remain=896, count=6
-	double* p7 = scoped_stack.template newArray<double>(3);		p7=006DF730, size=52, remain=872, count=7
-	int* p8 = scoped_stack.template newObj<int>();		p8=006DF748, size=56, remain=868, count=8
-data_t::data_t(): m_val=0
-	data_t* p9 = scoped_stack.template newObj<data_t>();		p9=006DF750, size=76, remain=848, count=9
-data_t::data_t(123): m_val=123
-	data_t* p10 = scoped_stack.template newObj<data_t>(123);		p10=006DF760, size=92, remain=832, count=10
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-	data_t* p11 = scoped_stack.template newArray<data_t>(3);		p11=006DF770, size=140, remain=784, count=11
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-	data_t* p12 = scoped_stack.template newArray<data_t>(3, 456);		p12=006DF7A0, size=188, remain=736, count=12
-	void* p13 = scoped_stack.alloc(1000);		p13=00000000, size=188, remain=736, count=12
-	void* p14 = scoped_stack.alloc(10);		p14=006DF7D0, size=198, remain=726, count=13
-	scoped_stack.debugInfo(message); printf(message);
------ Debug Info for scopedStackAllocator -----
-maxSize=924, size=198, remain=726, count=13 (buff=006DF6B0, initSize=100, initCount=1)
------------------------------------------------
-	scoped_stack.free(p1);		p1=006DF714, size=198, remain=726, count=12
-	scoped_stack.free(p2);		p2=006DF715, size=198, remain=726, count=11
-	scoped_stack.free(p3);		p3=006DF716, size=198, remain=726, count=10
-	scoped_stack.free(p4);		p4=006DF718, size=198, remain=726, count=9
-	scoped_stack.free(p5);		p5=006DF720, size=198, remain=726, count=8
-	scoped_stack.deleteObj(p6);		p6=006DF72C, size=198, remain=726, count=7
-	scoped_stack.deleteArray(p7, 3);		p7=006DF730, size=198, remain=726, count=6
-	scoped_stack.deleteObj(p8);		p8=006DF748, size=198, remain=726, count=5
-data_t::~data_t(): m_val=0
-	scoped_stack.deleteObj(p9);		p9=006DF750, size=198, remain=726, count=4
-data_t::~data_t(): m_val=123
-	scoped_stack.deleteObj(p10);		p10=006DF760, size=198, remain=726, count=3
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-data_t::~data_t(): m_val=0
-	scoped_stack.deleteArray(p11, 3);		p11=006DF770, size=198, remain=726, count=2
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-data_t::~data_t(): m_val=456
-	scoped_stack.deleteArray(p12, 3);		p12=006DF7A0, size=198, remain=726, count=1
-	scoped_stack.free(p13);		p13=00000000, size=198, remain=726, count=1
-	scoped_stack.free(p14);		p14=006DF7D0, size=198, remain=726, count=0
-	scoped_stack.debugInfo(message); printf(message);
------ Debug Info for scopedStackAllocator -----
-maxSize=924, size=198, remain=726, count=0 (buff=006DF6B0, initSize=100, initCount=1)
------------------------------------------------
-	scoped_stack.rewind(900);		size=198, remain=726, count=0
-	scoped_stack.rewind(20);		size=20, remain=904, count=0
-	void* p100 = scoped_stack.alloc(10);		p100=006DF728, size=30, remain=894, count=1
-	void* p101 = scoped_stack.alloc(20);		p101=006DF734, size=52, remain=872, count=2
-	scoped_stack.clear();		size=0, remain=924, count=0
-	void* p102 = scoped_stack.alloc(30);		p102=006DF714, size=30, remain=894, count=1
-	void* p103 = scoped_stack.alloc(40);		p103=006DF734, size=72, remain=852, count=2
-***** End : Scoped stack allocator *****
-stack.debugInfo(message); printf(message);
------ Debug Info for lfStackAllocator -----
-buff=006DF6B0, maxSize=1024, size=100, remain=924, count=1
--------------------------------------------
-stack.free(p);		p=006DF6B0, size=0, remain=1024, count=0
-stack.debugInfo(message); printf(message);
------ Debug Info for lfStackAllocator -----
-buff=006DF6B0, maxSize=1024, size=0, remain=1024, count=0
--------------------------------------------
+data_t::~data_t(): m_val=4559120
+std_allocator.deleteArray(p11, 3);		p11=004590F0, size=0, remain=0
+std_allocator.deleteArray(p12, 3);		p12=00459114, size=0, remain=0
+std_allocator.free(p13);		p13=00459130, size=0, remain=0
+std_allocator.free(p14);		p14=00459180, size=0, remain=0
+std_allocator.free(p15);		p15=00459FEC, size=0, remain=0
+std_allocator.free(p16);		p16=004591CC, size=0, remain=0
+std_allocator.free(p17);		p17=00459200, size=0, remain=0
+std_allocator.free(p18);		p18=0045923C, size=0, remain=0
+std_allocator.free(p19);		p19=00459260, size=0, remain=0
+std_allocator.free(p20);		p20=004592A4, size=0, remain=0
+std_allocator.free(p21);		p21=004592C0, size=0, remain=0
+std_allocator.debugInfo(message); printf(message);
+----- Debug Info for stdAllocator -----
+maxSize=0, size=0, remain=0
+---------------------------------------

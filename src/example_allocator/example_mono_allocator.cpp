@@ -22,8 +22,8 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //テスト用マクロ
 #define EXPR_PLAIN(...) printf("%s\n", #__VA_ARGS__); __VA_ARGS__
-#define EXPR_WITH_INFO(...) __VA_ARGS__ printf("%s\t\tsize=%d, remain=%d, isAllocated=%s\n", #__VA_ARGS__, mono.size(), mono.remain(), mono.isAllocated() ? "true" : "false")
-#define EXPR(P, ...) __VA_ARGS__ printf("%s\t\t%s=%p, size=%d, remain=%d, isAllocated=%s\n", #__VA_ARGS__, #P, P, mono.size(), mono.remain(), mono.isAllocated() ? "true" : "false")
+#define EXPR_WITH_INFO(...) __VA_ARGS__ printf("> %s\t\tsize=%d, remain=%d, isAllocated=%s\n", #__VA_ARGS__, mono.size(), mono.remain(), mono.isAllocated() ? "true" : "false")
+#define EXPR(p, ...) __VA_ARGS__ printf("> %s\t%s=%p, size=%d, remain=%d, isAllocated=%s\n", #__VA_ARGS__, #p, p, mono.size(), mono.remain(), mono.isAllocated() ? "true" : "false")
 
 //単一アロケータのテスト（共通処理）
 template<class ALLOCATOR>

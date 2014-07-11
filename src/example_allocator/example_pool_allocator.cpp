@@ -22,8 +22,8 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //テスト用マクロ
 #define EXPR_PLAIN(...) printf("%s\n", #__VA_ARGS__); __VA_ARGS__
-#define EXPR_WITH_INFO(...) __VA_ARGS__ printf("%s\t\tsize=%d, remain=%d, pool=%d/%d\n", #__VA_ARGS__, pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize())
-#define EXPR(P, ...) __VA_ARGS__ printf("%s\t\t%s=%p, size=%d, remain=%d, pool=%d/%d\n", #__VA_ARGS__, #P, P, pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize())
+#define EXPR_WITH_INFO(...) __VA_ARGS__ printf("> %s\tsize=%d, remain=%d, pool=%d/%d\n", #__VA_ARGS__, pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize())
+#define EXPR(p, ...) __VA_ARGS__ printf("> %s\t%s=%p, size=%d, remain=%d, pool=%d/%d\n", #__VA_ARGS__, #p, p, pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize())
 
 //プールアロケータのテスト（共通処理）
 template<class ALLOCATOR>

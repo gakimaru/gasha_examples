@@ -1,148 +1,167 @@
 
 ================================================================================
 
---------------------------------------------------------------------------------
-[ Test for stdAllocator ]
---------------------------------------------------------------------------------
+--------------------------------------------------
+[ Test for polyAllocator with new/delete operator ]
 
-----------------------------------------
-stdAllocator<lock_type> std_allocator;
-----------------------------------------
-
-std_allocator.debugInfo(message); printf(message);
------ Debug Info for stdAllocator -----
-maxSize=0, size=0, remain=0
----------------------------------------
-void* p1 = std_allocator.alloc(1);		p1=01148E10, size=0, remain=0
-void* p2 = std_allocator.alloc(1, 1);		p2=01148E40, size=0, remain=0
-void* p3 = std_allocator.alloc(1, 1);		p3=01148E70, size=0, remain=0
-void* p4 = std_allocator.alloc(1);		p4=01148EA0, size=0, remain=0
-void* p5 = std_allocator.alloc(10, 32);		p5=01148ED0, size=0, remain=0
-int* p6 = std_allocator.template newObj<int>();		p6=01148F08, size=0, remain=0
-double* p7 = std_allocator.template newArray<double>(3);		p7=01148F38, size=0, remain=0
-int* p8 = std_allocator.template newObj<int>();		p8=01148F80, size=0, remain=0
+> auto adapter = s_stackAllocator.adapter()
+> polyAllocator poly_allocator(adapter);
+poly_allocator: name="stackAllocator", mode="ManualClear"
+stack:size=0,count=0, pool:size=0,pool=0
+> data_t* p101 = new data_t;
 data_t::data_t(): m_val=0
-data_t* p9 = std_allocator.template newObj<data_t>();		p9=01148FB0, size=0, remain=0
-int* p10 = std_allocator.template newObj<int>();		p10=01148FF0, size=0, remain=0
-data_t::data_t(123): m_val=123
-data_t* p11 = std_allocator.template newObj<data_t>(123);		p11=01149020, size=0, remain=0
-int* p12 = std_allocator.template newObj<int>();		p12=01149060, size=0, remain=0
+> data_t* p102 = new data_t[2];
+data_t::data_t(): m_val=0
+data_t::data_t(): m_val=0
+> data_t* p103 = new data_t[3];
 data_t::data_t(): m_val=0
 data_t::data_t(): m_val=0
 data_t::data_t(): m_val=0
-data_t* p13 = std_allocator.template newArray<data_t>(3);		p13=01149090, size=0, remain=0
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-data_t* p14 = std_allocator.template newArray<data_t>(3, 456);		p14=011490F0, size=0, remain=0
-void* p15 = std_allocator.alloc(2000);		p15=01149150, size=0, remain=0
-void* p16 = std_allocator.alloc(10);		p16=01149950, size=0, remain=0
-data2_t* p17 = std_allocator.template newObj<data2_t>();		p17=0114B038, size=0, remain=0
-int* p18 = std_allocator.template newObj<int>();		p18=0114B088, size=0, remain=0
-data2_t* p19 = std_allocator.template newObj<data2_t>();		p19=0114B0B8, size=0, remain=0
-int* p20 = std_allocator.template newObj<int>();		p20=0114B108, size=0, remain=0
-data2_t* p21 = std_allocator.template newObj<data2_t>();		p21=0114B138, size=0, remain=0
-std_allocator.debugInfo(message); printf(message);
------ Debug Info for stdAllocator -----
-maxSize=0, size=0, remain=0
----------------------------------------
-std_allocator.free(p1);		p1=01148E10, size=0, remain=0
-std_allocator.free(p2);		p2=01148E40, size=0, remain=0
-std_allocator.free(p3);		p3=01148E70, size=0, remain=0
-std_allocator.free(p4);		p4=01148EA0, size=0, remain=0
-std_allocator.free(p5);		p5=01148ED0, size=0, remain=0
-std_allocator.deleteObj(p6);		p6=01148F08, size=0, remain=0
-std_allocator.deleteArray(p7, 3);		p7=01148F38, size=0, remain=0
-std_allocator.deleteObj(p8);		p8=01148F80, size=0, remain=0
+stack:size=128,count=3, pool:size=0,pool=0
+***** BEGIN BLOCK *****
+> auto nested_adapter = s_poolAllocator.adapter()
+> polyAllocator nested_poly_allocator(nested_adapter);
+nested_poly_allocator: name="poolAllocator", mode="-"
+stack:size=128,count=3, pool:size=0,pool=0
+> data_t* p201 = new data_t;
+data_t::data_t(): m_val=0
+> data_t* p202 = new data_t[2];
+data_t::data_t(): m_val=0
+data_t::data_t(): m_val=0
+> data_t* p203 = new data_t[3];
+stack:size=128,count=3, pool:size=96,pool=2
+> delete p201;
 data_t::~data_t(): m_val=0
-std_allocator.deleteObj(p9);		p9=01148FB0, size=0, remain=0
-std_allocator.deleteObj(p10);		p10=01148FF0, size=0, remain=0
-data_t::~data_t(): m_val=123
-data_t::~data_t(): m_val=-33686019
-data_t::~data_t(): m_val=18124800
-std_allocator.deleteArray(p11, 3);		p11=01149020, size=0, remain=0
-std_allocator.deleteArray(p12, 3);		p12=01149060, size=0, remain=0
-std_allocator.free(p13);		p13=01149090, size=0, remain=0
-std_allocator.free(p14);		p14=011490F0, size=0, remain=0
-std_allocator.free(p15);		p15=01149150, size=0, remain=0
-std_allocator.free(p16);		p16=01149950, size=0, remain=0
-std_allocator.free(p17);		p17=0114B038, size=0, remain=0
-std_allocator.free(p18);		p18=0114B088, size=0, remain=0
-std_allocator.free(p19);		p19=0114B0B8, size=0, remain=0
-std_allocator.free(p20);		p20=0114B108, size=0, remain=0
-std_allocator.free(p21);		p21=0114B138, size=0, remain=0
-std_allocator.debugInfo(message); printf(message);
------ Debug Info for stdAllocator -----
-maxSize=0, size=0, remain=0
----------------------------------------
-
-----------------------------------------
-stdAlignAllocator<lock_type> std_allocator;
-----------------------------------------
-
-std_allocator.debugInfo(message); printf(message);
------ Debug Info for stdAllocator -----
-maxSize=0, size=0, remain=0
----------------------------------------
-void* p1 = std_allocator.alloc(1);		p1=01148E18, size=0, remain=0
-void* p2 = std_allocator.alloc(1, 1);		p2=01148E50, size=0, remain=0
-void* p3 = std_allocator.alloc(1, 1);		p3=01148E88, size=0, remain=0
-void* p4 = std_allocator.alloc(1);		p4=01148EC0, size=0, remain=0
-void* p5 = std_allocator.alloc(10, 32);		p5=01148F00, size=0, remain=0
-int* p6 = std_allocator.template newObj<int>();		p6=01148F58, size=0, remain=0
-double* p7 = std_allocator.template newArray<double>(3);		p7=01148F98, size=0, remain=0
-int* p8 = std_allocator.template newObj<int>();		p8=01148FF0, size=0, remain=0
-data_t::data_t(): m_val=0
-data_t* p9 = std_allocator.template newObj<data_t>();		p9=01149030, size=0, remain=0
-int* p10 = std_allocator.template newObj<int>();		p10=01149088, size=0, remain=0
-data_t::data_t(123): m_val=123
-data_t* p11 = std_allocator.template newObj<data_t>(123);		p11=011490D0, size=0, remain=0
-int* p12 = std_allocator.template newObj<int>();		p12=01149120, size=0, remain=0
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-data_t::data_t(): m_val=0
-data_t* p13 = std_allocator.template newArray<data_t>(3);		p13=01149160, size=0, remain=0
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-data_t::data_t(456): m_val=456
-data_t* p14 = std_allocator.template newArray<data_t>(3, 456);		p14=011491E0, size=0, remain=0
-void* p15 = std_allocator.alloc(2000);		p15=0114B040, size=0, remain=0
-void* p16 = std_allocator.alloc(10);		p16=01149250, size=0, remain=0
-data2_t* p17 = std_allocator.template newObj<data2_t>();		p17=011492A0, size=0, remain=0
-int* p18 = std_allocator.template newObj<int>();		p18=01149310, size=0, remain=0
-data2_t* p19 = std_allocator.template newObj<data2_t>();		p19=01149360, size=0, remain=0
-int* p20 = std_allocator.template newObj<int>();		p20=011493C8, size=0, remain=0
-data2_t* p21 = std_allocator.template newObj<data2_t>();		p21=011404E0, size=0, remain=0
-std_allocator.debugInfo(message); printf(message);
------ Debug Info for stdAllocator -----
-maxSize=0, size=0, remain=0
----------------------------------------
-std_allocator.free(p1);		p1=01148E18, size=0, remain=0
-std_allocator.free(p2);		p2=01148E50, size=0, remain=0
-std_allocator.free(p3);		p3=01148E88, size=0, remain=0
-std_allocator.free(p4);		p4=01148EC0, size=0, remain=0
-std_allocator.free(p5);		p5=01148F00, size=0, remain=0
-std_allocator.deleteObj(p6);		p6=01148F58, size=0, remain=0
-std_allocator.deleteArray(p7, 3);		p7=01148F98, size=0, remain=0
-std_allocator.deleteObj(p8);		p8=01148FF0, size=0, remain=0
+> delete[] p202;
 data_t::~data_t(): m_val=0
-std_allocator.deleteObj(p9);		p9=01149030, size=0, remain=0
-std_allocator.deleteObj(p10);		p10=01149088, size=0, remain=0
-data_t::~data_t(): m_val=123
-data_t::~data_t(): m_val=-842150451
-data_t::~data_t(): m_val=141780182
-std_allocator.deleteArray(p11, 3);		p11=011490D0, size=0, remain=0
-std_allocator.deleteArray(p12, 3);		p12=01149120, size=0, remain=0
-std_allocator.free(p13);		p13=01149160, size=0, remain=0
-std_allocator.free(p14);		p14=011491E0, size=0, remain=0
-std_allocator.free(p15);		p15=0114B040, size=0, remain=0
-std_allocator.free(p16);		p16=01149250, size=0, remain=0
-std_allocator.free(p17);		p17=011492A0, size=0, remain=0
-std_allocator.free(p18);		p18=01149310, size=0, remain=0
-std_allocator.free(p19);		p19=01149360, size=0, remain=0
-std_allocator.free(p20);		p20=011493C8, size=0, remain=0
-std_allocator.free(p21);		p21=011404E0, size=0, remain=0
-std_allocator.debugInfo(message); printf(message);
------ Debug Info for stdAllocator -----
-maxSize=0, size=0, remain=0
----------------------------------------
+data_t::~data_t(): m_val=0
+> delete[] p203;
+stack:size=128,count=3, pool:size=0,pool=0
+***** END BLOCK *****
+> data_t* p104 = new data_t;
+data_t::data_t(): m_val=0
+stack:size=144,count=4, pool:size=0,pool=0
+> delete p101;
+data_t::~data_t(): m_val=0
+> delete[] p102;
+data_t::~data_t(): m_val=0
+data_t::~data_t(): m_val=0
+> delete[] p103;
+data_t::~data_t(): m_val=0
+data_t::~data_t(): m_val=0
+data_t::~data_t(): m_val=0
+> delete[] p104;
+----- Debug Info for scopedStackAllocator -----
+maxSize=880, size=0, remain=880, count=0 (INIT: buff=00AA1C2C, size=144, count=0)
+-----------------------------------------------
+data_t::data_t(): m_val=0
+----- Debug Info for scopedStackAllocator -----
+maxSize=880, size=16, remain=864, count=1 (INIT: buff=00AA1C2C, size=144, count=0)
+-----------------------------------------------
+data_t::~data_t(): m_val=0
+----- Debug Info for scopedStackAllocator -----
+maxSize=880, size=16, remain=864, count=0 (INIT: buff=00AA1C2C, size=144, count=0)
+-----------------------------------------------
+stack:size=144,count=0, pool:size=0,pool=0
+
+--------------------------------------------------
+[ Test for polyAllocator with STL ]
+
+> smartStackAllocator_withBuff<2048> stack;
+***** BEGIN BLOCK *****
+> auto adapter = stack.adapter();
+> polyAllocator poly(adapter);
+> std::vector<data_t> array;
+> data_t data;
+data_t::data_t(): m_val=0
+> array.push_back(data);
+data_t::data_t(const data_t&): m_val=0
+> array.push_back(data);
+data_t::data_t(data_t&&): m_val=0
+data_t::~data_t(): m_val=0
+data_t::data_t(const data_t&): m_val=0
+> array.push_back(data);
+data_t::data_t(data_t&&): m_val=0
+data_t::data_t(data_t&&): m_val=0
+data_t::~data_t(): m_val=0
+data_t::~data_t(): m_val=0
+data_t::data_t(const data_t&): m_val=0
+> stack.debugInfo(message); printf(message);
+----- Debug Info for stackAllocator -----
+buff=00BBECAC, maxSize=2048, size=104, remain=1944, count=2
+-----------------------------------------
+***** END BLOCK *****
+data_t::~data_t(): m_val=0
+data_t::~data_t(): m_val=0
+data_t::~data_t(): m_val=0
+data_t::~data_t(): m_val=0
+> stack.debugInfo(message); printf(message);
+----- Debug Info for stackAllocator -----
+buff=00BBECAC, maxSize=2048, size=0, remain=2048, count=0
+-----------------------------------------
+
+--------------------------------------------------
+[ Test for polyAllocator with GASHA_NEW/GASHA_DELETE ]
+
+> smartStackAllocator_withBuff<2048> stack;
+> auto adapter = stack.adapter();
+> polyAllocator poly(adapter);
+> debugAllocationObserver observer;
+> poly.setDebugObserver(observer);
+> data_t* p1 = GASHA_NEW(data_t);
+[CALLBACK] Operator new(16,16)p=00BBF090, allocator="stackAllocator:AutoClear"
+ struct data_t[0], file="example_poly_allocator.cpp(202)[Sat Jul 12 02:31:55 2014]", func="testAdvanced", time=0.002001
+data_t::data_t(): m_val=0
+> data_t* p2 = GASHA_NEW(data_t[2]);
+[CALLBACK] Operator new[](48,16)p=00BBF0A0, allocator="stackAllocator:AutoClear"
+ struct data_t[2], file="example_poly_allocator.cpp(205)[Sat Jul 12 02:31:55 2014]", func="testAdvanced", time=0.002001
+data_t::data_t(): m_val=0
+data_t::data_t(): m_val=0
+> data_t* p3 = GASHA_NEW_ARRAY(data_t, 3);
+[CALLBACK] Operator new[](64,16)p=00BBF0D0, allocator="stackAllocator:AutoClear"
+ struct data_t[3], file="example_poly_allocator.cpp(208)[Sat Jul 12 02:31:55 2014]", func="testAdvanced", time=0.002001
+data_t::data_t(): m_val=0
+data_t::data_t(): m_val=0
+data_t::data_t(): m_val=0
+> GASHA_DELETE(p1);
+data_t::~data_t(): m_val=0
+[CALLBACK] Operator delete(00BBF090), allocator="stackAllocator:AutoClear"
+ struct data_t, file="example_poly_allocator.cpp(211)[Sat Jul 12 02:31:55 2014]", func="testAdvanced", time=0.002001
+> GASHA_DELETE(p2);
+data_t::~data_t(): m_val=0
+[CALLBACK] Operator delete(00BBF0B0), allocator="stackAllocator:AutoClear"
+ struct data_t, file="example_poly_allocator.cpp(214)[Sat Jul 12 02:31:55 2014]", func="testAdvanced", time=0.002001
+> GASHA_DELETE(p3);
+data_t::~data_t(): m_val=0
+[CALLBACK] Operator delete(00BBF0E0), allocator="stackAllocator:AutoClear"
+ struct data_t, file="example_poly_allocator.cpp(215)[Sat Jul 12 02:31:55 2014]", func="testAdvanced", time=0.002001
+> std::vector<data_t> array;
+[CALLBACK] Operator new(8,4)p=00BBF084, allocator="stackAllocator:AutoClear"
+> data_t data;
+data_t::data_t(): m_val=0
+> array.push_back(data);
+[CALLBACK] Operator new(16,4)p=00BBF08C, allocator="stackAllocator:AutoClear"
+data_t::data_t(const data_t&): m_val=0
+> array.push_back(data);
+[CALLBACK] Operator new(32,4)p=00BBF09C, allocator="stackAllocator:AutoClear"
+data_t::data_t(data_t&&): m_val=0
+data_t::~data_t(): m_val=0
+[CALLBACK] Operator delete(00BBF08C), allocator="stackAllocator:AutoClear"
+data_t::data_t(const data_t&): m_val=0
+> array.push_back(data);
+[CALLBACK] Operator new(48,4)p=00BBF0BC, allocator="stackAllocator:AutoClear"
+data_t::data_t(data_t&&): m_val=0
+data_t::data_t(data_t&&): m_val=0
+data_t::~data_t(): m_val=0
+data_t::~data_t(): m_val=0
+[CALLBACK] Operator delete(00BBF09C), allocator="stackAllocator:AutoClear"
+data_t::data_t(const data_t&): m_val=0
+***** BEGIN BLOCK *****
+> auto nested_adapter = s_poolAllocator.adapter()
+> polyAllocator nested_poly_allocator(nested_adapter);
+[CALLBACK] Return allocator: "stackAllocator:AutoClear" <- "poolAllocator:-"data_t::~data_t(): m_val=0
+data_t::~data_t(): m_val=0
+data_t::~data_t(): m_val=0
+data_t::~data_t(): m_val=0
+[CALLBACK] Operator delete(00BBF0BC), allocator="stackAllocator:AutoClear"
+[CALLBACK] Operator delete(00BBF084), allocator="stackAllocator:AutoClear"

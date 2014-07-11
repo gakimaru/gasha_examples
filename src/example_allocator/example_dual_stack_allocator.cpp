@@ -23,15 +23,15 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //基本テスト
 
 //テスト用マクロ
-#define EXPR_PLAIN(...) printf("%s\n", #__VA_ARGS__); __VA_ARGS__
-#define EXPR_WITH_INFO(...) __VA_ARGS__ printf("%s\t\tsize=%d(ASC=%d,DESC=%d) remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc())
-#define EXPR(P, ...) __VA_ARGS__ printf("%s\t\t%s=%p, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, #P, P, stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc())
-#define EXPR_SCOPED_PLAIN(...) printf("\t%s\n", #__VA_ARGS__); __VA_ARGS__
-#define EXPR_SCOPED(P, ...) __VA_ARGS__ printf("\t%s\t\t%s=%p, size=%d, remain=%d, count=%d\n", #__VA_ARGS__, #P, P, scoped_stack.size(), scoped_stack.remain(), scoped_stack.count())
-#define EXPR_SCOPED_WITH_INFO(...) __VA_ARGS__ printf("\t%s\t\tsize=%d, remain=%d, count=%d\n", #__VA_ARGS__, scoped_stack.size(), scoped_stack.remain(), scoped_stack.count())
-#define EXPR_SCOPED_DUAL_PLAIN(...) printf("\t%s\n", #__VA_ARGS__); __VA_ARGS__
-#define EXPR_SCOPED_DUAL(P, ...) __VA_ARGS__ printf("\t%s\t\t%s=%p, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, #P, P, scoped_stack.size(), scoped_stack.sizeAsc(), scoped_stack.sizeDesc(), scoped_stack.remain(), scoped_stack.count(), scoped_stack.countAsc(), scoped_stack.countDesc())
-#define EXPR_SCOPED_DUAL_WITH_INFO(...) __VA_ARGS__ printf("\t%s\t\tsize=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, scoped_stack.size(), scoped_stack.sizeAsc(), scoped_stack.sizeDesc(), scoped_stack.remain(), scoped_stack.count(), scoped_stack.countAsc(), scoped_stack.countDesc())
+#define EXPR_PLAIN(...) printf("> %s\n", #__VA_ARGS__); __VA_ARGS__
+#define EXPR_WITH_INFO(...) __VA_ARGS__ printf("> %s\ttsize=%d(ASC=%d,DESC=%d) remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc())
+#define EXPR(p, ...) __VA_ARGS__ printf("> %s\t%s=%p, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, #p, p, stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc())
+#define EXPR_SCOPED_PLAIN(...) printf(">\t %s\n", #__VA_ARGS__); __VA_ARGS__
+#define EXPR_SCOPED_WITH_INFO(...) __VA_ARGS__ printf(">\t %s\tsize=%d, remain=%d, count=%d\n", #__VA_ARGS__, scoped_stack.size(), scoped_stack.remain(), scoped_stack.count())
+#define EXPR_SCOPED(p, ...) __VA_ARGS__ printf(">\t %s\t%s=%p, size=%d, remain=%d, count=%d\n", #__VA_ARGS__, #p, p, scoped_stack.size(), scoped_stack.remain(), scoped_stack.count())
+#define EXPR_SCOPED_DUAL_PLAIN(...) printf(">\t %s\n", #__VA_ARGS__); __VA_ARGS__
+#define EXPR_SCOPED_DUAL_WITH_INFO(...) __VA_ARGS__ printf(">\t %s\tsize=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, scoped_stack.size(), scoped_stack.sizeAsc(), scoped_stack.sizeDesc(), scoped_stack.remain(), scoped_stack.count(), scoped_stack.countAsc(), scoped_stack.countDesc())
+#define EXPR_SCOPED_DUAL(p, ...) __VA_ARGS__ printf(">\t %s\t%s=%p, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, #p, p, scoped_stack.size(), scoped_stack.sizeAsc(), scoped_stack.sizeDesc(), scoped_stack.remain(), scoped_stack.count(), scoped_stack.countAsc(), scoped_stack.countDesc())
 
 //双方向スタックアロケータのテスト（共通処理）
 template<class ALLOCATOR>

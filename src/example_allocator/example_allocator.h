@@ -15,11 +15,12 @@
 //--------------------------------------------------------------------------------
 //テスト用コンパイラスイッチ／定数
 
-#define ENABLE_TEST_FOR_STACK_ALLOATOR//スタックアロケータのテストを有効にする場合は、このマクロを有効化する
-#define ENABLE_TEST_FOR_DUAL_STACK_ALLOATOR//スタックアロケータのテストを有効にする場合は、このマクロを有効化する
-#define ENABLE_TEST_FOR_MONO_ALLOATOR//単一アロケータのテストを有効にする場合は、このマクロを有効化する
-#define ENABLE_TEST_FOR_POOL_ALLOATOR//プールアロケータのテストを有効にする場合は、このマクロを有効化する
-#define ENABLE_TEST_FOR_STD_ALLOATOR//標準アロケータのテストを有効にする場合は、このマクロを有効化する
+//#define ENABLE_TEST_FOR_STACK_ALLOATOR//スタックアロケータのテストを有効にする場合は、このマクロを有効化する
+//#define ENABLE_TEST_FOR_DUAL_STACK_ALLOATOR//スタックアロケータのテストを有効にする場合は、このマクロを有効化する
+//#define ENABLE_TEST_FOR_MONO_ALLOATOR//単一アロケータのテストを有効にする場合は、このマクロを有効化する
+//#define ENABLE_TEST_FOR_POOL_ALLOATOR//プールアロケータのテストを有効にする場合は、このマクロを有効化する
+//#define ENABLE_TEST_FOR_STD_ALLOATOR//標準アロケータのテストを有効にする場合は、このマクロを有効化する
+#define ENABLE_TEST_FOR_POLY_ALLOATOR//多態アロケータのテストを有効にする場合は、このマクロを有効化する
 
 #define USE_LOCK_TYPE 0//共有データのロックに dummyLock を使用する場合は、このマクロを有効化する（ロックしなくなる）（デフォルト）
 //#define USE_LOCK_TYPE 1//共有データのロックに spinLock を使用する場合は、このマクロを有効化する
