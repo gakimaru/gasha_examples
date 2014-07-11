@@ -164,14 +164,14 @@ void example_poly_allocator()
 		allocator.rewind(8);                                      allocator.debugInfo(message); printf(message);
 		allocator.rewind(16);                                     allocator.debugInfo(message); printf(message);
 		allocator.clear();                                        allocator.debugInfo(message); printf(message);
-		p1 = allocator.allocOrdinal(ALLOC_ASC, 1, 1);             allocator.debugInfo(message); printf(message);
-		p2 = allocator.allocOrdinal(ALLOC_DESC, 1, 1);            allocator.debugInfo(message); printf(message);
-		i = allocator.template newObjOrdinal<int>(ALLOC_ASC);     allocator.debugInfo(message); printf(message);
-		i2 = allocator.template newObjOrdinal<int>(ALLOC_DESC);   allocator.debugInfo(message); printf(message);
-		short* i3 = allocator.template newArrayOrdinal<short>(ALLOC_ASC, 2);  allocator.debugInfo(message); printf(message);
-		short* i4 = allocator.template newArrayOrdinal<short>(ALLOC_DESC, 2); allocator.debugInfo(message); printf(message);
-		int* i5 = allocator.newDefaultOrdinal(ALLOC_ASC);         allocator.debugInfo(message); printf(message);
-		int* i6 = allocator.newDefaultOrdinal(ALLOC_DESC);        allocator.debugInfo(message); printf(message);
+		p1 = allocator.allocOrd(ALLOC_ASC, 1, 1);             allocator.debugInfo(message); printf(message);
+		p2 = allocator.allocOrd(ALLOC_DESC, 1, 1);            allocator.debugInfo(message); printf(message);
+		i = allocator.template newObjOrd<int>(ALLOC_ASC);     allocator.debugInfo(message); printf(message);
+		i2 = allocator.template newObjOrd<int>(ALLOC_DESC);   allocator.debugInfo(message); printf(message);
+		short* i3 = allocator.template newArrayOrd<short>(ALLOC_ASC, 2);  allocator.debugInfo(message); printf(message);
+		short* i4 = allocator.template newArrayOrd<short>(ALLOC_DESC, 2); allocator.debugInfo(message); printf(message);
+		int* i5 = allocator.newDefaultOrd(ALLOC_ASC);         allocator.debugInfo(message); printf(message);
+		int* i6 = allocator.newDefaultOrd(ALLOC_DESC);        allocator.debugInfo(message); printf(message);
 		allocator.free(p1);                                       allocator.debugInfo(message); printf(message);
 		allocator.free(p2);                                       allocator.debugInfo(message); printf(message);
 		allocator.deleteObj(i);                                   allocator.debugInfo(message); printf(message);
@@ -214,8 +214,8 @@ void example_poly_allocator()
 			sub_allocator.free(p3); sub_allocator.debugInfo(message); printf(message);
 			sub_allocator.free(p4); sub_allocator.debugInfo(message); printf(message);
 			sub_allocator.clear(); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.clearOrdinal(ALLOC_DESC); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.clearOrdinal(ALLOC_ASC); sub_allocator.debugInfo(message); printf(message);
+			sub_allocator.clearOrd(ALLOC_DESC); sub_allocator.debugInfo(message); printf(message);
+			sub_allocator.clearOrd(ALLOC_ASC); sub_allocator.debugInfo(message); printf(message);
 			p1 = sub_allocator.alloc(1); sub_allocator.debugInfo(message); printf(message);
 			sub_allocator.reversewAllocateOrder();
 			p3 = sub_allocator.alloc(1); sub_allocator.debugInfo(message); printf(message);
@@ -569,8 +569,8 @@ void example_poly_allocator()
 	}
 #if 0
 	lfSmartDualStackAllocator_withBuff<2> al;
-	void* pp1 = al.allocOrdinal(ALLOC_ASC, 1, 1); al.debugInfo(message); printf(message);
-	void* pp2 = al.allocOrdinal(ALLOC_DESC, 1, 1); al.debugInfo(message); printf(message);
+	void* pp1 = al.allocOrd(ALLOC_ASC, 1, 1); al.debugInfo(message); printf(message);
+	void* pp2 = al.allocOrd(ALLOC_DESC, 1, 1); al.debugInfo(message); printf(message);
 	al.free(pp2); al.debugInfo(message); printf(message);
 	al.free(pp1); al.debugInfo(message); printf(message);
 #endif

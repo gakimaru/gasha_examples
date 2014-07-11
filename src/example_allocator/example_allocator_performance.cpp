@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
-// exmaple_pool_allocator.cpp
-// プールアロケータテスト
+// exmaple_allocator_performance.cpp
+// アロケータパフォーマンステスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -10,7 +10,18 @@
 
 #include "example_allocator.h"//アロケータテスト
 
+#include <gasha/mono_allocator.h>//単一アロケータ
+#include <gasha/lf_mono_allocator.h>//ロックフリー単一アロケータ
+#include <gasha/stack_allocator.h>//スタックアロケータ
+#include <gasha/stack_allocator.h>//ロックフリースタックアロケータ
+#include <gasha/dual_stack_allocator.h>//双方向スタックアロケータ
+#include <gasha/lf_dual_stack_allocator.h>//ロックフリー双方向スタックアロケータ
 #include <gasha/pool_allocator.h>//プールアロケータ
+#include <gasha/lf_pool_allocator.h>//ロックフリープールアロケータ
+#include <gasha/std_allocator.h>//標準アロケータ
+
+#include <gasha/scoped_stack_allocator.h>//スコープスタックアロケータ
+#include <gasha/scoped_dual_stack_allocator.h>//双方向スコープスタックアロケータ
 
 #include <gasha/allocator_adapter.h>//アロケータアダプター
 
@@ -22,11 +33,17 @@
 
 #include <stdio.h>//printf()
 
+//【VC++】例外を無効化した状態で <thread> をインクルードすると、warning C4530 が発生する
+//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
+#pragma warning(disable: 4530)//C4530を抑える
+
+#include <thread>//C++11 std::thread
+
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //----------------------------------------
-//プールアロケータテスト
-void example_pool_allocator()
+//アロケータパフォーマンステスト
+void example_allocator_performance()
 {
 #if 0
 	char message[2048];

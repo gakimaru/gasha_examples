@@ -14,8 +14,6 @@
 #include <gasha/lf_stack_allocator.h>//ロックフリースタックアロケータ
 #include <gasha/scoped_stack_allocator.h>//スコープスタックアロケータ
 
-#include <gasha/spin_lock.h>//スピンロック
-
 #include <stdio.h>//printf()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
@@ -31,9 +29,9 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 #define EXPR_SCOPED(P, ...) __VA_ARGS__ printf("\t%s\t\t%s=%p, size=%d, remain=%d, count=%d\n", #__VA_ARGS__, #P, P, scoped_stack.size(), scoped_stack.remain(), scoped_stack.count())
 #define EXPR_SCOPED_WITH_INFO(...) __VA_ARGS__ printf("\t%s\t\tsize=%d, remain=%d, count=%d\n", #__VA_ARGS__, scoped_stack.size(), scoped_stack.remain(), scoped_stack.count())
 
-//共通テスト
+//スタックアロケータのテスト（共通処理）
 template<class ALLOCATOR>
-static void test(ALLOCATOR& stack)
+static void testStack(ALLOCATOR& stack)
 {
 	printf("\n");
 	char message[1024];
@@ -53,6 +51,7 @@ static void test(ALLOCATOR& stack)
 	EXPR(p13, void* p13 = stack.alloc(1000););
 	EXPR(p14, void* p14 = stack.alloc(10););
 	EXPR_PLAIN(stack.debugInfo(message); printf(message););
+	EXPR_WITH_INFO(stack.clear(););
 	EXPR(p1, stack.free(p1););
 	EXPR(p2, stack.free(p2););
 	EXPR(p3, stack.free(p3););
@@ -66,68 +65,85 @@ static void test(ALLOCATOR& stack)
 	EXPR(p11, stack.deleteArray(p11, 3););
 	EXPR(p12, stack.deleteArray(p12, 3););
 	EXPR(p13, stack.free(p13););
-	EXPR(p14, stack.free(p14););
+	EXPR(p14, stack.free(p14););//スマートスタックならここで自動クリア
 	EXPR_PLAIN(stack.debugInfo(message); printf(message););
-	EXPR_WITH_INFO(stack.rewind(900););
-	EXPR_WITH_INFO(stack.rewind(20););
 	EXPR(p100, void* p100 = stack.alloc(10););
 	EXPR(p101, void* p101 = stack.alloc(20););
+	EXPR(p102, void* p102 = stack.alloc(30););
+	EXPR_WITH_INFO(stack.rewind(100););//誤ったリワインド（影響なし）
+	EXPR_WITH_INFO(stack.rewind(20););
+	EXPR_WITH_INFO(stack.rewind(p101););
 	EXPR_WITH_INFO(stack.clear(););
 	EXPR_PLAIN(stack.debugInfo(message); printf(message););
 }
+
+//スコープスタックアロケータのテスト（共通処理）
 template<class ALLOCATOR>
-static void testScoped(ALLOCATOR& stack)
+static void testScopedStack(ALLOCATOR& stack)
 {
 	printf("\n");
 	char message[1024];
 	EXPR_PLAIN(stack.debugInfo(message); printf(message););
-	EXPR(p, void* p = stack.alloc(100););
+	for (int i = 0; i < 2; ++i)
 	{
-		printf("***** Begin : Scoped stack allocator *****\n");
-		EXPR_SCOPED_PLAIN(auto scoped_stack = stack.scopedAllocator(););
-		EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
-		EXPR_SCOPED(p1, void* p1 = scoped_stack.alloc(1););
-		EXPR_SCOPED(p2, void* p2 = scoped_stack.alloc(1, 1););
-		EXPR_SCOPED(p3, void* p3 = scoped_stack.alloc(1, 1););
-		EXPR_SCOPED(p4, void* p4 = scoped_stack.alloc(1););
-		EXPR_SCOPED(p5, void* p5 = scoped_stack.alloc(10, 32););
-		EXPR_SCOPED(p6, int* p6 = scoped_stack.template newObj<int>(););
-		EXPR_SCOPED(p7, double* p7 = scoped_stack.template newArray<double>(3););
-		EXPR_SCOPED(p8, int* p8 = scoped_stack.template newObj<int>(););
-		EXPR_SCOPED(p9, data_t* p9 = scoped_stack.template newObj<data_t>(););
-		EXPR_SCOPED(p10, data_t* p10 = scoped_stack.template newObj<data_t>(123););
-		EXPR_SCOPED(p11, data_t* p11 = scoped_stack.template newArray<data_t>(3););
-		EXPR_SCOPED(p12, data_t* p12 = scoped_stack.template newArray<data_t>(3, 456););
-		EXPR_SCOPED(p13, void* p13 = scoped_stack.alloc(1000););
-		EXPR_SCOPED(p14, void* p14 = scoped_stack.alloc(10););
-		EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
-		EXPR_SCOPED(p1, scoped_stack.free(p1););
-		EXPR_SCOPED(p2, scoped_stack.free(p2););
-		EXPR_SCOPED(p3, scoped_stack.free(p3););
-		EXPR_SCOPED(p4, scoped_stack.free(p4););
-		EXPR_SCOPED(p5, scoped_stack.free(p5););
-		EXPR_SCOPED(p6, scoped_stack.deleteObj(p6););
-		EXPR_SCOPED(p7, scoped_stack.deleteArray(p7, 3););
-		EXPR_SCOPED(p8, scoped_stack.deleteObj(p8););
-		EXPR_SCOPED(p9, scoped_stack.deleteObj(p9););
-		EXPR_SCOPED(p10, scoped_stack.deleteObj(p10););
-		EXPR_SCOPED(p11, scoped_stack.deleteArray(p11, 3););
-		EXPR_SCOPED(p12, scoped_stack.deleteArray(p12, 3););
-		EXPR_SCOPED(p13, scoped_stack.free(p13););
-		EXPR_SCOPED(p14, scoped_stack.free(p14););
-		EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
-		EXPR_SCOPED_WITH_INFO(scoped_stack.rewind(900););
-		EXPR_SCOPED_WITH_INFO(scoped_stack.rewind(20););
-		EXPR_SCOPED(p100, void* p100 = scoped_stack.alloc(10););
-		EXPR_SCOPED(p101, void* p101 = scoped_stack.alloc(20););
-		EXPR_SCOPED_WITH_INFO(scoped_stack.clear(););
-		EXPR_SCOPED(p102, void* p102 = scoped_stack.alloc(30););
-		EXPR_SCOPED(p103, void* p103 = scoped_stack.alloc(40););
-		printf("***** End : Scoped stack allocator *****\n");
+		printf("--------------------------------------------------\n");
+		void* p = nullptr;
+		if (i == 0)
+		{
+			EXPR(p, p = stack.alloc(100););
+		}
+		{
+			printf("***** Begin : Scoped stack allocator *****\n");
+			EXPR_SCOPED_PLAIN(auto scoped_stack = stack.scopedAllocator(););//スコープスタックアロケータを取得（元になるスタックアロケータを使用してメモリ操作し、スコープを抜ける時に元の状態に戻す）
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
+			EXPR_SCOPED(p1, void* p1 = scoped_stack.alloc(1););
+			EXPR_SCOPED(p2, void* p2 = scoped_stack.alloc(1, 1););
+			EXPR_SCOPED(p3, void* p3 = scoped_stack.alloc(1, 1););
+			EXPR_SCOPED(p4, void* p4 = scoped_stack.alloc(1););
+			EXPR_SCOPED(p5, void* p5 = scoped_stack.alloc(10, 32););
+			EXPR_SCOPED(p6, int* p6 = scoped_stack.template newObj<int>(););
+			EXPR_SCOPED(p7, double* p7 = scoped_stack.template newArray<double>(3););
+			EXPR_SCOPED(p8, int* p8 = scoped_stack.template newObj<int>(););
+			EXPR_SCOPED(p9, data_t* p9 = scoped_stack.template newObj<data_t>(););
+			EXPR_SCOPED(p10, data_t* p10 = scoped_stack.template newObj<data_t>(123););
+			EXPR_SCOPED(p11, data_t* p11 = scoped_stack.template newArray<data_t>(3););
+			EXPR_SCOPED(p12, data_t* p12 = scoped_stack.template newArray<data_t>(3, 456););
+			EXPR_SCOPED(p13, void* p13 = scoped_stack.alloc(1000););
+			EXPR_SCOPED(p14, void* p14 = scoped_stack.alloc(10););
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
+			EXPR_SCOPED(p1, scoped_stack.free(p1););
+			EXPR_SCOPED(p2, scoped_stack.free(p2););
+			EXPR_SCOPED(p3, scoped_stack.free(p3););
+			EXPR_SCOPED(p4, scoped_stack.free(p4););
+			EXPR_SCOPED(p5, scoped_stack.free(p5););
+			EXPR_SCOPED(p6, scoped_stack.deleteObj(p6););
+			EXPR_SCOPED(p7, scoped_stack.deleteArray(p7, 3););
+			EXPR_SCOPED(p8, scoped_stack.deleteObj(p8););
+			EXPR_SCOPED(p9, scoped_stack.deleteObj(p9););
+			EXPR_SCOPED(p10, scoped_stack.deleteObj(p10););
+			EXPR_SCOPED(p11, scoped_stack.deleteArray(p11, 3););
+			EXPR_SCOPED(p12, scoped_stack.deleteArray(p12, 3););
+			EXPR_SCOPED(p13, scoped_stack.free(p13););
+			EXPR_SCOPED(p14, scoped_stack.free(p14););//スマートスタックでも自動クリアはしない
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
+			EXPR_SCOPED_WITH_INFO(scoped_stack.clear(););
+			EXPR_SCOPED(p100, void* p100 = scoped_stack.alloc(10););
+			EXPR_SCOPED(p101, void* p101 = scoped_stack.alloc(20););
+			EXPR_SCOPED(p102, void* p102 = scoped_stack.alloc(30););
+			EXPR_SCOPED_WITH_INFO(scoped_stack.rewind(100););//誤ったリワインド（影響なし）
+			EXPR_SCOPED_WITH_INFO(scoped_stack.rewind(20););
+			EXPR_SCOPED_WITH_INFO(scoped_stack.rewind(p101););
+			EXPR_SCOPED_WITH_INFO(scoped_stack.clear(););
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
+			EXPR_SCOPED(p200, void* p200 = scoped_stack.alloc(30););
+			EXPR_SCOPED(p201, void* p201 = scoped_stack.alloc(40););
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message);); 
+			printf("***** End : Scoped stack allocator *****\n");
+		}
+		EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		EXPR_PLAIN(stack.clear(););
+		EXPR_PLAIN(stack.debugInfo(message); printf(message););
 	}
-	EXPR_PLAIN(stack.debugInfo(message); printf(message););
-	EXPR(p, stack.free(p););
-	EXPR_PLAIN(stack.debugInfo(message); printf(message););
 }
 
 //----------------------------------------
@@ -143,46 +159,64 @@ void example_stack_allocator()
 		printf("[ Test for stackAllocator ]\n");
 		printf("--------------------------------------------------------------------------------\n");
 
+		//スタックアロケータ
 		{
 			printf("\n");
 			printf("----------------------------------------\n");
-			EXPR_PLAIN(stackAllocator<> stack(buff););
+			EXPR_PLAIN(stackAllocator<lock_type> stack(buff););
 			printf("----------------------------------------\n");
-			test(stack);
+			testStack(stack);
 		}
+
+		//スマートスタックアロケータ
+		//※メモリ確保数が0になったら自動リセット
 		{
 			printf("\n");
 			printf("----------------------------------------\n");
-			EXPR_PLAIN(smartStackAllocator<> stack(buff););
+			EXPR_PLAIN(smartStackAllocator<lock_type> stack(buff););
 			printf("----------------------------------------\n");
-			test(stack);
+			testStack(stack);
 		}
+
+		//バッファ付きスタックアロケータ
 		{
 			printf("\n");
 			printf("----------------------------------------\n");
-			EXPR_PLAIN(stackAllocator<spinLock> stack(buff););
-			printf("----------------------------------------\n");
-			test(stack);
-		}
-		{
-			printf("\n");
-			printf("----------------------------------------\n");
-			EXPR_PLAIN(smartStackAllocator<spinLock> stack(buff););
-			printf("----------------------------------------\n");
-			test(stack);
-		}
-		{
-			printf("\n");
-			printf("----------------------------------------\n");
-			EXPR_PLAIN(stackAllocator_withBuff<1024> stack;);
+			EXPR_PLAIN(stackAllocator_withBuff<1024, lock_type> stack;);
 			printf("----------------------------------------\n");
 			printf("\n");
 			EXPR_PLAIN(stack.debugInfo(message); printf(message););
 		}
+
+		//バッファ付きスマートスタックアロケータ
 		{
 			printf("\n");
 			printf("----------------------------------------\n");
-			EXPR_PLAIN(stackAllocator_withType<long long, 128> stack;);
+			EXPR_PLAIN(smartStackAllocator_withBuff<1024, lock_type> stack;);
+			printf("----------------------------------------\n");
+			printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		}
+
+		//型指定バッファ付きスタックアロケータ
+		//※型のアラインメントサイズ分余計に領域を割り当てる
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(stackAllocator_withType<long long, 128, lock_type> stack;);
+			printf("----------------------------------------\n");
+			printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			EXPR(p, long long* p = stack.newDefault(););
+			EXPR(p, stack.deleteDefault(p););
+		}
+
+		//型指定バッファ付きスマートスタックアロケータ
+		//※型のアラインメントサイズ分余計に領域を割り当てる
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(smartStackAllocator_withType<long long, 128, lock_type> stack;);
 			printf("----------------------------------------\n");
 			printf("\n");
 			EXPR_PLAIN(stack.debugInfo(message); printf(message););
@@ -197,20 +231,26 @@ void example_stack_allocator()
 		printf("[ Test for lfStackAllocator ]\n");
 		printf("--------------------------------------------------------------------------------\n");
 
+		//ロックフリースタックアロケータ
 		{
 			printf("\n");
 			printf("----------------------------------------\n");
 			EXPR_PLAIN(lfStackAllocator<> stack(buff););
 			printf("----------------------------------------\n");
-			test(stack);
+			testStack(stack);
 		}
+
+		//ロックスリースマートスタックアロケータ
+		//※メモリ確保数が0になったら自動リセット
 		{
 			printf("\n");
 			printf("----------------------------------------\n");
 			EXPR_PLAIN(lfSmartStackAllocator stack(buff););
 			printf("----------------------------------------\n");
-			test(stack);
+			testStack(stack);
 		}
+
+		//バッファ付きロックフリースタックアロケータ
 		{
 			printf("\n");
 			printf("----------------------------------------\n");
@@ -219,6 +259,19 @@ void example_stack_allocator()
 			printf("\n");
 			EXPR_PLAIN(stack.debugInfo(message); printf(message););
 		}
+
+		//バッファ付きロックフリースマートスタックアロケータ
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(lfSmartStackAllocator_withBuff<1024> stack;);
+			printf("----------------------------------------\n");
+			printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		}
+
+		//型指定バッファ付きロックフリースタックアロケータ
+		//※型のアラインメントサイズ分余計に領域を割り当てる
 		{
 			printf("\n");
 			printf("----------------------------------------\n");
@@ -229,45 +282,65 @@ void example_stack_allocator()
 			EXPR(p, long long* p = stack.newDefault(););
 			EXPR(p, stack.deleteDefault(p););
 		}
+
+		//型指定バッファ付きロックフリースマートスタックアロケータ
+		//※型のアラインメントサイズ分余計に領域を割り当てる
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(lfSmartStackAllocator_withType<long long, 128> stack;);
+			printf("----------------------------------------\n");
+			printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			EXPR(p, long long* p = stack.newDefault(););
+			EXPR(p, stack.deleteDefault(p););
+		}
 	}
-
-
+	
 	{
 		printf("\n");
 		printf("--------------------------------------------------------------------------------\n");
 		printf("[ Test for scoepdStackAllocator ]\n");
 		printf("--------------------------------------------------------------------------------\n");
 
+		//スタックアロケータ
+		//※スコープスタックアロケータのテスト用
 		{
 			printf("\n");
 			printf("----------------------------------------\n");
-			EXPR_PLAIN(stackAllocator<> stack(buff););
+			EXPR_PLAIN(stackAllocator<lock_type> stack(buff););
 			printf("----------------------------------------\n");
-			testScoped(stack);
+			testScopedStack(stack);
 		}
 
+		//スマートスタックアロケータ
+		//※スコープスタックアロケータのテスト用
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(smartStackAllocator<lock_type> stack(buff););
+			printf("----------------------------------------\n");
+			testScopedStack(stack);
+		}
+
+		//ロックフリースタックアロケータ
+		//※スコープスタックアロケータのテスト用
 		{
 			printf("\n");
 			printf("----------------------------------------\n");
 			EXPR_PLAIN(lfStackAllocator<> stack(buff););
 			printf("----------------------------------------\n");
-			testScoped(stack);
+			testScopedStack(stack);
 		}
 
-		{
-			printf("\n");
-			printf("----------------------------------------\n");
-			EXPR_PLAIN(smartStackAllocator<> stack(buff););
-			printf("----------------------------------------\n");
-			testScoped(stack);
-		}
-
+		//ロックフリースマートスタックアロケータ
+		//※スコープスタックアロケータのテスト用
 		{
 			printf("\n");
 			printf("----------------------------------------\n");
 			EXPR_PLAIN(lfSmartStackAllocator stack(buff););
 			printf("----------------------------------------\n");
-			testScoped(stack);
+			testScopedStack(stack);
 		}
 	}
 }

@@ -25,56 +25,21 @@
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
-GASHA_INSTANCING_stackAllocator();
-GASHA_INSTANCING_smartStackAllocator();
-GASHA_INSTANCING_stackAllocator_withLock(spinLock);
-GASHA_INSTANCING_smartStackAllocator_withLock(spinLock);
-//GASHA_INSTANCING_stackAllocator_withBuff(80);
-//GASHA_INSTANCING_smartStackAllocator_withBuff(80);
-//GASHA_INSTANCING_stackAllocator_withBuff_withLock(80, spinLock);
-//GASHA_INSTANCING_smartStackAllocator_withBuff_withLock(80, spinLock);
-//GASHA_INSTANCING_stackAllocator_withType(int, 20);
-//GASHA_INSTANCING_smartStackAllocator_withType(int, 20);
-//GASHA_INSTANCING_stackAllocator_withType_withLock(int, 20, spinLock);
-//GASHA_INSTANCING_smartStackAllocator_withType_withLock(int, 20, spinLock);
+GASHA_INSTANCING_stackAllocator_withLock(lock_type);
+GASHA_INSTANCING_smartStackAllocator_withLock(lock_type);
 
 GASHA_INSTANCING_lfStackAllocator();
 GASHA_INSTANCING_lfSmartStackAllocator();
-//GASHA_INSTANCING_lfStackAllocator_withBuff(80);
-//GASHA_INSTANCING_lfSmartStackAllocator_withBuff(80);
-//GASHA_INSTANCING_lfStackAllocator_withType(int, 20);
-//GASHA_INSTANCING_lfSmartStackAllocator_withType(int, 20);
 
-GASHA_INSTANCING_dualStackAllocator();
-GASHA_INSTANCING_smartDualStackAllocator();
-GASHA_INSTANCING_dualStackAllocator_withLock(spinLock);
-GASHA_INSTANCING_smartDualStackAllocator_withLock(spinLock);
-//GASHA_INSTANCING_dualStackAllocator_withBuff(80);
-//GASHA_INSTANCING_smartDualStackAllocator_withBuff(80);
-//GASHA_INSTANCING_dualStackAllocator_withBuff_withLock(80, spinLock);
-//GASHA_INSTANCING_smartDualStackAllocator_withBuff_withLock(80, spinLock);
-//GASHA_INSTANCING_dualStackAllocator_withType(int, 20);
-//GASHA_INSTANCING_smartDualStackAllocator_withType(int, 20);
-//GASHA_INSTANCING_dualStackAllocator_withType_withLock(int, 20, spinLock);
-//GASHA_INSTANCING_smartDualStackAllocator_withType_withLock(int, 20, spinLock);
+GASHA_INSTANCING_dualStackAllocator_withLock(lock_type);
+GASHA_INSTANCING_smartDualStackAllocator_withLock(lock_type);
 
 GASHA_INSTANCING_lfDualStackAllocator();
 GASHA_INSTANCING_lfSmartDualStackAllocator();
-//GASHA_INSTANCING_lfDualStackAllocator_withBuff(80);
-//GASHA_INSTANCING_lfSmartDualStackAllocator_withBuff(80);
-//GASHA_INSTANCING_lfDualStackAllocator_withType(int, 20);
-//GASHA_INSTANCING_lfSmartDualStackAllocator_withType(int, 20);
 
-GASHA_INSTANCING_monoAllocator();
-GASHA_INSTANCING_monoAllocator_withLock(spinLock);
-//GASHA_INSTANCING_monoAllocator_withBuff(80);
-//GASHA_INSTANCING_monoAllocator_withBuff_withLock(80, spinLock);
-//GASHA_INSTANCING_monoAllocator_withType(int, 20);
-//GASHA_INSTANCING_monoAllocator_withType_withLock(int, 20, spinLock);
+GASHA_INSTANCING_monoAllocator_withLock(lock_type);
 
-GASHA_INSTANCING_stdAllocator();
-GASHA_INSTANCING_stdAllocator_withLock(spinLock);
-GASHA_INSTANCING_stdAlignAllocator();
-GASHA_INSTANCING_stdAlignAllocator_withLock(spinLock);
+GASHA_INSTANCING_stdAllocator_withLock(lock_type);
+GASHA_INSTANCING_stdAlignAllocator_withLock(lock_type);
 
 // End of file

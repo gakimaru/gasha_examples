@@ -11,561 +11,520 @@
 #include "example_allocator.h"//アロケータテスト
 
 #include <gasha/dual_stack_allocator.h>//双方向スタックアロケータ
-
+#include <gasha/lf_dual_stack_allocator.h>//ロックフリー双方向スタックアロケータ
 #include <gasha/scoped_stack_allocator.h>//スコープスタックアロケータ
-#include <gasha/scoped_dual_stack_allocator.h>//双方向スコープスタックアロケータ
-
-#include <gasha/allocator_adapter.h>//アロケータアダプター
-
-#include <gasha/type_traits.h>//型特性ユーティリティ：extentof
-#include <gasha/spin_lock.h>//スピンロック
+#include <gasha/scoped_dual_stack_allocator.h>//スコープ双方向スタックアロケータ
 
 #include <stdio.h>//printf()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //----------------------------------------
+//基本テスト
+
+//テスト用マクロ
+#define EXPR_PLAIN(...) printf("%s\n", #__VA_ARGS__); __VA_ARGS__
+#define EXPR_WITH_INFO(...) __VA_ARGS__ printf("%s\t\tsize=%d(ASC=%d,DESC=%d) remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc())
+#define EXPR(P, ...) __VA_ARGS__ printf("%s\t\t%s=%p, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, #P, P, stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc())
+#define EXPR_SCOPED_PLAIN(...) printf("\t%s\n", #__VA_ARGS__); __VA_ARGS__
+#define EXPR_SCOPED(P, ...) __VA_ARGS__ printf("\t%s\t\t%s=%p, size=%d, remain=%d, count=%d\n", #__VA_ARGS__, #P, P, scoped_stack.size(), scoped_stack.remain(), scoped_stack.count())
+#define EXPR_SCOPED_WITH_INFO(...) __VA_ARGS__ printf("\t%s\t\tsize=%d, remain=%d, count=%d\n", #__VA_ARGS__, scoped_stack.size(), scoped_stack.remain(), scoped_stack.count())
+#define EXPR_SCOPED_DUAL_PLAIN(...) printf("\t%s\n", #__VA_ARGS__); __VA_ARGS__
+#define EXPR_SCOPED_DUAL(P, ...) __VA_ARGS__ printf("\t%s\t\t%s=%p, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, #P, P, scoped_stack.size(), scoped_stack.sizeAsc(), scoped_stack.sizeDesc(), scoped_stack.remain(), scoped_stack.count(), scoped_stack.countAsc(), scoped_stack.countDesc())
+#define EXPR_SCOPED_DUAL_WITH_INFO(...) __VA_ARGS__ printf("\t%s\t\tsize=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, scoped_stack.size(), scoped_stack.sizeAsc(), scoped_stack.sizeDesc(), scoped_stack.remain(), scoped_stack.count(), scoped_stack.countAsc(), scoped_stack.countDesc())
+
+//双方向スタックアロケータのテスト（共通処理）
+template<class ALLOCATOR>
+static void testDualStack(ALLOCATOR& stack)
+{
+	printf("\n");
+	char message[1024];
+	for (int i = 0; i < 4; ++i)
+	{
+		printf("--------------------------------------------------\n");
+		if (i == 0)
+		{
+			EXPR_PLAIN(stack.setAllocateOrder(ALLOC_ASC));
+		}
+		else if (i == 1)
+		{
+			EXPR_PLAIN(stack.setAllocateOrder(ALLOC_DESC));
+		}
+		else
+		{
+			EXPR_PLAIN(stack.reversewAllocateOrder());
+		}
+		EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		EXPR(p1, void* p1 = stack.alloc(1););
+		EXPR(p2, void* p2 = stack.alloc(1, 1););
+		EXPR(p3, void* p3 = stack.alloc(1, 1););
+		EXPR(p4, void* p4 = stack.alloc(1););
+		EXPR(p5, void* p5 = stack.alloc(10, 32););
+		EXPR(p6, int* p6 = stack.template newObj<int>(););
+		EXPR(p7, double* p7 = stack.template newArray<double>(3););
+		EXPR(p8, int* p8 = stack.template newObj<int>(););
+		EXPR(p9, data_t* p9 = stack.template newObj<data_t>(););
+		EXPR(p10, data_t* p10 = stack.template newObj<data_t>(123););
+		EXPR(p11, data_t* p11 = stack.template newArray<data_t>(3););
+		EXPR(p12, data_t* p12 = stack.template newArray<data_t>(3, 456););
+		EXPR(p13, void* p13 = stack.alloc(1000););
+		EXPR(p14, void* p14 = stack.alloc(10););
+		EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		EXPR(p1, stack.free(p1););
+		EXPR(p2, stack.free(p2););
+		EXPR(p3, stack.free(p3););
+		EXPR(p4, stack.free(p4););
+		EXPR(p5, stack.free(p5););
+		EXPR(p6, stack.deleteObj(p6););
+		EXPR(p7, stack.deleteArray(p7, 3););
+		EXPR(p8, stack.deleteObj(p8););
+		EXPR(p9, stack.deleteObj(p9););
+		EXPR(p10, stack.deleteObj(p10););
+		EXPR(p11, stack.deleteArray(p11, 3););
+		EXPR(p12, stack.deleteArray(p12, 3););
+		EXPR(p13, stack.free(p13););
+		EXPR(p14, stack.free(p14););//スマートスタックならここで自動クリア
+		EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		EXPR_WITH_INFO(stack.clearAll(););
+		EXPR(p100, void* p100 = stack.alloc(10););
+		EXPR(p101, void* p101 = stack.alloc(20););
+		EXPR(p102, void* p102 = stack.alloc(30););
+		EXPR_WITH_INFO(stack.rewind(100););//誤ったリワインド（影響なし）
+		EXPR_WITH_INFO(stack.rewind(20););
+		EXPR_WITH_INFO(stack.rewind(p101););
+		EXPR_WITH_INFO(stack.rewind(p100););
+		EXPR_WITH_INFO(stack.clearAll(););
+		EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		EXPR(p200, void* p200 = stack.allocOrd(ALLOC_ASC, 10););
+		EXPR(p201, void* p201 = stack.allocOrd(ALLOC_DESC, 10););
+		EXPR(p202, int* p202 = stack.template newObjOrd<int>(ALLOC_ASC););
+		EXPR(p203, int* p203 = stack.template newObjOrd<int>(ALLOC_DESC););
+		EXPR(p204, double* p204 = stack.template newArrayOrd<double>(ALLOC_ASC, 3););
+		EXPR(p205, double* p205 = stack.template newArrayOrd<double>(ALLOC_DESC, 3););
+		EXPR_WITH_INFO(stack.rewindOrd(ALLOC_ASC, 100););//誤ったリワインド（影響なし）
+		EXPR_WITH_INFO(stack.rewindOrd(ALLOC_DESC, 100););//誤ったリワインド（影響なし）
+		EXPR_WITH_INFO(stack.rewindOrd(ALLOC_ASC, 15););
+		EXPR_WITH_INFO(stack.rewindOrd(ALLOC_DESC, 15););
+		EXPR_WITH_INFO(stack.rewind(p202););
+		EXPR_WITH_INFO(stack.rewind(p201););
+		EXPR_WITH_INFO(stack.clearOrd(ALLOC_ASC););
+		EXPR_WITH_INFO(stack.clearOrd(ALLOC_DESC););
+		EXPR(p300, void* p300 = stack.allocOrd(ALLOC_ASC, 10););
+		EXPR(p301, void* p301 = stack.allocOrd(ALLOC_DESC, 10););
+		EXPR_WITH_INFO(stack.clear(););
+		EXPR_PLAIN(stack.debugInfo(message); printf(message););
+	}
+}
+
+//スコープスタックアロケータのテスト（共通処理）
+//※双方向スタックアロケータを（片方向の）スコープアロケータとして使用する
+template<class ALLOCATOR>
+static void testScopedStack(ALLOCATOR& stack)
+{
+	printf("\n");
+	char message[1024];
+	EXPR_PLAIN(stack.debugInfo(message); printf(message););
+	for (int i = 0; i < 2; ++i)
+	{
+		printf("--------------------------------------------------\n");
+		void* p = nullptr;
+		if (i == 0)
+		{
+			EXPR(p, p = stack.alloc(100););
+		}
+		{
+			printf("***** Begin : Scoped stack allocator *****\n");
+			EXPR_SCOPED_PLAIN(auto scoped_stack = stack.scopedAllocator(););//スコープスタックアロケータを取得（元になるスタックアロケータを使用してメモリ操作し、スコープを抜ける時に元の状態に戻す）
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
+			EXPR_SCOPED(p1, void* p1 = scoped_stack.alloc(1););
+			EXPR_SCOPED(p2, void* p2 = scoped_stack.alloc(1, 1););
+			EXPR_SCOPED(p3, void* p3 = scoped_stack.alloc(1, 1););
+			EXPR_SCOPED(p4, void* p4 = scoped_stack.alloc(1););
+			EXPR_SCOPED(p5, void* p5 = scoped_stack.alloc(10, 32););
+			EXPR_SCOPED(p6, int* p6 = scoped_stack.template newObj<int>(););
+			EXPR_SCOPED(p7, double* p7 = scoped_stack.template newArray<double>(3););
+			EXPR_SCOPED(p8, int* p8 = scoped_stack.template newObj<int>(););
+			EXPR_SCOPED(p9, data_t* p9 = scoped_stack.template newObj<data_t>(););
+			EXPR_SCOPED(p10, data_t* p10 = scoped_stack.template newObj<data_t>(123););
+			EXPR_SCOPED(p11, data_t* p11 = scoped_stack.template newArray<data_t>(3););
+			EXPR_SCOPED(p12, data_t* p12 = scoped_stack.template newArray<data_t>(3, 456););
+			EXPR_SCOPED(p13, void* p13 = scoped_stack.alloc(1000););
+			EXPR_SCOPED(p14, void* p14 = scoped_stack.alloc(10););
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
+			EXPR_SCOPED(p1, scoped_stack.free(p1););
+			EXPR_SCOPED(p2, scoped_stack.free(p2););
+			EXPR_SCOPED(p3, scoped_stack.free(p3););
+			EXPR_SCOPED(p4, scoped_stack.free(p4););
+			EXPR_SCOPED(p5, scoped_stack.free(p5););
+			EXPR_SCOPED(p6, scoped_stack.deleteObj(p6););
+			EXPR_SCOPED(p7, scoped_stack.deleteArray(p7, 3););
+			EXPR_SCOPED(p8, scoped_stack.deleteObj(p8););
+			EXPR_SCOPED(p9, scoped_stack.deleteObj(p9););
+			EXPR_SCOPED(p10, scoped_stack.deleteObj(p10););
+			EXPR_SCOPED(p11, scoped_stack.deleteArray(p11, 3););
+			EXPR_SCOPED(p12, scoped_stack.deleteArray(p12, 3););
+			EXPR_SCOPED(p13, scoped_stack.free(p13););
+			EXPR_SCOPED(p14, scoped_stack.free(p14););//スマートスタックでも自動クリアはしない
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
+			EXPR_SCOPED_WITH_INFO(scoped_stack.clear(););
+			EXPR_SCOPED(p100, void* p100 = scoped_stack.alloc(10););
+			EXPR_SCOPED(p101, void* p101 = scoped_stack.alloc(20););
+			EXPR_SCOPED(p102, void* p102 = scoped_stack.alloc(30););
+			EXPR_SCOPED_WITH_INFO(scoped_stack.rewind(100););//誤ったリワインド（影響なし）
+			EXPR_SCOPED_WITH_INFO(scoped_stack.rewind(20););
+			EXPR_SCOPED_WITH_INFO(scoped_stack.rewind(p101););
+			EXPR_SCOPED_WITH_INFO(scoped_stack.rewind(p100););
+			EXPR_SCOPED_WITH_INFO(scoped_stack.clear(););
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
+			EXPR_SCOPED(p200, void* p200 = scoped_stack.alloc(30););
+			EXPR_SCOPED(p201, void* p201 = scoped_stack.alloc(40););
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
+			printf("***** End : Scoped stack allocator *****\n");
+		}
+		EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		EXPR_PLAIN(stack.clear(););
+		EXPR_PLAIN(stack.debugInfo(message); printf(message););
+	}
+}
+
+//双方向スコープスタックアロケータのテスト（共通処理）
+template<class ALLOCATOR>
+static void testScopedDualStack(ALLOCATOR& stack)
+{
+	printf("\n");
+	char message[1024];
+	EXPR_PLAIN(stack.debugInfo(message); printf(message););
+	for (int i = 0; i < 2; ++i)
+	{
+		printf("--------------------------------------------------\n");
+		void* p1 = nullptr;
+		void* p2 = nullptr;
+		if (i == 0)
+		{
+			EXPR(p1, p1 = stack.allocOrd(ALLOC_ASC, 100););
+			EXPR(p2, p2 = stack.allocOrd(ALLOC_DESC, 100););
+		}
+		for (int j = 0; j < 4; ++j)
+		{
+			{
+				printf("***** Begin : Dual Scoped stack allocator *****\n");
+				EXPR_SCOPED_DUAL_PLAIN(auto scoped_stack = stack.scopedDualAllocator(););//スコープスタックアロケータを取得（元になるスタックアロケータを使用してメモリ操作し、スコープを抜ける時に元の状態に戻す）
+				if (j == 0)
+				{
+					EXPR_SCOPED_DUAL_PLAIN(scoped_stack.setAllocateOrder(ALLOC_ASC));
+				}
+				else if (j == 1)
+				{
+					EXPR_SCOPED_DUAL_PLAIN(scoped_stack.setAllocateOrder(ALLOC_DESC));
+				}
+				else
+				{
+					EXPR_SCOPED_DUAL_PLAIN(scoped_stack.reversewAllocateOrder());
+				}
+				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); printf(message););
+				EXPR_SCOPED_DUAL(p1, void* p1 = scoped_stack.alloc(1););
+				EXPR_SCOPED_DUAL(p2, void* p2 = scoped_stack.alloc(1, 1););
+				EXPR_SCOPED_DUAL(p3, void* p3 = scoped_stack.alloc(1, 1););
+				EXPR_SCOPED_DUAL(p4, void* p4 = scoped_stack.alloc(1););
+				EXPR_SCOPED_DUAL(p5, void* p5 = scoped_stack.alloc(10, 32););
+				EXPR_SCOPED_DUAL(p6, int* p6 = scoped_stack.template newObj<int>(););
+				EXPR_SCOPED_DUAL(p7, double* p7 = scoped_stack.template newArray<double>(3););
+				EXPR_SCOPED_DUAL(p8, int* p8 = scoped_stack.template newObj<int>(););
+				EXPR_SCOPED_DUAL(p9, data_t* p9 = scoped_stack.template newObj<data_t>(););
+				EXPR_SCOPED_DUAL(p10, data_t* p10 = scoped_stack.template newObj<data_t>(123););
+				EXPR_SCOPED_DUAL(p11, data_t* p11 = scoped_stack.template newArray<data_t>(3););
+				EXPR_SCOPED_DUAL(p12, data_t* p12 = scoped_stack.template newArray<data_t>(3, 456););
+				EXPR_SCOPED_DUAL(p13, void* p13 = scoped_stack.alloc(1000););
+				EXPR_SCOPED_DUAL(p14, void* p14 = scoped_stack.alloc(10););
+				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); printf(message););
+				EXPR_SCOPED_DUAL(p1, scoped_stack.free(p1););
+				EXPR_SCOPED_DUAL(p2, scoped_stack.free(p2););
+				EXPR_SCOPED_DUAL(p3, scoped_stack.free(p3););
+				EXPR_SCOPED_DUAL(p4, scoped_stack.free(p4););
+				EXPR_SCOPED_DUAL(p5, scoped_stack.free(p5););
+				EXPR_SCOPED_DUAL(p6, scoped_stack.deleteObj(p6););
+				EXPR_SCOPED_DUAL(p7, scoped_stack.deleteArray(p7, 3););
+				EXPR_SCOPED_DUAL(p8, scoped_stack.deleteObj(p8););
+				EXPR_SCOPED_DUAL(p9, scoped_stack.deleteObj(p9););
+				EXPR_SCOPED_DUAL(p10, scoped_stack.deleteObj(p10););
+				EXPR_SCOPED_DUAL(p11, scoped_stack.deleteArray(p11, 3););
+				EXPR_SCOPED_DUAL(p12, scoped_stack.deleteArray(p12, 3););
+				EXPR_SCOPED_DUAL(p13, scoped_stack.free(p13););
+				EXPR_SCOPED_DUAL(p14, scoped_stack.free(p14););//スマートスタックでも自動クリアはしない
+				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); printf(message););
+				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.clearAll(););
+				EXPR_SCOPED_DUAL(p100, void* p100 = scoped_stack.alloc(10););
+				EXPR_SCOPED_DUAL(p101, void* p101 = scoped_stack.alloc(20););
+				EXPR_SCOPED_DUAL(p102, void* p102 = scoped_stack.alloc(30););
+				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.rewind(100););//誤ったリワインド（影響なし）
+				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.rewind(20););
+				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.rewind(p101););
+				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.rewind(p100););
+				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.clearAll(););
+				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); printf(message););
+				EXPR_SCOPED_DUAL(p200, void* p200 = scoped_stack.allocOrd(ALLOC_ASC, 10););
+				EXPR_SCOPED_DUAL(p201, void* p201 = scoped_stack.allocOrd(ALLOC_DESC, 10););
+				EXPR_SCOPED_DUAL(p202, int* p202 = scoped_stack.template newObjOrd<int>(ALLOC_ASC););
+				EXPR_SCOPED_DUAL(p203, int* p203 = scoped_stack.template newObjOrd<int>(ALLOC_DESC););
+				EXPR_SCOPED_DUAL(p204, double* p204 = scoped_stack.template newArrayOrd<double>(ALLOC_ASC, 3););
+				EXPR_SCOPED_DUAL(p205, double* p205 = scoped_stack.template newArrayOrd<double>(ALLOC_DESC, 3););
+				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.rewindOrd(ALLOC_ASC, 100););//誤ったリワインド（影響なし）
+				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.rewindOrd(ALLOC_DESC, 100););//誤ったリワインド（影響なし）
+				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.rewindOrd(ALLOC_ASC, 15););
+				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.rewindOrd(ALLOC_DESC, 15););
+				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.rewind(p202););
+				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.rewind(p201););
+				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.clearOrd(ALLOC_ASC););
+				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.clearOrd(ALLOC_DESC););
+				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); printf(message););
+				EXPR_SCOPED_DUAL(p300, void* p300 = scoped_stack.allocOrd(ALLOC_ASC, 10););
+				EXPR_SCOPED_DUAL(p301, void* p301 = scoped_stack.allocOrd(ALLOC_DESC, 10););
+				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.clear(););
+				EXPR_SCOPED_DUAL(p302, void* p302 = scoped_stack.allocOrd(ALLOC_ASC, 10););
+				EXPR_SCOPED_DUAL(p303, void* p303 = scoped_stack.allocOrd(ALLOC_DESC, 10););
+				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); printf(message););
+				printf("***** End : Scoped stack allocator *****\n");
+			}
+			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			EXPR_PLAIN(stack.clearAll(););
+			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		}
+	}
+}
+
+//----------------------------------------
 //双方向スタックアロケータテスト
 void example_dual_stack_allocator()
 {
-#if 0
-	char message[2048];
-	
-	printf("----- Test for allocator -----\n");
+	alignas(16) char buff[1024];
+	char message[1024];
 
-	//仮：配置newテスト
 	{
-		printf("sizeof(st_a0)=%d, alignof(st_a0)=%d\n", sizeof(st_a0), alignof(st_a0));
-		printf("sizeof(st_a4)=%d, alignof(st_a4)=%d\n", sizeof(st_a4), alignof(st_a4));
-		printf("sizeof(st_a8)=%d, alignof(st_a8)=%d\n", sizeof(st_a8), alignof(st_a8));
-		printf("sizeof(st_a16)=%d, alignof(st_a16)=%d\n", sizeof(st_a16), alignof(st_a16));
-		printf("sizeof(st_a32)=%d, alignof(st_a32)=%d\n", sizeof(st_a32), alignof(st_a32));
-		std::size_t real_size;
-		new(1, real_size)st_a0;
-		new(2, real_size)st_a4;
-		new(3, real_size)st_a8;
-		new(4, real_size)st_a16;
-		new(5, real_size)st_a32;
-		new(6, real_size)st_a0[2];
-		new(7, real_size)st_a4[2];
-		new(8, real_size)st_a8[2];
-		new(9, real_size)st_a16[2];
-		new(10, real_size)st_a32[2];
+		printf("\n");
+		printf("--------------------------------------------------------------------------------\n");
+		printf("[ Test for dualStackAllocator ]\n");
+		printf("--------------------------------------------------------------------------------\n");
+
+		//双方向スタックアロケータ
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(dualStackAllocator<lock_type> stack(buff););
+			printf("----------------------------------------\n");
+			testDualStack(stack);
+		}
+
+		//スマート双方向スタックアロケータ
+		//※正順か逆順のメモリ確保数が0になったら、対象方向のメモリを自動リセット
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(smartDualStackAllocator<lock_type> stack(buff););
+			printf("----------------------------------------\n");
+			testDualStack(stack);
+		}
+
+		//バッファ付き双方向スタックアロケータ
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(dualStackAllocator_withBuff<1024, lock_type> stack;);
+			printf("----------------------------------------\n");
+			printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		}
+
+		//バッファ付きスマート双方向スタックアロケータ
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(smartDualStackAllocator_withBuff<1024, lock_type> stack;);
+			printf("----------------------------------------\n");
+			printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		}
+
+		//型指定バッファ付き双方向スタックアロケータ
+		//※型のアラインメントサイズ分余計に領域を割り当てる
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(dualStackAllocator_withType<long long, 128, lock_type> stack;);
+			printf("----------------------------------------\n");
+			printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			EXPR(p1, long long* p1 = stack.newDefault(););
+			EXPR_PLAIN(stack.reversewAllocateOrder(););
+			EXPR(p1, long long* p2 = stack.newDefault(););
+			EXPR(p2, long long* p3 = stack.newDefaultOrd(ALLOC_ASC););
+			EXPR(p3, long long* p4 = stack.newDefaultOrd(ALLOC_DESC););
+			EXPR(p1, stack.deleteDefault(p1););
+			EXPR(p2, stack.deleteDefault(p2););
+			EXPR(p3, stack.deleteDefault(p3););
+			EXPR(p4, stack.deleteDefault(p4););
+		}
+
+		//型指定バッファ付きスマート双方向スタックアロケータ
+		//※型のアラインメントサイズ分余計に領域を割り当てる
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(smartDualStackAllocator_withType<long long, 128, lock_type> stack;);
+			printf("----------------------------------------\n");
+			printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			EXPR(p1, long long* p1 = stack.newDefault(););
+			EXPR_PLAIN(stack.reversewAllocateOrder(););
+			EXPR(p1, long long* p2 = stack.newDefault(););
+			EXPR(p2, long long* p3 = stack.newDefaultOrd(ALLOC_ASC););
+			EXPR(p3, long long* p4 = stack.newDefaultOrd(ALLOC_DESC););
+			EXPR(p1, stack.deleteDefault(p1););
+			EXPR(p2, stack.deleteDefault(p2););
+			EXPR(p3, stack.deleteDefault(p3););
+			EXPR(p4, stack.deleteDefault(p4););
+		}
 	}
 
-	//スタックアロケータテスト
 	{
-		//stackAllocator_withType<int, 9>                           allocator; allocator.debugInfo(message); printf(message);
-		//lfStackAllocator_withType<int, 9>                         allocator; allocator.debugInfo(message); printf(message);
-		//smartStackAllocator_withType<int, 9>                      allocator; allocator.debugInfo(message); printf(message);
-		lfSmartStackAllocator_withType<int, 9>                    allocator; allocator.debugInfo(message); printf(message);
-		void* p1 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
-		void* p2 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
-		int* i = allocator.template newObj<int>();                allocator.debugInfo(message); printf(message);
-		double* d3 = allocator.template newArray<double>(3);      allocator.debugInfo(message); printf(message);
-		int* i2 = allocator.newDefault();                         allocator.debugInfo(message); printf(message);
-		double* d = allocator.template newObj<double>();          allocator.debugInfo(message); printf(message);
-		void* p3 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
-		st_a0* a0 = allocator.template newObj<st_a0>();           allocator.debugInfo(message); printf(message);
-		st_a4* a4 = allocator.template newObj<st_a4>();           allocator.debugInfo(message); printf(message);
-		st_a8* a8 = allocator.template newObj<st_a8>();           allocator.debugInfo(message); printf(message);
-		st_a16* a16 = allocator.template newObj<st_a16>();        allocator.debugInfo(message); printf(message);
-		st_a32* a32 = allocator.template newObj<st_a32>();        allocator.debugInfo(message); printf(message);
-		void* p4 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
-		void* p5 = allocator.alloc(0, 16);                        allocator.debugInfo(message); printf(message);
-		allocator.free(p1);                                       allocator.debugInfo(message); printf(message);
-		allocator.free(p2);                                       allocator.debugInfo(message); printf(message);
-		allocator.free(p3);                                       allocator.debugInfo(message); printf(message);
-		allocator.free(p4);                                       allocator.debugInfo(message); printf(message);
-		allocator.free(p5);                                       allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a0);                                  allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a4);                                  allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a8);                                  allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a16);                                 allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a32);                                 allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(i);                                   allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(i2);                                  allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(d);                                   allocator.debugInfo(message); printf(message);
-		allocator.deleteArray(d3, 3);                             allocator.debugInfo(message); printf(message);//自動クリア
-		p1 = allocator.alloc(1, 1);                               allocator.debugInfo(message); printf(message);
-		allocator.free(p5);                                       allocator.debugInfo(message); printf(message);//二重解放
-		allocator.free(p1);                                       allocator.debugInfo(message); printf(message);
-		allocator.clear();                                        allocator.debugInfo(message); printf(message);
-		a16 = allocator.template newObj<st_a16>();                allocator.debugInfo(message); printf(message);
-		allocator.rewind(8);                                      allocator.debugInfo(message); printf(message);
-		allocator.rewind(16);                                     allocator.debugInfo(message); printf(message);
-		allocator.clear();                                        allocator.debugInfo(message); printf(message);
+		printf("\n");
+		printf("--------------------------------------------------------------------------------\n");
+		printf("[ Test for lfDualStackAllocator ]\n");
+		printf("--------------------------------------------------------------------------------\n");
 
-		i = allocator.template newArray<int>(2);  allocator.debugInfo(message); printf(message);
+		//ロックフリー双方向スタックアロケータ
 		{
-			auto sub_allocator = allocator.scopedAllocator();
-			sub_allocator.debugInfo(message); printf(message);
-			void* p1 = sub_allocator.alloc(1); sub_allocator.debugInfo(message); printf(message);
-			void* p2 = sub_allocator.alloc(30, 1); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.free(p1); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.free(p2); sub_allocator.debugInfo(message); printf(message);
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(lfDualStackAllocator<> stack(buff););
+			printf("----------------------------------------\n");
+			testDualStack(stack);
 		}
-		allocator.debugInfo(message); printf(message);
-		allocator.deleteArray(i, 2);  allocator.debugInfo(message); printf(message);
-	}
 
-	//双方向スタックアロケータテスト
-	{
-		//dualStackAllocator_withType<int, 9>                       allocator; allocator.debugInfo(message); printf(message);
-		//lfDualStackAllocator_withType<int, 9>                     allocator; allocator.debugInfo(message); printf(message);
-		//smartDualStackAllocator_withType<int, 9>                  allocator; allocator.debugInfo(message); printf(message);
-		lfSmartDualStackAllocator_withType<int, 9>                allocator; allocator.debugInfo(message); printf(message);
-		//allocator.reversewAllocateOrder();
-		void* p1 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
-		void* p2 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
-		int* i = allocator.template newObj<int>();                allocator.debugInfo(message); printf(message);
-		double* d3 = allocator.template newArray<double>(3);      allocator.debugInfo(message); printf(message);
-		int* i2 = allocator.newDefault();                         allocator.debugInfo(message); printf(message);
-		double* d = allocator.template newObj<double>();          allocator.debugInfo(message); printf(message);
-		void* p3 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
-		st_a0* a0 = allocator.template newObj<st_a0>();           allocator.debugInfo(message); printf(message);
-		st_a4* a4 = allocator.template newObj<st_a4>();           allocator.debugInfo(message); printf(message);
-		st_a8* a8 = allocator.template newObj<st_a8>();           allocator.debugInfo(message); printf(message);
-		st_a16* a16 = allocator.template newObj<st_a16>();        allocator.debugInfo(message); printf(message);
-		st_a32* a32 = allocator.template newObj<st_a32>();        allocator.debugInfo(message); printf(message);
-		void* p4 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
-		void* p5 = allocator.alloc(0, 16);                        allocator.debugInfo(message); printf(message);
-		allocator.free(p1);                                       allocator.debugInfo(message); printf(message);
-		allocator.free(p2);                                       allocator.debugInfo(message); printf(message);
-		allocator.free(p3);                                       allocator.debugInfo(message); printf(message);
-		allocator.free(p4);                                       allocator.debugInfo(message); printf(message);
-		allocator.free(p5);                                       allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a0);                                  allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a4);                                  allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a8);                                  allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a16);                                 allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a32);                                 allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(i);                                   allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(i2);                                  allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(d);                                   allocator.debugInfo(message); printf(message);
-		allocator.deleteArray(d3, 3);                             allocator.debugInfo(message); printf(message);//自動クリア
-		allocator.reversewAllocateOrder();
-		p1 = allocator.alloc(1, 1);                               allocator.debugInfo(message); printf(message);
-		allocator.free(p5);                                       allocator.debugInfo(message); printf(message);//二重解放
-		allocator.free(p1);                                       allocator.debugInfo(message); printf(message);
-		allocator.clear();                                        allocator.debugInfo(message); printf(message);
-		a16 = allocator.template newObj<st_a16>();                allocator.debugInfo(message); printf(message);
-		allocator.rewind(8);                                      allocator.debugInfo(message); printf(message);
-		allocator.rewind(16);                                     allocator.debugInfo(message); printf(message);
-		allocator.clear();                                        allocator.debugInfo(message); printf(message);
-		p1 = allocator.allocOrdinal(ALLOC_ASC, 1, 1);             allocator.debugInfo(message); printf(message);
-		p2 = allocator.allocOrdinal(ALLOC_DESC, 1, 1);            allocator.debugInfo(message); printf(message);
-		i = allocator.template newObjOrdinal<int>(ALLOC_ASC);     allocator.debugInfo(message); printf(message);
-		i2 = allocator.template newObjOrdinal<int>(ALLOC_DESC);   allocator.debugInfo(message); printf(message);
-		short* i3 = allocator.template newArrayOrdinal<short>(ALLOC_ASC, 2);  allocator.debugInfo(message); printf(message);
-		short* i4 = allocator.template newArrayOrdinal<short>(ALLOC_DESC, 2); allocator.debugInfo(message); printf(message);
-		int* i5 = allocator.newDefaultOrdinal(ALLOC_ASC);         allocator.debugInfo(message); printf(message);
-		int* i6 = allocator.newDefaultOrdinal(ALLOC_DESC);        allocator.debugInfo(message); printf(message);
-		allocator.free(p1);                                       allocator.debugInfo(message); printf(message);
-		allocator.free(p2);                                       allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(i);                                   allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(i2);                                  allocator.debugInfo(message); printf(message);
-		allocator.deleteArray(i3, 2);                             allocator.debugInfo(message); printf(message);
-		allocator.deleteArray(i4, 2);                             allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(i5);                                  allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(i6);                                  allocator.debugInfo(message); printf(message);
-
-		//allocator.reversewAllocateOrder();
-		i = allocator.template newArray<int>(2);  allocator.debugInfo(message); printf(message);
+		//ロックフリースマート双方向スタックアロケータ
+		//※正順か逆順のメモリ確保数が0になったら、対象方向のメモリを自動リセット
 		{
-			auto sub_allocator = allocator.scopedAllocator();
-			sub_allocator.debugInfo(message); printf(message);
-			void* p1 = sub_allocator.alloc(1); sub_allocator.debugInfo(message); printf(message);
-			void* p2 = sub_allocator.alloc(30, 1); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.free(p1); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.free(p2); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.clear(); sub_allocator.debugInfo(message); printf(message);
-			p1 = sub_allocator.alloc(1); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.free(p1); sub_allocator.debugInfo(message); printf(message);
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(lfSmartDualStackAllocator stack(buff););
+			printf("----------------------------------------\n");
+			testDualStack(stack);
 		}
-		allocator.debugInfo(message); printf(message);
-		allocator.deleteArray(i, 2);  allocator.debugInfo(message); printf(message);
 
-		//allocator.reversewAllocateOrder();
-		i = allocator.template newArray<int>(2);  allocator.debugInfo(message); printf(message);
-		allocator.reversewAllocateOrder();
-		i2 = allocator.template newArray<int>(1);  allocator.debugInfo(message); printf(message);
+		//バッファ付きロックフリー双方向スタックアロケータ
 		{
-			auto sub_allocator = allocator.scopedDualAllocator();
-			sub_allocator.debugInfo(message); printf(message);
-			void* p1 = sub_allocator.alloc(1); sub_allocator.debugInfo(message); printf(message);
-			void* p2 = sub_allocator.alloc(4, 4); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.reversewAllocateOrder();
-			void* p3 = sub_allocator.alloc(1); sub_allocator.debugInfo(message); printf(message);
-			void* p4 = sub_allocator.alloc(4, 4); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.free(p1); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.free(p2); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.free(p3); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.free(p4); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.clear(); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.clearOrdinal(ALLOC_DESC); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.clearOrdinal(ALLOC_ASC); sub_allocator.debugInfo(message); printf(message);
-			p1 = sub_allocator.alloc(1); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.reversewAllocateOrder();
-			p3 = sub_allocator.alloc(1); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.free(p1); sub_allocator.debugInfo(message); printf(message);
-			sub_allocator.free(p3); sub_allocator.debugInfo(message); printf(message);
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(lfDualStackAllocator_withBuff<1024> stack;);
+			printf("----------------------------------------\n");
+			printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); printf(message););
 		}
-		allocator.debugInfo(message); printf(message);
-		allocator.deleteArray(i, 2);  allocator.debugInfo(message); printf(message);
-		allocator.deleteArray(i2, 1);  allocator.debugInfo(message); printf(message);
-	}
 
-	//単一アロケータテスト
-	{
-		//monoAllocator_withType<int, 9>                            allocator; allocator.debugInfo(message); printf(message);
-		lfMonoAllocator_withType<int, 9>                         allocator; allocator.debugInfo(message); printf(message);
-		void* p1 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
-		int* i = allocator.template newObj<int>();                allocator.debugInfo(message); printf(message);
-		double* d3 = allocator.template newArray<double>(3);      allocator.debugInfo(message); printf(message);
-		int* i2 = allocator.newDefault();                         allocator.debugInfo(message); printf(message);
-		st_a0* a0 = allocator.template newObj<st_a0>();           allocator.debugInfo(message); printf(message);
-		st_a4* a4 = allocator.template newObj<st_a4>();           allocator.debugInfo(message); printf(message);
-		st_a8* a8 = allocator.template newObj<st_a8>();           allocator.debugInfo(message); printf(message);
-		st_a16* a16 = allocator.template newObj<st_a16>();        allocator.debugInfo(message); printf(message);
-		st_a32* a32 = allocator.template newObj<st_a32>();        allocator.debugInfo(message); printf(message);
-		allocator.free(p1);                                       allocator.debugInfo(message); printf(message);
-		i = allocator.template newObj<int>();                     allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(i);                                   allocator.debugInfo(message); printf(message);
-		d3 = allocator.template newArray<double>(3);              allocator.debugInfo(message); printf(message);
-		allocator.deleteArray(d3, 3);                             allocator.debugInfo(message); printf(message);
-		i2 = allocator.newDefault();                              allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(i2);                                  allocator.debugInfo(message); printf(message);
-		a0 = allocator.template newObj<st_a0>();                  allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a0);                                  allocator.debugInfo(message); printf(message);
-		a4 = allocator.template newObj<st_a4>();                  allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a4);                                  allocator.debugInfo(message); printf(message);
-		a8 = allocator.template newObj<st_a8>();                  allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a8);                                  allocator.debugInfo(message); printf(message);
-		a16 = allocator.template newObj<st_a16>();                allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a16);                                 allocator.debugInfo(message); printf(message);
-		a32 = allocator.template newObj<st_a32>();                allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a32);                                 allocator.debugInfo(message); printf(message);
+		//バッファ付きロックフリースマート双方向スタックアロケータ
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(lfSmartDualStackAllocator_withBuff<1024> stack;);
+			printf("----------------------------------------\n");
+			printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		}
+
+		//型指定バッファ付きロックフリー双方向スタックアロケータ
+		//※型のアラインメントサイズ分余計に領域を割り当てる
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(lfDualStackAllocator_withType<long long, 128> stack;);
+			printf("----------------------------------------\n");
+			printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			EXPR(p1, long long* p1 = stack.newDefault(););
+			EXPR_PLAIN(stack.reversewAllocateOrder(););
+			EXPR(p1, long long* p2 = stack.newDefault(););
+			EXPR(p2, long long* p3 = stack.newDefaultOrd(ALLOC_ASC););
+			EXPR(p3, long long* p4 = stack.newDefaultOrd(ALLOC_DESC););
+			EXPR(p1, stack.deleteDefault(p1););
+			EXPR(p2, stack.deleteDefault(p2););
+			EXPR(p3, stack.deleteDefault(p3););
+			EXPR(p4, stack.deleteDefault(p4););
+		}
+
+		//型指定バッファ付きロックフリースマート双方向スタックアロケータ
+		//※型のアラインメントサイズ分余計に領域を割り当てる
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(lfSmartDualStackAllocator_withType<long long, 128> stack;);
+			printf("----------------------------------------\n");
+			printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			EXPR(p1, long long* p1 = stack.newDefault(););
+			EXPR_PLAIN(stack.reversewAllocateOrder(););
+			EXPR(p1, long long* p2 = stack.newDefault(););
+			EXPR(p2, long long* p3 = stack.newDefaultOrd(ALLOC_ASC););
+			EXPR(p3, long long* p4 = stack.newDefaultOrd(ALLOC_DESC););
+			EXPR(p1, stack.deleteDefault(p1););
+			EXPR(p2, stack.deleteDefault(p2););
+			EXPR(p3, stack.deleteDefault(p3););
+			EXPR(p4, stack.deleteDefault(p4););
+		}
 	}
 	
-	//プールアロケータテスト
 	{
-		struct st{
-			char m[35];
-			st(){ m[0] = 'a'; m[1] = 'b'; m[2] = 'c'; printf("st::st()\n"); }
-			~st(){ printf("st::~st()\n"); }
-			st(const st&){ printf("(copy consstructor)\n"); }
-			st(st&&){ printf("(move consstructor)\n"); }
-		};
-		st x[10];
-		struct alignas(16) st2a{ int m; st2a(int n) :m(n){ printf("st2a::st2a()\n"); } ~st2a(){ printf("st2a::~st2a()\n"); } };
-		struct alignas(32) st2b{ int m; st2b(int n) :m(n){ printf("st2b::st2b()\n"); } ~st2b(){ printf("st2b::~st2b()\n"); } };
-		struct st3{
-			int m;
-			st3(int n) :m(n){ printf("st3::st3()\n"); }
-			~st3(){ printf("st3::~st3()\n"); }
-		};
+		printf("\n");
+		printf("--------------------------------------------------------------------------------\n");
+		printf("[ Test for scoepdStackAllocator / scoepdDualStackAllocator ]\n");
+		printf("--------------------------------------------------------------------------------\n");
 
-		poolAllocator_withType<st, 10> x1;
-		lfPoolAllocator<10> x2(x);
-		st* s1 = x1.newDefault();
-		st* s1c = x1.newDefault(*s1);
-		st* s1m = x1.newDefault(std::move(*s1));
-		x1.deleteDefault(s1);
-		x1.deleteDefault(s1c);
-		x1.deleteDefault(s1m);
-		st2a* s2a = x1.template newObj<st2a>(99);
-		x1.deleteObj(s2a);
-		st2b* s2b = x1.template newObj<st2b>(99);
-		x1.deleteObj(s2b);
-		st3* s3 = x1.template newArray<st3>(3, 99);
-		x1.debugInfo(message, false); printf(message);
-		x1.deleteArray(s3, 3);
+		//双方向スタックアロケータ
+		//※スコープスタックアロケータのテスト用
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(dualStackAllocator<lock_type> stack(buff););
+			printf("----------------------------------------\n");
+			testScopedStack(stack);
+			EXPR_PLAIN(stack.clearAll(););
+			testScopedDualStack(stack);
+		}
 
-		poolAllocator_withType<st, 10> x3;
-		lfPoolAllocator<10> x4(x, extentof(x));
-		s1 = x3.newDefault();
-		x3.deleteDefault(s1);
-		s2a = x3.template newObj<st2a>(99);
-		x3.deleteObj(s2a);
-		s2b = x3.template newObj<st2b>(99);
-		x3.deleteObj(s2b);
-		s3 = x3.template newArray<st3>(3, 99);
-		x3.debugInfo(message, false); printf(message);
-		x3.deleteArray(s3, 3);
+		//スマート双方向スタックアロケータ
+		//※スコープスタックアロケータのテスト用
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(smartDualStackAllocator<lock_type> stack(buff););
+			printf("----------------------------------------\n");
+			testDualStack(stack);
+			EXPR_PLAIN(stack.clearAll(););
+			testScopedDualStack(stack);
+		}
 
-		struct st_p1 { int a; st_p1() :a(1){ printf("st_p1::st_p1():a=%d\n", a); } ~st_p1(){ printf("st_p1::~st_p1():a=%d\n", a); } };
-		struct st_p2 { int b; st_p2() :b(2){ printf("st_p2::st_p2():b=%d\n", b); } ~st_p2(){ printf("st_p2::~st_p2():b=%d\n", b); } };
-		struct st_c : st_p1, st_p2 { int c; st_c() :c(3){ printf("st_c::st_c():c=%d\n", c); } ~st_c(){ printf("st_c::~st_c():c=%d\n", c); } };
+		//ロックフリー双方向スタックアロケータ
+		//※スコープスタックアロケータのテスト用
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(lfDualStackAllocator<> stack(buff););
+			printf("----------------------------------------\n");
+			testDualStack(stack);
+			EXPR_PLAIN(stack.clearAll(););
+			testScopedDualStack(stack);
+		}
 
-		poolAllocator_withType<st_c, 10> x5;
-		st_c* p1 = x5.newDefault();
-		st_p1* p2 = x5.newDefault();
-		st_p2* p3 = x5.newDefault();
-		st_p1* p1_1 = p1;
-		st_p2* p1_2 = p1;
-		st_c* p2_c = static_cast<st_c*>(p2);
-		st_c* p3_c = static_cast<st_c*>(p3);
-		x5.debugInfo(message, false); printf(message);
-		x5.deleteObj(static_cast<st_c*>(p1_2));
-		x5.deleteObj(static_cast<st_c*>(p1_1));
-		x5.deleteObj(p1);
-		x5.deleteObj(p2_c);
-		x5.deleteObj(p3_c);
-		x5.debugInfo(message, false); printf(message);
+		//ロックフリースマート双方向スタックアロケータ
+		//※スコープスタックアロケータのテスト用
+		{
+			printf("\n");
+			printf("----------------------------------------\n");
+			EXPR_PLAIN(lfSmartDualStackAllocator stack(buff););
+			printf("----------------------------------------\n");
+			testDualStack(stack);
+			EXPR_PLAIN(stack.clearAll(););
+			testScopedDualStack(stack);
+		}
 	}
-
-	//標準アロケータテスト
-	{
-		stdAllocator<>                                           allocator; allocator.debugInfo(message); printf(message);
-		void* p1 = allocator.alloc(1, 1);                         allocator.debugInfo(message); printf(message);
-		int* i = allocator.template newObj<int>();                allocator.debugInfo(message); printf(message);
-		double* d3 = allocator.template newArray<double>(3);      allocator.debugInfo(message); printf(message);
-		int* i2 = allocator.template newObj<int>();               allocator.debugInfo(message); printf(message);
-		st_a0* a0 = allocator.template newObj<st_a0>();           allocator.debugInfo(message); printf(message);
-		st_a4* a4 = allocator.template newObj<st_a4>();           allocator.debugInfo(message); printf(message);
-		st_a8* a8 = allocator.template newObj<st_a8>();           allocator.debugInfo(message); printf(message);
-		st_a16* a16 = allocator.template newObj<st_a16>();        allocator.debugInfo(message); printf(message);
-		st_a32* a32 = allocator.template newObj<st_a32>();        allocator.debugInfo(message); printf(message);
-		allocator.free(p1);                                       allocator.debugInfo(message); printf(message);
-		i = allocator.template newObj<int>();                     allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(i);                                   allocator.debugInfo(message); printf(message);
-		d3 = allocator.template newArray<double>(3);              allocator.debugInfo(message); printf(message);
-		allocator.deleteArray(d3, 3);                             allocator.debugInfo(message); printf(message);
-		i2 = allocator.template newObj<int>();                    allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(i2);                                  allocator.debugInfo(message); printf(message);
-		a0 = allocator.template newObj<st_a0>();                  allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a0);                                  allocator.debugInfo(message); printf(message);
-		a4 = allocator.template newObj<st_a4>();                  allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a4);                                  allocator.debugInfo(message); printf(message);
-		a8 = allocator.template newObj<st_a8>();                  allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a8);                                  allocator.debugInfo(message); printf(message);
-		a16 = allocator.template newObj<st_a16>();                allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a16);                                 allocator.debugInfo(message); printf(message);
-		a32 = allocator.template newObj<st_a32>();                allocator.debugInfo(message); printf(message);
-		allocator.deleteObj(a32);                                 allocator.debugInfo(message); printf(message);
-	}
-
-	//マルチスレッドテスト
-	{
-		static const std::size_t alloc_size = 4;
-		static const std::size_t align_size = 4;
-		static const std::size_t alloc_num = 100;
-		static const std::size_t alloc_error_num = 0;
-		static const std::size_t thread_num = 10;
-		static const std::size_t repeat_num = 100;
-		static const std::size_t pool_size = alloc_num * thread_num;
-		static const std::size_t buff_size = alloc_size * pool_size;
-		auto alloc_thread = [](std::function<void*(const std::size_t, const std::size_t)> alloc_func, std::function<void(void*)> free_func)
-		{
-			for (std::size_t i = 0; i < repeat_num; ++i)
-			{
-				void* ptr[alloc_num + alloc_error_num] = { nullptr };
-				std::this_thread::sleep_for(std::chrono::microseconds(1));
-				for (std::size_t i = 0; i < extentof(ptr); ++i)
-					ptr[i] = alloc_func(i % (alloc_size + 1), align_size);
-				std::this_thread::sleep_for(std::chrono::microseconds(1));
-				for (std::size_t i = 0; i < extentof(ptr); ++i)
-					free_func(ptr[i]);
-			}
-		};
-		auto thread_test = [&alloc_thread](std::function<void*(const std::size_t, const std::size_t)> alloc_func, std::function<void(void*)> free_func, std::function<void()> print_func)
-		{
-			std::thread* th[thread_num];
-			for (std::size_t i = 0; i < thread_num; ++i)
-				th[i] = new std::thread(alloc_thread, alloc_func, free_func);
-			for (std::size_t i = 0; i < thread_num; ++i)
-			{
-				th[i]->join();
-				delete th[i];
-				th[i] = nullptr;
-			}
-			print_func();
-		};
-		char buff[buff_size];
-		smartStackAllocator<spinLock> stack_allocator(buff);
-		lfSmartStackAllocator lf_stack_allocator(buff);
-		smartDualStackAllocator<spinLock> dual_stack_allocator(buff);
-		lfSmartDualStackAllocator<spinLock> lf_dual_stack_allocator(buff);
-		monoAllocator<spinLock> mono_allocator(buff);
-		lfMonoAllocator lf_mono_allocator(buff);
-		poolAllocator<pool_size, spinLock> pool_allocator(buff, buff_size, alloc_size);
-		lfPoolAllocator<pool_size> lf_pool_allocator(buff, buff_size, alloc_size);
-		stdAllocator<> std_allocator;
-		//stdAllocator<spinLock> std_allocator;
-		auto allocator_adapter_impl1 = stack_allocator.adapter();
-		auto allocator_adapter_impl2 = lf_stack_allocator.adapter();
-		auto allocator_adapter_impl3 = dual_stack_allocator.adapter();
-		auto allocator_adapter_impl4 = lf_dual_stack_allocator.adapter();
-		auto allocator_adapter_impl5 = mono_allocator.adapter();
-		auto allocator_adapter_impl6 = lf_mono_allocator.adapter();
-		auto allocator_adapter_impl7 = pool_allocator.adapter();
-		auto allocator_adapter_impl8 = std_allocator.adapter();
-		IAllocatorAdapter* allocator_adapter = &allocator_adapter_impl8;
-		auto alloc_stack = [&stack_allocator](const std::size_t size, const std::size_t align) -> void*
-		{
-			return stack_allocator.alloc(size, align);
-		};
-		auto free_stack = [&stack_allocator](void* p)
-		{
-			stack_allocator.free(p);
-		};
-		auto print_stack = [&stack_allocator]()
-		{
-			char message[1024];
-			stack_allocator.debugInfo(message);
-			printf(message);
-		};
-		auto alloc_lfstack = [&lf_stack_allocator](const std::size_t size, const std::size_t align) -> void*
-		{
-			return lf_stack_allocator.alloc(size, align);
-		};
-		auto free_lfstack = [&lf_stack_allocator](void* p)
-		{
-			lf_stack_allocator.free(p);
-		};
-		auto print_lfstack = [&lf_stack_allocator]()
-		{
-			char message[1024];
-			lf_stack_allocator.debugInfo(message);
-			printf(message);
-		};
-		auto alloc_dstack = [&dual_stack_allocator](const std::size_t size, const std::size_t align) -> void*
-		{
-			dual_stack_allocator.reversewAllocateOrder();
-			return dual_stack_allocator.alloc(size, align);
-		};
-		auto free_dstack = [&dual_stack_allocator](void* p)
-		{
-			dual_stack_allocator.free(p);
-		};
-		auto print_dstack = [&dual_stack_allocator]()
-		{
-			char message[1024];
-			dual_stack_allocator.debugInfo(message);
-			printf(message);
-		};
-		auto alloc_lfdstack = [&lf_dual_stack_allocator](const std::size_t size, const std::size_t align) -> void*
-		{
-			lf_dual_stack_allocator.reversewAllocateOrder();
-			return lf_dual_stack_allocator.alloc(size, align);
-		};
-		auto free_lfdstack = [&lf_dual_stack_allocator](void* p)
-		{
-			lf_dual_stack_allocator.free(p);
-		};
-		auto print_lfdstack = [&lf_dual_stack_allocator]()
-		{
-			char message[1024];
-			lf_dual_stack_allocator.debugInfo(message);
-			printf(message);
-		};
-		auto alloc_mono = [&mono_allocator](const std::size_t size, const std::size_t align) -> void*
-		{
-			return mono_allocator.alloc(size, align);
-		};
-		auto free_mono = [&mono_allocator](void* p)
-		{
-			mono_allocator.free(p);
-		};
-		auto print_mono = [&mono_allocator]()
-		{
-			char message[1024];
-			mono_allocator.debugInfo(message);
-			printf(message);
-		};
-		auto alloc_lfmono = [&lf_mono_allocator](const std::size_t size, const std::size_t align) -> void*
-		{
-			return lf_mono_allocator.alloc(size, align);
-		};
-		auto free_lfmono = [&lf_mono_allocator](void* p)
-		{
-			lf_mono_allocator.free(p);
-		};
-		auto print_lfmono = [&lf_mono_allocator]()
-		{
-			char message[1024];
-			lf_mono_allocator.debugInfo(message);
-			printf(message);
-		};
-		auto alloc_pool = [&pool_allocator](const std::size_t size, const std::size_t align) -> void*
-		{
-			return pool_allocator.alloc(size, align);
-		};
-		auto free_pool = [&pool_allocator](void* p)
-		{
-			pool_allocator.free(p);
-		};
-		auto print_pool = [&pool_allocator]()
-		{
-			char message[1024];
-			pool_allocator.debugInfo(message, false);
-			printf(message);
-		};
-		auto alloc_lfpool = [&lf_pool_allocator](const std::size_t size, const std::size_t align) -> void*
-		{
-			return lf_pool_allocator.alloc(size, align);
-		};
-		auto free_lfpool = [&lf_pool_allocator](void* p)
-		{
-			lf_pool_allocator.free(p);
-		};
-		auto print_lfpool = [&lf_pool_allocator]()
-		{
-			char message[1024];
-			lf_pool_allocator.debugInfo(message, false);
-			printf(message);
-		};
-		auto alloc_global = [&std_allocator](const std::size_t size, const std::size_t align) -> void*
-		{
-			return std_allocator.alloc(size, align);
-		};
-		auto free_global = [&std_allocator](void* p)
-		{
-			std_allocator.free(p);
-		};
-		auto print_global = [&std_allocator]()
-		{
-			char message[1024];
-			std_allocator.debugInfo(message);
-			printf(message);
-		};
-		auto alloc_adapter = [&allocator_adapter](const std::size_t size, const std::size_t align) -> void*
-		{
-			return allocator_adapter->alloc(size, align);
-		};
-		auto free_adapter = [&allocator_adapter](void* p)
-		{
-			allocator_adapter->free(p);
-		};
-		auto print_adapter = [&allocator_adapter]()
-		{
-			printf("[ allocator adapter : %s ]\n", allocator_adapter->name());
-			char message[1024];
-			allocator_adapter->debugInfo(message);
-			printf(message);
-		};
-		thread_test(alloc_stack, free_stack, print_stack);
-		thread_test(alloc_lfstack, free_lfstack, print_lfstack);
-		thread_test(alloc_dstack, free_dstack, print_dstack);
-		thread_test(alloc_lfdstack, free_lfdstack, print_lfdstack);
-		thread_test(alloc_mono, free_mono, print_mono);
-		thread_test(alloc_lfmono, free_lfmono, print_lfmono);
-		thread_test(alloc_pool, free_pool, print_pool);
-		thread_test(alloc_lfpool, free_lfpool, print_lfpool);
-		thread_test(alloc_global, free_global, print_global);
-		thread_test(alloc_adapter, free_adapter, print_adapter);
-	}
-#if 0
-	lfSmartDualStackAllocator_withBuff<2> al;
-	void* pp1 = al.allocOrdinal(ALLOC_ASC, 1, 1); al.debugInfo(message); printf(message);
-	void* pp2 = al.allocOrdinal(ALLOC_DESC, 1, 1); al.debugInfo(message); printf(message);
-	al.free(pp2); al.debugInfo(message); printf(message);
-	al.free(pp1); al.debugInfo(message); printf(message);
-#endif
-
-	printf("- end -\n");
-#endif
 }
 
 // End of file
