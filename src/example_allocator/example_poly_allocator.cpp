@@ -14,7 +14,6 @@
 
 #include "example_allocator.h"//アロケータテスト
 
-#include <gasha/poly_allocator.h>//多態アロケータ
 #include <gasha/new.h>//多態アロケータ対応new/delete：GASHA_NEW/GASHA_DELETE
 
 #include <gasha/mono_allocator.h>//単一アロケータ
@@ -96,7 +95,7 @@ static void testBasic()
 	EXPR_PLAIN(delete p101;);//delete演算子で領域解放
 	EXPR_PLAIN(delete[] p102;);//delete[]演算子で領域解放
 	EXPR_PLAIN(delete[] p103;);
-	EXPR_PLAIN(delete[] p104;);
+	EXPR_PLAIN(delete p104;);
 	{
 		//スコープスタックもアダプター化可能
 		auto scoped = s_stackAllocator.scopedAllocator();
@@ -211,8 +210,8 @@ static void testAdvanced()
 	EXPR_PLAIN(GASHA_DELETE(p1););
 
 	//GASHA_DELETE_ARRAY でメモリ破棄
-	EXPR_PLAIN(GASHA_DELETE(p2););
-	EXPR_PLAIN(GASHA_DELETE(p3););
+	EXPR_PLAIN(GASHA_DELETE_ARRAY(p2););
+	EXPR_PLAIN(GASHA_DELETE_ARRAY(p3););
 
 	//STLのstd::vectorを使用
 	EXPR_PLAIN(std::vector<data_t> array;);

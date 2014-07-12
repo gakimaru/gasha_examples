@@ -15,16 +15,40 @@
 //--------------------------------------------------------------------------------
 //テスト用コンパイラスイッチ／定数
 
-//#define ENABLE_TEST_FOR_STACK_ALLOATOR//スタックアロケータのテストを有効にする場合は、このマクロを有効化する
-//#define ENABLE_TEST_FOR_DUAL_STACK_ALLOATOR//スタックアロケータのテストを有効にする場合は、このマクロを有効化する
-//#define ENABLE_TEST_FOR_MONO_ALLOATOR//単一アロケータのテストを有効にする場合は、このマクロを有効化する
-//#define ENABLE_TEST_FOR_POOL_ALLOATOR//プールアロケータのテストを有効にする場合は、このマクロを有効化する
-//#define ENABLE_TEST_FOR_STD_ALLOATOR//標準アロケータのテストを有効にする場合は、このマクロを有効化する
+#define ENABLE_TEST_FOR_STACK_ALLOATOR//スタックアロケータのテストを有効にする場合は、このマクロを有効化する
+#define ENABLE_TEST_FOR_DUAL_STACK_ALLOATOR//スタックアロケータのテストを有効にする場合は、このマクロを有効化する
+#define ENABLE_TEST_FOR_MONO_ALLOATOR//単一アロケータのテストを有効にする場合は、このマクロを有効化する
+#define ENABLE_TEST_FOR_POOL_ALLOATOR//プールアロケータのテストを有効にする場合は、このマクロを有効化する
+#define ENABLE_TEST_FOR_STD_ALLOATOR//標準アロケータのテストを有効にする場合は、このマクロを有効化する
 #define ENABLE_TEST_FOR_POLY_ALLOATOR//多態アロケータのテストを有効にする場合は、このマクロを有効化する
+#define ENABLE_TEST_FOR_ALLOATOR_PERFORMANCE//アロケータパフォーマンスのテストを有効にする場合は、このマクロを有効化する
+#define ENABLE_TEST_FOR_ALLOATOR_PERFORMANCE_ST//シングルスレッド時のパフォーマンステストを有効にする場合は、このマクロを有効化する
+#define ENABLE_TEST_FOR_ALLOATOR_PERFORMANCE_MT//マルチスレッド時のパフォーマンステストを有効にする場合は、このマクロを有効化する
+#define ENABLE_TEST_FOR_NEW_DELETE//new/delete演算子の挙動確認用テストを有効にする場合は、このマクロを有効化する
 
 #define USE_LOCK_TYPE 0//共有データのロックに dummyLock を使用する場合は、このマクロを有効化する（ロックしなくなる）（デフォルト）
 //#define USE_LOCK_TYPE 1//共有データのロックに spinLock を使用する場合は、このマクロを有効化する
 //#define USE_LOCK_TYPE 2//共有データのロックに std::mutex を使用する場合は、このマクロを有効化する
+
+#ifdef GASHA_OPTIMIZED
+
+static const int ST_TEST_REPEAT_COUNT1 = 1000;//シングルスレッドパフォーマンステストの繰り返しテスト回数① ※①×②回の繰り返し
+static const int ST_TEST_REPEAT_COUNT2 = 1000;//シングルスレッドパフォーマンステストの繰り返しテスト回数②
+
+static const int MT_TEST_REPEAT_COUNT1 = 10;//マルチスレッドパフォーマンステストの繰り返しテスト回数① ※①スレッド数×②×③回の繰り返し
+static const int MT_TEST_REPEAT_COUNT2 = 100;//マルチスレッドパフォーマンステストの繰り返しテスト回数②
+static const int MT_TEST_REPEAT_COUNT3 = 100;//マルチスレッドパフォーマンステストの繰り返しテスト回数②
+
+#else//GASHA_OPTIMIZED
+
+static const int ST_TEST_REPEAT_COUNT1 = 10;//シングルスレッドパフォーマンステストの繰り返しテスト回数① ※①×②回の繰り返し
+static const int ST_TEST_REPEAT_COUNT2 = 10;//シングルスレッドパフォーマンステストの繰り返しテスト回数②
+
+static const int MT_TEST_REPEAT_COUNT1 = 10;//マルチスレッドパフォーマンステストの繰り返しテスト回数① ※①スレッド数×②×③回の繰り返し
+static const int MT_TEST_REPEAT_COUNT2 = 10;//マルチスレッドパフォーマンステストの繰り返しテスト回数②
+static const int MT_TEST_REPEAT_COUNT3 = 10;//マルチスレッドパフォーマンステストの繰り返しテスト回数②
+
+#endif//GASHA_OPTIMIZED
 
 //----------------------------------------
 //テスト用構造体
@@ -74,6 +98,7 @@ typedef GASHA_ dummyLock lock_type;//共有データのロックに dummyLock �
 
 //----------------------------------------
 //アロケータテスト
+void example_allocator();//アロケータテスト
 void example_stack_allocator();//スタックアロケータテスト
 void example_dual_stack_allocator();//双方向スタックアロケータテスト
 void example_mono_allocator();//単一アロケータテスト
@@ -81,6 +106,7 @@ void example_pool_allocator();//プールアロケータテスト
 void example_std_allocator();//標準アロケータテスト
 void example_poly_allocator();//多態アロケータテスト
 void example_allocator_performance();//アロケータパフォーマンステスト
+void example_new_delete_test();//new/delete演算子の挙動確認用テスト
 
 #endif//GASHA_INCLUDED_EXAMPLE_ALLOCATOR_H
 

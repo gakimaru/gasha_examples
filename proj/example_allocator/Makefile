@@ -32,6 +32,7 @@ SRCS := \
 	$(PROJ_SRC_DIR)/example_std_allocator.cpp \
 	$(PROJ_SRC_DIR)/example_poly_allocator.cpp \
 	$(PROJ_SRC_DIR)/example_allocator_performance.cpp \
+	$(PROJ_SRC_DIR)/example_new_delete_test.cpp \
 
 # インクルードディレクトリ
 INCLIDE_DIRS := \
