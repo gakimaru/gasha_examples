@@ -9,21 +9,7 @@ Released under the [MIT license][MIT].
 サンプルプログラム用リポジトリ
 --------
 **このリポジトリは、「GASHA」のサンプルプログラム用です。**
-> 多数のサンプルプログラムのビルドと実行が可能です。  
-> 
-> また、サブモジュールにより、ライブラリ用の各リポジトリを適切な位置関係に配置しており、ライブラリファイルのビルド、および、ソースコードレベルでのライブラリのデバッグが可能です。  
-
-**構成リポジトリ**
-* [`gasha` ライブラリ本体用リポジトリ][gasha]  
-* [`gasha_settings` プロジェクト固有のライブラリ挙動カスタマイズ用リポジトリ][gasha_settings]  
-* [`gasha_src` ライブラリソース用リポジトリ][gasha_src]  
-* [`gasha_examples` サンプルプログラム用リポジトリ][gasha_examples]  
-* [`gasha_proj` ライブラリビルド用リポジトリ][gasha_proj]  
-[gasha]: https://github.com/gakimaru/gasha
-[gasha_settings]: https://github.com/gakimaru/gasha_settings
-[gasha_src]: https://github.com/gakimaru/gasha_src
-[gasha_examples]: https://github.com/gakimaru/gasha_examples
-[gasha_proj]: https://github.com/gakimaru/gasha_proj
+> 本書にて、ライブラリ「GASHA」を解説します。  
 
 「GASHA」とは？
 --------
@@ -136,6 +122,22 @@ Released under the [MIT license][MIT].
 * GCC 4.8.2 (32bit版Cygwin環境)  
 
 > * 今後 Clang への対応を検討しています。  
+
+**構成リポジトリ**
+GASHAは、下記のように複数のリポジトリで構成しています。  
+* [`gasha` ライブラリ本体用リポジトリ][gasha]  
+* [`gasha_settings` プロジェクト固有のライブラリ挙動カスタマイズ用リポジトリ][gasha_settings]  
+* [`gasha_src` ライブラリソース用リポジトリ][gasha_src]  
+* [`gasha_examples` サンプルプログラム用リポジトリ][gasha_examples]  
+* [`gasha_proj` ライブラリビルド用リポジトリ][gasha_proj]  
+[gasha]: https://github.com/gakimaru/gasha
+[gasha_settings]: https://github.com/gakimaru/gasha_settings
+[gasha_src]: https://github.com/gakimaru/gasha_src
+[gasha_examples]: https://github.com/gakimaru/gasha_examples
+[gasha_proj]: https://github.com/gakimaru/gasha_proj
+
+Gitの「サブモジュール」の機能を活用し、プロジェクトのソースコード管理に対象バージョンのライブラリを組み込むことができるように構成しています。  
+また、プロジェクトごとにライブラリの挙動をカスタマイズすることや、プロジェクトに応じてライブラリのソースコードを隠蔽することに対応可能な構成です。  
 
 基本ディレクトリ構成とサブモジュール構成
 --------
