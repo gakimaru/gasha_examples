@@ -37,38 +37,50 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //レベル列挙
 void printLevelAll()
 {
-	forEach(logLevel::container(),//正順表示
-	//reverseForEach(logLevel::container(),//逆順表示
+	forEach(logLevelContainer(),//正順表示
+	//reverseForEach(logLevelContainer(),//逆順表示
 		[](logLevel& obj)
 		{
-			IConsole* console = obj.console();
+			IConsole* print_console = obj.console();
+			if (!print_console)
+				print_console = &stdConsole::instance();
+			char message[1024];
+			char str_color[64];
+			print_console->changeColor(obj.color());
+			if(obj.isSpecial())
+				print_console->printf(message, "(SP-%2d)\"%s\"", obj.value(), obj.name());
+			else
+				print_console->printf(message, "(%2d:%2d)\"%s\"", obj.value(), obj.outputLevel(), obj.name());
+			print_console->outputCr();
+			auto* console = obj.console();
+			auto& color = obj.color();
+			auto* console_for_notice = obj.consoleForNotice();
+			auto& color_for_notice = obj.colorForNotice();
+			auto prev = obj.prev();
+			auto next = obj.next();
 			if (console)
 			{
-				char message[1024];
-				char str_color[64];
-				console->changeColor(obj.color());
-				console->printf(message, "name=\"%s\", logLevel=%d, outputLevel=%d, forLog=%s, forNotice=%s, forMask=%s", obj.name(), obj.value(), obj.outputLevel(), toStr(obj.forLog()), toStr(obj.forNotice()), toStr(obj.forMask()));
-				console->outputCr();
-				console->changeColor(obj.color());
-				console->printf(message, "\tconsole=\"%s\"(%s)", obj.console()->name(), obj.color().toStr(str_color));
-				console->outputCr();
-				console->changeColor(obj.colorForNotice());
-				console->printf(message, "\tconsoleForNotice=\"%s\"(%s)", obj.consoleForNotice()->name(), obj.colorForNotice().toStr(str_color));
-				console->outputCr();
-				auto* prev = obj.prev();
-				auto* next = obj.next();
-				if (prev)
-				{
-					console->changeColor(prev->color());
-					console->printf(message, "\tprev=%s(%d)", prev->name(), prev->value());
-					console->outputCr();
-				}
-				if (next)
-				{
-					console->changeColor(next->color());
-					console->printf(message, "\tnext=%s(%d)", next->name(), next->value());
-					console->outputCr();
-				}
+				print_console->changeColor(obj.color());
+				print_console->printf(message, "\tconsole: \"%s\"(%s)", console->name(), color.toStr(str_color));
+				print_console->outputCr();
+			}
+			if (console_for_notice)
+			{
+				print_console->changeColor(obj.colorForNotice());
+				print_console->printf(message, "\tnotice: \"%s\"(%s)", console_for_notice->name(), color_for_notice.toStr(str_color));
+				print_console->outputCr();
+			}
+			if (prev)
+			{
+				print_console->changeColor(prev.color());
+				print_console->printf(message, "\tprev: (%2d:%2d)\"%s\"", prev.value(), prev.outputLevel(), prev.name());
+				print_console->outputCr();
+			}
+			if (next)
+			{
+				print_console->changeColor(next.color());
+				print_console->printf(message, "\tnext: (%2d:%2d)\"%s", next.value(), next.outputLevel(), next.name());
+				print_console->outputCr();
 			}
 		}
 	);
@@ -89,71 +101,81 @@ void example_debug_message()
 	//標準コンソールに文字列出力テスト
 	//※標準コンソールは対象プラットフォームに応じて適切なコンソールが選択される
 	{
-		stdConsole con;
-		con.changeColor(color);
-		con.output("message for Standard");
-		con.outputCr();
+		stdConsole console;
+		console.changeColor(color);
+		console.output("message for Standard");
+		console.outputCr();
 	}
 
 	//TTY端末に文字列出力テスト
 	//※エスケープシーケンスで着色
 	//※Windowsの場合はコマンドプロンプトに出力
 	{
-		ttyConsole con(stdout);
-		con.changeColor(color);
-		con.output("message for TTY (stdout)");
-		con.outputCr();
+		ttyConsole console(stdout);
+		console.changeColor(color);
+		console.output("message for TTY (stdout)");
+		console.outputCr();
 	}
 
 	//TTY端末の標準エラー出力
 	{
-		ttyConsole con(stderr);
-		con.changeColor(color);
-		con.output("message for TTY (stderr)");
-		con.outputCr();
+		ttyConsole console(stderr);
+		console.changeColor(color);
+		console.output("message for TTY (stderr)");
+		console.outputCr();
 	}
 
 	//Windowsコマンドプロンプトに文字列出力テスト
 	//※Windowsのコンソールテキスト属性で着色
 	//※Windows以外の場合は標準出力に出力
 	{
-		winConsole con(stdout);
-		con.changeColor(color);
-		con.output("message for Win (stdout)");
-		con.outputCr();
+		winConsole console(stdout);
+		console.changeColor(color);
+		console.output("message for Win (stdout)");
+		console.outputCr();
 	}
 	
 	//Windowsコマンドプロンプトの標準エラー出力
 	{
-		winConsole con(stderr);
-		con.changeColor(color);
-		con.output("message for Win (stderr)");
-		con.outputCr();
+		winConsole console(stderr);
+		console.changeColor(color);
+		console.output("message for Win (stderr)");
+		console.outputCr();
 	}
 
 	//Visual Studio 出力ウインドウに文字列出力テスト
 	//※着色不可
 	//※Windows以外／開発ツール無効時の場合は標準出力に出力
 	{
-		vsConsole con;
-		con.changeColor(color);
-		con.output("message for VS");
-		con.outputCr();
+		vsConsole console;
+		console.changeColor(color);
+		console.output("message for VS");
+		console.outputCr();
+	}
+
+	//明示的なログレベルコンテナの初期化
+	//※GASHA_SECURE_CONTAINER_INITIALIZE を設定していない場合、最初のログレベル使用前に、
+	//　一度だけ（ローカル変数でいいので）コンテナのインスタンスを作り、初期化を済ませなければならない
+	//※GASHA_SECURE_CONTAINER_INITIALIZE を設定している場合は、初回のコンテナアクセス時に自動的に初期化する。
+	//※いずれにしても、CallOnceにより、スレッドセーフな初期化が保証される。
+	{
+		//logLevelContainer con;//ログレベルコンテナを生成（初回に限り、ログレベルをプールする静的データの初期化が行われる）
 	}
 
 	//ログレベルのコンソールを変更
 	{
-		static winConsole con(stdout, "win-console*");
-		logLevel* level = logLevel::at(asNormal);
-		level->console() = &con;
-		//level->consoleForNotice() = &con;
+		static winConsole console(stdout, "win-console *CHANGED*");
+		logLevel level(asNormal);
+		level.console() = &console;
+		//level->consoleForNotice() = &console;
 	}
 
 	//全ログレベルのコンソールをまとめて変更
 	{
-		static vsConsole con("vs-console*");
-		//logLevel::setAllConsole(&con);
-		logLevel::setAllConsoleForNotice(&con);
+		static vsConsole console("vs-console *CHANGED*");
+		//logLevel::setAllConsole(&console);
+		logLevelContainer con;
+		con.setAllConsoleForNotice(&console);
 	}
 
 	//全ログレベルの列挙
@@ -167,18 +189,19 @@ void example_debug_message()
 		int fd = open("/dev/pty3", O_WRONLY | O_NDELAY | O_NOCTTY);//書き込み専用＋（可能なら）非停止モード＋制御端末割り当て禁止（端末でCtrl+Cなどの制御が効かない）
 		FILE* fp = fdopen(fd, "w");
 		printf("fd=%d, fp=%p\n", fd, fp);
-		static ttyConsole con(fp, "/dev/pty3");
+		static ttyConsole console(fp, "/dev/pty3");
 		
 		//ログレベルにコンソールを割り当て
-		logLevel::setAllConsole(&con);
-		logLevel::setAllConsoleForNotice(&con);
+		logLevelContainer con;
+		con.setAllConsoleForNotice(&console);
+		con.setAllConsoleForNotice(&console);
 
 		//出力テスト
 		printLevelAll();
 
 		//標準コンソールに戻す
-		logLevel::setAllConsole(&stdConsole::instance());
-		logLevel::setAllConsole(&stdConsoleForNotice::instance());
+		con.setAllConsoleForNotice(&stdConsole::instance());
+		con.setAllConsoleForNotice(&stdConsoleForNotice::instance());
 
 		//端末をクローズ
 		fclose(fp);
