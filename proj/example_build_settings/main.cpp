@@ -12,8 +12,8 @@
 
 #include <gasha/build_settings/build_settings_diag.h>//ビルド設定診断
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

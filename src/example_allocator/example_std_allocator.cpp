@@ -12,7 +12,7 @@
 
 #include <gasha/std_allocator.h>//標準アロケータ
 
-#include <stdio.h>//printf()
+#include <cstdio>//printf()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

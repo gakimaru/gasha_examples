@@ -14,7 +14,7 @@
 
 #include <gasha/type_traits.h>//型特性ユーティリティ：toStr()
 
-#include <stdio.h>//printf()
+#include <cstdio>//printf()
 
 //【VC++】例外を無効化した状態で <thread> をインクルードすると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。

@@ -10,8 +10,8 @@
 
 #include "example_hash_table.h"//開番地法ハッシュテーブルコンテナテスト
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 int main(const int argc, const char* argv[])
 {

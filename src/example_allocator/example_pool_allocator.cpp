@@ -13,7 +13,7 @@
 #include <gasha/pool_allocator.h>//プールアロケータ
 #include <gasha/lf_pool_allocator.h>//ロックフリープールアロケータ
 
-#include <stdio.h>//printf()
+#include <cstdio>//printf()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

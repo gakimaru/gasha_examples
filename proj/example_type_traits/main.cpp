@@ -10,8 +10,8 @@
 
 #include "example_type_traits.h"//型特性ユーティリティテスト
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 int main(const int argc, const char* argv[])
 {

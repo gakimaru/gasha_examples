@@ -15,7 +15,7 @@
 #include <gasha/type_traits.h>//型特性ユーティリティ：extentof
 #include <gasha/thread_id.h>//スレッドID
 
-#include <stdio.h>//printf()
+#include <cstdio>//printf()
 
 //【VC++】sprintf を使用すると、error C4996 が発生する
 //  error C4996: 'sprintf': This function or variable may be unsafe. Consider using strncpy_fast_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
@@ -152,7 +152,7 @@ void example_singleton()
 	auto thread_func1a = [](const std::size_t thread_no)
 	{
 		char name[20];
-		sprintf(name, "Thread1A(%d)", thread_no);
+		std::sprintf(name, "Thread1A(%d)", thread_no);
 		threadId thread_id(name);
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));//100ミリ秒スリープ
 		for (int i = 0; i < 10; ++i)
@@ -160,7 +160,7 @@ void example_singleton()
 			for (int j = 0; j < 100; ++j)
 			{
 				char procedure[20];
-				sprintf(procedure, "Proc[%d][%d]", i, j);
+				std::sprintf(procedure, "Proc[%d][%d]", i, j);
 				//シングルトンアクセス
 				{
 					singleton<common_data1_t> data(procedure, with_lock_shared);//共有ロックでシングルトンにアクセス
@@ -179,10 +179,10 @@ void example_singleton()
 	auto thread_func1b = [](const std::size_t thread_no)
 	{
 		char name[20];
-		sprintf(name, "Thread1B(%d)", thread_no);
+		std::sprintf(name, "Thread1B(%d)", thread_no);
 		threadId thread_id(name);
 		char procedure[20];
-		sprintf(procedure, "Proc");
+		std::sprintf(procedure, "Proc");
 		//シングルトンアクセス
 		{
 			singleton<common_data1_t> data(procedure, with_lock_shared);//共有ロックでシングルトンにアクセス
@@ -194,7 +194,7 @@ void example_singleton()
 	auto thread_func2 = [](const std::size_t thread_no)
 	{
 		char name[20];
-		sprintf(name, "Thread2(%d)", thread_no);
+		std::sprintf(name, "Thread2(%d)", thread_no);
 		threadId thread_id(name);
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));//10ミリ秒スリープ
 		for (int i = 0; i < 10; ++i)
@@ -202,7 +202,7 @@ void example_singleton()
 			for (int j = 0; j < 100; ++j)
 			{
 				char procedure[20];
-				sprintf(procedure, "Proc[%d][%d]", i, j);
+				std::sprintf(procedure, "Proc[%d][%d]", i, j);
 				//シングルトンアクセス
 				{
 					simpleSingleton<common_data2_t> data(procedure);//排他ロックでシングルトンにアクセス

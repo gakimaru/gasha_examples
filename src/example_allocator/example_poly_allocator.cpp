@@ -28,7 +28,7 @@
 #include <gasha/scoped_stack_allocator.h>//スコープスタックアロケータ
 #include <gasha/scoped_dual_stack_allocator.h>//双方向スコープスタックアロケータ
 
-#include <stdio.h>//printf()
+#include <cstdio>//printf()
 
 //【VC++】例外を無効化した状態で <vector> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。

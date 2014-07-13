@@ -42,7 +42,7 @@
 
 #include <random>//C++11 std::random
 #include <cstdint>//C++11 std::intptr_t
-#include <memory.h>//memcpy()
+#include <cstring>//memcpy()
 
 //【VC++】例外を無効化した状態で <algorithm> <functional> <bitset> をインクルードすると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -315,7 +315,7 @@ void example_sort_and_search()
 		case init_ordered_without_both_ends:  array_src = array_ordered_without_both_ends; break;
 		case init_hard_with_quick_sort:       array_src = array_hard_with_quick_sort; break;
 		}
-		memcpy(array, array_src,sizeof(array_t));
+		std::memcpy(array, array_src,sizeof(array_t));
 		const bool is_print = false;
 		prev_time = printElapsedTime(prev_time, is_print);
 	};

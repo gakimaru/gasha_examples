@@ -12,7 +12,7 @@
 
 #include <gasha/utility.h>//汎用ユーティリティ
 
-#include <stdio.h>//printf()
+#include <cstdio>//printf()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

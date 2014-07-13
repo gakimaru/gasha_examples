@@ -10,7 +10,7 @@
 
 #include "example_build_settings.h"//ビルド設定処理テスト
 
-#include <stdio.h>//printf()
+#include <cstdio>//printf()
 #include <cstddef>//std::size_t
 
 GASHA_USING_NAMESPACE;//ネームスペース使用

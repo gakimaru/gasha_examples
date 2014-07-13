@@ -13,7 +13,7 @@
 #include <gasha/type_traits.h>//型特性ユーティリティ：rankof(), sizeof(), sizeofelemof()
 
 #include <type_traits>//std::rank, std::extent
-#include <stdio.h>//printf()
+#include <cstdio>//printf()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

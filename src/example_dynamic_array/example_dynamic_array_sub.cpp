@@ -10,7 +10,7 @@
 
 #include "example_dynamic_array.h"//動的配列コンテナテスト
 
-#include <stdio.h>//printf()
+#include <cstdio>//printf()
 
 //----------------------------------------
 //テンプレートの明示的なインスタンス化
@@ -44,7 +44,7 @@ GASHA_INSTANCING_dArray(mt_ope_t);//template class dynamic_array::container<mt_o
 //　ただし、ソート用関数や探索用関数の定義、ロックオブジェクトの指定といった細かいカスタマイズはできない。
 //　シンプルコンテナも明示的なインスタンス化は可能。
 
-#include <stdio.h>//printf()
+#include <cstdio>//printf()
 
 //【VC++】例外を無効化した状態で <algorithm> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。

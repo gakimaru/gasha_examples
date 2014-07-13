@@ -10,8 +10,8 @@
 
 #include "example_priority_queue.h"//優先度付きキューコンテナアダプタ／二分ヒープコンテナテスト
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 int main(const int argc, const char* argv[])
 {

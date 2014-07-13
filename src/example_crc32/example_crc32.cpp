@@ -13,9 +13,8 @@
 #include <gasha/crc32.h>//CRC32計算
 #include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
 
-#include <stdio.h>//printf()
-
-#include <assert.h>//assert()
+#include <cstdio>//printf()
+#include <cassert>//assert()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

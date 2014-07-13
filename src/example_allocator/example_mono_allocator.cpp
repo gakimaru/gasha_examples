@@ -13,7 +13,7 @@
 #include <gasha/mono_allocator.h>//単一アロケータ
 #include <gasha/lf_mono_allocator.h>//ロックフリー単一アロケータ
 
-#include <stdio.h>//printf()
+#include <cstdio>//printf()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

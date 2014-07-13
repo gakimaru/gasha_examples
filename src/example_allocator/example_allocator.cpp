@@ -10,7 +10,7 @@
 
 #include "example_allocator.h"//アロケータテスト
 
-#include <stdio.h>//printf()
+#include <cstdio>//printf()
 
 //----------------------------------------
 //テスト用構造体

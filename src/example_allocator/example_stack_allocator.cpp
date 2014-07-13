@@ -14,7 +14,7 @@
 #include <gasha/lf_stack_allocator.h>//ロックフリースタックアロケータ
 #include <gasha/scoped_stack_allocator.h>//スコープスタックアロケータ
 
-#include <stdio.h>//printf()
+#include <cstdio>//printf()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

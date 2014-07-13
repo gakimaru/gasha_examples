@@ -10,8 +10,8 @@
 
 #include "example_sort_and_search.h"//ソート＆探索処理テスト
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 int main(const int argc, const char* argv[])
 {

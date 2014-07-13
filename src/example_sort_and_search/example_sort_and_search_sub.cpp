@@ -16,30 +16,30 @@
 //テスト用構造体
 
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-#include <stdio.h>//printf()
-#include <memory.h>//memcpy()
+#include <cstdio>//printf()
+#include <cstring>//memcpy()
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
 data_t& data_t::operator=(data_t&& rhs)
 {
-	memcpy(this, &rhs, sizeof(*this));
+	std::memcpy(this, &rhs, sizeof(*this));
 	printf("data_t::move_assignment_operator\n");
 	return *this;
 }
 data_t& data_t::operator=(const data_t& rhs)
 {
-	memcpy(this, &rhs, sizeof(*this));
+	std::memcpy(this, &rhs, sizeof(*this));
 	printf("data_t::copy_assignment_operator\n");
 	return *this;
 }
 data_t::data_t(data_t&& src)
 {
-	memcpy(this, &src, sizeof(*this));
+	std::memcpy(this, &src, sizeof(*this));
 	printf("data_t::move_constructor\n");
 }
 data_t::data_t(const data_t& src)
 {
-	memcpy(this, &src, sizeof(*this));
+	std::memcpy(this, &src, sizeof(*this));
 	printf("data_t::copy_constructor\n");
 }
 data_t::data_t()

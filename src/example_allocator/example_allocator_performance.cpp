@@ -30,7 +30,7 @@
 #include <gasha/chrono.h>//時間系ユーティリティ：elapsedTime
 #include <gasha/type_traits.h>//型特性ユーティリティ：toStr()
 
-#include <stdio.h>//printf()
+#include <cstdio>//printf()
 
 //【VC++】例外を無効化した状態で <thread> <mutex> をインクルードすると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -129,7 +129,7 @@ static void testAllSingleThread()
 		auto adapter = stack.adapter();
 		polyAllocator poly_allocator(adapter);
 		auto alloc = [](const std::size_t size) -> void* { return new char[size]; };
-		auto free = [](void* p) { delete[] p; };
+		auto free = [](void* p) { delete[] reinterpret_cast<char*>(p); };
 		auto show = [&stack]() { printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
 		testSingleThread("polyAllocator with smartStackAllocator<>::adapter", alloc, free, show);
 	}
@@ -196,7 +196,7 @@ static void testAllSingleThread()
 		auto adapter = stack.adapter();
 		polyAllocator poly_allocator(adapter);
 		auto alloc = [](const std::size_t size) -> void* { return new char[size]; };
-		auto free = [](void* p) { delete[] p; };
+		auto free = [](void* p) { delete[] reinterpret_cast<char*>(p); };
 		auto show = [&stack]() { printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
 		testSingleThread("polyAllocator with smartDualStackAllocator<>::adapter", alloc, free, show);
 	}
@@ -290,7 +290,7 @@ static void testAllSingleThread()
 		auto adapter = pool.adapter();
 		polyAllocator poly_allocator(adapter);
 		auto alloc = [](const std::size_t size) -> void* { return new char[size]; };
-		auto free = [](void* p) { delete[] p; };
+		auto free = [](void* p) { delete[] reinterpret_cast<char*>(p); };
 		auto show = [&pool]() { printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
 		testSingleThread("polyAllocator with poolAllocator<1024>::adapter", alloc, free, show);
 	}
@@ -328,7 +328,7 @@ static void testAllSingleThread()
 		auto adapter = std_allocator.adapter();
 		polyAllocator poly_allocator(adapter);
 		auto alloc = [](const std::size_t size) -> void* { return new char[size]; };
-		auto free = [](void* p) { delete[] p; };
+		auto free = [](void* p) { delete[] reinterpret_cast<char*>(p); };
 		auto show = [&std_allocator]() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testSingleThread("polyAllocator with stdAllocator<>::adapter", alloc, free, show);
 	}
@@ -366,7 +366,7 @@ static void testAllSingleThread()
 		auto adapter = std_allocator.adapter();
 		polyAllocator poly_allocator(adapter);
 		auto alloc = [](const std::size_t size) -> void* { return new char[size]; };
-		auto free = [](void* p) { delete[] p; };
+		auto free = [](void* p) { delete[] reinterpret_cast<char*>(p); };
 		auto show = [&std_allocator]() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testSingleThread("polyAllocator with stdAlignAllocator<>::adapter", alloc, free, show);
 	}

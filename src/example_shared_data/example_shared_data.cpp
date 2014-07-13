@@ -32,7 +32,7 @@
 #include <utility>//C++11 std::move
 #include <condition_variable>//C++11 std::condition_variable
 #include <chrono>//C++11 std::chrono
-#include <stdio.h>//printf()
+#include <cstdio>//printf()
 
 //【VC++】例外を無効化した状態で <mutex> <thread> <function >をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -283,7 +283,7 @@ void easyTest()
 	//デバッグ情報表示用処理
 	auto debug_print_info = [](char* message, const data_t& data) -> std::size_t
 	{
-		return sprintf(message, "temp=%d, value=%d", data.m_temp, data.m_value);
+		return std::sprintf(message, "temp=%d, value=%d", data.m_temp, data.m_value);
 	};
 #endif//ENABLE_TEST_PRINT_DEBUG_INFO
 
@@ -714,7 +714,7 @@ void thread_test()
 	//デバッグ情報表示用処理
 	auto debug_print_info = [](char* message, const data_t& data) -> std::size_t
 	{
-		return sprintf(message, "temp=%d, value=%d", data.m_temp, data.m_value);
+		return std::sprintf(message, "temp=%d, value=%d", data.m_temp, data.m_value);
 	};
 #endif//ENABLE_TEST_PRINT_DEBUG_INFO
 

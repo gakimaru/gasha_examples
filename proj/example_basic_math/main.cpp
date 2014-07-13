@@ -10,8 +10,8 @@
 
 #include "example_basic_math.h"//基本算術処理テスト
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 int main(const int argc, const char* argv[])
 {

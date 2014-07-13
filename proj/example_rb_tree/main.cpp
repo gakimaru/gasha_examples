@@ -10,8 +10,8 @@
 
 #include "example_rb_tree.h"//赤黒木コンテナテスト
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 int main(const int argc, const char* argv[])
 {

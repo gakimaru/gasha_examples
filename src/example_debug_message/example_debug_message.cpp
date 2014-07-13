@@ -20,6 +20,15 @@
 #include <gasha/iterator.h>//イテレータ操作
 #include <gasha/type_traits.h>//型特性ユーティリティ：toStr()
 
+#ifdef GASHA_IS_GCC
+//※別端末へのログ出力テスト用
+//#include <sys/types.h>//open()
+//#include <sys/stat.h>//open()
+#include <fcntl.h>//open(), O_WRONLY, O_NDELAY, O_NOCTTY
+#include <unistd.h>//close()
+#include <cstdio>//fdopen()
+#endif//GASHA_IS_GCC
+
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
 #ifdef GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
@@ -146,9 +155,36 @@ void example_debug_message()
 		//logLevel::setAllConsole(&con);
 		logLevel::setAllConsoleForNotice(&con);
 	}
-	
+
 	//全ログレベルの列挙
 	printLevelAll();
+
+	//【Unix用】別の端末にログを出力
+#ifdef GASHA_IS_GCC
+	{
+		//端末をオープン
+		//※dev/pty3/はCygwinの端末
+		int fd = open("/dev/pty3", O_WRONLY | O_NDELAY | O_NOCTTY);//書き込み専用＋（可能なら）非停止モード＋制御端末割り当て禁止（端末でCtrl+Cなどの制御が効かない）
+		FILE* fp = fdopen(fd, "w");
+		printf("fd=%d, fp=%p\n", fd, fp);
+		static ttyConsole con(fp, "/dev/pty3");
+		
+		//ログレベルにコンソールを割り当て
+		logLevel::setAllConsole(&con);
+		logLevel::setAllConsoleForNotice(&con);
+
+		//出力テスト
+		printLevelAll();
+
+		//標準コンソールに戻す
+		logLevel::setAllConsole(&stdConsole::instance());
+		logLevel::setAllConsole(&stdConsoleForNotice::instance());
+
+		//端末をクローズ
+		fclose(fp);
+		close(fd);
+	}
+#endif//GASHA_IS_GCC
 
 #endif//GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
 }

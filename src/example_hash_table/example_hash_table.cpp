@@ -14,11 +14,12 @@
 
 #include <gasha/iterator.h>//イテレータ操作
 #include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
+#include <gasha/fast_string.h>//高速文字列操作
 
 #include <utility>//C++11 std::forward
-#include <stdio.h>//printf()
-
-#include <assert.h>//assert()
+#include <cstring>//memcpy()
+#include <cstdio>//printf(), sprintf()
+#include <cassert>//assert()
 
 //【VC++】例外を無効化した状態で <unordered_map> <algoritm> をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -27,12 +28,9 @@
 #include <algorithm>//std::for_each()
 #include <unordered_map>//C++11 std::unordered_map（比較用）
 
-//【VC++】strncpy, sprintf を使用すると、error C4996 が発生する
-//  error C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+//【VC++】sprintf を使用すると、error C4996 が発生する
 //  error C4996: 'sprintf': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 #pragma warning(disable: 4996)//C4996を抑える
-
-#include <string.h>//strcpy
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
@@ -45,7 +43,7 @@ data_t::data_t(const char* name, const int value) :
 	m_key(calcCRC32(name)),
 	m_value(value)
 {
-	strncpy(m_name, name, sizeof(m_name)-1);
+	strncpy_fast(m_name, name, sizeof(m_name)-1);
 	m_name[sizeof(m_name)-1] = '\0';
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
 	printf("data_t::constructor(\"%s\", value)\n", name, value);
@@ -56,27 +54,27 @@ data_t::data_t(const char* name, const int value) :
 //ムーブオペレータ
 data_t& data_t::operator=(data_t&& rhs)
 {
-	memcpy(this, &rhs, sizeof(*this));
+	std::memcpy(this, &rhs, sizeof(*this));
 	printf("data_t::move_operator\n");
 	return *this;
 }
 //コピーオペレータ
 data_t& data_t::operator=(const data_t& rhs)
 {
-	memcpy(this, &rhs, sizeof(*this));
+	std::memcpy(this, &rhs, sizeof(*this));
 	printf("data_t::copy_operator\n");
 	return *this;
 }
 //ムーブコンストラクタ
 data_t::data_t(data_t&& src)
 {
-	memcpy(this, &src, sizeof(*this));
+	std::memcpy(this, &src, sizeof(*this));
 	printf("data_t::move_constructor\n");
 }
 //コピーコンストラクタ
 data_t::data_t(const data_t& src)
 {
-	memcpy(this, &src, sizeof(*this));
+	std::memcpy(this, &src, sizeof(*this));
 	printf("data_t::copy_constructor\n");
 }
 //デフォルトコンストラクタ
@@ -217,7 +215,7 @@ void example_hash_table()
 		for (int i = begin; i < end; i += step)
 		{
 			char name[20];
-			sprintf(name, "Name_%06d", i);
+			std::sprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			data_t* obj = nullptr;
 			//【推奨】【登録方法①】emplace()メソッドにキーとコンストラクタパラメータを渡して登録する方法
@@ -483,7 +481,7 @@ void example_hash_table()
 		for (int i = 0; i < TEST_DATA_TABLE_SIZE; ++i)
 		{
 			char name[20];
-			sprintf(name, "Name_%06d", i);
+			std::sprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			data_t* obj;
 			crc32_t key;
@@ -564,7 +562,7 @@ void example_hash_table()
 		for (int i = begin; i < end; i += step)
 		{
 			char name[20];
-			sprintf(name, "Name_%06d", i);
+			std::sprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			bool result = false;
 			#define USE_ERASE_TYPE 1
@@ -738,7 +736,7 @@ void example_hash_table()
 		for (int i = begin; i < end; i += step)
 		{
 			char name[20];
-			sprintf(name, "Name_%06d", i);
+			std::sprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			data_t obj(name, i);
 			auto ite = stl_con->emplace(calcCRC32(name), obj);//キーとコンストラクタパラメータを渡して登録
@@ -789,7 +787,7 @@ void example_hash_table()
 		for (int i = 0; i < TEST_DATA_TABLE_SIZE; ++i)
 		{
 			char name[20];
-			sprintf(name, "Name_%06d", i);
+			std::sprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			crc32_t key = calcCRC32(name);
 			auto ite = stl_con->find(key);
@@ -822,7 +820,7 @@ void example_hash_table()
 		for (int i = begin; i < end; i += step)
 		{
 			char name[20];
-			sprintf(name, "Name_%06d", i);
+			std::sprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			crc32_t key = calcCRC32(name);
 			bool result = stl_con->erase(key) == 1;

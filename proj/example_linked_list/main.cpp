@@ -10,8 +10,8 @@
 
 #include "example_linked_list.h"//双方向連結リストコンテナテスト
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 int main(const int argc, const char* argv[])
 {

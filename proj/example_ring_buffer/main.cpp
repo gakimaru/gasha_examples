@@ -10,8 +10,8 @@
 
 #include "example_ring_buffer.h"//リングバッファコンテナテスト
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 int main(const int argc, const char* argv[])
 {

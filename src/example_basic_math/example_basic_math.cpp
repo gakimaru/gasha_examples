@@ -14,8 +14,8 @@
 #include <gasha/memory.h>//メモリ操作：アライメント計算
 #include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
 
-#include <stdio.h>//printf()
-#include<stdarg.h>//va_list
+#include <cstdio>//printf()
+#include <cstdarg>//va_list
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

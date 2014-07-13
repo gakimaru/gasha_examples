@@ -10,8 +10,8 @@
 
 #include "example_crc32.h"//CRC32計算処理テスト
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 int main(const int argc, const char* argv[])
 {

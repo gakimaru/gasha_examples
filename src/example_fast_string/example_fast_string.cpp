@@ -16,8 +16,8 @@
 #include <gasha/type_traits.h>//型特性ユーティリティ：extentof()
 
 #include <cstddef>//std::size_t
-#include <memory.h>//memset()
-#include <stdio.h>//printf()
+#include <cstring>//memset()
+#include <cstdio>//printf()
 
 //【VC++】str*** を使用すると、error C4996 が発生する
 //  error C4996: 'str***': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
@@ -33,7 +33,7 @@ void example_fast_string()
 	char buff[81];
 	auto reset_buff = [&buff]()
 	{
-		memset(buff, 'X', sizeof(buff));
+		std::memset(buff, 'X', sizeof(buff));
 		buff[sizeof(buff) - 1] = '\0';
 	};
 

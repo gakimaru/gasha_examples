@@ -10,8 +10,8 @@
 
 #include "example_singly_linked_list.h"//片方向連結リストテスト
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 int main(const int argc, const char* argv[])
 {

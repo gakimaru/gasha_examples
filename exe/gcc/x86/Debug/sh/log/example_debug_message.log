@@ -1,27 +1,48 @@
-[93;41;4mmessage[0m
-[90;49mlogLevel=0, name="asVerbose", outputLevel=0, forLog=1, forNotice=0, forMask=1
-[90;49m             next=asDetail(1)
-[0m[90;49mlogLevel=1, name="asDetail", outputLevel=0, forLog=1, forNotice=0, forMask=1
-[90;49m             prev=asVerbose(0)
-[0m             next=asNormal(2)
-[0m[0mlogLevel=2, name="asNormal", outputLevel=1, forLog=1, forNotice=1, forMask=1
-[90;49m             prev=asDetail(1)
-[94;49m             next=asImportant(4)
-[0m[94;49mlogLevel=4, name="asImportant", outputLevel=2, forLog=1, forNotice=1, forMask=1
-[0m             prev=asNormal(2)
-[95;49m             next=asWarning(6)
-[0m[95;49mlogLevel=6, name="asWarning", outputLevel=3, forLog=1, forNotice=1, forMask=1
-[94;49m             prev=asImportant(4)
-[91;49m             next=asCritical(8)
-[0m[91;49mlogLevel=8, name="asCritical", outputLevel=4, forLog=1, forNotice=1, forMask=1
-[95;49m             prev=asWarning(6)
-[0m             next=asAbsolute(10)
-[0m[0mlogLevel=10, name="asAbsolute", outputLevel=5, forLog=1, forNotice=0, forMask=1
-[91;49m             prev=asCritical(8)
-[0m             next=asSilent(11)
-[0m[0mlogLevel=11, name="asSilent", outputLevel=5, forLog=0, forNotice=0, forMask=1
-[0m             prev=asAbsolute(10)
-[0m             next=asSilentAbsolutely(12)
-[0m[0mlogLevel=12, name="asSilentAbsolutely", outputLevel=6, forLog=0, forNotice=0, forMask=1
-[0m             prev=asSilent(11)
-[0m
+[93;41;4mmessage for Standard[0m
+[93;41;4mmessage for TTY (stdout)[0m
+[93;41;4mmessage for Win (stdout)[0m
+[93;41;4mmessage for VS[0m
+[90;49mname="asVerbose", logLevel=0, outputLevel=0, forLog=true, forNotice=false, forMask=true[0m
+[90;49m	console="TTY-console"(iBLACK+STANDARD)[0m
+[90;107m	consoleForNotice="vs-console*"(iBLACK+iWHITE)[0m
+[90;49m	next=asDetail(1)[0m
+[90;49mname="asDetail", logLevel=1, outputLevel=0, forLog=true, forNotice=false, forMask=true[0m
+[90;49m	console="TTY-console"(iBLACK+STANDARD)[0m
+[90;107m	consoleForNotice="vs-console*"(iBLACK+iWHITE)[0m
+[90;49m	prev=asVerbose(0)[0m
+[0m	next=asNormal(2)[0m
+[0mname="asNormal", logLevel=2, outputLevel=1, forLog=true, forNotice=true, forMask=true[0m
+[0m	console="win-console*"(STANDARD+STANDARD)[0m
+[30;107m	consoleForNotice="vs-console*"(BLACK+iWHITE)[0m
+[90;49m	prev=asDetail(1)[0m
+[94;49m	next=asImportant(4)[0m
+[94;49mname="asImportant", logLevel=4, outputLevel=2, forLog=true, forNotice=true, forMask=true[0m
+[94;49m	console="TTY-console"(iBLUE+STANDARD)[0m
+[94;107m	consoleForNotice="vs-console*"(iBLUE+iWHITE)[0m
+[0m	prev=asNormal(2)[0m
+[95;49m	next=asWarning(6)[0m
+[95;49mname="asWarning", logLevel=6, outputLevel=3, forLog=true, forNotice=true, forMask=true[0m
+[95;49m	console="TTY-console"(iMAGENTA+STANDARD)[0m
+[30;105m	consoleForNotice="vs-console*"(BLACK+iMAGENTA)[0m
+[94;49m	prev=asImportant(4)[0m
+[91;49m	next=asCritical(8)[0m
+[91;49mname="asCritical", logLevel=8, outputLevel=4, forLog=true, forNotice=true, forMask=true[0m
+[91;49m	console="TTY-console"(iRED+STANDARD)[0m
+[93;101m	consoleForNotice="vs-console*"(iYELLOW+iRED)[0m
+[95;49m	prev=asWarning(6)[0m
+[0m	next=asAbsolute(10)[0m
+[0mname="asAbsolute", logLevel=10, outputLevel=5, forLog=true, forNotice=false, forMask=true[0m
+[0m	console="TTY-console"(STANDARD+STANDARD)[0m
+[0m	consoleForNotice="vs-console*"(STANDARD+STANDARD)[0m
+[91;49m	prev=asCritical(8)[0m
+[0m	next=asSilent(11)[0m
+[0mname="asSilent", logLevel=11, outputLevel=5, forLog=false, forNotice=false, forMask=true[0m
+[0m	console="TTY-console"(STANDARD+STANDARD)[0m
+[0m	consoleForNotice="vs-console*"(STANDARD+STANDARD)[0m
+[0m	prev=asAbsolute(10)[0m
+[0m	next=asSilentAbsolutely(12)[0m
+[0mname="asSilentAbsolutely", logLevel=12, outputLevel=6, forLog=false, forNotice=false, forMask=true[0m
+[0m	console="TTY-console"(STANDARD+STANDARD)[0m
+[0m	consoleForNotice="vs-console*"(STANDARD+STANDARD)[0m
+[0m	prev=asSilent(11)[0m
+fd=3, fp=0x800383d8

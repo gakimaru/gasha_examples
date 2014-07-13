@@ -10,9 +10,8 @@
 
 #include "example_allocator.h"//アロケータテスト
 
-#include <stddef.h>//std::size_t
-
-#include <stdio.h>//printf()
+#include <cstddef>//std::size_t
+#include <cstdio>//printf()
 
 //【VC++】例外を無効化した状態で <new> をインクルードすると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。

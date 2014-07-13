@@ -1,1 +1,46 @@
-message
+message for Standard
+[93;41;4mmessage for TTY (stdout)[0m
+message for Win (stdout)
+name="asVerbose", logLevel=0, outputLevel=0, forLog=true, forNotice=false, forMask=true
+	console="Win-console"(iBLACK+STANDARD)
+	consoleForNotice="vs-console*"(iBLACK+iWHITE)
+	next=asDetail(1)
+name="asDetail", logLevel=1, outputLevel=0, forLog=true, forNotice=false, forMask=true
+	console="Win-console"(iBLACK+STANDARD)
+	consoleForNotice="vs-console*"(iBLACK+iWHITE)
+	prev=asVerbose(0)
+	next=asNormal(2)
+name="asNormal", logLevel=2, outputLevel=1, forLog=true, forNotice=true, forMask=true
+	console="win-console*"(STANDARD+STANDARD)
+	consoleForNotice="vs-console*"(BLACK+iWHITE)
+	prev=asDetail(1)
+	next=asImportant(4)
+name="asImportant", logLevel=4, outputLevel=2, forLog=true, forNotice=true, forMask=true
+	console="Win-console"(iBLUE+STANDARD)
+	consoleForNotice="vs-console*"(iBLUE+iWHITE)
+	prev=asNormal(2)
+	next=asWarning(6)
+name="asWarning", logLevel=6, outputLevel=3, forLog=true, forNotice=true, forMask=true
+	console="Win-console"(iMAGENTA+STANDARD)
+	consoleForNotice="vs-console*"(BLACK+iMAGENTA)
+	prev=asImportant(4)
+	next=asCritical(8)
+name="asCritical", logLevel=8, outputLevel=4, forLog=true, forNotice=true, forMask=true
+	console="Win-console"(iRED+STANDARD)
+	consoleForNotice="vs-console*"(iYELLOW+iRED)
+	prev=asWarning(6)
+	next=asAbsolute(10)
+name="asAbsolute", logLevel=10, outputLevel=5, forLog=true, forNotice=false, forMask=true
+	console="Win-console"(STANDARD+STANDARD)
+	consoleForNotice="vs-console*"(STANDARD+STANDARD)
+	prev=asCritical(8)
+	next=asSilent(11)
+name="asSilent", logLevel=11, outputLevel=5, forLog=false, forNotice=false, forMask=true
+	console="Win-console"(STANDARD+STANDARD)
+	consoleForNotice="vs-console*"(STANDARD+STANDARD)
+	prev=asAbsolute(10)
+	next=asSilentAbsolutely(12)
+name="asSilentAbsolutely", logLevel=12, outputLevel=6, forLog=false, forNotice=false, forMask=true
+	console="Win-console"(STANDARD+STANDARD)
+	consoleForNotice="vs-console*"(STANDARD+STANDARD)
+	prev=asSilent(11)

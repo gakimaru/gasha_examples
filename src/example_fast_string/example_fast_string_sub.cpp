@@ -13,8 +13,7 @@
 #include <gasha/type_traits.h>//型特性ユーティリティ：extentof()
 
 #include <cstddef>//std::size_t
-#include <memory.h>//memcpy()
-#include <string.h>//strlen()
+#include <cstring>//strlen(), memcpy()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
@@ -125,7 +124,7 @@ std::size_t getStrSetNum()
 //テスト用データ取得
 const char* getStr(char* buff, const std::size_t no, const int dummy)
 {
-	memcpy(buff, s_str[no], s_strLen[no] + 1);
+	std::memcpy(buff, s_str[no], s_strLen[no] + 1);
 	return buff;
 }
 

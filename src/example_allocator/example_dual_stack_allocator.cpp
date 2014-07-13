@@ -15,7 +15,7 @@
 #include <gasha/scoped_stack_allocator.h>//スコープスタックアロケータ
 #include <gasha/scoped_dual_stack_allocator.h>//スコープ双方向スタックアロケータ
 
-#include <stdio.h>//printf()
+#include <cstdio>//printf()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

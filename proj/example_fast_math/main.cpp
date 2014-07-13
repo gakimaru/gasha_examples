@@ -10,8 +10,8 @@
 
 #include "example_fast_math.h"//高速算術テスト
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 int main(const int argc, const char* argv[])
 {

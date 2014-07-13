@@ -16,9 +16,9 @@
 #include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
 
 #include <utility>//C++11 std::move, std::forward
-#include <stdio.h>//printf()
-
-#include <assert.h>//assert()
+#include <cstring>//memcpy()
+#include <cstdio>//printf()
+#include <cassert>//assert()
 
 //【VC++】例外を無効化した状態で <algorithm> <list> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -69,27 +69,27 @@ data_t::~data_t()
 //ムーブオペレータ
 data_t& data_t::operator=(data_t&& rhs)
 {
-	memcpy(this, &rhs, sizeof(*this));
+	std::memcpy(this, &rhs, sizeof(*this));
 	printf("data_t::move_operator\n");
 	return *this;
 }
 //コピーオペレータ
 data_t& data_t::operator=(const data_t& rhs)
 {
-	memcpy(this, &rhs, sizeof(*this));
+	std::memcpy(this, &rhs, sizeof(*this));
 	printf("data_t::copy_operator\n");
 	return *this;
 }
 //ムーブコンストラクタ
 data_t::data_t(data_t&& src)
 {
-	memcpy(this, &src, sizeof(*this));
+	std::memcpy(this, &src, sizeof(*this));
 	printf("data_t::move_constructor\n");
 }
 //コピーコンストラクタ
 data_t::data_t(const data_t& src)
 {
-	memcpy(this, &src, sizeof(*this));
+	std::memcpy(this, &src, sizeof(*this));
 	printf("data_t::copy_constructor\n");
 }
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
