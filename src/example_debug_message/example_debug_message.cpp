@@ -16,6 +16,7 @@
 #include <gasha/tty_console.h>//Windowsコマンドプロンプト
 
 #include <gasha/log_level.h>//ログレベル
+#include <gasha/log_category.h>//ログカテゴリ
 
 #include <gasha/iterator.h>//イテレータ操作
 #include <gasha/type_traits.h>//型特性ユーティリティ：toStr()
@@ -34,8 +35,8 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 #ifdef GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
 
 //----------------------------------------
-//レベル列挙
-void printLevelAll()
+//ログレベル列挙
+void printAllLogLevel()
 {
 	forEach(logLevelContainer(),//正順表示
 	//reverseForEach(logLevelContainer(),//逆順表示
@@ -80,6 +81,39 @@ void printLevelAll()
 			{
 				print_console->changeColor(next.color());
 				print_console->printf(message, "\tnext: (%2d:%2d)\"%s", next.value(), next.outputLevel(), next.name());
+				print_console->outputCr();
+			}
+		}
+	);
+}
+
+//----------------------------------------
+//ログカテゴリ列挙
+void printAllLogCategory()
+{
+	forEach(logCategoryContainer(),//正順表示
+	//reverseForEach(logCategoryContainer(),//逆順表示
+		[](logCategory& obj)
+		{
+			IConsole* print_console = obj.console();
+			if (!print_console)
+				print_console = &stdConsole::instance();
+			char message[1024];
+			if (obj.isSpecial())
+				print_console->printf(message, "(SP-%2d)\"%s\"", obj.value(), obj.name());
+			else
+				print_console->printf(message, "(%2d)\"%s\"", obj.value(), obj.name());
+			print_console->outputCr();
+			auto* console = obj.console();
+			auto* console_for_notice = obj.consoleForNotice();
+			if (console)
+			{
+				print_console->printf(message, "\tconsole: \"%s\"(%s)", console->name());
+				print_console->outputCr();
+			}
+			if (console_for_notice)
+			{
+				print_console->printf(message, "\tnotice: \"%s\"(%s)", console_for_notice->name());
 				print_console->outputCr();
 			}
 		}
@@ -153,13 +187,18 @@ void example_debug_message()
 		console.outputCr();
 	}
 
-	//明示的なログレベルコンテナの初期化
-	//※GASHA_SECURE_CONTAINER_INITIALIZE を設定していない場合、最初のログレベル使用前に、
+	//明示的なログレベル／カテゴリコンテナの初期化
+	//※GASHA_LOG_LEVEL(CATEGORY)_CONTAINER_SECURE_INITIALIZE を設定していない場合、最初のログレベル使用前に、
 	//　一度だけ（ローカル変数でいいので）コンテナのインスタンスを作り、初期化を済ませなければならない
-	//※GASHA_SECURE_CONTAINER_INITIALIZE を設定している場合は、初回のコンテナアクセス時に自動的に初期化する。
+	//※GASHA_LOG_LEVEL(CATEGORY)_CONTAINER_SECURE_INITIALIZE を設定している場合は、初回のコンテナアクセス時に自動的に初期化する。
 	//※いずれにしても、CallOnceにより、スレッドセーフな初期化が保証される。
 	{
-		//logLevelContainer con;//ログレベルコンテナを生成（初回に限り、ログレベルをプールする静的データの初期化が行われる）
+	#ifndef GASHA_LOG_LEVEL_CONTAINER_SECURE_INITIALIZE
+		logLevelContainer con;//ログレベルコンテナを生成（初回に限り、ログレベルをプールする静的データの初期化が行われる）
+	#endif//GASHA_LOG_LEVEL_CONTAINER_SECURE_INITIALIZE
+	#ifndef GASHA_LOG_CATEGORY_CONTAINER_SECURE_INITIALIZE
+		logCategoryContainer con;//ログカテゴリコンテナを生成（初回に限り、ログカテゴリをプールする静的データの初期化が行われる）
+	#endif//GASHA_LOG_CATEGORY_CONTAINER_SECURE_INITIALIZE
 	}
 
 	//ログレベルのコンソールを変更
@@ -179,7 +218,10 @@ void example_debug_message()
 	}
 
 	//全ログレベルの列挙
-	printLevelAll();
+	printAllLogLevel();
+
+	//全カテゴリレベルの列挙
+	printAllLogCategory();
 
 	//【Unix用】別の端末にログを出力
 #ifdef GASHA_IS_GCC
@@ -193,11 +235,11 @@ void example_debug_message()
 		
 		//ログレベルにコンソールを割り当て
 		logLevelContainer con;
-		con.setAllConsoleForNotice(&console);
+		con.setAllConsole(&console);
 		con.setAllConsoleForNotice(&console);
 
 		//出力テスト
-		printLevelAll();
+		printAllLogLevel();
 
 		//標準コンソールに戻す
 		con.setAllConsoleForNotice(&stdConsole::instance());
