@@ -22,6 +22,8 @@
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
+#ifdef GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
+
 //----------------------------------------
 //レベル列挙
 void printLevelAll()
@@ -63,10 +65,15 @@ void printLevelAll()
 	);
 }
 
+#endif//GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
+
+
 //----------------------------------------
 //デバッグメッセージテスト
 void example_debug_message()
 {
+#ifdef GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
+
 	//コンソールカラー
 	consoleColor color(consoleColor::iYELLOW, consoleColor::RED, consoleColor::UNDERLINE);
 
@@ -142,6 +149,8 @@ void example_debug_message()
 	
 	//全ログレベルの列挙
 	printLevelAll();
+
+#endif//GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
 }
 
 // End of file
