@@ -1,2 +1,27 @@
-[91;103;1;4mmessage
+[93;41;4mmessage[0m
+[90;49mlogLevel=0, name="asVerbose", outputLevel=0, forLog=1, forNotice=0, forMask=1
+[90;49m             next=asDetail(1)
+[0m[90;49mlogLevel=1, name="asDetail", outputLevel=0, forLog=1, forNotice=0, forMask=1
+[90;49m             prev=asVerbose(0)
+[0m             next=asNormal(2)
+[0m[0mlogLevel=2, name="asNormal", outputLevel=1, forLog=1, forNotice=1, forMask=1
+[90;49m             prev=asDetail(1)
+[94;49m             next=asImportant(4)
+[0m[94;49mlogLevel=4, name="asImportant", outputLevel=2, forLog=1, forNotice=1, forMask=1
+[0m             prev=asNormal(2)
+[95;49m             next=asWarning(6)
+[0m[95;49mlogLevel=6, name="asWarning", outputLevel=3, forLog=1, forNotice=1, forMask=1
+[94;49m             prev=asImportant(4)
+[91;49m             next=asCritical(8)
+[0m[91;49mlogLevel=8, name="asCritical", outputLevel=4, forLog=1, forNotice=1, forMask=1
+[95;49m             prev=asWarning(6)
+[0m             next=asAbsolute(10)
+[0m[0mlogLevel=10, name="asAbsolute", outputLevel=5, forLog=1, forNotice=0, forMask=1
+[91;49m             prev=asCritical(8)
+[0m             next=asSilent(11)
+[0m[0mlogLevel=11, name="asSilent", outputLevel=5, forLog=0, forNotice=0, forMask=1
+[0m             prev=asAbsolute(10)
+[0m             next=asSilentAbsolutely(12)
+[0m[0mlogLevel=12, name="asSilentAbsolutely", outputLevel=6, forLog=0, forNotice=0, forMask=1
+[0m             prev=asSilent(11)
 [0m
