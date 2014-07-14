@@ -1,46 +1,254 @@
 message for Standard
 [93;41;4mmessage for TTY (stdout)[0m
 message for Win (stdout)
-name="asVerbose", logLevel=0, outputLevel=0, forLog=true, forNotice=false, forMask=true
-	console="Win-console"(iBLACK+STANDARD)
-	consoleForNotice="vs-console*"(iBLACK+iWHITE)
-	next=asDetail(1)
-name="asDetail", logLevel=1, outputLevel=0, forLog=true, forNotice=false, forMask=true
-	console="Win-console"(iBLACK+STANDARD)
-	consoleForNotice="vs-console*"(iBLACK+iWHITE)
-	prev=asVerbose(0)
-	next=asNormal(2)
-name="asNormal", logLevel=2, outputLevel=1, forLog=true, forNotice=true, forMask=true
-	console="win-console*"(STANDARD+STANDARD)
-	consoleForNotice="vs-console*"(BLACK+iWHITE)
-	prev=asDetail(1)
-	next=asImportant(4)
-name="asImportant", logLevel=4, outputLevel=2, forLog=true, forNotice=true, forMask=true
-	console="Win-console"(iBLUE+STANDARD)
-	consoleForNotice="vs-console*"(iBLUE+iWHITE)
-	prev=asNormal(2)
-	next=asWarning(6)
-name="asWarning", logLevel=6, outputLevel=3, forLog=true, forNotice=true, forMask=true
-	console="Win-console"(iMAGENTA+STANDARD)
-	consoleForNotice="vs-console*"(BLACK+iMAGENTA)
-	prev=asImportant(4)
-	next=asCritical(8)
-name="asCritical", logLevel=8, outputLevel=4, forLog=true, forNotice=true, forMask=true
-	console="Win-console"(iRED+STANDARD)
-	consoleForNotice="vs-console*"(iYELLOW+iRED)
-	prev=asWarning(6)
-	next=asAbsolute(10)
-name="asAbsolute", logLevel=10, outputLevel=5, forLog=true, forNotice=false, forMask=true
-	console="Win-console"(STANDARD+STANDARD)
-	consoleForNotice="vs-console*"(STANDARD+STANDARD)
-	prev=asCritical(8)
-	next=asSilent(11)
-name="asSilent", logLevel=11, outputLevel=5, forLog=false, forNotice=false, forMask=true
-	console="Win-console"(STANDARD+STANDARD)
-	consoleForNotice="vs-console*"(STANDARD+STANDARD)
-	prev=asAbsolute(10)
-	next=asSilentAbsolutely(12)
-name="asSilentAbsolutely", logLevel=12, outputLevel=6, forLog=false, forNotice=false, forMask=true
-	console="Win-console"(STANDARD+STANDARD)
-	consoleForNotice="vs-console*"(STANDARD+STANDARD)
-	prev=asSilent(11)
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-levels ]
+
+( 0: 0)"asVerbose"
+	console: "Win(stdout)"(iBLACK+STANDARD)
+	next: ( 2: 1)"asNormal
+( 1: 0)"asDetail"
+	console: "Win(stdout)"(iBLACK+STANDARD)
+	next: ( 2: 1)"asNormal
+( 2: 1)"asNormal"
+	console: "win-console *CHANGED*"(STANDARD+STANDARD)
+	prev: ( 0: 0)"asVerbose"
+	next: ( 4: 2)"asImportant
+( 4: 2)"asImportant"
+	console: "Win(stdout)"(iBLUE+BLACK)
+	prev: ( 2: 1)"asNormal"
+	next: ( 6: 3)"asWarning
+(10: 5)"asAbsolute"
+	console: "Win(stdout)"(STANDARD+STANDARD)
+	prev: ( 8: 4)"asCritical"
+(SP-11)"asSilent"
+(SP-12)"asSilentAbsolutely"
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-categoris ]
+
+( 0)"forAny"
+( 1)"forFileSystem"
+( 2)"forResource"
+( 3)"for3D"
+( 4)"for2D"
+( 5)"forSound"
+(10)"forMiniGame"
+(SP-64)"forEvery"
+(SP-65)"forCallPoint"
+(SP-66)"forCriticalCallPoint"
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-level-masks : Test for output message asDetail ]
+
+( 0)"forAny"
+	mask(of log): ( 2)"asNormal"
+		MASKED! ... notice-message: ( 1)"asDetail"
+	mask(of notice): ( 8)"asCritical"
+		MASKED! ... notice-message: ( 1)"asDetail"
+( 1)"forFileSystem"
+	mask(of log): ( 2)"asNormal"
+		MASKED! ... notice-message: ( 1)"asDetail"
+	mask(of notice): ( 8)"asCritical"
+		MASKED! ... notice-message: ( 1)"asDetail"
+( 2)"forResource"
+	mask(of log): ( 2)"asNormal"
+		MASKED! ... notice-message: ( 1)"asDetail"
+	mask(of notice): ( 8)"asCritical"
+		MASKED! ... notice-message: ( 1)"asDetail"
+( 3)"for3D"
+	mask(of log): ( 2)"asNormal"
+		MASKED! ... notice-message: ( 1)"asDetail"
+	mask(of notice): ( 8)"asCritical"
+		MASKED! ... notice-message: ( 1)"asDetail"
+( 4)"for2D"
+	mask(of log): ( 2)"asNormal"
+		MASKED! ... notice-message: ( 1)"asDetail"
+	mask(of notice): ( 8)"asCritical"
+		MASKED! ... notice-message: ( 1)"asDetail"
+( 5)"forSound"
+	mask(of log): ( 2)"asNormal"
+		MASKED! ... notice-message: ( 1)"asDetail"
+	mask(of notice): ( 8)"asCritical"
+		MASKED! ... notice-message: ( 1)"asDetail"
+(10)"forMiniGame"
+	mask(of log): ( 2)"asNormal"
+		MASKED! ... notice-message: ( 1)"asDetail"
+	mask(of notice): ( 8)"asCritical"
+		MASKED! ... notice-message: ( 1)"asDetail"
+(20)"forTARO"
+	mask(of log): ( 1)"asDetail"
+		OK ... 
+	mask(of notice): ( 2)"asNormal"
+		MASKED! ... notice-message: ( 1)"asDetail"
+(21)"forJIRO"
+	mask(of log): (11)"asSilent"
+		MASKED! ... notice-message: ( 1)"asDetail"
+	mask(of notice): (12)"asSilentAbsolutely"
+		MASKED! ... notice-message: ( 1)"asDetail"
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-level-masks : Test for output message asNormal ]
+
+( 0)"forAny"
+	mask(of log): ( 2)"asNormal"
+		OK ... log-message: ( 2)"asNormal", "win-console *CHANGED*"
+	mask(of notice): ( 8)"asCritical"
+		MASKED! ... notice-message: ( 2)"asNormal"
+( 1)"forFileSystem"
+	mask(of log): ( 2)"asNormal"
+		OK ... log-message: ( 2)"asNormal", "win-console *CHANGED*"
+	mask(of notice): ( 8)"asCritical"
+		MASKED! ... notice-message: ( 2)"asNormal"
+( 2)"forResource"
+	mask(of log): ( 2)"asNormal"
+		OK ... log-message: ( 2)"asNormal", "win-console *CHANGED*"
+	mask(of notice): ( 8)"asCritical"
+		MASKED! ... notice-message: ( 2)"asNormal"
+( 3)"for3D"
+	mask(of log): ( 2)"asNormal"
+		OK ... log-message: ( 2)"asNormal", "win-console *CHANGED*"
+	mask(of notice): ( 8)"asCritical"
+		MASKED! ... notice-message: ( 2)"asNormal"
+( 4)"for2D"
+	mask(of log): ( 2)"asNormal"
+		OK ... log-message: ( 2)"asNormal", "win-console *CHANGED*"
+	mask(of notice): ( 8)"asCritical"
+		MASKED! ... notice-message: ( 2)"asNormal"
+( 5)"forSound"
+	mask(of log): ( 2)"asNormal"
+		OK ... log-message: ( 2)"asNormal", "win-console *CHANGED*"
+	mask(of notice): ( 8)"asCritical"
+		MASKED! ... notice-message: ( 2)"asNormal"
+(10)"forMiniGame"
+	mask(of log): ( 2)"asNormal"
+		OK ... log-message: ( 2)"asNormal", "win-console *CHANGED*"
+	mask(of notice): ( 8)"asCritical"
+		MASKED! ... notice-message: ( 2)"asNormal"
+(20)"forTARO"
+	mask(of log): ( 1)"asDetail"
+		OK ... 
+	mask(of notice): ( 2)"asNormal"
+		OK ... 
+(21)"forJIRO"
+	mask(of log): (11)"asSilent"
+		MASKED! ... notice-message: ( 2)"asNormal"
+	mask(of notice): (12)"asSilentAbsolutely"
+		MASKED! ... notice-message: ( 2)"asNormal"
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-level-masks : Test for output message asCritical ]
+
+( 0)"forAny"
+	mask(of log): ( 2)"asNormal"
+		OK ... 
+	mask(of notice): ( 8)"asCritical"
+		OK ... 
+( 1)"forFileSystem"
+	mask(of log): ( 2)"asNormal"
+		OK ... 
+	mask(of notice): ( 8)"asCritical"
+		OK ... 
+( 2)"forResource"
+	mask(of log): ( 2)"asNormal"
+		OK ... 
+	mask(of notice): ( 8)"asCritical"
+		OK ... 
+( 3)"for3D"
+	mask(of log): ( 2)"asNormal"
+		OK ... 
+	mask(of notice): ( 8)"asCritical"
+		OK ... 
+( 4)"for2D"
+	mask(of log): ( 2)"asNormal"
+		OK ... 
+	mask(of notice): ( 8)"asCritical"
+		OK ... 
+( 5)"forSound"
+	mask(of log): ( 2)"asNormal"
+		OK ... 
+	mask(of notice): ( 8)"asCritical"
+		OK ... 
+(10)"forMiniGame"
+	mask(of log): ( 2)"asNormal"
+		OK ... 
+	mask(of notice): ( 8)"asCritical"
+		OK ... 
+(20)"forTARO"
+	mask(of log): ( 1)"asDetail"
+		OK ... 
+	mask(of notice): ( 2)"asNormal"
+		OK ... 
+(21)"forJIRO"
+	mask(of log): (11)"asSilent"
+		MASKED! ... notice-message: ( 8)"asCritical"
+	mask(of notice): (12)"asSilentAbsolutely"
+		MASKED! ... notice-message: ( 8)"asCritical"
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-level-masks : Test for output message asAbsolute ]
+
+( 0)"forAny"
+	mask(of log): ( 2)"asNormal"
+		OK ... log-message: (10)"asAbsolute", "Win(stdout)"
+	mask(of notice): ( 8)"asCritical"
+		OK ... 
+( 1)"forFileSystem"
+	mask(of log): ( 2)"asNormal"
+		OK ... log-message: (10)"asAbsolute", "Win(stdout)"
+	mask(of notice): ( 8)"asCritical"
+		OK ... 
+( 2)"forResource"
+	mask(of log): ( 2)"asNormal"
+		OK ... log-message: (10)"asAbsolute", "Win(stdout)"
+	mask(of notice): ( 8)"asCritical"
+		OK ... 
+( 3)"for3D"
+	mask(of log): ( 2)"asNormal"
+		OK ... log-message: (10)"asAbsolute", "Win(stdout)"
+	mask(of notice): ( 8)"asCritical"
+		OK ... 
+( 4)"for2D"
+	mask(of log): ( 2)"asNormal"
+		OK ... log-message: (10)"asAbsolute", "Win(stdout)"
+	mask(of notice): ( 8)"asCritical"
+		OK ... 
+( 5)"forSound"
+	mask(of log): ( 2)"asNormal"
+		OK ... log-message: (10)"asAbsolute", "Win(stdout)"
+	mask(of notice): ( 8)"asCritical"
+		OK ... 
+(10)"forMiniGame"
+	mask(of log): ( 2)"asNormal"
+		OK ... log-message: (10)"asAbsolute", "Win(stdout)"
+	mask(of notice): ( 8)"asCritical"
+		OK ... 
+(20)"forTARO"
+	mask(of log): ( 1)"asDetail"
+		OK ... 
+	mask(of notice): ( 2)"asNormal"
+		OK ... 
+(21)"forJIRO"
+	mask(of log): (11)"asSilent"
+		OK ... 
+	mask(of notice): (12)"asSilentAbsolutely"
+		MASKED! ... notice-message: (10)"asAbsolute"
+id=1, category=21, level=2, message="message:1"
+id=2, category=21, level=2, message="message:3"
+id=3, category=21, level=2, message="message:9"
+id=4, category=21, level=2, message="message:27"
+id=5, category=21, level=2, message="message:81"
+id=6, category=21, level=2, message="message:243"
+id=7, category=21, level=2, message="message:729"
+id=8, category=21, level=2, message="message:2187"
+id=9, category=21, level=2, message="message:6561"
+id=10, category=21, level=2, message="message:19683"
+id=11, category=21, level=2, message="message:59049"
+id=12, category=21, level=2, message="message:177147"
+id=13, category=21, level=2, message="message:531441"
+id=14, category=21, level=2, message="message:1594323"
+id=15, category=21, level=2, message="message:4782969"
+id=16, category=21, level=2, message="message:14348907"
+id=17, category=21, level=2, message="message:43046721"
+end

@@ -20,6 +20,7 @@
 #include <gasha/log_category.h>//ログカテゴリ
 #include <gasha/log_mask.h>//ログマスク
 #include <gasha/log_work_buff.h>//ログワークバッファ
+#include <gasha/log_queue.h>//ログキュー
 
 #include <gasha/iterator.h>//イテレータ操作
 #include <gasha/type_traits.h>//型特性ユーティリティ：toStr()
@@ -287,14 +288,20 @@ void example_debug_message()
 	//※GASHA_LOG_LEVEL(CATEGORY)_CONTAINER_SECURE_INITIALIZE 設定時には不要
 	{
 	#ifndef GASHA_LOG_LEVEL_CONTAINER_SECURE_INITIALIZE
-		logLevelContainer level_con(logLevelContainer::explicitInitialize);
+		logLevelContainer level_con(logLevelContainer::explicitInitialize);//ログレベルの明示的な初期化
 	#endif//GASHA_LOG_LEVEL_CONTAINER_SECURE_INITIALIZE
 	#ifndef GASHA_LOG_CATEGORY_CONTAINER_SECURE_INITIALIZE
-		logCategoryContainer cate_con(logCategoryContainer::explicitInitialize);
+		logCategoryContainer cate_con(logCategoryContainer::explicitInitialize);//ログカテゴリの明示的な初期化
 	#endif//GASHA_LOG_CATEGORY_CONTAINER_SECURE_INITIALIZE
 	#ifndef GASHA_LOG_MASK_SECURE_INITIALIZE
-		logMask mask(logMask::explicitInitialize);
+		logMask mask(logMask::explicitInitialize);//ログマスクの明示的な初期化
 	#endif//GASHA_LOG_MASK_SECURE_INITIALIZE
+	#ifndef GASHA_LOG_WORK_BUFF_SECURE_INITIALIZE
+		logWorkBuff log_buff(logWorkBuff::explicitInitialize);//ログワークバッファの明示的な初期化
+	#endif//GASHA_LOG_WORK_BUFF_SECURE_INITIALIZE
+	#ifndef GASHA_LOG_QUEUE_SECURE_INITIALIZE
+		logQueue log_queue(logQueue::explicitInitialize);//ログキューの明示的な初期化
+	#endif//GASHA_LOG_QUEUE_SECURE_INITIALIZE
 	}
 
 	//ログレベルのコンソールを変更
@@ -396,6 +403,63 @@ void example_debug_message()
 		if (fd1 >= 2) close(fd3);
 	}
 #endif//GASHA_IS_GCC
+
+	//メッセージのキューイング
+	{
+		for (int mode = 0; mode < 4; ++mode)
+		{
+			if (mode == 1)
+			{
+				//ログキュー中断
+				logQueue queue;
+				queue.abort();
+			}
+			else if (mode == 2)
+			{
+				//ログワークバッファ中断
+				logWorkBuff work_buff;
+				work_buff.abort();
+			}
+			else if (mode == 3)
+			{
+				//ログキューとログワークバッファを再開
+				logWorkBuff work_buff(logWorkBuff::explicitInitialize);
+				logQueue queue(logQueue::explicitInitialize);
+			}
+			for (int i = 1; i < 1000000000; i *= 3)
+			{
+				//エンキュー
+				{
+					logWorkBuff work_buff;
+					char* message = work_buff.alloc();
+					if (message)
+					{
+						std::size_t size = 0;
+						work_buff.spprintf(message, size, "message:%d", i);
+						logQueue queue;
+						const bool result = queue.enqueue(forJIRO, asNormal, message, size + 1);
+						if (!result)
+							printf("enqueu failed.\n");
+						work_buff.free(message);
+					}
+					else
+						printf("message making failed.\n");
+				}
+				//デキュー
+				{
+					logQueue::node_type node;
+					logQueue queue;
+					const bool result = queue.dequeue(node);
+					if (result)
+					{
+						printf("id=%lld, category=%d, level=%d, message=\"%s\"\n", node.m_id, node.m_category, node.m_level, node.m_message);
+						queue.release(node);
+					}
+				}
+			}
+		}
+		printf("end\n");
+	}
 
 #endif//GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
 }

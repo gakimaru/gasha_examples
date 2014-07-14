@@ -2,39 +2,39 @@
 ================================================================================
 [ Test for performance ]
 
-strlen_fast (*830000 times repeat) ... 0.018087000 sec
-strlen_sse  (*830000 times repeat) ... 0.017931000 sec
-strlen      (*830000 times repeat) ... 0.015693000 sec
-strnlen_fast (*6640000 times repeat) ... 0.156775000 sec
-strnlen_sse  (*6640000 times repeat) ... 0.171559000 sec
-strnlen      (*6640000 times repeat) ... 0.121542000 sec
-strcmp_fast (*7470000 times repeat) ... 0.190440000 sec
-strcmp_sse  (*7470000 times repeat) ... 0.165575000 sec
-strcmp      (*7470000 times repeat) ... 0.158079000 sec
-strncmp_fast (*22410000 times repeat) ... 0.562407000 sec
-strncmp_sse  (*22410000 times repeat) ... 0.594938000 sec
-strncmp      (*22410000 times repeat) ... 0.422384000 sec
-strchr_fast (*5810000 times repeat) ... 0.146528000 sec
-strchr_sse  (*5810000 times repeat) ... 0.125654000 sec
-strchr      (*5810000 times repeat) ... 0.118173000 sec
-strrchr_fast (*5810000 times repeat) ... 0.150637000 sec
-strrchr_sse  (*5810000 times repeat) ... 0.145180000 sec
-strrchr      (*5810000 times repeat) ... 0.107581000 sec
-strstr_fast (*5810000 times repeat) ... 0.189213000 sec
-strstr_sse  (*5810000 times repeat) ... 0.171544000 sec
-strstr      (*5810000 times repeat) ... 0.114541000 sec
-strstrbm_fast (*5810000 times repeat) ... 8.147813000 sec
-strstrbm_sse  (*5810000 times repeat) ... 5.784028000 sec
-strstrbm      (*5810000 times repeat) ... 3.187848000 sec
-strstr0_fast (*5810000 times repeat) ... 0.130207000 sec
-strstr0_sse  (*5810000 times repeat) ... 0.129216000 sec
-strstr0      (*5810000 times repeat) ... 0.103440000 sec
-strcpy_fast (*830000 times repeat) ... 0.042153000 sec
-strcpy_sse  (*830000 times repeat) ... 0.042177000 sec
-strcpy      (*830000 times repeat) ... 0.047979000 sec
-strncpy_fast (*6640000 times repeat) ... 0.266872000 sec
-strncpy_sse  (*6640000 times repeat) ... 0.269428000 sec
-strncpy      (*6640000 times repeat) ... 0.346967000 sec
+strlen_fast (*830000 times repeat) ... 0.016854000 sec
+strlen_sse  (*830000 times repeat) ... 0.017433000 sec
+strlen      (*830000 times repeat) ... 0.015680000 sec
+strnlen_fast (*6640000 times repeat) ... 0.151633000 sec
+strnlen_sse  (*6640000 times repeat) ... 0.207322000 sec
+strnlen      (*6640000 times repeat) ... 0.117791000 sec
+strcmp_fast (*7470000 times repeat) ... 0.162287000 sec
+strcmp_sse  (*7470000 times repeat) ... 0.161241000 sec
+strcmp      (*7470000 times repeat) ... 0.134770000 sec
+strncmp_fast (*22410000 times repeat) ... 0.526651000 sec
+strncmp_sse  (*22410000 times repeat) ... 0.529694000 sec
+strncmp      (*22410000 times repeat) ... 0.423134000 sec
+strchr_fast (*5810000 times repeat) ... 0.121583000 sec
+strchr_sse  (*5810000 times repeat) ... 0.134594000 sec
+strchr      (*5810000 times repeat) ... 0.105165000 sec
+strrchr_fast (*5810000 times repeat) ... 0.184453000 sec
+strrchr_sse  (*5810000 times repeat) ... 0.121671000 sec
+strrchr      (*5810000 times repeat) ... 0.107642000 sec
+strstr_fast (*5810000 times repeat) ... 0.168834000 sec
+strstr_sse  (*5810000 times repeat) ... 0.169310000 sec
+strstr      (*5810000 times repeat) ... 0.104762000 sec
+strstrbm_fast (*5810000 times repeat) ... 8.101871000 sec
+strstrbm_sse  (*5810000 times repeat) ... 5.665143000 sec
+strstrbm      (*5810000 times repeat) ... 3.420193000 sec
+strstr0_fast (*5810000 times repeat) ... 0.125992000 sec
+strstr0_sse  (*5810000 times repeat) ... 0.127693000 sec
+strstr0      (*5810000 times repeat) ... 0.104060000 sec
+strcpy_fast (*830000 times repeat) ... 0.041292000 sec
+strcpy_sse  (*830000 times repeat) ... 0.041160000 sec
+strcpy      (*830000 times repeat) ... 0.047004000 sec
+strncpy_fast (*6640000 times repeat) ... 0.260716000 sec
+strncpy_sse  (*6640000 times repeat) ... 0.268747000 sec
+strncpy      (*6640000 times repeat) ... 0.351775000 sec
 
 ================================================================================
 [ Test for logic ]
@@ -22307,5 +22307,20 @@ strncpy(     buff, str[81], 81): ret=0x28ab2f, buff="123123123123123123123123123
 strncpy_fast(buff, str[82], 81): ret=0x28ab2f, buff="1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 strncpy_sse( buff, str[82], 81): ret=0x28ab2f, buff="1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 strncpy(     buff, str[82], 81): ret=0x28ab2f, buff="1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+================================================================================
+[ Test for spptinf ]
+char buff[10];
+ret = spprintf(buff, 10, pos, "1"); buff="1", pos=1, ret=1
+ret = spprintf(buff, 10, pos, "%d", 23); buff="123", pos=3, ret=2
+ret = spprintf(buff, 10, pos, "%d%d%d", 4, 5, 6); buff="123456", pos=6, ret=3
+ret = spprintf(buff, 10, pos, "%d", 7890); buff="123456789", pos=9, ret=0
+ret = spprintf(buff, 10, pos, "ABC"); buff="123456789", pos=9, ret=0
+pos = 0; buff="123456789", pos=0, ret=0
+ret = spprintf(buff, pos, "1"); buff="1", pos=1, ret=1
+ret = spprintf(buff, pos, "%d", 23); buff="123", pos=3, ret=2
+ret = spprintf(buff, pos, "%d%d%d", 4, 5, 6); buff="123456", pos=6, ret=3
+ret = spprintf(buff, pos, "%d", 7890); buff="1234567890", pos=10, ret=4
+ret = spprintf(buff, pos, "ABC"); buff="1234567890ABC", pos=13, ret=3
 
 - end -

@@ -2,47 +2,271 @@
 [93;41;4mmessage for TTY (stdout)[0m
 [93;41;4mmessage for Win (stdout)[0m
 [93;41;4mmessage for VS[0m
-[90;49mname="asVerbose", logLevel=0, outputLevel=0, forLog=true, forNotice=false, forMask=true[0m
-[90;49m	console="TTY-console"(iBLACK+STANDARD)[0m
-[90;107m	consoleForNotice="vs-console*"(iBLACK+iWHITE)[0m
-[90;49m	next=asDetail(1)[0m
-[90;49mname="asDetail", logLevel=1, outputLevel=0, forLog=true, forNotice=false, forMask=true[0m
-[90;49m	console="TTY-console"(iBLACK+STANDARD)[0m
-[90;107m	consoleForNotice="vs-console*"(iBLACK+iWHITE)[0m
-[90;49m	prev=asVerbose(0)[0m
-[0m	next=asNormal(2)[0m
-[0mname="asNormal", logLevel=2, outputLevel=1, forLog=true, forNotice=true, forMask=true[0m
-[0m	console="win-console*"(STANDARD+STANDARD)[0m
-[30;107m	consoleForNotice="vs-console*"(BLACK+iWHITE)[0m
-[90;49m	prev=asDetail(1)[0m
-[94;49m	next=asImportant(4)[0m
-[94;49mname="asImportant", logLevel=4, outputLevel=2, forLog=true, forNotice=true, forMask=true[0m
-[94;49m	console="TTY-console"(iBLUE+STANDARD)[0m
-[94;107m	consoleForNotice="vs-console*"(iBLUE+iWHITE)[0m
-[0m	prev=asNormal(2)[0m
-[95;49m	next=asWarning(6)[0m
-[95;49mname="asWarning", logLevel=6, outputLevel=3, forLog=true, forNotice=true, forMask=true[0m
-[95;49m	console="TTY-console"(iMAGENTA+STANDARD)[0m
-[30;105m	consoleForNotice="vs-console*"(BLACK+iMAGENTA)[0m
-[94;49m	prev=asImportant(4)[0m
-[91;49m	next=asCritical(8)[0m
-[91;49mname="asCritical", logLevel=8, outputLevel=4, forLog=true, forNotice=true, forMask=true[0m
-[91;49m	console="TTY-console"(iRED+STANDARD)[0m
-[93;101m	consoleForNotice="vs-console*"(iYELLOW+iRED)[0m
-[95;49m	prev=asWarning(6)[0m
-[0m	next=asAbsolute(10)[0m
-[0mname="asAbsolute", logLevel=10, outputLevel=5, forLog=true, forNotice=false, forMask=true[0m
-[0m	console="TTY-console"(STANDARD+STANDARD)[0m
-[0m	consoleForNotice="vs-console*"(STANDARD+STANDARD)[0m
-[91;49m	prev=asCritical(8)[0m
-[0m	next=asSilent(11)[0m
-[0mname="asSilent", logLevel=11, outputLevel=5, forLog=false, forNotice=false, forMask=true[0m
-[0m	console="TTY-console"(STANDARD+STANDARD)[0m
-[0m	consoleForNotice="vs-console*"(STANDARD+STANDARD)[0m
-[0m	prev=asAbsolute(10)[0m
-[0m	next=asSilentAbsolutely(12)[0m
-[0mname="asSilentAbsolutely", logLevel=12, outputLevel=6, forLog=false, forNotice=false, forMask=true[0m
-[0m	console="TTY-console"(STANDARD+STANDARD)[0m
-[0m	consoleForNotice="vs-console*"(STANDARD+STANDARD)[0m
-[0m	prev=asSilent(11)[0m
-fd=3, fp=0x800383d8
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-levels ]
+
+[90;49m( 0: 0)"asVerbose"[0m
+[90;49m	console: "TTY(stdout)"(iBLACK+STANDARD)[0m
+[90;107m	notice: "vs-console *CHANGED*"(iBLACK+iWHITE)[0m
+[0m	next: ( 2: 1)"asNormal[0m
+[90;49m( 1: 0)"asDetail"[0m
+[90;49m	console: "TTY(stdout)"(iBLACK+STANDARD)[0m
+[90;107m	notice: "vs-console *CHANGED*"(iBLACK+iWHITE)[0m
+[0m	next: ( 2: 1)"asNormal[0m
+[0m( 2: 1)"asNormal"[0m
+[0m	console: "win-console *CHANGED*"(STANDARD+STANDARD)[0m
+[30;107m	notice: "vs-console *CHANGED*"(BLACK+iWHITE)[0m
+[90;49m	prev: ( 0: 0)"asVerbose"[0m
+[94;40m	next: ( 4: 2)"asImportant[0m
+[94;40m( 4: 2)"asImportant"[0m
+[94;40m	console: "TTY(stdout)"(iBLUE+BLACK)[0m
+[94;107m	notice: "vs-console *CHANGED*"(iBLUE+iWHITE)[0m
+[0m	prev: ( 2: 1)"asNormal"[0m
+[95;49m	next: ( 6: 3)"asWarning[0m
+[30;105m	notice: "vs-console *CHANGED*"(BLACK+iMAGENTA)[0m
+[93;101m	notice: "vs-console *CHANGED*"(iYELLOW+iRED)[0m
+[0m(10: 5)"asAbsolute"[0m
+[0m	console: "TTY(stdout)"(STANDARD+STANDARD)[0m
+[0m	notice: "vs-console *CHANGED*"(STANDARD+STANDARD)[0m
+[91;49m	prev: ( 8: 4)"asCritical"[0m
+[0m(SP-11)"asSilent"[0m
+[0m(SP-12)"asSilentAbsolutely"[0m
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-categoris ]
+
+( 0)"forAny"[0m
+( 1)"forFileSystem"[0m
+( 2)"forResource"[0m
+( 3)"for3D"[0m
+( 4)"for2D"[0m
+( 5)"forSound"[0m
+(10)"forMiniGame"[0m
+(20)"forTARO"[0m
+	console: "TTY-console"[0m
+(21)"forJIRO"[0m
+	console: "TTY-console"[0m
+(SP-64)"forEvery"[0m
+(SP-65)"forCallPoint"[0m
+(SP-66)"forCriticalCallPoint"[0m
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-level-masks : Test for output message asDetail ]
+
+( 0)"forAny"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		MASKED! ... [90;49mnotice-message: ( 1)"asDetail"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
+( 1)"forFileSystem"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		MASKED! ... [90;49mnotice-message: ( 1)"asDetail"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
+( 2)"forResource"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		MASKED! ... [90;49mnotice-message: ( 1)"asDetail"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
+( 3)"for3D"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		MASKED! ... [90;49mnotice-message: ( 1)"asDetail"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
+( 4)"for2D"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		MASKED! ... [90;49mnotice-message: ( 1)"asDetail"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
+( 5)"forSound"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		MASKED! ... [90;49mnotice-message: ( 1)"asDetail"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
+(10)"forMiniGame"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		MASKED! ... [90;49mnotice-message: ( 1)"asDetail"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
+(20)"forTARO"[0m
+[90;49m	mask(of log): ( 1)"asDetail"[0m
+[90;49m		OK ... [90;49mlog-message: ( 1)"asDetail", "TTY-console"[0m
+[30;107m	mask(of notice): ( 2)"asNormal"[0m
+[30;107m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
+(21)"forJIRO"[0m
+[0m	mask(of log): (11)"asSilent"[0m
+[0m		MASKED! ... [90;49mnotice-message: ( 1)"asDetail"[0m
+[0m	mask(of notice): (12)"asSilentAbsolutely"[0m
+[0m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-level-masks : Test for output message asNormal ]
+
+( 0)"forAny"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0mlog-message: ( 2)"asNormal", "win-console *CHANGED*"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		MASKED! ... [30;107mnotice-message: ( 2)"asNormal"[0m
+( 1)"forFileSystem"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0mlog-message: ( 2)"asNormal", "win-console *CHANGED*"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		MASKED! ... [30;107mnotice-message: ( 2)"asNormal"[0m
+( 2)"forResource"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0mlog-message: ( 2)"asNormal", "win-console *CHANGED*"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		MASKED! ... [30;107mnotice-message: ( 2)"asNormal"[0m
+( 3)"for3D"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0mlog-message: ( 2)"asNormal", "win-console *CHANGED*"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		MASKED! ... [30;107mnotice-message: ( 2)"asNormal"[0m
+( 4)"for2D"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0mlog-message: ( 2)"asNormal", "win-console *CHANGED*"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		MASKED! ... [30;107mnotice-message: ( 2)"asNormal"[0m
+( 5)"forSound"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0mlog-message: ( 2)"asNormal", "win-console *CHANGED*"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		MASKED! ... [30;107mnotice-message: ( 2)"asNormal"[0m
+(10)"forMiniGame"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0mlog-message: ( 2)"asNormal", "win-console *CHANGED*"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		MASKED! ... [30;107mnotice-message: ( 2)"asNormal"[0m
+(20)"forTARO"[0m
+[90;49m	mask(of log): ( 1)"asDetail"[0m
+[90;49m		OK ... [0mlog-message: ( 2)"asNormal", "TTY-console"[0m
+[30;107m	mask(of notice): ( 2)"asNormal"[0m
+[30;107m		OK ... [30;107mnotice-message: ( 2)"asNormal", "vs-console *CHANGED*"[0m
+(21)"forJIRO"[0m
+[0m	mask(of log): (11)"asSilent"[0m
+[0m		MASKED! ... [0mnotice-message: ( 2)"asNormal"[0m
+[0m	mask(of notice): (12)"asSilentAbsolutely"[0m
+[0m		MASKED! ... [30;107mnotice-message: ( 2)"asNormal"[0m
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-level-masks : Test for output message asCritical ]
+
+( 0)"forAny"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		OK ... [93;101mnotice-message: ( 8)"asCritical", "vs-console *CHANGED*"[0m
+( 1)"forFileSystem"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		OK ... [93;101mnotice-message: ( 8)"asCritical", "vs-console *CHANGED*"[0m
+( 2)"forResource"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		OK ... [93;101mnotice-message: ( 8)"asCritical", "vs-console *CHANGED*"[0m
+( 3)"for3D"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		OK ... [93;101mnotice-message: ( 8)"asCritical", "vs-console *CHANGED*"[0m
+( 4)"for2D"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		OK ... [93;101mnotice-message: ( 8)"asCritical", "vs-console *CHANGED*"[0m
+( 5)"forSound"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		OK ... [93;101mnotice-message: ( 8)"asCritical", "vs-console *CHANGED*"[0m
+(10)"forMiniGame"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		OK ... [93;101mnotice-message: ( 8)"asCritical", "vs-console *CHANGED*"[0m
+(20)"forTARO"[0m
+[90;49m	mask(of log): ( 1)"asDetail"[0m
+[90;49m		OK ... [91;49mlog-message: ( 8)"asCritical", "TTY-console"[0m
+[30;107m	mask(of notice): ( 2)"asNormal"[0m
+[30;107m		OK ... [93;101mnotice-message: ( 8)"asCritical", "vs-console *CHANGED*"[0m
+(21)"forJIRO"[0m
+[0m	mask(of log): (11)"asSilent"[0m
+[0m		MASKED! ... [91;49mnotice-message: ( 8)"asCritical"[0m
+[0m	mask(of notice): (12)"asSilentAbsolutely"[0m
+[0m		MASKED! ... [93;101mnotice-message: ( 8)"asCritical"[0m
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-level-masks : Test for output message asAbsolute ]
+
+( 0)"forAny"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0mlog-message: (10)"asAbsolute", "TTY(stdout)"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		OK ... [0mnotice-message: (10)"asAbsolute", "vs-console *CHANGED*"[0m
+( 1)"forFileSystem"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0mlog-message: (10)"asAbsolute", "TTY(stdout)"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		OK ... [0mnotice-message: (10)"asAbsolute", "vs-console *CHANGED*"[0m
+( 2)"forResource"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0mlog-message: (10)"asAbsolute", "TTY(stdout)"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		OK ... [0mnotice-message: (10)"asAbsolute", "vs-console *CHANGED*"[0m
+( 3)"for3D"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0mlog-message: (10)"asAbsolute", "TTY(stdout)"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		OK ... [0mnotice-message: (10)"asAbsolute", "vs-console *CHANGED*"[0m
+( 4)"for2D"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0mlog-message: (10)"asAbsolute", "TTY(stdout)"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		OK ... [0mnotice-message: (10)"asAbsolute", "vs-console *CHANGED*"[0m
+( 5)"forSound"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0mlog-message: (10)"asAbsolute", "TTY(stdout)"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		OK ... [0mnotice-message: (10)"asAbsolute", "vs-console *CHANGED*"[0m
+(10)"forMiniGame"[0m
+[0m	mask(of log): ( 2)"asNormal"[0m
+[0m		OK ... [0mlog-message: (10)"asAbsolute", "TTY(stdout)"[0m
+[93;101m	mask(of notice): ( 8)"asCritical"[0m
+[93;101m		OK ... [0mnotice-message: (10)"asAbsolute", "vs-console *CHANGED*"[0m
+(20)"forTARO"[0m
+[90;49m	mask(of log): ( 1)"asDetail"[0m
+[90;49m		OK ... [0mlog-message: (10)"asAbsolute", "TTY-console"[0m
+[30;107m	mask(of notice): ( 2)"asNormal"[0m
+[30;107m		OK ... [0mnotice-message: (10)"asAbsolute", "vs-console *CHANGED*"[0m
+(21)"forJIRO"[0m
+[0m	mask(of log): (11)"asSilent"[0m
+[0m		OK ... [0mlog-message: (10)"asAbsolute", "TTY-console"[0m
+[0m	mask(of notice): (12)"asSilentAbsolutely"[0m
+[0m		MASKED! ... [0mnotice-message: (10)"asAbsolute"[0m
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-levels ]
+
+[0m(SP-11)"asSilent"[0m
+[0m(SP-12)"asSilentAbsolutely"[0m
+id=1, category=21, level=2, message="message:1"
+id=2, category=21, level=2, message="message:3"
+id=3, category=21, level=2, message="message:9"
+id=4, category=21, level=2, message="message:27"
+id=5, category=21, level=2, message="message:81"
+id=6, category=21, level=2, message="message:243"
+id=7, category=21, level=2, message="message:729"
+id=8, category=21, level=2, message="message:2187"
+id=9, category=21, level=2, message="message:6561"
+id=10, category=21, level=2, message="message:19683"
+id=11, category=21, level=2, message="message:59049"
+id=12, category=21, level=2, message="message:177147"
+id=13, category=21, level=2, message="message:531441"
+id=14, category=21, level=2, message="message:1594323"
+id=15, category=21, level=2, message="message:4782969"
+id=16, category=21, level=2, message="message:14348907"
+id=17, category=21, level=2, message="message:43046721"
+end
