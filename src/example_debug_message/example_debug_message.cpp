@@ -19,6 +19,7 @@
 #include <gasha/log_level.h>//ログレベル
 #include <gasha/log_category.h>//ログカテゴリ
 #include <gasha/log_mask.h>//ログマスク
+#include <gasha/log_work_buff.h>//ログワークバッファ
 
 #include <gasha/iterator.h>//イテレータ操作
 #include <gasha/type_traits.h>//型特性ユーティリティ：toStr()
