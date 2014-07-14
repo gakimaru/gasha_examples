@@ -13,6 +13,10 @@
 #include <cstdio>
 #include <cstdlib>
 
+#include <cstring>
+
+#pragma warning(disable:4996)
+
 int main(const int argc, const char* argv[])
 {
 	//デバッグメッセージテスト

@@ -28,6 +28,7 @@
 
 #include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
 #include <gasha/type_traits.h>//型特性ユーティリティ：extentof
+#include <gasha/string.h>//文字列処理：spprintf()
 
 #include <utility>//C++11 std::move
 #include <condition_variable>//C++11 std::condition_variable
@@ -41,10 +42,6 @@
 #include <mutex>//C++11 std::mutex
 #include <thread>//C++11 std::thread
 #include <functional>//C++11 std::function
-
-//【VC++】sprintf を使用すると、error C4996 が発生する
-//  error C4996: 'sprintf': This function or variable may be unsafe. Consider using strncpy_fast_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-#pragma warning(disable: 4996)//C4996を抑える
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
@@ -283,7 +280,7 @@ void easyTest()
 	//デバッグ情報表示用処理
 	auto debug_print_info = [](char* message, const data_t& data) -> std::size_t
 	{
-		return std::sprintf(message, "temp=%d, value=%d", data.m_temp, data.m_value);
+		return GASHA_ spprintf(message, "temp=%d, value=%d", data.m_temp, data.m_value);
 	};
 #endif//ENABLE_TEST_PRINT_DEBUG_INFO
 
@@ -714,7 +711,7 @@ void thread_test()
 	//デバッグ情報表示用処理
 	auto debug_print_info = [](char* message, const data_t& data) -> std::size_t
 	{
-		return std::sprintf(message, "temp=%d, value=%d", data.m_temp, data.m_value);
+		return GASHA_ spprintf(message, "temp=%d, value=%d", data.m_temp, data.m_value);
 	};
 #endif//ENABLE_TEST_PRINT_DEBUG_INFO
 

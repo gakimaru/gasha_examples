@@ -14,11 +14,12 @@
 
 #include <gasha/iterator.h>//イテレータ操作
 #include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
-#include <gasha/fast_string.h>//高速文字列操作
+#include <gasha/fast_string.h>//高速文字列処理：strncpy_fast()
+#include <gasha/string.h>//文字列処理：spprintf()
 
 #include <utility>//C++11 std::forward
 #include <cstring>//memcpy()
-#include <cstdio>//printf(), sprintf()
+#include <cstdio>//printf()
 #include <cassert>//assert()
 
 //【VC++】例外を無効化した状態で <unordered_map> <algoritm> をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
@@ -27,10 +28,6 @@
 
 #include <algorithm>//std::for_each()
 #include <unordered_map>//C++11 std::unordered_map（比較用）
-
-//【VC++】sprintf を使用すると、error C4996 が発生する
-//  error C4996: 'sprintf': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-#pragma warning(disable: 4996)//C4996を抑える
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
@@ -215,7 +212,7 @@ void example_hash_table()
 		for (int i = begin; i < end; i += step)
 		{
 			char name[20];
-			std::sprintf(name, "Name_%06d", i);
+			GASHA_ spprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			data_t* obj = nullptr;
 			//【推奨】【登録方法①】emplace()メソッドにキーとコンストラクタパラメータを渡して登録する方法
@@ -481,7 +478,7 @@ void example_hash_table()
 		for (int i = 0; i < TEST_DATA_TABLE_SIZE; ++i)
 		{
 			char name[20];
-			std::sprintf(name, "Name_%06d", i);
+			GASHA_ spprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			data_t* obj;
 			crc32_t key;
@@ -562,7 +559,7 @@ void example_hash_table()
 		for (int i = begin; i < end; i += step)
 		{
 			char name[20];
-			std::sprintf(name, "Name_%06d", i);
+			GASHA_ spprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			bool result = false;
 			#define USE_ERASE_TYPE 1
@@ -736,7 +733,7 @@ void example_hash_table()
 		for (int i = begin; i < end; i += step)
 		{
 			char name[20];
-			std::sprintf(name, "Name_%06d", i);
+			GASHA_ spprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			data_t obj(name, i);
 			auto ite = stl_con->emplace(calcCRC32(name), obj);//キーとコンストラクタパラメータを渡して登録
@@ -787,7 +784,7 @@ void example_hash_table()
 		for (int i = 0; i < TEST_DATA_TABLE_SIZE; ++i)
 		{
 			char name[20];
-			std::sprintf(name, "Name_%06d", i);
+			GASHA_ spprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			crc32_t key = calcCRC32(name);
 			auto ite = stl_con->find(key);
@@ -820,7 +817,7 @@ void example_hash_table()
 		for (int i = begin; i < end; i += step)
 		{
 			char name[20];
-			std::sprintf(name, "Name_%06d", i);
+			GASHA_ spprintf(name, "Name_%06d", i);
 			printf_detail("name=\"%s\" ... ", name);
 			crc32_t key = calcCRC32(name);
 			bool result = stl_con->erase(key) == 1;

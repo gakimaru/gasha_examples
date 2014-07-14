@@ -744,6 +744,34 @@ void example_fast_string()
 	test_strcpy(0, 0);
 	test_strncpy(0, 0);
 
+	//spprintfテスト
+	//※高速文字列処理ではないが、いっしょにテスト
+	printf("\n");
+	printf("================================================================================\n");
+	printf("[ Test for spptinf ]\n");
+	{
+		char buff[32];
+		memset(buff, 0xcd, sizeof(buff));
+		std::size_t pos = 0;
+		int ret;
+		#define EXPR(expr) expr; printf("%s buff=\"%s\", pos=%d, ret=%d\n", #expr, buff, pos, ret);
+
+		printf("char buff[10];\n");
+		EXPR(ret = spprintf(buff, 10, pos, "1"););
+		EXPR(ret = spprintf(buff, 10, pos, "%d", 23););
+		EXPR(ret = spprintf(buff, 10, pos, "%d%d%d", 4, 5, 6););
+		EXPR(ret = spprintf(buff, 10, pos, "%d", 7890););
+		EXPR(ret = spprintf(buff, 10, pos, "ABC"););
+		
+		EXPR(pos = 0;);
+		EXPR(ret = spprintf(buff, pos, "1"););
+		EXPR(ret = spprintf(buff, pos, "%d", 23););
+		EXPR(ret = spprintf(buff, pos, "%d%d%d", 4, 5, 6););
+		EXPR(ret = spprintf(buff, pos, "%d", 7890););
+		EXPR(ret = spprintf(buff, pos, "ABC"););
+		#undef EXPR
+	}
+
 	printf("\n");
 	printf("- end -\n");
 }

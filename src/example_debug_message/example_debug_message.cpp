@@ -108,12 +108,12 @@ void printAllLogCategory()
 			auto* console_for_notice = obj.consoleForNotice();
 			if (console)
 			{
-				print_console->printf(message, "\tconsole: \"%s\"(%s)", console->name());
+				print_console->printf(message, "\tconsole: \"%s\"", console->name());
 				print_console->outputCr();
 			}
 			if (console_for_notice)
 			{
-				print_console->printf(message, "\tnotice: \"%s\"(%s)", console_for_notice->name());
+				print_console->printf(message, "\tnotice: \"%s\"", console_for_notice->name());
 				print_console->outputCr();
 			}
 		}
@@ -220,6 +220,18 @@ void example_debug_message()
 	//全ログレベルの列挙
 	printAllLogLevel();
 
+	//独自ログカテゴリの追加
+	enum exCategory : logCategory::category_type
+	{
+		forMiniGame = MAKE_LOG_CATEGORY_VALUE(10),//ミニゲーム
+		forTARO = MAKE_LOG_CATEGORY_VALUE(20),//太郎用（可発者個人用）
+		forJIRO = MAKE_LOG_CATEGORY_VALUE(21),//次郎用（可発者個人用）
+	};
+	regLogCategory<forMiniGame>()("forMiniGame");
+	vsConsole vs_console;
+	regLogCategory<forTARO>()("forTARO", &vs_console);//開発者用のログはVSの出力ウインドウに
+	regLogCategory<forJIRO>()("forJIRO", &vs_console);//開発者用のログはVSの出力ウインドウに
+
 	//全カテゴリレベルの列挙
 	printAllLogCategory();
 
@@ -230,7 +242,6 @@ void example_debug_message()
 		//※dev/pty3/はCygwinの端末
 		int fd = open("/dev/pty3", O_WRONLY | O_NDELAY | O_NOCTTY);//書き込み専用＋（可能なら）非停止モード＋制御端末割り当て禁止（端末でCtrl+Cなどの制御が効かない）
 		FILE* fp = fdopen(fd, "w");
-		printf("fd=%d, fp=%p\n", fd, fp);
 		static ttyConsole console(fp, "/dev/pty3");
 		
 		//ログレベルにコンソールを割り当て
