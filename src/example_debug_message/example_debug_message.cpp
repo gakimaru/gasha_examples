@@ -152,7 +152,7 @@ void printAllLogMask(const logLevel::level_type level)
 	//reverseForEach(logMask(),//逆順表示
 	//	[&level_obj](logMask::reverse_iterator& obj)
 	{
-		logCategory& category = obj.category();
+		const logCategory& category = obj.category();
 		logLevel level_mask(obj.levelMask(ofLog));
 		logLevel level_mask_of_notice(obj.levelMask(ofNotice));
 		IConsole* print_console = level_mask.console(ofLog);
@@ -164,9 +164,11 @@ void printAllLogMask(const logLevel::level_type level)
 		else
 			print_console->printf(message, "(%2d)\"%s\"", category.value(), category.name());
 		print_console->outputCr();
-		auto* console = obj.console(ofLog, level_obj);
-		auto* console_of_notice = obj.console(ofNotice, level_obj);
-		
+		IConsole* console = obj.console(ofLog, level_obj);
+		const consoleColor* color = obj.color(ofLog, level_obj);
+		IConsole* console_of_notice = obj.console(ofNotice, level_obj);
+		const consoleColor* color_of_notice = obj.color(ofNotice, level_obj);
+
 		print_console->changeColor(level_mask.color(ofLog));
 		print_console->printf(message, "\tmask(of log): (%2d)\"%s\"", level_mask.value(), level_mask.name());
 		print_console->outputCr();
@@ -174,7 +176,7 @@ void printAllLogMask(const logLevel::level_type level)
 		{
 			print_console->changeColor(level_mask.color(ofLog));
 			print_console->printf(message, "\t\tOK ... ");
-			console->changeColor(level_obj.color(ofLog));
+			console->changeColor(*color);
 			console->printf(message, "log-message: (%2d)\"%s\", \"%s\"", level_obj.value(), level_obj.name(), console->name());
 			console->outputCr();
 			if (*print_console != *console)
@@ -196,7 +198,7 @@ void printAllLogMask(const logLevel::level_type level)
 		{
 			print_console->changeColor(level_mask_of_notice.color(ofNotice));
 			print_console->printf(message, "\t\tOK ... ");
-			console_of_notice->changeColor(level_obj.color(ofNotice));
+			console_of_notice->changeColor(*color_of_notice);
 			console_of_notice->printf(message, "notice-message: (%2d)\"%s\", \"%s\"", level_obj.value(), level_obj.name(), console_of_notice->name());
 			console_of_notice->outputCr();
 			if (*print_console != *console_of_notice)
