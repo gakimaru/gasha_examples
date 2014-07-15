@@ -20,7 +20,7 @@
 #include <gasha/log_purpose.h>//ログ用途
 #include <gasha/log_level.h>//ログレベル
 #include <gasha/log_category.h>//ログカテゴリ
-#include <gasha/log_mask.h>//ログマスク
+#include <gasha/log_mask.h>//ログreberu マスク
 #include <gasha/log_work_buff.h>//ログワークバッファ
 #include <gasha/log_attr.h>//ログ属性
 #include <gasha/log_print_info.h>//ログ出力情報
@@ -144,7 +144,7 @@ void printAllLogCategory()
 }
 
 //----------------------------------------
-//ログマスク列挙
+//ログレベルマスク列挙
 void printAllLogMask(const logLevel::level_type level)
 {
 	logLevel level_obj(level);
@@ -300,8 +300,11 @@ void example_debug_message()
 		logCategoryContainer cate_con(logCategoryContainer::explicitInitialize);//ログカテゴリの明示的な初期化
 	#endif//GASHA_LOG_CATEGORY_CONTAINER_SECURE_INITIALIZE
 	#ifndef GASHA_LOG_MASK_SECURE_INITIALIZE
-		logMask mask(logMask::explicitInitialize);//ログマスクの明示的な初期化
+		logMask mask(logMask::explicitInitialize);//ログレベルマスクの明示的な初期化
 	#endif//GASHA_LOG_MASK_SECURE_INITIALIZE
+	#ifndef GASHA_LOG_ATTR_SECURE_INITIALIZE
+		logAttr attr(logAttr::explicitInitialize);//ログ属性の明示的な初期化
+	#endif//GASHA_LOG_ATTR_SECURE_INITIALIZE
 	#ifndef GASHA_LOG_WORK_BUFF_SECURE_INITIALIZE
 		logWorkBuff log_buff(logWorkBuff::explicitInitialize);//ログワークバッファの明示的な初期化
 	#endif//GASHA_LOG_WORK_BUFF_SECURE_INITIALIZE
@@ -371,21 +374,121 @@ void example_debug_message()
 	//全カテゴリレベルの列挙
 	printAllLogCategory();
 
-	//ログマスクを変更
+	//ログレベルマスクを変更
 	{
 		logMask mask;
 		{
-			auto ite = mask.find(forTARO);//太郎用ログマスク（イテレータ）を取得
-			ite.changeLevel(ofLog, asDetail);//ログマスクを詳細メッセージレベルに下げる
+			auto ite = mask.find(forTARO);//太郎用ログレベルマスク（イテレータ）を取得
+			ite.changeLevel(ofLog, asDetail);//ログレベルマスクを詳細メッセージレベルに下げる
 			ite.changeLevel(ofNotice, asNormal);//画面通知マスクを通常メッセージレベルに下げる
 		}
 		{
-			mask.changeLevel(ofLog, asSilent, forJIRO);//次郎用ログマスクを静寂レベルに上げる
+			mask.changeLevel(ofLog, asSilent, forJIRO);//次郎用ログレベルマスクを静寂レベルに上げる
 			mask.changeLevel(ofNotice, asSilentAbsolutely, forJIRO);//次郎用画面通知マスクを絶対静寂レベルに上げる
 		}
 	}
 
-	//ログマスク列挙
+	//ローカルログレベルマスク＆ローカルログ属性
+	{
+		logMask mask;
+		logAttr attr;
+		printf("1:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		printf("1:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		mask.changeRef(logMask::isLocal);
+		attr.changeRef(logAttr::isLocal);
+		printf("2:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		printf("2:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		mask.changeRef(logMask::isGlobal);
+		attr.changeRef(logAttr::isGlobal);
+		printf("2a:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		printf("2a:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		mask.changeRef(logMask::isTls);
+		attr.changeRef(logAttr::isTls);
+		printf("2b:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		printf("2b:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		mask.changeRef(logMask::isLocal);
+		attr.changeRef(logAttr::isLocal);
+		printf("2c:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		printf("2c:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		mask.changeLevel(ofLog, asNormal, forEvery);
+		attr.add(logWithCriticalCPName);
+		attr.add(noticeWithCPName);
+		printf("3:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		printf("3:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		{
+			logMask mask;
+			logAttr attr;
+			printf("4:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+			printf("4:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+			{
+				logMask mask;
+				logAttr attr;
+				printf("5:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				printf("5:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				mask.changeRef(logMask::isLocal);
+				attr.changeRef(logAttr::isLocal);
+				printf("6:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				printf("6:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				mask.changeLevel(ofLog, asDetail, forEvery);
+				attr.remove(logWithCriticalCPName);
+				attr.remove(noticeWithCPName);
+				attr.add(logWithCPName);
+				attr.add(noticeWithCriticalCPName);
+				printf("7:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				printf("7:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				mask.changeRef(logMask::isLocal);
+				attr.changeRef(logAttr::isLocal);
+				printf("7a:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				printf("7a:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				mask.changeRef(logMask::isGlobal);
+				attr.changeRef(logAttr::isGlobal);
+				printf("7b:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				printf("7b:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				{
+					logMask mask;
+					logAttr attr;
+					printf("7bx:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+					printf("7bx:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+					mask.changeRef(logMask::isLocal);
+					attr.changeRef(logAttr::isLocal);
+					printf("7bx2:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+					printf("7bx2:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				}
+				mask.changeRef(logMask::isLocal);
+				attr.changeRef(logAttr::isLocal);
+				printf("7c:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				printf("7c:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				mask.changeRef(logMask::isTls);
+				attr.changeRef(logAttr::isTls);
+				printf("7d:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				printf("7d:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				mask.changeRef(logMask::isGlobal);
+				attr.changeRef(logAttr::isGlobal);
+				printf("7e:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				printf("7e:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				mask.changeRef(logMask::isLocal);
+				attr.changeRef(logAttr::isLocal);
+				printf("7f:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				printf("7f:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				mask.changeRef(logMask::isGlobal);
+				attr.changeRef(logAttr::isGlobal);
+				printf("7g:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				printf("7g:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+			}
+			printf("8:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+			printf("8:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		}
+		printf("9:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		printf("9:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+	}
+	{
+		logMask mask;
+		logAttr attr;
+		printf("10:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		printf("10:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+	}
+
+	//ログレベルマスク列挙
 	printAllLogMask(asDetail);//詳細レベルの表示チェック
 	printAllLogMask(asNormal);//通常レベルの表示チェック
 	printAllLogMask(asCritical);//重大レベルの表示チェック
@@ -470,7 +573,7 @@ void example_debug_message()
 			}
 
 			logQueue queue;
-			logQueue::id_type reserved_id = queue.reserve();
+			logQueue::id_type reserved_id = queue.reserve(1);
 			for (int i = 1; i < 1000000000; i *= 3)
 			{
 				//エンキュー
@@ -482,6 +585,7 @@ void example_debug_message()
 						std::size_t size = 0;
 						work_buff.spprintf(message, size, "message:%d", i);
 						logMask mask;
+						logAttr attr;
 						logPrintInfo print_info;
 						logLevel::level_type level = asNormal;
 						logCategory::category_type category = forTARO;
@@ -490,7 +594,7 @@ void example_debug_message()
 						print_info.m_messageSize = static_cast<logPrintInfo::message_size_type>(size + 1);
 						print_info.m_level = level;
 						print_info.m_category = category;
-						print_info.m_attr = noLogAttr;
+						print_info.m_attr = attr.attr();
 						for (logPurpose::purpose_type purpose = 0; purpose < logPurpose::NUM; ++purpose)
 						{
 							print_info.m_consoles[purpose] = mask.console(purpose, level, category);
@@ -534,6 +638,7 @@ void example_debug_message()
 					std::size_t size = 0;
 					work_buff.spprintf(message, size, "reserved message");
 					logMask mask;
+					logAttr attr;
 					logPrintInfo print_info;
 					logLevel::level_type level = asNormal;
 					logCategory::category_type category = forTARO;
@@ -542,7 +647,7 @@ void example_debug_message()
 					print_info.m_messageSize = static_cast<logPrintInfo::message_size_type>(size + 1);
 					print_info.m_level = level;
 					print_info.m_category = category;
-					print_info.m_attr = noLogAttr;
+					print_info.m_attr = attr.attr();
 					for (logPurpose::purpose_type purpose = 0; purpose < logPurpose::NUM; ++purpose)
 					{
 						print_info.m_consoles[purpose] = mask.console(purpose, level, category);
