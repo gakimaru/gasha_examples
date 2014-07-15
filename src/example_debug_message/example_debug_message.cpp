@@ -21,6 +21,7 @@
 #include <gasha/log_mask.h>//ログマスク
 #include <gasha/log_work_buff.h>//ログワークバッファ
 #include <gasha/log_queue.h>//ログキュー
+#include <gasha/log_queue_monitor.h>//ログキューモニター
 
 #include <gasha/iterator.h>//イテレータ操作
 #include <gasha/type_traits.h>//型特性ユーティリティ：toStr()
@@ -302,6 +303,9 @@ void example_debug_message()
 	#ifndef GASHA_LOG_QUEUE_SECURE_INITIALIZE
 		logQueue log_queue(logQueue::explicitInitialize);//ログキューの明示的な初期化
 	#endif//GASHA_LOG_QUEUE_SECURE_INITIALIZE
+	#ifndef GASHA_LOG_QUEUE_MONITOR_SECURE_INITIALIZE
+		logQueueMonitor log_queue_monitor(logQueueMonitor::explicitInitialize);//ログキューモニターの明示的な初期化
+	#endif//GASHA_LOG_QUEUE_MONITOR_SECURE_INITIALIZE
 	}
 
 	//ログレベルのコンソールを変更
@@ -405,8 +409,11 @@ void example_debug_message()
 	}
 #endif//GASHA_IS_GCC
 
-	//メッセージのキューイング
 	{
+		//ログキューモニタースレッド実行
+		std::thread th_mon(logQueueMonitor::monitor, logQueueMonitor::defaultOutput);
+
+		//メッセージのキューイング
 		for (int mode = 0; mode < 4; ++mode)
 		{
 			if (mode == 1)
@@ -426,7 +433,12 @@ void example_debug_message()
 				//ログキューとログワークバッファを再開
 				logWorkBuff work_buff(logWorkBuff::explicitInitialize);
 				logQueue queue(logQueue::explicitInitialize);
+				logQueueMonitor mon;
+				mon.reset();//ログキューモニターリセット
 			}
+
+			logQueue queue;
+			logQueue::id_type reserved_id = queue.reserve();
 			for (int i = 1; i < 1000000000; i *= 3)
 			{
 				//エンキュー
@@ -437,18 +449,26 @@ void example_debug_message()
 					{
 						std::size_t size = 0;
 						work_buff.spprintf(message, size, "message:%d", i);
-						logQueue queue;
 						logMask mask;
-						IConsole* consoles[] = { mask.console(ofLog, asNormal, forJIRO), mask.console(ofNotice, asNormal, forJIRO) };
-						const consoleColor* colors[] = { mask.color(ofLog, asNormal, forJIRO), mask.color(ofNotice, asNormal, forJIRO) };
-						const bool result = queue.enqueue(message, asNormal, forJIRO, consoles, colors, size + 1, 0);
-						if (!result)
+						logLevel::level_type level = asNormal;
+						logCategory::category_type category = forTARO;
+						IConsole* consoles[] = { mask.console(ofLog, level, category), mask.console(ofNotice, level, category) };
+						const consoleColor* colors[] = { mask.color(ofLog, level, category), mask.color(ofNotice, level, category) };
+						const bool result = queue.enqueue(message, true, level, category, consoles, colors, size + 1, 0);
+						if (result)
+						{
+							//モニターに通知
+							logQueueMonitor mon;
+							mon.notify();
+						}
+						else
 							printf("enqueu failed.\n");
 						work_buff.free(message);
 					}
 					else
 						printf("message making failed.\n");
 				}
+			#if 0
 				//デキュー
 				{
 					logQueue::node_type node;
@@ -460,9 +480,50 @@ void example_debug_message()
 						queue.release(node);
 					}
 				}
+			#endif
+			}
+			//予約したメッセージを出力
+			{
+				logWorkBuff work_buff;
+				char* message = work_buff.alloc();
+				if (message)
+				{
+					std::size_t size = 0;
+					work_buff.spprintf(message, size, "reserved message");
+					logMask mask;
+					logLevel::level_type level = asNormal;
+					logCategory::category_type category = forTARO;
+					IConsole* consoles[] = { mask.console(ofLog, level, category), mask.console(ofNotice, level, category) };
+					const consoleColor* colors[] = { mask.color(ofLog, level, category), mask.color(ofNotice, level, category) };
+					const bool result = queue.enqueue(message, true, level, category, consoles, colors, size + 1, reserved_id);
+					if (result)
+					{
+						//モニターに通知
+						logQueueMonitor mon;
+						mon.notify();
+					}
+					else
+						printf("enqueu of reservation failed.\n");
+					work_buff.free(message);
+				}
+				else
+					printf("message making of reservation failed.\n");
+			}
+
+			//モニター終了待ち
+			{
+				logQueueMonitor mon;
+				mon.flush();
 			}
 		}
-		printf("end\n");
+
+		//モニター終了
+		{
+			logQueueMonitor mon;
+			mon.flush();
+			mon.abort();
+		}
+		th_mon.join();
 	}
 
 #endif//GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
