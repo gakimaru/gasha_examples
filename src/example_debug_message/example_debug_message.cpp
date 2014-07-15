@@ -53,50 +53,50 @@ void printAllLogLevel()
 
 	forEach(logLevelContainer(),//正順表示
 	//reverseForEach(logLevelContainer(),//逆順表示
-		[](logLevel& obj)
+		[](logLevel& level_obj)
 		{
-			IConsole* print_console = obj.console(ofLog);
-			IConsole* notice_console = obj.console(ofNotice);
+			IConsole* print_console = level_obj.console(ofLog);
+			IConsole* notice_console = level_obj.console(ofNotice);
 			if (!print_console)
 				print_console = &stdOutConsole::instance();
 			if (!notice_console)
 				notice_console = &stdOutConsole::instance();
 			char message[1024];
 			char str_color[64];
-			print_console->changeColor(obj.color(ofLog));
-			if(obj.isSpecial())
-				print_console->printf(message, "(SP-%2d)\"%s\"", obj.value(), obj.name());
+			print_console->changeColor(level_obj.color(ofLog));
+			if (level_obj.isSpecial())
+				print_console->printf(message, "[%2d](SP%2d)\"%s\"", level_obj.outputLevel(), level_obj.value(), level_obj.name());
 			else
-				print_console->printf(message, "(%2d:%2d)\"%s\"", obj.value(), obj.outputLevel(), obj.name());
+				print_console->printf(message, "[%2d](%2d)\"%s\"", level_obj.outputLevel(), level_obj.value(), level_obj.name());
 			print_console->outputCr();
-			auto* console = obj.console(ofLog);
-			auto& color = obj.color(ofLog);
-			auto* console_of_notice = obj.console(ofNotice);
-			auto& color_of_notice = obj.color(ofNotice);
-			auto prev = obj.prev();
-			auto next = obj.next();
+			IConsole* console = level_obj.console(ofLog);
+			consoleColor& color = level_obj.color(ofLog);
+			IConsole* console_of_notice = level_obj.console(ofNotice);
+			consoleColor& color_of_notice = level_obj.color(ofNotice);
+			logLevel prev = level_obj.prev();
+			logLevel next = level_obj.next();
 			if (console)
 			{
-				print_console->changeColor(obj.color(ofLog));
+				print_console->changeColor(level_obj.color(ofLog));
 				print_console->printf(message, "\tconsole: \"%s\"(%s)", console->name(), color.toStr(str_color));
 				print_console->outputCr();
 			}
 			if (console_of_notice)
 			{
-				notice_console->changeColor(obj.color(ofNotice));
+				notice_console->changeColor(level_obj.color(ofNotice));
 				notice_console->printf(message, "\tnotice: \"%s\"(%s)", console_of_notice->name(), color_of_notice.toStr(str_color));
 				notice_console->outputCr();
 			}
 			if (prev)
 			{
 				print_console->changeColor(prev.color(ofLog));
-				print_console->printf(message, "\tprev: (%2d:%2d)\"%s\"", prev.value(), prev.outputLevel(), prev.name());
+				print_console->printf(message, "\tprev: [%2d](%2d)\"%s\"", prev.outputLevel(), prev.value(), prev.name());
 				print_console->outputCr();
 			}
 			if (next)
 			{
 				print_console->changeColor(next.color(ofLog));
-				print_console->printf(message, "\tnext: (%2d:%2d)\"%s", next.value(), next.outputLevel(), next.name());
+				print_console->printf(message, "\tnext: [%2d](%2d)\"%s", next.outputLevel(), next.value(), next.name());
 				print_console->outputCr();
 			}
 		}
@@ -109,24 +109,24 @@ void printAllLogCategory()
 {
 	printf("\n");
 	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Enumeration of all log-categoris ]\n");
+	printf("[ Enumeration of all log-categories ]\n");
 	printf("\n");
 
 	forEach(logCategoryContainer(),//正順表示
 	//reverseForEach(logCategoryContainer(),//逆順表示
-		[](logCategory& obj)
+		[](logCategory& category_obj)
 		{
-			IConsole* print_console = obj.console(ofLog);
+			IConsole* print_console = category_obj.console(ofLog);
 			if (!print_console)
 				print_console = &stdOutConsole::instance();
 			char message[1024];
-			if (obj.isSpecial())
-				print_console->printf(message, "(SP-%2d)\"%s\"", obj.value(), obj.name());
+			if (category_obj.isSpecial())
+				print_console->printf(message, "(SP%2d)\"%s\"", category_obj.value(), category_obj.name());
 			else
-				print_console->printf(message, "(%2d)\"%s\"", obj.value(), obj.name());
+				print_console->printf(message, "(%2d)\"%s\"", category_obj.value(), category_obj.name());
 			print_console->outputCr();
-			auto* console = obj.console(ofLog);
-			auto* console_of_notice = obj.console(ofNotice);
+			IConsole* console = category_obj.console(ofLog);
+			IConsole* console_of_notice = category_obj.console(ofNotice);
 			if (console)
 			{
 				print_console->printf(message, "\tconsole: \"%s\"", console->name());
@@ -165,7 +165,7 @@ void printAllLogMask(const logLevel::level_type level)
 			print_console = &stdOutConsole::instance();
 		char message[1024];
 		if (category.isSpecial())
-			print_console->printf(message, "(SP-%2d)\"%s\"", category.value(), category.name());
+			print_console->printf(message, "(SP%2d)\"%s\"", category.value(), category.name());
 		else
 			print_console->printf(message, "(%2d)\"%s\"", category.value(), category.name());
 		print_console->outputCr();
@@ -328,21 +328,43 @@ void example_debug_message()
 		con.replaceEachConsole(ofNotice, &console);
 	}
 
+	//独自ログレベルを追加
+	enum extLogLevel : logLevel::level_type
+	{
+		asMoreDetail = MAKE_LOG_LEVEL_VALUE(0, 0),//更に詳細
+		asAboveNormal = MAKE_LOG_LEVEL_VALUE(4, 1),//通常より少し上のレベル
+	};
+	{
+		static vsConsole vs_console("vs-console *CUSTOM*");
+		IConsole* consoles[] = { &stdOutConsole::instance(), &vs_console };
+		consoleColor colors[] = { consoleColor(consoleColor::WHITE, consoleColor::iBLACK), stdConsoleColor };
+		regLogLevel<asMoreDetail>()("asMoreDetail", consoles, colors);
+	}
+	{
+		IConsole* consoles[] = { &stdOutConsole::instance(), nullptr };
+		consoleColor colors[] = { consoleColor(consoleColor::CYAN), stdConsoleColor };
+		regLogLevel<asAboveNormal>()("asAboveNormal", consoles, colors);
+	}
+
 	//全ログレベルの列挙
 	printAllLogLevel();
 
-	//独自ログカテゴリの追加
-	enum exCategory : logCategory::category_type
+	//独自ログカテゴリを追加
+	enum extLogCategory : logCategory::category_type
 	{
 		forMiniGame = MAKE_LOG_CATEGORY_VALUE(10),//ミニゲーム
 		forTARO = MAKE_LOG_CATEGORY_VALUE(20),//太郎用（可発者個人用）
 		forJIRO = MAKE_LOG_CATEGORY_VALUE(21),//次郎用（可発者個人用）
 	};
-	regLogCategory<forMiniGame>()("forMiniGame");
-	static vsConsole vs_console;
-	IConsole* console[] = { &vs_console, nullptr };
-	regLogCategory<forTARO>()("forTARO", console);//開発者用のログはVSの出力ウインドウに
-	regLogCategory<forJIRO>()("forJIRO", console);//開発者用のログはVSの出力ウインドウに
+	{
+		regLogCategory<forMiniGame>()("forMiniGame");
+	}
+	{
+		static vsConsole vs_console("vs-console *Category CUSTOM*");
+		IConsole* consoles[] = { &vs_console, nullptr };
+		regLogCategory<forTARO>()("forTARO", consoles);//開発者用のログはVSの出力ウインドウに
+		regLogCategory<forJIRO>()("forJIRO", consoles);//開発者用のログはVSの出力ウインドウに
+	}
 
 	//全カテゴリレベルの列挙
 	printAllLogCategory();
