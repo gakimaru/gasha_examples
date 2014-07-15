@@ -20,7 +20,10 @@
 #include <gasha/log_category.h>//ログカテゴリ
 #include <gasha/log_mask.h>//ログマスク
 #include <gasha/log_work_buff.h>//ログワークバッファ
+#include <gasha/log_attr.h>//ログ属性
+#include <gasha/log_print_info.h>//ログ出力情報
 #include <gasha/log_queue.h>//ログキュー
+#include <gasha/std_log_print.h>//標準ログ出力
 #include <gasha/log_queue_monitor.h>//ログキューモニター
 
 #include <gasha/iterator.h>//イテレータ操作
@@ -411,7 +414,12 @@ void example_debug_message()
 
 	{
 		//ログキューモニタースレッド実行
-		std::thread th_mon(logQueueMonitor::monitor, logQueueMonitor::defaultOutput);
+		auto monitor_thread_func = []()
+		{
+			logQueueMonitor mon;
+			mon.monitor(stdLogPrint());
+		};
+		std::thread monitor_thread(monitor_thread_func);
 
 		//メッセージのキューイング
 		for (int mode = 0; mode < 4; ++mode)
@@ -450,11 +458,22 @@ void example_debug_message()
 						std::size_t size = 0;
 						work_buff.spprintf(message, size, "message:%d", i);
 						logMask mask;
+						logPrintInfo print_info;
 						logLevel::level_type level = asNormal;
 						logCategory::category_type category = forTARO;
-						IConsole* consoles[] = { mask.console(ofLog, level, category), mask.console(ofNotice, level, category) };
-						const consoleColor* colors[] = { mask.color(ofLog, level, category), mask.color(ofNotice, level, category) };
-						const bool result = queue.enqueue(message, true, level, category, consoles, colors, size + 1, 0);
+						print_info.m_id = 0;//IDは自動発番
+						print_info.m_message = message;
+						print_info.m_messageSize = static_cast<logPrintInfo::message_size_type>(size + 1);
+						print_info.m_level = level;
+						print_info.m_category = category;
+						print_info.m_attr = noLogAttr;
+						for (logPurpose::purpose_type purpose = 0; purpose < logPurpose::NUM; ++purpose)
+						{
+							print_info.m_consoles[purpose] = mask.console(purpose, level, category);
+							print_info.m_colors[purpose] = mask.color(purpose, level, category);
+						}
+						//stdLogPrint()(print_info);//キューイングせずに直接表示する場合
+						const bool result = queue.enqueue(print_info);//キューイング
 						if (result)
 						{
 							//モニターに通知
@@ -491,11 +510,22 @@ void example_debug_message()
 					std::size_t size = 0;
 					work_buff.spprintf(message, size, "reserved message");
 					logMask mask;
+					logPrintInfo print_info;
 					logLevel::level_type level = asNormal;
 					logCategory::category_type category = forTARO;
-					IConsole* consoles[] = { mask.console(ofLog, level, category), mask.console(ofNotice, level, category) };
-					const consoleColor* colors[] = { mask.color(ofLog, level, category), mask.color(ofNotice, level, category) };
-					const bool result = queue.enqueue(message, true, level, category, consoles, colors, size + 1, reserved_id);
+					print_info.m_id = reserved_id;//予約したID
+					print_info.m_message = message;
+					print_info.m_messageSize = static_cast<logPrintInfo::message_size_type>(size + 1);
+					print_info.m_level = level;
+					print_info.m_category = category;
+					print_info.m_attr = noLogAttr;
+					for (logPurpose::purpose_type purpose = 0; purpose < logPurpose::NUM; ++purpose)
+					{
+						print_info.m_consoles[purpose] = mask.console(purpose, level, category);
+						print_info.m_colors[purpose] = mask.color(purpose, level, category);
+					}
+					//stdLogPrint()(print_info);//キューイングせずに直接表示する場合
+					const bool result = queue.enqueue(print_info);//キューイング
 					if (result)
 					{
 						//モニターに通知
@@ -523,7 +553,7 @@ void example_debug_message()
 			mon.flush();
 			mon.abort();
 		}
-		th_mon.join();
+		monitor_thread.join();
 	}
 
 #endif//GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
