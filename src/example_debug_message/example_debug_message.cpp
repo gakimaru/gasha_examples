@@ -14,6 +14,8 @@
 #include <gasha/tty_console.h>//コンソール：TTY端末
 #include <gasha/win_console.h>//コンソール：Windowsコマンドプロンプト
 #include <gasha/vs_console.h>//コンソール：Visual Studio出力ウインドウ
+#include <gasha/dummy_console.h>//コンソール：ダミーコンソール
+#include <gasha/std_console.h>//標準コンソール
 
 #include <gasha/log_purpose.h>//ログ用途
 #include <gasha/log_level.h>//ログレベル
