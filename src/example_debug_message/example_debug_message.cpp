@@ -15,7 +15,7 @@
 #include <gasha/win_console.h>//コンソール：Windowsコマンドプロンプト
 #include <gasha/vs_console.h>//コンソール：Visual Studio出力ウインドウ
 
-#include <gasha/log_common.h>//ログ共通設定
+#include <gasha/log_purpose.h>//ログ用途
 #include <gasha/log_level.h>//ログレベル
 #include <gasha/log_category.h>//ログカテゴリ
 #include <gasha/log_mask.h>//ログマスク
@@ -149,13 +149,13 @@ void printAllLogMask(const logLevel::level_type level)
 	printf("\n");
 
 	forEach(logMask(),//正順表示
-		[&level_obj](logMask::iterator& obj)
+		[&level_obj](logMask::iterator& mask_obj)
 	//reverseForEach(logMask(),//逆順表示
-	//	[&level_obj](logMask::reverse_iterator& obj)
+	//	[&level_obj](logMask::reverse_iterator& mask_obj)
 	{
-		const logCategory& category = obj.category();
-		logLevel level_mask(obj.levelMask(ofLog));
-		logLevel level_mask_of_notice(obj.levelMask(ofNotice));
+		const logCategory& category = mask_obj.category();
+		logLevel level_mask(mask_obj.level(ofLog));
+		logLevel level_mask_of_notice(mask_obj.level(ofNotice));
 		IConsole* print_console = level_mask.console(ofLog);
 		if (!print_console)
 			print_console = &stdOutConsole::instance();
@@ -165,10 +165,10 @@ void printAllLogMask(const logLevel::level_type level)
 		else
 			print_console->printf(message, "(%2d)\"%s\"", category.value(), category.name());
 		print_console->outputCr();
-		IConsole* console = obj.console(ofLog, level_obj);
-		const consoleColor* color = obj.color(ofLog, level_obj);
-		IConsole* console_of_notice = obj.console(ofNotice, level_obj);
-		const consoleColor* color_of_notice = obj.color(ofNotice, level_obj);
+		IConsole* console = mask_obj.console(ofLog, level_obj);
+		const consoleColor* color = mask_obj.color(ofLog, level_obj);
+		IConsole* console_of_notice = mask_obj.console(ofNotice, level_obj);
+		const consoleColor* color_of_notice = mask_obj.color(ofNotice, level_obj);
 
 		print_console->changeColor(level_mask.color(ofLog));
 		print_console->printf(message, "\tmask(of log): (%2d)\"%s\"", level_mask.value(), level_mask.name());
@@ -313,12 +313,12 @@ void example_debug_message()
 	}
 
 	//全ログレベルのコンソールをまとめて変更
-	//※replaceAllConsole()メソッドは、nullptr が設定されているコンソールは変更しない
+	//※replaceEachConsole()メソッドは、nullptr が設定されているコンソールは変更しない
 	{
 		static vsConsole console("vs-console *CHANGED*");
-		//logLevel::replaceAllConsole(ofLog, &console);
+		//logLevel::replaceEachConsole(ofLog, &console);
 		logLevelContainer con;
-		con.replaceAllConsole(ofNotice, &console);
+		con.replaceEachConsole(ofNotice, &console);
 	}
 
 	//全ログレベルの列挙
@@ -332,9 +332,10 @@ void example_debug_message()
 		forJIRO = MAKE_LOG_CATEGORY_VALUE(21),//次郎用（可発者個人用）
 	};
 	regLogCategory<forMiniGame>()("forMiniGame");
-	vsConsole vs_console;
-	regLogCategory<forTARO>()("forTARO", &vs_console);//開発者用のログはVSの出力ウインドウに
-	regLogCategory<forJIRO>()("forJIRO", &vs_console);//開発者用のログはVSの出力ウインドウに
+	static vsConsole vs_console;
+	IConsole* console[] = { &vs_console, nullptr };
+	regLogCategory<forTARO>()("forTARO", console);//開発者用のログはVSの出力ウインドウに
+	regLogCategory<forJIRO>()("forJIRO", console);//開発者用のログはVSの出力ウインドウに
 
 	//全カテゴリレベルの列挙
 	printAllLogCategory();
@@ -382,17 +383,17 @@ void example_debug_message()
 
 		//ログレベルにコンソールを割り当て
 		logLevelContainer con;
-		con.replaceAllConsole(ofLog, &stdOutConsole::instance(), &new_stdout_console);
-		con.replaceAllConsole(ofLog, &stdErrConsole::instance(), &new_stderr_console);
-		con.replaceAllConsole(ofNotice, &new_notice_console);
+		con.replaceEachConsole(ofLog, &stdOutConsole::instance(), &new_stdout_console);
+		con.replaceEachConsole(ofLog, &stdErrConsole::instance(), &new_stderr_console);
+		con.replaceEachConsole(ofNotice, &new_notice_console);
 
 		//出力テスト
 		printAllLogLevel();
 
 		//標準コンソールに戻す
-		con.replaceAllConsole(ofLog, &new_stdout_console, &stdOutConsole::instance());
-		con.replaceAllConsole(ofLog, &new_stderr_console, &stdErrConsole::instance());
-		con.replaceAllConsole(ofNotice, &stdConsoleOfNotice::instance());
+		con.replaceEachConsole(ofLog, &new_stdout_console, &stdOutConsole::instance());
+		con.replaceEachConsole(ofLog, &new_stderr_console, &stdErrConsole::instance());
+		con.replaceEachConsole(ofNotice, &stdConsoleOfNotice::instance());
 
 		//端末をクローズ
 		if(fp1) fclose(fp1);
@@ -437,7 +438,10 @@ void example_debug_message()
 						std::size_t size = 0;
 						work_buff.spprintf(message, size, "message:%d", i);
 						logQueue queue;
-						const bool result = queue.enqueue(forJIRO, asNormal, message, size + 1);
+						logMask mask;
+						IConsole* consoles[] = { mask.console(ofLog, asNormal, forJIRO), mask.console(ofNotice, asNormal, forJIRO) };
+						const consoleColor* colors[] = { mask.color(ofLog, asNormal, forJIRO), mask.color(ofNotice, asNormal, forJIRO) };
+						const bool result = queue.enqueue(message, asNormal, forJIRO, consoles, colors, size + 1, 0);
 						if (!result)
 							printf("enqueu failed.\n");
 						work_buff.free(message);
