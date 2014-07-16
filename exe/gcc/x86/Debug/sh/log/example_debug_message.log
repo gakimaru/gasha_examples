@@ -6,267 +6,580 @@
 --------------------------------------------------------------------------------
 [ Enumeration of all log-levels ]
 
-[90;49m( 0: 0)"asVerbose"[0m
+[37;100m[ 0]( 0)"asMoreDetail"[0m
+[37;100m	console: "TTY(stdout)"(WHITE+iBLACK)[0m
+[0m	notice: "vs-console *CUSTOM*"(STANDARD+STANDARD)[0m
+[90;49m	next: [ 1]( 4)"asVerbose[0m
+[90;49m[ 1]( 4)"asVerbose"[0m
 [90;49m	console: "TTY(stdout)"(iBLACK+STANDARD)[0m
 [90;107m	notice: "vs-console *CHANGED*"(iBLACK+iWHITE)[0m
-[0m	next: ( 2: 1)"asNormal[0m
-[90;49m( 1: 0)"asDetail"[0m
+[37;100m	prev: [ 0]( 0)"asMoreDetail"[0m
+[0m	next: [ 3](12)"asNormal[0m
+[90;49m[ 1]( 5)"asDetail"[0m
 [90;49m	console: "TTY(stdout)"(iBLACK+STANDARD)[0m
 [90;107m	notice: "vs-console *CHANGED*"(iBLACK+iWHITE)[0m
-[0m	next: ( 2: 1)"asNormal[0m
-[0m( 2: 1)"asNormal"[0m
+[37;100m	prev: [ 0]( 0)"asMoreDetail"[0m
+[0m	next: [ 3](12)"asNormal[0m
+[0m[ 3](12)"asNormal"[0m
 [0m	console: "win-console *CHANGED*"(STANDARD+STANDARD)[0m
 [30;107m	notice: "vs-console *CHANGED*"(BLACK+iWHITE)[0m
-[90;49m	prev: ( 0: 0)"asVerbose"[0m
-[94;40m	next: ( 4: 2)"asImportant[0m
-[94;40m( 4: 2)"asImportant"[0m
+[90;49m	prev: [ 1]( 5)"asDetail"[0m
+[36;49m	next: [ 4](17)"asAboveNormal[0m
+[36;49m[ 4](17)"asAboveNormal"[0m
+[36;49m	console: "TTY(stdout)"(CYAN+STANDARD)[0m
+[0m	prev: [ 3](12)"asNormal"[0m
+[94;40m	next: [ 5](20)"asImportant[0m
+[94;40m[ 5](20)"asImportant"[0m
 [94;40m	console: "TTY(stdout)"(iBLUE+BLACK)[0m
 [94;107m	notice: "vs-console *CHANGED*"(iBLUE+iWHITE)[0m
-[0m	prev: ( 2: 1)"asNormal"[0m
-[95;49m	next: ( 6: 3)"asWarning[0m
+[0m	prev: [ 3](12)"asNormal"[0m
+[95;49m	next: [ 7](28)"asWarning[0m
 [30;105m	notice: "vs-console *CHANGED*"(BLACK+iMAGENTA)[0m
 [93;101m	notice: "vs-console *CHANGED*"(iYELLOW+iRED)[0m
-[0m(10: 5)"asAbsolute"[0m
+[0m[11](44)"asAbsolute"[0m
 [0m	console: "TTY(stdout)"(STANDARD+STANDARD)[0m
 [0m	notice: "vs-console *CHANGED*"(STANDARD+STANDARD)[0m
-[91;49m	prev: ( 8: 4)"asCritical"[0m
-[0m(SP-11)"asSilent"[0m
-[0m(SP-12)"asSilentAbsolutely"[0m
+[91;49m	prev: [ 9](36)"asCritical"[0m
+[0m[11](SP47)"asSilent"[0m
+[0m[12](SP48)"asSilentAbsolutely"[0m
 
 --------------------------------------------------------------------------------
-[ Enumeration of all log-categoris ]
+[ Enumeration of all log-categories ]
 
 ( 0)"forAny"[0m
-( 1)"forFileSystem"[0m
-( 2)"forResource"[0m
-( 3)"for3D"[0m
-( 4)"for2D"[0m
-( 5)"forSound"[0m
+( 3)"forFileSystem"[0m
+( 4)"forResource"[0m
+( 5)"for3D"[0m
+( 6)"for2D"[0m
+( 7)"forSound"[0m
 (10)"forMiniGame"[0m
 (20)"forTARO"[0m
-	console: "TTY-console"[0m
+	console: "vs-console *Category CUSTOM*"[0m
 (21)"forJIRO"[0m
-	console: "TTY-console"[0m
-(SP-64)"forEvery"[0m
-(SP-65)"forCallPoint"[0m
-(SP-66)"forCriticalCallPoint"[0m
+	console: "vs-console *Category CUSTOM*"[0m
+(SP64)"forEvery"[0m
+(SP65)"forCallPoint"[0m
+(SP66)"forCriticalCallPoint"[0m
+1:mask: refType=0, level=4
+1:attr: refType=0, attr=0x00000000
+2:mask: refType=2, level=4
+2:attr: refType=2, attr=0x00000000
+2a:mask: refType=0, level=4
+2a:attr: refType=0, attr=0x00000000
+2b:mask: refType=0, level=4
+2b:attr: refType=0, attr=0x00000000
+2c:mask: refType=2, level=4
+2c:attr: refType=2, attr=0x00000000
+3:mask: refType=2, level=12
+3:attr: refType=2, attr=0x00100020
+4:mask: refType=1, level=12
+4:attr: refType=1, attr=0x00100020
+5:mask: refType=1, level=12
+5:attr: refType=1, attr=0x00100020
+6:mask: refType=2, level=12
+6:attr: refType=2, attr=0x00100020
+7:mask: refType=2, level=5
+7:attr: refType=2, attr=0x00200010
+7a:mask: refType=2, level=12
+7a:attr: refType=2, attr=0x00100020
+7b:mask: refType=0, level=4
+7b:attr: refType=0, attr=0x00000000
+7bx:mask: refType=1, level=4
+7bx:attr: refType=1, attr=0x00000000
+7bx2:mask: refType=2, level=4
+7bx2:attr: refType=2, attr=0x00000000
+7c:mask: refType=2, level=12
+7c:attr: refType=2, attr=0x00100020
+7d:mask: refType=1, level=12
+7d:attr: refType=1, attr=0x00100020
+7e:mask: refType=0, level=4
+7e:attr: refType=0, attr=0x00000000
+7f:mask: refType=2, level=12
+7f:attr: refType=2, attr=0x00100020
+7g:mask: refType=0, level=4
+7g:attr: refType=0, attr=0x00000000
+8:mask: refType=1, level=12
+8:attr: refType=1, attr=0x00100020
+9:mask: refType=2, level=12
+9:attr: refType=2, attr=0x00100020
+10:mask: refType=0, level=4
+10:attr: refType=0, attr=0x00000000
 
 --------------------------------------------------------------------------------
 [ Enumeration of all log-level-masks : Test for output message asDetail ]
 
 ( 0)"forAny"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		MASKED! ... [90;49mnotice-message: ( 1)"asDetail"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
-( 1)"forFileSystem"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		MASKED! ... [90;49mnotice-message: ( 1)"asDetail"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
-( 2)"forResource"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		MASKED! ... [90;49mnotice-message: ( 1)"asDetail"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
-( 3)"for3D"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		MASKED! ... [90;49mnotice-message: ( 1)"asDetail"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
-( 4)"for2D"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		MASKED! ... [90;49mnotice-message: ( 1)"asDetail"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
-( 5)"forSound"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		MASKED! ... [90;49mnotice-message: ( 1)"asDetail"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+( 1)"forDummy"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+( 2)"forNotice"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+( 3)"forFileSystem"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+( 4)"forResource"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+( 5)"for3D"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+( 6)"for2D"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+( 7)"forSound"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
 (10)"forMiniGame"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		MASKED! ... [90;49mnotice-message: ( 1)"asDetail"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
 (20)"forTARO"[0m
-[90;49m	mask(of log): ( 1)"asDetail"[0m
-[90;49m		OK ... [90;49mlog-message: ( 1)"asDetail", "TTY-console"[0m
-[30;107m	mask(of notice): ( 2)"asNormal"[0m
-[30;107m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
+[90;49m	mask(of log): ( 5)"asDetail"[0m
+[90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "vs-console *Category CUSTOM*"[0m
+[30;107m	mask(of notice): (12)"asNormal"[0m
+[30;107m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
 (21)"forJIRO"[0m
-[0m	mask(of log): (11)"asSilent"[0m
-[0m		MASKED! ... [90;49mnotice-message: ( 1)"asDetail"[0m
-[0m	mask(of notice): (12)"asSilentAbsolutely"[0m
-[0m		MASKED! ... [90;107mnotice-message: ( 1)"asDetail"[0m
+[0m	mask(of log): (47)"asSilent"[0m
+[0m		MASKED! ... [90;49mnotice-message: ( 5)"asDetail"[0m
+[0m	mask(of notice): (48)"asSilentAbsolutely"[0m
+[0m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
 
 --------------------------------------------------------------------------------
 [ Enumeration of all log-level-masks : Test for output message asNormal ]
 
 ( 0)"forAny"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0mlog-message: ( 2)"asNormal", "win-console *CHANGED*"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		MASKED! ... [30;107mnotice-message: ( 2)"asNormal"[0m
-( 1)"forFileSystem"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0mlog-message: ( 2)"asNormal", "win-console *CHANGED*"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		MASKED! ... [30;107mnotice-message: ( 2)"asNormal"[0m
-( 2)"forResource"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0mlog-message: ( 2)"asNormal", "win-console *CHANGED*"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		MASKED! ... [30;107mnotice-message: ( 2)"asNormal"[0m
-( 3)"for3D"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0mlog-message: ( 2)"asNormal", "win-console *CHANGED*"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		MASKED! ... [30;107mnotice-message: ( 2)"asNormal"[0m
-( 4)"for2D"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0mlog-message: ( 2)"asNormal", "win-console *CHANGED*"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		MASKED! ... [30;107mnotice-message: ( 2)"asNormal"[0m
-( 5)"forSound"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0mlog-message: ( 2)"asNormal", "win-console *CHANGED*"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		MASKED! ... [30;107mnotice-message: ( 2)"asNormal"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+( 1)"forDummy"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+( 2)"forNotice"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+( 3)"forFileSystem"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+( 4)"forResource"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+( 5)"for3D"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+( 6)"for2D"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+( 7)"forSound"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
 (10)"forMiniGame"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0mlog-message: ( 2)"asNormal", "win-console *CHANGED*"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		MASKED! ... [30;107mnotice-message: ( 2)"asNormal"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
 (20)"forTARO"[0m
-[90;49m	mask(of log): ( 1)"asDetail"[0m
-[90;49m		OK ... [0mlog-message: ( 2)"asNormal", "TTY-console"[0m
-[30;107m	mask(of notice): ( 2)"asNormal"[0m
-[30;107m		OK ... [30;107mnotice-message: ( 2)"asNormal", "vs-console *CHANGED*"[0m
+[90;49m	mask(of log): ( 5)"asDetail"[0m
+[90;49m		OK ... [0mlog-message: (12)"asNormal", "vs-console *Category CUSTOM*"[0m
+[30;107m	mask(of notice): (12)"asNormal"[0m
+[30;107m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 (21)"forJIRO"[0m
-[0m	mask(of log): (11)"asSilent"[0m
-[0m		MASKED! ... [0mnotice-message: ( 2)"asNormal"[0m
-[0m	mask(of notice): (12)"asSilentAbsolutely"[0m
-[0m		MASKED! ... [30;107mnotice-message: ( 2)"asNormal"[0m
+[0m	mask(of log): (47)"asSilent"[0m
+[0m		MASKED! ... [0mnotice-message: (12)"asNormal"[0m
+[0m	mask(of notice): (48)"asSilentAbsolutely"[0m
+[0m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
 
 --------------------------------------------------------------------------------
 [ Enumeration of all log-level-masks : Test for output message asCritical ]
 
 ( 0)"forAny"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		OK ... [93;101mnotice-message: ( 8)"asCritical", "vs-console *CHANGED*"[0m
-( 1)"forFileSystem"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		OK ... [93;101mnotice-message: ( 8)"asCritical", "vs-console *CHANGED*"[0m
-( 2)"forResource"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		OK ... [93;101mnotice-message: ( 8)"asCritical", "vs-console *CHANGED*"[0m
-( 3)"for3D"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		OK ... [93;101mnotice-message: ( 8)"asCritical", "vs-console *CHANGED*"[0m
-( 4)"for2D"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		OK ... [93;101mnotice-message: ( 8)"asCritical", "vs-console *CHANGED*"[0m
-( 5)"forSound"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		OK ... [93;101mnotice-message: ( 8)"asCritical", "vs-console *CHANGED*"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [93;101mnotice-message: (36)"asCritical", "vs-console *CHANGED*"[0m
+( 1)"forDummy"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [0m
+( 2)"forNotice"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [0m
+( 3)"forFileSystem"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [93;101mnotice-message: (36)"asCritical", "vs-console *CHANGED*"[0m
+( 4)"forResource"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [93;101mnotice-message: (36)"asCritical", "vs-console *CHANGED*"[0m
+( 5)"for3D"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [93;101mnotice-message: (36)"asCritical", "vs-console *CHANGED*"[0m
+( 6)"for2D"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [93;101mnotice-message: (36)"asCritical", "vs-console *CHANGED*"[0m
+( 7)"forSound"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [93;101mnotice-message: (36)"asCritical", "vs-console *CHANGED*"[0m
 (10)"forMiniGame"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		OK ... [93;101mnotice-message: ( 8)"asCritical", "vs-console *CHANGED*"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [93;101mnotice-message: (36)"asCritical", "vs-console *CHANGED*"[0m
 (20)"forTARO"[0m
-[90;49m	mask(of log): ( 1)"asDetail"[0m
-[90;49m		OK ... [91;49mlog-message: ( 8)"asCritical", "TTY-console"[0m
-[30;107m	mask(of notice): ( 2)"asNormal"[0m
-[30;107m		OK ... [93;101mnotice-message: ( 8)"asCritical", "vs-console *CHANGED*"[0m
+[90;49m	mask(of log): ( 5)"asDetail"[0m
+[90;49m		OK ... [91;49mlog-message: (36)"asCritical", "vs-console *Category CUSTOM*"[0m
+[30;107m	mask(of notice): (12)"asNormal"[0m
+[30;107m		OK ... [93;101mnotice-message: (36)"asCritical", "vs-console *CHANGED*"[0m
 (21)"forJIRO"[0m
-[0m	mask(of log): (11)"asSilent"[0m
-[0m		MASKED! ... [91;49mnotice-message: ( 8)"asCritical"[0m
-[0m	mask(of notice): (12)"asSilentAbsolutely"[0m
-[0m		MASKED! ... [93;101mnotice-message: ( 8)"asCritical"[0m
+[0m	mask(of log): (47)"asSilent"[0m
+[0m		MASKED! ... [91;49mnotice-message: (36)"asCritical"[0m
+[0m	mask(of notice): (48)"asSilentAbsolutely"[0m
+[0m		MASKED! ... [93;101mnotice-message: (36)"asCritical"[0m
 
 --------------------------------------------------------------------------------
 [ Enumeration of all log-level-masks : Test for output message asAbsolute ]
 
 ( 0)"forAny"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0mlog-message: (10)"asAbsolute", "TTY(stdout)"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		OK ... [0mnotice-message: (10)"asAbsolute", "vs-console *CHANGED*"[0m
-( 1)"forFileSystem"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0mlog-message: (10)"asAbsolute", "TTY(stdout)"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		OK ... [0mnotice-message: (10)"asAbsolute", "vs-console *CHANGED*"[0m
-( 2)"forResource"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0mlog-message: (10)"asAbsolute", "TTY(stdout)"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		OK ... [0mnotice-message: (10)"asAbsolute", "vs-console *CHANGED*"[0m
-( 3)"for3D"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0mlog-message: (10)"asAbsolute", "TTY(stdout)"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		OK ... [0mnotice-message: (10)"asAbsolute", "vs-console *CHANGED*"[0m
-( 4)"for2D"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0mlog-message: (10)"asAbsolute", "TTY(stdout)"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		OK ... [0mnotice-message: (10)"asAbsolute", "vs-console *CHANGED*"[0m
-( 5)"forSound"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0mlog-message: (10)"asAbsolute", "TTY(stdout)"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		OK ... [0mnotice-message: (10)"asAbsolute", "vs-console *CHANGED*"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0mlog-message: (44)"asAbsolute", "TTY(stdout)"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
+( 1)"forDummy"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [0m
+( 2)"forNotice"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [0m
+( 3)"forFileSystem"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0mlog-message: (44)"asAbsolute", "TTY(stdout)"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
+( 4)"forResource"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0mlog-message: (44)"asAbsolute", "TTY(stdout)"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
+( 5)"for3D"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0mlog-message: (44)"asAbsolute", "TTY(stdout)"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
+( 6)"for2D"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0mlog-message: (44)"asAbsolute", "TTY(stdout)"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
+( 7)"forSound"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0mlog-message: (44)"asAbsolute", "TTY(stdout)"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
 (10)"forMiniGame"[0m
-[0m	mask(of log): ( 2)"asNormal"[0m
-[0m		OK ... [0mlog-message: (10)"asAbsolute", "TTY(stdout)"[0m
-[93;101m	mask(of notice): ( 8)"asCritical"[0m
-[93;101m		OK ... [0mnotice-message: (10)"asAbsolute", "vs-console *CHANGED*"[0m
+[90;49m	mask(of log): ( 4)"asVerbose"[0m
+[90;49m		OK ... [0mlog-message: (44)"asAbsolute", "TTY(stdout)"[0m
+[93;101m	mask(of notice): (36)"asCritical"[0m
+[93;101m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
 (20)"forTARO"[0m
-[90;49m	mask(of log): ( 1)"asDetail"[0m
-[90;49m		OK ... [0mlog-message: (10)"asAbsolute", "TTY-console"[0m
-[30;107m	mask(of notice): ( 2)"asNormal"[0m
-[30;107m		OK ... [0mnotice-message: (10)"asAbsolute", "vs-console *CHANGED*"[0m
+[90;49m	mask(of log): ( 5)"asDetail"[0m
+[90;49m		OK ... [0mlog-message: (44)"asAbsolute", "vs-console *Category CUSTOM*"[0m
+[30;107m	mask(of notice): (12)"asNormal"[0m
+[30;107m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
 (21)"forJIRO"[0m
-[0m	mask(of log): (11)"asSilent"[0m
-[0m		OK ... [0mlog-message: (10)"asAbsolute", "TTY-console"[0m
-[0m	mask(of notice): (12)"asSilentAbsolutely"[0m
-[0m		MASKED! ... [0mnotice-message: (10)"asAbsolute"[0m
+[0m	mask(of log): (47)"asSilent"[0m
+[0m		OK ... [0mlog-message: (44)"asAbsolute", "vs-console *Category CUSTOM*"[0m
+[0m	mask(of notice): (48)"asSilentAbsolutely"[0m
+[0m		MASKED! ... [0mnotice-message: (44)"asAbsolute"[0m
 
 --------------------------------------------------------------------------------
 [ Enumeration of all log-levels ]
 
-[0m(SP-11)"asSilent"[0m
-[0m(SP-12)"asSilentAbsolutely"[0m
-id=1, category=21, level=2, message="message:1"
-id=2, category=21, level=2, message="message:3"
-id=3, category=21, level=2, message="message:9"
-id=4, category=21, level=2, message="message:27"
-id=5, category=21, level=2, message="message:81"
-id=6, category=21, level=2, message="message:243"
-id=7, category=21, level=2, message="message:729"
-id=8, category=21, level=2, message="message:2187"
-id=9, category=21, level=2, message="message:6561"
-id=10, category=21, level=2, message="message:19683"
-id=11, category=21, level=2, message="message:59049"
-id=12, category=21, level=2, message="message:177147"
-id=13, category=21, level=2, message="message:531441"
-id=14, category=21, level=2, message="message:1594323"
-id=15, category=21, level=2, message="message:4782969"
-id=16, category=21, level=2, message="message:14348907"
-id=17, category=21, level=2, message="message:43046721"
-end
+[0m[11](SP47)"asSilent"[0m
+[0m[12](SP48)"asSilentAbsolutely"[0m
+[1] [1] reserved message[0m
+[2] [2] message:1[0m
+[3] [3] message:3[0m
+[4] [4] message:9[0m
+[5] [5] message:27[0m
+[6] [6] message:81[0m
+[7] [7] message:243[0m
+[8] [8] message:729[0m
+[9] [9] message:2187[0m
+[10] [10] message:6561[0m
+[11] [11] message:19683[0m
+[12] [12] message:59049[0m
+[13] [13] message:177147[0m
+[14] [14] message:531441[0m
+[15] [15] message:1594323[0m
+[16] [16] message:4782969[0m
+[17] [17] message:14348907[0m
+[18] [18] message:43046721[0m
+[19] [19] message:129140163[0m
+[20] [20] message:387420489[0m
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu of reservation failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making of reservation failed.
+[1] [1] reserved message[0m
+[2] [2] message:1[0m
+[3] [3] message:3[0m
+[4] [4] message:9[0m
+[5] [5] message:27[0m
+[6] [6] message:81[0m
+[7] [7] message:243[0m
+[8] [8] message:729[0m
+[9] [9] message:2187[0m
+[10] [10] message:6561[0m
+[11] [11] message:19683[0m
+[12] [12] message:59049[0m
+[13] [13] message:177147[0m
+[14] [14] message:531441[0m
+[15] [15] message:1594323[0m
+[16] [16] message:4782969[0m
+[17] [17] message:14348907[0m
+[18] [18] message:43046721[0m
+[19] [19] message:129140163[0m
+[20] [20] message:387420489[0m
+
+12345678901234567890
+123456789012345
+
+(size=0)
+
+(size=0)
+#
+#(size=1)
+1
+1(size=1)
+1#
+1#(size=2)
+12
+12(size=2)
+12#
+12#(size=3)
+123
+123(size=3)
+123#
+123#(size=4)
+1234
+1234(size=4)
+1234#
+1234#(size=5)
+12345
+12345(size=5)
+12345#
+12345#(size=6)
+123456
+123456(size=6)
+123456#
+123456#(size=7)
+1234567
+1234567(size=7)
+1234567#
+1234567#(size=8)
+12345678
+12345678(size=8)
+12345678#
+12345678#(size=9)
+123456789
+123456789(size=9)
+123456789#
+123456789#(size=10)
+1234567890
+1234567890(size=10)
+1234567890#
+1234567890#(size=11)
+12345678901
+12345678901(size=11)
+12345678901#
+12345678901#(size=12)
+123456789012
+123456789012(size=12)
+123456789012#
+123456789012#(size=13)
+1234567890123
+1234567890123(size=13)
+1234567890123#
+1234567890123#(size=14)
+12345678901234
+12345678901234(size=14)
+12345678901234#
+12345678901234#(size=15)
+123456789012345
+123456789012345(size=15)
+123456789012345#
+123456789012345#(size=16)
+1234567890123456
+1234567890123456(size=16)
+1234567890123456#
+1234567890123456#(size=17)
+12345678901234567
+12345678901234567(size=17)
+12345678901234567#
+12345678901234567#(size=18)
+123456789012345678
+123456789012345678(size=18)
+123456789012345678#
+123456789012345678#(size=19)
+1234567890123456789
+1234567890123456789(size=19)
+1234567890123456789#
+1234567890123456789#(size=20)
+12345678901234567890
+12345678901234567890(size=20)
+12345678901234567890#
+12345678901234567890#(size=21)
+123456789012345678901
+123456789012345678901(size=21)
+123456789012345678901#
+123456789012345678901#(size=22)
+1234567890123456789012
+1234567890123456789012(size=22)
+1234567890123456789012#
+1234567890123456789012#(size=23)
+12345678901234567890123
+12345678901234567890123(size=23)
+12345678901234567890123#
+12345678901234567890123#(size=24)
+123456789012345678901234
+123456789012345678901234(size=24)
+123456789012345678901234#
+123456789012345678901234#(size=25)
+1234567890123456789012345
+1234567890123456789012345(size=25)
+1234567890123456789012345#
+1234567890123456789012345#(size=26)
+12345678901234567890123456
+12345678901234567890123456(size=26)
+12345678901234567890123456#
+12345678901234567890123456#(size=27)
+123456789012345678901234567
+123456789012345678901234567(size=27)
+123456789012345678901234567#
+123456789012345678901234567#(size=28)
+1234567890123456789012345678
+1234567890123456789012345678(size=28)
+1234567890123456789012345678#
+1234567890123456789012345678#(size=29)
+12345678901234567890123456789
+12345678901234567890123456789(size=29)
+12345678901234567890123456789#
+12345678901234567890123456789#(size=30)
+123456789012345678901234567890
+123456789012345678901234567890(size=30)
+123456789012345678901234567890#
+123456789012345678901234567890#(size=31)
+1234567890123456789012345678901
+1234567890123456789012345678901(size=31)
+1234567890123456789012345678901#
+1234567890123456789012345678901#(size=32)
+12345678901234567890123456789012
+12345678901234567890123456789012(size=32)
+12345678901234567890123456789012#
+12345678901234567890123456789012(size=32)
+(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(size=68)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(size=124)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(size=124)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(size=124)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(size=124)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(size=124)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(size=124)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(size=124)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(size=124)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(size=124)

@@ -8358,34 +8358,34 @@ buff=0x28a39d, maxSize=2048, size=0, remain=2048, count=0
 > poly.setDebugObserver(observer);
 > data_t* p1 = GASHA_NEW(data_t);
 [CALLBACK] Operator new(16,16)p=0x28a360, allocator="stackAllocator:AutoClear"
- 6data_t[0], file="example_poly_allocator.cpp(201)[Sun Jul 13 17:30:31 2014]", func="testAdvanced", time=0.009553
+ 6data_t[0], file="example_poly_allocator.cpp(201)[Sun Jul 13 17:30:31 2014]", func="testAdvanced", time=0.009586
 data_t::data_t(): m_val=0
 > data_t* p2 = GASHA_NEW(data_t[2]);
 [CALLBACK] Operator new[](48,16)p=0x28a370, allocator="stackAllocator:AutoClear"
- 6data_t[2], file="example_poly_allocator.cpp(204)[Sun Jul 13 17:30:31 2014]", func="testAdvanced", time=0.009575
+ 6data_t[2], file="example_poly_allocator.cpp(204)[Sun Jul 13 17:30:31 2014]", func="testAdvanced", time=0.009616
 data_t::data_t(): m_val=0
 data_t::data_t(): m_val=0
 > data_t* p3 = GASHA_NEW_ARRAY(data_t, 3);
 [CALLBACK] Operator new[](64,16)p=0x28a3a0, allocator="stackAllocator:AutoClear"
- 6data_t[3], file="example_poly_allocator.cpp(207)[Sun Jul 13 17:30:31 2014]", func="testAdvanced", time=0.009585
+ 6data_t[3], file="example_poly_allocator.cpp(207)[Sun Jul 13 17:30:31 2014]", func="testAdvanced", time=0.009630
 data_t::data_t(): m_val=0
 data_t::data_t(): m_val=0
 data_t::data_t(): m_val=0
 > GASHA_DELETE(p1);
 data_t::~data_t(): m_val=0
 [CALLBACK] Operator delete(0x28a360), allocator="stackAllocator:AutoClear"
- 6data_t, file="example_poly_allocator.cpp(210)[Sun Jul 13 17:30:31 2014]", func="testAdvanced", time=0.009595
+ 6data_t, file="example_poly_allocator.cpp(210)[Sun Jul 13 17:30:31 2014]", func="testAdvanced", time=0.009641
 > GASHA_DELETE_ARRAY(p2);
 data_t::~data_t(): m_val=0
 data_t::~data_t(): m_val=0
 [CALLBACK] Operator delete[](0x28a370), allocator="stackAllocator:AutoClear"
- 6data_t[], file="example_poly_allocator.cpp(213)[Sun Jul 13 17:30:31 2014]", func="testAdvanced", time=0.009604
+ 6data_t[], file="example_poly_allocator.cpp(213)[Sun Jul 13 17:30:31 2014]", func="testAdvanced", time=0.009650
 > GASHA_DELETE_ARRAY(p3);
 data_t::~data_t(): m_val=0
 data_t::~data_t(): m_val=0
 data_t::~data_t(): m_val=0
 [CALLBACK] Operator delete[](0x28a3a0), allocator="stackAllocator:AutoClear"
- 6data_t[], file="example_poly_allocator.cpp(214)[Sun Jul 13 17:30:31 2014]", func="testAdvanced", time=0.009612
+ 6data_t[], file="example_poly_allocator.cpp(214)[Sun Jul 13 17:30:31 2014]", func="testAdvanced", time=0.009658
 > std::vector<data_t> array;
 > data_t data;
 data_t::data_t(): m_val=0
@@ -8473,23 +8473,23 @@ data_t::~data_t(): m_val=0
 
 ------------------------------------------------------------
 "smartStackAllocator<std::mutex>" : 100 * times allocate & free
-* elapsed time = 0.000047000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.000049000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "lfSmartStackAllocator" : 100 * times allocate & free
-* elapsed time = 0.000009000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.000010000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "smartStackAllocator<>::scopedAllocator" : 100 * times allocate & free
-* elapsed time = 0.000007000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.000006000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "polyAllocator with smartStackAllocator<>::adapter" : 100 * times allocate & free
-* elapsed time = 0.000085000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.000084000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "smartDualStackAllocator<>" : 100 * times allocate & free
-* elapsed time = 0.000007000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
+* elapsed time = 0.000008000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
 
 ------------------------------------------------------------
 "smartDualStackAllocator<spinLock>" : 100 * times allocate & free
@@ -8497,19 +8497,19 @@ data_t::~data_t(): m_val=0
 
 ------------------------------------------------------------
 "smartDualStackAllocator<std::mutex>" : 100 * times allocate & free
-* elapsed time = 0.000050000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
+* elapsed time = 0.000048000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
 
 ------------------------------------------------------------
 "lfSmartDualStackAllocator" : 100 * times allocate & free
-* elapsed time = 0.000016000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
+* elapsed time = 0.000017000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
 
 ------------------------------------------------------------
 "smartDualStackAllocator<>::scopedAllocator" : 100 * times allocate & free
-* elapsed time = 0.000007000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.000008000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "smartDualStackAllocator<>::scopedDualAllocator" : 100 * times allocate & free
-* elapsed time = 0.000007000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
+* elapsed time = 0.000008000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
 
 ------------------------------------------------------------
 "polyAllocator with smartDualStackAllocator<>::adapter" : 100 * times allocate & free
@@ -8517,7 +8517,7 @@ data_t::~data_t(): m_val=0
 
 ------------------------------------------------------------
 "monoAllocator<>" : 100 * times allocate & free
-* elapsed time = 0.000004000	maxSize=16384, size=0, remain=16384, isAllocated=false
+* elapsed time = 0.000005000	maxSize=16384, size=0, remain=16384, isAllocated=false
 
 ------------------------------------------------------------
 "monoAllocator<spinLock>" : 100 * times allocate & free
@@ -8533,7 +8533,7 @@ data_t::~data_t(): m_val=0
 
 ------------------------------------------------------------
 "polyAllocator with monoAllocator<>::adapter" : 100 * times allocate & free
-* elapsed time = 0.000083000	maxSize=16384, size=0, remain=16384, isAllocated=false
+* elapsed time = 0.000088000	maxSize=16384, size=0, remain=16384, isAllocated=false
 
 ------------------------------------------------------------
 "poolAllocator<1024>" : 100 * times allocate & free
@@ -8541,11 +8541,11 @@ data_t::~data_t(): m_val=0
 
 ------------------------------------------------------------
 "poolAllocator<1024, spinLock>" : 100 * times allocate & free
-* elapsed time = 0.000019000	maxSize=16384, size=0, remain=16384, pool=0/1024
+* elapsed time = 0.000018000	maxSize=16384, size=0, remain=16384, pool=0/1024
 
 ------------------------------------------------------------
 "poolAllocator<1024, std::mutex>" : 100 * times allocate & free
-* elapsed time = 0.000053000	maxSize=16384, size=0, remain=16384, pool=0/1024
+* elapsed time = 0.000054000	maxSize=16384, size=0, remain=16384, pool=0/1024
 
 ------------------------------------------------------------
 "lfPoolAllocator<1024>" : 100 * times allocate & free
@@ -8553,11 +8553,11 @@ data_t::~data_t(): m_val=0
 
 ------------------------------------------------------------
 "polyAllocator with poolAllocator<1024>::adapter" : 100 * times allocate & free
-* elapsed time = 0.000045000	maxSize=16384, size=0, remain=16384, pool=0/1024
+* elapsed time = 0.000046000	maxSize=16384, size=0, remain=16384, pool=0/1024
 
 ------------------------------------------------------------
 "stdAllocator<>" : 100 * times allocate & free
-* elapsed time = 0.000022000	maxSize=196608, size=132464, remain=64144
+* elapsed time = 0.000023000	maxSize=196608, size=132464, remain=64144
 
 ------------------------------------------------------------
 "stdAllocator<spinLock>" : 100 * times allocate & free
@@ -8569,7 +8569,7 @@ data_t::~data_t(): m_val=0
 
 ------------------------------------------------------------
 "polyAllocator with stdAllocator<>::adapter" : 100 * times allocate & free
-* elapsed time = 0.000101000	maxSize=196608, size=132512, remain=64096
+* elapsed time = 0.000104000	maxSize=196608, size=132512, remain=64096
 
 ------------------------------------------------------------
 "stdAlignAllocator<>" : 100 * times allocate & free
@@ -8577,15 +8577,15 @@ data_t::~data_t(): m_val=0
 
 ------------------------------------------------------------
 "stdAlignAllocator<spinLock>" : 100 * times allocate & free
-* elapsed time = 0.000036000	maxSize=196608, size=132512, remain=64096
+* elapsed time = 0.000028000	maxSize=196608, size=132512, remain=64096
 
 ------------------------------------------------------------
 "stdAlignAllocator<std::mutex>" : 100 * times allocate & free
-* elapsed time = 0.000041000	maxSize=196608, size=132560, remain=64048
+* elapsed time = 0.000045000	maxSize=196608, size=132560, remain=64048
 
 ------------------------------------------------------------
 "polyAllocator with stdAlignAllocator<>::adapter" : 100 * times allocate & free
-* elapsed time = 0.000097000	maxSize=196608, size=132560, remain=64048
+* elapsed time = 0.000106000	maxSize=196608, size=132560, remain=64048
 
 --------------------------------------------------------------------------------
 [ Test for performance of multi threada ]
@@ -8593,79 +8593,79 @@ data_t::~data_t(): m_val=0
 
 ------------------------------------------------------------
 "smartStackAllocator<spinLock>" : 1000 * times allocate & free
-* elapsed time = 0.025510000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.010772000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "smartStackAllocator<std::mutex>" : 1000 * times allocate & free
-* elapsed time = 0.020627000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.013093000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "lfSmartStackAllocator" : 1000 * times allocate & free
-* elapsed time = 0.020881000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.011148000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "smartDualStackAllocator<spinLock>" : 1000 * times allocate & free
-* elapsed time = 0.020899000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
+* elapsed time = 0.011496000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
 
 ------------------------------------------------------------
 "smartDualStackAllocator<std::mutex>" : 1000 * times allocate & free
-* elapsed time = 0.020614000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
+* elapsed time = 0.013525000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
 
 ------------------------------------------------------------
 "lfSmartDualStackAllocator" : 1000 * times allocate & free
-* elapsed time = 0.020635000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
+* elapsed time = 0.010989000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
 
 ------------------------------------------------------------
 "monoAllocator<spinLock>" : 1000 * times allocate & free
-* elapsed time = 0.020321000	maxSize=16384, size=0, remain=16384, isAllocated=false
+* elapsed time = 0.013459000	maxSize=16384, size=0, remain=16384, isAllocated=false
 
 ------------------------------------------------------------
 "monoAllocator<std::mutex>" : 1000 * times allocate & free
-* elapsed time = 0.020799000	maxSize=16384, size=0, remain=16384, isAllocated=false
+* elapsed time = 0.016562000	maxSize=16384, size=0, remain=16384, isAllocated=false
 
 ------------------------------------------------------------
 "lfMonoAllocator" : 1000 * times allocate & free
-* elapsed time = 0.020131000	maxSize=16384, size=0, remain=16384, isAllocated=false
+* elapsed time = 0.010523000	maxSize=16384, size=0, remain=16384, isAllocated=false
 
 ------------------------------------------------------------
 "poolAllocator<1024, spinLock>" : 1000 * times allocate & free
-* elapsed time = 0.020692000	maxSize=16384, size=0, remain=16384, pool=0/1024
+* elapsed time = 0.013030000	maxSize=16384, size=0, remain=16384, pool=0/1024
 
 ------------------------------------------------------------
 "poolAllocator<1024, std::mutex>" : 1000 * times allocate & free
-* elapsed time = 0.020501000	maxSize=16384, size=0, remain=16384, pool=0/1024
+* elapsed time = 0.013148000	maxSize=16384, size=0, remain=16384, pool=0/1024
 
 ------------------------------------------------------------
 "lfPoolAllocator<1024>" : 1000 * times allocate & free
-* elapsed time = 0.020668000	maxSize=16384, size=0, remain=16384, pool=0/1024
+* elapsed time = 0.010605000	maxSize=16384, size=0, remain=16384, pool=0/1024
 
 ------------------------------------------------------------
 "stdAllocator<>" : 1000 * times allocate & free
-* elapsed time = 0.020794000	maxSize=196608, size=132896, remain=63712
+* elapsed time = 0.013452000	maxSize=196608, size=132896, remain=63712
 
 ------------------------------------------------------------
 "stdAllocator<spinLock>" : 1000 * times allocate & free
-* elapsed time = 0.397720000	maxSize=196608, size=132896, remain=63712
+* elapsed time = 0.010849000	maxSize=196608, size=132896, remain=63712
 
 ------------------------------------------------------------
 "stdAllocator<std::mutex>" : 1000 * times allocate & free
-* elapsed time = 0.020724000	maxSize=196608, size=132944, remain=63664
+* elapsed time = 0.020787000	maxSize=196608, size=132944, remain=63664
 
 ------------------------------------------------------------
 "stdAlignAllocator<>" : 1000 * times allocate & free
-* elapsed time = 0.020339000	maxSize=196608, size=132944, remain=63664
+* elapsed time = 0.020496000	maxSize=196608, size=132944, remain=63664
 
 ------------------------------------------------------------
 "stdAlignAllocator<spinLock>" : 1000 * times allocate & free
-* elapsed time = 0.020837000	maxSize=196608, size=132944, remain=63664
+* elapsed time = 0.010895000	maxSize=196608, size=132944, remain=63664
 
 ------------------------------------------------------------
 "stdAlignAllocator<std::mutex>" : 1000 * times allocate & free
-* elapsed time = 0.020337000	maxSize=196608, size=132992, remain=63616
+* elapsed time = 0.013305000	maxSize=196608, size=132992, remain=63616
 
 ------------------------------------------------------------
 "stdAlignAllocator<>" : 1000 * times allocate & free
-* elapsed time = 0.020736000	maxSize=196608, size=132992, remain=63616
+* elapsed time = 0.010606000	maxSize=196608, size=132992, remain=63616
 
 ================================================================================
 
