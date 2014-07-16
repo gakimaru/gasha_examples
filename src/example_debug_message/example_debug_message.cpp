@@ -14,6 +14,7 @@
 #include <gasha/tty_console.h>//コンソール：TTY端末
 #include <gasha/win_console.h>//コンソール：Windowsコマンドプロンプト
 #include <gasha/vs_console.h>//コンソール：Visual Studio出力ウインドウ
+#include <gasha/mem_console.h>//コンソール：メモリコンソール
 #include <gasha/dummy_console.h>//コンソール：ダミーコンソール
 #include <gasha/std_console.h>//標準コンソール
 
@@ -30,6 +31,9 @@
 
 #include <gasha/iterator.h>//イテレータ操作
 #include <gasha/type_traits.h>//型特性ユーティリティ：toStr()
+#include <gasha/shared_spin_lock.h>//共有スピンロック
+
+#include <cstdio>//FILE
 
 #ifdef GASHA_IS_GCC
 //※別端末へのログ出力テスト用
@@ -502,9 +506,9 @@ void example_debug_message()
 		int fd1 = open("/dev/pty1", O_WRONLY | O_NDELAY | O_NOCTTY);//書き込み専用＋（可能なら）非停止モード＋制御端末割り当て禁止（端末でCtrl+Cなどの制御が効かない）
 		int fd2 = open("/dev/pty2", O_WRONLY | O_NDELAY | O_NOCTTY);//書き込み専用＋（可能なら）非停止モード＋制御端末割り当て禁止（端末でCtrl+Cなどの制御が効かない）
 		int fd3 = open("/dev/pty3", O_WRONLY | O_NDELAY | O_NOCTTY);//書き込み専用＋（可能なら）非停止モード＋制御端末割り当て禁止（端末でCtrl+Cなどの制御が効かない）
-		FILE* fp1 = stdout;
-		FILE* fp2 = stderr;
-		FILE* fp3 = stderr;
+		std::FILE* fp1 = stdout;
+		std::FILE* fp2 = stderr;
+		std::FILE* fp3 = stderr;
 		const char* consle_name_fp1 = "stdout(/dev/pty1 open failed)";
 		const char* consle_name_fp2 = "stderr(/dev/pty2 open failed)";
 		const char* consle_name_fp3 = "stderr(/dev/pty3 open failed)";
@@ -684,8 +688,69 @@ void example_debug_message()
 		}
 		monitor_thread.join();
 	}
+	//メモリコンソールのテスト
+	{
+		char buff[256];
+		std::size_t size;
+		memConsole<128, sharedSpinLock> console;//任意のバッファサイズのメモリコンソールを作成
+		//auto& console = stdMemConsole::instance();//標準メモリコンソールを使用
+		console.printScreen();
+		printf("\n");
+		console.printf(buff, "%d%d", 1234567890, 1234567890);
+		console.printScreen();
+		printf("\n");
+		console.clear();
+		console.printf(buff, 16, "%d%d", 1234567890, 1234567890);
+		console.printScreen();
+		printf("\n");
+		console.clear();
+		console.printScreen();
+		printf("\n");
+		size = console.copy(buff, sizeof(buff));
+		printf("%s(size=%d)\n", buff, size);
+		for (int i = 0; i <= 32; ++i)
+		{
+			console.clear();
+			const char* str = "1234567890123456789012345678901234567890";
+			char buff[32 + 1];
+			GASHA_ strncpy_fast(buff, str, i);
+			buff[i] = '\0';
+			console.output(buff);
+			size = console.copy(buff, sizeof(buff));
+			console.printScreen();
+			printf("\n");
+			printf("%s(size=%d)\n", buff, size);
+			console.output("#");
+			size = console.copy(buff, sizeof(buff));
+			console.printScreen();
+			printf("\n");
+			printf("%s(size=%d)\n", buff, size);
+		}
+		console.clear();
+		for (int i = 0; i < 10; ++i)
+		{
+			console.output(nullptr);
+			console.output("1");
+			console.output("23456");
+			console.output("7");
+			console.output("8");
+			console.output("9");
+			console.output("0");
+			console.output("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+			console.output("abcdefghijklmnopqrstuvwxyz");
+			size = console.copy(buff, sizeof(buff));
+			console.printScreen();
+			printf("\n");
+			printf("%s(size=%d)\n", buff, size);
+		}
+	}
 
 #endif//GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
 }
+
+#include <gasha/mem_console.cpp.h>
+
+//明示的なインスタンス化
+GASHA_INSTANCING_memConsole_withLock(8192, sharedSpinLock);
 
 // End of file
