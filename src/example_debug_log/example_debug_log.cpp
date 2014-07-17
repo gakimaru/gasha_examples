@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
-// exmaple_debug_message.cpp
-// デバッグメッセージテスト
+// exmaple_debug_log.cpp
+// デバッグログテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -8,7 +8,7 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_debug_message.h"//デバッグメッセージテスト
+#include "example_debug_log.h"//デバッグログテスト
 
 #include <gasha/console_color.h>//コンソールカラー
 #include <gasha/tty_console.h>//コンソール：TTY端末
@@ -29,9 +29,14 @@
 #include <gasha/std_log_print.h>//標準ログ出力
 #include <gasha/log_queue_monitor.h>//ログキューモニター
 
+#include <gasha/log.h>//ログ操作
+#include <gasha/print.h>//ログ出力操作 ※これだけインクルードしていれば print() が使用できる
+
 #include <gasha/iterator.h>//イテレータ操作
 #include <gasha/type_traits.h>//型特性ユーティリティ：toStr()
 #include <gasha/shared_spin_lock.h>//共有スピンロック
+#include <gasha/strconv.h>//文字列変換
+#include <gasha/chrono.h>//時間処理系ユーティリティ：nowElapsedTime()
 
 #include <cstdio>//FILE
 
@@ -231,8 +236,8 @@ void printAllLogMask(const logLevel::level_type level)
 
 
 //----------------------------------------
-//デバッグメッセージテスト
-void example_debug_message()
+//デバッグログテスト
+void example_debug_log()
 {
 #ifdef GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
 
@@ -394,8 +399,14 @@ void example_debug_message()
 
 	//ローカルログレベルマスク＆ローカルログ属性
 	{
+		printf("\n");
+		printf("--------------------------------------------------------------------------------\n");
+		printf("[ Test for change log-level-mask & log-attribute ]\n");
+		printf("\n");
 		logMask mask;
 		logAttr attr;
+		char mask_serialize_buff[sizeof(logMask::mask_type)];
+		char attr_serialize_buff[sizeof(logAttr::attr_type)];
 		printf("1:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
 		printf("1:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
 		mask.changeRef(logMask::isLocal);
@@ -457,6 +468,13 @@ void example_debug_message()
 					attr.changeRef(logAttr::isLocal);
 					printf("7bx2:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
 					printf("7bx2:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+					mask.changeLevel(ofLog, asSilentAbsolutely, forEvery);
+					attr.add(logWithLevel);
+					attr.add(logWithCategory);
+					printf("7bx3:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+					printf("7bx3:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+					mask.serialize(mask_serialize_buff, sizeof(mask_serialize_buff));
+					attr.serialize(attr_serialize_buff, sizeof(attr_serialize_buff));
 				}
 				mask.changeRef(logMask::isLocal);
 				attr.changeRef(logAttr::isLocal);
@@ -484,6 +502,10 @@ void example_debug_message()
 		}
 		printf("9:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
 		printf("9:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		mask.deserialize(mask_serialize_buff, sizeof(mask_serialize_buff));
+		attr.deserialize(attr_serialize_buff, sizeof(attr_serialize_buff));
+		printf("9a:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		printf("9a:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
 	}
 	{
 		logMask mask;
@@ -493,14 +515,21 @@ void example_debug_message()
 	}
 
 	//ログレベルマスク列挙
-	printAllLogMask(asDetail);//詳細レベルの表示チェック
-	printAllLogMask(asNormal);//通常レベルの表示チェック
-	printAllLogMask(asCritical);//重大レベルの表示チェック
-	printAllLogMask(asAbsolute);//絶対レベルの表示チェック
-
-	//【Unix用】別の端末にログを出力
-#ifdef GASHA_IS_GCC
 	{
+		printAllLogMask(asDetail);//詳細レベルの表示チェック
+		printAllLogMask(asNormal);//通常レベルの表示チェック
+		printAllLogMask(asCritical);//重大レベルの表示チェック
+		printAllLogMask(asAbsolute);//絶対レベルの表示チェック
+	}
+
+#ifdef GASHA_IS_GCC
+	//【Unix用】別の端末にログを出力
+	{
+		printf("\n");
+		printf("--------------------------------------------------------------------------------\n");
+		printf("[ Test for console that output other tty ]\n");
+		printf("\n");
+		
 		//端末をオープン
 		//※dev/pty*/はCygwinの端末
 		int fd1 = open("/dev/pty1", O_WRONLY | O_NDELAY | O_NOCTTY);//書き込み専用＋（可能なら）非停止モード＋制御端末割り当て禁止（端末でCtrl+Cなどの制御が効かない）
@@ -544,6 +573,11 @@ void example_debug_message()
 #endif//GASHA_IS_GCC
 
 	{
+		printf("\n");
+		printf("--------------------------------------------------------------------------------\n");
+		printf("[ Test for log-queue-monitor ]\n");
+		printf("\n");
+		
 		//ログキューモニタースレッド実行
 		auto monitor_thread_func = []()
 		{
@@ -594,6 +628,7 @@ void example_debug_message()
 						logLevel::level_type level = asNormal;
 						logCategory::category_type category = forTARO;
 						print_info.m_id = 0;//IDは自動発番
+						print_info.m_time = nowElapsedTime();
 						print_info.m_message = message;
 						print_info.m_messageSize = static_cast<logPrintInfo::message_size_type>(size + 1);
 						print_info.m_level = level;
@@ -647,6 +682,7 @@ void example_debug_message()
 					logLevel::level_type level = asNormal;
 					logCategory::category_type category = forTARO;
 					print_info.m_id = reserved_id;//予約したID
+					print_info.m_time = nowElapsedTime();
 					print_info.m_message = message;
 					print_info.m_messageSize = static_cast<logPrintInfo::message_size_type>(size + 1);
 					print_info.m_level = level;
@@ -688,8 +724,14 @@ void example_debug_message()
 		}
 		monitor_thread.join();
 	}
+	
 	//メモリコンソールのテスト
 	{
+		printf("\n");
+		printf("--------------------------------------------------------------------------------\n");
+		printf("[ Test for memory console ]\n");
+		printf("\n");
+		
 		char buff[256];
 		std::size_t size;
 		memConsole<128, sharedSpinLock> console;//任意のバッファサイズのメモリコンソールを作成
@@ -744,13 +786,104 @@ void example_debug_message()
 			printf("%s(size=%d)\n", buff, size);
 		}
 	}
+	
+	//ログ出力操作のテスト
+	{
+		printf("\n");
+		printf("--------------------------------------------------------------------------------\n");
+		printf("[ Test for print log ]\n");
+		printf("\n");
+		
+		GASHA_ log log;
+		log.initialize();
+
+		//ログキューモニタースレッド実行
+		auto monitor_thread_func = []()
+		{
+			logQueueMonitor mon;
+			mon.monitor();
+		};
+		std::thread monitor_thread(monitor_thread_func);
+
+		logAttr attr;
+		attr.add(logWithID);
+		attr.add(logWithTime);
+		attr.add(logWithLevel);
+		attr.add(logWithCategory);
+		print(asImportant, forAny, "(01)Test Message:%d", 10);
+
+		attr.reset();
+		attr.add(ofLog, withID);
+		attr.add(ofLog, withTime);
+
+		log.reserve(asImportant, forAny, 8);
+
+		log.print(asImportant, forAny, "(02)Test Message:%d", 10);
+		
+		log.convPrint(dummyStrConv(), asImportant, forAny, "(03)Test Message:%d", 10);
+		log.convPrint(upperCaseConv, asImportant, forAny, "(04)Test Message:%d", 10);
+		log.convPrint(lowerCaseConv, asImportant, forAny, "(05)Test Message:%d", 10);
+
+		log.put(asImportant, forAny, "(06)Test Message");
+		
+		log.convPut(dummyStrConv(), asImportant, forAny, "(07)Test Message");
+		log.convPut(upperCaseConv, asImportant, forAny, "(08)Test Message");
+		log.convPut(lowerCaseConv, asImportant, forAny, "(09)Test Message");
+
+		log.reservedPrint("(10)Test Message:%d", 10);
+		
+		log.reservedConvPrint(dummyStrConv(), "(11)Test Message");
+		log.reservedConvPrint(upperCaseConv, "(12)Test Message");
+		log.reservedConvPrint(lowerCaseConv, "(13)Test Message");
+		
+		log.reservedPut("(14)Test Message");
+		
+		log.reservedConvPut(dummyStrConv(), "(15)Test Message");
+		log.reservedConvPut(upperCaseConv, "(16)Test Message");
+		log.reservedConvPut(lowerCaseConv, "(17)Test Message");
+		
+		log.flush();
+
+		attr.remove(ofLog, withID);
+		attr.add(ofLog, headerOnlyColored);
+
+		log.printDirect(asImportant, forAny, "(18)Test Message:%d", 10);
+		log.printDirect(stdLogPrint(), asImportant, forAny, "(19)Test Message:%d", 10);
+		
+		log.convPrintDirect(dummyStrConv(), asImportant, forAny, "(20)Test Message:%d", 10);
+		log.convPrintDirect(upperCaseConv, asImportant, forAny, "(21)Test Message:%d", 10);
+		log.convPrintDirect(lowerCaseConv, asImportant, forAny, "(22)Test Message:%d", 10);
+		log.convPrintDirect(stdLogPrint(), dummyStrConv(), asImportant, forAny, "(23)Test Message:%d", 10);
+		log.convPrintDirect(stdLogPrint(), upperCaseConv, asImportant, forAny, "(24)Test Message:%d", 10);
+		log.convPrintDirect(stdLogPrint(), lowerCaseConv, asImportant, forAny, "(25)Test Message:%d", 10);
+
+		attr.add(ofLog, withoutColor);
+
+		log.putDirect(asImportant, forAny, "(26)Test Message");
+		log.putDirect(stdLogPrint(), asImportant, forAny, "(27)Test Message");
+		
+		log.convPutDirect(dummyStrConv(), asImportant, forAny, "(28)Test Message");
+		log.convPutDirect(upperCaseConv, asImportant, forAny, "(29)Test Message");
+		log.convPutDirect(lowerCaseConv, asImportant, forAny, "(30)Test Message");
+		log.convPutDirect(stdLogPrint(), dummyStrConv(), asImportant, forAny, "(31)Test Message");
+		log.convPutDirect(stdLogPrint(), upperCaseConv, asImportant, forAny, "(32)Test Message");
+		log.convPutDirect(stdLogPrint(), lowerCaseConv, asImportant, forAny, "(33)Test Message");
+
+		log.flush();
+		log.pause();
+		log.resume();
+		log.abort();
+
+		monitor_thread.join();
+	}
 
 #endif//GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
 }
 
-#include <gasha/mem_console.cpp.h>
-
+#ifdef GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
 //明示的なインスタンス化
-GASHA_INSTANCING_memConsole_withLock(8192, sharedSpinLock);
+#include <gasha/mem_console.cpp.h>
+GASHA_INSTANCING_memConsole_withLock(128, sharedSpinLock);
+#endif//GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
 
 // End of file

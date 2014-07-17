@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1F0C163F-CE6A-4CF9-97DC-E961C875DA67}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>example_debug_message</RootNamespace>
+    <RootNamespace>example_debug_log</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -93,7 +93,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.;$(ProjectDir);$(ProjectDir)../../src/example_debug_message;$(ProjectDir)../../sub/gasha/include;$(ProjectDir)../../sub/gasha_settings/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(ProjectDir);$(ProjectDir)../../src/example_debug_log;$(ProjectDir)../../sub/gasha/include;$(ProjectDir)../../sub/gasha_settings/include</AdditionalIncludeDirectories>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
       <FloatingPointExceptions>false</FloatingPointExceptions>
@@ -122,7 +122,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.;$(ProjectDir);$(ProjectDir)../../src/example_debug_message;$(ProjectDir)../../sub/gasha/include;$(ProjectDir)../../sub/gasha_settings/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(ProjectDir);$(ProjectDir)../../src/example_debug_log;$(ProjectDir)../../sub/gasha/include;$(ProjectDir)../../sub/gasha_settings/include</AdditionalIncludeDirectories>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
       <FloatingPointExceptions>false</FloatingPointExceptions>
@@ -153,7 +153,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.;$(ProjectDir);$(ProjectDir)../../src/example_debug_message;$(ProjectDir)../../sub/gasha/include;$(ProjectDir)../../sub/gasha_settings/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(ProjectDir);$(ProjectDir)../../src/example_debug_log;$(ProjectDir)../../sub/gasha/include;$(ProjectDir)../../sub/gasha_settings/include</AdditionalIncludeDirectories>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
@@ -187,7 +187,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.;$(ProjectDir);$(ProjectDir)../../src/example_debug_message;$(ProjectDir)../../sub/gasha/include;$(ProjectDir)../../sub/gasha_settings/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(ProjectDir);$(ProjectDir)../../src/example_debug_log;$(ProjectDir)../../sub/gasha/include;$(ProjectDir)../../sub/gasha_settings/include</AdditionalIncludeDirectories>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
@@ -213,7 +213,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\example_debug_message\example_debug_message.cpp" />
+    <ClCompile Include="..\..\src\example_debug_log\example_debug_log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="standard.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -223,7 +223,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\example_debug_message\example_debug_message.h" />
+    <ClInclude Include="..\..\src\example_debug_log\example_debug_log.h" />
     <ClInclude Include="standard.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

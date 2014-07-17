@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
 // main.cpp
-// デバッグメッセージテスト - メイン
+// デバッグログテスト - メイン
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -8,15 +8,15 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
-#include "example_debug_message.h"//デバッグメッセージテスト
+#include "example_debug_log.h"//デバッグログテスト
 
 #include <cstdio>
 #include <cstdlib>
 
 int main(const int argc, const char* argv[])
 {
-	//デバッグメッセージテスト
-	example_debug_message();
+	//デバッグログテスト
+	example_debug_log();
 	
 	return EXIT_SUCCESS;
 }

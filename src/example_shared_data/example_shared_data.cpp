@@ -951,16 +951,16 @@ void example_shared_data()
 	printf("alignof(lf_stack_t::stack_t)=%d\n", alignof(lf_stack_t::stack_t));
 	printf("lf_stack_t::TAGGED_PTR_TAG_BITS=%d\n", lf_stack_t::TAGGED_PTR_TAG_BITS);
 	printf("lf_stack_t::TAGGED_PTR_TAG_SHIFT=%d\n", lf_stack_t::TAGGED_PTR_TAG_SHIFT);
-	printf("lf_stack_t::stack_ptr_t::TAG_BITS=%d\n", lf_stack_t::stack_ptr_t::TAG_BITS);
-	printf("lf_stack_t::stack_ptr_t::TAG_SHIFT=%d\n", lf_stack_t::stack_ptr_t::TAG_SHIFT);
+	printf("lf_stack_t::stack_ptr_type::TAG_BITS=%d\n", lf_stack_t::stack_ptr_type::TAG_BITS);
+	printf("lf_stack_t::stack_ptr_type::TAG_SHIFT=%d\n", lf_stack_t::stack_ptr_type::TAG_SHIFT);
 	printf("sizeof(lf_queue_t)=%d\n", sizeof(lf_queue_t));
 	printf("alignof(lf_queue_t)=%d\n", alignof(lf_queue_t));
 	printf("sizeof(lf_queue_t::queue_t)=%d\n", sizeof(lf_queue_t::queue_t));
 	printf("alignof(lf_queue_t::queue_t)=%d\n", alignof(lf_queue_t::queue_t));
 	printf("lf_queue_t::TAGGED_PTR_TAG_BITS=%d\n", lf_queue_t::TAGGED_PTR_TAG_BITS);
 	printf("lf_queue_t::TAGGED_PTR_TAG_SHIFT=%d\n", lf_queue_t::TAGGED_PTR_TAG_SHIFT);
-	printf("lf_queue_t::queue_ptr_t::TAG_BITS=%d\n", lf_queue_t::queue_ptr_t::TAG_BITS);
-	printf("lf_queue_t::queue_ptr_t::TAG_SHIFT=%d\n", lf_queue_t::queue_ptr_t::TAG_SHIFT);
+	printf("lf_queue_t::queue_ptr_type::TAG_BITS=%d\n", lf_queue_t::queue_ptr_type::TAG_BITS);
+	printf("lf_queue_t::queue_ptr_type::TAG_SHIFT=%d\n", lf_queue_t::queue_ptr_type::TAG_SHIFT);
 	printf("-----------------------------\n");
 	printf("\n");
 

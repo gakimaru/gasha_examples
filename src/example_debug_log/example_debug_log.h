@@ -3,8 +3,8 @@
 #define GASHA_INCLUDED_EXAMPLE_DEBUG_MESSAGE_H
 
 //--------------------------------------------------------------------------------
-// exmaple_debug_message.h
-// デバッグメッセージテスト
+// exmaple_debug_log.h
+// デバッグログテスト
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -13,8 +13,8 @@
 //--------------------------------------------------------------------------------
 
 //----------------------------------------
-//デバッグメッセージテスト
-void example_debug_message();
+//デバッグログテスト
+void example_debug_log();
 
 #endif//GASHA_INCLUDED_EXAMPLE_DEBUG_MESSAGE_H
 

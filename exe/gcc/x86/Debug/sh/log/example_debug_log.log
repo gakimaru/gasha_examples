@@ -60,6 +60,10 @@
 (SP64)"forEvery"[0m
 (SP65)"forCallPoint"[0m
 (SP66)"forCriticalCallPoint"[0m
+
+--------------------------------------------------------------------------------
+[ Test for change log-level-mask & log-attribute ]
+
 1:mask: refType=0, level=4
 1:attr: refType=0, attr=0x00000000
 2:mask: refType=2, level=4
@@ -71,37 +75,41 @@
 2c:mask: refType=2, level=4
 2c:attr: refType=2, attr=0x00000000
 3:mask: refType=2, level=12
-3:attr: refType=2, attr=0x00100020
+3:attr: refType=2, attr=0x02004000
 4:mask: refType=1, level=12
-4:attr: refType=1, attr=0x00100020
+4:attr: refType=1, attr=0x02004000
 5:mask: refType=1, level=12
-5:attr: refType=1, attr=0x00100020
+5:attr: refType=1, attr=0x02004000
 6:mask: refType=2, level=12
-6:attr: refType=2, attr=0x00100020
+6:attr: refType=2, attr=0x02004000
 7:mask: refType=2, level=5
-7:attr: refType=2, attr=0x00200010
+7:attr: refType=2, attr=0x04002000
 7a:mask: refType=2, level=12
-7a:attr: refType=2, attr=0x00100020
+7a:attr: refType=2, attr=0x02004000
 7b:mask: refType=0, level=4
 7b:attr: refType=0, attr=0x00000000
 7bx:mask: refType=1, level=4
 7bx:attr: refType=1, attr=0x00000000
 7bx2:mask: refType=2, level=4
 7bx2:attr: refType=2, attr=0x00000000
+7bx3:mask: refType=2, level=48
+7bx3:attr: refType=2, attr=0x00001800
 7c:mask: refType=2, level=12
-7c:attr: refType=2, attr=0x00100020
+7c:attr: refType=2, attr=0x02004000
 7d:mask: refType=1, level=12
-7d:attr: refType=1, attr=0x00100020
+7d:attr: refType=1, attr=0x02004000
 7e:mask: refType=0, level=4
 7e:attr: refType=0, attr=0x00000000
 7f:mask: refType=2, level=12
-7f:attr: refType=2, attr=0x00100020
+7f:attr: refType=2, attr=0x02004000
 7g:mask: refType=0, level=4
 7g:attr: refType=0, attr=0x00000000
 8:mask: refType=1, level=12
-8:attr: refType=1, attr=0x00100020
+8:attr: refType=1, attr=0x02004000
 9:mask: refType=2, level=12
-9:attr: refType=2, attr=0x00100020
+9:attr: refType=2, attr=0x02004000
+9a:mask: refType=2, level=48
+9a:attr: refType=2, attr=0x00001800
 10:mask: refType=0, level=4
 10:attr: refType=0, attr=0x00000000
 
@@ -112,57 +120,57 @@
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+[93;101m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 ( 1)"forDummy"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+[93;101m		OK ... [0m
 ( 2)"forNotice"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+[93;101m		OK ... [0m
 ( 3)"forFileSystem"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+[93;101m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 ( 4)"forResource"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+[93;101m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 ( 5)"for3D"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+[93;101m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 ( 6)"for2D"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+[93;101m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 ( 7)"forSound"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+[93;101m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 (10)"forMiniGame"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+[93;101m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 (20)"forTARO"[0m
 [90;49m	mask(of log): ( 5)"asDetail"[0m
 [90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "vs-console *Category CUSTOM*"[0m
 [30;107m	mask(of notice): (12)"asNormal"[0m
-[30;107m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+[30;107m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 (21)"forJIRO"[0m
 [0m	mask(of log): (47)"asSilent"[0m
-[0m		MASKED! ... [90;49mnotice-message: ( 5)"asDetail"[0m
+[0m		OK ... [90;49mlog-message: ( 5)"asDetail", "vs-console *Category CUSTOM*"[0m
 [0m	mask(of notice): (48)"asSilentAbsolutely"[0m
-[0m		MASKED! ... [90;107mnotice-message: ( 5)"asDetail"[0m
+[0m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 
 --------------------------------------------------------------------------------
 [ Enumeration of all log-level-masks : Test for output message asNormal ]
@@ -171,47 +179,47 @@
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+[93;101m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 ( 1)"forDummy"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+[93;101m		OK ... [0m
 ( 2)"forNotice"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+[93;101m		OK ... [0m
 ( 3)"forFileSystem"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+[93;101m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 ( 4)"forResource"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+[93;101m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 ( 5)"for3D"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+[93;101m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 ( 6)"for2D"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+[93;101m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 ( 7)"forSound"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+[93;101m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 (10)"forMiniGame"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+[93;101m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 (20)"forTARO"[0m
 [90;49m	mask(of log): ( 5)"asDetail"[0m
 [90;49m		OK ... [0mlog-message: (12)"asNormal", "vs-console *Category CUSTOM*"[0m
@@ -219,9 +227,9 @@
 [30;107m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 (21)"forJIRO"[0m
 [0m	mask(of log): (47)"asSilent"[0m
-[0m		MASKED! ... [0mnotice-message: (12)"asNormal"[0m
+[0m		OK ... [0mlog-message: (12)"asNormal", "vs-console *Category CUSTOM*"[0m
 [0m	mask(of notice): (48)"asSilentAbsolutely"[0m
-[0m		MASKED! ... [30;107mnotice-message: (12)"asNormal"[0m
+[0m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 
 --------------------------------------------------------------------------------
 [ Enumeration of all log-level-masks : Test for output message asCritical ]
@@ -278,9 +286,9 @@
 [30;107m		OK ... [93;101mnotice-message: (36)"asCritical", "vs-console *CHANGED*"[0m
 (21)"forJIRO"[0m
 [0m	mask(of log): (47)"asSilent"[0m
-[0m		MASKED! ... [91;49mnotice-message: (36)"asCritical"[0m
+[0m		OK ... [91;49mlog-message: (36)"asCritical", "vs-console *Category CUSTOM*"[0m
 [0m	mask(of notice): (48)"asSilentAbsolutely"[0m
-[0m		MASKED! ... [93;101mnotice-message: (36)"asCritical"[0m
+[0m		OK ... [93;101mnotice-message: (36)"asCritical", "vs-console *CHANGED*"[0m
 
 --------------------------------------------------------------------------------
 [ Enumeration of all log-level-masks : Test for output message asAbsolute ]
@@ -339,33 +347,41 @@
 [0m	mask(of log): (47)"asSilent"[0m
 [0m		OK ... [0mlog-message: (44)"asAbsolute", "vs-console *Category CUSTOM*"[0m
 [0m	mask(of notice): (48)"asSilentAbsolutely"[0m
-[0m		MASKED! ... [0mnotice-message: (44)"asAbsolute"[0m
+[0m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
+
+--------------------------------------------------------------------------------
+[ Test for console that output other tty ]
+
 
 --------------------------------------------------------------------------------
 [ Enumeration of all log-levels ]
 
 [0m[11](SP47)"asSilent"[0m
 [0m[12](SP48)"asSilentAbsolutely"[0m
-[1] [1] reserved message[0m
-[2] [2] message:1[0m
-[3] [3] message:3[0m
-[4] [4] message:9[0m
-[5] [5] message:27[0m
-[6] [6] message:81[0m
-[7] [7] message:243[0m
-[8] [8] message:729[0m
-[9] [9] message:2187[0m
-[10] [10] message:6561[0m
-[11] [11] message:19683[0m
-[12] [12] message:59049[0m
-[13] [13] message:177147[0m
-[14] [14] message:531441[0m
-[15] [15] message:1594323[0m
-[16] [16] message:4782969[0m
-[17] [17] message:14348907[0m
-[18] [18] message:43046721[0m
-[19] [19] message:129140163[0m
-[20] [20] message:387420489[0m
+
+--------------------------------------------------------------------------------
+[ Test for log-queue-monitor ]
+
+reserved message
+message:1
+message:3
+message:9
+message:27
+message:81
+message:243
+message:729
+message:2187
+message:6561
+message:19683
+message:59049
+message:177147
+message:531441
+message:1594323
+message:4782969
+message:14348907
+message:43046721
+message:129140163
+message:387420489
 enqueu failed.
 enqueu failed.
 enqueu failed.
@@ -406,26 +422,30 @@ message making failed.
 message making failed.
 message making failed.
 message making of reservation failed.
-[1] [1] reserved message[0m
-[2] [2] message:1[0m
-[3] [3] message:3[0m
-[4] [4] message:9[0m
-[5] [5] message:27[0m
-[6] [6] message:81[0m
-[7] [7] message:243[0m
-[8] [8] message:729[0m
-[9] [9] message:2187[0m
-[10] [10] message:6561[0m
-[11] [11] message:19683[0m
-[12] [12] message:59049[0m
-[13] [13] message:177147[0m
-[14] [14] message:531441[0m
-[15] [15] message:1594323[0m
-[16] [16] message:4782969[0m
-[17] [17] message:14348907[0m
-[18] [18] message:43046721[0m
-[19] [19] message:129140163[0m
-[20] [20] message:387420489[0m
+reserved message
+message:1
+message:3
+message:9
+message:27
+message:81
+message:243
+message:729
+message:2187
+message:6561
+message:19683
+message:59049
+message:177147
+message:531441
+message:1594323
+message:4782969
+message:14348907
+message:43046721
+message:129140163
+message:387420489
+
+--------------------------------------------------------------------------------
+[ Test for memory console ]
+
 
 12345678901234567890
 123456789012345
@@ -583,3 +603,40 @@ message making of reservation failed.
 7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(size=124)
 7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
 7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(size=124)
+
+--------------------------------------------------------------------------------
+[ Test for print log ]
+
+[94;40m[1/00:00:00.003245/asImportant/forAny] (01)Test Message:10[0m
+[94;40m[2/00:00:00.003291] (10)Test Message:10[0m
+[94;40m[3/00:00:00.003296] (11)Test Message[0m
+[94;40m[4/00:00:00.003300] (12)TEST MESSAGE[0m
+[94;40m[5/00:00:00.003304] (13)test message[0m
+[94;40m[6/00:00:00.003308] (14)Test Message[0m
+[94;40m[7/00:00:00.003312] (15)Test Message[0m
+[94;40m[8/00:00:00.003316] (16)TEST MESSAGE[0m
+[94;40m[9/00:00:00.003321] (17)test message[0m
+[94;40m[10/00:00:00.003258] (02)Test Message:10[0m
+[94;40m[11/00:00:00.003262] (03)Test Message:10[0m
+[94;40m[12/00:00:00.003267] (04)TEST MESSAGE:10[0m
+[94;40m[13/00:00:00.003271] (05)test message:10[0m
+[94;40m[14/00:00:00.003275] (06)Test Message[0m
+[94;40m[15/00:00:00.003279] (07)Test Message[0m
+[94;40m[16/00:00:00.003283] (08)TEST MESSAGE[0m
+[94;40m[17/00:00:00.003287] (09)test message[0m
+[94;40m[00:00:00.003410] [0m(18)Test Message:10
+[94;40m[00:00:00.003422] [0m(19)Test Message:10
+[94;40m[00:00:00.003432] [0m(20)Test Message:10
+[94;40m[00:00:00.003441] [0m(21)TEST MESSAGE:10
+[94;40m[00:00:00.003448] [0m(22)test message:10
+[94;40m[00:00:00.003458] [0m(23)Test Message:10
+[94;40m[00:00:00.003465] [0m(24)TEST MESSAGE:10
+[94;40m[00:00:00.003474] [0m(25)test message:10
+[00:00:00.003481] (26)Test Message
+[00:00:00.003488] (27)Test Message
+[00:00:00.003495] (28)Test Message
+[00:00:00.003503] (29)TEST MESSAGE
+[00:00:00.003510] (30)test message
+[00:00:00.003517] (31)Test Message
+[00:00:00.003524] (32)TEST MESSAGE
+[00:00:00.003531] (33)test message

@@ -150,7 +150,7 @@ static void testAdvanced()
 	printf("\n");
 
 	//デバッグ用 operator new 時コールバック
-	auto at_new = [](const gasha::IAllocatorAdapter& adapter, const void* p, const std::size_t size, const std::size_t align, const gasha::newMethod_t method, const gasha::debugAllocationInfo* info)
+	auto at_new = [](const gasha::IAllocatorAdapter& adapter, const void* p, const std::size_t size, const std::size_t align, const gasha::newMethod_type method, const gasha::debugAllocationInfo* info)
 	{
 	#ifdef GASHA_HAS_DEBUG_FEATURE
 		printf("[CALLBACK] Operator new%s(%d,%d)p=%p, allocator=\"%s:%s\"\n", method == gasha::methodOfNewArrays ? "[]" : "", size, align, p, adapter.name(), adapter.mode());
@@ -160,7 +160,7 @@ static void testAdvanced()
 	};
 	
 	//デバッグ用 operator delete 時コールバック
-	auto at_delete = [](const gasha::IAllocatorAdapter& adapter, const void* p, const gasha::deleteMethod_t method, const gasha::debugAllocationInfo* info)
+	auto at_delete = [](const gasha::IAllocatorAdapter& adapter, const void* p, const gasha::deleteMethod_type method, const gasha::debugAllocationInfo* info)
 	{
 	#ifdef GASHA_HAS_DEBUG_FEATURE
 		printf("[CALLBACK] Operator delete%s(%p), allocator=\"%s:%s\"\n", method == gasha::methodOfDeleteArrays ? "[]" : "", p, adapter.name(), adapter.mode());

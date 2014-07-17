@@ -1,6 +1,6 @@
 ﻿#-------------------------------------------------------------------------------
 # Makefile
-# example_debug_message 用メイクファイル
+# example_debug_log 用メイクファイル
 #
 # Gakimaru's researched and standard library for C++ - GASHA
 #   Copyright (c) 2014 Itagaki Mamoru
@@ -11,7 +11,7 @@
 #-------------------------------------------------------------------------------
 
 # 実行ファイル名
-PROG_NAME := example_debug_message
+PROG_NAME := example_debug_log
 
 # プロジェクトの先頭ディレクトリ
 PROJ_BASE_DIR := ..
@@ -23,7 +23,7 @@ PROJ_SRC_DIR := $(SRC_BASE_DIR)/$(PROG_NAME)
 # ソースファイル
 SRCS := \
 	main.cpp \
-	$(PROJ_SRC_DIR)/example_debug_message.cpp \
+	$(PROJ_SRC_DIR)/example_debug_log.cpp \
 
 # インクルードディレクトリ
 INCLIDE_DIRS := \
