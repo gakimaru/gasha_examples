@@ -278,9 +278,9 @@ void easyTest()
 
 #ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 	//デバッグ情報表示用処理
-	auto debug_print_info = [](char* message, const data_t& data) -> std::size_t
+	auto debug_print_info = [](char* message, const std::size_t max_size, std::size_t& size, const data_t& data) -> std::size_t
 	{
-		return GASHA_ spprintf(message, "temp=%d, value=%d", data.m_temp, data.m_value);
+		return GASHA_ spprintf(message, max_size, size, "temp=%d, value=%d", data.m_temp, data.m_value);
 	};
 #endif//ENABLE_TEST_PRINT_DEBUG_INFO
 
@@ -299,7 +299,7 @@ void easyTest()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_poolAllocator.template debugInfo<data_t>(message, true, debug_print_info);
+		s_poolAllocator.template debugInfo<data_t>(message, sizeof(message), true, debug_print_info);
 		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -320,7 +320,7 @@ void easyTest()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_lfPoolAllocator.template debugInfo<data_t>(message, true, debug_print_info);
+		s_lfPoolAllocator.template debugInfo<data_t>(message, sizeof(message), true, debug_print_info);
 		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -341,7 +341,7 @@ void easyTest()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_stack.debugInfo(message, true, debug_print_info);
+		s_stack.debugInfo(message, sizeof(message), true, debug_print_info);
 		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -362,7 +362,7 @@ void easyTest()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_lfStack.debugInfo(message, true, debug_print_info);
+		s_lfStack.debugInfo(message, sizeof(message), true, debug_print_info);
 		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -383,7 +383,7 @@ void easyTest()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_queue.debugInfo(message, true, debug_print_info);
+		s_queue.debugInfo(message, sizeof(message), true, debug_print_info);
 		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -404,7 +404,7 @@ void easyTest()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_lfQueue.debugInfo(message, true, debug_print_info);
+		s_lfQueue.debugInfo(message, sizeof(message), true, debug_print_info);
 		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -709,9 +709,9 @@ void thread_test()
 
 #ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 	//デバッグ情報表示用処理
-	auto debug_print_info = [](char* message, const data_t& data) -> std::size_t
+	auto debug_print_info = [](char* message, const std::size_t max_size, std::size_t& size, const data_t& data) -> std::size_t
 	{
-		return GASHA_ spprintf(message, "temp=%d, value=%d", data.m_temp, data.m_value);
+		return GASHA_ spprintf(message, max_size, size, "temp=%d, value=%d", data.m_temp, data.m_value);
 	};
 #endif//ENABLE_TEST_PRINT_DEBUG_INFO
 
@@ -730,7 +730,7 @@ void thread_test()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_poolAllocator.debugInfo<data_t>(message, true, debug_print_info);
+		s_poolAllocator.debugInfo<data_t>(message, sizeof(message), true, debug_print_info);
 		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -751,7 +751,7 @@ void thread_test()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_lfPoolAllocator.debugInfo<data_t>(message, true, debug_print_info);
+		s_lfPoolAllocator.debugInfo<data_t>(message, sizeof(message), true, debug_print_info);
 		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -772,7 +772,7 @@ void thread_test()
 		
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_stack.debugInfo(message, true, debug_print_info);
+		s_stack.debugInfo(message, sizeof(message), true, debug_print_info);
 		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -793,7 +793,7 @@ void thread_test()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_lfStack.debugInfo(message, true, debug_print_info);
+		s_lfStack.debugInfo(message, sizeof(message), true, debug_print_info);
 		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -814,7 +814,7 @@ void thread_test()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_queue.debugInfo(message, true, debug_print_info);
+		s_queue.debugInfo(message, sizeof(message), true, debug_print_info);
 		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
@@ -835,7 +835,7 @@ void thread_test()
 
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
-		s_lfQueue.debugInfo(message, true, debug_print_info);
+		s_lfQueue.debugInfo(message, sizeof(message), true, debug_print_info);
 		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}

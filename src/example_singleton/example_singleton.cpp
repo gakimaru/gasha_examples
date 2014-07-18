@@ -236,7 +236,7 @@ void example_singleton()
 	{
 		char message[2048];
 		singleton<common_data1_t> data("test1-E", with_lock_shared);
-		data.debugInfo(message);
+		data.debugInfo(message, sizeof(message));
 		std::printf(message);
 	}
 

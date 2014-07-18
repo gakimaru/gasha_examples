@@ -102,11 +102,11 @@ static void testBasic()
 		auto adapter = scoped.adapter();
 		polyAllocator poly_allocator(adapter);
 		char message[1024];
-		scoped.debugInfo(message); std::printf(message);
+		scoped.debugInfo(message, sizeof(message)); std::printf(message);
 		data_t* p101 = new data_t;
-		scoped.debugInfo(message); std::printf(message);
+		scoped.debugInfo(message, sizeof(message)); std::printf(message);
 		delete p101;
-		scoped.debugInfo(message); std::printf(message);
+		scoped.debugInfo(message, sizeof(message)); std::printf(message);
 	}
 	std::printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
 }
@@ -134,10 +134,10 @@ static void testSTL()
 		EXPR_PLAIN(array.push_back(data););
 		EXPR_PLAIN(array.push_back(data););
 
-		EXPR_PLAIN(stack.debugInfo(message); std::printf(message););//STL内のnewがローカルのスタックアロケータを使用していることを確認
+		EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););//STL内のnewがローカルのスタックアロケータを使用していることを確認
 		std::printf("***** END BLOCK *****\n");
 	}
-	EXPR_PLAIN(stack.debugInfo(message); std::printf(message););//スマートスタックアロケータにより、アロケータのメモリが空いたことを確認
+	EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););//スマートスタックアロケータにより、アロケータのメモリが空いたことを確認
 }
 
 //----------------------------------------

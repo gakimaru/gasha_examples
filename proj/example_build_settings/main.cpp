@@ -29,13 +29,13 @@ int main(const int argc, const char* argv[])
 
 		//ライブラリビルド時のビルド設定を診断
 		std::printf("\n");
-		buildSettingsDiagnosticTest(message, size, diagForLibrary);
+		buildSettingsDiagnosticTest(message, sizeof(message), size, diagForLibrary);
 		std::printf(message);
 		std::printf("message size = %d bytes.\n", size);
 
 		//現在のビルド設定を診断
 		std::printf("\n");
-		buildSettingsDiagnosticTest(message, size, diagForProject);
+		buildSettingsDiagnosticTest(message, sizeof(message), size, diagForProject);
 		std::printf(message);
 		std::printf("message size = %d bytes.\n", size);
 	}

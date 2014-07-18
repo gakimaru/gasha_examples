@@ -31,7 +31,7 @@ static void testMono(ALLOCATOR& mono)
 {
 	std::printf("\n");
 	char message[1024];
-	EXPR_PLAIN(mono.debugInfo(message); std::printf(message););
+	EXPR_PLAIN(mono.debugInfo(message, sizeof(message)); std::printf(message););
 	EXPR(p1, void* p1 = mono.alloc(1););
 	EXPR(p1, mono.free(p1););
 	EXPR(p2, void* p2 = mono.alloc(1, 1););
@@ -60,7 +60,7 @@ static void testMono(ALLOCATOR& mono)
 	EXPR(p13, mono.free(p13););
 	EXPR(p14, void* p14 = mono.alloc(10););
 	EXPR(p14, mono.free(p14););
-	EXPR_PLAIN(mono.debugInfo(message); std::printf(message););
+	EXPR_PLAIN(mono.debugInfo(message, sizeof(message)); std::printf(message););
 }
 
 //----------------------------------------
@@ -95,7 +95,7 @@ void example_mono_allocator()
 			EXPR_PLAIN(monoAllocator_withBuff<1024, lock_type> mono;);
 			std::printf("----------------------------------------\n");
 			std::printf("\n");
-			EXPR_PLAIN(mono.debugInfo(message); std::printf(message););
+			EXPR_PLAIN(mono.debugInfo(message, sizeof(message)); std::printf(message););
 		}
 
 		//型指定バッファ付き単一アロケータ
@@ -106,7 +106,7 @@ void example_mono_allocator()
 			EXPR_PLAIN(monoAllocator_withType<long long, 128, lock_type> mono;);
 			std::printf("----------------------------------------\n");
 			std::printf("\n");
-			EXPR_PLAIN(mono.debugInfo(message); std::printf(message););
+			EXPR_PLAIN(mono.debugInfo(message, sizeof(message)); std::printf(message););
 			EXPR(p, long long* p = mono.newDefault(););
 			EXPR(p, mono.deleteDefault(p););
 		}
@@ -134,7 +134,7 @@ void example_mono_allocator()
 			EXPR_PLAIN(lfMonoAllocator_withBuff<1024> mono;);
 			std::printf("----------------------------------------\n");
 			std::printf("\n");
-			EXPR_PLAIN(mono.debugInfo(message); std::printf(message););
+			EXPR_PLAIN(mono.debugInfo(message, sizeof(message)); std::printf(message););
 		}
 
 		//型指定バッファ付き単一スタックアロケータ
@@ -145,7 +145,7 @@ void example_mono_allocator()
 			EXPR_PLAIN(lfMonoAllocator_withType<long long, 128> mono;);
 			std::printf("----------------------------------------\n");
 			std::printf("\n");
-			EXPR_PLAIN(mono.debugInfo(message); std::printf(message););
+			EXPR_PLAIN(mono.debugInfo(message, sizeof(message)); std::printf(message););
 			EXPR(p, long long* p = mono.newDefault(););
 			EXPR(p, mono.deleteDefault(p););
 		}

@@ -35,7 +35,7 @@ static void testStack(ALLOCATOR& stack)
 {
 	std::printf("\n");
 	char message[1024];
-	EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
+	EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););
 	EXPR(p1, void* p1 = stack.alloc(1););
 	EXPR(p2, void* p2 = stack.alloc(1, 1););
 	EXPR(p3, void* p3 = stack.alloc(1, 1););
@@ -50,7 +50,7 @@ static void testStack(ALLOCATOR& stack)
 	EXPR(p12, data_t* p12 = stack.template newArray<data_t>(3, 456););
 	EXPR(p13, void* p13 = stack.alloc(1000););//アロケート失敗（サイズオーバー）
 	EXPR(p14, void* p14 = stack.alloc(10););
-	EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
+	EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););
 	EXPR_WITH_INFO(stack.clear(););
 	EXPR(p1, stack.free(p1););
 	EXPR(p2, stack.free(p2););
@@ -66,7 +66,7 @@ static void testStack(ALLOCATOR& stack)
 	EXPR(p12, stack.deleteArray(p12, 3););
 	EXPR(p13, stack.free(p13););
 	EXPR(p14, stack.free(p14););//スマートスタックならここで自動クリア
-	EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
+	EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););
 	EXPR(p100, void* p100 = stack.alloc(10););
 	EXPR(p101, void* p101 = stack.alloc(20););
 	EXPR(p102, void* p102 = stack.alloc(30););
@@ -74,7 +74,7 @@ static void testStack(ALLOCATOR& stack)
 	EXPR_WITH_INFO(stack.rewind(20););
 	EXPR_WITH_INFO(stack.rewind(p101););
 	EXPR_WITH_INFO(stack.clear(););
-	EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
+	EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););
 }
 
 //スコープスタックアロケータのテスト（共通処理）
@@ -83,7 +83,7 @@ static void testScopedStack(ALLOCATOR& stack)
 {
 	std::printf("\n");
 	char message[1024];
-	EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
+	EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););
 	for (int i = 0; i < 2; ++i)
 	{
 		std::printf("--------------------------------------------------\n");
@@ -95,7 +95,7 @@ static void testScopedStack(ALLOCATOR& stack)
 		{
 			std::printf("***** Begin : Scoped stack allocator *****\n");
 			EXPR_SCOPED_PLAIN(auto scoped_stack = stack.scopedAllocator(););//スコープスタックアロケータを取得（元になるスタックアロケータを使用してメモリ操作し、スコープを抜ける時に元の状態に戻す）
-			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); std::printf(message););
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message, sizeof(message)); std::printf(message););
 			EXPR_SCOPED(p1, void* p1 = scoped_stack.alloc(1););
 			EXPR_SCOPED(p2, void* p2 = scoped_stack.alloc(1, 1););
 			EXPR_SCOPED(p3, void* p3 = scoped_stack.alloc(1, 1););
@@ -110,7 +110,7 @@ static void testScopedStack(ALLOCATOR& stack)
 			EXPR_SCOPED(p12, data_t* p12 = scoped_stack.template newArray<data_t>(3, 456););
 			EXPR_SCOPED(p13, void* p13 = scoped_stack.alloc(1000););//アロケート失敗（サイズオーバー）
 			EXPR_SCOPED(p14, void* p14 = scoped_stack.alloc(10););
-			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); std::printf(message););
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message, sizeof(message)); std::printf(message););
 			EXPR_SCOPED(p1, scoped_stack.free(p1););
 			EXPR_SCOPED(p2, scoped_stack.free(p2););
 			EXPR_SCOPED(p3, scoped_stack.free(p3););
@@ -125,7 +125,7 @@ static void testScopedStack(ALLOCATOR& stack)
 			EXPR_SCOPED(p12, scoped_stack.deleteArray(p12, 3););
 			EXPR_SCOPED(p13, scoped_stack.free(p13););
 			EXPR_SCOPED(p14, scoped_stack.free(p14););//スマートスタックでも自動クリアはしない
-			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); std::printf(message););
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message, sizeof(message)); std::printf(message););
 			EXPR_SCOPED_WITH_INFO(scoped_stack.clear(););
 			EXPR_SCOPED(p100, void* p100 = scoped_stack.alloc(10););
 			EXPR_SCOPED(p101, void* p101 = scoped_stack.alloc(20););
@@ -134,15 +134,15 @@ static void testScopedStack(ALLOCATOR& stack)
 			EXPR_SCOPED_WITH_INFO(scoped_stack.rewind(20););
 			EXPR_SCOPED_WITH_INFO(scoped_stack.rewind(p101););
 			EXPR_SCOPED_WITH_INFO(scoped_stack.clear(););
-			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); std::printf(message););
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message, sizeof(message)); std::printf(message););
 			EXPR_SCOPED(p200, void* p200 = scoped_stack.alloc(30););
 			EXPR_SCOPED(p201, void* p201 = scoped_stack.alloc(40););
-			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); std::printf(message);); 
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message, sizeof(message)); std::printf(message);); 
 			std::printf("***** End : Scoped stack allocator *****\n");
 		}
-		EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
+		EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););
 		EXPR_PLAIN(stack.clear(););
-		EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
+		EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););
 	}
 }
 
@@ -188,7 +188,7 @@ void example_stack_allocator()
 			EXPR_PLAIN(stackAllocator_withBuff<1024, lock_type> stack;);
 			std::printf("----------------------------------------\n");
 			std::printf("\n");
-			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
+			EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););
 		}
 
 		//バッファ付きスマートスタックアロケータ
@@ -198,7 +198,7 @@ void example_stack_allocator()
 			EXPR_PLAIN(smartStackAllocator_withBuff<1024, lock_type> stack;);
 			std::printf("----------------------------------------\n");
 			std::printf("\n");
-			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
+			EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););
 		}
 
 		//型指定バッファ付きスタックアロケータ
@@ -209,7 +209,7 @@ void example_stack_allocator()
 			EXPR_PLAIN(stackAllocator_withType<long long, 128, lock_type> stack;);
 			std::printf("----------------------------------------\n");
 			std::printf("\n");
-			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
+			EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););
 			EXPR(p, long long* p = stack.newDefault(););
 			EXPR(p, stack.deleteDefault(p););
 		}
@@ -222,7 +222,7 @@ void example_stack_allocator()
 			EXPR_PLAIN(smartStackAllocator_withType<long long, 128, lock_type> stack;);
 			std::printf("----------------------------------------\n");
 			std::printf("\n");
-			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
+			EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););
 			EXPR(p, long long* p = stack.newDefault(););
 			EXPR(p, stack.deleteDefault(p););
 		}
@@ -260,7 +260,7 @@ void example_stack_allocator()
 			EXPR_PLAIN(lfStackAllocator_withBuff<1024> stack;);
 			std::printf("----------------------------------------\n");
 			std::printf("\n");
-			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
+			EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););
 		}
 
 		//バッファ付きロックフリースマートスタックアロケータ
@@ -270,7 +270,7 @@ void example_stack_allocator()
 			EXPR_PLAIN(lfSmartStackAllocator_withBuff<1024> stack;);
 			std::printf("----------------------------------------\n");
 			std::printf("\n");
-			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
+			EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););
 		}
 
 		//型指定バッファ付きロックフリースタックアロケータ
@@ -281,7 +281,7 @@ void example_stack_allocator()
 			EXPR_PLAIN(lfStackAllocator_withType<long long, 128> stack;);
 			std::printf("----------------------------------------\n");
 			std::printf("\n");
-			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
+			EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););
 			EXPR(p, long long* p = stack.newDefault(););
 			EXPR(p, stack.deleteDefault(p););
 		}
@@ -294,7 +294,7 @@ void example_stack_allocator()
 			EXPR_PLAIN(lfSmartStackAllocator_withType<long long, 128> stack;);
 			std::printf("----------------------------------------\n");
 			std::printf("\n");
-			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
+			EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););
 			EXPR(p, long long* p = stack.newDefault(););
 			EXPR(p, stack.deleteDefault(p););
 		}
