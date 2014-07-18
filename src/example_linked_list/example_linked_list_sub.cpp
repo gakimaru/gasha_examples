@@ -40,7 +40,7 @@ GASHA_INSTANCING_lList(another_ope);//template class linked_list::container<anot
 //　ただし、ソート用関数や探索用関数の定義、ロックオブジェクトの指定といった細かいカスタマイズはできない。
 //※シンプルコンテナも明示的なインスタンス化は可能。
 
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 //【VC++】例外を無効化した状態で <algorithm> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -51,8 +51,8 @@ GASHA_INSTANCING_lList(another_ope);//template class linked_list::container<anot
 //シンプル双方向連結リストコンテナテスト
 void example_simple_linked_list()
 {
-	printf("\n");
-	printf("--- example_simple_linked_list ---\n");
+	std::printf("\n");
+	std::printf("--- example_simple_linked_list ---\n");
 
 	{
 		simpleLList<short>::con con;//シンプル双方向連結リストコンテナ
@@ -65,27 +65,27 @@ void example_simple_linked_list()
 		con.push_back(data[2]);
 		auto print = [&con]()
 		{
-			printf("data =");
+			std::printf("data =");
 			for (auto data : con)
 			{
-				printf(" %d", data.value());
+				std::printf(" %d", data.value());
 			}
-			printf("\n");
+			std::printf("\n");
 		};
 		print();
 		con.sort();
 		print();
 		auto ite = con.findValue(5);
-		printf(".findValue(5): ite=%d\n", ite->m_value);
+		std::printf(".findValue(5): ite=%d\n", ite->m_value);
 	#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 		ite = con.binarySearchValue(3);
-		printf(".binarySearchValue(3): ite=%d\n", ite->m_value);
+		std::printf(".binarySearchValue(3): ite=%d\n", ite->m_value);
 	#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 		ite = std::find(con.begin(), con.end(), 5);
-		printf("std::find(.begin(), .end(), 5): ite=%d\n", ite->m_value);
+		std::printf("std::find(.begin(), .end(), 5): ite=%d\n", ite->m_value);
 		if (std::binary_search(con.begin(), con.end(), 3))
 			ite = std::lower_bound(con.begin(), con.end(), 3);
-		printf("std::lower_bound(.begin(), .end(), 3): ite=%d\n", ite->m_value);
+		std::printf("std::lower_bound(.begin(), .end(), 3): ite=%d\n", ite->m_value);
 	}
 	{
 		//ローカルクラス（関数内クラス）を使うと、明示的なインスタンス化ができない点に注意
@@ -123,27 +123,27 @@ void example_simple_linked_list()
 		con.push_back(data[2]);
 		auto print = [&con]()
 		{
-			printf("data =");
+			std::printf("data =");
 			for (auto& data : con)
 			{
-				printf(" {%d,%d}", data->m_val1, data->m_val2);
+				std::printf(" {%d,%d}", data->m_val1, data->m_val2);
 			}
-			printf("\n");
+			std::printf("\n");
 		};
 		print();
 		con.sort();
 		print();
 		auto ite = con.findValue(5);
-		printf(".findValue(5): ite={%d,%d}\n", ite->m_value.m_val1, ite->m_value.m_val2);
+		std::printf(".findValue(5): ite={%d,%d}\n", ite->m_value.m_val1, ite->m_value.m_val2);
 	#ifdef GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 		ite = con.binarySearchValue(3);
-		printf(".binarySearchValue(3): ite={%d,%d}\n", ite->m_value.m_val1, ite->m_value.m_val2);
+		std::printf(".binarySearchValue(3): ite={%d,%d}\n", ite->m_value.m_val1, ite->m_value.m_val2);
 	#endif//GASHA_LINKED_LIST_ENABLE_BINARY_SEARCH
 		ite = std::find(con.begin(), con.end(), 5);
-		printf("std::find(.begin(), .end(), 5): ite={%d,%d}\n", ite->m_value.m_val1, ite->m_value.m_val2);
+		std::printf("std::find(.begin(), .end(), 5): ite={%d,%d}\n", ite->m_value.m_val1, ite->m_value.m_val2);
 		//if (std::binary_search(con.begin(), con.end(), 3))//operator<(const int, const data_t&) が定義できないのでNG
 		//	ite = std::lower_bound(con.begin(), con.end(), 3);
-		//printf("std::lower_bound(.begin(), .end(), 3): ite={%d,%d}\n", ite->m_value.m_val1, ite->m_value.m_val2);
+		//std::printf("std::lower_bound(.begin(), .end(), 3): ite={%d,%d}\n", ite->m_value.m_val1, ite->m_value.m_val2);
 		data[1].destructor();
 	}
 }

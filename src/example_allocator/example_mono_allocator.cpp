@@ -13,7 +13,7 @@
 #include <gasha/mono_allocator.h>//単一アロケータ
 #include <gasha/lf_mono_allocator.h>//ロックフリー単一アロケータ
 
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
@@ -21,17 +21,17 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //基本テスト
 
 //テスト用マクロ
-#define EXPR_PLAIN(...) printf("%s\n", #__VA_ARGS__); __VA_ARGS__
-#define EXPR_WITH_INFO(...) __VA_ARGS__ printf("> %s\t\tsize=%d, remain=%d, isAllocated=%s\n", #__VA_ARGS__, mono.size(), mono.remain(), mono.isAllocated() ? "true" : "false")
-#define EXPR(p, ...) __VA_ARGS__ printf("> %s\t%s=%p, size=%d, remain=%d, isAllocated=%s\n", #__VA_ARGS__, #p, p, mono.size(), mono.remain(), mono.isAllocated() ? "true" : "false")
+#define EXPR_PLAIN(...) std::printf("%s\n", #__VA_ARGS__); __VA_ARGS__
+#define EXPR_WITH_INFO(...) __VA_ARGS__ std::printf("> %s\t\tsize=%d, remain=%d, isAllocated=%s\n", #__VA_ARGS__, mono.size(), mono.remain(), mono.isAllocated() ? "true" : "false")
+#define EXPR(p, ...) __VA_ARGS__ std::printf("> %s\t%s=%p, size=%d, remain=%d, isAllocated=%s\n", #__VA_ARGS__, #p, p, mono.size(), mono.remain(), mono.isAllocated() ? "true" : "false")
 
 //単一アロケータのテスト（共通処理）
 template<class ALLOCATOR>
 static void testMono(ALLOCATOR& mono)
 {
-	printf("\n");
+	std::printf("\n");
 	char message[1024];
-	EXPR_PLAIN(mono.debugInfo(message); printf(message););
+	EXPR_PLAIN(mono.debugInfo(message); std::printf(message););
 	EXPR(p1, void* p1 = mono.alloc(1););
 	EXPR(p1, mono.free(p1););
 	EXPR(p2, void* p2 = mono.alloc(1, 1););
@@ -60,92 +60,92 @@ static void testMono(ALLOCATOR& mono)
 	EXPR(p13, mono.free(p13););
 	EXPR(p14, void* p14 = mono.alloc(10););
 	EXPR(p14, mono.free(p14););
-	EXPR_PLAIN(mono.debugInfo(message); printf(message););
+	EXPR_PLAIN(mono.debugInfo(message); std::printf(message););
 }
 
 //----------------------------------------
 //単一アロケータテスト
 void example_mono_allocator()
 {
-	printf("\n");
-	printf("================================================================================\n");
+	std::printf("\n");
+	std::printf("================================================================================\n");
 
 	alignas(16) char buff[1024];
 	char message[1024];
 
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[ Test for monoAllocator ]\n");
-		printf("--------------------------------------------------------------------------------\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[ Test for monoAllocator ]\n");
+		std::printf("--------------------------------------------------------------------------------\n");
 
 		//単一アロケータ
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(monoAllocator<lock_type> mono(buff););
-			printf("----------------------------------------\n");
+			std::printf("----------------------------------------\n");
 			testMono(mono);
 		}
 
 		//バッファ付き単一アロケータ
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(monoAllocator_withBuff<1024, lock_type> mono;);
-			printf("----------------------------------------\n");
-			printf("\n");
-			EXPR_PLAIN(mono.debugInfo(message); printf(message););
+			std::printf("----------------------------------------\n");
+			std::printf("\n");
+			EXPR_PLAIN(mono.debugInfo(message); std::printf(message););
 		}
 
 		//型指定バッファ付き単一アロケータ
 		//※型のアラインメントサイズ分余計に領域を割り当てる
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(monoAllocator_withType<long long, 128, lock_type> mono;);
-			printf("----------------------------------------\n");
-			printf("\n");
-			EXPR_PLAIN(mono.debugInfo(message); printf(message););
+			std::printf("----------------------------------------\n");
+			std::printf("\n");
+			EXPR_PLAIN(mono.debugInfo(message); std::printf(message););
 			EXPR(p, long long* p = mono.newDefault(););
 			EXPR(p, mono.deleteDefault(p););
 		}
 	}
 
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[ Test for lfMonoAllocator ]\n");
-		printf("--------------------------------------------------------------------------------\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[ Test for lfMonoAllocator ]\n");
+		std::printf("--------------------------------------------------------------------------------\n");
 
 		//ロックフリー単一アロケータ
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(lfMonoAllocator mono(buff););
-			printf("----------------------------------------\n");
+			std::printf("----------------------------------------\n");
 			testMono(mono);
 		}
 
 		//バッファ付き単一スタックアロケータ
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(lfMonoAllocator_withBuff<1024> mono;);
-			printf("----------------------------------------\n");
-			printf("\n");
-			EXPR_PLAIN(mono.debugInfo(message); printf(message););
+			std::printf("----------------------------------------\n");
+			std::printf("\n");
+			EXPR_PLAIN(mono.debugInfo(message); std::printf(message););
 		}
 
 		//型指定バッファ付き単一スタックアロケータ
 		//※型のアラインメントサイズ分余計に領域を割り当てる
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(lfMonoAllocator_withType<long long, 128> mono;);
-			printf("----------------------------------------\n");
-			printf("\n");
-			EXPR_PLAIN(mono.debugInfo(message); printf(message););
+			std::printf("----------------------------------------\n");
+			std::printf("\n");
+			EXPR_PLAIN(mono.debugInfo(message); std::printf(message););
 			EXPR(p, long long* p = mono.newDefault(););
 			EXPR(p, mono.deleteDefault(p););
 		}

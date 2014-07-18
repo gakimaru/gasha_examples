@@ -17,7 +17,7 @@
 
 #include <cstddef>//std::size_t
 #include <cstring>//memset()
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 //【VC++】str*** を使用すると、error C4996 が発生する
 //  error C4996: 'str***': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
@@ -45,8 +45,8 @@ void example_fast_string()
 	{
 		if (test_mode == 0)
 		{
-			printf("--------------------------------------------------------------------------------\n");
-			printf("[ Test for strlen_fast ]\n");
+			std::printf("--------------------------------------------------------------------------------\n");
+			std::printf("[ Test for strlen_fast ]\n");
 		}
 		int num = 0;
 		for (std::size_t i = 0; i < getStrSetNum(); ++i)
@@ -59,24 +59,24 @@ void example_fast_string()
 			{
 				ret1 = strlen_fast(getStr(src_buff, i, loop));
 				if (test_mode == 0)
-					printf("strlen_fast(str[%d]): ret=%d\n", i, ret1);
+					std::printf("strlen_fast(str[%d]): ret=%d\n", i, ret1);
 			}
 			if (test_mode == 0 || test_mode == 2)
 			{
 				ret2 = strlen_sse(getStr(src_buff, i, loop));
 				if (test_mode == 0)
-					printf("strlen_sse( str[%d]): ret=%d\n", i, ret2);
+					std::printf("strlen_sse( str[%d]): ret=%d\n", i, ret2);
 			}
 			if (test_mode == 0 || test_mode == 3)
 			{
 				ret3 = GASHA_ strlen(getStr(src_buff, i, loop));
 				if (test_mode == 0)
-					printf("strlen(     str[%d]): ret=%d\n", i, ret3);
+					std::printf("strlen(     str[%d]): ret=%d\n", i, ret3);
 			}
 			if (test_mode == 0)
 			{
 				if (ret1 != ret2 || ret1 != ret3)
-					printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+					std::printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 			}
 		}
 		return num;
@@ -87,8 +87,8 @@ void example_fast_string()
 	{
 		if (test_mode == 0)
 		{
-			printf("--------------------------------------------------------------------------------\n");
-			printf("[ Test for strnlen_fast ]\n");
+			std::printf("--------------------------------------------------------------------------------\n");
+			std::printf("[ Test for strnlen_fast ]\n");
 		}
 		static const std::size_t max_len_types[] = { 0, 1, 15, 16, 17, 32, 33, sizeof(buff) };
 		int num = 0;
@@ -105,24 +105,24 @@ void example_fast_string()
 				{
 					ret1 = strnlen_fast(getStr(src_buff, i, loop), max_len);
 					if (test_mode == 0)
-						printf("strnlen_fast(str[%d], %d): ret=%d (strlen=%d)\n", i, max_len, ret1, getStrLen(i, loop));
+						std::printf("strnlen_fast(str[%d], %d): ret=%d (strlen=%d)\n", i, max_len, ret1, getStrLen(i, loop));
 				}
 				if (test_mode == 0 || test_mode == 2)
 				{
 					ret2 = strnlen_sse(getStr(src_buff, i, loop), max_len);
 					if (test_mode == 0)
-						printf("strnlen_sse( str[%d], %d): ret=%d (strlen=%d)\n", i, max_len, ret2, getStrLen(i, loop));
+						std::printf("strnlen_sse( str[%d], %d): ret=%d (strlen=%d)\n", i, max_len, ret2, getStrLen(i, loop));
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
 					ret3 = GASHA_ strnlen(getStr(src_buff, i, loop), max_len);
 					if (test_mode == 0)
-						printf("strnlen(     str[%d], %d): ret=%d (strlen=%d)\n", i, max_len, ret3, getStrLen(i, loop));
+						std::printf("strnlen(     str[%d], %d): ret=%d (strlen=%d)\n", i, max_len, ret3, getStrLen(i, loop));
 				}
 				if (test_mode == 0)
 				{
 					if (ret1 != ret2 || ret1 != ret3)
-						printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+						std::printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 				}
 			}
 		}
@@ -134,8 +134,8 @@ void example_fast_string()
 	{
 		if (test_mode == 0)
 		{
-			printf("--------------------------------------------------------------------------------\n");
-			printf("[ Test for strcmp_fast ]\n");
+			std::printf("--------------------------------------------------------------------------------\n");
+			std::printf("[ Test for strcmp_fast ]\n");
 		}
 		int num = 0;
 		static const char* pattern_types[] = { "1", "12", "123456789012345", "1234567890123456", "12345678901234567", "1234567890123456789012345678901", "12345678901234567890123456789012", "123456789012345678901234567890123", "Z" };
@@ -152,24 +152,24 @@ void example_fast_string()
 				{
 					ret1 = strcmp_fast(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						printf("strcmp_fast(str[%d], \"%s\"): ret=%d\n", i, pattern, ret1);
+						std::printf("strcmp_fast(str[%d], \"%s\"): ret=%d\n", i, pattern, ret1);
 				}
 				if (test_mode == 0 || test_mode == 2)
 				{
 					ret2 = strcmp_sse(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						printf("strcmp_sse( str[%d], \"%s\"): ret=%d\n", i, pattern, ret2);
+						std::printf("strcmp_sse( str[%d], \"%s\"): ret=%d\n", i, pattern, ret2);
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
 					ret3 = GASHA_ strcmp(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						printf("strcmp(     str[%d], \"%s\"): ret=%d\n", i, pattern, ret3);
+						std::printf("strcmp(     str[%d], \"%s\"): ret=%d\n", i, pattern, ret3);
 				}
 				if (test_mode == 0)
 				{
 					if (ret1 != ret2 || ret1 != ret3)
-						printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+						std::printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 				}
 			}
 		}
@@ -181,8 +181,8 @@ void example_fast_string()
 	{
 		if (test_mode == 0)
 		{
-			printf("--------------------------------------------------------------------------------\n");
-			printf("[ Test for strncmp_fast ]\n");
+			std::printf("--------------------------------------------------------------------------------\n");
+			std::printf("[ Test for strncmp_fast ]\n");
 		}
 		static const char* pattern_types[] = { "1", "12", "123456789012345", "1234567890123456", "12345678901234567", "1234567890123456789012345678901", "12345678901234567890123456789012", "123456789012345678901234567890123", "Z" };
 		static const std::size_t pattern_len_types[] = { 1, 2, 15, 16, 17, 31, 32, 33, 1};
@@ -204,24 +204,24 @@ void example_fast_string()
 					{
 						ret1 = strncmp_fast(getStr(src_buff, i, loop), pattern, max_len);
 						if (test_mode == 0)
-							printf("strncmp_fast(str[%d], \"%s\", %d): ret=%d\n", i, pattern, max_len, ret1);
+							std::printf("strncmp_fast(str[%d], \"%s\", %d): ret=%d\n", i, pattern, max_len, ret1);
 					}
 					if (test_mode == 0 || test_mode == 2)
 					{
 						ret2 = strncmp_sse(getStr(src_buff, i, loop), pattern, max_len);
 						if (test_mode == 0)
-							printf("strncmp_sse( str[%d], \"%s\", %d): ret=%d\n", i, pattern, max_len, ret2);
+							std::printf("strncmp_sse( str[%d], \"%s\", %d): ret=%d\n", i, pattern, max_len, ret2);
 					}
 					if (test_mode == 0 || test_mode == 3)
 					{
 						ret3 = GASHA_ strncmp(getStr(src_buff, i, loop), pattern, max_len);
 						if (test_mode == 0)
-							printf("strncmp(     str[%d], \"%s\", %d): ret=%d\n", i, pattern, max_len, ret3);
+							std::printf("strncmp(     str[%d], \"%s\", %d): ret=%d\n", i, pattern, max_len, ret3);
 					}
 					if (test_mode == 0)
 					{
 						if (ret1 != ret2 || ret1 != ret3)
-							printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+							std::printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 					}
 				}
 			}
@@ -234,8 +234,8 @@ void example_fast_string()
 	{
 		if (test_mode == 0)
 		{
-			printf("--------------------------------------------------------------------------------\n");
-			printf("[ Test for strstr_fast ]\n");
+			std::printf("--------------------------------------------------------------------------------\n");
+			std::printf("[ Test for strstr_fast ]\n");
 		}
 		static const char pattern_types[] = { '0', '1', '2', 'e', 'f', 't', 'u' };
 		int num = 0;
@@ -252,24 +252,24 @@ void example_fast_string()
 				{
 					ret1 = strchr_fast(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						printf("strchr_fast(str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret1, ret1);
+						std::printf("strchr_fast(str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret1, ret1);
 				}
 				if (test_mode == 0 || test_mode == 2)
 				{
 					ret2 = strchr_sse(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						printf("strchr_sse( str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret2, ret2);
+						std::printf("strchr_sse( str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret2, ret2);
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
 					ret3 = strchr(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						printf("strchr(     str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret3, ret3);
+						std::printf("strchr(     str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret3, ret3);
 				}
 				if (test_mode == 0)
 				{
 					if (ret1 != ret2 || ret1 != ret3)
-						printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+						std::printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 				}
 			}
 		}
@@ -281,8 +281,8 @@ void example_fast_string()
 	{
 		if (test_mode == 0)
 		{
-			printf("--------------------------------------------------------------------------------\n");
-			printf("[ Test for strstr_fast ]\n");
+			std::printf("--------------------------------------------------------------------------------\n");
+			std::printf("[ Test for strstr_fast ]\n");
 		}
 		static const char pattern_types[] = { '0', '1', '2', 'e', 'f', 't', 'u' };
 		int num = 0;
@@ -299,24 +299,24 @@ void example_fast_string()
 				{
 					ret1 = strrchr_fast(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						printf("strrchr_fast(str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret1, ret1);
+						std::printf("strrchr_fast(str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret1, ret1);
 				}
 				if (test_mode == 0 || test_mode == 2)
 				{
 					ret2 = strrchr_sse(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						printf("strrchr_sse( str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret2, ret2);
+						std::printf("strrchr_sse( str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret2, ret2);
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
 					ret3 = strrchr(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						printf("strrchr(     str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret3, ret3);
+						std::printf("strrchr(     str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret3, ret3);
 				}
 				if (test_mode == 0)
 				{
 					if (ret1 != ret2 || ret1 != ret3)
-						printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+						std::printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 				}
 			}
 		}
@@ -328,8 +328,8 @@ void example_fast_string()
 	{
 		if (test_mode == 0)
 		{
-			printf("--------------------------------------------------------------------------------\n");
-			printf("[ Test for strstr_fast ]\n");
+			std::printf("--------------------------------------------------------------------------------\n");
+			std::printf("[ Test for strstr_fast ]\n");
 		}
 		static const char* pattern_types[] = { "1", "12", "123456789012345", "1234567890123456", "12345678901234567", "8901234567890123", "89012345678901234" };
 		int num = 0;
@@ -346,24 +346,24 @@ void example_fast_string()
 				{
 					ret1 = strstr_fast(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						printf("strstr_fast(str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret1, ret1);
+						std::printf("strstr_fast(str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret1, ret1);
 				}
 				if (test_mode == 0 || test_mode == 2)
 				{
 					ret2 = strstr_sse(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						printf("strstr_sse( str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret2, ret2);
+						std::printf("strstr_sse( str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret2, ret2);
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
 					ret3 = GASHA_ strstr(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						printf("strstr(     str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret3, ret3);
+						std::printf("strstr(     str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret3, ret3);
 				}
 				if (test_mode == 0)
 				{
 					if (ret1 != ret2 || ret1 != ret3)
-						printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+						std::printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 				}
 			}
 		}
@@ -375,9 +375,9 @@ void example_fast_string()
 	{
 		if (test_mode == 0)
 		{
-			printf("--------------------------------------------------------------------------------\n");
-			printf("[ Test for strstrbm_fast ]\n");
-			printf("*callback-funcion \'found_it\' will be return \'true\' when found it 2 times.\n");
+			std::printf("--------------------------------------------------------------------------------\n");
+			std::printf("[ Test for strstrbm_fast ]\n");
+			std::printf("*callback-funcion \'found_it\' will be return \'true\' when found it 2 times.\n");
 		}
 		static const char* pattern_types[] = { "1", "12", "123456789012345", "1234567890123456", "12345678901234567", "8901234567890123", "89012345678901234" };
 		int found_count = 0;
@@ -407,7 +407,7 @@ void example_fast_string()
 					ret1 = strstrbm_fast(getStr(src_buff, i, loop), pattern, found_it);
 					found_count1 = found_count;
 					if (test_mode == 0)
-						printf("strstrbm_fast(str[%d], \"%s\", found_it): ret=%p(\"%s\") found_count=%d\n", i, pattern, ret1, ret1, found_count);
+						std::printf("strstrbm_fast(str[%d], \"%s\", found_it): ret=%p(\"%s\") found_count=%d\n", i, pattern, ret1, ret1, found_count);
 				}
 				if (test_mode == 0 || test_mode == 2)
 				{
@@ -415,7 +415,7 @@ void example_fast_string()
 					ret2 = strstrbm_sse(getStr(src_buff, i, loop), pattern, found_it);
 					found_count2 = found_count;
 					if (test_mode == 0)
-						printf("strstrbm_sse( str[%d], \"%s\", found_it): ret=%p(\"%s\") found_count=%d\n", i, pattern, ret2, ret2, found_count);
+						std::printf("strstrbm_sse( str[%d], \"%s\", found_it): ret=%p(\"%s\") found_count=%d\n", i, pattern, ret2, ret2, found_count);
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
@@ -423,12 +423,12 @@ void example_fast_string()
 					ret3 = strstrbm(getStr(src_buff, i, loop), pattern, found_it);
 					found_count3 = found_count;
 					if (test_mode == 0)
-						printf("strstrbm(     str[%d], \"%s\", found_it): ret=%p(\"%s\") found_count=%d\n", i, pattern, ret3, ret3, found_count);
+						std::printf("strstrbm(     str[%d], \"%s\", found_it): ret=%p(\"%s\") found_count=%d\n", i, pattern, ret3, ret3, found_count);
 				}
 				if (test_mode == 0)
 				{
 					if (ret1 != ret2 || ret1 != ret3 || found_count1 != found_count2 || found_count1 != found_count3)
-						printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+						std::printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 				}
 			}
 		}
@@ -440,8 +440,8 @@ void example_fast_string()
 	{
 		if (test_mode == 0)
 		{
-			printf("--------------------------------------------------------------------------------\n");
-			printf("[ Test for strstr0_fast ]\n");
+			std::printf("--------------------------------------------------------------------------------\n");
+			std::printf("[ Test for strstr0_fast ]\n");
 		}
 		static const char* pattern_types[] = { "1", "12", "123456789012345", "1234567890123456", "12345678901234567", "8901234567890123", "89012345678901234" };
 		int num = 0;
@@ -458,24 +458,24 @@ void example_fast_string()
 				{
 					ret1 = strstr0_fast(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						printf("strstr0_fast(str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret1, ret1);
+						std::printf("strstr0_fast(str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret1, ret1);
 				}
 				if (test_mode == 0 || test_mode == 2)
 				{
 					ret2 = strstr0_sse(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						printf("strstr0_sse( str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret2, ret2);
+						std::printf("strstr0_sse( str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret2, ret2);
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
 					ret3 = strstr0(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						printf("strstr0(     str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret3, ret3);
+						std::printf("strstr0(     str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret3, ret3);
 				}
 				if (test_mode == 0)
 				{
 					if (ret1 != ret2 || ret1 != ret3)
-						printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+						std::printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 				}
 			}
 		}
@@ -487,8 +487,8 @@ void example_fast_string()
 	{
 		if (test_mode == 0)
 		{
-			printf("--------------------------------------------------------------------------------\n");
-			printf("[ Test for strcpy_fast ]\n");
+			std::printf("--------------------------------------------------------------------------------\n");
+			std::printf("[ Test for strcpy_fast ]\n");
 		}
 		int num = 0;
 		for (std::size_t i = 0; i < getStrSetNum(); ++i)
@@ -507,7 +507,7 @@ void example_fast_string()
 				if (test_mode == 0)
 				{
 					crc1 = calcCRC32(ret1);
-					printf("strcpy_fast(buff, str[%d]): ret=%p, buff=\"%s\"\n", i, ret1, buff);
+					std::printf("strcpy_fast(buff, str[%d]): ret=%p, buff=\"%s\"\n", i, ret1, buff);
 				}
 			}
 			if (test_mode == 0 || test_mode == 2)
@@ -517,7 +517,7 @@ void example_fast_string()
 				if (test_mode == 0)
 				{
 					crc2 = calcCRC32(ret2);
-					printf("strcpy_sse( buff, str[%d]): ret=%p, buff=\"%s\"\n", i, ret2, buff);
+					std::printf("strcpy_sse( buff, str[%d]): ret=%p, buff=\"%s\"\n", i, ret2, buff);
 				}
 			}
 			if (test_mode == 0 || test_mode == 3)
@@ -527,13 +527,13 @@ void example_fast_string()
 				if (test_mode == 0)
 				{
 					crc3 = calcCRC32(ret3);
-					printf("strcpy(     buff, str[%d]): ret=%p, buff=\"%s\"\n", i, ret3, buff);
+					std::printf("strcpy(     buff, str[%d]): ret=%p, buff=\"%s\"\n", i, ret3, buff);
 				}
 			}
 			if (test_mode == 0)
 			{
 				if (ret1 != ret2 || ret1 != ret3 || crc1 != crc2 || crc1 != crc3)
-					printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+					std::printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 			}
 		}
 		return num;
@@ -544,8 +544,8 @@ void example_fast_string()
 	{
 		if (test_mode == 0)
 		{
-			printf("--------------------------------------------------------------------------------\n");
-			printf("[ Test for strncpy_fast ]\n");
+			std::printf("--------------------------------------------------------------------------------\n");
+			std::printf("[ Test for strncpy_fast ]\n");
 		}
 		static const std::size_t max_len_types[] = { 0, 1, 15, 16, 17, 32, 33, sizeof(buff) };
 		int num = 0;
@@ -568,7 +568,7 @@ void example_fast_string()
 					if (test_mode == 0)
 					{
 						crc1 = calcCRC32(ret1);
-						printf("strncpy_fast(buff, str[%d], %d): ret=%p, buff=\"%s\"\n", i, max_len, ret1, buff);
+						std::printf("strncpy_fast(buff, str[%d], %d): ret=%p, buff=\"%s\"\n", i, max_len, ret1, buff);
 					}
 				}
 				if (test_mode == 0 || test_mode == 2)
@@ -578,7 +578,7 @@ void example_fast_string()
 					if (test_mode == 0)
 					{
 						crc2 = calcCRC32(ret2);
-						printf("strncpy_sse( buff, str[%d], %d): ret=%p, buff=\"%s\"\n", i, max_len, ret2, buff);
+						std::printf("strncpy_sse( buff, str[%d], %d): ret=%p, buff=\"%s\"\n", i, max_len, ret2, buff);
 					}
 				}
 				if (test_mode == 0 || test_mode == 3)
@@ -588,13 +588,13 @@ void example_fast_string()
 					if (test_mode == 0)
 					{
 						crc3 = calcCRC32(ret3);
-						printf("strncpy(     buff, str[%d], %d): ret=%p, buff=\"%s\"\n", i, max_len, ret3, buff);
+						std::printf("strncpy(     buff, str[%d], %d): ret=%p, buff=\"%s\"\n", i, max_len, ret3, buff);
 					}
 				}
 				if (test_mode == 0)
 				{
 					if (ret1 != ret2 || ret1 != ret3 || crc1 != crc2 || crc1 != crc3)
-						printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+						std::printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NG! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 				}
 			}
 		}
@@ -602,10 +602,10 @@ void example_fast_string()
 	};
 	
 	//パフォーマンステスト
-	printf("\n");
-	printf("================================================================================\n");
-	printf("[ Test for performance ]\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("================================================================================\n");
+	std::printf("[ Test for performance ]\n");
+	std::printf("\n");
 	auto type_name = [](const int type)
 	{
 		return
@@ -615,123 +615,123 @@ void example_fast_string()
 	};
 	for (int type = 1; type <= 3; ++type)
 	{
-		printf("strlen%s", type_name(type));
+		std::printf("strlen%s", type_name(type));
 		const auto begin = nowTime();
 		int num = 0;
 		for (int repeat = 0; repeat < TEST_STRLEN_REPEAT_NUM; repeat++)
 			num += test_strlen(type, repeat);
 		const double elapsed_time = calcElapsedTime(begin);
-		printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
+		std::printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
 	}
 	for (int type = 1; type <= 3; ++type)
 	{
-		printf("strnlen%s", type_name(type));
+		std::printf("strnlen%s", type_name(type));
 		const auto begin = nowTime();
 		int num = 0;
 		for (int repeat = 0; repeat < TEST_STRNLEN_REPEAT_NUM; repeat++)
 			num += test_strnlen(type, repeat);
 		const double elapsed_time = calcElapsedTime(begin);
-		printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
+		std::printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
 	}
 	for (int type = 1; type <= 3; ++type)
 	{
-		printf("strcmp%s", type_name(type));
+		std::printf("strcmp%s", type_name(type));
 		const auto begin = nowTime();
 		int num = 0;
 		for (int repeat = 0; repeat < TEST_STRCMP_REPEAT_NUM; repeat++)
 			num += test_strcmp(type, repeat);
 		const double elapsed_time = calcElapsedTime(begin);
-		printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
+		std::printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
 	}
 	for (int type = 1; type <= 3; ++type)
 	{
-		printf("strncmp%s", type_name(type));
+		std::printf("strncmp%s", type_name(type));
 		const auto begin = nowTime();
 		int num = 0;
 		for (int repeat = 0; repeat < TEST_STRNCMP_REPEAT_NUM; repeat++)
 			num += test_strncmp(type, repeat);
 		const double elapsed_time = calcElapsedTime(begin);
-		printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
+		std::printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
 	}
 	for (int type = 1; type <= 3; ++type)
 	{
-		printf("strchr%s", type_name(type));
+		std::printf("strchr%s", type_name(type));
 		const auto begin = nowTime();
 		int num = 0;
 		for (int repeat = 0; repeat < TEST_STRCHR_REPEAT_NUM; repeat++)
 			num += test_strchr(type, repeat);
 		const double elapsed_time = calcElapsedTime(begin);
-		printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
+		std::printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
 	}
 	for (int type = 1; type <= 3; ++type)
 	{
-		printf("strrchr%s", type_name(type));
+		std::printf("strrchr%s", type_name(type));
 		const auto begin = nowTime();
 		int num = 0;
 		for (int repeat = 0; repeat < TEST_STRRCHR_REPEAT_NUM; repeat++)
 			num += test_strrchr(type, repeat);
 		const double elapsed_time = calcElapsedTime(begin);
-		printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
+		std::printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
 	}
 	for (int type = 1; type <= 3; ++type)
 	{
-		printf("strstr%s", type_name(type));
+		std::printf("strstr%s", type_name(type));
 		const auto begin = nowTime();
 		int num = 0;
 		for (int repeat = 0; repeat < TEST_STRSTR_REPEAT_NUM; repeat++)
 			num += test_strstr(type, repeat);
 		const double elapsed_time = calcElapsedTime(begin);
-		printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
+		std::printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
 	}
 	for (int type = 1; type <= 3; ++type)
 	{
-		printf("strstrbm%s", type_name(type));
+		std::printf("strstrbm%s", type_name(type));
 		const auto begin = nowTime();
 		int num = 0;
 		for (int repeat = 0; repeat < TEST_STRSTRBM_REPEAT_NUM; repeat++)
 			num += test_strstrbm(type, repeat);
 		const double elapsed_time = calcElapsedTime(begin);
-		printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
+		std::printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
 	}
 	for (int type = 1; type <= 3; ++type)
 	{
-		printf("strstr0%s", type_name(type));
+		std::printf("strstr0%s", type_name(type));
 		const auto begin = nowTime();
 		int num = 0;
 		for (int repeat = 0; repeat < TEST_STRSTR0_REPEAT_NUM; repeat++)
 			num += test_strstr0(type, repeat);
 		const double elapsed_time = calcElapsedTime(begin);
-		printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
+		std::printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
 	}
 	for (int type = 1; type <= 3; ++type)
 	{
-		printf("strcpy%s", type_name(type));
+		std::printf("strcpy%s", type_name(type));
 		const auto begin = nowTime();
 		int num = 0;
 		for (int repeat = 0; repeat < TEST_STRCPY_REPEAT_NUM; repeat++)
 			num += test_strcpy(type, repeat);
 		const double elapsed_time = calcElapsedTime(begin);
-		printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
+		std::printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
 	}
 	for (int type = 1; type <= 3; ++type)
 	{
-		printf("strncpy%s", type_name(type));
+		std::printf("strncpy%s", type_name(type));
 		const auto begin = nowTime();
 		int num = 0;
 		for (int repeat = 0; repeat < TEST_STRNCPY_REPEAT_NUM; repeat++)
 			num += test_strncpy(type, repeat);
 		const double elapsed_time = calcElapsedTime(begin);
-		printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
+		std::printf(" (*%d times repeat) ... %.9lf sec\n", num, elapsed_time);
 	}
 
 	//ロジックテスト
-	printf("\n");
-	printf("================================================================================\n");
-	printf("[ Test for logic ]\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("================================================================================\n");
+	std::printf("[ Test for logic ]\n");
+	std::printf("\n");
 	for (std::size_t i = 0; i < getStrSetNum(); ++i)
-		printf("str[%d]=\"%s\"\n", i, getStr(src_buff, i, 0));
-	printf("\n");
+		std::printf("str[%d]=\"%s\"\n", i, getStr(src_buff, i, 0));
+	std::printf("\n");
 	test_strlen(0, 0);
 	test_strnlen(0, 0);
 	test_strcmp(0, 0);
@@ -746,17 +746,17 @@ void example_fast_string()
 
 	//spprintfテスト
 	//※高速文字列処理ではないが、いっしょにテスト
-	printf("\n");
-	printf("================================================================================\n");
-	printf("[ Test for spptinf ]\n");
+	std::printf("\n");
+	std::printf("================================================================================\n");
+	std::printf("[ Test for spptinf ]\n");
 	{
 		char buff[32];
 		memset(buff, 0xcd, sizeof(buff));
 		std::size_t pos = 0;
 		int ret;
-		#define EXPR(expr) expr; printf("%s buff=\"%s\", pos=%d, ret=%d\n", #expr, buff, pos, ret);
+		#define EXPR(expr) expr; std::printf("%s buff=\"%s\", pos=%d, ret=%d\n", #expr, buff, pos, ret);
 
-		printf("char buff[10];\n");
+		std::printf("char buff[10];\n");
 		EXPR(ret = spprintf(buff, 10, pos, "1"););
 		EXPR(ret = spprintf(buff, 10, pos, "%d", 23););
 		EXPR(ret = spprintf(buff, 10, pos, "%d%d%d", 4, 5, 6););
@@ -772,8 +772,8 @@ void example_fast_string()
 		#undef EXPR
 	}
 
-	printf("\n");
-	printf("- end -\n");
+	std::printf("\n");
+	std::printf("- end -\n");
 }
 
 // End of file

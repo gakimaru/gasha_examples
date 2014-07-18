@@ -43,7 +43,7 @@ GASHA_INSTANCING_hTable(obj_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class
 //　ただし、ソート用関数や探索用関数の定義、ロックオブジェクトの指定といった細かいカスタマイズはできない。
 //　シンプルコンテナも明示的なインスタンス化は可能。
 
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 //【VC++】例外を無効化した状態で <algorithm> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -54,8 +54,8 @@ GASHA_INSTANCING_hTable(obj_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC);//template class
 //シンプル開番地法ハッシュテーブルコンテナテスト
 void example_simple_hash_table()
 {
-	printf("\n");
-	printf("--- example_simple_hash_table ---\n");
+	std::printf("\n");
+	std::printf("--- example_simple_hash_table ---\n");
 
 	{
 		simpleHTable<short, 100>::con con;//シンプル開番地法ハッシュテーブルコンテナ
@@ -64,16 +64,16 @@ void example_simple_hash_table()
 		con.insert("KEY5", 5);
 		auto print = [&con]()
 		{
-			printf("data =");
+			std::printf("data =");
 			for (auto data : con)
 			{
-				printf(" %d", data);
+				std::printf(" %d", data);
 			}
-			printf("\n");
+			std::printf("\n");
 		};
 		print();
 		auto ite = con.find("KEY5");
-		printf(".find(\"KEY5\"): ite=%d\n",  *ite);
+		std::printf(".find(\"KEY5\"): ite=%d\n",  *ite);
 	}
 	{
 		//ローカルクラス（関数内クラス）を使うと、明示的なインスタンス化ができない点に注意
@@ -100,16 +100,16 @@ void example_simple_hash_table()
 		con.insert("KEY5", 56);
 		auto print = [&con]()
 		{
-			printf("data =");
+			std::printf("data =");
 			for (auto& data : con)
 			{
-				printf(" {%d,%d}", data.m_val1, data.m_val2);
+				std::printf(" {%d,%d}", data.m_val1, data.m_val2);
 			}
-			printf("\n");
+			std::printf("\n");
 		};
 		print();
 		auto ite = con.find("KEY5");
-		printf(".find(\"KEY5\"): ite={%d,%d}\n", ite->m_val1, ite->m_val2);
+		std::printf(".find(\"KEY5\"): ite={%d,%d}\n", ite->m_val1, ite->m_val2);
 	}
 }
 //明示的インスタンス化する場合

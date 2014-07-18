@@ -10,7 +10,7 @@
 
 #include "example_allocator.h"//アロケータテスト
 
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 //----------------------------------------
 //テスト用構造体
@@ -19,34 +19,34 @@
 data_t::data_t() :
 	m_val(0)
 {
-	printf("data_t::data_t(): m_val=%d\n", m_val);
+	std::printf("data_t::data_t(): m_val=%d\n", m_val);
 }
 
 //コンストラクタ
 data_t::data_t(const int val) :
 	m_val(val)
 {
-	printf("data_t::data_t(%d): m_val=%d\n", val, m_val);
+	std::printf("data_t::data_t(%d): m_val=%d\n", val, m_val);
 }
 
 //ムーブコンストラクタ
 data_t::data_t(data_t&& obj) :
 	m_val(obj.m_val)
 {
-	printf("data_t::data_t(data_t&&): m_val=%d\n", m_val);
+	std::printf("data_t::data_t(data_t&&): m_val=%d\n", m_val);
 }
 
 //コピーコンストラクタ
 data_t::data_t(const data_t& obj) :
 	m_val(obj.m_val)
 {
-	printf("data_t::data_t(const data_t&): m_val=%d\n", m_val);
+	std::printf("data_t::data_t(const data_t&): m_val=%d\n", m_val);
 }
 
 //デストラクタ
 data_t::~data_t()
 {
-	printf("data_t::~data_t(): m_val=%d\n", m_val);
+	std::printf("data_t::~data_t(): m_val=%d\n", m_val);
 }
 
 //----------------------------------------
@@ -85,7 +85,7 @@ void example_allocator()
 	example_new_delete_test();//new/delete演算子の挙動確認用テスト
 #endif//ENABLE_TEST_FOR_NEW_DELETE
 
-	printf("- end -\n");
+	std::printf("- end -\n");
 }
 
 // End of file

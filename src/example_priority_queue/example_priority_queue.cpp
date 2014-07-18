@@ -17,8 +17,8 @@
 #include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
 
 #include <utility>//C++11 std::forward
-#include <cstring>//memcpy()
-#include <cstdio>//printf()
+#include <cstring>//std::memcpy()
+#include <cstdio>//std::printf()
 #include <cassert>//assert()
 
 //【VC++】例外を無効化した状態で <random> <algorithm> <queue> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
@@ -44,8 +44,8 @@ data_t::data_t(const PRIORITY priority, const int val) :
 	m_data[0] = 99;
 	m_data[1] = 99;
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("data_t::constructor(%d, %d)\n", priority, val);
-	//printf("    m_priority=%d, m_seqNo=%d, m_val=%d\n", m_priority, m_seqNo, m_val);
+	std::printf("data_t::constructor(%d, %d)\n", priority, val);
+	//std::printf("    m_priority=%d, m_seqNo=%d, m_val=%d\n", m_priority, m_seqNo, m_val);
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 data_t::data_t(const int val) :
@@ -54,8 +54,8 @@ data_t::data_t(const int val) :
 	m_val(val)
 {
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("data_t::constructor(%d)\n", val);
-	//printf("    m_priority=%d, m_seqNo=%d, m_val=%d\n", m_priority, m_seqNo, m_val);
+	std::printf("data_t::constructor(%d)\n", val);
+	//std::printf("    m_priority=%d, m_seqNo=%d, m_val=%d\n", m_priority, m_seqNo, m_val);
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
@@ -63,27 +63,27 @@ data_t::data_t(const int val) :
 data_t& data_t::operator=(data_t&& rhs)
 {
 	std::memcpy(this, &rhs, sizeof(*this));
-	printf("data_t::move_operator\n");
+	std::printf("data_t::move_operator\n");
 	return *this;
 }
 //コピーオペレータ
 data_t& data_t::operator=(const data_t& rhs)
 {
 	std::memcpy(this, &rhs, sizeof(*this));
-	printf("data_t::copy_operator\n");
+	std::printf("data_t::copy_operator\n");
 	return *this;
 }
 //ムーブコンストラクタ
 data_t::data_t(data_t&& src)
 {
 	std::memcpy(this, &src, sizeof(*this));
-	printf("data_t::move_constructor\n");
+	std::printf("data_t::move_constructor\n");
 }
 //コピーコンストラクタ
 data_t::data_t(const data_t& src)
 {
 	std::memcpy(this, &src, sizeof(*this));
-	printf("data_t::copy_constructor\n");
+	std::printf("data_t::copy_constructor\n");
 }
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 //デフォルトコンストラクタ
@@ -93,16 +93,16 @@ data_t::data_t() :
 	m_val(0)
 {
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("data_t::constructor\n");
-	//printf("    m_priority=%d, m_seqNo=%d, m_val=%d\n", m_priority, m_seqNo, m_val);
+	std::printf("data_t::constructor\n");
+	//std::printf("    m_priority=%d, m_seqNo=%d, m_val=%d\n", m_priority, m_seqNo, m_val);
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 //デストラクタ
 data_t::~data_t()
 {
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("data_t::destructor\n");
-	//printf("    m_priority=%d, m_seqNo=%d, m_val=%d\n", m_priority, m_seqNo, m_val);
+	std::printf("data_t::destructor\n");
+	//std::printf("    m_priority=%d, m_seqNo=%d, m_val=%d\n", m_priority, m_seqNo, m_val);
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 
@@ -112,7 +112,7 @@ data_t::~data_t()
 template<typename... Tx>
 inline int printf_detail(const char* fmt, Tx&&... args)
 {
-	return printf(fmt, std::forward<Tx>(args)...);
+	return std::printf(fmt, std::forward<Tx>(args)...);
 }
 #else//PRINT_TEST_DATA_DETAIL
 inline int printf_detail(const char* fmt, ...){ return 0; }
@@ -199,14 +199,14 @@ void example_priority_queue()
 
 	//--------------------
 	//プライオリティキューのテスト
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[Test for priority_queue::containerAdapter(Priority Queue)]\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[Test for priority_queue::containerAdapter(Priority Queue)]\n");
 
 	//エンキュー
 	auto enqueue = [&con]()
 	{
-		printf("\n");
-		printf("--- Enqueue ---\n");
+		std::printf("\n");
+		std::printf("--- Enqueue ---\n");
 		std::mt19937 rand_engine;
 		rand_engine.seed(0);
 		std::uniform_int_distribution<int> rand_dist(TEST_DATA_PRIOR_MIN, TEST_DATA_PRIOR_MAX);
@@ -267,7 +267,7 @@ void example_priority_queue()
 		auto now_time = nowTime();
 		const double elapsed_time = calcElapsedTime(prev_time, now_time);
 		if (is_show)
-			printf("*elapsed_time=%.9lf sec\n", elapsed_time);
+			std::printf("*elapsed_time=%.9lf sec\n", elapsed_time);
 		return now_time;
 	};
 	prev_time = printElapsedTime(prev_time, true);
@@ -312,11 +312,11 @@ void example_priority_queue()
 #if defined(GASHA_BINARY_HEAP_ENABLE_RANDOM_ACCESS_INTERFACE) && defined(GASHA_BINARY_HEAP_ENABLE_REVERSE_ITERATOR)
 #ifdef TEST_ITERATOR_OPERATION
 	{
-		printf("\n");
+		std::printf("\n");
 		typedef pqueue_t::container_type container_t;
 		container_t& heap = *con;
-		printf("--------------------[iterator operattion:begin]\n");
-		printf("[constructor]\n");
+		std::printf("--------------------[iterator operattion:begin]\n");
+		std::printf("[constructor]\n");
 		container_t::iterator ite = heap.begin();
 		container_t::reverse_iterator rite = heap.rbegin();
 		container_t::iterator ite_end = heap.end();
@@ -325,23 +325,23 @@ void example_priority_queue()
 		container_t::reverse_iterator rite2 = heap.begin();
 		container_t::iterator ite2_end = heap.rend();
 		container_t::reverse_iterator rite2_end = heap.end();
-		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
-		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
-		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
-		if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
-		if (ite2.isExist()) printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
-		if (rite2.isExist()) printf("rite2:[%d] priority=%d, seqNo=%d, value=%d\n", rite2.getIndex(), rite2->m_priority, rite2->m_seqNo, rite2->m_val);
-		if (ite2_end.isExist()) printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
-		if (rite2_end.isExist()) printf("rite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_priority, rite2_end->m_seqNo, rite2_end->m_val);
-		printf("ite_end - ite = %d\n", ite_end - ite);
-		printf("ite - ite_end = %d\n", ite - ite_end);
-		printf("rite_end - rite = %d\n", rite_end - rite);
-		printf("rite - rite_end = %d\n", rite - rite_end);
-		printf("ite2 - ite = %d\n", ite2 - ite);
-		printf("ite - ite2 = %d\n", ite - ite2);
-		printf("rite2 - rite = %d\n", rite2 - rite);
-		printf("rite - rite2 = %d\n", rite - rite2);
-		printf("[copy operator]\n");
+		if (ite.isExist()) std::printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) std::printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		if (ite_end.isExist()) std::printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
+		if (rite_end.isExist()) std::printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
+		if (ite2.isExist()) std::printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
+		if (rite2.isExist()) std::printf("rite2:[%d] priority=%d, seqNo=%d, value=%d\n", rite2.getIndex(), rite2->m_priority, rite2->m_seqNo, rite2->m_val);
+		if (ite2_end.isExist()) std::printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
+		if (rite2_end.isExist()) std::printf("rite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_priority, rite2_end->m_seqNo, rite2_end->m_val);
+		std::printf("ite_end - ite = %d\n", ite_end - ite);
+		std::printf("ite - ite_end = %d\n", ite - ite_end);
+		std::printf("rite_end - rite = %d\n", rite_end - rite);
+		std::printf("rite - rite_end = %d\n", rite - rite_end);
+		std::printf("ite2 - ite = %d\n", ite2 - ite);
+		std::printf("ite - ite2 = %d\n", ite - ite2);
+		std::printf("rite2 - rite = %d\n", rite2 - rite);
+		std::printf("rite - rite2 = %d\n", rite - rite2);
+		std::printf("[copy operator]\n");
 		ite = heap.begin();
 		rite = heap.rbegin();
 		ite_end = heap.end();
@@ -350,115 +350,115 @@ void example_priority_queue()
 		rite2 = heap.begin();
 		ite2_end = heap.rend();
 		rite2_end = heap.end();
-		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
-		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
-		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
-		if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
-		if (ite2.isExist()) printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
-		if (rite2.isExist()) printf("rite2:[%d] priority=%d, seqNo=%d, value=%d\n", rite2.getIndex(), rite2->m_priority, rite2->m_seqNo, rite2->m_val);
-		if (ite2_end.isExist()) printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
-		if (rite2_end.isExist()) printf("rite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_priority, rite2_end->m_seqNo, rite2_end->m_val);
-		printf("[rite.base()]\n");
+		if (ite.isExist()) std::printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) std::printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		if (ite_end.isExist()) std::printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
+		if (rite_end.isExist()) std::printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
+		if (ite2.isExist()) std::printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
+		if (rite2.isExist()) std::printf("rite2:[%d] priority=%d, seqNo=%d, value=%d\n", rite2.getIndex(), rite2->m_priority, rite2->m_seqNo, rite2->m_val);
+		if (ite2_end.isExist()) std::printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
+		if (rite2_end.isExist()) std::printf("rite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_priority, rite2_end->m_seqNo, rite2_end->m_val);
+		std::printf("[rite.base()]\n");
 		ite2 = rite.base();
 		ite2_end = rite_end.base();
-		if (ite2.isExist()) printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
-		if (ite2_end.isExist()) printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
-		printf("[++ite,--ie_end]\n");
+		if (ite2.isExist()) std::printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
+		if (ite2_end.isExist()) std::printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
+		std::printf("[++ite,--ie_end]\n");
 		++ite;
 		++rite;
 		--ite_end;
 		--rite_end;
-		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
-		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
-		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
-		if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
-		printf("[--ite,++ie_end]\n");
+		if (ite.isExist()) std::printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) std::printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		if (ite_end.isExist()) std::printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
+		if (rite_end.isExist()) std::printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
+		std::printf("[--ite,++ie_end]\n");
 		--ite;
 		--rite;
 		++ite_end;
 		++rite_end;
-		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
-		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
-		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
-		if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
+		if (ite.isExist()) std::printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) std::printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		if (ite_end.isExist()) std::printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
+		if (rite_end.isExist()) std::printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
 		for (int i = 0; i < 3; ++i)
 		{
-			printf("[ite[%d]]\n", i);
+			std::printf("[ite[%d]]\n", i);
 			ite = ite[i];
 			rite = rite[i];
-			if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
-			if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+			if (ite.isExist()) std::printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+			if (rite.isExist()) std::printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
 		}
-		printf("[ite+=3]\n");
+		std::printf("[ite+=3]\n");
 		ite += 3;
 		rite += 3;
-		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
-		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
-		printf("[ite-=3]\n");
+		if (ite.isExist()) std::printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) std::printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		std::printf("[ite-=3]\n");
 		ite -= 3;
 		rite -= 3;
-		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
-		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
-		printf("ite_end - ite = %d\n", ite_end - ite);
-		printf("ite - ite_end = %d\n", ite - ite_end);
-		printf("rite_end - rite = %d\n", rite_end - rite);
-		printf("rite - rite_end = %d\n", rite - rite_end);
-		printf("[ite2-=2]\n");
+		if (ite.isExist()) std::printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) std::printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		std::printf("ite_end - ite = %d\n", ite_end - ite);
+		std::printf("ite - ite_end = %d\n", ite - ite_end);
+		std::printf("rite_end - rite = %d\n", rite_end - rite);
+		std::printf("rite - rite_end = %d\n", rite - rite_end);
+		std::printf("[ite2-=2]\n");
 		ite2 -= 2;
 		rite2 -= 2;
-		printf("ite2 - ite = %d\n", ite2 - ite);
-		printf("ite - ite2 = %d\n", ite - ite2);
-		printf("rite2 - rite = %d\n", rite2 - rite);
-		printf("rite - rite2 = %d\n", rite - rite2);
-		printf("[++ite_end]\n");
+		std::printf("ite2 - ite = %d\n", ite2 - ite);
+		std::printf("ite - ite2 = %d\n", ite - ite2);
+		std::printf("rite2 - rite = %d\n", rite2 - rite);
+		std::printf("rite - rite2 = %d\n", rite - rite2);
+		std::printf("[++ite_end]\n");
 		++ite_end;
 		++rite_end;
-		printf("ite_end - ite = %d\n", ite_end - ite);
-		printf("ite - ite_end = %d\n", ite - ite_end);
-		printf("rite_end - rite = %d\n", rite_end - rite);
-		printf("rite - rite_end = %d\n", rite - rite_end);
-		printf("--------------------[iterator operattion:end]\n");
+		std::printf("ite_end - ite = %d\n", ite_end - ite);
+		std::printf("ite - ite_end = %d\n", ite - ite_end);
+		std::printf("rite_end - rite = %d\n", rite_end - rite);
+		std::printf("rite - rite_end = %d\n", rite - rite_end);
+		std::printf("--------------------[iterator operattion:end]\n");
 	}
 #endif//TEST_ITERATOR_OPERATION
 #endif//GASHA_BINARY_HEAP_ENABLE_RANDOM_ACCESS_INTERFACE, GASHA_BINARY_HEAP_ENABLE_REVERSE_ITERATOR
 
 #ifdef TEST_LOCK_OPERATION
 	//ロック操作テスト
-	printf("--------------------[lock operation:begin]\n");
+	std::printf("--------------------[lock operation:begin]\n");
 	{
 		auto lock(con->lockScoped());//lock_guard<container_t::lock_type> lock(*con);と同じ
-		printf(".lockScoped() ... OK\n");
+		std::printf(".lockScoped() ... OK\n");
 	}
 	{
 		auto lock(con->lockUnique());//unique_shared_lock<container_t::lock_type> lock(*con);と同じ
-		printf(".lockUnique() ... OK\n");
+		std::printf(".lockUnique() ... OK\n");
 	}
 	{
 		auto lock(con->lockUnique(with_lock));//unique_shared_lock<container_t::lock_type> lock(*con, with_lock);と同じ
-		printf(".lockUnique(with_lock) ... OK\n");
+		std::printf(".lockUnique(with_lock) ... OK\n");
 	}
 	{
 		auto lock(con->lockUnique(try_to_lock));//unique_shared_lock<container_t::lock_type> lock(*con, try_to_lock);と同じ
-		printf(".lockUnique(try_to_lock) ... OK\n");
+		std::printf(".lockUnique(try_to_lock) ... OK\n");
 	}
 	{
 		pqueue_t::lock_type& lock_obj = *con;
 		lock_obj.lock();
 		auto lock(con->lockUnique(adopt_lock));//unique_shared_lock<container_t::lock_type> lock(*con, adopt_lock);と同じ
-		printf(".lockUnique(adopt_lock) ... OK\n");
+		std::printf(".lockUnique(adopt_lock) ... OK\n");
 	}
 	{
 		auto lock(con->lockUnique(defer_lock));//unique_shared_lock<container_t::lock_type> lock(*con, defer_lock);と同じ
-		printf(".lockUnique(defer_lock) ... OK\n");
+		std::printf(".lockUnique(defer_lock) ... OK\n");
 	}
-	printf("--------------------[lock operation:end]\n");
+	std::printf("--------------------[lock operation:end]\n");
 #endif//TEST_LOCK_OPERATION
 
 	//デキュー
 	auto dequeue = [&con](const int pop_limit)
 	{
-		printf("\n");
-		printf("--- Dequeue ---\n");
+		std::printf("\n");
+		std::printf("--- Dequeue ---\n");
 		for (int i = 0; i < pop_limit; ++i)
 		{
 			//【推奨】【デキュー方法①】情報取得用のオブジェクトを受け渡す
@@ -508,12 +508,12 @@ void example_priority_queue()
 	//先頭（根）ノードの優先度を変更
 	auto changePriorityOnTop = [&con](const PRIORITY new_priority)
 	{
-		printf("\n");
-		printf("--- Change Priority ---\n");
+		std::printf("\n");
+		std::printf("--- Change Priority ---\n");
 		const data_t* node = con->top();//先頭ノードを取得（ポップされない）
-		printf("[%1d:%2d(seq=%d)]", node->m_priority, node->m_val, node->m_seqNo);
+		std::printf("[%1d:%2d(seq=%d)]", node->m_priority, node->m_val, node->m_seqNo);
 		node = con->changePriorityOnTop(new_priority);//優先度を変更（変更後、キューが再配置される）
-		printf(" -> [%1d:%2d(seq=%d)]\n", node->m_priority, node->m_val, node->m_seqNo);
+		std::printf(" -> [%1d:%2d(seq=%d)]\n", node->m_priority, node->m_val, node->m_seqNo);
 	};
 	changePriorityOnTop(HIGHEST);
 	prev_time = printElapsedTime(prev_time, true);//経過時間を表示
@@ -546,9 +546,9 @@ void example_priority_queue()
 
 	//--------------------
 	//プライオリティキューのクリアのテスト
-	printf("\n");
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[Test for priority_queue::containerAdapter(Priority Queue)] *Clear\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[Test for priority_queue::containerAdapter(Priority Queue)] *Clear\n");
 
 	//エンキュー
 	enqueue();
@@ -558,12 +558,12 @@ void example_priority_queue()
 	showTree(con->getContainer());
 	prev_time = printElapsedTime(prev_time, false);//経過時間を表示
 
-	printf("\n");
-	printf("--- Clear ---\n");
+	std::printf("\n");
+	std::printf("--- Clear ---\n");
 
 	//クリア
 	con->clear();
-	printf("OK\n");
+	std::printf("OK\n");
 	prev_time = printElapsedTime(prev_time, true);//経過時間を表示
 
 	//木を表示
@@ -573,10 +573,10 @@ void example_priority_queue()
 	//--------------------
 	//ポインタ変数をキューイングする場合のテスト
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[Test for priority_queue::containerAdapter(Priority Queue)] *Pointer\n");
-		printf("\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[Test for priority_queue::containerAdapter(Priority Queue)] *Pointer\n");
+		std::printf("\n");
 
 		//プライオリティキュー
 		priority_queue::container<ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER> p_con;
@@ -610,9 +610,9 @@ void example_priority_queue()
 	//--------------------
 	//【挙動比較用】プライオリティキューの再テスト
 	//※上記の二分ヒープ／STLのテストと同一の流れのテストを実施
-	printf("\n");
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[Test for priority_queue::containerAdapter(Priority Queue)] *Second time\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[Test for priority_queue::containerAdapter(Priority Queue)] *Second time\n");
 
 	//エンキュー
 	enqueue();
@@ -643,8 +643,8 @@ void example_priority_queue()
 	con = nullptr;
 
 	//終了
-	printf("\n");
-	printf("--- end ---\n");
+	std::printf("\n");
+	std::printf("--- end ---\n");
 	printElapsedTime(begin_time, true);//経過時間を表示
 }
 
@@ -663,15 +663,15 @@ void example_binary_heap()
 	//--------------------
 	//【挙動比較用】二分ヒープのテスト
 	//※プライオリティキューと異なり、ポップ時に、プッシュ時（エンキュー時）の順序性が保証されていないことが確認できる
-	printf("\n");
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[Test for binary_heap::container(Binary Heap)]\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[Test for binary_heap::container(Binary Heap)]\n");
 
 	//二分ヒープでノードをプッシュ
 	auto pushNodesBinHeap = [&heap]()
 	{
-		printf("\n");
-		printf("--- Push nodes(Binary Heap) ---\n");
+		std::printf("\n");
+		std::printf("--- Push nodes(Binary Heap) ---\n");
 		std::mt19937 rand_engine;
 		rand_engine.seed(0);
 		std::uniform_int_distribution<int> rand_dist(TEST_DATA_PRIOR_MIN, TEST_DATA_PRIOR_MAX);
@@ -729,7 +729,7 @@ void example_binary_heap()
 		auto now_time = nowTime();
 		const double elapsed_time = calcElapsedTime(prev_time, now_time);
 		if (is_show)
-			printf("*elapsed_time=%.9lf sec\n", elapsed_time);
+			std::printf("*elapsed_time=%.9lf sec\n", elapsed_time);
 		return now_time;
 	};
 	prev_time = printElapsedTime(prev_time, true);
@@ -772,9 +772,9 @@ void example_binary_heap()
 #if defined(GASHA_BINARY_HEAP_ENABLE_RANDOM_ACCESS_INTERFACE) && defined(GASHA_BINARY_HEAP_ENABLE_REVERSE_ITERATOR)
 #ifdef TEST_ITERATOR_OPERATION
 	{
-		printf("\n");
-		printf("--------------------[iterator operattion:begin]\n");
-		printf("[constructor]\n");
+		std::printf("\n");
+		std::printf("--------------------[iterator operattion:begin]\n");
+		std::printf("[constructor]\n");
 		heap_t::iterator ite = heap->begin();
 		heap_t::reverse_iterator rite = heap->rbegin();
 		heap_t::iterator ite_end = heap->end();
@@ -783,23 +783,23 @@ void example_binary_heap()
 		heap_t::reverse_iterator rite2 = heap->begin();
 		heap_t::iterator ite2_end = heap->rend();
 		heap_t::reverse_iterator rite2_end = heap->end();
-		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
-		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
-		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
-		if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
-		if (ite2.isExist()) printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
-		if (rite2.isExist()) printf("rite2:[%d] priority=%d, seqNo=%d, value=%d\n", rite2.getIndex(), rite2->m_priority, rite2->m_seqNo, rite2->m_val);
-		if (ite2_end.isExist()) printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
-		if (rite2_end.isExist()) printf("rite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_priority, rite2_end->m_seqNo, rite2_end->m_val);
-		printf("ite_end - ite = %d\n", ite_end - ite);
-		printf("ite - ite_end = %d\n", ite - ite_end);
-		printf("rite_end - rite = %d\n", rite_end - rite);
-		printf("rite - rite_end = %d\n", rite - rite_end);
-		printf("ite2 - ite = %d\n", ite2 - ite);
-		printf("ite - ite2 = %d\n", ite - ite2);
-		printf("rite2 - rite = %d\n", rite2 - rite);
-		printf("rite - rite2 = %d\n", rite - rite2);
-		printf("[copy operator]\n");
+		if (ite.isExist()) std::printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) std::printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		if (ite_end.isExist()) std::printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
+		if (rite_end.isExist()) std::printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
+		if (ite2.isExist()) std::printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
+		if (rite2.isExist()) std::printf("rite2:[%d] priority=%d, seqNo=%d, value=%d\n", rite2.getIndex(), rite2->m_priority, rite2->m_seqNo, rite2->m_val);
+		if (ite2_end.isExist()) std::printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
+		if (rite2_end.isExist()) std::printf("rite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_priority, rite2_end->m_seqNo, rite2_end->m_val);
+		std::printf("ite_end - ite = %d\n", ite_end - ite);
+		std::printf("ite - ite_end = %d\n", ite - ite_end);
+		std::printf("rite_end - rite = %d\n", rite_end - rite);
+		std::printf("rite - rite_end = %d\n", rite - rite_end);
+		std::printf("ite2 - ite = %d\n", ite2 - ite);
+		std::printf("ite - ite2 = %d\n", ite - ite2);
+		std::printf("rite2 - rite = %d\n", rite2 - rite);
+		std::printf("rite - rite2 = %d\n", rite - rite2);
+		std::printf("[copy operator]\n");
 		ite = heap->begin();
 		rite = heap->rbegin();
 		ite_end = heap->end();
@@ -808,115 +808,115 @@ void example_binary_heap()
 		rite2 = heap->begin();
 		ite2_end = heap->rend();
 		rite2_end = heap->end();
-		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
-		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
-		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
-		if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
-		if (ite2.isExist()) printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
-		if (rite2.isExist()) printf("rite2:[%d] priority=%d, seqNo=%d, value=%d\n", rite2.getIndex(), rite2->m_priority, rite2->m_seqNo, rite2->m_val);
-		if (ite2_end.isExist()) printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
-		if (rite2_end.isExist()) printf("rite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_priority, rite2_end->m_seqNo, rite2_end->m_val);
-		printf("[rite.base()]\n");
+		if (ite.isExist()) std::printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) std::printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		if (ite_end.isExist()) std::printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
+		if (rite_end.isExist()) std::printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
+		if (ite2.isExist()) std::printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
+		if (rite2.isExist()) std::printf("rite2:[%d] priority=%d, seqNo=%d, value=%d\n", rite2.getIndex(), rite2->m_priority, rite2->m_seqNo, rite2->m_val);
+		if (ite2_end.isExist()) std::printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
+		if (rite2_end.isExist()) std::printf("rite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_priority, rite2_end->m_seqNo, rite2_end->m_val);
+		std::printf("[rite.base()]\n");
 		ite2 = rite.base();
 		ite2_end = rite_end.base();
-		if (ite2.isExist()) printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
-		if (ite2_end.isExist()) printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
-		printf("[++ite,--ie_end]\n");
+		if (ite2.isExist()) std::printf("ite2:[%d] priority=%d, seqNo=%d, value=%d\n", ite2.getIndex(), ite2->m_priority, ite2->m_seqNo, ite2->m_val);
+		if (ite2_end.isExist()) std::printf("ite2_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_priority, ite2_end->m_seqNo, ite2_end->m_val);
+		std::printf("[++ite,--ie_end]\n");
 		++ite;
 		++rite;
 		--ite_end;
 		--rite_end;
-		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
-		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
-		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
-		if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
-		printf("[--ite,++ie_end]\n");
+		if (ite.isExist()) std::printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) std::printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		if (ite_end.isExist()) std::printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
+		if (rite_end.isExist()) std::printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
+		std::printf("[--ite,++ie_end]\n");
 		--ite;
 		--rite;
 		++ite_end;
 		++rite_end;
-		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
-		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
-		if (ite_end.isExist()) printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
-		if (rite_end.isExist()) printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
+		if (ite.isExist()) std::printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) std::printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		if (ite_end.isExist()) std::printf("ite_end:[%d] priority=%d, seqNo=%d, value=%d\n", ite_end.getIndex(), ite_end->m_priority, ite_end->m_seqNo, ite_end->m_val);
+		if (rite_end.isExist()) std::printf("rite_end:[%d] priority=%d, seqNo=%d, value=%d\n", rite_end.getIndex(), rite_end->m_priority, rite_end->m_seqNo, rite_end->m_val);
 		for (int i = 0; i < 3; ++i)
 		{
-			printf("[ite[%d]]\n", i);
+			std::printf("[ite[%d]]\n", i);
 			ite = ite[i];
 			rite = rite[i];
-			if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
-			if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+			if (ite.isExist()) std::printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+			if (rite.isExist()) std::printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
 		}
-		printf("[ite+=3]\n");
+		std::printf("[ite+=3]\n");
 		ite += 3;
 		rite += 3;
-		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
-		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
-		printf("[ite-=3]\n");
+		if (ite.isExist()) std::printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) std::printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		std::printf("[ite-=3]\n");
 		ite -= 3;
 		rite -= 3;
-		if (ite.isExist()) printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
-		if (rite.isExist()) printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
-		printf("ite_end - ite = %d\n", ite_end - ite);
-		printf("ite - ite_end = %d\n", ite - ite_end);
-		printf("rite_end - rite = %d\n", rite_end - rite);
-		printf("rite - rite_end = %d\n", rite - rite_end);
-		printf("[ite2-=2]\n");
+		if (ite.isExist()) std::printf("ite:[%d] priority=%d, seqNo=%d, value=%d\n", ite.getIndex(), ite->m_priority, ite->m_seqNo, ite->m_val);
+		if (rite.isExist()) std::printf("rite:[%d] priority=%d, seqNo=%d, value=%d\n", rite.getIndex(), rite->m_priority, rite->m_seqNo, rite->m_val);
+		std::printf("ite_end - ite = %d\n", ite_end - ite);
+		std::printf("ite - ite_end = %d\n", ite - ite_end);
+		std::printf("rite_end - rite = %d\n", rite_end - rite);
+		std::printf("rite - rite_end = %d\n", rite - rite_end);
+		std::printf("[ite2-=2]\n");
 		ite2 -= 2;
 		rite2 -= 2;
-		printf("ite2 - ite = %d\n", ite2 - ite);
-		printf("ite - ite2 = %d\n", ite - ite2);
-		printf("rite2 - rite = %d\n", rite2 - rite);
-		printf("rite - rite2 = %d\n", rite - rite2);
-		printf("[++ite_end]\n");
+		std::printf("ite2 - ite = %d\n", ite2 - ite);
+		std::printf("ite - ite2 = %d\n", ite - ite2);
+		std::printf("rite2 - rite = %d\n", rite2 - rite);
+		std::printf("rite - rite2 = %d\n", rite - rite2);
+		std::printf("[++ite_end]\n");
 		++ite_end;
 		++rite_end;
-		printf("ite_end - ite = %d\n", ite_end - ite);
-		printf("ite - ite_end = %d\n", ite - ite_end);
-		printf("rite_end - rite = %d\n", rite_end - rite);
-		printf("rite - rite_end = %d\n", rite - rite_end);
-		printf("--------------------[iterator operattion:end]\n");
+		std::printf("ite_end - ite = %d\n", ite_end - ite);
+		std::printf("ite - ite_end = %d\n", ite - ite_end);
+		std::printf("rite_end - rite = %d\n", rite_end - rite);
+		std::printf("rite - rite_end = %d\n", rite - rite_end);
+		std::printf("--------------------[iterator operattion:end]\n");
 	}
 #endif//TEST_ITERATOR_OPERATION
 #endif//GASHA_BINARY_HEAP_ENABLE_RANDOM_ACCESS_INTERFACE, GASHA_BINARY_HEAP_ENABLE_REVERSE_ITERATOR
 
 #ifdef TEST_LOCK_OPERATION
 	//ロック操作テスト
-	printf("--------------------[lock operation:begin]\n");
+	std::printf("--------------------[lock operation:begin]\n");
 	{
 		auto lock(heap->lockScoped());//lock_guard<container_t::lock_type> lock(*heap);と同じ
-		printf(".lockScoped() ... OK\n");
+		std::printf(".lockScoped() ... OK\n");
 	}
 	{
 		auto lock(heap->lockUnique());//unique_shared_lock<container_t::lock_type> lock(*heap);と同じ
-		printf(".lockUnique() ... OK\n");
+		std::printf(".lockUnique() ... OK\n");
 	}
 	{
 		auto lock(heap->lockUnique(with_lock));//unique_shared_lock<container_t::lock_type> lock(*heap, with_lock);と同じ
-		printf(".lockUnique(with_lock) ... OK\n");
+		std::printf(".lockUnique(with_lock) ... OK\n");
 	}
 	{
 		auto lock(heap->lockUnique(try_to_lock));//unique_shared_lock<container_t::lock_type> lock(*heap, try_lock);と同じ
-		printf(".lockUnique(try_to_lock) ... OK\n");
+		std::printf(".lockUnique(try_to_lock) ... OK\n");
 	}
 	{
 		heap_t::lock_type& lock_obj = *heap;
 		lock_obj.lock();
 		auto lock(heap->lockUnique(adopt_lock));//unique_shared_lock<container_t::lock_type> lock(*heap, adopt_lock);と同じ
-		printf(".lockUnique(adopt_lock) ... OK\n");
+		std::printf(".lockUnique(adopt_lock) ... OK\n");
 	}
 	{
 		auto lock(heap->lockUnique(defer_lock));//unique_shared_lock<container_t::lock_type> lock(*heap, defer_lock);と同じ
-		printf(".lockUnique(defer_lock) ... OK\n");
+		std::printf(".lockUnique(defer_lock) ... OK\n");
 	}
-	printf("--------------------[lock operation:end]\n");
+	std::printf("--------------------[lock operation:end]\n");
 #endif//TEST_LOCK_OPERATION
 
 	//二分ヒープでノードをポップ
 	auto popNodesBinHeap  = [&heap](const int pop_limit)
 	{
-		printf("\n");
-		printf("--- Pop nodes(Binary Heap) ---\n");
+		std::printf("\n");
+		std::printf("--- Pop nodes(Binary Heap) ---\n");
 		for (int i = 0; i < pop_limit; ++i)
 		{
 			//※上記プライオリティキューで説明した、２種類のポップ方法が使える
@@ -977,9 +977,9 @@ void example_binary_heap()
 	//【挙動比較用】STLのstd::priority_queueテスト
 	//※プライオリティキューと異なり、ポップ時に、プッシュ時（エンキュー時）の順序性が保証されていないことが確認できる
 	//※STLと二分ヒープの挙動（ポップ順序）が全く同じことを確認できる
-	printf("\n");
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[Test for std::priority_queue(STL)]\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[Test for std::priority_queue(STL)]\n");
 	
 	//優先度付きキューコンテナ生成
 	typedef std::priority_queue<data_t, std::vector<data_t>, typename heap_ope::less> stl_container_type;
@@ -989,8 +989,8 @@ void example_binary_heap()
 	//STLでノードをプッシュ
 	auto pushNodesSTL = [&stl_heap]()
 	{
-		printf("\n");
-		printf("--- Push nodes(STL) ---\n");
+		std::printf("\n");
+		std::printf("--- Push nodes(STL) ---\n");
 		std::mt19937 rand_engine;
 		rand_engine.seed(0);
 		std::uniform_int_distribution<int> rand_dist(TEST_DATA_PRIOR_MIN, TEST_DATA_PRIOR_MAX);
@@ -1013,8 +1013,8 @@ void example_binary_heap()
 	//STLでノードをポップ
 	auto popNodesSTL = [&stl_heap](const int pop_limit)
 	{
-		printf("\n");
-		printf("--- Pop nodes(STL) ---\n");
+		std::printf("\n");
+		std::printf("--- Pop nodes(STL) ---\n");
 		for (int i = 0; i < pop_limit && !stl_heap->empty(); ++i)
 		{
 			data_t node = stl_heap->top();
@@ -1034,8 +1034,8 @@ void example_binary_heap()
 	stl_heap = nullptr;
 
 	//終了
-	printf("\n");
-	printf("--- end ---\n");
+	std::printf("\n");
+	std::printf("--- end ---\n");
 	printElapsedTime(begin_time, true);//経過時間を表示
 }
 

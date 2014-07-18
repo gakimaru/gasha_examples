@@ -28,7 +28,7 @@
 #include <gasha/scoped_stack_allocator.h>//スコープスタックアロケータ
 #include <gasha/scoped_dual_stack_allocator.h>//双方向スコープスタックアロケータ
 
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 //【VC++】例外を無効化した状態で <vector> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -42,7 +42,7 @@
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
-#define EXPR_PLAIN(...) printf("> %s\n", #__VA_ARGS__); __VA_ARGS__
+#define EXPR_PLAIN(...) std::printf("> %s\n", #__VA_ARGS__); __VA_ARGS__
 
 //----------------------------------------
 //様々なアロケータ
@@ -53,44 +53,44 @@ static poolAllocator_withBuff<48, 8, 16> s_poolAllocator;//プールアロケー
 //多態アロケータ使用基本形
 static void testBasic()
 {
-	printf("\n");
-	printf("--------------------------------------------------\n");
-	printf("[ Test for polyAllocator with new/delete operator ]\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------\n");
+	std::printf("[ Test for polyAllocator with new/delete operator ]\n");
+	std::printf("\n");
 
 	EXPR_PLAIN(auto adapter = s_stackAllocator.adapter());//スタックアロケータのアダプターを取得（変数を直接操作することはない）
 	EXPR_PLAIN(polyAllocator poly_allocator(adapter););//多態アロケータにアダプターをセット（変数を直接操作することはない）
-	printf("poly_allocator: name=\"%s\", mode=\"%s\"\n", poly_allocator.name(), poly_allocator.mode());
-	printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
+	std::printf("poly_allocator: name=\"%s\", mode=\"%s\"\n", poly_allocator.name(), poly_allocator.mode());
+	std::printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
 	
 	EXPR_PLAIN(data_t* p101 = new data_t;);//new演算子で領域確保
 	EXPR_PLAIN(data_t* p102 = new data_t[2];);//new[]演算子で領域確保
 	EXPR_PLAIN(data_t* p103 = new data_t[3];);
-	printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
+	std::printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
 	
 	{
 		//ネストした処理ブロックで別のアロケータに切り替え
-		printf("***** BEGIN BLOCK *****\n");
+		std::printf("***** BEGIN BLOCK *****\n");
 		EXPR_PLAIN(auto nested_adapter = s_poolAllocator.adapter());//プールアロケータのアダプターを取得
 		EXPR_PLAIN(polyAllocator nested_poly_allocator(nested_adapter););//多態アロケータにアダプターをセット
-		printf("nested_poly_allocator: name=\"%s\", mode=\"%s\"\n", nested_poly_allocator.name(), nested_poly_allocator.mode());
-		printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
+		std::printf("nested_poly_allocator: name=\"%s\", mode=\"%s\"\n", nested_poly_allocator.name(), nested_poly_allocator.mode());
+		std::printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
 		
 		EXPR_PLAIN(data_t* p201 = new data_t;);//new演算子で領域確保
 		EXPR_PLAIN(data_t* p202 = new data_t[2];);//new[]演算子で領域確保
 		EXPR_PLAIN(data_t* p203 = new(std::nothrow) data_t[3];);
-		printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
+		std::printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
 		
 		EXPR_PLAIN(delete p201;);//delete演算子で領域解放
 		EXPR_PLAIN(delete[] p202;);//delete[]演算子で領域解放
 		EXPR_PLAIN(delete[] p203;);
-		printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
-		printf("***** END BLOCK *****\n");
+		std::printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
+		std::printf("***** END BLOCK *****\n");
 	}
 	//処理ブロックを抜けると元のアロケータに戻る
 	
 	EXPR_PLAIN(data_t* p104 = new data_t;);//new演算子で領域確保
-	printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
+	std::printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
 	
 	EXPR_PLAIN(delete p101;);//delete演算子で領域解放
 	EXPR_PLAIN(delete[] p102;);//delete[]演算子で領域解放
@@ -102,29 +102,29 @@ static void testBasic()
 		auto adapter = scoped.adapter();
 		polyAllocator poly_allocator(adapter);
 		char message[1024];
-		scoped.debugInfo(message); printf(message);
+		scoped.debugInfo(message); std::printf(message);
 		data_t* p101 = new data_t;
-		scoped.debugInfo(message); printf(message);
+		scoped.debugInfo(message); std::printf(message);
 		delete p101;
-		scoped.debugInfo(message); printf(message);
+		scoped.debugInfo(message); std::printf(message);
 	}
-	printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
+	std::printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
 }
 
 //----------------------------------------
 //多態アロケータ活用例：ローカルメモリでSTLを使用
 static void testSTL()
 {
-	printf("\n");
-	printf("--------------------------------------------------\n");
-	printf("[ Test for polyAllocator with STL ]\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------\n");
+	std::printf("[ Test for polyAllocator with STL ]\n");
+	std::printf("\n");
 
 	char message[1024];
 
 	EXPR_PLAIN(smartStackAllocator_withBuff<2048> stack;);//スタックアロケータ
 	{
-		printf("***** BEGIN BLOCK *****\n");
+		std::printf("***** BEGIN BLOCK *****\n");
 		EXPR_PLAIN(auto adapter = stack.adapter(););//スタックアロケータのアダプターを取得
 		EXPR_PLAIN(polyAllocator poly(adapter););//多態アロケータにアダプターをセット（処理ブロックを抜ける時に元に戻る）
 
@@ -134,55 +134,55 @@ static void testSTL()
 		EXPR_PLAIN(array.push_back(data););
 		EXPR_PLAIN(array.push_back(data););
 
-		EXPR_PLAIN(stack.debugInfo(message); printf(message););//STL内のnewがローカルのスタックアロケータを使用していることを確認
-		printf("***** END BLOCK *****\n");
+		EXPR_PLAIN(stack.debugInfo(message); std::printf(message););//STL内のnewがローカルのスタックアロケータを使用していることを確認
+		std::printf("***** END BLOCK *****\n");
 	}
-	EXPR_PLAIN(stack.debugInfo(message); printf(message););//スマートスタックアロケータにより、アロケータのメモリが空いたことを確認
+	EXPR_PLAIN(stack.debugInfo(message); std::printf(message););//スマートスタックアロケータにより、アロケータのメモリが空いたことを確認
 }
 
 //----------------------------------------
 //多態アロケータ応用例：GASHA_NEW / GASHA_DELETE マクロでアラインメント保証＆デバッグ情報取得
 static void testAdvanced()
 {
-	printf("\n");
-	printf("--------------------------------------------------\n");
-	printf("[ Test for polyAllocator with GASHA_NEW/GASHA_DELETE ]\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------\n");
+	std::printf("[ Test for polyAllocator with GASHA_NEW/GASHA_DELETE ]\n");
+	std::printf("\n");
 
 	//デバッグ用 operator new 時コールバック
 	auto at_new = [](const gasha::IAllocatorAdapter& adapter, const void* p, const std::size_t size, const std::size_t align, const gasha::newMethod_type method, const gasha::debugAllocationInfo* info)
 	{
-	#ifdef GASHA_HAS_DEBUG_FEATURE
-		printf("[CALLBACK] Operator new%s(%d,%d)p=%p, allocator=\"%s:%s\"\n", method == gasha::methodOfNewArrays ? "[]" : "", size, align, p, adapter.name(), adapter.mode());
+	#ifdef GASHA_DEBUG_FEATURE_IS_ENABLED
+		std::printf("[CALLBACK] Operator new%s(%d,%d)p=%p, allocator=\"%s:%s\"\n", method == gasha::methodOfNewArrays ? "[]" : "", size, align, p, adapter.name(), adapter.mode());
 		if (info)
-			printf(" %s[%d], file=\"%s\", func=\"%s\", time=%lf\n", info->m_typeName, info->m_arrayNum, info->m_fileName, info->m_funcName, info->m_time);
-	#endif//GASHA_HAS_DEBUG_FEATURE
+			std::printf(" %s[%d], file=\"%s\", func=\"%s\", time=%lf\n", info->m_typeName, info->m_arrayNum, info->m_fileName, info->m_funcName, info->m_time);
+	#endif//GASHA_DEBUG_FEATURE_IS_ENABLED
 	};
 	
 	//デバッグ用 operator delete 時コールバック
 	auto at_delete = [](const gasha::IAllocatorAdapter& adapter, const void* p, const gasha::deleteMethod_type method, const gasha::debugAllocationInfo* info)
 	{
-	#ifdef GASHA_HAS_DEBUG_FEATURE
-		printf("[CALLBACK] Operator delete%s(%p), allocator=\"%s:%s\"\n", method == gasha::methodOfDeleteArrays ? "[]" : "", p, adapter.name(), adapter.mode());
+	#ifdef GASHA_DEBUG_FEATURE_IS_ENABLED
+		std::printf("[CALLBACK] Operator delete%s(%p), allocator=\"%s:%s\"\n", method == gasha::methodOfDeleteArrays ? "[]" : "", p, adapter.name(), adapter.mode());
 		if (info)
-			printf(" %s%s, file=\"%s\", func=\"%s\", time=%lf\n", info->m_typeName, method == gasha::methodOfDeleteArrays ? "[]" : "", info->m_fileName, info->m_funcName, info->m_time);
-	#endif//GASHA_HAS_DEBUG_FEATURE
+			std::printf(" %s%s, file=\"%s\", func=\"%s\", time=%lf\n", info->m_typeName, method == gasha::methodOfDeleteArrays ? "[]" : "", info->m_fileName, info->m_funcName, info->m_time);
+	#endif//GASHA_DEBUG_FEATURE_IS_ENABLED
 	};
 
 	//デバッグ用 多態アロケータ変更時コールバック
 	auto at_change_allocator = [](const gasha::IAllocatorAdapter& adapter, const gasha::IAllocatorAdapter& next_adapter)
 	{
-	#ifdef GASHA_HAS_DEBUG_FEATURE
-		printf("[CALLBACK] Change allocator: \"%s:%s\" -> \"%s:%s\"\n", adapter.name(), adapter.mode(), next_adapter.name(), next_adapter.mode());
-	#endif//GASHA_HAS_DEBUG_FEATURE
+	#ifdef GASHA_DEBUG_FEATURE_IS_ENABLED
+		std::printf("[CALLBACK] Change allocator: \"%s:%s\" -> \"%s:%s\"\n", adapter.name(), adapter.mode(), next_adapter.name(), next_adapter.mode());
+	#endif//GASHA_DEBUG_FEATURE_IS_ENABLED
 	};
 
 	//デバッグ用 多態アロケータ復帰時コールバック
 	auto at_return_allocator = [](const gasha::IAllocatorAdapter& adapter, const gasha::IAllocatorAdapter& prev_adapter)
 	{
-	#ifdef GASHA_HAS_DEBUG_FEATURE
-		printf("[CALLBACK] Return allocator: \"%s:%s\" <- \"%s:%s\"\n", adapter.name(), adapter.mode(), prev_adapter.name(), prev_adapter.mode());
-	#endif//GASHA_HAS_DEBUG_FEATURE
+	#ifdef GASHA_DEBUG_FEATURE_IS_ENABLED
+		std::printf("[CALLBACK] Return allocator: \"%s:%s\" <- \"%s:%s\"\n", adapter.name(), adapter.mode(), prev_adapter.name(), prev_adapter.mode());
+	#endif//GASHA_DEBUG_FEATURE_IS_ENABLED
 	};
 
 	EXPR_PLAIN(smartStackAllocator_withBuff<2048> stack;);//スタックアロケータ
@@ -222,10 +222,10 @@ static void testAdvanced()
 
 	{
 		//ネストした処理ブロックで別のアロケータに切り替え
-		printf("***** BEGIN BLOCK *****\n");
+		std::printf("***** BEGIN BLOCK *****\n");
 		EXPR_PLAIN(auto nested_adapter = s_poolAllocator.adapter());//プールアロケータのアダプターを取得
 		EXPR_PLAIN(polyAllocator nested_poly_allocator(nested_adapter););//多態アロケータにアダプターをセット
-		printf("***** END BLOCK *****\n");
+		std::printf("***** END BLOCK *****\n");
 	}
 	
 	//オブザーバーをリセット
@@ -236,10 +236,10 @@ static void testAdvanced()
 //全種オブジェクトのアダプター化を確認
 void testAllAdapters()
 {
-	printf("\n");
-	printf("--------------------------------------------------\n");
-	printf("[ Test for polyAllocator adapters ]\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------\n");
+	std::printf("[ Test for polyAllocator adapters ]\n");
+	std::printf("\n");
 
 	char buff[1024];
 
@@ -324,8 +324,8 @@ void testAllAdapters()
 //多態アロケータテスト
 void example_poly_allocator()
 {
-	printf("\n");
-	printf("================================================================================\n");
+	std::printf("\n");
+	std::printf("================================================================================\n");
 	
 	//多態アロケータ使用基本形
 	testBasic();

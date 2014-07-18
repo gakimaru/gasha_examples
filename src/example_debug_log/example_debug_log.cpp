@@ -32,13 +32,15 @@
 #include <gasha/log.h>//ログ操作
 #include <gasha/print.h>//ログ出力操作 ※これだけインクルードしていれば print() が使用できる
 
+#include <gasha/call_point.h>//コールポイント
+
 #include <gasha/iterator.h>//イテレータ操作
 #include <gasha/type_traits.h>//型特性ユーティリティ：toStr()
 #include <gasha/shared_spin_lock.h>//共有スピンロック
 #include <gasha/strconv.h>//文字列変換
-#include <gasha/chrono.h>//時間処理系ユーティリティ：nowElapsedTime()
+#include <gasha/chrono.h>//時間処理ユーティリティ：nowElapsedTime()
 
-#include <cstdio>//FILE
+#include <cstdio>//FILE, std::printf()
 
 #ifdef GASHA_IS_GCC
 //※別端末へのログ出力テスト用
@@ -51,16 +53,14 @@
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
-#ifdef GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
-
 //----------------------------------------
 //ログレベル列挙
 void printAllLogLevel()
 {
-	printf("\n");
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Enumeration of all log-levels ]\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Enumeration of all log-levels ]\n");
+	std::printf("\n");
 
 	forEach(logLevelContainer(),//正順表示
 	//reverseForEach(logLevelContainer(),//逆順表示
@@ -79,7 +79,7 @@ void printAllLogLevel()
 				print_console->printf(message, "[%2d](SP%2d)\"%s\"", level_obj.outputLevel(), level_obj.value(), level_obj.name());
 			else
 				print_console->printf(message, "[%2d](%2d)\"%s\"", level_obj.outputLevel(), level_obj.value(), level_obj.name());
-			print_console->outputCr();
+			print_console->putCr();
 			IConsole* console = level_obj.console(ofLog);
 			consoleColor& color = level_obj.color(ofLog);
 			IConsole* console_of_notice = level_obj.console(ofNotice);
@@ -90,25 +90,25 @@ void printAllLogLevel()
 			{
 				print_console->changeColor(level_obj.color(ofLog));
 				print_console->printf(message, "\tconsole: \"%s\"(%s)", console->name(), color.toStr(str_color));
-				print_console->outputCr();
+				print_console->putCr();
 			}
 			if (console_of_notice)
 			{
 				notice_console->changeColor(level_obj.color(ofNotice));
 				notice_console->printf(message, "\tnotice: \"%s\"(%s)", console_of_notice->name(), color_of_notice.toStr(str_color));
-				notice_console->outputCr();
+				notice_console->putCr();
 			}
 			if (prev)
 			{
 				print_console->changeColor(prev.color(ofLog));
 				print_console->printf(message, "\tprev: [%2d](%2d)\"%s\"", prev.outputLevel(), prev.value(), prev.name());
-				print_console->outputCr();
+				print_console->putCr();
 			}
 			if (next)
 			{
 				print_console->changeColor(next.color(ofLog));
 				print_console->printf(message, "\tnext: [%2d](%2d)\"%s", next.outputLevel(), next.value(), next.name());
-				print_console->outputCr();
+				print_console->putCr();
 			}
 		}
 	);
@@ -118,10 +118,10 @@ void printAllLogLevel()
 //ログカテゴリ列挙
 void printAllLogCategory()
 {
-	printf("\n");
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Enumeration of all log-categories ]\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Enumeration of all log-categories ]\n");
+	std::printf("\n");
 
 	forEach(logCategoryContainer(),//正順表示
 	//reverseForEach(logCategoryContainer(),//逆順表示
@@ -135,18 +135,18 @@ void printAllLogCategory()
 				print_console->printf(message, "(SP%2d)\"%s\"", category_obj.value(), category_obj.name());
 			else
 				print_console->printf(message, "(%2d)\"%s\"", category_obj.value(), category_obj.name());
-			print_console->outputCr();
+			print_console->putCr();
 			IConsole* console = category_obj.console(ofLog);
 			IConsole* console_of_notice = category_obj.console(ofNotice);
 			if (console)
 			{
 				print_console->printf(message, "\tconsole: \"%s\"", console->name());
-				print_console->outputCr();
+				print_console->putCr();
 			}
 			if (console_of_notice)
 			{
 				print_console->printf(message, "\tnotice: \"%s\"", console_of_notice->name());
-				print_console->outputCr();
+				print_console->putCr();
 			}
 		}
 	);
@@ -158,89 +158,85 @@ void printAllLogMask(const logLevel::level_type level)
 {
 	logLevel level_obj(level);
 	
-	printf("\n");
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Enumeration of all log-level-masks : Test for output message %s ]\n", level_obj.name());
-	printf("\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Enumeration of all log-level-masks : Test for put message %s ]\n", level_obj.name());
+	std::printf("\n");
 
 	forEach(logMask(),//正順表示
 		[&level_obj](logMask::iterator& mask_obj)
 	//reverseForEach(logMask(),//逆順表示
 	//	[&level_obj](logMask::reverse_iterator& mask_obj)
-	{
-		const logCategory& category = mask_obj.category();
-		logLevel level_mask(mask_obj.level(ofLog));
-		logLevel level_mask_of_notice(mask_obj.level(ofNotice));
-		IConsole* print_console = level_mask.console(ofLog);
-		if (!print_console)
-			print_console = &stdOutConsole::instance();
-		char message[1024];
-		if (category.isSpecial())
-			print_console->printf(message, "(SP%2d)\"%s\"", category.value(), category.name());
-		else
-			print_console->printf(message, "(%2d)\"%s\"", category.value(), category.name());
-		print_console->outputCr();
-		IConsole* console = mask_obj.console(ofLog, level_obj);
-		const consoleColor* color = mask_obj.color(ofLog, level_obj);
-		IConsole* console_of_notice = mask_obj.console(ofNotice, level_obj);
-		const consoleColor* color_of_notice = mask_obj.color(ofNotice, level_obj);
+		{
+			const logCategory& category = mask_obj.category();
+			logLevel level_mask(mask_obj.level(ofLog));
+			logLevel level_mask_of_notice(mask_obj.level(ofNotice));
+			IConsole* print_console = level_mask.console(ofLog);
+			if (!print_console)
+				print_console = &stdOutConsole::instance();
+			char message[1024];
+			if (category.isSpecial())
+				print_console->printf(message, "(SP%2d)\"%s\"", category.value(), category.name());
+			else
+				print_console->printf(message, "(%2d)\"%s\"", category.value(), category.name());
+			print_console->putCr();
+			IConsole* console = mask_obj.console(ofLog, level_obj);
+			const consoleColor* color = mask_obj.color(ofLog, level_obj);
+			IConsole* console_of_notice = mask_obj.console(ofNotice, level_obj);
+			const consoleColor* color_of_notice = mask_obj.color(ofNotice, level_obj);
 
-		print_console->changeColor(level_mask.color(ofLog));
-		print_console->printf(message, "\tmask(of log): (%2d)\"%s\"", level_mask.value(), level_mask.name());
-		print_console->outputCr();
-		if (console)
-		{
 			print_console->changeColor(level_mask.color(ofLog));
-			print_console->printf(message, "\t\tOK ... ");
-			console->changeColor(*color);
-			console->printf(message, "log-message: (%2d)\"%s\", \"%s\"", level_obj.value(), level_obj.name(), console->name());
-			console->outputCr();
-			if (*print_console != *console)
-				print_console->outputCr();
-		}
-		else
-		{
-			print_console->changeColor(level_mask.color(ofLog));
-			print_console->printf(message, "\t\tMASKED! ... ");
-			print_console->changeColor(level_obj.color(ofLog));
-			print_console->printf(message, "notice-message: (%2d)\"%s\"", level_obj.value(), level_obj.name());
-			print_console->outputCr();
-		}
+			print_console->printf(message, "\tmask(of log): (%2d)\"%s\"", level_mask.value(), level_mask.name());
+			print_console->putCr();
+			if (console)
+			{
+				print_console->changeColor(level_mask.color(ofLog));
+				print_console->printf(message, "\t\tOK ... ");
+				console->changeColor(*color);
+				console->printf(message, "log-message: (%2d)\"%s\", \"%s\"", level_obj.value(), level_obj.name(), console->name());
+				console->putCr();
+				if (*print_console != *console)
+					print_console->putCr();
+			}
+			else
+			{
+				print_console->changeColor(level_mask.color(ofLog));
+				print_console->printf(message, "\t\tMASKED! ... ");
+				print_console->changeColor(level_obj.color(ofLog));
+				print_console->printf(message, "notice-message: (%2d)\"%s\"", level_obj.value(), level_obj.name());
+				print_console->putCr();
+			}
 		
-		print_console->changeColor(level_mask_of_notice.color(ofNotice));
-		print_console->printf(message, "\tmask(of notice): (%2d)\"%s\"", level_mask_of_notice.value(), level_mask_of_notice.name());
-		print_console->outputCr();
-		if (console_of_notice)
-		{
 			print_console->changeColor(level_mask_of_notice.color(ofNotice));
-			print_console->printf(message, "\t\tOK ... ");
-			console_of_notice->changeColor(*color_of_notice);
-			console_of_notice->printf(message, "notice-message: (%2d)\"%s\", \"%s\"", level_obj.value(), level_obj.name(), console_of_notice->name());
-			console_of_notice->outputCr();
-			if (*print_console != *console_of_notice)
-				print_console->outputCr();
+			print_console->printf(message, "\tmask(of notice): (%2d)\"%s\"", level_mask_of_notice.value(), level_mask_of_notice.name());
+			print_console->putCr();
+			if (console_of_notice)
+			{
+				print_console->changeColor(level_mask_of_notice.color(ofNotice));
+				print_console->printf(message, "\t\tOK ... ");
+				console_of_notice->changeColor(*color_of_notice);
+				console_of_notice->printf(message, "notice-message: (%2d)\"%s\", \"%s\"", level_obj.value(), level_obj.name(), console_of_notice->name());
+				console_of_notice->putCr();
+				if (*print_console != *console_of_notice)
+					print_console->putCr();
+			}
+			else
+			{
+				print_console->changeColor(level_mask_of_notice.color(ofNotice));
+				print_console->printf(message, "\t\tMASKED! ... ");
+				print_console->changeColor(level_obj.color(ofNotice));
+				print_console->printf(message, "notice-message: (%2d)\"%s\"", level_obj.value(), level_obj.name());
+				print_console->putCr();
+			}
 		}
-		else
-		{
-			print_console->changeColor(level_mask_of_notice.color(ofNotice));
-			print_console->printf(message, "\t\tMASKED! ... ");
-			print_console->changeColor(level_obj.color(ofNotice));
-			print_console->printf(message, "notice-message: (%2d)\"%s\"", level_obj.value(), level_obj.name());
-			print_console->outputCr();
-		}
-	}
 	);
 }
-
-#endif//GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
 
 
 //----------------------------------------
 //デバッグログテスト
 void example_debug_log()
 {
-#ifdef GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
-
 	//コンソールカラー
 	consoleColor color(consoleColor::iYELLOW, consoleColor::RED, consoleColor::UNDERLINE);
 
@@ -249,8 +245,8 @@ void example_debug_log()
 	{
 		stdOutConsole console;
 		console.changeColor(color);
-		console.output("message for Standard");
-		console.outputCr();
+		console.put("message for Standard");
+		console.putCr();
 	}
 
 	//TTY端末に文字列出力テスト
@@ -259,16 +255,26 @@ void example_debug_log()
 	{
 		ttyConsole console(stdout);
 		console.changeColor(color);
-		console.output("message for TTY (stdout)");
-		console.outputCr();
+		console.put("message for TTY (stdout)");
+		console.putCr();
 	}
 
 	//TTY端末の標準エラー出力
 	{
 		ttyConsole console(stderr);
 		console.changeColor(color);
-		console.output("message for TTY (stderr)");
-		console.outputCr();
+		console.put("message for TTY (stderr)");
+		console.putCr();
+	}
+
+	//カラーなしTTY端末に文字列出力テスト
+	//※着色を無視
+	//※Windowsの場合はコマンドプロンプトに出力
+	{
+		monoTtyConsole console(stdout);
+		console.changeColor(color);
+		console.put("message for Mono-TTY (stdout)");
+		console.putCr();
 	}
 
 	//Windowsコマンドプロンプトに文字列出力テスト
@@ -277,16 +283,26 @@ void example_debug_log()
 	{
 		winConsole console(stdout);
 		console.changeColor(color);
-		console.output("message for Win (stdout)");
-		console.outputCr();
+		console.put("message for Win (stdout)");
+		console.putCr();
 	}
 	
 	//Windowsコマンドプロンプトの標準エラー出力
 	{
 		winConsole console(stderr);
 		console.changeColor(color);
-		console.output("message for Win (stderr)");
-		console.outputCr();
+		console.put("message for Win (stderr)");
+		console.putCr();
+	}
+
+	//カラーなしWindowsコマンドプロンプトに文字列出力テスト
+	//※着色を無視
+	//※Windows以外の場合は標準出力に出力
+	{
+		monoWinConsole console(stdout);
+		console.changeColor(color);
+		console.put("message for Mono-Win (stdout)");
+		console.putCr();
 	}
 
 	//Visual Studio 出力ウインドウに文字列出力テスト
@@ -295,42 +311,44 @@ void example_debug_log()
 	{
 		vsConsole console;
 		console.changeColor(color);
-		console.output("message for VS");
-		console.outputCr();
+		console.put("message for VS");
+		console.putCr();
 	}
 
 	//明示的なログレベル／カテゴリコンテナの初期化
-	//※GASHA_LOG_LEVEL(CATEGORY)_CONTAINER_SECURE_INITIALIZE 設定時には不要
+	//※GASHA_LOG_***_SECURE_INITIALIZE 設定時には不要
 	{
 	#ifndef GASHA_LOG_LEVEL_CONTAINER_SECURE_INITIALIZE
-		logLevelContainer level_con(logLevelContainer::explicitInitialize);//ログレベルの明示的な初期化
+		logLevelContainer level_con(logLevelContainer::explicitInit);//ログレベルの明示的な初期化
 	#endif//GASHA_LOG_LEVEL_CONTAINER_SECURE_INITIALIZE
 	#ifndef GASHA_LOG_CATEGORY_CONTAINER_SECURE_INITIALIZE
-		logCategoryContainer cate_con(logCategoryContainer::explicitInitialize);//ログカテゴリの明示的な初期化
+		logCategoryContainer cate_con(logCategoryContainer::explicitInit);//ログカテゴリの明示的な初期化
 	#endif//GASHA_LOG_CATEGORY_CONTAINER_SECURE_INITIALIZE
 	#ifndef GASHA_LOG_MASK_SECURE_INITIALIZE
-		logMask mask(logMask::explicitInitialize);//ログレベルマスクの明示的な初期化
+		logMask mask(logMask::explicitInit);//ログレベルマスクの明示的な初期化
 	#endif//GASHA_LOG_MASK_SECURE_INITIALIZE
 	#ifndef GASHA_LOG_ATTR_SECURE_INITIALIZE
-		logAttr attr(logAttr::explicitInitialize);//ログ属性の明示的な初期化
+		logAttr attr(logAttr::explicitInit);//ログ属性の明示的な初期化
 	#endif//GASHA_LOG_ATTR_SECURE_INITIALIZE
+#ifdef GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
 	#ifndef GASHA_LOG_WORK_BUFF_SECURE_INITIALIZE
-		logWorkBuff log_buff(logWorkBuff::explicitInitialize);//ログワークバッファの明示的な初期化
+		logWorkBuff log_buff(logWorkBuff::explicitInit);//ログワークバッファの明示的な初期化
 	#endif//GASHA_LOG_WORK_BUFF_SECURE_INITIALIZE
 	#ifndef GASHA_LOG_QUEUE_SECURE_INITIALIZE
-		logQueue log_queue(logQueue::explicitInitialize);//ログキューの明示的な初期化
+		logQueue log_queue(logQueue::explicitInit);//ログキューの明示的な初期化
 	#endif//GASHA_LOG_QUEUE_SECURE_INITIALIZE
 	#ifndef GASHA_LOG_QUEUE_MONITOR_SECURE_INITIALIZE
-		logQueueMonitor log_queue_monitor(logQueueMonitor::explicitInitialize);//ログキューモニターの明示的な初期化
+		logQueueMonitor log_queue_monitor(logQueueMonitor::explicitInit);//ログキューモニターの明示的な初期化
 	#endif//GASHA_LOG_QUEUE_MONITOR_SECURE_INITIALIZE
+#endif//GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
 	}
 
 	//ログレベルのコンソールを変更
 	{
 		static winConsole console(stdout, "win-console *CHANGED*");
 		logLevel level(asNormal);
-		level.console(ofLog) = &console;
-		//level->console(ofNotice) = &console;
+		level.setConsole(ofLog, console);
+		//level->setConsole(ofNotice, console);
 	}
 
 	//全ログレベルのコンソールをまとめて変更
@@ -351,12 +369,12 @@ void example_debug_log()
 	{
 		static vsConsole vs_console("vs-console *CUSTOM*");
 		IConsole* consoles[] = { &stdOutConsole::instance(), &vs_console };
-		consoleColor colors[] = { consoleColor(consoleColor::WHITE, consoleColor::iBLACK), stdConsoleColor };
+		consoleColor colors[] = { consoleColor(consoleColor::WHITE, consoleColor::iBLACK), consoleColor(consoleColor::stdColor) };
 		regLogLevel<asMoreDetail>()("asMoreDetail", consoles, colors);
 	}
 	{
 		IConsole* consoles[] = { &stdOutConsole::instance(), nullptr };
-		consoleColor colors[] = { consoleColor(consoleColor::CYAN), stdConsoleColor };
+		consoleColor colors[] = { consoleColor(consoleColor::CYAN), consoleColor(consoleColor::stdColor) };
 		regLogLevel<asAboveNormal>()("asAboveNormal", consoles, colors);
 	}
 
@@ -399,119 +417,141 @@ void example_debug_log()
 
 	//ローカルログレベルマスク＆ローカルログ属性
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[ Test for change log-level-mask & log-attribute ]\n");
-		printf("\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[ Test for change log-level-mask & log-attribute ]\n");
+		std::printf("\n");
 		logMask mask;
 		logAttr attr;
 		char mask_serialize_buff[sizeof(logMask::mask_type)];
 		char attr_serialize_buff[sizeof(logAttr::attr_type)];
-		printf("1:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-		printf("1:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		std::printf("1:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		std::printf("1:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 		mask.changeRef(logMask::isLocal);
 		attr.changeRef(logAttr::isLocal);
-		printf("2:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-		printf("2:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		std::printf("2:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		std::printf("2:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 		mask.changeRef(logMask::isGlobal);
 		attr.changeRef(logAttr::isGlobal);
-		printf("2a:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-		printf("2a:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		std::printf("2a:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		std::printf("2a:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 		mask.changeRef(logMask::isTls);
 		attr.changeRef(logAttr::isTls);
-		printf("2b:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-		printf("2b:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		std::printf("2b:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		std::printf("2b:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 		mask.changeRef(logMask::isLocal);
 		attr.changeRef(logAttr::isLocal);
-		printf("2c:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-		printf("2c:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		std::printf("2c:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		std::printf("2c:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 		mask.changeLevel(ofLog, asNormal, forEvery);
 		attr.add(logWithCriticalCPName);
 		attr.add(noticeWithCPName);
-		printf("3:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-		printf("3:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		std::printf("3:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		std::printf("3:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 		{
 			logMask mask;
 			logAttr attr;
-			printf("4:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-			printf("4:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+			std::printf("4:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+			std::printf("4:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 			{
 				logMask mask;
 				logAttr attr;
-				printf("5:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-				printf("5:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				std::printf("5:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				std::printf("5:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 				mask.changeRef(logMask::isLocal);
 				attr.changeRef(logAttr::isLocal);
-				printf("6:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-				printf("6:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				std::printf("6:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				std::printf("6:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 				mask.changeLevel(ofLog, asDetail, forEvery);
 				attr.remove(logWithCriticalCPName);
 				attr.remove(noticeWithCPName);
 				attr.add(logWithCPName);
 				attr.add(noticeWithCriticalCPName);
-				printf("7:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-				printf("7:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				std::printf("7:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				std::printf("7:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 				mask.changeRef(logMask::isLocal);
 				attr.changeRef(logAttr::isLocal);
-				printf("7a:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-				printf("7a:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				std::printf("7a:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				std::printf("7a:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 				mask.changeRef(logMask::isGlobal);
 				attr.changeRef(logAttr::isGlobal);
-				printf("7b:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-				printf("7b:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				std::printf("7b:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				std::printf("7b:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 				{
 					logMask mask;
 					logAttr attr;
-					printf("7bx:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-					printf("7bx:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+					std::printf("7bx:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+					std::printf("7bx:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 					mask.changeRef(logMask::isLocal);
 					attr.changeRef(logAttr::isLocal);
-					printf("7bx2:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-					printf("7bx2:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+					std::printf("7bx2:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+					std::printf("7bx2:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 					mask.changeLevel(ofLog, asSilentAbsolutely, forEvery);
 					attr.add(logWithLevel);
 					attr.add(logWithCategory);
-					printf("7bx3:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-					printf("7bx3:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+					std::printf("7bx3:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+					std::printf("7bx3:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 					mask.serialize(mask_serialize_buff, sizeof(mask_serialize_buff));
 					attr.serialize(attr_serialize_buff, sizeof(attr_serialize_buff));
+					logMask mask2(std::move(mask));
+					logAttr attr2(std::move(attr));
+					std::printf("7bx4:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+					std::printf("7bx4:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
+					std::printf("7bx4:mask2: refType=%d, level=%d\n", mask2.refType(), mask2.level(ofLog, forAny));
+					std::printf("7bx4:attr2: refType=%d, attr=0x%08x\n", attr2.refType(), attr2.attrValue());
+					logMask mask3;
+					logAttr attr3;
+					mask3 = std::move(mask2);
+					attr3 = std::move(attr2);
+					std::printf("7bx5:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+					std::printf("7bx5:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
+					std::printf("7bx5:mask2: refType=%d, level=%d\n", mask2.refType(), mask2.level(ofLog, forAny));
+					std::printf("7bx5:attr2: refType=%d, attr=0x%08x\n", attr2.refType(), attr2.attrValue());
+					std::printf("7bx5:mask3: refType=%d, level=%d\n", mask3.refType(), mask3.level(ofLog, forAny));
+					std::printf("7bx5:attr3: refType=%d, attr=0x%08x\n", attr3.refType(), attr3.attrValue());
+					{
+						logMask mask;
+						logAttr attr;
+						std::printf("7bxx:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+						std::printf("7bxx:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
+					}
 				}
 				mask.changeRef(logMask::isLocal);
 				attr.changeRef(logAttr::isLocal);
-				printf("7c:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-				printf("7c:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				std::printf("7c:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				std::printf("7c:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 				mask.changeRef(logMask::isTls);
 				attr.changeRef(logAttr::isTls);
-				printf("7d:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-				printf("7d:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				std::printf("7d:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				std::printf("7d:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 				mask.changeRef(logMask::isGlobal);
 				attr.changeRef(logAttr::isGlobal);
-				printf("7e:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-				printf("7e:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				std::printf("7e:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				std::printf("7e:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 				mask.changeRef(logMask::isLocal);
 				attr.changeRef(logAttr::isLocal);
-				printf("7f:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-				printf("7f:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				std::printf("7f:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				std::printf("7f:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 				mask.changeRef(logMask::isGlobal);
 				attr.changeRef(logAttr::isGlobal);
-				printf("7g:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-				printf("7g:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+				std::printf("7g:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+				std::printf("7g:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 			}
-			printf("8:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-			printf("8:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+			std::printf("8:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+			std::printf("8:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 		}
-		printf("9:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-		printf("9:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		std::printf("9:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		std::printf("9:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 		mask.deserialize(mask_serialize_buff, sizeof(mask_serialize_buff));
 		attr.deserialize(attr_serialize_buff, sizeof(attr_serialize_buff));
-		printf("9a:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-		printf("9a:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		std::printf("9a:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		std::printf("9a:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 	}
 	{
 		logMask mask;
 		logAttr attr;
-		printf("10:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
-		printf("10:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attr());
+		std::printf("10:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
+		std::printf("10:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 	}
 
 	//ログレベルマスク列挙
@@ -525,10 +565,10 @@ void example_debug_log()
 #ifdef GASHA_IS_GCC
 	//【Unix用】別の端末にログを出力
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[ Test for console that output other tty ]\n");
-		printf("\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[ Test for console that put other tty ]\n");
+		std::printf("\n");
 		
 		//端末をオープン
 		//※dev/pty*/はCygwinの端末
@@ -573,11 +613,12 @@ void example_debug_log()
 #endif//GASHA_IS_GCC
 
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[ Test for log-queue-monitor ]\n");
-		printf("\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[ Test for log-queue-monitor ]\n");
+		std::printf("\n");
 		
+	#ifdef GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
 		//ログキューモニタースレッド実行
 		auto monitor_thread_func = []()
 		{
@@ -604,8 +645,8 @@ void example_debug_log()
 			else if (mode == 3)
 			{
 				//ログキューとログワークバッファを再開
-				logWorkBuff work_buff(logWorkBuff::explicitInitialize);
-				logQueue queue(logQueue::explicitInitialize);
+				logWorkBuff work_buff(logWorkBuff::explicitInit);
+				logQueue queue(logQueue::explicitInit);
 				logQueueMonitor mon;
 				mon.reset();//ログキューモニターリセット
 			}
@@ -624,20 +665,20 @@ void example_debug_log()
 						work_buff.spprintf(message, size, "message:%d", i);
 						logMask mask;
 						logAttr attr;
-						logPrintInfo print_info;
 						logLevel::level_type level = asNormal;
 						logCategory::category_type category = forTARO;
-						print_info.m_id = 0;//IDは自動発番
-						print_info.m_time = nowElapsedTime();
-						print_info.m_message = message;
-						print_info.m_messageSize = static_cast<logPrintInfo::message_size_type>(size + 1);
-						print_info.m_level = level;
-						print_info.m_category = category;
-						print_info.m_attr = attr.attr();
+						logPrintInfo print_info;
+						print_info.setId(0);//IDは自動発番
+						print_info.setTime(nowElapsedTime());
+						print_info.setMessage(message);
+						print_info.setMessageSize(size + 1);
+						print_info.setLevel(level);
+						print_info.setCategory(category);
+						print_info.setAttr(attr.attrValue());
 						for (logPurpose::purpose_type purpose = 0; purpose < logPurpose::NUM; ++purpose)
 						{
-							print_info.m_consoles[purpose] = mask.console(purpose, level, category);
-							print_info.m_colors[purpose] = mask.color(purpose, level, category);
+							print_info.setConsole(purpose, mask.console(purpose, level, category));
+							print_info.setColor(purpose, mask.color(purpose, level, category));
 						}
 						//stdLogPrint()(print_info);//キューイングせずに直接表示する場合
 						const bool result = queue.enqueue(print_info);//キューイング
@@ -648,11 +689,11 @@ void example_debug_log()
 							mon.notify();
 						}
 						else
-							printf("enqueu failed.\n");
+							std::printf("enqueu failed.\n");
 						work_buff.free(message);
 					}
 					else
-						printf("message making failed.\n");
+						std::printf("message making failed.\n");
 				}
 			#if 0
 				//デキュー
@@ -662,7 +703,7 @@ void example_debug_log()
 					const bool result = queue.dequeue(node);
 					if (result)
 					{
-						printf("id=%lld, category=%d, level=%d, message=\"%s\"\n", node.m_id, node.m_category, node.m_level, node.m_message);
+						std::printf("id=%lld, category=%d, level=%d, message=\"%s\"\n", node.m_id, node.m_category, node.m_level, node.m_message);
 						queue.release(node);
 					}
 				}
@@ -681,17 +722,17 @@ void example_debug_log()
 					logPrintInfo print_info;
 					logLevel::level_type level = asNormal;
 					logCategory::category_type category = forTARO;
-					print_info.m_id = reserved_id;//予約したID
-					print_info.m_time = nowElapsedTime();
-					print_info.m_message = message;
-					print_info.m_messageSize = static_cast<logPrintInfo::message_size_type>(size + 1);
-					print_info.m_level = level;
-					print_info.m_category = category;
-					print_info.m_attr = attr.attr();
+					print_info.setId(reserved_id);//予約したID
+					print_info.setTime(nowElapsedTime());
+					print_info.setMessage(message);
+					print_info.setMessageSize(size + 1);
+					print_info.setLevel(level);
+					print_info.setCategory(category);
+					print_info.setAttr(attr.attrValue());
 					for (logPurpose::purpose_type purpose = 0; purpose < logPurpose::NUM; ++purpose)
 					{
-						print_info.m_consoles[purpose] = mask.console(purpose, level, category);
-						print_info.m_colors[purpose] = mask.color(purpose, level, category);
+						print_info.setConsole(purpose, mask.console(purpose, level, category));
+						print_info.setColor(purpose, mask.color(purpose, level, category));
 					}
 					//stdLogPrint()(print_info);//キューイングせずに直接表示する場合
 					const bool result = queue.enqueue(print_info);//キューイング
@@ -702,11 +743,11 @@ void example_debug_log()
 						mon.notify();
 					}
 					else
-						printf("enqueu of reservation failed.\n");
+						std::printf("enqueu of reservation failed.\n");
 					work_buff.free(message);
 				}
 				else
-					printf("message making of reservation failed.\n");
+					std::printf("message making of reservation failed.\n");
 			}
 
 			//モニター終了待ち
@@ -723,33 +764,34 @@ void example_debug_log()
 			mon.abort();
 		}
 		monitor_thread.join();
+	#endif//GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
 	}
 	
 	//メモリコンソールのテスト
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[ Test for memory console ]\n");
-		printf("\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[ Test for memory console ]\n");
+		std::printf("\n");
 		
 		char buff[256];
 		std::size_t size;
 		memConsole<128, sharedSpinLock> console;//任意のバッファサイズのメモリコンソールを作成
 		//auto& console = stdMemConsole::instance();//標準メモリコンソールを使用
 		console.printScreen();
-		printf("\n");
+		std::printf("\n");
 		console.printf(buff, "%d%d", 1234567890, 1234567890);
 		console.printScreen();
-		printf("\n");
+		std::printf("\n");
 		console.clear();
 		console.printf(buff, 16, "%d%d", 1234567890, 1234567890);
 		console.printScreen();
-		printf("\n");
+		std::printf("\n");
 		console.clear();
 		console.printScreen();
-		printf("\n");
+		std::printf("\n");
 		size = console.copy(buff, sizeof(buff));
-		printf("%s(size=%d)\n", buff, size);
+		std::printf("%s(size=%d)\n", buff, size);
 		for (int i = 0; i <= 32; ++i)
 		{
 			console.clear();
@@ -757,46 +799,48 @@ void example_debug_log()
 			char buff[32 + 1];
 			GASHA_ strncpy_fast(buff, str, i);
 			buff[i] = '\0';
-			console.output(buff);
+			console.put(buff);
+			std::memset(buff, 0, sizeof(buff));
 			size = console.copy(buff, sizeof(buff));
 			console.printScreen();
-			printf("\n");
-			printf("%s(size=%d)\n", buff, size);
-			console.output("#");
+			std::printf("\n");
+			std::printf("%s(size=%d)\n", buff, size);
+			console.put("#");
 			size = console.copy(buff, sizeof(buff));
 			console.printScreen();
-			printf("\n");
-			printf("%s(size=%d)\n", buff, size);
+			std::printf("\n");
+			std::printf("%s(size=%d)\n", buff, size);
 		}
 		console.clear();
 		for (int i = 0; i < 10; ++i)
 		{
-			console.output(nullptr);
-			console.output("1");
-			console.output("23456");
-			console.output("7");
-			console.output("8");
-			console.output("9");
-			console.output("0");
-			console.output("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-			console.output("abcdefghijklmnopqrstuvwxyz");
+			console.put(nullptr);
+			console.put("1");
+			console.put("23456");
+			console.put("7");
+			console.put("8");
+			console.put("9");
+			console.put("0");
+			console.put("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+			console.put("abcdefghijklmnopqrstuvwxyz");
 			size = console.copy(buff, sizeof(buff));
 			console.printScreen();
-			printf("\n");
-			printf("%s(size=%d)\n", buff, size);
+			std::printf("\n");
+			std::printf("%s(size=%d)\n", buff, size);
 		}
 	}
 	
 	//ログ出力操作のテスト
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[ Test for print log ]\n");
-		printf("\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[ Test for print log ]\n");
+		std::printf("\n");
 		
 		GASHA_ log log;
 		log.initialize();
 
+	#ifdef GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
 		//ログキューモニタースレッド実行
 		auto monitor_thread_func = []()
 		{
@@ -804,6 +848,7 @@ void example_debug_log()
 			mon.monitor();
 		};
 		std::thread monitor_thread(monitor_thread_func);
+	#endif//GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
 
 		logAttr attr;
 		attr.add(logWithID);
@@ -813,8 +858,8 @@ void example_debug_log()
 		print(asImportant, forAny, "(01)Test Message:%d", 10);
 
 		attr.reset();
-		attr.add(ofLog, withID);
-		attr.add(ofLog, withTime);
+		attr.add(ofLog, logPurposeWithID);
+		attr.add(ofLog, logPurposeWithTime);
 
 		log.reserve(asImportant, forAny, 8);
 
@@ -844,8 +889,8 @@ void example_debug_log()
 		
 		log.flush();
 
-		attr.remove(ofLog, withID);
-		attr.add(ofLog, headerOnlyColored);
+		attr.remove(ofLog, logPurposeWithID);
+		attr.add(ofLog, logPurposeHeaderOnlyColored);
 
 		log.printDirect(asImportant, forAny, "(18)Test Message:%d", 10);
 		log.printDirect(stdLogPrint(), asImportant, forAny, "(19)Test Message:%d", 10);
@@ -857,7 +902,7 @@ void example_debug_log()
 		log.convPrintDirect(stdLogPrint(), upperCaseConv, asImportant, forAny, "(24)Test Message:%d", 10);
 		log.convPrintDirect(stdLogPrint(), lowerCaseConv, asImportant, forAny, "(25)Test Message:%d", 10);
 
-		attr.add(ofLog, withoutColor);
+		attr.add(ofLog, logPurposeWithoutColor);
 
 		log.putDirect(asImportant, forAny, "(26)Test Message");
 		log.putDirect(stdLogPrint(), asImportant, forAny, "(27)Test Message");
@@ -874,16 +919,97 @@ void example_debug_log()
 		log.resume();
 		log.abort();
 
+	#ifdef GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
 		monitor_thread.join();
+	#endif//GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
 	}
 
-#endif//GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
+	//コールポイントのテスト
+	char message[1024];
+	auto print_cp = [](const callPoint* cp)
+	{
+		printf("> recent critical-cp info\n");
+		if (cp)
+		{
+			printf("  - name = \"%s\"\n", cp->name());
+			printf("  - category = \"%s\"\n", logCategory(cp->category()).name());
+			printf("  - type = \"%s\"\n", cp->type() == callPoint::isNormal ? "isNormal" : cp->type() == callPoint::isCritical ? "isCritical" : "isReference");
+			printf("  - autoProfiling = \"%s\"\n", cp->autoProfiling() == callPoint::useAutoProfiling ? "useAutoProfiling" : "noProfiling");
+			printf("  - source file = \"%s\"\n", cp->fileName());
+			printf("  - function = \"%s\"\n", cp->funcName());
+			printf("  - begin time = %.6lf\n", cp->beginTime());
+		}
+		else
+		{
+			printf("  (nothing)\n");
+		}
+	};
+	{
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[ Test for call-point ]\n");
+		std::printf("\n");
+
+		callPoint cp(forTARO, "test", GASHA_CP_ARGS);
+		{
+			callPoint cp;
+			const callPoint* recent_cp = cp.find();
+			print_cp(recent_cp);
+			{
+				criticalCallPoint cp(forTARO, "test2", callPoint::useAutoProfiling, GASHA_CP_ARGS);
+				{
+					callPoint cp(forTARO, "test3", GASHA_CP_ARGS);
+					const callPoint* recent_cp = cp.find();
+					print_cp(recent_cp);
+					recent_cp = cp.findCritical();
+					print_cp(recent_cp);
+					callPoint cp2(std::move(cp));
+					{
+						callPoint cp;
+						const callPoint* recent_cp = cp.find();
+						print_cp(recent_cp);
+						callPoint cp2(forTARO, "test4", GASHA_CP_ARGS);
+						recent_cp = cp.find();
+						print_cp(recent_cp);
+						cp = std::move(cp2);
+						recent_cp = cp.find();
+						print_cp(recent_cp);
+						const std::size_t size = cp.debugInfo(message, sizeof(message));
+						printf("debugInfo(size=%d):\n%s", size, message);
+					}
+					recent_cp = cp.find();
+					print_cp(recent_cp);
+					recent_cp = cp.findCritical();
+					print_cp(recent_cp);
+				}
+				const callPoint* recent_cp = cp.find();
+				print_cp(recent_cp);
+				recent_cp = cp.findCritical();
+				print_cp(recent_cp);
+			}
+			recent_cp = cp.find();
+			print_cp(recent_cp);
+			recent_cp = cp.findCritical();
+			print_cp(recent_cp);
+		}
+		const callPoint* recent_cp = cp.find();
+		print_cp(recent_cp);
+		recent_cp = cp.findCritical();
+		print_cp(recent_cp);
+	}
+	{
+		callPoint cp;
+		const callPoint* recent_cp = cp.find();
+		print_cp(recent_cp);
+		recent_cp = cp.findCritical();
+		print_cp(recent_cp);
+		const std::size_t size = cp.debugInfo(message, sizeof(message));
+		printf("debugInfo(size=%d):\n%s", size, message);
+	}
 }
 
-#ifdef GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
 //明示的なインスタンス化
 #include <gasha/mem_console.cpp.h>
 GASHA_INSTANCING_memConsole_withLock(128, sharedSpinLock);
-#endif//GASHA_HAS_DEBUG_LOG//デバッグログ無効時はまるごと無効化
 
 // End of file

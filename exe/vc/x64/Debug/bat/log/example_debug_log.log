@@ -1,52 +1,58 @@
-message for Standard
+message for Standard
 [93;41;4mmessage for TTY (stdout)[0m
-message for Win (stdout)
+message for Mono-TTY (stdout)
+message for Win (stdout)
+message for Mono-Win (stdout)
 
 --------------------------------------------------------------------------------
 [ Enumeration of all log-levels ]
 
-[ 0]( 0)"asMoreDetail"
-	console: "Win(stdout)"(WHITE+iBLACK)
-	next: [ 1]( 4)"asVerbose
-[ 1]( 4)"asVerbose"
-	console: "Win(stdout)"(iBLACK+STANDARD)
-	prev: [ 0]( 0)"asMoreDetail"
-	next: [ 3](12)"asNormal
-[ 1]( 5)"asDetail"
-	console: "Win(stdout)"(iBLACK+STANDARD)
-	prev: [ 0]( 0)"asMoreDetail"
-	next: [ 3](12)"asNormal
-[ 3](12)"asNormal"
-	console: "win-console *CHANGED*"(STANDARD+STANDARD)
-	prev: [ 1]( 5)"asDetail"
-	next: [ 4](17)"asAboveNormal
-[ 4](17)"asAboveNormal"
-	console: "Win(stdout)"(CYAN+STANDARD)
-	prev: [ 3](12)"asNormal"
-	next: [ 5](20)"asImportant
-[ 5](20)"asImportant"
-	console: "Win(stdout)"(iBLUE+BLACK)
-	prev: [ 3](12)"asNormal"
-	next: [ 7](28)"asWarning
-[11](44)"asAbsolute"
-	console: "Win(stdout)"(STANDARD+STANDARD)
-	prev: [ 9](36)"asCritical"
-[11](SP47)"asSilent"
-[12](SP48)"asSilentAbsolutely"
+[ 0]( 0)"asMoreDetail"
+	console: "Win(stdout)"(WHITE+iBLACK)
+	next: [ 1]( 4)"asVerbose
+[ 1]( 4)"asVerbose"
+	console: "Win(stdout)"(iBLACK+STANDARD)
+	prev: [ 0]( 0)"asMoreDetail"
+	next: [ 3](12)"asNormal
+[ 1]( 5)"asDetail"
+	console: "Win(stdout)"(iBLACK+STANDARD)
+	prev: [ 0]( 0)"asMoreDetail"
+	next: [ 3](12)"asNormal
+[ 3](12)"asNormal"
+	console: "win-console *CHANGED*"(STANDARD+STANDARD)
+	prev: [ 1]( 5)"asDetail"
+	next: [ 4](17)"asAboveNormal
+[ 4](17)"asAboveNormal"
+	console: "Win(stdout)"(CYAN+STANDARD)
+	prev: [ 3](12)"asNormal"
+	next: [ 5](20)"asImportant
+[ 5](20)"asImportant"
+	console: "Win(stdout)"(iBLUE+BLACK)
+	prev: [ 3](12)"asNormal"
+	next: [ 7](28)"asWarning
+[11](44)"asAbsolute"
+	console: "Win(stdout)"(STANDARD+STANDARD)
+	prev: [ 9](36)"asCritical"
+[11](SP47)"asSilent"
+[12](SP48)"asSilentAbsolutely"
 
 --------------------------------------------------------------------------------
 [ Enumeration of all log-categories ]
 
-( 0)"forAny"
-( 3)"forFileSystem"
-( 4)"forResource"
-( 5)"for3D"
-( 6)"for2D"
-( 7)"forSound"
-(10)"forMiniGame"
-(SP64)"forEvery"
-(SP65)"forCallPoint"
-(SP66)"forCriticalCallPoint"
+( 0)"forAny"
+( 3)"forFileSystem"
+( 4)"forResource"
+( 5)"for3D"
+( 6)"for2D"
+( 7)"forSound"
+(10)"forMiniGame"
+(SP64)"forEvery"
+(SP65)"forCallPoint"
+(SP66)"forCriticalCallPoint"
+
+--------------------------------------------------------------------------------
+[ Test for change log-level-mask & log-attribute ]
+
 1:mask: refType=0, level=4
 1:attr: refType=0, attr=0x00000000
 2:mask: refType=2, level=4
@@ -77,6 +83,18 @@ message for Win (stdout)
 7bx2:attr: refType=2, attr=0x00000000
 7bx3:mask: refType=2, level=48
 7bx3:attr: refType=2, attr=0x00001800
+7bx4:mask: refType=0, level=4
+7bx4:attr: refType=0, attr=0x00000000
+7bx4:mask2: refType=2, level=48
+7bx4:attr2: refType=2, attr=0x00001800
+7bx5:mask: refType=0, level=4
+7bx5:attr: refType=0, attr=0x00000000
+7bx5:mask2: refType=0, level=4
+7bx5:attr2: refType=0, attr=0x00000000
+7bx5:mask3: refType=2, level=48
+7bx5:attr3: refType=2, attr=0x00001800
+7bxx:mask: refType=1, level=48
+7bxx:attr: refType=1, attr=0x00001800
 7c:mask: refType=2, level=12
 7c:attr: refType=2, attr=0x02004000
 7d:mask: refType=1, level=12
@@ -97,240 +115,244 @@ message for Win (stdout)
 10:attr: refType=0, attr=0x00000000
 
 --------------------------------------------------------------------------------
-[ Enumeration of all log-level-masks : Test for output message asDetail ]
+[ Enumeration of all log-level-masks : Test for put message asDetail ]
 
-( 0)"forAny"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 1)"forDummy"
-	mask(of log): ( 4)"asVerbose"
-		OK ... 
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 2)"forNotice"
-	mask(of log): ( 4)"asVerbose"
-		OK ... 
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 3)"forFileSystem"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 4)"forResource"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 5)"for3D"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 6)"for2D"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 7)"forSound"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-(10)"forMiniGame"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-(20)"forTARO"
-	mask(of log): ( 5)"asDetail"
-		OK ... 
-	mask(of notice): (12)"asNormal"
-		OK ... 
-(21)"forJIRO"
-	mask(of log): (47)"asSilent"
-		OK ... 
-	mask(of notice): (48)"asSilentAbsolutely"
-		OK ... 
-
---------------------------------------------------------------------------------
-[ Enumeration of all log-level-masks : Test for output message asNormal ]
-
-( 0)"forAny"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 1)"forDummy"
-	mask(of log): ( 4)"asVerbose"
-		OK ... 
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 2)"forNotice"
-	mask(of log): ( 4)"asVerbose"
-		OK ... 
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 3)"forFileSystem"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 4)"forResource"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 5)"for3D"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 6)"for2D"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 7)"forSound"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-(10)"forMiniGame"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-(20)"forTARO"
-	mask(of log): ( 5)"asDetail"
-		OK ... 
-	mask(of notice): (12)"asNormal"
-		OK ... 
-(21)"forJIRO"
-	mask(of log): (47)"asSilent"
-		OK ... 
-	mask(of notice): (48)"asSilentAbsolutely"
-		OK ... 
+( 0)"forAny"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 1)"forDummy"
+	mask(of log): ( 4)"asVerbose"
+		OK ... 
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 2)"forNotice"
+	mask(of log): ( 4)"asVerbose"
+		OK ... 
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 3)"forFileSystem"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 4)"forResource"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 5)"for3D"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 6)"for2D"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 7)"forSound"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+(10)"forMiniGame"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+(20)"forTARO"
+	mask(of log): ( 5)"asDetail"
+		OK ... 
+	mask(of notice): (12)"asNormal"
+		OK ... 
+(21)"forJIRO"
+	mask(of log): (47)"asSilent"
+		OK ... 
+	mask(of notice): (48)"asSilentAbsolutely"
+		OK ... 
 
 --------------------------------------------------------------------------------
-[ Enumeration of all log-level-masks : Test for output message asCritical ]
+[ Enumeration of all log-level-masks : Test for put message asNormal ]
 
-( 0)"forAny"
-	mask(of log): ( 4)"asVerbose"
-		OK ... 
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 1)"forDummy"
-	mask(of log): ( 4)"asVerbose"
-		OK ... 
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 2)"forNotice"
-	mask(of log): ( 4)"asVerbose"
-		OK ... 
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 3)"forFileSystem"
-	mask(of log): ( 4)"asVerbose"
-		OK ... 
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 4)"forResource"
-	mask(of log): ( 4)"asVerbose"
-		OK ... 
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 5)"for3D"
-	mask(of log): ( 4)"asVerbose"
-		OK ... 
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 6)"for2D"
-	mask(of log): ( 4)"asVerbose"
-		OK ... 
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 7)"forSound"
-	mask(of log): ( 4)"asVerbose"
-		OK ... 
-	mask(of notice): (36)"asCritical"
-		OK ... 
-(10)"forMiniGame"
-	mask(of log): ( 4)"asVerbose"
-		OK ... 
-	mask(of notice): (36)"asCritical"
-		OK ... 
-(20)"forTARO"
-	mask(of log): ( 5)"asDetail"
-		OK ... 
-	mask(of notice): (12)"asNormal"
-		OK ... 
-(21)"forJIRO"
-	mask(of log): (47)"asSilent"
-		OK ... 
-	mask(of notice): (48)"asSilentAbsolutely"
-		OK ... 
+( 0)"forAny"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 1)"forDummy"
+	mask(of log): ( 4)"asVerbose"
+		OK ... 
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 2)"forNotice"
+	mask(of log): ( 4)"asVerbose"
+		OK ... 
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 3)"forFileSystem"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 4)"forResource"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 5)"for3D"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 6)"for2D"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 7)"forSound"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+(10)"forMiniGame"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+(20)"forTARO"
+	mask(of log): ( 5)"asDetail"
+		OK ... 
+	mask(of notice): (12)"asNormal"
+		OK ... 
+(21)"forJIRO"
+	mask(of log): (47)"asSilent"
+		OK ... 
+	mask(of notice): (48)"asSilentAbsolutely"
+		OK ... 
 
 --------------------------------------------------------------------------------
-[ Enumeration of all log-level-masks : Test for output message asAbsolute ]
+[ Enumeration of all log-level-masks : Test for put message asCritical ]
 
-( 0)"forAny"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 1)"forDummy"
-	mask(of log): ( 4)"asVerbose"
-		OK ... 
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 2)"forNotice"
-	mask(of log): ( 4)"asVerbose"
-		OK ... 
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 3)"forFileSystem"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 4)"forResource"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 5)"for3D"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 6)"for2D"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-( 7)"forSound"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-(10)"forMiniGame"
-	mask(of log): ( 4)"asVerbose"
-		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
-	mask(of notice): (36)"asCritical"
-		OK ... 
-(20)"forTARO"
-	mask(of log): ( 5)"asDetail"
-		OK ... 
-	mask(of notice): (12)"asNormal"
-		OK ... 
-(21)"forJIRO"
-	mask(of log): (47)"asSilent"
-		OK ... 
-	mask(of notice): (48)"asSilentAbsolutely"
-		OK ... 
+( 0)"forAny"
+	mask(of log): ( 4)"asVerbose"
+		OK ... 
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 1)"forDummy"
+	mask(of log): ( 4)"asVerbose"
+		OK ... 
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 2)"forNotice"
+	mask(of log): ( 4)"asVerbose"
+		OK ... 
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 3)"forFileSystem"
+	mask(of log): ( 4)"asVerbose"
+		OK ... 
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 4)"forResource"
+	mask(of log): ( 4)"asVerbose"
+		OK ... 
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 5)"for3D"
+	mask(of log): ( 4)"asVerbose"
+		OK ... 
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 6)"for2D"
+	mask(of log): ( 4)"asVerbose"
+		OK ... 
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 7)"forSound"
+	mask(of log): ( 4)"asVerbose"
+		OK ... 
+	mask(of notice): (36)"asCritical"
+		OK ... 
+(10)"forMiniGame"
+	mask(of log): ( 4)"asVerbose"
+		OK ... 
+	mask(of notice): (36)"asCritical"
+		OK ... 
+(20)"forTARO"
+	mask(of log): ( 5)"asDetail"
+		OK ... 
+	mask(of notice): (12)"asNormal"
+		OK ... 
+(21)"forJIRO"
+	mask(of log): (47)"asSilent"
+		OK ... 
+	mask(of notice): (48)"asSilentAbsolutely"
+		OK ... 
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-level-masks : Test for put message asAbsolute ]
+
+( 0)"forAny"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 1)"forDummy"
+	mask(of log): ( 4)"asVerbose"
+		OK ... 
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 2)"forNotice"
+	mask(of log): ( 4)"asVerbose"
+		OK ... 
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 3)"forFileSystem"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 4)"forResource"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 5)"for3D"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 6)"for2D"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+( 7)"forSound"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+(10)"forMiniGame"
+	mask(of log): ( 4)"asVerbose"
+		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... 
+(20)"forTARO"
+	mask(of log): ( 5)"asDetail"
+		OK ... 
+	mask(of notice): (12)"asNormal"
+		OK ... 
+(21)"forJIRO"
+	mask(of log): (47)"asSilent"
+		OK ... 
+	mask(of notice): (48)"asSilentAbsolutely"
+		OK ... 
+
+--------------------------------------------------------------------------------
+[ Test for log-queue-monitor ]
+
 enqueu failed.
 enqueu failed.
 enqueu failed.
@@ -371,6 +393,10 @@ message making failed.
 message making failed.
 message making failed.
 message making of reservation failed.
+
+--------------------------------------------------------------------------------
+[ Test for memory console ]
+
 
 12345678901234567890
 123456789012345
@@ -528,36 +554,171 @@ message making of reservation failed.
 7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(size=124)
 7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
 7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(size=124)
-[1/00:00:00.012010/asImportant/forAny] (01)Test Message:10
-[2/00:00:00.012010] (10)Test Message:10
-[3/00:00:00.012010] (11)Test Message
-[4/00:00:00.012010] (12)TEST MESSAGE
-[5/00:00:00.012010] (13)test message
-[6/00:00:00.012010] (14)Test Message
-[7/00:00:00.012010] (15)Test Message
-[8/00:00:00.012010] (16)TEST MESSAGE
-[9/00:00:00.012010] (17)test message
-[10/00:00:00.012010] (02)Test Message:10
-[11/00:00:00.012010] (03)Test Message:10
-[12/00:00:00.012010] (04)TEST MESSAGE:10
-[13/00:00:00.012010] (05)test message:10
-[14/00:00:00.012010] (06)Test Message
-[15/00:00:00.012010] (07)Test Message
-[16/00:00:00.012010] (08)TEST MESSAGE
-[17/00:00:00.012010] (09)test message
-[00:00:00.012010] (18)Test Message:10
-[00:00:00.012010] (19)Test Message:10
-[00:00:00.012010] (20)Test Message:10
-[00:00:00.012010] (21)TEST MESSAGE:10
-[00:00:00.012010] (22)test message:10
-[00:00:00.012010] (23)Test Message:10
-[00:00:00.012010] (24)TEST MESSAGE:10
-[00:00:00.012010] (25)test message:10
-[00:00:00.012010] (26)Test Message
-[00:00:00.012010] (27)Test Message
-[00:00:00.012010] (28)Test Message
-[00:00:00.012010] (29)TEST MESSAGE
-[00:00:00.012010] (30)test message
-[00:00:00.012010] (31)Test Message
-[00:00:00.012010] (32)TEST MESSAGE
-[00:00:00.012010] (33)test message
+
+--------------------------------------------------------------------------------
+[ Test for print log ]
+
+[1|00:00:00.022021|asImportant|forAny](01)Test Message:10
+[2|00:00:00.022021](10)Test Message:10
+[3|00:00:00.022021](11)Test Message
+[4|00:00:00.022021](12)TEST MESSAGE
+[5|00:00:00.022021](13)test message
+[6|00:00:00.022021](14)Test Message
+[7|00:00:00.022021](15)Test Message
+[8|00:00:00.022021](16)TEST MESSAGE
+[9|00:00:00.022021](17)test message
+[10|00:00:00.022021](02)Test Message:10
+[11|00:00:00.022021](03)Test Message:10
+[12|00:00:00.022021](04)TEST MESSAGE:10
+[13|00:00:00.022021](05)test message:10
+[14|00:00:00.022021](06)Test Message
+[15|00:00:00.022021](07)Test Message
+[16|00:00:00.022021](08)TEST MESSAGE
+[17|00:00:00.022021](09)test message
+[00:00:00.022021](18)Test Message:10
+[00:00:00.022021](19)Test Message:10
+[00:00:00.022021](20)Test Message:10
+[00:00:00.022021](21)TEST MESSAGE:10
+[00:00:00.022021](22)test message:10
+[00:00:00.022021](23)Test Message:10
+[00:00:00.022021](24)TEST MESSAGE:10
+[00:00:00.022021](25)test message:10
+[00:00:00.022021](26)Test Message
+[00:00:00.022021](27)Test Message
+[00:00:00.022021](28)Test Message
+[00:00:00.022021](29)TEST MESSAGE
+[00:00:00.022021](30)test message
+[00:00:00.022021](31)Test Message
+[00:00:00.022021](32)TEST MESSAGE
+[00:00:00.022021](33)test message
+
+--------------------------------------------------------------------------------
+[ Test for call-point ]
+
+> recent critical-cp info
+  - name = "test"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log.cpp(953)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.022022
+> recent critical-cp info
+  - name = "test3"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log.cpp(961)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.022022
+> recent critical-cp info
+  - name = "test2"
+  - category = "forTARO"
+  - type = "isCritical"
+  - autoProfiling = "useAutoProfiling"
+  - source file = "example_debug_log.cpp(959)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.022022
+> recent critical-cp info
+  - name = "test3"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log.cpp(961)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.022022
+> recent critical-cp info
+  - name = "test4"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log.cpp(971)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.022022
+> recent critical-cp info
+  - name = "test4"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log.cpp(971)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.022022
+debugInfo(size=769):
+----- Debug-info for callPoint -----
+Thread: "(no name)"(ID=dddeaf24)
+Num of point: 4
+------------------------------------
+[forTARO]"test4"(addr=0000000FE6C9F3D8)
+        src: example_debug_log.cpp(971)[Fri Jul 18 12:50:05 2014]
+        func:example_debug_log
+  [forTARO]"test3"(addr=0000000FE6C9F388)
+          src: example_debug_log.cpp(961)[Fri Jul 18 12:50:05 2014]
+          func:example_debug_log
+    [forTARO]"test2"(addr=0000000FE6C9F2E8)<CRITICAL><Auto-Profiling>
+            src: example_debug_log.cpp(959)[Fri Jul 18 12:50:05 2014]
+            func:example_debug_log
+      [forTARO]"test"(addr=0000000FE6C9F248)
+              src: example_debug_log.cpp(953)[Fri Jul 18 12:50:05 2014]
+              func:example_debug_log
+------------------------------------
+> recent critical-cp info
+  - name = "test3"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log.cpp(961)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.022022
+> recent critical-cp info
+  - name = "test2"
+  - category = "forTARO"
+  - type = "isCritical"
+  - autoProfiling = "useAutoProfiling"
+  - source file = "example_debug_log.cpp(959)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.022022
+> recent critical-cp info
+  - name = "test2"
+  - category = "forTARO"
+  - type = "isCritical"
+  - autoProfiling = "useAutoProfiling"
+  - source file = "example_debug_log.cpp(959)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.022022
+> recent critical-cp info
+  - name = "test2"
+  - category = "forTARO"
+  - type = "isCritical"
+  - autoProfiling = "useAutoProfiling"
+  - source file = "example_debug_log.cpp(959)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.022022
+> recent critical-cp info
+  - name = "test"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log.cpp(953)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.022022
+> recent critical-cp info
+  (nothing)
+> recent critical-cp info
+  - name = "test"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log.cpp(953)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.022022
+> recent critical-cp info
+  (nothing)
+> recent critical-cp info
+  (nothing)
+> recent critical-cp info
+  (nothing)
+debugInfo(size=123):
+----- Debug-info for callPoint -----
+Thread: "(no name)"(ID=dddeaf24)
+Num of point: 0
+------------------------------------

@@ -30,7 +30,7 @@
 #include <gasha/chrono.h>//時間系ユーティリティ：elapsedTime
 #include <gasha/type_traits.h>//型特性ユーティリティ：toStr()
 
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 //【VC++】例外を無効化した状態で <thread> <mutex> をインクルードすると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -46,9 +46,9 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 template<class ALLOC, class FREE, class SHOW>
 static void testSingleThread(const char* caption, ALLOC alloc_func, FREE free_func, SHOW show_func)
 {
-	printf("\n");
-	printf("------------------------------------------------------------\n");
-	printf("\"%s\" : %d * times allocate & free\n", caption, ST_TEST_REPEAT_COUNT1 * ST_TEST_REPEAT_COUNT2);
+	std::printf("\n");
+	std::printf("------------------------------------------------------------\n");
+	std::printf("\"%s\" : %d * times allocate & free\n", caption, ST_TEST_REPEAT_COUNT1 * ST_TEST_REPEAT_COUNT2);
 	elapsedTime time;
 	for (int i = 0; i < ST_TEST_REPEAT_COUNT1; ++i)
 	{
@@ -62,7 +62,7 @@ static void testSingleThread(const char* caption, ALLOC alloc_func, FREE free_fu
 			free_func(p[j]);
 		}
 	}
-	printf("* elapsed time = %.9lf\t", time.now());
+	std::printf("* elapsed time = %.9lf\t", time.now());
 	show_func();
 }
 
@@ -70,10 +70,10 @@ static void testSingleThread(const char* caption, ALLOC alloc_func, FREE free_fu
 //シングルスレッドテスト
 static void testAllSingleThread()
 {
-	printf("\n");
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for performance of single thread ]\n");
-	printf("--------------------------------------------------------------------------------\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for performance of single thread ]\n");
+	std::printf("--------------------------------------------------------------------------------\n");
 
 	char buff[1024 * 16];
 
@@ -82,7 +82,7 @@ static void testAllSingleThread()
 		smartStackAllocator<> stack(buff);
 		auto alloc = [&stack](const std::size_t size) -> void* { return stack.alloc(size); };
 		auto free = [&stack](void* p) { stack.free(p); };
-		auto show = [&stack]() { printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
+		auto show = [&stack]() { std::printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
 		testSingleThread("smartStackAllocator<>", alloc, free, show);
 	}
 
@@ -91,7 +91,7 @@ static void testAllSingleThread()
 		smartStackAllocator<spinLock> stack(buff);
 		auto alloc = [&stack](const std::size_t size) -> void* { return stack.alloc(size); };
 		auto free = [&stack](void* p) { stack.free(p); };
-		auto show = [&stack]() { printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
+		auto show = [&stack]() { std::printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
 		testSingleThread("smartStackAllocator<spinLock>", alloc, free, show);
 	}
 
@@ -100,7 +100,7 @@ static void testAllSingleThread()
 		smartStackAllocator<std::mutex> stack(buff);
 		auto alloc = [&stack](const std::size_t size) -> void* { return stack.alloc(size); };
 		auto free = [&stack](void* p) { stack.free(p); };
-		auto show = [&stack]() { printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
+		auto show = [&stack]() { std::printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
 		testSingleThread("smartStackAllocator<std::mutex>", alloc, free, show);
 	}
 
@@ -109,7 +109,7 @@ static void testAllSingleThread()
 		lfSmartStackAllocator stack(buff);
 		auto alloc = [&stack](const std::size_t size) -> void* { return stack.alloc(size); };
 		auto free = [&stack](void* p) { stack.free(p); };
-		auto show = [&stack]() { printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
+		auto show = [&stack]() { std::printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
 		testSingleThread("lfSmartStackAllocator", alloc, free, show);
 	}
 
@@ -119,7 +119,7 @@ static void testAllSingleThread()
 		auto scoped_allocator = stack.scopedAllocator();
 		auto alloc = [&scoped_allocator](const std::size_t size) -> void* { return scoped_allocator.alloc(size); };
 		auto free = [&scoped_allocator](void* p) { scoped_allocator.free(p); };
-		auto show = [&scoped_allocator]() { printf("maxSize=%d, size=%d, remain=%d, count=%d\n", scoped_allocator.maxSize(), scoped_allocator.size(), scoped_allocator.remain(), scoped_allocator.count()); };
+		auto show = [&scoped_allocator]() { std::printf("maxSize=%d, size=%d, remain=%d, count=%d\n", scoped_allocator.maxSize(), scoped_allocator.size(), scoped_allocator.remain(), scoped_allocator.count()); };
 		testSingleThread("smartStackAllocator<>::scopedAllocator", alloc, free, show);
 	}
 
@@ -130,7 +130,7 @@ static void testAllSingleThread()
 		polyAllocator poly_allocator(adapter);
 		auto alloc = [](const std::size_t size) -> void* { return new char[size]; };
 		auto free = [](void* p) { delete[] reinterpret_cast<char*>(p); };
-		auto show = [&stack]() { printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
+		auto show = [&stack]() { std::printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
 		testSingleThread("polyAllocator with smartStackAllocator<>::adapter", alloc, free, show);
 	}
 
@@ -139,7 +139,7 @@ static void testAllSingleThread()
 		smartDualStackAllocator<> stack(buff);
 		auto alloc = [&stack](const std::size_t size) -> void* { stack.reversewAllocateOrder(); return stack.alloc(size); };
 		auto free = [&stack](void* p) { stack.free(p); };
-		auto show = [&stack]() { printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
+		auto show = [&stack]() { std::printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
 		testSingleThread("smartDualStackAllocator<>", alloc, free, show);
 	}
 
@@ -148,7 +148,7 @@ static void testAllSingleThread()
 		smartDualStackAllocator<spinLock> stack(buff);
 		auto alloc = [&stack](const std::size_t size) -> void* { stack.reversewAllocateOrder(); return stack.alloc(size); };
 		auto free = [&stack](void* p) { stack.free(p); };
-		auto show = [&stack]() { printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
+		auto show = [&stack]() { std::printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
 		testSingleThread("smartDualStackAllocator<spinLock>", alloc, free, show);
 	}
 
@@ -157,7 +157,7 @@ static void testAllSingleThread()
 		smartDualStackAllocator<std::mutex> stack(buff);
 		auto alloc = [&stack](const std::size_t size) -> void* { stack.reversewAllocateOrder(); return stack.alloc(size); };
 		auto free = [&stack](void* p) { stack.free(p); };
-		auto show = [&stack]() { printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
+		auto show = [&stack]() { std::printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
 		testSingleThread("smartDualStackAllocator<std::mutex>", alloc, free, show);
 	}
 
@@ -166,7 +166,7 @@ static void testAllSingleThread()
 		lfSmartDualStackAllocator stack(buff);
 		auto alloc = [&stack](const std::size_t size) -> void* { stack.reversewAllocateOrder(); return stack.alloc(size); };
 		auto free = [&stack](void* p) { stack.free(p); };
-		auto show = [&stack]() { printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
+		auto show = [&stack]() { std::printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
 		testSingleThread("lfSmartDualStackAllocator", alloc, free, show);
 	}
 
@@ -176,7 +176,7 @@ static void testAllSingleThread()
 		auto scoped_allocator = stack.scopedAllocator();
 		auto alloc = [&scoped_allocator](const std::size_t size) -> void* { return scoped_allocator.alloc(size); };
 		auto free = [&scoped_allocator](void* p) { scoped_allocator.free(p); };
-		auto show = [&scoped_allocator]() { printf("maxSize=%d, size=%d, remain=%d, count=%d\n", scoped_allocator.maxSize(), scoped_allocator.size(), scoped_allocator.remain(), scoped_allocator.count()); };
+		auto show = [&scoped_allocator]() { std::printf("maxSize=%d, size=%d, remain=%d, count=%d\n", scoped_allocator.maxSize(), scoped_allocator.size(), scoped_allocator.remain(), scoped_allocator.count()); };
 		testSingleThread("smartDualStackAllocator<>::scopedAllocator", alloc, free, show);
 	}
 
@@ -186,7 +186,7 @@ static void testAllSingleThread()
 		auto scoped_allocator = stack.scopedDualAllocator();
 		auto alloc = [&scoped_allocator](const std::size_t size) -> void* { return scoped_allocator.alloc(size); };
 		auto free = [&scoped_allocator](void* p) { scoped_allocator.free(p); };
-		auto show = [&scoped_allocator]() { printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", scoped_allocator.maxSize(), scoped_allocator.size(), scoped_allocator.sizeAsc(), scoped_allocator.sizeDesc(), scoped_allocator.remain(), scoped_allocator.count(), scoped_allocator.countAsc(), scoped_allocator.countDesc()); };
+		auto show = [&scoped_allocator]() { std::printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", scoped_allocator.maxSize(), scoped_allocator.size(), scoped_allocator.sizeAsc(), scoped_allocator.sizeDesc(), scoped_allocator.remain(), scoped_allocator.count(), scoped_allocator.countAsc(), scoped_allocator.countDesc()); };
 		testSingleThread("smartDualStackAllocator<>::scopedDualAllocator", alloc, free, show);
 	}
 
@@ -197,7 +197,7 @@ static void testAllSingleThread()
 		polyAllocator poly_allocator(adapter);
 		auto alloc = [](const std::size_t size) -> void* { return new char[size]; };
 		auto free = [](void* p) { delete[] reinterpret_cast<char*>(p); };
-		auto show = [&stack]() { printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
+		auto show = [&stack]() { std::printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
 		testSingleThread("polyAllocator with smartDualStackAllocator<>::adapter", alloc, free, show);
 	}
 
@@ -206,7 +206,7 @@ static void testAllSingleThread()
 		monoAllocator<> mono(buff);
 		auto alloc = [&mono](const std::size_t size) -> void* { void* p = mono.alloc(size); mono.free(p); return nullptr; };
 		auto free = [&mono](void* p) {};
-		auto show = [&mono]() { printf("maxSize=%d, size=%d, remain=%d, isAllocated=%s\n", mono.maxSize(), mono.size(), mono.remain(), toStr(mono.isAllocated())); };
+		auto show = [&mono]() { std::printf("maxSize=%d, size=%d, remain=%d, isAllocated=%s\n", mono.maxSize(), mono.size(), mono.remain(), toStr(mono.isAllocated())); };
 		testSingleThread("monoAllocator<>", alloc, free, show);
 	}
 
@@ -215,7 +215,7 @@ static void testAllSingleThread()
 		monoAllocator<spinLock> mono(buff);
 		auto alloc = [&mono](const std::size_t size) -> void* { void* p = mono.alloc(size); mono.free(p); return nullptr; };
 		auto free = [&mono](void* p) {};
-		auto show = [&mono]() { printf("maxSize=%d, size=%d, remain=%d, isAllocated=%s\n", mono.maxSize(), mono.size(), mono.remain(), toStr(mono.isAllocated())); };
+		auto show = [&mono]() { std::printf("maxSize=%d, size=%d, remain=%d, isAllocated=%s\n", mono.maxSize(), mono.size(), mono.remain(), toStr(mono.isAllocated())); };
 		testSingleThread("monoAllocator<spinLock>", alloc, free, show);
 	}
 
@@ -224,7 +224,7 @@ static void testAllSingleThread()
 		monoAllocator<std::mutex> mono(buff);
 		auto alloc = [&mono](const std::size_t size) -> void* { void* p = mono.alloc(size); mono.free(p); return nullptr; };
 		auto free = [&mono](void* p) {};
-		auto show = [&mono]() { printf("maxSize=%d, size=%d, remain=%d, isAllocated=%s\n", mono.maxSize(), mono.size(), mono.remain(), toStr(mono.isAllocated())); };
+		auto show = [&mono]() { std::printf("maxSize=%d, size=%d, remain=%d, isAllocated=%s\n", mono.maxSize(), mono.size(), mono.remain(), toStr(mono.isAllocated())); };
 		testSingleThread("monoAllocator<std::mutex>", alloc, free, show);
 	}
 
@@ -233,7 +233,7 @@ static void testAllSingleThread()
 		lfMonoAllocator mono(buff);
 		auto alloc = [&mono](const std::size_t size) -> void* { void* p = mono.alloc(size); mono.free(p); return nullptr; };
 		auto free = [&mono](void* p) {};
-		auto show = [&mono]() { printf("maxSize=%d, size=%d, remain=%d, isAllocated=%s\n", mono.maxSize(), mono.size(), mono.remain(), toStr(mono.isAllocated())); };
+		auto show = [&mono]() { std::printf("maxSize=%d, size=%d, remain=%d, isAllocated=%s\n", mono.maxSize(), mono.size(), mono.remain(), toStr(mono.isAllocated())); };
 		testSingleThread("lfMonoAllocator", alloc, free, show);
 	}
 
@@ -244,7 +244,7 @@ static void testAllSingleThread()
 		polyAllocator poly_allocator(adapter);
 		auto alloc = [](const std::size_t size) -> void* { char* p = new char[size]; delete[] p; return nullptr; };
 		auto free = [](void* p) {};
-		auto show = [&mono]() { printf("maxSize=%d, size=%d, remain=%d, isAllocated=%s\n", mono.maxSize(), mono.size(), mono.remain(), toStr(mono.isAllocated())); };
+		auto show = [&mono]() { std::printf("maxSize=%d, size=%d, remain=%d, isAllocated=%s\n", mono.maxSize(), mono.size(), mono.remain(), toStr(mono.isAllocated())); };
 		testSingleThread("polyAllocator with monoAllocator<>::adapter", alloc, free, show);
 	}
 
@@ -253,7 +253,7 @@ static void testAllSingleThread()
 		poolAllocator<1024> pool(buff, sizeof(buff), 16);
 		auto alloc = [&pool](const std::size_t size) -> void* { return pool.alloc(size); };
 		auto free = [&pool](void* p) { pool.free(p); };
-		auto show = [&pool]() { printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
+		auto show = [&pool]() { std::printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
 		testSingleThread("poolAllocator<1024>", alloc, free, show);
 	}
 
@@ -262,7 +262,7 @@ static void testAllSingleThread()
 		poolAllocator<1024, spinLock> pool(buff, sizeof(buff), 16);
 		auto alloc = [&pool](const std::size_t size) -> void* { return pool.alloc(size); };
 		auto free = [&pool](void* p) { pool.free(p); };
-		auto show = [&pool]() { printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
+		auto show = [&pool]() { std::printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
 		testSingleThread("poolAllocator<1024, spinLock>", alloc, free, show);
 	}
 
@@ -271,7 +271,7 @@ static void testAllSingleThread()
 		poolAllocator<1024, std::mutex> pool(buff, sizeof(buff), 16);
 		auto alloc = [&pool](const std::size_t size) -> void* { return pool.alloc(size); };
 		auto free = [&pool](void* p) { pool.free(p); };
-		auto show = [&pool]() { printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
+		auto show = [&pool]() { std::printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
 		testSingleThread("poolAllocator<1024, std::mutex>", alloc, free, show);
 	}
 
@@ -280,7 +280,7 @@ static void testAllSingleThread()
 		lfPoolAllocator<1024> pool(buff, sizeof(buff), 16);
 		auto alloc = [&pool](const std::size_t size) -> void* { return pool.alloc(size); };
 		auto free = [&pool](void* p) { pool.free(p); };
-		auto show = [&pool]() { printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
+		auto show = [&pool]() { std::printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
 		testSingleThread("lfPoolAllocator<1024>", alloc, free, show);
 	}
 
@@ -291,7 +291,7 @@ static void testAllSingleThread()
 		polyAllocator poly_allocator(adapter);
 		auto alloc = [](const std::size_t size) -> void* { return new char[size]; };
 		auto free = [](void* p) { delete[] reinterpret_cast<char*>(p); };
-		auto show = [&pool]() { printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
+		auto show = [&pool]() { std::printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
 		testSingleThread("polyAllocator with poolAllocator<1024>::adapter", alloc, free, show);
 	}
 
@@ -300,7 +300,7 @@ static void testAllSingleThread()
 		stdAllocator<> std_allocator;
 		auto alloc = [&std_allocator](const std::size_t size) -> void* { return std_allocator.alloc(size); };
 		auto free = [&std_allocator](void* p) { std_allocator.free(p); };
-		auto show = [&std_allocator]() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
+		auto show = [&std_allocator]() { std::printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testSingleThread("stdAllocator<>", alloc, free, show);
 	}
 
@@ -309,7 +309,7 @@ static void testAllSingleThread()
 		stdAllocator<spinLock> std_allocator;
 		auto alloc = [&std_allocator](const std::size_t size) -> void* { return std_allocator.alloc(size); };
 		auto free = [&std_allocator](void* p) { std_allocator.free(p); };
-		auto show = [&std_allocator]() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
+		auto show = [&std_allocator]() { std::printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testSingleThread("stdAllocator<spinLock>", alloc, free, show);
 	}
 
@@ -318,7 +318,7 @@ static void testAllSingleThread()
 		stdAllocator<std::mutex> std_allocator;
 		auto alloc = [&std_allocator](const std::size_t size) -> void* { return std_allocator.alloc(size); };
 		auto free = [&std_allocator](void* p) { std_allocator.free(p); };
-		auto show = [&std_allocator]() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
+		auto show = [&std_allocator]() { std::printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testSingleThread("stdAllocator<std::mutex>", alloc, free, show);
 	}
 
@@ -329,7 +329,7 @@ static void testAllSingleThread()
 		polyAllocator poly_allocator(adapter);
 		auto alloc = [](const std::size_t size) -> void* { return new char[size]; };
 		auto free = [](void* p) { delete[] reinterpret_cast<char*>(p); };
-		auto show = [&std_allocator]() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
+		auto show = [&std_allocator]() { std::printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testSingleThread("polyAllocator with stdAllocator<>::adapter", alloc, free, show);
 	}
 
@@ -338,7 +338,7 @@ static void testAllSingleThread()
 		stdAlignAllocator<> std_allocator;
 		auto alloc = [&std_allocator](const std::size_t size) -> void* { return std_allocator.alloc(size); };
 		auto free = [&std_allocator](void* p) { std_allocator.free(p); };
-		auto show = [&std_allocator]() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
+		auto show = [&std_allocator]() { std::printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testSingleThread("stdAlignAllocator<>", alloc, free, show);
 	}
 
@@ -347,7 +347,7 @@ static void testAllSingleThread()
 		stdAlignAllocator<spinLock> std_allocator;
 		auto alloc = [&std_allocator](const std::size_t size) -> void* { return std_allocator.alloc(size); };
 		auto free = [&std_allocator](void* p) { std_allocator.free(p); };
-		auto show = [&std_allocator]() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
+		auto show = [&std_allocator]() { std::printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testSingleThread("stdAlignAllocator<spinLock>", alloc, free, show);
 	}
 
@@ -356,7 +356,7 @@ static void testAllSingleThread()
 		stdAlignAllocator<std::mutex> std_allocator;
 		auto alloc = [&std_allocator](const std::size_t size) -> void* { return std_allocator.alloc(size); };
 		auto free = [&std_allocator](void* p) { std_allocator.free(p); };
-		auto show = [&std_allocator]() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
+		auto show = [&std_allocator]() { std::printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testSingleThread("stdAlignAllocator<std::mutex>", alloc, free, show);
 	}
 
@@ -367,7 +367,7 @@ static void testAllSingleThread()
 		polyAllocator poly_allocator(adapter);
 		auto alloc = [](const std::size_t size) -> void* { return new char[size]; };
 		auto free = [](void* p) { delete[] reinterpret_cast<char*>(p); };
-		auto show = [&std_allocator]() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
+		auto show = [&std_allocator]() { std::printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testSingleThread("polyAllocator with stdAlignAllocator<>::adapter", alloc, free, show);
 	}
 }
@@ -377,9 +377,9 @@ static void testAllSingleThread()
 template<class ALLOC, class FREE, class SHOW>
 static void testMultiThreads(const char* caption, ALLOC alloc_func, FREE free_func, SHOW show_func)
 {
-	printf("\n");
-	printf("------------------------------------------------------------\n");
-	printf("\"%s\" : %d * times allocate & free\n", caption, MT_TEST_REPEAT_COUNT1 * MT_TEST_REPEAT_COUNT2 * MT_TEST_REPEAT_COUNT3);
+	std::printf("\n");
+	std::printf("------------------------------------------------------------\n");
+	std::printf("\"%s\" : %d * times allocate & free\n", caption, MT_TEST_REPEAT_COUNT1 * MT_TEST_REPEAT_COUNT2 * MT_TEST_REPEAT_COUNT3);
 	elapsedTime time;
 	auto test_thread = [&alloc_func, &free_func]()
 	{
@@ -407,7 +407,7 @@ static void testMultiThreads(const char* caption, ALLOC alloc_func, FREE free_fu
 		delete th[i];
 		th[i] = nullptr;
 	}
-	printf("* elapsed time = %.9lf\t", time.now());
+	std::printf("* elapsed time = %.9lf\t", time.now());
 	show_func();
 }
 
@@ -415,10 +415,10 @@ static void testMultiThreads(const char* caption, ALLOC alloc_func, FREE free_fu
 //マルチスレッドテスト
 static void testAllMultiThreads()
 {
-	printf("\n");
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for performance of multi threada ]\n");
-	printf("--------------------------------------------------------------------------------\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for performance of multi threada ]\n");
+	std::printf("--------------------------------------------------------------------------------\n");
 
 	static char buff[1024 * 16];
 
@@ -427,7 +427,7 @@ static void testAllMultiThreads()
 		static smartStackAllocator<spinLock> stack(buff);
 		auto alloc = [](const std::size_t size) -> void* { return stack.alloc(size); };
 		auto free = [](void* p) { stack.free(p); };
-		auto show = []() { printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
+		auto show = []() { std::printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
 		testMultiThreads("smartStackAllocator<spinLock>", alloc, free, show);
 	}
 
@@ -436,7 +436,7 @@ static void testAllMultiThreads()
 		static smartStackAllocator<std::mutex> stack(buff);
 		auto alloc = [](const std::size_t size) -> void* { return stack.alloc(size); };
 		auto free = [](void* p) { stack.free(p); };
-		auto show = []() { printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
+		auto show = []() { std::printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
 		testMultiThreads("smartStackAllocator<std::mutex>", alloc, free, show);
 	}
 
@@ -445,7 +445,7 @@ static void testAllMultiThreads()
 		static lfSmartStackAllocator stack(buff);
 		auto alloc = [](const std::size_t size) -> void* { return stack.alloc(size); };
 		auto free = [](void* p) { stack.free(p); };
-		auto show = []() { printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
+		auto show = []() { std::printf("maxSize=%d, size=%d, remain=%d, count=%d\n", stack.maxSize(), stack.size(), stack.remain(), stack.count()); };
 		testMultiThreads("lfSmartStackAllocator", alloc, free, show);
 	}
 
@@ -454,7 +454,7 @@ static void testAllMultiThreads()
 		static smartDualStackAllocator<spinLock> stack(buff);
 		auto alloc = [](const std::size_t size) -> void* { stack.reversewAllocateOrder(); return stack.alloc(size); };
 		auto free = [](void* p) { stack.free(p); };
-		auto show = []() { printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
+		auto show = []() { std::printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
 		testMultiThreads("smartDualStackAllocator<spinLock>", alloc, free, show);
 	}
 
@@ -463,7 +463,7 @@ static void testAllMultiThreads()
 		static smartDualStackAllocator<std::mutex> stack(buff);
 		auto alloc = [](const std::size_t size) -> void* { stack.reversewAllocateOrder(); return stack.alloc(size); };
 		auto free = [](void* p) { stack.free(p); };
-		auto show = []() { printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
+		auto show = []() { std::printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
 		testMultiThreads("smartDualStackAllocator<std::mutex>", alloc, free, show);
 	}
 
@@ -472,7 +472,7 @@ static void testAllMultiThreads()
 		static lfSmartDualStackAllocator stack(buff);
 		auto alloc = [](const std::size_t size) -> void* { stack.reversewAllocateOrder(); return stack.alloc(size); };
 		auto free = [](void* p) { stack.free(p); };
-		auto show = []() { printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
+		auto show = []() { std::printf("maxSize=%d, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", stack.maxSize(), stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc()); };
 		testMultiThreads("lfSmartDualStackAllocator", alloc, free, show);
 	}
 
@@ -481,7 +481,7 @@ static void testAllMultiThreads()
 		static monoAllocator<spinLock> mono(buff);
 		auto alloc = [](const std::size_t size) -> void* { void* p = mono.alloc(size); mono.free(p); return nullptr; };
 		auto free = [](void* p) {};
-		auto show = []() { printf("maxSize=%d, size=%d, remain=%d, isAllocated=%s\n", mono.maxSize(), mono.size(), mono.remain(), toStr(mono.isAllocated())); };
+		auto show = []() { std::printf("maxSize=%d, size=%d, remain=%d, isAllocated=%s\n", mono.maxSize(), mono.size(), mono.remain(), toStr(mono.isAllocated())); };
 		testMultiThreads("monoAllocator<spinLock>", alloc, free, show);
 	}
 
@@ -490,7 +490,7 @@ static void testAllMultiThreads()
 		static monoAllocator<std::mutex> mono(buff);
 		auto alloc = [](const std::size_t size) -> void* { void* p = mono.alloc(size); mono.free(p); return nullptr; };
 		auto free = [](void* p) {};
-		auto show = []() { printf("maxSize=%d, size=%d, remain=%d, isAllocated=%s\n", mono.maxSize(), mono.size(), mono.remain(), toStr(mono.isAllocated())); };
+		auto show = []() { std::printf("maxSize=%d, size=%d, remain=%d, isAllocated=%s\n", mono.maxSize(), mono.size(), mono.remain(), toStr(mono.isAllocated())); };
 		testMultiThreads("monoAllocator<std::mutex>", alloc, free, show);
 	}
 
@@ -499,7 +499,7 @@ static void testAllMultiThreads()
 		static lfMonoAllocator mono(buff);
 		auto alloc = [](const std::size_t size) -> void* { void* p = mono.alloc(size); mono.free(p); return nullptr; };
 		auto free = [](void* p) {};
-		auto show = []() { printf("maxSize=%d, size=%d, remain=%d, isAllocated=%s\n", mono.maxSize(), mono.size(), mono.remain(), toStr(mono.isAllocated())); };
+		auto show = []() { std::printf("maxSize=%d, size=%d, remain=%d, isAllocated=%s\n", mono.maxSize(), mono.size(), mono.remain(), toStr(mono.isAllocated())); };
 		testMultiThreads("lfMonoAllocator", alloc, free, show);
 	}
 
@@ -508,7 +508,7 @@ static void testAllMultiThreads()
 		static poolAllocator<1024, spinLock> pool(buff, sizeof(buff), 16);
 		auto alloc = [](const std::size_t size) -> void* { return pool.alloc(size); };
 		auto free = [](void* p) { pool.free(p); };
-		auto show = []() { printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
+		auto show = []() { std::printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
 		testMultiThreads("poolAllocator<1024, spinLock>", alloc, free, show);
 	}
 
@@ -517,7 +517,7 @@ static void testAllMultiThreads()
 		static poolAllocator<1024, std::mutex> pool(buff, sizeof(buff), 16);
 		auto alloc = [](const std::size_t size) -> void* { return pool.alloc(size); };
 		auto free = [](void* p) { pool.free(p); };
-		auto show = []() { printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
+		auto show = []() { std::printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
 		testMultiThreads("poolAllocator<1024, std::mutex>", alloc, free, show);
 	}
 
@@ -526,7 +526,7 @@ static void testAllMultiThreads()
 		static lfPoolAllocator<1024> pool(buff, sizeof(buff), 16);
 		auto alloc = [](const std::size_t size) -> void* { return pool.alloc(size); };
 		auto free = [](void* p) { pool.free(p); };
-		auto show = []() { printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
+		auto show = []() { std::printf("maxSize=%d, size=%d, remain=%d, pool=%d/%d\n", pool.maxSize(), pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize()); };
 		testMultiThreads("lfPoolAllocator<1024>", alloc, free, show);
 	}
 
@@ -535,7 +535,7 @@ static void testAllMultiThreads()
 		static stdAllocator<> std_allocator;
 		auto alloc = [](const std::size_t size) -> void* { return std_allocator.alloc(size); };
 		auto free = [](void* p) { std_allocator.free(p); };
-		auto show = []() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
+		auto show = []() { std::printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testMultiThreads("stdAllocator<>", alloc, free, show);
 	}
 
@@ -544,7 +544,7 @@ static void testAllMultiThreads()
 		static stdAllocator<spinLock> std_allocator;
 		auto alloc = [](const std::size_t size) -> void* { return std_allocator.alloc(size); };
 		auto free = [](void* p) { std_allocator.free(p); };
-		auto show = []() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
+		auto show = []() { std::printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testMultiThreads("stdAllocator<spinLock>", alloc, free, show);
 	}
 
@@ -553,7 +553,7 @@ static void testAllMultiThreads()
 		static stdAllocator<std::mutex> std_allocator;
 		auto alloc = [](const std::size_t size) -> void* { return std_allocator.alloc(size); };
 		auto free = [](void* p) { std_allocator.free(p); };
-		auto show = []() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
+		auto show = []() { std::printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testMultiThreads("stdAllocator<std::mutex>", alloc, free, show);
 	}
 
@@ -562,7 +562,7 @@ static void testAllMultiThreads()
 		static stdAlignAllocator<> std_allocator;
 		auto alloc = [](const std::size_t size) -> void* { return std_allocator.alloc(size); };
 		auto free = [](void* p) { std_allocator.free(p); };
-		auto show = []() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
+		auto show = []() { std::printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testMultiThreads("stdAlignAllocator<>", alloc, free, show);
 	}
 
@@ -571,7 +571,7 @@ static void testAllMultiThreads()
 		static stdAlignAllocator<spinLock> std_allocator;
 		auto alloc = [](const std::size_t size) -> void* { return std_allocator.alloc(size); };
 		auto free = [](void* p) { std_allocator.free(p); };
-		auto show = []() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
+		auto show = []() { std::printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testMultiThreads("stdAlignAllocator<spinLock>", alloc, free, show);
 	}
 
@@ -580,7 +580,7 @@ static void testAllMultiThreads()
 		static stdAlignAllocator<std::mutex> std_allocator;
 		auto alloc = [](const std::size_t size) -> void* { return std_allocator.alloc(size); };
 		auto free = [](void* p) { std_allocator.free(p); };
-		auto show = []() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
+		auto show = []() { std::printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testMultiThreads("stdAlignAllocator<std::mutex>", alloc, free, show);
 	}
 
@@ -589,7 +589,7 @@ static void testAllMultiThreads()
 		static stdAlignAllocator<> std_allocator;
 		auto alloc = [](const std::size_t size) -> void* { return std_allocator.alloc(size); };
 		auto free = [](void* p) { std_allocator.free(p); };
-		auto show = []() { printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
+		auto show = []() { std::printf("maxSize=%d, size=%d, remain=%d\n", std_allocator.maxSize(), std_allocator.size(), std_allocator.remain()); };
 		testMultiThreads("stdAlignAllocator<>", alloc, free, show);
 	}
 }
@@ -598,8 +598,8 @@ static void testAllMultiThreads()
 //アロケータパフォーマンステスト
 void example_allocator_performance()
 {
-	printf("\n");
-	printf("================================================================================\n");
+	std::printf("\n");
+	std::printf("================================================================================\n");
 
 #ifdef ENABLE_TEST_FOR_ALLOATOR_PERFORMANCE_ST
 	//シングルスレッドテスト

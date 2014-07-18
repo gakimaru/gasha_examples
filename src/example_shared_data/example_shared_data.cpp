@@ -33,7 +33,7 @@
 #include <utility>//C++11 std::move
 #include <condition_variable>//C++11 std::condition_variable
 #include <chrono>//C++11 std::chrono
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 //【VC++】例外を無効化した状態で <mutex> <thread> <function >をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -166,8 +166,8 @@ bool dequeueLockFree(data_t& value)
 //タグ付きポインタテスト
 void taggedPtrTest()
 {
-	printf("================================================================================\n");
-	printf("[Test for taggedPtr]\n");
+	std::printf("================================================================================\n");
+	std::printf("[Test for taggedPtr]\n");
 
 	int i = 0;
 	int* p = &i;
@@ -178,10 +178,10 @@ void taggedPtrTest()
 	a.set(p, tag);
 	b.set(p, tag);
 	c.set(p, tag);
-	printf("p=0x%p, tag=%d\n", p, tag);
-	printf("taggedPtr<int, 32, 32>: .value()=0x%016llx, .ptr()=0x%p, .tag()=%d\n", a.value(), a.ptr(), a.tag());
-	printf("taggedPtr<int,  2,  0>: .value()=0x%016llx, .ptr()=0x%p, .tag()=%d\n", b.value(), b.ptr(), b.tag());
-	printf("taggedPtr<int,  8, -8>: .value()=0x%016llx, .ptr()=0x%p, .tag()=%d\n", c.value(), c.ptr(), c.tag());
+	std::printf("p=0x%p, tag=%d\n", p, tag);
+	std::printf("taggedPtr<int, 32, 32>: .value()=0x%016llx, .ptr()=0x%p, .tag()=%d\n", a.value(), a.ptr(), a.tag());
+	std::printf("taggedPtr<int,  2,  0>: .value()=0x%016llx, .ptr()=0x%p, .tag()=%d\n", b.value(), b.ptr(), b.tag());
+	std::printf("taggedPtr<int,  8, -8>: .value()=0x%016llx, .ptr()=0x%p, .tag()=%d\n", c.value(), c.ptr(), c.tag());
 }
 #endif//ENABLE_TAGGED_PTRTEST
 
@@ -190,18 +190,18 @@ void taggedPtrTest()
 //簡易テスト
 void easyTest()
 {
-	printf("================================================================================\n");
-	printf("[Test for Lock-free pool-allocator/sharedStack/sharedQueue]\n");
+	std::printf("================================================================================\n");
+	std::printf("[Test for Lock-free pool-allocator/sharedStack/sharedQueue]\n");
 	
 #if defined(ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR) || defined(ENABLE_TEST_FOR_LF_POOL_ALLOCATOR)
 	//プールアロケータのテスト（共通処理）
 	auto test_pool_allocator = [](const char* caption, std::function<data_t*()> alloc, std::function<bool(data_t*)> free)
 	{
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[%s:START]\n", caption);
-		printf("*Test count                     = %d\n", TEST_COUNT);
-		printf("*Allocate and free test threads = %d\n", 1);
-		printf("*Memory pool size               = %d\n", TEST_POOL_SIZE);
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[%s:START]\n", caption);
+		std::printf("*Test count                     = %d\n", TEST_COUNT);
+		std::printf("*Allocate and free test threads = %d\n", 1);
+		std::printf("*Memory pool size               = %d\n", TEST_POOL_SIZE);
 		const auto begin_time = nowTime();
 		poolAllocator_withType<data_t, TEST_POOL_SIZE> allocator;
 		data_t* data[TEST_POOL_SIZE + 1] = { 0 };
@@ -230,8 +230,8 @@ void easyTest()
 				break;
 		}
 		const double elapsed_time = calcElapsedTime(begin_time);
-		printf("[%s:END] elapsed_time=%.9lf sec\n", caption, elapsed_time);
-		printf("--------------------------------------------------------------------------------\n");
+		std::printf("[%s:END] elapsed_time=%.9lf sec\n", caption, elapsed_time);
+		std::printf("--------------------------------------------------------------------------------\n");
 	};
 #endif//defined(ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR) || defined(ENABLE_TEST_FOR_LF_POOL_ALLOCATOR)
 
@@ -239,12 +239,12 @@ void easyTest()
 	//スタック／キューのテスト（共通処理）
 	auto test_stack_queue = [](const char* caption, std::function<bool(data_t&&)> push, std::function<bool(data_t&)> pop)
 	{
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[%s:START]\n", caption);
-		printf("*Test count                = %d\n", TEST_COUNT);
-		printf("*Push/Enqueue test threads = %d\n", 1);
-		printf("*Pop/Dequeue  test threads = %d\n", 1);
-		printf("*Memory pool size          = %d\n", TEST_POOL_SIZE);
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[%s:START]\n", caption);
+		std::printf("*Test count                = %d\n", TEST_COUNT);
+		std::printf("*Push/Enqueue test threads = %d\n", 1);
+		std::printf("*Pop/Dequeue  test threads = %d\n", 1);
+		std::printf("*Memory pool size          = %d\n", TEST_POOL_SIZE);
 		const auto begin_time = nowTime();
 		int count = 0;
 		while (true)
@@ -271,8 +271,8 @@ void easyTest()
 				break;
 		}
 		const double elapsed_time = calcElapsedTime(begin_time);
-		printf("[%s:END] elapsed_time=%.9lf sec\n", caption, elapsed_time);
-		printf("--------------------------------------------------------------------------------\n");
+		std::printf("[%s:END] elapsed_time=%.9lf sec\n", caption, elapsed_time);
+		std::printf("--------------------------------------------------------------------------------\n");
 	};
 #endif//defined(ENABLE_TEST_FOR_SHARED_STACK) || defined(ENABLE_TEST_FOR_LF_STACK) || defined(ENABLE_TEST_FOR_SHARED_QUEUE) || defined(ENABLE_TEST_FOR_LF_QUEUE)
 
@@ -300,7 +300,7 @@ void easyTest()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_poolAllocator.template debugInfo<data_t>(message, true, debug_print_info);
-		printf(message);
+		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR
@@ -321,7 +321,7 @@ void easyTest()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_lfPoolAllocator.template debugInfo<data_t>(message, true, debug_print_info);
-		printf(message);
+		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_POOL_ALLOCATOR
@@ -342,7 +342,7 @@ void easyTest()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_stack.debugInfo(message, true, debug_print_info);
-		printf(message);
+		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_STACK
@@ -363,7 +363,7 @@ void easyTest()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_lfStack.debugInfo(message, true, debug_print_info);
-		printf(message);
+		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_STACK
@@ -384,7 +384,7 @@ void easyTest()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_queue.debugInfo(message, true, debug_print_info);
-		printf(message);
+		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_QUEUE
@@ -405,7 +405,7 @@ void easyTest()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_lfQueue.debugInfo(message, true, debug_print_info);
-		printf(message);
+		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_QUEUE
@@ -417,18 +417,18 @@ void easyTest()
 //スレッドを使ったテスト
 void thread_test()
 {
-	printf("================================================================================\n");
-	printf("[Test for Lock-free pool-allocator/sharedStack/sharedQueue with threads]\n");
+	std::printf("================================================================================\n");
+	std::printf("[Test for Lock-free pool-allocator/sharedStack/sharedQueue with threads]\n");
 
 #if defined(ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR) || defined(ENABLE_TEST_FOR_LF_POOL_ALLOCATOR)
 	//プールアロケータのテスト（共通処理）
 	auto test_pool_allocator = [](const char* caption, std::function<data_t*()> alloc, std::function<bool(data_t*)> free)
 	{
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[%s:START]\n", caption);
-		printf("*Test count                     = %d\n", TEST_COUNT);
-		printf("*Allocate and free test threads = %d\n", TEST_ALLOC_THREADS);
-		printf("*Memory pool size               = %d\n", TEST_POOL_SIZE);
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[%s:START]\n", caption);
+		std::printf("*Test count                     = %d\n", TEST_COUNT);
+		std::printf("*Allocate and free test threads = %d\n", TEST_ALLOC_THREADS);
+		std::printf("*Memory pool size               = %d\n", TEST_POOL_SIZE);
 
 		std::condition_variable cond;
 		std::mutex mutex;
@@ -450,7 +450,7 @@ void thread_test()
 		{
 			wait_count.fetch_add(1);
 		#ifdef ENABLE_TEST_PRINT
-			printf("[Alloc:%2d]:Waiting...\n", thread_no);
+			std::printf("[Alloc:%2d]:Waiting...\n", thread_no);
 		#endif//ENABLE_TEST_PRINT
 			{
 				std::unique_lock<std::mutex> lock(mutex);
@@ -459,7 +459,7 @@ void thread_test()
 
 			start_count.fetch_add(1);
 		#ifdef ENABLE_TEST_PRINT
-			printf("[Alloc:%2d]:Start\n", thread_no);
+			std::printf("[Alloc:%2d]:Start\n", thread_no);
 		#endif//ENABLE_TEST_PRINT
 
 			int loop_count = 0;
@@ -485,7 +485,7 @@ void thread_test()
 					std::this_thread::sleep_for(std::chrono::microseconds(1));
 			#ifdef ENABLE_TEST_PRINT
 				if (count % TEST_PRINT_STEP == 0)
-					printf("[Alloc:%2d] alloc=%d\n", thread_no, count);
+					std::printf("[Alloc:%2d] alloc=%d\n", thread_no, count);
 			#endif//ENABLE_TEST_PRINT
 				//std::this_thread::yield();
 				std::this_thread::sleep_for(std::chrono::microseconds(0));
@@ -493,7 +493,7 @@ void thread_test()
 
 			end_count.fetch_add(1);
 		#ifdef ENABLE_TEST_PRINT
-			printf("[Alloc:%2d]:End\n", thread_no);
+			std::printf("[Alloc:%2d]:End\n", thread_no);
 		#endif//ENABLE_TEST_PRINT
 		};
 		std::thread* th[TEST_ALLOC_THREADS];
@@ -527,8 +527,8 @@ void thread_test()
 			}
 		}
 		const double elapsed_time = calcElapsedTime(begin_time);
-		printf("[%s:END] elapsed_time=%.9lf sec\n", caption, elapsed_time);
-		printf("--------------------------------------------------------------------------------\n");
+		std::printf("[%s:END] elapsed_time=%.9lf sec\n", caption, elapsed_time);
+		std::printf("--------------------------------------------------------------------------------\n");
 	};
 #endif//defined(ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR) || defined(ENABLE_TEST_FOR_LF_POOL_ALLOCATOR)
 
@@ -536,12 +536,12 @@ void thread_test()
 	//スタック／キューのテスト（共通処理）
 	auto test_stack_queue = [](const char* caption, const char* push_name, const char* pop_name, std::function<bool(data_t&&)> push, std::function<bool(data_t&)> pop)
 	{
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[%s:START]\n", caption);
-		printf("*Test count                = %d\n", TEST_COUNT);
-		printf("*Push/Enqueue test threads = %d\n", TEST_PUSH_THREADS);
-		printf("*Pop/Dequeue  test threads = %d\n", TEST_POP_THREADS);
-		printf("*Memory pool size          = %d\n", TEST_POOL_SIZE);
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[%s:START]\n", caption);
+		std::printf("*Test count                = %d\n", TEST_COUNT);
+		std::printf("*Push/Enqueue test threads = %d\n", TEST_PUSH_THREADS);
+		std::printf("*Pop/Dequeue  test threads = %d\n", TEST_POP_THREADS);
+		std::printf("*Memory pool size          = %d\n", TEST_POOL_SIZE);
 
 		std::condition_variable cond;
 		std::mutex mutex;
@@ -567,7 +567,7 @@ void thread_test()
 		{
 			wait_count.fetch_add(1);
 		#ifdef ENABLE_TEST_PRINT
-			printf("[%s:%2d]:Waiting...\n", push_name, thread_no);
+			std::printf("[%s:%2d]:Waiting...\n", push_name, thread_no);
 		#endif//ENABLE_TEST_PRINT
 			{
 				std::unique_lock<std::mutex> lock(mutex);
@@ -576,7 +576,7 @@ void thread_test()
 			
 			start_count.fetch_add(1);
 		#ifdef ENABLE_TEST_PRINT
-			printf("[%s:%2d]:Start\n", push_name, thread_no);
+			std::printf("[%s:%2d]:Start\n", push_name, thread_no);
 		#endif//ENABLE_TEST_PRINT
 
 			int loop_count = 0;
@@ -609,7 +609,7 @@ void thread_test()
 					std::this_thread::sleep_for(std::chrono::microseconds(1));
 			#ifdef ENABLE_TEST_PRINT
 				if (count % TEST_PRINT_STEP == 0)
-					printf("[%s:%2d] count=%d\n", push_name, thread_no, count);
+					std::printf("[%s:%2d] count=%d\n", push_name, thread_no, count);
 			#endif//ENABLE_TEST_PRINT
 				//std::this_thread::yield();
 				std::this_thread::sleep_for(std::chrono::microseconds(0));
@@ -617,14 +617,14 @@ void thread_test()
 			
 			end_count.fetch_add(1);
 		#ifdef ENABLE_TEST_PRINT
-			printf("[%s:%2d]:End\n", push_name, thread_no);
+			std::printf("[%s:%2d]:End\n", push_name, thread_no);
 		#endif//ENABLE_TEST_PRINT
 		};
 		auto threadPop = [&pop_name, &pop, &cond, &mutex, &isReady, &wait_count, &start_count, &end_count, &pop_count](const int thread_no)
 		{
 			wait_count.fetch_add(1);
 		#ifdef ENABLE_TEST_PRINT
-			printf("[%s:%2d]:Waiting...\n", pop_name, thread_no);
+			std::printf("[%s:%2d]:Waiting...\n", pop_name, thread_no);
 		#endif//ENABLE_TEST_PRINT
 			{
 				std::unique_lock<std::mutex> lock(mutex);
@@ -633,7 +633,7 @@ void thread_test()
 
 			start_count.fetch_add(1);
 		#ifdef ENABLE_TEST_PRINT
-			printf("[%s:%2d]:Start\n", pop_name, thread_no);
+			std::printf("[%s:%2d]:Start\n", pop_name, thread_no);
 		#endif//ENABLE_TEST_PRINT
 
 			while (pop_count.load() <= TEST_COUNT)
@@ -647,7 +647,7 @@ void thread_test()
 						pop_count.fetch_add(1);
 				#ifdef ENABLE_TEST_PRINT
 					if (TEST_PRINT_STEP > 0 && count % TEST_PRINT_STEP == 0)
-						printf("[%s:%2d] count=%d\n", pop_name, thread_no, count);
+						std::printf("[%s:%2d] count=%d\n", pop_name, thread_no, count);
 				#endif//ENABLE_TEST_PRINT
 				}
 				//std::this_thread::yield();
@@ -656,7 +656,7 @@ void thread_test()
 
 			end_count.fetch_add(1);
 		#ifdef ENABLE_TEST_PRINT
-			printf("[%s:%2d]:End\n", pop_name, thread_no);
+			std::printf("[%s:%2d]:End\n", pop_name, thread_no);
 		#endif//ENABLE_TEST_PRINT
 		};
 		std::thread* th1[TEST_PUSH_THREADS];
@@ -702,8 +702,8 @@ void thread_test()
 			}
 		}
 		const double elapsed_time = calcElapsedTime(begin_time);
-		printf("[%s:END] elapsed_time=%.9lf sec\n", caption, elapsed_time);
-		printf("--------------------------------------------------------------------------------\n");
+		std::printf("[%s:END] elapsed_time=%.9lf sec\n", caption, elapsed_time);
+		std::printf("--------------------------------------------------------------------------------\n");
 	};
 #endif//defined(ENABLE_TEST_FOR_SHARED_STACK) || defined(ENABLE_TEST_FOR_LF_STACK) || defined(ENABLE_TEST_FOR_SHARED_QUEUE) || defined(ENABLE_TEST_FOR_LF_QUEUE)
 
@@ -731,7 +731,7 @@ void thread_test()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_poolAllocator.debugInfo<data_t>(message, true, debug_print_info);
-		printf(message);
+		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR
@@ -752,7 +752,7 @@ void thread_test()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_lfPoolAllocator.debugInfo<data_t>(message, true, debug_print_info);
-		printf(message);
+		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_POOL_ALLOCATOR
@@ -773,7 +773,7 @@ void thread_test()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_stack.debugInfo(message, true, debug_print_info);
-		printf(message);
+		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_STACK
@@ -794,7 +794,7 @@ void thread_test()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_lfStack.debugInfo(message, true, debug_print_info);
-		printf(message);
+		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_STACK
@@ -815,7 +815,7 @@ void thread_test()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_queue.debugInfo(message, true, debug_print_info);
-		printf(message);
+		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_QUEUE
@@ -836,7 +836,7 @@ void thread_test()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_lfQueue.debugInfo(message, true, debug_print_info);
-		printf(message);
+		std::printf(message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_QUEUE
@@ -943,26 +943,26 @@ void testScopedSharedLock()
 //マルチスレッド共有データテスト
 void example_shared_data()
 {
-	printf("----- Basic information -----\n");
-	printf("alignof(data_t)=%d\n", alignof(data_t));
-	printf("sizeof(lf_stack_t)=%d\n", sizeof(lf_stack_t));
-	printf("alignof(lf_stack_t)=%d\n", alignof(lf_stack_t));
-	printf("sizeof(lf_stack_t::stack_t)=%d\n", sizeof(lf_stack_t::stack_t));
-	printf("alignof(lf_stack_t::stack_t)=%d\n", alignof(lf_stack_t::stack_t));
-	printf("lf_stack_t::TAGGED_PTR_TAG_BITS=%d\n", lf_stack_t::TAGGED_PTR_TAG_BITS);
-	printf("lf_stack_t::TAGGED_PTR_TAG_SHIFT=%d\n", lf_stack_t::TAGGED_PTR_TAG_SHIFT);
-	printf("lf_stack_t::stack_ptr_type::TAG_BITS=%d\n", lf_stack_t::stack_ptr_type::TAG_BITS);
-	printf("lf_stack_t::stack_ptr_type::TAG_SHIFT=%d\n", lf_stack_t::stack_ptr_type::TAG_SHIFT);
-	printf("sizeof(lf_queue_t)=%d\n", sizeof(lf_queue_t));
-	printf("alignof(lf_queue_t)=%d\n", alignof(lf_queue_t));
-	printf("sizeof(lf_queue_t::queue_t)=%d\n", sizeof(lf_queue_t::queue_t));
-	printf("alignof(lf_queue_t::queue_t)=%d\n", alignof(lf_queue_t::queue_t));
-	printf("lf_queue_t::TAGGED_PTR_TAG_BITS=%d\n", lf_queue_t::TAGGED_PTR_TAG_BITS);
-	printf("lf_queue_t::TAGGED_PTR_TAG_SHIFT=%d\n", lf_queue_t::TAGGED_PTR_TAG_SHIFT);
-	printf("lf_queue_t::queue_ptr_type::TAG_BITS=%d\n", lf_queue_t::queue_ptr_type::TAG_BITS);
-	printf("lf_queue_t::queue_ptr_type::TAG_SHIFT=%d\n", lf_queue_t::queue_ptr_type::TAG_SHIFT);
-	printf("-----------------------------\n");
-	printf("\n");
+	std::printf("----- Basic information -----\n");
+	std::printf("alignof(data_t)=%d\n", alignof(data_t));
+	std::printf("sizeof(lf_stack_t)=%d\n", sizeof(lf_stack_t));
+	std::printf("alignof(lf_stack_t)=%d\n", alignof(lf_stack_t));
+	std::printf("sizeof(lf_stack_t::stack_t)=%d\n", sizeof(lf_stack_t::stack_t));
+	std::printf("alignof(lf_stack_t::stack_t)=%d\n", alignof(lf_stack_t::stack_t));
+	std::printf("lf_stack_t::TAGGED_PTR_TAG_BITS=%d\n", lf_stack_t::TAGGED_PTR_TAG_BITS);
+	std::printf("lf_stack_t::TAGGED_PTR_TAG_SHIFT=%d\n", lf_stack_t::TAGGED_PTR_TAG_SHIFT);
+	std::printf("lf_stack_t::stack_ptr_type::TAG_BITS=%d\n", lf_stack_t::stack_ptr_type::TAG_BITS);
+	std::printf("lf_stack_t::stack_ptr_type::TAG_SHIFT=%d\n", lf_stack_t::stack_ptr_type::TAG_SHIFT);
+	std::printf("sizeof(lf_queue_t)=%d\n", sizeof(lf_queue_t));
+	std::printf("alignof(lf_queue_t)=%d\n", alignof(lf_queue_t));
+	std::printf("sizeof(lf_queue_t::queue_t)=%d\n", sizeof(lf_queue_t::queue_t));
+	std::printf("alignof(lf_queue_t::queue_t)=%d\n", alignof(lf_queue_t::queue_t));
+	std::printf("lf_queue_t::TAGGED_PTR_TAG_BITS=%d\n", lf_queue_t::TAGGED_PTR_TAG_BITS);
+	std::printf("lf_queue_t::TAGGED_PTR_TAG_SHIFT=%d\n", lf_queue_t::TAGGED_PTR_TAG_SHIFT);
+	std::printf("lf_queue_t::queue_ptr_type::TAG_BITS=%d\n", lf_queue_t::queue_ptr_type::TAG_BITS);
+	std::printf("lf_queue_t::queue_ptr_type::TAG_SHIFT=%d\n", lf_queue_t::queue_ptr_type::TAG_SHIFT);
+	std::printf("-----------------------------\n");
+	std::printf("\n");
 
 #ifdef ENABLE_TAGGED_PTRTEST
 	//タグ付きポインタテスト

@@ -19,8 +19,8 @@
 #include <condition_variable>//C++11 std::condition_variable用
 #include <atomic>//C++11 std::atomic用
 #include <chrono>//C++11 std::chrono用
-#include <cstring>//memcpy()
-#include <cstdio>//printf()
+#include <cstring>//std::memcpy()
+#include <cstdio>//std::printf()
 #include <cassert>//assert()
 
 //【VC++】例外を無効化した状態で <thread> <mutex> <algorithm> <vector> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
@@ -43,7 +43,7 @@ data_t::data_t(const int key, const int val) :
 	m_val(val)
 {
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("data_t::constructor(%d, %d)\n", key, val);
+	std::printf("data_t::constructor(%d, %d)\n", key, val);
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 //デフォルトコンストラクタ
@@ -52,14 +52,14 @@ data_t::data_t() :
 	m_val(0)
 {
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("data_t::constructor()\n");
+	std::printf("data_t::constructor()\n");
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 //デストラクタ
 data_t::~data_t()
 {
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("data_t::destructor(): key=%d, val=%d\n", m_key, m_val);
+	std::printf("data_t::destructor(): key=%d, val=%d\n", m_key, m_val);
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
@@ -67,27 +67,27 @@ data_t::~data_t()
 data_t& data_t::operator=(data_t&& rhs)
 {
 	std::memcpy(this, &rhs, sizeof(*this));
-	printf("data_t::move_operator\n");
+	std::printf("data_t::move_operator\n");
 	return *this;
 }
 //コピーオペレータ
 data_t& data_t::operator=(const data_t& rhs)
 {
 	std::memcpy(this, &rhs, sizeof(*this));
-	printf("data_t::copy_operator\n");
+	std::printf("data_t::copy_operator\n");
 	return *this;
 }
 //ムーブコンストラクタ
 data_t::data_t(data_t&& src)
 {
 	std::memcpy(this, &src, sizeof(*this));
-	printf("data_t::move_constructor\n");
+	std::printf("data_t::move_constructor\n");
 }
 //コピーコンストラクタ
 data_t::data_t(const data_t& src)
 {
 	std::memcpy(this, &src, sizeof(*this));
-	printf("data_t::copy_constructor\n");
+	std::printf("data_t::copy_constructor\n");
 }
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 
@@ -97,7 +97,7 @@ data_t::data_t(const data_t& src)
 template<typename... Tx>
 inline int printf_detail(const char* fmt, Tx&&... args)
 {
-	return printf(fmt, std::forward<Tx>(args)...);
+	return std::printf(fmt, std::forward<Tx>(args)...);
 }
 #else//PRINT_TEST_DATA_DETAIL
 inline int printf_detail(const char* fmt, ...){ return 0; }
@@ -116,8 +116,8 @@ void example_dynamic_array()
 	//--------------------
 	//テスト①：基本ロジックテスト：プリミティブ型の配列を扱う場合
 	{
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[Test for dynamic_array::container(Primitive type)]\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[Test for dynamic_array::container(Primitive type)]\n");
 
 		int arr[20];//配列
 
@@ -128,34 +128,34 @@ void example_dynamic_array()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
-			printf("array=");
+			std::printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
+			std::printf("array=");
 			if (con.empty())
-				printf("(empty)");
+				std::printf("(empty)");
 			for (auto val : con)
-				printf(" %d", val);
-			printf("\n");
+				std::printf(" %d", val);
+			std::printf("\n");
 		};
 
 		//データを逆順に表示
 		auto printReverse = [&con]()
 		{
-			printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
-			printf("array(reverse)=");
+			std::printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
+			std::printf("array(reverse)=");
 			if (con.empty())
-				printf("(empty)");
+				std::printf("(empty)");
 			std::for_each(con.rbegin(), con.rend(),
 				[](int val)
 				{
-					printf(" %d", val);
+					std::printf(" %d", val);
 				}
 			);
-			printf("\n");
+			std::printf("\n");
 		};
 
 		//値を追加
-		printf("\n");
-		printf("[push_back]\n");
+		std::printf("\n");
+		std::printf("[push_back]\n");
 		con.push_back(5);
 		con.push_back(8);
 		con.push_back(3);
@@ -173,14 +173,14 @@ void example_dynamic_array()
 		printReverse();
 
 		//リサイズ（拡大）
-		printf("\n");
-		printf("[resize(expand)]\n");
+		std::printf("\n");
+		std::printf("[resize(expand)]\n");
 		con.resize(12, 1000);//12件に拡張
 		printAll();//全件表示
 
 		//ソ―ト
-		printf("\n");
-		printf("[sort]\n");
+		std::printf("\n");
+		std::printf("[sort]\n");
 	#ifdef USE_STL_ALGORITM
 		std::sort(con.begin(), con.end());//高速ソート(STL版)
 	#else//USE_STL_ALGORITM
@@ -189,8 +189,8 @@ void example_dynamic_array()
 		printAll();//全件表示
 
 		//逆順にソート ※カスタムプレディケート関数を使用
-		printf("\n");
-		printf("[custom sort]\n");
+		std::printf("\n");
+		std::printf("[custom sort]\n");
 		auto reverse_pred = [](const int lhs, const int rhs) -> bool {return lhs > rhs; };
 	#ifdef USE_STL_ALGORITM
 		std::sort(con.begin(), con.end(), reverse_pred);//高速ソート(STL版)
@@ -200,8 +200,8 @@ void example_dynamic_array()
 		printAll();//全件表示
 
 		//安定ソ―ト
-		printf("\n");
-		printf("[stable_sort]\n");
+		std::printf("\n");
+		std::printf("[stable_sort]\n");
 	#ifdef USE_STL_ALGORITM
 		std::stable_sort(con.begin(), con.end());//安定ソート(STL版)
 	#else//USE_STL_ALGORITM
@@ -210,8 +210,8 @@ void example_dynamic_array()
 		printAll();//全件表示
 
 		//逆順に安定ソート ※カスタムプレディケート関数を使用
-		printf("\n");
-		printf("[custom stable_sort]\n");
+		std::printf("\n");
+		std::printf("[custom stable_sort]\n");
 		//auto reverse_pred = [](const int lhs, const int rhs) -> bool {return lhs > rhs; };
 	#ifdef USE_STL_ALGORITM
 		std::stable_sort(con.begin(), con.end(), reverse_pred);//安定ソート(STL版)
@@ -221,32 +221,32 @@ void example_dynamic_array()
 		printAll();//全件表示
 
 		//ポップ(1)
-		printf("\n");
-		printf("[pop_back(1)]\n");
+		std::printf("\n");
+		std::printf("[pop_back(1)]\n");
 		{
 			const int* val = con.back();//末尾の値を取得
-			printf("back=%d\n", *val);
+			std::printf("back=%d\n", *val);
 			con.pop_back();//末尾を削除
 			printAll();//全件表示
 		}
 
 		//ポップ(2)
-		printf("\n");
-		printf("[pop_back(2)]\n");
+		std::printf("\n");
+		std::printf("[pop_back(2)]\n");
 		{
 			int pop_val = 0;
 			con.pop_back(pop_val);//値のコピーを受け取って末尾を削除
-			printf("pop_back=[%d]\n", pop_val);
+			std::printf("pop_back=[%d]\n", pop_val);
 			printAll();//全件表示
 		}
 
 		//線形探索
-		printf("\n");
-		printf("[find]\n");
+		std::printf("\n");
+		std::printf("[find]\n");
 		printAll();//全件表示
 		auto find = [&con](const int val)
 		{
-			printf("findValue(%d)=", val);
+			std::printf("findValue(%d)=", val);
 		#ifdef USE_STL_ALGORITM
 			auto ite = std::find(con.begin(), con.end(), val);//線形探索(STL版)
 		#else//USE_STL_ALGORITM
@@ -254,26 +254,26 @@ void example_dynamic_array()
 		#endif//USE_STL_ALGORITM
 			if (ite.isExist())
 			{
-				printf("%d", *ite);
+				std::printf("%d", *ite);
 				++ite;
 				if (ite.isExist())
-					printf(" next=%d", *ite);
+					std::printf(" next=%d", *ite);
 			}
 			else
-				printf("(not found)");
-			printf("\n");
+				std::printf("(not found)");
+			std::printf("\n");
 		};
 		find(5);
 		find(6);
 		find(7);
 
 		//二分探索（ソート前）
-		printf("\n");
-		printf("[binary search(before sort)]\n");
+		std::printf("\n");
+		std::printf("[binary search(before sort)]\n");
 		printAll();//全件表示
 		auto binary_search = [&con](const int val)
 		{
-			printf("binarySearchValue(%d)=", val);
+			std::printf("binarySearchValue(%d)=", val);
 		#ifdef USE_STL_ALGORITM
 			if (std::binary_search(con.begin(), con.end(), val))//二分探索(STL版)
 			{
@@ -283,22 +283,22 @@ void example_dynamic_array()
 			if (ite.isExist())
 			{
 		#endif//USE_STL_ALGORITM
-				printf("%d", *ite);
+				std::printf("%d", *ite);
 				--ite;
 				if (ite.isExist())
-					printf(" prev=%d", *ite);
+					std::printf(" prev=%d", *ite);
 			}
 			else
-				printf("(not found)");
-			printf("\n");
+				std::printf("(not found)");
+			std::printf("\n");
 		};
 		binary_search(5);
 		binary_search(6);
 		binary_search(7);
 
 		//二分探索（ソート後）
-		printf("\n");
-		printf("[binary search(after sort)]\n");
+		std::printf("\n");
+		std::printf("[binary search(after sort)]\n");
 		con.sort();//ソート済み状態にする
 		printAll();//全件表示
 		binary_search(5);
@@ -306,8 +306,8 @@ void example_dynamic_array()
 		binary_search(7);
 
 		//削除１：イテレータと数で指定
-		printf("\n");
-		printf("[erase(1)]\n");
+		std::printf("\n");
+		std::printf("[erase(1)]\n");
 		{
 			auto ite = con.end();
 			ite -= 4;
@@ -316,8 +316,8 @@ void example_dynamic_array()
 		}
 
 		//削除２：イテレータの範囲で指定
-		printf("\n");
-		printf("[erase(2)]\n");
+		std::printf("\n");
+		std::printf("[erase(2)]\n");
 		{
 			auto start = con.end();
 			start -= 4;
@@ -328,8 +328,8 @@ void example_dynamic_array()
 		}
 
 		//挿入
-		printf("\n");
-		printf("[insert]\n");
+		std::printf("\n");
+		std::printf("[insert]\n");
 		{
 			auto ite = con.begin();
 			++ite;
@@ -338,26 +338,26 @@ void example_dynamic_array()
 		}
 
 		//リサイズ（縮小）
-		printf("\n");
-		printf("[resize(shrink)]\n");
+		std::printf("\n");
+		std::printf("[resize(shrink)]\n");
 		con.resize(5);//要素数=5に縮小
 		printAll();//全件表示
 
 		//最大サイズを縮小
-		printf("\n");
-		printf("[shrink_to_fit]\n");
+		std::printf("\n");
+		std::printf("[shrink_to_fit]\n");
 		con.shrink_to_fit();
 		printAll();//全件表示
 
 		//データ割り当て
-		printf("\n");
-		printf("[assign]\n");
+		std::printf("\n");
+		std::printf("[assign]\n");
 		con.assign(-1, 0);//※-1で最大要素数全件に割り当て
 		printAll();//全件表示
 
 		//クリア
-		printf("\n");
-		printf("[clear]\n");
+		std::printf("\n");
+		std::printf("[clear]\n");
 		con.clear();
 		printAll();//全件表示
 		//printReverse();//全件逆順表示
@@ -366,8 +366,8 @@ void example_dynamic_array()
 	//--------------------
 	//テスト②：基本ロジックテスト：ユーザー定義型を扱う場合
 	{
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[Test for dynamic_array::container(User defined type)]\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[Test for dynamic_array::container(User defined type)]\n");
 
 		//配列データ
 		data_t array[20];
@@ -393,42 +393,42 @@ void example_dynamic_array()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
-			printf("array=");
+			std::printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
+			std::printf("array=");
 			if (con.empty())
 			{
-				printf("(empty)\n");
+				std::printf("(empty)\n");
 				return;
 			}
 			for (auto& data : con)
 			{
-				printf(" [%d:%d]", data.m_key, data.m_val);
+				std::printf(" [%d:%d]", data.m_key, data.m_val);
 			}
-			printf("\n");
+			std::printf("\n");
 		};
 
 		//データを逆順に表示
 		auto printReverse = [&con]()
 		{
-			printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
-			printf("array(reverse)=");
+			std::printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
+			std::printf("array(reverse)=");
 			if (con.empty())
 			{
-				printf("(empty)\n");
+				std::printf("(empty)\n");
 				return;
 			}
 			std::for_each(con.rbegin(), con.rend(),
 				[](data_t& data)
 				{
-					printf(" [%d:%d]", data.m_key, data.m_val);
+					std::printf(" [%d:%d]", data.m_key, data.m_val);
 				}
 			);
-			printf("\n");
+			std::printf("\n");
 		};
 		
 		//データ登録１：push_back()メソッド＋コンストラクタパラメータ（コンストラクタ呼び出しを行う）
-		printf("\n");
-		printf("[push_back(1)]\n");
+		std::printf("\n");
+		std::printf("[push_back(1)]\n");
 		con.push_back(5, 101);
 		con.push_back(8, 102);
 		con.push_back(3, 103);
@@ -440,8 +440,8 @@ void example_dynamic_array()
 		printReverse();
 
 		//データ登録２：push_back()メソッド＋オブジェクト（オブジェクトのコピーを行う）
-		printf("\n");
-		printf("[push_back(2)]\n");
+		std::printf("\n");
+		std::printf("[push_back(2)]\n");
 		{ data_t obj(1, 104); con.push_back(obj); }//コピーで追加
 		{ data_t obj(7, 105); con.push_back(obj); }//コピーで追加
 		{ data_t obj(4, 106); con.push_back(obj); }//コピーで追加
@@ -451,14 +451,14 @@ void example_dynamic_array()
 		printAll();//全件表示
 
 		//リサイズ１：resize()メソッド＋コンストラクタパラメータ（コンストラクタ呼び出しを行う）
-		printf("\n");
-		printf("[resize(1)]\n");
+		std::printf("\n");
+		std::printf("[resize(1)]\n");
 		con.resize(12, 1000, 1000);//12件に拡張
 		printAll();
 
 		//リサイズ２：resize()メソッド＋オブジェクト（オブジェクトのコピーを行う）
-		printf("\n");
-		printf("[resize(2)]\n");
+		std::printf("\n");
+		std::printf("[resize(2)]\n");
 		{
 			data_t prototype(1001, 1001);//コピー用のオブジェクト
 			con.resize(15, prototype);//15件に拡張
@@ -466,8 +466,8 @@ void example_dynamic_array()
 		printAll();
 
 		//ソ―ト
-		printf("\n");
-		printf("[sort]\n");
+		std::printf("\n");
+		std::printf("[sort]\n");
 	#ifdef USE_STL_ALGORITM
 		std::sort(con.begin(), con.end());//高速ソート(STL版)
 	#else//USE_STL_ALGORITM
@@ -476,8 +476,8 @@ void example_dynamic_array()
 		printAll();//全件表示
 
 		//逆順にソート ※カスタムプレディケート関数を使用
-		printf("\n");
-		printf("[custom sort]\n");
+		std::printf("\n");
+		std::printf("[custom sort]\n");
 		auto reverse_pred = [](const data_t& lhs, const data_t& rhs) -> bool {return lhs.m_key > rhs.m_key; };
 	#ifdef USE_STL_ALGORITM
 		std::sort(con.begin(), con.end(), reverse_pred);//高速ソート(STL版)
@@ -487,8 +487,8 @@ void example_dynamic_array()
 		printAll();//全件表示
 
 		//安定ソ―ト
-		printf("\n");
-		printf("[stable_sort]\n");
+		std::printf("\n");
+		std::printf("[stable_sort]\n");
 	#ifdef USE_STL_ALGORITM
 		std::stable_sort(con.begin(), con.end());//安定ソート(STL版)
 	#else//USE_STL_ALGORITM
@@ -497,8 +497,8 @@ void example_dynamic_array()
 		printAll();//全件表示
 
 		//逆順に安定ソート ※カスタムプレディケート関数を使用
-		printf("\n");
-		printf("[custom stable_sort]\n");
+		std::printf("\n");
+		std::printf("[custom stable_sort]\n");
 		//auto reverse_pred = [](const data_t& lhs, const data_t& rhs) -> bool {return lhs.m_key > rhs.m_key; };
 	#ifdef USE_STL_ALGORITM
 		std::stable_sort(con.begin(), con.end(), reverse_pred);//安定ソート(STL版)
@@ -509,9 +509,9 @@ void example_dynamic_array()
 
 	#ifdef TEST_ITERATOR_OPERATION
 		{
-			printf("\n");
-			printf("--------------------[iterator operattion:begin]\n");
-			printf("[constructor]\n");
+			std::printf("\n");
+			std::printf("--------------------[iterator operattion:begin]\n");
+			std::printf("[constructor]\n");
 			container_t::iterator ite = con.begin();
 			container_t::reverse_iterator rite = con.rbegin();
 			container_t::iterator ite_end = con.end();
@@ -520,23 +520,23 @@ void example_dynamic_array()
 			container_t::reverse_iterator rite2 = con.begin();
 			container_t::iterator ite2_end = con.rend();
 			container_t::reverse_iterator rite2_end = con.end();
-			if (ite.isExist()) printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
-			if (rite.isExist()) printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
-			if (ite_end.isExist()) printf("ite_end:[%d] key=%d, value=%d\n", ite_end.getIndex(), ite_end->m_key, ite_end->m_val);
-			if (rite_end.isExist()) printf("rite_end:[%d] key=%d, value=%d\n", rite_end.getIndex(), rite_end->m_key, rite_end->m_val);
-			if (ite2.isExist()) printf("ite2:[%d] key=%d, value=%d\n", ite2.getIndex(), ite2->m_key, ite2->m_val);
-			if (rite2.isExist()) printf("rite2:[%d] key=%d, value=%d\n", rite2.getIndex(), rite2->m_key, rite2->m_val);
-			if (ite2_end.isExist()) printf("ite2_end:[%d] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_key, ite2_end->m_val);
-			if (rite2_end.isExist()) printf("rite2_end:[%d] key=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_key, rite2_end->m_val);
-			printf("ite_end - ite = %d\n", ite_end - ite);
-			printf("ite - ite_end = %d\n", ite - ite_end);
-			printf("rite_end - rite = %d\n", rite_end - rite);
-			printf("rite - rite_end = %d\n", rite - rite_end);
-			printf("ite2 - ite = %d\n", ite2 - ite);
-			printf("ite - ite2 = %d\n", ite - ite2);
-			printf("rite2 - rite = %d\n", rite2 - rite);
-			printf("rite - rite2 = %d\n", rite - rite2);
-			printf("[copy operator]\n");
+			if (ite.isExist()) std::printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
+			if (rite.isExist()) std::printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
+			if (ite_end.isExist()) std::printf("ite_end:[%d] key=%d, value=%d\n", ite_end.getIndex(), ite_end->m_key, ite_end->m_val);
+			if (rite_end.isExist()) std::printf("rite_end:[%d] key=%d, value=%d\n", rite_end.getIndex(), rite_end->m_key, rite_end->m_val);
+			if (ite2.isExist()) std::printf("ite2:[%d] key=%d, value=%d\n", ite2.getIndex(), ite2->m_key, ite2->m_val);
+			if (rite2.isExist()) std::printf("rite2:[%d] key=%d, value=%d\n", rite2.getIndex(), rite2->m_key, rite2->m_val);
+			if (ite2_end.isExist()) std::printf("ite2_end:[%d] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_key, ite2_end->m_val);
+			if (rite2_end.isExist()) std::printf("rite2_end:[%d] key=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_key, rite2_end->m_val);
+			std::printf("ite_end - ite = %d\n", ite_end - ite);
+			std::printf("ite - ite_end = %d\n", ite - ite_end);
+			std::printf("rite_end - rite = %d\n", rite_end - rite);
+			std::printf("rite - rite_end = %d\n", rite - rite_end);
+			std::printf("ite2 - ite = %d\n", ite2 - ite);
+			std::printf("ite - ite2 = %d\n", ite - ite2);
+			std::printf("rite2 - rite = %d\n", rite2 - rite);
+			std::printf("rite - rite2 = %d\n", rite - rite2);
+			std::printf("[copy operator]\n");
 			ite = con.begin();
 			rite = con.rbegin();
 			ite_end = con.end();
@@ -545,154 +545,154 @@ void example_dynamic_array()
 			rite2 = con.begin();
 			ite2_end = con.rend();
 			rite2_end = con.end();
-			if (ite.isExist()) printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
-			if (rite.isExist()) printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
-			if (ite_end.isExist()) printf("ite_end:[%d] key=%d, value=%d\n", ite_end.getIndex(), ite_end->m_key, ite_end->m_val);
-			if (rite_end.isExist()) printf("rite_end:[%d] key=%d, value=%d\n", rite_end.getIndex(), rite_end->m_key, rite_end->m_val);
-			if (ite2.isExist()) printf("ite2:[%d] key=%d, value=%d\n", ite2.getIndex(), ite2->m_key, ite2->m_val);
-			if (rite2.isExist()) printf("rite2:[%d] key=%d, value=%d\n", rite2.getIndex(), rite2->m_key, rite2->m_val);
-			if (ite2_end.isExist()) printf("ite2_end:[%d] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_key, ite2_end->m_val);
-			if (rite2_end.isExist()) printf("rite2_end:[%d] key=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_key, rite2_end->m_val);
-			printf("[rite.base()]\n");
+			if (ite.isExist()) std::printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
+			if (rite.isExist()) std::printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
+			if (ite_end.isExist()) std::printf("ite_end:[%d] key=%d, value=%d\n", ite_end.getIndex(), ite_end->m_key, ite_end->m_val);
+			if (rite_end.isExist()) std::printf("rite_end:[%d] key=%d, value=%d\n", rite_end.getIndex(), rite_end->m_key, rite_end->m_val);
+			if (ite2.isExist()) std::printf("ite2:[%d] key=%d, value=%d\n", ite2.getIndex(), ite2->m_key, ite2->m_val);
+			if (rite2.isExist()) std::printf("rite2:[%d] key=%d, value=%d\n", rite2.getIndex(), rite2->m_key, rite2->m_val);
+			if (ite2_end.isExist()) std::printf("ite2_end:[%d] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_key, ite2_end->m_val);
+			if (rite2_end.isExist()) std::printf("rite2_end:[%d] key=%d, value=%d\n", rite2_end.getIndex(), rite2_end->m_key, rite2_end->m_val);
+			std::printf("[rite.base()]\n");
 			ite2 = rite.base();
 			ite2_end = rite_end.base();
-			if (ite2.isExist()) printf("ite2:[%d] key=%d, value=%d\n", ite2.getIndex(), ite2->m_key, ite2->m_val);
-			if (ite2_end.isExist()) printf("ite2_end:[%d] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_key, ite2_end->m_val);
-			printf("[++ite,--ie_end]\n");
+			if (ite2.isExist()) std::printf("ite2:[%d] key=%d, value=%d\n", ite2.getIndex(), ite2->m_key, ite2->m_val);
+			if (ite2_end.isExist()) std::printf("ite2_end:[%d] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end->m_key, ite2_end->m_val);
+			std::printf("[++ite,--ie_end]\n");
 			++ite;
 			++rite;
 			--ite_end;
 			--rite_end;
-			if (ite.isExist()) printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
-			if (rite.isExist()) printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
-			if (ite_end.isExist()) printf("ite_end:[%d] key=%d, value=%d\n", ite_end.getIndex(), ite_end->m_key, ite_end->m_val);
-			if (rite_end.isExist()) printf("rite_end:[%d] key=%d, value=%d\n", rite_end.getIndex(), rite_end->m_key, rite_end->m_val);
-			printf("[--ite,++ie_end]\n");
+			if (ite.isExist()) std::printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
+			if (rite.isExist()) std::printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
+			if (ite_end.isExist()) std::printf("ite_end:[%d] key=%d, value=%d\n", ite_end.getIndex(), ite_end->m_key, ite_end->m_val);
+			if (rite_end.isExist()) std::printf("rite_end:[%d] key=%d, value=%d\n", rite_end.getIndex(), rite_end->m_key, rite_end->m_val);
+			std::printf("[--ite,++ie_end]\n");
 			--ite;
 			--rite;
 			++ite_end;
 			++rite_end;
-			if (ite.isExist()) printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
-			if (rite.isExist()) printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
-			if (ite_end.isExist()) printf("ite_end:[%d] key=%d, value=%d\n", ite_end.getIndex(), ite_end->m_key, ite_end->m_val);
-			if (rite_end.isExist()) printf("rite_end:[%d] key=%d, value=%d\n", rite_end.getIndex(), rite_end->m_key, rite_end->m_val);
+			if (ite.isExist()) std::printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
+			if (rite.isExist()) std::printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
+			if (ite_end.isExist()) std::printf("ite_end:[%d] key=%d, value=%d\n", ite_end.getIndex(), ite_end->m_key, ite_end->m_val);
+			if (rite_end.isExist()) std::printf("rite_end:[%d] key=%d, value=%d\n", rite_end.getIndex(), rite_end->m_key, rite_end->m_val);
 			for (int i = 0; i < 3; ++i)
 			{
-				printf("[ite[%d]]\n", i);
+				std::printf("[ite[%d]]\n", i);
 				ite = ite[i];
 				rite = rite[i];
-				if (ite.isExist()) printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
-				if (rite.isExist()) printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
+				if (ite.isExist()) std::printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
+				if (rite.isExist()) std::printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
 			}
-			printf("[ite+=3]\n");
+			std::printf("[ite+=3]\n");
 			ite += 3;
 			rite += 3;
-			if (ite.isExist()) printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
-			if (rite.isExist()) printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
-			printf("[ite-=3]\n");
+			if (ite.isExist()) std::printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
+			if (rite.isExist()) std::printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
+			std::printf("[ite-=3]\n");
 			ite -= 3;
 			rite -= 3;
-			if (ite.isExist()) printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
-			if (rite.isExist()) printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
-			printf("ite_end - ite = %d\n", ite_end - ite);
-			printf("ite - ite_end = %d\n", ite - ite_end);
-			printf("rite_end - rite = %d\n", rite_end - rite);
-			printf("rite - rite_end = %d\n", rite - rite_end);
-			printf("[ite2-=2]\n");
+			if (ite.isExist()) std::printf("ite:[%d] key=%d, value=%d\n", ite.getIndex(), ite->m_key, ite->m_val);
+			if (rite.isExist()) std::printf("rite:[%d] key=%d, value=%d\n", rite.getIndex(), rite->m_key, rite->m_val);
+			std::printf("ite_end - ite = %d\n", ite_end - ite);
+			std::printf("ite - ite_end = %d\n", ite - ite_end);
+			std::printf("rite_end - rite = %d\n", rite_end - rite);
+			std::printf("rite - rite_end = %d\n", rite - rite_end);
+			std::printf("[ite2-=2]\n");
 			ite2 -= 2;
 			rite2 -= 2;
-			printf("ite2 - ite = %d\n", ite2 - ite);
-			printf("ite - ite2 = %d\n", ite - ite2);
-			printf("rite2 - rite = %d\n", rite2 - rite);
-			printf("rite - rite2 = %d\n", rite - rite2);
-			printf("[++ite_end]\n");
+			std::printf("ite2 - ite = %d\n", ite2 - ite);
+			std::printf("ite - ite2 = %d\n", ite - ite2);
+			std::printf("rite2 - rite = %d\n", rite2 - rite);
+			std::printf("rite - rite2 = %d\n", rite - rite2);
+			std::printf("[++ite_end]\n");
 			++ite_end;
 			++rite_end;
-			printf("ite_end - ite = %d\n", ite_end - ite);
-			printf("ite - ite_end = %d\n", ite - ite_end);
-			printf("rite_end - rite = %d\n", rite_end - rite);
-			printf("rite - rite_end = %d\n", rite - rite_end);
-			printf("--------------------[iterator operattion:end]\n");
+			std::printf("ite_end - ite = %d\n", ite_end - ite);
+			std::printf("ite - ite_end = %d\n", ite - ite_end);
+			std::printf("rite_end - rite = %d\n", rite_end - rite);
+			std::printf("rite - rite_end = %d\n", rite - rite_end);
+			std::printf("--------------------[iterator operattion:end]\n");
 		}
 	#endif//TEST_ITERATOR_OPERATION
 
 	#ifdef TEST_LOCK_OPERATION
 		//ロック操作テスト
-		printf("--------------------[lock operation:begin]\n");
+		std::printf("--------------------[lock operation:begin]\n");
 		{
 			auto lock(con.lockScoped());//lock_guard<container_t::lock_type> lock(*con);と同じ
-			printf(".lockScoped() ... OK\n");
+			std::printf(".lockScoped() ... OK\n");
 		}
 		{
 			auto lock(con.lockSharedScoped());//shared_lock_guard<container_t::lock_type> lock(*con);と同じ
-			printf(".lockSharedScoped() ... OK\n");
+			std::printf(".lockSharedScoped() ... OK\n");
 		}
 		{
 			auto lock(con.lockUnique());//unique_shared_lock<container_t::lock_type> lock(*con);と同じ
-			printf(".lockUnique() ... OK\n");
+			std::printf(".lockUnique() ... OK\n");
 		}
 		{
 			auto lock(con.lockUnique(with_lock));//unique_shared_lock<container_t::lock_type> lock(*con, with_lock);と同じ
-			printf(".lockUnique(with_lock) ... OK\n");
+			std::printf(".lockUnique(with_lock) ... OK\n");
 		}
 		{
 			auto lock(con.lockUnique(with_lock_shared));//unique_shared_lock<container_t::lock_type> lock(*con, with_lock_shared);と同じ
-			printf(".lockUnique(with_lock_shared) ... OK\n");
+			std::printf(".lockUnique(with_lock_shared) ... OK\n");
 		}
 		{
 			auto lock(con.lockUnique(try_to_lock));//unique_shared_lock<container_t::lock_type> lock(*con, try_to_lock);と同じ
-			printf(".lockUnique(try_to_lock) ... OK\n");
+			std::printf(".lockUnique(try_to_lock) ... OK\n");
 		}
 		{
 			auto lock(con.lockUnique(try_to_lock_shared));//unique_shared_lock<container_t::lock_type> lock(*con, try_to_lock_shared);と同じ
-			printf(".lockUnique(try_to_lock_shared) ... OK\n");
+			std::printf(".lockUnique(try_to_lock_shared) ... OK\n");
 		}
 		{
 			container_t::lock_type& lock_obj = con;
 			lock_obj.lock();
 			auto lock(con.lockUnique(adopt_lock));//unique_shared_lock<container_t::lock_type> lock(*con, adopt_lock);と同じ
-			printf(".lockUnique(adopt_lock) ... OK\n");
+			std::printf(".lockUnique(adopt_lock) ... OK\n");
 		}
 		{
 			container_t::lock_type& lock_obj = con;
 			lock_obj.lock_shared();
 			auto lock(con.lockUnique(adopt_shared_lock));//unique_shared_lock<container_t::lock_type> lock(*con, adopt_shared_lock);と同じ
-			printf(".lockUnique(adopt_shared_lock) ... OK\n");
+			std::printf(".lockUnique(adopt_shared_lock) ... OK\n");
 		}
 		{
 			auto lock(con.lockUnique(defer_lock));//unique_shared_lock<container_t::lock_type> lock(*con, defer_lock);と同じ
-			printf(".lockUnique(defer_lock) ... OK\n");
+			std::printf(".lockUnique(defer_lock) ... OK\n");
 		}
-		printf("--------------------[lock operation:end]\n");
+		std::printf("--------------------[lock operation:end]\n");
 	#endif//TEST_LOCK_OPERATION
 
 		//末尾をポップ(1)
-		printf("\n");
-		printf("[pop_back(1)]\n");
+		std::printf("\n");
+		std::printf("[pop_back(1)]\n");
 		{
 			const data_t* val = con.back();//末尾の値を取得
-			printf("back=[%d:%d]\n", val->m_key, val->m_val);
+			std::printf("back=[%d:%d]\n", val->m_key, val->m_val);
 			con.pop_back();//末尾を削除
 			printAll();//全件表示
 		}
 
 		//末尾をポップ(2)
-		printf("\n");
-		printf("[pop_back(2)]\n");
+		std::printf("\n");
+		std::printf("[pop_back(2)]\n");
 		{
 			data_t pop_val;
 			con.pop_back(pop_val);//値のコピーを受け取って末尾を削除
-			printf("pop_back=[%d:%d]\n", pop_val.m_key, pop_val.m_val);
+			std::printf("pop_back=[%d:%d]\n", pop_val.m_key, pop_val.m_val);
 			printAll();//全件表示
 		}
 
 		//線形探索
-		printf("\n");
-		printf("[find]\n");
+		std::printf("\n");
+		std::printf("[find]\n");
 		printAll();//全件表示
 		auto find = [&con](const int key)
 		{
-			printf("findValue(key=%d)=", key);
+			std::printf("findValue(key=%d)=", key);
 		#ifdef USE_STL_ALGORITM
 			auto ite = std::find(con.begin(), con.end(), key);//線形探索(STL版)
 		#else//USE_STL_ALGORITM
@@ -700,26 +700,26 @@ void example_dynamic_array()
 		#endif//USE_STL_ALGORITM
 			if (ite.isExist())
 			{
-				printf(" [%d:%d]", ite->m_key, ite->m_val);
+				std::printf(" [%d:%d]", ite->m_key, ite->m_val);
 				++ite;
 				if (ite.isExist())
-					printf(" next=[%d:%d]", ite->m_key, ite->m_val);
+					std::printf(" next=[%d:%d]", ite->m_key, ite->m_val);
 			}
 			else
-				printf("(not found)");
-			printf("\n");
+				std::printf("(not found)");
+			std::printf("\n");
 		};
 		find(5);
 		find(6);
 		find(7);
 
 		//二分探索（ソート前）
-		printf("\n");
-		printf("[binary search(before sort)]\n");
+		std::printf("\n");
+		std::printf("[binary search(before sort)]\n");
 		printAll();//全件表示
 		auto binary_search = [&con](const int key)
 		{
-			printf("binarySearchValue(key=%d)=", key);
+			std::printf("binarySearchValue(key=%d)=", key);
 		#ifdef USE_STL_ALGORITM
 			if (std::binary_search(con.begin(), con.end(), key))//二分探索(STL版)
 			{
@@ -729,22 +729,22 @@ void example_dynamic_array()
 			{
 		#endif//USE_STL_ALGORITM
 				auto ite = std::lower_bound(con.begin(), con.end(), key);
-				printf(" [%d:%d]", ite->m_key, ite->m_val);
+				std::printf(" [%d:%d]", ite->m_key, ite->m_val);
 				--ite;
 				if (ite.isExist())
-					printf(" prev=[%d:%d]", ite->m_key, ite->m_val);
+					std::printf(" prev=[%d:%d]", ite->m_key, ite->m_val);
 			}
 			else
-				printf("(not found)");
-			printf("\n");
+				std::printf("(not found)");
+			std::printf("\n");
 		};
 		binary_search(5);
 		binary_search(6);
 		binary_search(7);
 
 		//二分探索（ソート後）
-		printf("\n");
-		printf("[binary search(after sort)]\n");
+		std::printf("\n");
+		std::printf("[binary search(after sort)]\n");
 		con.sort();//ソート済み状態にする
 		printAll();//全件表示
 		binary_search(5);
@@ -752,8 +752,8 @@ void example_dynamic_array()
 		binary_search(7);
 
 		//削除１：イテレータと削除数で指定
-		printf("\n");
-		printf("[erase(1)]\n");
+		std::printf("\n");
+		std::printf("[erase(1)]\n");
 		{
 			auto ite = con.end();
 			ite -= 4;
@@ -762,8 +762,8 @@ void example_dynamic_array()
 		}
 
 		//削除２：イテレータの範囲で指定
-		printf("\n");
-		printf("[erase(2)]\n");
+		std::printf("\n");
+		std::printf("[erase(2)]\n");
 		{
 			auto start = con.end();
 			start -= 4;
@@ -774,8 +774,8 @@ void example_dynamic_array()
 		}
 
 		//挿入１：insert()メソッド＋コンストラクタパラメータ（コンストラクタ呼び出しを行う）
-		printf("\n");
-		printf("[insert(1)]\n");
+		std::printf("\n");
+		std::printf("[insert(1)]\n");
 		{
 			auto ite = con.begin();
 			++ite;
@@ -784,8 +784,8 @@ void example_dynamic_array()
 		}
 
 		//挿入２：insert()メソッド＋オブジェクト（オブジェクトのコピーを行う）
-		printf("\n");
-		printf("[insert(2)]\n");
+		std::printf("\n");
+		std::printf("[insert(2)]\n");
 		{
 			auto ite = con.begin();
 			ite += 10;
@@ -795,28 +795,28 @@ void example_dynamic_array()
 		}
 
 		//リサイズ（縮小）
-		printf("\n");
-		printf("[resize(shrink)]\n");
+		std::printf("\n");
+		std::printf("[resize(shrink)]\n");
 		con.resize(5);//要素数=5に縮小
 		printAll();//全件表示
 
 		//最大サイズを縮小
-		printf("\n");
-		printf("[shrink_to_fit]\n");
+		std::printf("\n");
+		std::printf("[shrink_to_fit]\n");
 		con.shrink_to_fit();
 		printAll();//全件表示
 
 		//データ割り当て１：assign()メソッド＋コンストラクタパラメータ（コンストラクタ呼び出しを行う）
-		printf("\n");
-		printf("[assign(1)]\n");
+		std::printf("\n");
+		std::printf("[assign(1)]\n");
 		{
 			con.assign(2, 0, 0);//先頭から2件に割り当て
 			printAll();//全件表示
 		}
 
 		//データ割り当て２：assign()メソッド＋オブジェクト（オブジェクトのコピーを行う）
-		printf("\n");
-		printf("[assign(2)]\n");
+		std::printf("\n");
+		std::printf("[assign(2)]\n");
 		{
 			data_t prototype(-1, 0);//コピー用のオブジェクト
 			con.assign(-1, prototype);//※-1で最大要素数全件に割り当て
@@ -824,8 +824,8 @@ void example_dynamic_array()
 		}
 
 		//クリア
-		printf("\n");
-		printf("[clear]\n");
+		std::printf("\n");
+		std::printf("[clear]\n");
 		con.clear();
 		printAll();//全件表示
 		//printReverse();//全件逆順表示
@@ -834,8 +834,8 @@ void example_dynamic_array()
 	//--------------------
 	//テスト③：ソート、探索の設定を変える
 	{
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[Test for dynamic_array::container(User defined type with custom operator type)]\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[Test for dynamic_array::container(User defined type with custom operator type)]\n");
 
 		//配列データ
 		data_t array[20];
@@ -849,8 +849,8 @@ void example_dynamic_array()
 		//con.assignArray(array);
 
 		//データ登録１：push_back()メソッド＋コンストラクタパラメータ（コンストラクタ呼び出しを行う）
-		printf("\n");
-		printf("[push_back]\n");
+		std::printf("\n");
+		std::printf("[push_back]\n");
 		con.push_back(1, 105);
 		con.push_back(1, 108);
 		con.push_back(2, 103);
@@ -865,57 +865,57 @@ void example_dynamic_array()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
-			printf("array=");
+			std::printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
+			std::printf("array=");
 			if (con.empty())
 			{
-				printf("(empty)\n");
+				std::printf("(empty)\n");
 				return;
 			}
 			for (auto& data : con)
 			{
-				printf(" [%d:%d]", data.m_key, data.m_val);
+				std::printf(" [%d:%d]", data.m_key, data.m_val);
 			}
-			printf("\n");
+			std::printf("\n");
 		};
 		printAll();
 
 		//ソ―ト
-		printf("\n");
-		printf("[sort]\n");
+		std::printf("\n");
+		std::printf("[sort]\n");
 		con.sort();//高速ソート
 		//con.stableSort();//安定ソート
 		printAll();//全件表示
 
 		//線形探索
-		printf("\n");
-		printf("[find]\n");
+		std::printf("\n");
+		std::printf("[find]\n");
 		auto find = [&con](const int value)
 		{
-			printf("findValue(value=%d)=", value);
+			std::printf("findValue(value=%d)=", value);
 			auto ite = con.findValue(value);//線形探索
 			if (ite.isExist())
-				printf(" [%d:%d]", ite->m_key, ite->m_val);
+				std::printf(" [%d:%d]", ite->m_key, ite->m_val);
 			else
-				printf("(not found)");
-			printf("\n");
+				std::printf("(not found)");
+			std::printf("\n");
 		};
 		find(101);
 		find(110);
 		find(103);
 
 		//二分探索
-		printf("\n");
-		printf("[binary search]\n");
+		std::printf("\n");
+		std::printf("[binary search]\n");
 		auto binary_search = [&con](const int value)
 		{
-			printf("binarySearchValue(value=%d)=", value);
+			std::printf("binarySearchValue(value=%d)=", value);
 			auto ite = con.binarySearchValue(value);//二分探索
 			if (ite.isExist())
-				printf(" [%d:%d]", ite->m_key, ite->m_val);
+				std::printf(" [%d:%d]", ite->m_key, ite->m_val);
 			else
-				printf("(not found)");
-			printf("\n");
+				std::printf("(not found)");
+			std::printf("\n");
 		};
 		binary_search(101);
 		binary_search(110);
@@ -923,8 +923,8 @@ void example_dynamic_array()
 
 		//カスタムソート
 		{
-			printf("\n");
-			printf("[sort with custom predicate]\n");
+			std::printf("\n");
+			std::printf("[sort with custom predicate]\n");
 			auto predicate = [](const data_t& lhs, const data_t& rhs) -> bool {return lhs.m_key < rhs.m_key ? true : lhs.m_key == rhs.m_key ? lhs.m_val > rhs.m_val : false; };
 			con.sort(predicate);//高速ソート
 			//con.stableSort(reverse_pred);//安定ソート
@@ -932,72 +932,72 @@ void example_dynamic_array()
 		}
 
 		//カスタム線形探索(1)
-		printf("\n");
-		printf("[find with custom predicate(1)]\n");
+		std::printf("\n");
+		std::printf("[find with custom predicate(1)]\n");
 		auto custom_find1 = [&con](const int key, const int value)
 		{
-			printf("find(key=%d, value=%d)=", key, value);
+			std::printf("find(key=%d, value=%d)=", key, value);
 			auto predicate = [&key, &value](const data_t& lhs) -> bool { return lhs.m_key == key && lhs.m_val == value; };
 			auto ite = con.find(predicate);//線形探索
 			if (ite.isExist())
-				printf(" [%d:%d]", ite->m_key, ite->m_val);
+				std::printf(" [%d:%d]", ite->m_key, ite->m_val);
 			else
-				printf("(not found)");
-			printf("\n");
+				std::printf("(not found)");
+			std::printf("\n");
 		};
 		custom_find1(2, 101);
 		custom_find1(2, 102);
 		custom_find1(2, 103);
 
 		//カスタム二分探索(1)
-		printf("\n");
-		printf("[binary search with custom comparison(1)]\n");
+		std::printf("\n");
+		std::printf("[binary search with custom comparison(1)]\n");
 		auto custom_binary_search1 = [&con](const int key, const int value)
 		{
-			printf("binarySearchValue(key=%d, value=%d)=", key, value);
+			std::printf("binarySearchValue(key=%d, value=%d)=", key, value);
 			auto comparison = [&key, &value](const data_t& lhs) -> int { return key == lhs.m_key ? lhs.m_val - value : key > lhs.m_key ? 1 : -1; };
 			auto ite = con.binary_search(comparison);//二分探索
 			if (ite.isExist())
-				printf(" [%d:%d]", ite->m_key, ite->m_val);
+				std::printf(" [%d:%d]", ite->m_key, ite->m_val);
 			else
-				printf("(not found)");
-			printf("\n");
+				std::printf("(not found)");
+			std::printf("\n");
 		};
 		custom_binary_search1(2, 101);
 		custom_binary_search1(2, 102);
 		custom_binary_search1(2, 103);
 
 		//カスタム線形探索(2)
-		printf("\n");
-		printf("[find with custom predicate(2)]\n");
+		std::printf("\n");
+		std::printf("[find with custom predicate(2)]\n");
 		auto custom_find2 = [&con](const int key)
 		{
-			printf("find(key=%d)=", key);
+			std::printf("find(key=%d)=", key);
 			auto predicate = [](const data_t& lhs, const int key) -> bool { return lhs.m_key == key; };
 			auto ite = con.findValue(key, predicate);//線形探索
 			if (ite.isExist())
-				printf(" [%d:%d]", ite->m_key, ite->m_val);
+				std::printf(" [%d:%d]", ite->m_key, ite->m_val);
 			else
-				printf("(not found)");
-			printf("\n");
+				std::printf("(not found)");
+			std::printf("\n");
 		};
 		custom_find2(2);
 		custom_find2(7);
 		custom_find2(3);
 
 		//カスタム二分探索(2)
-		printf("\n");
-		printf("[binary search with custom comparison(2)]\n");
+		std::printf("\n");
+		std::printf("[binary search with custom comparison(2)]\n");
 		auto custom_binary_search2 = [&con](const int key)
 		{
-			printf("binarySearchValue(key=%d)=", key);
+			std::printf("binarySearchValue(key=%d)=", key);
 			auto comparison = [](const data_t& lhs, const int key) -> int { return key - lhs.m_key; };
 			auto ite = con.binarySearchValue(key, comparison);//二分探索
 			if (ite.isExist())
-				printf(" [%d:%d]", ite->m_key, ite->m_val);
+				std::printf(" [%d:%d]", ite->m_key, ite->m_val);
 			else
-				printf("(not found)");
-			printf("\n");
+				std::printf("(not found)");
+			std::printf("\n");
 		};
 		custom_binary_search2(2);
 		custom_binary_search2(7);
@@ -1007,8 +1007,8 @@ void example_dynamic_array()
 	//--------------------
 	//テスト④：データ設定済みの既存の配列を扱う
 	{
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[Test for dynamic_array::container(User defined type for existing data)]\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[Test for dynamic_array::container(User defined type for existing data)]\n");
 
 		//データ設定済みの既存の配列
 		data_t array[] =
@@ -1037,26 +1037,26 @@ void example_dynamic_array()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
-			printf("array=");
+			std::printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
+			std::printf("array=");
 			if (con.empty())
 			{
-				printf("(empty)\n");
+				std::printf("(empty)\n");
 				return;
 			}
 			for (auto& data : con)
 			{
-				printf(" [%d:%d]", data.m_key, data.m_val);
+				std::printf(" [%d:%d]", data.m_key, data.m_val);
 			}
-			printf("\n");
+			std::printf("\n");
 		};
-		printf("\n");
-		printf("[sort(before)]\n");
+		std::printf("\n");
+		std::printf("[sort(before)]\n");
 		printAll();
 
 		//ソ―ト
-		printf("\n");
-		printf("[sort(after)]\n");
+		std::printf("\n");
+		std::printf("[sort(after)]\n");
 		//con.sort();//高速ソート
 		con.stableSort();//安定ソート
 		printAll();//全件表示
@@ -1065,8 +1065,8 @@ void example_dynamic_array()
 	//--------------------
 	//テスト⑤：ロック制御を行う
 	{
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[Test for dynamic_array::container(User defined type for multi-thread)]\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[Test for dynamic_array::container(User defined type for multi-thread)]\n");
 
 		testThread<dynamic_array::container<ope> >("normal container");//ロックなし版のスレッド
 		testThread<dynamic_array::container<mt_ope_t> >("multi-thread container");//ロックあり版のスレッド
@@ -1082,20 +1082,20 @@ void example_dynamic_array()
 			const auto now_time = nowTime();
 			const double elapsed_time = calcElapsedTime(prev_time, now_time);
 			if (is_show)
-				printf("*elapsed_time=%.9lf sec\n", elapsed_time);
+				std::printf("*elapsed_time=%.9lf sec\n", elapsed_time);
 			return now_time;
 		};
 
 		{
-			printf("--------------------------------------------------------------------------------\n");
-			printf("[Test for performance dynamic_array]\n");
+			std::printf("--------------------------------------------------------------------------------\n");
+			std::printf("[Test for performance dynamic_array]\n");
 
 			const auto begin_time = nowTime();
 			auto prev_time = begin_time;
 
 			//データを初期化
-			printf("\n");
-			printf("[create container & assign() * %d]\n", TEST_DATA_NUM);
+			std::printf("\n");
+			std::printf("[create container & assign() * %d]\n", TEST_DATA_NUM);
 			const std::size_t buff_size = sizeof(data_t)* TEST_DATA_NUM;
 			char* buff = new char[buff_size];
 			typedef dynamic_array::container<ope> container_t;
@@ -1104,14 +1104,14 @@ void example_dynamic_array()
 			prev_time = printElapsedTime(prev_time, true);
 
 			//データをクリア
-			printf("\n");
-			printf("[clear() * %d]\n", TEST_DATA_NUM);
+			std::printf("\n");
+			std::printf("[clear() * %d]\n", TEST_DATA_NUM);
 			con->clear();
 			prev_time = printElapsedTime(prev_time, true);
 
 			//データを登録
-			printf("\n");
-			printf("[push_back() * %d]\n", TEST_DATA_NUM);
+			std::printf("\n");
+			std::printf("[push_back() * %d]\n", TEST_DATA_NUM);
 			{
 				int num = 0;
 				for (int i = 0; i < TEST_DATA_NUM; ++i)
@@ -1119,13 +1119,13 @@ void example_dynamic_array()
 					con->push_back(i, 10000000 + i);
 					++num;
 				}
-				printf("num=%d\n", num);
+				std::printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
 
 			//イテレータ(1)
-			printf("\n");
-			printf("[iterator(1)]\n");
+			std::printf("\n");
+			std::printf("[iterator(1)]\n");
 			{
 				printf_detail("size=%d, max_size=%d(%d)\n", con->size(), con->max_size(), con->max_sizeReal());
 				printf_detail("array=");
@@ -1138,21 +1138,21 @@ void example_dynamic_array()
 					++num;
 				}
 				printf_detail("\n");
-				printf("num=%d\n", num);
+				std::printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
 
 			//逆順ソート
-			printf("\n");
-			printf("[reverse sort]\n");
+			std::printf("\n");
+			std::printf("[reverse sort]\n");
 			auto reverse_sort = [](const data_t& lhs, const data_t& rhs){return lhs.m_key > rhs.m_key; };
 			con->sort(reverse_sort);
 			assert(con->isOrdered(reverse_sort));
 			prev_time = printElapsedTime(prev_time, true);
 
 			//イテレータ(2)
-			printf("\n");
-			printf("[iterator(2)]\n");
+			std::printf("\n");
+			std::printf("[iterator(2)]\n");
 			{
 				printf_detail("size=%d, max_size=%d(%d)\n", con->size(), con->max_size(), con->max_sizeReal());
 				printf_detail("array=");
@@ -1166,20 +1166,20 @@ void example_dynamic_array()
 					}
 				);
 				printf_detail("\n");
-				printf("num=%d\n", num);
+				std::printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
 
 			//正順ソート
-			printf("\n");
-			printf("[sort]\n");
+			std::printf("\n");
+			std::printf("[sort]\n");
 			con->sort();
 			assert(con->isOrdered());
 			prev_time = printElapsedTime(prev_time, true);
 
 			//リバースイテレータ
-			printf("\n");
-			printf("[reverse_iterator]\n");
+			std::printf("\n");
+			std::printf("[reverse_iterator]\n");
 			{
 				printf_detail("size=%d, max_size=%d(%d)\n", con->size(), con->max_size(), con->max_sizeReal());
 				printf_detail("array=");
@@ -1193,29 +1193,29 @@ void example_dynamic_array()
 					}
 				);
 				printf_detail("\n");
-				printf("num=%d\n", num);
+				std::printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
 
 		#if 0
 			//逆順安定ソート
-			printf("\n");
-			printf("[reverse stable sort]\n");
+			std::printf("\n");
+			std::printf("[reverse stable sort]\n");
 			con->stableSort(reverse_sort);
 			assert(con->isOrdered(reverse_sort));
 			prev_time = printElapsedTime(prev_time, true);
 
 			//正順安定ソート
-			printf("\n");
-			printf("[stable sort]\n");
+			std::printf("\n");
+			std::printf("[stable sort]\n");
 			con->stableSort();
 			assert(con->isOrdered());
 			prev_time = printElapsedTime(prev_time, true);
 		#endif
 
 			//線形探索
-			printf("\n");
-			printf("[findValue]\n");
+			std::printf("\n");
+			std::printf("[findValue]\n");
 			{
 				int num = 0;
 				for (int i = 0; i < TEST_DATA_NUM; i += TEST_DATA_FIND_STEP)
@@ -1225,13 +1225,13 @@ void example_dynamic_array()
 					++num;
 				}
 				printf_detail("\n");
-				printf("num=%d\n", num);
+				std::printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
 
 			//二分探索
-			printf("\n");
-			printf("[binarySearchValue]\n");
+			std::printf("\n");
+			std::printf("[binarySearchValue]\n");
 			{
 				int num = 0;
 				for (int i = 0; i < TEST_DATA_NUM; ++i)
@@ -1241,13 +1241,13 @@ void example_dynamic_array()
 					++num;
 				}
 				printf_detail("\n");
-				printf("num=%d\n", num);
+				std::printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
 
 			//データを破棄
-			printf("\n");
-			printf("[delete container]\n");
+			std::printf("\n");
+			std::printf("[delete container]\n");
 			delete con;//コンテナを破棄
 			con = nullptr;
 			delete buff;
@@ -1255,21 +1255,21 @@ void example_dynamic_array()
 			prev_time = printElapsedTime(prev_time, true);
 
 			//総時間
-			printf("\n");
-			printf("[finish]\n");
+			std::printf("\n");
+			std::printf("[finish]\n");
 			printElapsedTime(begin_time, true);
 		}
 
 		{
-			printf("--------------------------------------------------------------------------------\n");
-			printf("[Test for performance std::vector]\n");
+			std::printf("--------------------------------------------------------------------------------\n");
+			std::printf("[Test for performance std::vector]\n");
 
 			const auto begin_time = nowTime();
 			auto prev_time = begin_time;
 
 			//データを初期化
-			printf("\n");
-			printf("[create container & assign() * %d]\n", TEST_DATA_NUM);
+			std::printf("\n");
+			std::printf("[create container & assign() * %d]\n", TEST_DATA_NUM);
 			typedef std::vector<data_t> container_t;
 			container_t* con = new container_t();//std::vectorコンテナを生成
 			con->reserve(TEST_DATA_NUM);
@@ -1280,14 +1280,14 @@ void example_dynamic_array()
 			prev_time = printElapsedTime(prev_time, true);
 
 			//データをクリア
-			printf("\n");
-			printf("[clear() * %d]\n", TEST_DATA_NUM);
+			std::printf("\n");
+			std::printf("[clear() * %d]\n", TEST_DATA_NUM);
 			con->clear();
 			prev_time = printElapsedTime(prev_time, true);
 
 			//データを登録
-			printf("\n");
-			printf("[push_back() * %d]\n", TEST_DATA_NUM);
+			std::printf("\n");
+			std::printf("[push_back() * %d]\n", TEST_DATA_NUM);
 			{
 				int num = 0;
 				for (int i = 0; i < TEST_DATA_NUM; ++i)
@@ -1296,13 +1296,13 @@ void example_dynamic_array()
 					con->push_back(std::move(value));
 					++num;
 				}
-				printf("num=%d\n", num);
+				std::printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
 
 			//イテレータ(1)
-			printf("\n");
-			printf("[iterator(1)]\n");
+			std::printf("\n");
+			std::printf("[iterator(1)]\n");
 			{
 				printf_detail("size=%d, max_size=%d\n", con->size(), con->max_size());
 				printf_detail("array=");
@@ -1315,20 +1315,20 @@ void example_dynamic_array()
 					++num;
 				}
 				printf_detail("\n");
-				printf("num=%d\n", num);
+				std::printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
 
 			//逆順ソート
-			printf("\n");
-			printf("[reverse sort]\n");
+			std::printf("\n");
+			std::printf("[reverse sort]\n");
 			auto reverse_sort = [](const data_t& lhs, const data_t& rhs){return lhs.m_key > rhs.m_key; };
 			std::sort(con->begin(), con->end(), reverse_sort);
 			prev_time = printElapsedTime(prev_time, true);
 
 			//イテレータ(2)
-			printf("\n");
-			printf("[iterator(2)]\n");
+			std::printf("\n");
+			std::printf("[iterator(2)]\n");
 			{
 				printf_detail("size=%d, max_size=%d\n", con->size(), con->max_size());
 				printf_detail("array=");
@@ -1342,19 +1342,19 @@ void example_dynamic_array()
 				}
 				);
 				printf_detail("\n");
-				printf("num=%d\n", num);
+				std::printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
 
 			//正順ソート
-			printf("\n");
-			printf("[sort]\n");
+			std::printf("\n");
+			std::printf("[sort]\n");
 			std::sort(con->begin(), con->end());
 			prev_time = printElapsedTime(prev_time, true);
 
 			//リバースイテレータ
-			printf("\n");
-			printf("[reverse_iterator]\n");
+			std::printf("\n");
+			std::printf("[reverse_iterator]\n");
 			{
 				printf_detail("array=");
 				if (con->empty())
@@ -1367,27 +1367,27 @@ void example_dynamic_array()
 				}
 				);
 				printf_detail("\n");
-				printf("num=%d\n", num);
+				std::printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
 
 		#if 0
 			//逆順安定ソート
-			printf("\n");
-			printf("[reverse stable sort]\n");
+			std::printf("\n");
+			std::printf("[reverse stable sort]\n");
 			std::stable_sort(con->begin(), con->end(), reverse_sort);
 			prev_time = printElapsedTime(prev_time, true);
 
 			//正順安定ソート
-			printf("\n");
-			printf("[stable sort]\n");
+			std::printf("\n");
+			std::printf("[stable sort]\n");
 			std::stable_sort(con->begin(), con->end());
 			prev_time = printElapsedTime(prev_time, true);
 		#endif
 
 			//線形探索
-			printf("\n");
-			printf("[findValue]\n");
+			std::printf("\n");
+			std::printf("[findValue]\n");
 			{
 				int num = 0;
 				for (int i = 0; i < TEST_DATA_NUM; i += TEST_DATA_FIND_STEP)
@@ -1397,13 +1397,13 @@ void example_dynamic_array()
 					++num;
 				}
 				printf_detail("\n");
-				printf("num=%d\n", num);
+				std::printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
 
 			//二分探索
-			printf("\n");
-			printf("[binarySearchValue]\n");
+			std::printf("\n");
+			std::printf("[binarySearchValue]\n");
 			{
 				int num = 0;
 				for (int i = 0; i < TEST_DATA_NUM; ++i)
@@ -1413,26 +1413,26 @@ void example_dynamic_array()
 					++num;
 				}
 				printf_detail("\n");
-				printf("num=%d\n", num);
+				std::printf("num=%d\n", num);
 			}
 			prev_time = printElapsedTime(prev_time, true);
 
 			//データを破棄
-			printf("\n");
-			printf("[delete container]\n");
+			std::printf("\n");
+			std::printf("[delete container]\n");
 			delete con;//std::vectorコンテナを破棄
 			con = nullptr;
 			prev_time = printElapsedTime(prev_time, true);
 
 			//総時間
-			printf("\n");
-			printf("[finish]\n");
+			std::printf("\n");
+			std::printf("[finish]\n");
 			printElapsedTime(begin_time, true);
 		}
 	}
 
-	printf("\n");
-	printf("- end -\n");
+	std::printf("\n");
+	std::printf("- end -\n");
 }
 
 //--------------------
@@ -1443,8 +1443,8 @@ void testThread(const char* container_type)
 {
 	typedef C container_t;//テンプレートパラメータでコンテナの型を受け取る
 
-	printf("\n");
-	printf("[%s]\n", container_type);
+	std::printf("\n");
+	std::printf("[%s]\n", container_type);
 
 	//配列データ
 	data_t array[100];
@@ -1523,22 +1523,22 @@ void testThread(const char* container_type)
 		{
 			//GASHA_ shared_lock_guard<typename container_t::lock_type> lock(con);//リード・ロック取得 ※スコープロック
 			auto lock = con.lockSharedScoped();//（上の処理と同じ意味）
-			printf("(%s)\n", caption);
-			printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
+			std::printf("(%s)\n", caption);
+			std::printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
 			std::this_thread::sleep_for(std::chrono::microseconds(1));
-			printf("array=");
+			std::printf("array=");
 			if (con.empty())
 			{
-				printf("(empty)");
+				std::printf("(empty)");
 			}
 			else
 			{
 				for (auto& data : con)
 				{
-					printf(" [%d:%d]", data.m_key, data.m_val);
+					std::printf(" [%d:%d]", data.m_key, data.m_val);
 				}
 			}
-			printf("\n");
+			std::printf("\n");
 		};
 		print_data("before");
 

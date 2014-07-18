@@ -17,8 +17,8 @@
 
 #include <utility>//C++11 std::forward
 #include <random>//C++11 std::random
-#include <cstring>//memcpy()
-#include <cstdio>//printf()
+#include <cstring>//std::memcpy()
+#include <cstdio>//std::printf()
 
 //【VC++】例外を無効化した状態で <algorithm> <map> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -45,7 +45,7 @@ data_t::data_t(const int key, const int val) :
 	m_val(val)
 {
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("data_t::constructor(%d, %d)\n", key, val);
+	std::printf("data_t::constructor(%d, %d)\n", key, val);
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 //デフォルトコンストラクタ
@@ -57,14 +57,14 @@ data_t::data_t() :
 	m_val(0)
 {
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("data_t::constructor()\n");
+	std::printf("data_t::constructor()\n");
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 //デストラクタ
 data_t::~data_t()
 {
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("data_t::destructor(): key=%d, val=%d\n", m_key, m_val);
+	std::printf("data_t::destructor(): key=%d, val=%d\n", m_key, m_val);
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
@@ -72,27 +72,27 @@ data_t::~data_t()
 data_t::data_t& operator=(data_t&& rhs)
 {
 	std::memcpy(this, &rhs, sizeof(*this));
-	printf("data_t::move_operator\n");
+	std::printf("data_t::move_operator\n");
 	return *this;
 }
 //コピーオペレータ
 data_t::data_t& operator=(const data_t& rhs)
 {
 	std::memcpy(this, &rhs, sizeof(*this));
-	printf("data_t::copy_operator\n");
+	std::printf("data_t::copy_operator\n");
 	return *this;
 }
 //ムーブコンストラクタ
 data_t::data_t(data_t&& src)
 {
 	std::memcpy(this, &src, sizeof(*this));
-	printf("data_t::move_constructor\n");
+	std::printf("data_t::move_constructor\n");
 }
 //コピーコンストラクタ
 data_t::data_t(const data_t& src)
 {
 	std::memcpy(this, &src, sizeof(*this));
-	printf("data_t::copy_constructor\n");
+	std::printf("data_t::copy_constructor\n");
 }
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 
@@ -102,7 +102,7 @@ data_t::data_t(const data_t& src)
 template<typename... Tx>
 inline int printf_detail(const char* fmt, Tx&&... args)
 {
-	return printf(fmt, std::forward<Tx>(args)...);
+	return std::printf(fmt, std::forward<Tx>(args)...);
 }
 #else//PRINT_TEST_DATA_DETAIL
 inline int printf_detail(const char* fmt, ...){ return 0; }
@@ -111,7 +111,7 @@ inline int printf_detail(const char* fmt, ...){ return 0; }
 template<typename... Tx>
 inline int printf_dbg_search(const char* fmt, Tx&&... args)
 {
-	return printf(fmt, std::forward<Tx>(args)...);
+	return std::printf(fmt, std::forward<Tx>(args)...);
 }
 #else//PRINT_TEST_DATA_SEARCH
 inline int printf_dbg_search(const char* fmt, ...){ return 0; }
@@ -138,7 +138,7 @@ void example_rb_tree()
 	//データを登録
 	auto regList = [&con]()
 	{
-		printf("--- Make table ---\n");
+		std::printf("--- Make table ---\n");
 		auto insert = [&con](const int key, const int val)
 		{
 			data_t* new_node = new data_t(key, val);
@@ -172,7 +172,7 @@ void example_rb_tree()
 	#endif//TEST_DATA_REGISTRATION_LIST
 	#endif//REGIST_TEST_DATA_SEQUENTIALLY
 		printf_detail("\n");
-		printf("%d registered.\n", TEST_DATA_REG_NUM);
+		std::printf("%d registered.\n", TEST_DATA_REG_NUM);
 	};
 	regList();
 
@@ -182,7 +182,7 @@ void example_rb_tree()
 		//最終経過時間表示
 		const auto now_time = nowTime();
 		const double elapsed_time = calcElapsedTime(prev_time, now_time);
-		printf("*elapsed_time=%.9lf sec\n", elapsed_time);
+		std::printf("*elapsed_time=%.9lf sec\n", elapsed_time);
 		return now_time;
 	};
 	prev_time = printElapsedTime(prev_time);
@@ -190,11 +190,11 @@ void example_rb_tree()
 	//木を表示
 	auto showTree = [&con]()
 	{
-		printf("--- Show tree (count=%d) ---\n", con.size());
+		std::printf("--- Show tree (count=%d) ---\n", con.size());
 		//static const int depth_limit = 5;//最大でも5段階目までを表示（0段階目から数えるので最大で6段階表示される→最大：1+2+4+8+16+32=63個）
 		static const int depth_limit = 4;//最大でも4段階目までを表示（0段階目から数えるので最大で5段階表示される→最大：1+2+4+8+16=31個）
 		const int _depth_max = con.maxDepth();
-		printf("depth_max=%d (limit for showing=%d)\n", _depth_max, depth_limit);
+		std::printf("depth_max=%d (limit for showing=%d)\n", _depth_max, depth_limit);
 	#ifdef PRINT_TEST_DATA_TREE
 		const int depth_max = _depth_max <= depth_limit ? _depth_max : depth_limit;
 		const int width_max = depth_max < 0 ? 0 : 1 << depth_max;//static_cast<int>(std::pow(2, depth_max));
@@ -219,36 +219,36 @@ void example_rb_tree()
 					{
 						int c = 0;
 						for (; c < print_indent / 2; ++c)
-							printf(" ");
+							std::printf(" ");
 						if (ope::getChildS(*node) && c < print_indent)
 						{
-							printf(".");
+							std::printf(".");
 							++c;
 						}
 						for (; c < print_indent; ++c)
-							printf(ope::getChildS(*node) ? "-" : " ");
+							std::printf(ope::getChildS(*node) ? "-" : " ");
 					}
-					printf("%s%2d:%c%s", ope::getChildS(*node) ? "{" : "[", node->m_key, ope::isBlack(*node) ? 'B' : 'R', ope::getChildL(*node) ? "}" : "]");
+					std::printf("%s%2d:%c%s", ope::getChildS(*node) ? "{" : "[", node->m_key, ope::isBlack(*node) ? 'B' : 'R', ope::getChildL(*node) ? "}" : "]");
 					{
 						int c = 0;
 						for (; c < print_indent / 2; ++c)
-							printf(ope::getChildL(*node) ? "-" : " ");
+							std::printf(ope::getChildL(*node) ? "-" : " ");
 						if (ope::getChildL(*node) && c < print_indent)
 						{
-							printf(".");
+							std::printf(".");
 							++c;
 						}
 						for (; c < print_indent; ++c)
-							printf(" ");
+							std::printf(" ");
 					}
 				}
 				else
 				{
 					for (int c = 0; c < print_width; ++c)
-						printf(" ");
+						std::printf(" ");
 				}
 			}
-			printf("\n");
+			std::printf("\n");
 		}
 	#endif//PRINT_TEST_DATA_TREE
 	};
@@ -259,13 +259,13 @@ void example_rb_tree()
 	//※条件③と条件④違反確認
 	auto showNodesCount = [&con]()
 	{
-		printf("--- Show nodes count (count=%d) ---\n", con.size());
+		std::printf("--- Show nodes count (count=%d) ---\n", con.size());
 		const int depth_max = con.maxDepth();
 		const unsigned long long width_max = depth_max < 0 ? 0llu : 1llu << depth_max;//static_cast<long long>(std::pow(2, static_cast<long long>(depth_max)));
-		printf("depth_max=%d, width_max=%llu\n", depth_max, width_max);
+		std::printf("depth_max=%d, width_max=%llu\n", depth_max, width_max);
 		if(depth_max > 63)
 		{
-			printf("'depth_max' is over 63. aborting therefor.\n");
+			std::printf("'depth_max' is over 63. aborting therefor.\n");
 			return;
 		}
 	#ifdef PRINT_TEST_DATA_COLOR_COUNT
@@ -315,7 +315,7 @@ void example_rb_tree()
 			if (prev_node != last_node)
 			{
 			#ifdef PRINT_TEST_DATA_DETAIL
-				printf("%5lld:[%2d] blacks=%d, reds=%d, total=%d (illegal=%d)\n", breath, last_node->m_key, blacks, reds, total, illegal_connects);
+				std::printf("%5lld:[%2d] blacks=%d, reds=%d, total=%d (illegal=%d)\n", breath, last_node->m_key, blacks, reds, total, illegal_connects);
 			#endif//PRINT_TEST_DATA_DETAIL
 			}
 			prev_node = last_node;
@@ -326,9 +326,9 @@ void example_rb_tree()
 		reds_max = reds_max >= 0 ? reds_max : 0;
 		total_min = total_min >= 0 ? total_min : 0;
 		total_max = total_max >= 0 ? total_max : 0;
-		printf("max: blacks=%d, reds=%d, total=%d\n", blacks_max, reds_max, total_max);
-		printf("min: blacks=%d, reds=%d, total=%d\n", blacks_min, reds_min, total_min);
-		printf("diff:blacks=%d, reds=%d, total=%d (illegal=%d)\n", blacks_max - blacks_min, reds_max - reds_min, total_max - total_min, total_illegal_connects);
+		std::printf("max: blacks=%d, reds=%d, total=%d\n", blacks_max, reds_max, total_max);
+		std::printf("min: blacks=%d, reds=%d, total=%d\n", blacks_min, reds_min, total_min);
+		std::printf("diff:blacks=%d, reds=%d, total=%d (illegal=%d)\n", blacks_max - blacks_min, reds_max - reds_min, total_max - total_min, total_illegal_connects);
 	#endif//PRINT_TEST_DATA_COLOR_COUNT
 	};
 	showNodesCount();
@@ -337,7 +337,7 @@ void example_rb_tree()
 	//一番小さいノードから昇順に全ノードをリストアップ
 	auto showListAsc = [&con]()
 	{
-		printf("--- Show nodes ascending (count=%d) ---\n", con.size());
+		std::printf("--- Show nodes ascending (count=%d) ---\n", con.size());
 		bool is_found = false;
 		for (const data_t& obj : con)
 		{
@@ -348,7 +348,7 @@ void example_rb_tree()
 		if (is_found)
 			printf_detail("\n");
 		else
-			printf("(nothing)\n");
+			std::printf("(nothing)\n");
 	};
 	showListAsc();
 	prev_time = printElapsedTime(prev_time);//経過時間を表示
@@ -356,7 +356,7 @@ void example_rb_tree()
 	//一番大きいノードから降順に全ノードをリストアップ
 	auto showListDesc = [&con]()
 	{
-		printf("--- Show nodes descending (count=%d) ---\n", con.size());
+		std::printf("--- Show nodes descending (count=%d) ---\n", con.size());
 		bool is_found = false;
 		std::for_each(con.rbegin(), con.rend(),//リバースイテレータ
 			[&is_found](const data_t& obj)
@@ -369,16 +369,16 @@ void example_rb_tree()
 		if (is_found)
 			printf_detail("\n");
 		else
-			printf("(nothing)\n");
+			std::printf("(nothing)\n");
 	};
 	showListDesc();
 	prev_time = printElapsedTime(prev_time);//経過時間を表示
 
 #ifdef TEST_ITERATOR_OPERATION
 	{
-		printf("\n");
-		printf("--------------------[iterator operattion:begin]\n");
-		printf("[constructor]\n");
+		std::printf("\n");
+		std::printf("--------------------[iterator operattion:begin]\n");
+		std::printf("[constructor]\n");
 		container_t::iterator ite = con.begin();
 		container_t::reverse_iterator rite = con.rbegin();
 		container_t::iterator ite_end = con.end();
@@ -387,24 +387,24 @@ void example_rb_tree()
 		container_t::reverse_iterator rite2 = con.begin();
 		container_t::iterator ite2_end = con.rend();
 		container_t::reverse_iterator rite2_end = con.end();
-		printf("constructor\n");
-		if (ite.isExist()) printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
-		if (rite.isExist()) printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
-		if (ite_end.isExist()) printf("ite_end:key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
-		if (rite_end.isExist()) printf("rite_end:key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
-		if (ite2.isExist()) printf("ite2:key=%d, value=%d\n", ite2->m_key, ite2->m_val);
-		if (rite2.isExist()) printf("rite2:key=%d, value=%d\n", rite2->m_key, rite2->m_val);
-		if (ite2_end.isExist()) printf("ite2_end:key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
-		if (rite2_end.isExist()) printf("rite2_end:key=%d, value=%d\n", rite2_end->m_key, rite2_end->m_val);
-		printf("ite_end - ite = %d\n", ite_end - ite);
-		printf("ite - ite_end = %d\n", ite - ite_end);
-		printf("rite_end - rite = %d\n", rite_end - rite);
-		printf("rite - rite_end = %d\n", rite - rite_end);
-		printf("ite2 - ite = %d\n", ite2 - ite);
-		printf("ite - ite2 = %d\n", ite - ite2);
-		printf("rite2 - rite = %d\n", rite2 - rite);
-		printf("rite - rite2 = %d\n", rite - rite2);
-		printf("[copy operator]\n");
+		std::printf("constructor\n");
+		if (ite.isExist()) std::printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
+		if (rite.isExist()) std::printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
+		if (ite_end.isExist()) std::printf("ite_end:key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
+		if (rite_end.isExist()) std::printf("rite_end:key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
+		if (ite2.isExist()) std::printf("ite2:key=%d, value=%d\n", ite2->m_key, ite2->m_val);
+		if (rite2.isExist()) std::printf("rite2:key=%d, value=%d\n", rite2->m_key, rite2->m_val);
+		if (ite2_end.isExist()) std::printf("ite2_end:key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
+		if (rite2_end.isExist()) std::printf("rite2_end:key=%d, value=%d\n", rite2_end->m_key, rite2_end->m_val);
+		std::printf("ite_end - ite = %d\n", ite_end - ite);
+		std::printf("ite - ite_end = %d\n", ite - ite_end);
+		std::printf("rite_end - rite = %d\n", rite_end - rite);
+		std::printf("rite - rite_end = %d\n", rite - rite_end);
+		std::printf("ite2 - ite = %d\n", ite2 - ite);
+		std::printf("ite - ite2 = %d\n", ite - ite2);
+		std::printf("rite2 - rite = %d\n", rite2 - rite);
+		std::printf("rite - rite2 = %d\n", rite - rite2);
+		std::printf("[copy operator]\n");
 		ite = con.begin();
 		rite = con.rbegin();
 		ite_end = con.end();
@@ -413,131 +413,131 @@ void example_rb_tree()
 		rite2 = con.begin();
 		ite2_end = con.rend();
 		rite2_end = con.end();
-		if (ite.isExist()) printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
-		if (rite.isExist()) printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
-		if (ite_end.isExist()) printf("ite_end:key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
-		if (rite_end.isExist()) printf("rite_end:key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
-		if (ite2.isExist()) printf("ite2:key=%d, value=%d\n", ite2->m_key, ite2->m_val);
-		if (rite2.isExist()) printf("rite2:key=%d, value=%d\n", rite2->m_key, rite2->m_val);
-		if (ite2_end.isExist()) printf("ite2_end:key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
-		if (rite2_end.isExist()) printf("rite2_end:key=%d, value=%d\n", rite2_end->m_key, rite2_end->m_val);
-		printf("[rite.base()]\n");
+		if (ite.isExist()) std::printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
+		if (rite.isExist()) std::printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
+		if (ite_end.isExist()) std::printf("ite_end:key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
+		if (rite_end.isExist()) std::printf("rite_end:key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
+		if (ite2.isExist()) std::printf("ite2:key=%d, value=%d\n", ite2->m_key, ite2->m_val);
+		if (rite2.isExist()) std::printf("rite2:key=%d, value=%d\n", rite2->m_key, rite2->m_val);
+		if (ite2_end.isExist()) std::printf("ite2_end:key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
+		if (rite2_end.isExist()) std::printf("rite2_end:key=%d, value=%d\n", rite2_end->m_key, rite2_end->m_val);
+		std::printf("[rite.base()]\n");
 		ite2 = rite.base();
 		ite2_end = rite_end.base();
-		if (ite2.isExist()) printf("ite2: key=%d, value=%d\n", ite2->m_key, ite2->m_val);
-		if (ite2_end.isExist()) printf("ite2_end: key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
-		printf("[++ite,--ie_end]\n");
+		if (ite2.isExist()) std::printf("ite2: key=%d, value=%d\n", ite2->m_key, ite2->m_val);
+		if (ite2_end.isExist()) std::printf("ite2_end: key=%d, value=%d\n", ite2_end->m_key, ite2_end->m_val);
+		std::printf("[++ite,--ie_end]\n");
 		++ite;
 		++rite;
 		--ite_end;
 		--rite_end;
-		if (ite.isExist()) printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
-		if (rite.isExist()) printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
-		if (ite_end.isExist()) printf("ite_end:key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
-		if (rite_end.isExist()) printf("rite_end:key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
-		printf("[--ite,++ite_end]\n");
+		if (ite.isExist()) std::printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
+		if (rite.isExist()) std::printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
+		if (ite_end.isExist()) std::printf("ite_end:key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
+		if (rite_end.isExist()) std::printf("rite_end:key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
+		std::printf("[--ite,++ite_end]\n");
 		--ite;
 		--rite;
 		++ite_end;
 		++rite_end;
-		if (ite.isExist()) printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
-		if (rite.isExist()) printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
-		if (ite_end.isExist()) printf("ite_end:key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
-		if (rite_end.isExist()) printf("rite_end:key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
+		if (ite.isExist()) std::printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
+		if (rite.isExist()) std::printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
+		if (ite_end.isExist()) std::printf("ite_end:key=%d, value=%d\n", ite_end->m_key, ite_end->m_val);
+		if (rite_end.isExist()) std::printf("rite_end:key=%d, value=%d\n", rite_end->m_key, rite_end->m_val);
 		for (int i = 0; i < 3; ++i)
 		{
-			printf("[ite[%d]]\n", i);
+			std::printf("[ite[%d]]\n", i);
 			ite = ite[i];
 			rite = rite[i];
-			if (ite.isExist()) printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
-			if (rite.isExist()) printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
+			if (ite.isExist()) std::printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
+			if (rite.isExist()) std::printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
 		}
-		printf("[ite+=3]\n");
+		std::printf("[ite+=3]\n");
 		ite += 3;
 		rite += 3;
-		if (ite.isExist()) printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
-		if (rite.isExist()) printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
-		printf("[ite-=3]\n");
+		if (ite.isExist()) std::printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
+		if (rite.isExist()) std::printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
+		std::printf("[ite-=3]\n");
 		ite -= 3;
 		rite -= 3;
-		if (ite.isExist()) printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
-		if (rite.isExist()) printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
-		printf("ite_end - ite = %d\n", ite_end - ite);
-		printf("ite - ite_end = %d\n", ite - ite_end);
-		printf("rite_end - rite = %d\n", rite_end - rite);
-		printf("rite - rite_end = %d\n", rite - rite_end);
-		printf("[ite2-=2]\n");
+		if (ite.isExist()) std::printf("ite:key=%d, value=%d\n", ite->m_key, ite->m_val);
+		if (rite.isExist()) std::printf("rite:key=%d, value=%d\n", rite->m_key, rite->m_val);
+		std::printf("ite_end - ite = %d\n", ite_end - ite);
+		std::printf("ite - ite_end = %d\n", ite - ite_end);
+		std::printf("rite_end - rite = %d\n", rite_end - rite);
+		std::printf("rite - rite_end = %d\n", rite - rite_end);
+		std::printf("[ite2-=2]\n");
 		ite2 -= 2;
 		rite2 -= 2;
-		printf("ite2 - ite = %d\n", ite2 - ite);
-		printf("ite - ite2 = %d\n", ite - ite2);
-		printf("rite2 - rite = %d\n", rite2 - rite);
-		printf("rite - rite2 = %d\n", rite - rite2);
-		printf("[++ite_end]\n");
+		std::printf("ite2 - ite = %d\n", ite2 - ite);
+		std::printf("ite - ite2 = %d\n", ite - ite2);
+		std::printf("rite2 - rite = %d\n", rite2 - rite);
+		std::printf("rite - rite2 = %d\n", rite - rite2);
+		std::printf("[++ite_end]\n");
 		++ite_end;
 		++rite_end;
-		printf("ite_end - ite = %d\n", ite_end - ite);
-		printf("ite - ite_end = %d\n", ite - ite_end);
-		printf("rite_end - rite = %d\n", rite_end - rite);
-		printf("rite - rite_end = %d\n", rite - rite_end);
-		printf("--------------------[iterator operattion:end]\n");
+		std::printf("ite_end - ite = %d\n", ite_end - ite);
+		std::printf("ite - ite_end = %d\n", ite - ite_end);
+		std::printf("rite_end - rite = %d\n", rite_end - rite);
+		std::printf("rite - rite_end = %d\n", rite - rite_end);
+		std::printf("--------------------[iterator operattion:end]\n");
 	}
 #endif
 
 #ifdef TEST_LOCK_OPERATION
 	//ロック操作テスト
-	printf("--------------------[lock operation:begin]\n");
+	std::printf("--------------------[lock operation:begin]\n");
 	{
 		auto lock(con.lockScoped());//lock_guard<container_t::lock_type> lock(*con);と同じ
-		printf(".lockScoped() ... OK\n");
+		std::printf(".lockScoped() ... OK\n");
 	}
 	{
 		auto lock(con.lockSharedScoped());//shared_lock_guard<container_t::lock_type> lock(*con);と同じ
-		printf(".lockSharedScoped() ... OK\n");
+		std::printf(".lockSharedScoped() ... OK\n");
 	}
 	{
 		auto lock(con.lockUnique());//unique_shared_lock<container_t::lock_type> lock(*con);と同じ
-		printf(".lockUnique() ... OK\n");
+		std::printf(".lockUnique() ... OK\n");
 	}
 	{
 		auto lock(con.lockUnique(with_lock));//unique_shared_lock<container_t::lock_type> lock(*con, with_lock);と同じ
-		printf(".lockUnique(with_lock) ... OK\n");
+		std::printf(".lockUnique(with_lock) ... OK\n");
 	}
 	{
 		auto lock(con.lockUnique(with_lock_shared));//unique_shared_lock<container_t::lock_type> lock(*con, with_lock_shared);と同じ
-		printf(".lockUnique(with_lock_shared) ... OK\n");
+		std::printf(".lockUnique(with_lock_shared) ... OK\n");
 	}
 	{
 		auto lock(con.lockUnique(try_to_lock));//unique_shared_lock<container_t::lock_type> lock(*con, try_to_lock);と同じ
-		printf(".lockUnique(try_to_lock) ... OK\n");
+		std::printf(".lockUnique(try_to_lock) ... OK\n");
 	}
 	{
 		auto lock(con.lockUnique(try_to_lock_shared));//unique_shared_lock<container_t::lock_type> lock(*con, try_to_lock_shared);と同じ
-		printf(".lockUnique(try_to_lock_shared) ... OK\n");
+		std::printf(".lockUnique(try_to_lock_shared) ... OK\n");
 	}
 	{
 		container_t::lock_type& lock_obj = con;
 		lock_obj.lock();
 		auto lock(con.lockUnique(adopt_lock));//unique_shared_lock<container_t::lock_type> lock(*con, adopt_lock);と同じ
-		printf(".lockUnique(adopt_lock) ... OK\n");
+		std::printf(".lockUnique(adopt_lock) ... OK\n");
 	}
 	{
 		container_t::lock_type& lock_obj = con;
 		lock_obj.lock_shared();
 		auto lock(con.lockUnique(adopt_shared_lock));//unique_shared_lock<container_t::lock_type> lock(*con, adopt_shared_lock);と同じ
-		printf(".lockUnique(adopt_shared_lock) ... OK\n");
+		std::printf(".lockUnique(adopt_shared_lock) ... OK\n");
 	}
 	{
 		auto lock(con.lockUnique(defer_lock));//unique_shared_lock<container_t::lock_type> lock(*con, defer_lock);と同じ
-		printf(".lockUnique(defer_lock) ... OK\n");
+		std::printf(".lockUnique(defer_lock) ... OK\n");
 	}
-	printf("--------------------[lock operation:end]\n");
+	std::printf("--------------------[lock operation:end]\n");
 #endif//TEST_LOCK_OPERATION
 
 	//指定のキーのノードを検索し、同じキーのノードをリストアップ
 	auto searchData = [&con]()
 	{
-		printf("--- Search each key nodes ---\n");
+		std::printf("--- Search each key nodes ---\n");
 		for (int search_key = TEST_DATA_KEY_MIN; search_key <= TEST_DATA_KEY_MAX; ++search_key)
 		{
 			static const int print_count_limit = 10;
@@ -570,7 +570,7 @@ void example_rb_tree()
 	//※最近ノードから数ノードを表示
 	auto searchNearestData = [&con](const rb_tree::match_type_t search_type)
 	{
-		printf("--- Search each nearest key nodes for %s ---\n", search_type == rb_tree::FOR_NEAREST_SMALLER ? "smaller" : search_type == rb_tree::FOR_NEAREST_LARGER ? "larger" : "same");
+		std::printf("--- Search each nearest key nodes for %s ---\n", search_type == rb_tree::FOR_NEAREST_SMALLER ? "smaller" : search_type == rb_tree::FOR_NEAREST_LARGER ? "larger" : "same");
 		for (int search_key = TEST_DATA_KEY_MIN; search_key <= TEST_DATA_KEY_MAX; ++search_key)
 		{
 			bool is_found = false;
@@ -602,7 +602,7 @@ void example_rb_tree()
 	//※特定のキーを削除
 	auto removeNodes = [&con]()
 	{
-		printf("--- Remove nodes ---\n");
+		std::printf("--- Remove nodes ---\n");
 		auto erase = [&con](const int remove_key) -> bool
 		{
 			data_t* removed_node = con.erase(remove_key);
@@ -639,7 +639,7 @@ void example_rb_tree()
 		}
 	#endif//TEST_DATA_REMOVING_LIST
 		rb_tree::printf_dbg_remove("\n");
-		printf("%d removed.\n", removed_count);
+		std::printf("%d removed.\n", removed_count);
 	};
 	removeNodes();
 	prev_time = printElapsedTime(prev_time);//経過時間を表示
@@ -660,7 +660,7 @@ void example_rb_tree()
 	//※すべての値のキーを一つずつ削除
 	auto removeEachKeyNodes = [&con]()
 	{
-		printf("--- Remove each key nodes ---\n");
+		std::printf("--- Remove each key nodes ---\n");
 		int removed_count = 0;
 		for (int remove_key = TEST_DATA_KEY_MIN; remove_key <= TEST_DATA_KEY_MAX; ++remove_key)
 		{
@@ -675,7 +675,7 @@ void example_rb_tree()
 			}
 		}
 		rb_tree::printf_dbg_remove("\n");
-		printf("%d removed.\n", removed_count);
+		std::printf("%d removed.\n", removed_count);
 	};
 	removeEachKeyNodes();
 	prev_time = printElapsedTime(prev_time);//経過時間を表示
@@ -696,7 +696,7 @@ void example_rb_tree()
 	//※すべての値のキーに対して、削除が失敗するまで削除を実行
 	auto removeAllNodes = [&con]()
 	{
-		printf("--- Remove all nodes ---\n");
+		std::printf("--- Remove all nodes ---\n");
 		int removed_count = 0;
 		for (int remove_key = TEST_DATA_KEY_MIN; remove_key <= TEST_DATA_KEY_MAX;)
 		{
@@ -713,7 +713,7 @@ void example_rb_tree()
 				++remove_key;
 		}
 		rb_tree::printf_dbg_remove("\n");
-		printf("%d removed.\n", removed_count);
+		std::printf("%d removed.\n", removed_count);
 	};
 	removeAllNodes();
 	prev_time = printElapsedTime(prev_time);//経過時間を表示
@@ -731,7 +731,7 @@ void example_rb_tree()
 	prev_time = printElapsedTime(prev_time);//経過時間を表示
 
 	//終了
-	printf("--- end ---\n");
+	std::printf("--- end ---\n");
 	printElapsedTime(begin_time);//経過時間を表示
 }
 

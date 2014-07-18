@@ -12,20 +12,20 @@ common_data1_t is not created.
 [ Access Singleton : common_data2_t(2) ]
 common_data2: val1=0, val2=0
 [ Create Singleton Instance(2) : common_data1_t ]
------ Debug Info for singletonDebug -----
+----- Debug-info for singletonDebug -----
 Accessing Count: 3
 Created:         0.000000000 sec, "test1:create(2)"
 Destroyed:       0.000000000 sec, "(null)"
 Access Info: (Count=6)
-  - [2] 0.002001200 sec, "Proc": thread="Thread1B(1)"(0xa4988347)
-  - [3] 0.002001200 sec, "Proc": thread="Thread1B(4)"(0x819b70b5)
-  - [4] 0.003004400 sec, "Proc": thread="Thread1B(7)"(0x7f83b623)
-  - [5] 0.003004400 sec, "Proc": thread="Thread1B(10)"(0x153e6b0b)
-  - [6] 0.004002300 sec, "Proc": thread="Thread1B(13)"(0xa85d1620)
-  - [7] 0.014026900 sec, "test1-E": thread="MainThread"(0x07a27549)
+  - [2] 0.012012300 sec, "Proc": thread="Thread1B(1)"(0x2da5af04)
+  - [3] 0.013013200 sec, "Proc": thread="Thread1B(4)"(0x3dc23fc5)
+  - [4] 0.013013200 sec, "Proc": thread="Thread1B(7)"(0x2de90515)
+  - [5] 0.013013200 sec, "Proc": thread="Thread1B(10)"(0x79d649a7)
+  - [6] 0.013013200 sec, "Proc": thread="Thread1B(13)"(0x7e9c433e)
+  - [7] 0.023022600 sec, "test1-E": thread="MainThread"(0xa291ddef)
 -----------------------------------------
 [ Access Singleton : common_data1_t(3) ]
 common_data1: val1=5000, val2=-5000
 [ Access Singleton : common_data2_t(3) ]
-common_data2: val1=4788, val2=-4790
+common_data2: val1=4706, val2=-4713
 - end -

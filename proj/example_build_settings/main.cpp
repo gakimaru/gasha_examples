@@ -28,20 +28,20 @@ int main(const int argc, const char* argv[])
 		std::size_t size = 0;
 
 		//ライブラリビルド時のビルド設定を診断
-		printf("\n");
+		std::printf("\n");
 		buildSettingsDiagnosticTest(message, size, diagForLibrary);
-		printf(message);
-		printf("message size = %d bytes.\n", size);
+		std::printf(message);
+		std::printf("message size = %d bytes.\n", size);
 
 		//現在のビルド設定を診断
-		printf("\n");
+		std::printf("\n");
 		buildSettingsDiagnosticTest(message, size, diagForProject);
-		printf(message);
-		printf("message size = %d bytes.\n", size);
+		std::printf(message);
+		std::printf("message size = %d bytes.\n", size);
 	}
 
-	printf("\n");
-	printf("- End -\n");
+	std::printf("\n");
+	std::printf("- End -\n");
 
 	return EXIT_SUCCESS;
 }

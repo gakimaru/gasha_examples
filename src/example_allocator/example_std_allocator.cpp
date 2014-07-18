@@ -12,7 +12,7 @@
 
 #include <gasha/std_allocator.h>//標準アロケータ
 
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
@@ -20,17 +20,17 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //基本テスト
 
 //テスト用マクロ
-#define EXPR_PLAIN(...) printf("%s\n", #__VA_ARGS__); __VA_ARGS__
-#define EXPR_WITH_INFO(...) __VA_ARGS__ printf("> %s\t\size=%d, remain=%d\n", #__VA_ARGS__, std_allocator.size(), std_allocator.remain())
-#define EXPR(p, ...) __VA_ARGS__ printf("> %s\t%s=%p, size=%d, remain=%d\n", #__VA_ARGS__, #p, p, std_allocator.size(), std_allocator.remain())
+#define EXPR_PLAIN(...) std::printf("%s\n", #__VA_ARGS__); __VA_ARGS__
+#define EXPR_WITH_INFO(...) __VA_ARGS__ std::printf("> %s\t\size=%d, remain=%d\n", #__VA_ARGS__, std_allocator.size(), std_allocator.remain())
+#define EXPR(p, ...) __VA_ARGS__ std::printf("> %s\t%s=%p, size=%d, remain=%d\n", #__VA_ARGS__, #p, p, std_allocator.size(), std_allocator.remain())
 
 //標準アロケータのテスト（共通処理）
 template<class ALLOCATOR>
 static void testStdAllocator(ALLOCATOR& std_allocator)
 {
-	printf("\n");
+	std::printf("\n");
 	char message[1024];
-	EXPR_PLAIN(std_allocator.debugInfo(message); printf(message););
+	EXPR_PLAIN(std_allocator.debugInfo(message); std::printf(message););
 	EXPR(p1, void* p1 = std_allocator.alloc(1););
 	EXPR(p2, void* p2 = std_allocator.alloc(1, 1););
 	EXPR(p3, void* p3 = std_allocator.alloc(1, 1););
@@ -52,7 +52,7 @@ static void testStdAllocator(ALLOCATOR& std_allocator)
 	EXPR(p19, data2_t* p19 = std_allocator.template newObj<data2_t>(););//アラインメント対応版の時にはアラインメントが保証される
 	EXPR(p20, int* p20 = std_allocator.template newObj<int>(););
 	EXPR(p21, data2_t* p21 = std_allocator.template newObj<data2_t>(););//アラインメント対応版の時にはアラインメントが保証される
-	EXPR_PLAIN(std_allocator.debugInfo(message); printf(message););
+	EXPR_PLAIN(std_allocator.debugInfo(message); std::printf(message););
 	EXPR(p1, std_allocator.free(p1););
 	EXPR(p2, std_allocator.free(p2););
 	EXPR(p3, std_allocator.free(p3););
@@ -74,37 +74,37 @@ static void testStdAllocator(ALLOCATOR& std_allocator)
 	EXPR(p19, std_allocator.free(p19););
 	EXPR(p20, std_allocator.free(p20););
 	EXPR(p21, std_allocator.free(p21););
-	EXPR_PLAIN(std_allocator.debugInfo(message); printf(message););
+	EXPR_PLAIN(std_allocator.debugInfo(message); std::printf(message););
 }
 
 //----------------------------------------
 //標準アロケータテスト
 void example_std_allocator()
 {
-	printf("\n");
-	printf("================================================================================\n");
+	std::printf("\n");
+	std::printf("================================================================================\n");
 
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[ Test for stdAllocator ]\n");
-		printf("--------------------------------------------------------------------------------\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[ Test for stdAllocator ]\n");
+		std::printf("--------------------------------------------------------------------------------\n");
 
 		//標準アロケータ
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(stdAllocator<lock_type> std_allocator;);
-			printf("----------------------------------------\n");
+			std::printf("----------------------------------------\n");
 			testStdAllocator(std_allocator);
 		}
 
 		//アライメント対応標準アロケータ
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(stdAlignAllocator<lock_type> std_allocator;);
-			printf("----------------------------------------\n");
+			std::printf("----------------------------------------\n");
 			testStdAllocator(std_allocator);
 		}
 	}

@@ -42,7 +42,7 @@ GASHA_INSTANCING_bHeap(heap_ope, TEST_DATA_MAX);//template class binary_heap::co
 //　ただし、ソート用関数や探索用関数の定義、ロックオブジェクトの指定といった細かいカスタマイズはできない。
 //　シンプルコンテナも明示的なインスタンス化は可能。
 
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 //【VC++】例外を無効化した状態で <algorithm> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -53,8 +53,8 @@ GASHA_INSTANCING_bHeap(heap_ope, TEST_DATA_MAX);//template class binary_heap::co
 //シンプル優先度付きキューコンテナアダプタテスト
 void example_simple_priority_queue()
 {
-	printf("\n");
-	printf("--- example_simple_priority_queue ---\n");
+	std::printf("\n");
+	std::printf("--- example_simple_priority_queue ---\n");
 
 	{
 		simplePQueue<short, 100>::con con;//シンプル優先度付きキューコンテナアダプタ
@@ -63,13 +63,13 @@ void example_simple_priority_queue()
 		con.enqueue(3, 13);
 		auto print = [&con]()
 		{
-			printf("data =");
+			std::printf("data =");
 			simplePQueue<short, 100>::node node;
 			while (con.dequeueCopying(node))
 			{
-				printf(" %d", node.m_value);
+				std::printf(" %d", node.m_value);
 			}
-			printf("\n");
+			std::printf("\n");
 		};
 		print();
 	}
@@ -98,13 +98,13 @@ void example_simple_priority_queue()
 		con.enqueue(3, 34);
 		auto print = [&con]()
 		{
-			printf("data =");
+			std::printf("data =");
 			con_t::node node;
 			while (con.dequeueCopying(node))
 			{
-				printf(" {%d, {%d,%d}}", node.m_priority, node->m_val1, node->m_val2);
+				std::printf(" {%d, {%d,%d}}", node.m_priority, node->m_val1, node->m_val2);
 			}
-			printf("\n");
+			std::printf("\n");
 		};
 		print();
 	}
@@ -117,8 +117,8 @@ GASHA_INSTANCING_simplePQueue(short, 100);
 //二分ヒープコンテナテスト
 void example_simple_binary_heap()
 {
-	printf("\n");
-	printf("--- example_simple_binary_heap ---\n");
+	std::printf("\n");
+	std::printf("--- example_simple_binary_heap ---\n");
 
 	{
 		simpleBHeap<short, 100>::con con;//シンプル優先度付きキューコンテナアダプタ
@@ -127,13 +127,13 @@ void example_simple_binary_heap()
 		con.push(3);
 		auto print = [&con]()
 		{
-			printf("data =");
+			std::printf("data =");
 			short node;
 			while (con.popCopying(node))
 			{
-				printf(" %d", node);
+				std::printf(" %d", node);
 			}
-			printf("\n");
+			std::printf("\n");
 		};
 		print();
 	}
@@ -163,13 +163,13 @@ void example_simple_binary_heap()
 		con.push(34);
 		auto print = [&con]()
 		{
-			printf("data =");
+			std::printf("data =");
 			data_t node;
 			while (con.popCopying(node))
 			{
-				printf(" {%d,%d}", node.m_val1, node.m_val2);
+				std::printf(" {%d,%d}", node.m_val1, node.m_val2);
 			}
-			printf("\n");
+			std::printf("\n");
 		};
 		print();
 	}

@@ -13,7 +13,7 @@
 #include <gasha/fast_math.h>//高速算術
 #include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
 
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 //【VC++】例外を無効化した状態で <random> をインクルードすると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -30,8 +30,8 @@ void testForOperationPerformance(const char* caption)
 {
 	typedef FAST_ARITH fast_arith_class;
 
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for performance of operation : %s ] (* %d times repeat)\n", caption, TEST_OPERATION_REPEAT_NUM);
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for performance of operation : %s ] (* %d times repeat)\n", caption, TEST_OPERATION_REPEAT_NUM);
 
 	std::mt19937 rnd_engine(0);
 	std::uniform_real_distribution<TYPE> rnd_distribution(static_cast<TYPE>(0.5), static_cast<TYPE>(1.));
@@ -50,13 +50,13 @@ void testForOperationPerformance(const char* caption)
 		total += result;
 	}
 	double elapsed_time = calcElapsedTime(begin);
-	printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
+	std::printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
 }
 template<typename TYPE>
 void testForOperationPerformanceDirect(const char* caption)
 {
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for performance of operation : %s ] (* %d times repeat)\n", caption, TEST_OPERATION_REPEAT_NUM);
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for performance of operation : %s ] (* %d times repeat)\n", caption, TEST_OPERATION_REPEAT_NUM);
 
 	std::mt19937 rnd_engine(0);
 	std::uniform_real_distribution<TYPE> rnd_distribution(static_cast<TYPE>(0.5), static_cast<TYPE>(1.));
@@ -75,7 +75,7 @@ void testForOperationPerformanceDirect(const char* caption)
 		total += result;
 	}
 	double elapsed_time = calcElapsedTime(begin);
-	printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
+	std::printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
 }
 
 //----------------------------------------
@@ -85,8 +85,8 @@ void testForSqrtPerformance(const char* caption)
 {
 	typedef FAST_ARITH fast_arith_class;
 	
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for performance of sqr : %s ] (* %d times repeat)\n", caption, TEST_SQRT_REPEAT_NUM);
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for performance of sqr : %s ] (* %d times repeat)\n", caption, TEST_SQRT_REPEAT_NUM);
 
 	std::mt19937 rnd_engine(0);
 	std::uniform_real_distribution<TYPE> rnd_distribution(0.5f, 1.f);
@@ -101,13 +101,13 @@ void testForSqrtPerformance(const char* caption)
 		total += result;
 	}
 	double elapsed_time = calcElapsedTime(begin);
-	printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
+	std::printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
 }
 template<typename TYPE>
 void testForSqrtPerformanceDirect(const char* caption)
 {
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for performance of sqr : %s ] (* %d times repeat)\n", caption, TEST_SQRT_REPEAT_NUM);
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for performance of sqr : %s ] (* %d times repeat)\n", caption, TEST_SQRT_REPEAT_NUM);
 
 	std::mt19937 rnd_engine(0);
 	std::uniform_real_distribution<TYPE> rnd_distribution(0.5f, 1.f);
@@ -122,7 +122,7 @@ void testForSqrtPerformanceDirect(const char* caption)
 		total += result;
 	}
 	double elapsed_time = calcElapsedTime(begin);
-	printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
+	std::printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
 }
 
 //----------------------------------------
@@ -132,8 +132,8 @@ void testForVectorPerformance(const char* caption)
 {
 	typedef FAST_ARITH fast_arith_class;
 
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for performance of vector : %s ] (* %d times repeat)\n", caption, TEST_VECTOR_REPEAT_NUM);
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for performance of vector : %s ] (* %d times repeat)\n", caption, TEST_VECTOR_REPEAT_NUM);
 
 	std::mt19937 rnd_engine(0);
 	std::uniform_real_distribution<TYPE> rnd_distribution(0.5f, 1.f);
@@ -186,13 +186,13 @@ void testForVectorPerformance(const char* caption)
 		}
 	}
 	double elapsed_time = calcElapsedTime(begin);
-	printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
+	std::printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
 }
 template<typename TYPE, std::size_t N>
 void testForVectorPerformanceDirect(const char* caption)
 {
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for performance of vector : %s ] (* %d times repeat)\n", caption, TEST_VECTOR_REPEAT_NUM);
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for performance of vector : %s ] (* %d times repeat)\n", caption, TEST_VECTOR_REPEAT_NUM);
 
 	std::mt19937 rnd_engine(0);
 	std::uniform_real_distribution<TYPE> rnd_distribution(0.5f, 1.f);
@@ -245,15 +245,15 @@ void testForVectorPerformanceDirect(const char* caption)
 		}
 	}
 	double elapsed_time = calcElapsedTime(begin);
-	printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
+	std::printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
 }
 template<class FAST_ARITH, typename TYPE, std::size_t N>
 void testForVectorPerformanceDummy(const char* caption)
 {
 	typedef FAST_ARITH fast_arith_class;
 
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for performance of vector : %s ] (* %d times repeat)\n", caption, TEST_VECTOR_REPEAT_NUM);
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for performance of vector : %s ] (* %d times repeat)\n", caption, TEST_VECTOR_REPEAT_NUM);
 
 	std::mt19937 rnd_engine(0);
 	std::uniform_real_distribution<TYPE> rnd_distribution(0.5f, 1.f);
@@ -306,7 +306,7 @@ void testForVectorPerformanceDummy(const char* caption)
 		}
 	}
 	double elapsed_time = calcElapsedTime(begin);
-	printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
+	std::printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
 }
 
 //----------------------------------------
@@ -316,8 +316,8 @@ void testForMatrixPerformance(const char* caption)
 {
 	typedef FAST_ARITH fast_arith_class;
 
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for performance of matrix : %s ] (* %d times repeat)\n", caption, TEST_MATRIX_REPEAT_NUM);
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for performance of matrix : %s ] (* %d times repeat)\n", caption, TEST_MATRIX_REPEAT_NUM);
 
 	std::mt19937 rnd_engine(0);
 	std::uniform_real_distribution<TYPE> rnd_distribution(0.5f, 1.f);
@@ -356,13 +356,13 @@ void testForMatrixPerformance(const char* caption)
 		}
 	}
 	double elapsed_time = calcElapsedTime(begin);
-	printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
+	std::printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
 }
 template<typename TYPE, std::size_t N, std::size_t M>
 void testForMatrixPerformanceDirect(const char* caption)
 {
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for performance of matrix : %s ] (* %d times repeat)\n", caption, TEST_MATRIX_REPEAT_NUM);
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for performance of matrix : %s ] (* %d times repeat)\n", caption, TEST_MATRIX_REPEAT_NUM);
 
 	std::mt19937 rnd_engine(0);
 	std::uniform_real_distribution<TYPE> rnd_distribution(0.5f, 1.f);
@@ -405,13 +405,13 @@ void testForMatrixPerformanceDirect(const char* caption)
 		}
 	}
 	double elapsed_time = calcElapsedTime(begin);
-	printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
+	std::printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
 }
 template<typename TYPE, std::size_t N, std::size_t M>
 void testForMatrixPerformanceDirectLU(const char* caption)
 {
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for performance of matrix : %s ] (* %d times repeat)\n", caption, TEST_MATRIX_REPEAT_NUM);
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for performance of matrix : %s ] (* %d times repeat)\n", caption, TEST_MATRIX_REPEAT_NUM);
 
 	std::mt19937 rnd_engine(0);
 	std::uniform_real_distribution<TYPE> rnd_distribution(0.5f, 1.f);
@@ -454,15 +454,15 @@ void testForMatrixPerformanceDirectLU(const char* caption)
 		}
 	}
 	double elapsed_time = calcElapsedTime(begin);
-	printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
+	std::printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
 }
 template<class FAST_ARITH, typename TYPE, std::size_t N, std::size_t M>
 void testForMatrixPerformanceDummy(const char* caption)
 {
 	typedef FAST_ARITH fast_arith_class;
 
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for performance of matrix : %s ] (* %d times repeat)\n", caption, TEST_MATRIX_REPEAT_NUM);
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for performance of matrix : %s ] (* %d times repeat)\n", caption, TEST_MATRIX_REPEAT_NUM);
 
 	std::mt19937 rnd_engine(0);
 	std::uniform_real_distribution<TYPE> rnd_distribution(0.5f, 1.f);
@@ -505,7 +505,7 @@ void testForMatrixPerformanceDummy(const char* caption)
 		}
 	}
 	double elapsed_time = calcElapsedTime(begin);
-	printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
+	std::printf("total = %.9lf : time=%.9lf sec\n", static_cast<double>(total), elapsed_time);
 }
 
 //----------------------------------------
@@ -521,7 +521,7 @@ void testForCalc(const char* caption)
 	const float d = rnd_distribution(rnd_engine);
 	const float e = rnd_distribution(rnd_engine);
 	const float f = FAST_ARITH(a) + FAST_ARITH(b) - FAST_ARITH(c) * FAST_ARITH(d) / FAST_ARITH(e);
-	printf("[%-8.8s] %.5f + %5f - %.5f * %.5f / %.5f = %.5f\n", caption, a, b, c, d, e, f);
+	std::printf("[%-8.8s] %.5f + %5f - %.5f * %.5f / %.5f = %.5f\n", caption, a, b, c, d, e, f);
 }
 template<typename TYPE>
 void testForCalcDirect(const char* caption)
@@ -534,7 +534,7 @@ void testForCalcDirect(const char* caption)
 	const float d = rnd_distribution(rnd_engine);
 	const float e = rnd_distribution(rnd_engine);
 	const float f = a + b - c * d / e;
-	printf("[%-8.8s] %.5f + %5f - %.5f * %.5f / %.5f = %.5f\n", caption, a, b, c, d, e, f);
+	std::printf("[%-8.8s] %.5f + %5f - %.5f * %.5f / %.5f = %.5f\n", caption, a, b, c, d, e, f);
 }
 
 //----------------------------------------
@@ -542,8 +542,8 @@ void testForCalcDirect(const char* caption)
 void example_fast_math()
 {
 	//各種高速演算のテスト
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for fast operation (basic) ]\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for fast operation (basic) ]\n");
 
 	testForCalcDirect<float>("direct");
 	testForCalc<dummyA_f, float>("dummy");
@@ -554,16 +554,16 @@ void example_fast_math()
 	testForCalc<fastestA_f, float>("fastest");
 	
 	//各種高速演算のテスト
-	printf("\n");
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for fast operation ]\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for fast operation ]\n");
 
-	#define TEST_OPE(expr, space)  { double result = static_cast<double>(expr); printf(#expr space " = %.3lf (%.9lf)\n", result, result); }
+	#define TEST_OPE(expr, space)  { double result = static_cast<double>(expr); std::printf(#expr space " = %.3lf (%.9lf)\n", result, result); }
 	#define TEST_ADD_SET(lvalue, rvalue) \
 		{ \
 			const double lvalue_d = static_cast<double>(lvalue); \
 			const double rvalue_d = static_cast<double>(rvalue); \
-			printf("\n"); \
+			std::printf("\n"); \
 			TEST_OPE(lvalue + rvalue, "                 "); \
 			TEST_OPE(dummyA_f(lvalue) + rvalue, "   "); \
 			TEST_OPE(normA_f(lvalue) + rvalue, "  "); \
@@ -582,7 +582,7 @@ void example_fast_math()
 		{ \
 			const double lvalue_d = static_cast<double>(lvalue); \
 			const double rvalue_d = static_cast<double>(rvalue); \
-			printf("\n"); \
+			std::printf("\n"); \
 			TEST_OPE(lvalue - rvalue, "                 "); \
 			TEST_OPE(dummyA_f(lvalue) - rvalue, "   "); \
 			TEST_OPE(normA_f(lvalue) - rvalue, "  "); \
@@ -601,7 +601,7 @@ void example_fast_math()
 		{ \
 			const double lvalue_d = static_cast<double>(lvalue); \
 			const double rvalue_d = static_cast<double>(rvalue); \
-			printf("\n"); \
+			std::printf("\n"); \
 			TEST_OPE(lvalue * rvalue, "                 "); \
 			TEST_OPE(dummyA_f(lvalue) * rvalue, "   "); \
 			TEST_OPE(normA_f(lvalue) * rvalue, "  "); \
@@ -620,7 +620,7 @@ void example_fast_math()
 		{ \
 			const double lvalue_d = static_cast<double>(lvalue); \
 			const double rvalue_d = static_cast<double>(rvalue); \
-			printf("\n"); \
+			std::printf("\n"); \
 			TEST_OPE(lvalue / rvalue, "                 "); \
 			TEST_OPE(dummyA_f(lvalue) / rvalue, "   "); \
 			TEST_OPE(normA_f(lvalue) / rvalue, "  "); \
@@ -685,15 +685,15 @@ void example_fast_math()
 	TEST_DIV_SET(10.f, 1000000.f);
 
 	//各種高速平方根のテスト
-	printf("\n");
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for fast sqr ]\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for fast sqr ]\n");
 
-	#define TEST_SQRT(expr, space) { double result = static_cast<double>(expr); printf(#expr space " = %.3lf (%.9lf)\n", result, result); }
+	#define TEST_SQRT(expr, space) { double result = static_cast<double>(expr); std::printf(#expr space " = %.3lf (%.9lf)\n", result, result); }
 	#define TEST_SQRT_SET(value) \
 		{ \
 			const double value_d = value; \
-			printf("\n"); \
+			std::printf("\n"); \
 			TEST_SQRT(std::sqrt(value), "             "); \
 			TEST_SQRT(sqr(dummyA_f(value)), "    "); \
 			TEST_SQRT(sqr(normA_f(value)), "   "); \
@@ -722,21 +722,21 @@ void example_fast_math()
 	TEST_SQRT_SET(1000000.f);
 
 	//高速ベクトル演算のテスト
-	printf("\n");
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for vector operation ]\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for vector operation ]\n");
 
 	{
-		#define TEST_VECTOR_OPE1(expr, space)  { double result = static_cast<double>(expr); printf(#expr space " = %.5lf\n", result); }
-		#define TEST_VECTOR_OPE2(expr, space, result)  { expr; printf(#expr space " = [%.5lf][%.5f]\n", static_cast<double>(result[0]), static_cast<double>(result[1])); }
-		#define TEST_VECTOR_OPE3(expr, space, result)  { expr; printf(#expr space " = [%.5lf][%.5f][%.5f]\n", static_cast<double>(result[0]), static_cast<double>(result[1]), static_cast<double>(result[2])); }
-		printf("\n");
-		printf("- 2D vector -\n");
+		#define TEST_VECTOR_OPE1(expr, space)  { double result = static_cast<double>(expr); std::printf(#expr space " = %.5lf\n", result); }
+		#define TEST_VECTOR_OPE2(expr, space, result)  { expr; std::printf(#expr space " = [%.5lf][%.5f]\n", static_cast<double>(result[0]), static_cast<double>(result[1])); }
+		#define TEST_VECTOR_OPE3(expr, space, result)  { expr; std::printf(#expr space " = [%.5lf][%.5f][%.5f]\n", static_cast<double>(result[0]), static_cast<double>(result[1]), static_cast<double>(result[2])); }
+		std::printf("\n");
+		std::printf("- 2D vector -\n");
 		float vec2_1[2] = { 1.f, 2.f };
 		float vec2_2[2] = { 3.f, 4.f };
 		float vec2_result[2];
-		printf("vec2_1=[%.5f][%.5f]\n", vec2_1[0], vec2_1[1]);
-		printf("vec2_2=[%.5f][%.5f]\n", vec2_2[0], vec2_2[1]);
+		std::printf("vec2_1=[%.5f][%.5f]\n", vec2_1[0], vec2_1[1]);
+		std::printf("vec2_2=[%.5f][%.5f]\n", vec2_2[0], vec2_2[1]);
 		TEST_VECTOR_OPE1(norm(vec2_1), "                            ");
 		TEST_VECTOR_OPE1(normSq(vec2_1), "                          ");
 		TEST_VECTOR_OPE2(merge(vec2_result, vec2_1, vec2_2), "      ", vec2_result);
@@ -821,13 +821,13 @@ void example_fast_math()
 		TEST_VECTOR_OPE1(dot(dummyA_2f(vec2_1), dummyA_2f(vec2_2)), "                     ");
 		TEST_VECTOR_OPE1(normalizedDot(dummyA_2f(vec2_1), dummyA_2f(vec2_2)), "           ");
 
-		printf("\n");
-		printf("- 3D vector -\n");
+		std::printf("\n");
+		std::printf("- 3D vector -\n");
 		float vec3_1[3] = { 1.f, 2.f, 3.f };
 		float vec3_2[3] = { 4.f, 5.f, 6.f };
 		float vec3_result[3];
-		printf("vec3_1=[%.5f][%.5f][%.5f]\n", vec3_1[0], vec3_1[1], vec3_1[2]);
-		printf("vec3_2=[%.5f][%.5f][%.5f]\n", vec3_2[0], vec3_2[1], vec3_2[2]);
+		std::printf("vec3_1=[%.5f][%.5f][%.5f]\n", vec3_1[0], vec3_1[1], vec3_1[2]);
+		std::printf("vec3_2=[%.5f][%.5f][%.5f]\n", vec3_2[0], vec3_2[1], vec3_2[2]);
 		TEST_VECTOR_OPE1(norm(vec3_1), "                            ");
 		TEST_VECTOR_OPE1(normSq(vec3_1), "                          ");
 		TEST_VECTOR_OPE3(merge(vec3_result, vec3_1, vec3_2), "      ", vec3_result);
@@ -919,13 +919,13 @@ void example_fast_math()
 		TEST_VECTOR_OPE1(normalizedDot(dummyA_3f(vec3_1), dummyA_3f(vec3_2)), "           ");
 		TEST_VECTOR_OPE3(cross(vec3_result, dummyA_3f(vec3_1), dummyA_3f(vec3_2)), "      ", vec3_result);
 
-		printf("\n");
-		printf("- 4D vector -\n");
+		std::printf("\n");
+		std::printf("- 4D vector -\n");
 		float vec4_1[4] = { 1.f, 2.f, 3.f, 0.f };
 		float vec4_2[4] = { 4.f, 5.f, 6.f, 0.f };
 		float vec4_result[4];
-		printf("vec4_1=[%.5f][%.5f][%.5f]\n", vec4_1[0], vec4_1[1], vec4_1[2]);
-		printf("vec4_2=[%.5f][%.5f][%.5f]\n", vec4_2[0], vec4_2[1], vec4_2[2]);
+		std::printf("vec4_1=[%.5f][%.5f][%.5f]\n", vec4_1[0], vec4_1[1], vec4_1[2]);
+		std::printf("vec4_2=[%.5f][%.5f][%.5f]\n", vec4_2[0], vec4_2[1], vec4_2[2]);
 		TEST_VECTOR_OPE1(norm(vec4_1), "                            ");
 		TEST_VECTOR_OPE1(normSq(vec4_1), "                          ");
 		TEST_VECTOR_OPE3(merge(vec4_result, vec4_1, vec4_2), "      ", vec4_result);
@@ -1017,13 +1017,13 @@ void example_fast_math()
 		TEST_VECTOR_OPE1(normalizedDot(dummyA_4f(vec4_1), dummyA_4f(vec4_2)), "           ");
 		TEST_VECTOR_OPE3(cross(vec4_result, dummyA_4f(vec4_1), dummyA_4f(vec4_2)), "      ", vec4_result);
 
-		printf("\n");
-		printf("- 2D vector(double) -\n");
+		std::printf("\n");
+		std::printf("- 2D vector(double) -\n");
 		double vec2d_1[2] = { 1., 2. };
 		double vec2d_2[2] = { 3., 4. };
 		double vec2d_result[2];
-		printf("vec2d_1=[%.5lf][%.5lf]\n", vec2d_1[0], vec2d_1[1]);
-		printf("vec2d_2=[%.5lf][%.5lf]\n", vec2d_2[0], vec2d_2[1]);
+		std::printf("vec2d_1=[%.5lf][%.5lf]\n", vec2d_1[0], vec2d_1[1]);
+		std::printf("vec2d_2=[%.5lf][%.5lf]\n", vec2d_2[0], vec2d_2[1]);
 		TEST_VECTOR_OPE1(norm(vec2d_1), "                              ");
 		TEST_VECTOR_OPE1(normSq(vec2d_1), "                            ");
 		TEST_VECTOR_OPE2(merge(vec2d_result, vec2d_1, vec2d_2), "      ", vec2d_result);
@@ -1036,13 +1036,13 @@ void example_fast_math()
 		TEST_VECTOR_OPE1(dot(vec2d_1, vec2d_2), "                      ");
 		TEST_VECTOR_OPE1(normalizedDot(vec2d_1, vec2d_2), "            ");
 		
-		printf("\n");
-		printf("- 3D vector (double) -\n");
+		std::printf("\n");
+		std::printf("- 3D vector (double) -\n");
 		double vec3d_1[3] = { 1., 2., 3. };
 		double vec3d_2[3] = { 4., 5., 6. };
 		double vec3d_result[3];
-		printf("vec3dd_1=[%.5lf][%.5lf][%.5lf]\n", vec3d_1[0], vec3d_1[1], vec3d_1[2]);
-		printf("vec3dd_2=[%.5lf][%.5lf][%.5lf]\n", vec3d_2[0], vec3d_2[1], vec3d_2[2]);
+		std::printf("vec3dd_1=[%.5lf][%.5lf][%.5lf]\n", vec3d_1[0], vec3d_1[1], vec3d_1[2]);
+		std::printf("vec3dd_2=[%.5lf][%.5lf][%.5lf]\n", vec3d_2[0], vec3d_2[1], vec3d_2[2]);
 		TEST_VECTOR_OPE1(norm(vec3d_1), "                              ");
 		TEST_VECTOR_OPE1(normSq(vec3d_1), "                            ");
 		TEST_VECTOR_OPE3(merge(vec3d_result, vec3d_1, vec3d_2), "      ", vec3d_result);
@@ -1058,55 +1058,55 @@ void example_fast_math()
 	}
 
 	//テンプレート行列演算のテスト
-	printf("\n");
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for matrix operation ]\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for matrix operation ]\n");
 
 	{
 		float x1[4][4] = { { 1.f, 2.f, 3.f, 4.f }, { 5.f, 6.f, 7.f, 8.f }, { 9.f, 10.f, 11.f, 12.f }, { 13.f, 14.f, 15.f, 16.f } };
 		float x2[4][4] = { { .1f, .2f, .3f, .4f }, { .5f, .6f, .7f, .8f }, { .9f, .10f, .11f, .12f }, { .13f, .14f, .15f, .16f } };
 		float x3[4][4];
 		add(x3, x1, x2);
-		printf("add:   x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		std::printf("add:   x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
 		addLU(x3, x1, x2);
-		printf("addLU: x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		std::printf("addLU: x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
 		sub(x3, x1, x2);
-		printf("sub:   x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		std::printf("sub:   x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
 		subLU(x3, x1, x2);
-		printf("subLU: x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		std::printf("subLU: x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
 		mul(x3, x1, 10.f);
-		printf("mul:   x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		std::printf("mul:   x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
 		mulLU(x3, x1, 10.f);
-		printf("mulLU: x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		std::printf("mulLU: x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
 		mul(x3, x1, x2);
-		printf("mul:   x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		std::printf("mul:   x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
 		mulLU(x3, x1, x2);
-		printf("mulLU: x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		std::printf("mulLU: x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
 	}
 {
 		double x1[3][3] = { { 1., 2., 3. }, { 4., 5., 6. }, { 7., 8., 9. } };
 		double x2[3][3] = { { .1, .2, .3 }, { .4, .5, .6 }, { .7, .8, .9 } };
 		double x3[3][3];
 		add(x3, x1, x2);
-		printf("add:   x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		std::printf("add:   x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
 		addLU(x3, x1, x2);
-		printf("addLU: x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		std::printf("addLU: x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
 		sub(x3, x1, x2);
-		printf("sub:   x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		std::printf("sub:   x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
 		subLU(x3, x1, x2);
-		printf("subLU: x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		std::printf("subLU: x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
 		mul(x3, x1, 10.);
-		printf("mul:   x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		std::printf("mul:   x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
 		mulLU(x3, x1, 10.);
-		printf("mulLU: x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		std::printf("mulLU: x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
 		mul(x3, x1, x2);
-		printf("mul:   x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		std::printf("mul:   x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
 		mulLU(x3, x1, x2);
-		printf("mulLU: x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		std::printf("mulLU: x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
 	}
 
 	//パフォーマンス計測
-	printf("\n");
+	std::printf("\n");
 	
 	//各種高速演算のパフォーマンス計測
 	testForOperationPerformanceDirect<float>("direct:float");

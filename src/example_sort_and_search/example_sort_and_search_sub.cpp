@@ -16,39 +16,39 @@
 //テスト用構造体
 
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-#include <cstdio>//printf()
-#include <cstring>//memcpy()
+#include <cstdio>//std::printf()
+#include <cstring>//std::memcpy()
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
 data_t& data_t::operator=(data_t&& rhs)
 {
 	std::memcpy(this, &rhs, sizeof(*this));
-	printf("data_t::move_assignment_operator\n");
+	std::printf("data_t::move_assignment_operator\n");
 	return *this;
 }
 data_t& data_t::operator=(const data_t& rhs)
 {
 	std::memcpy(this, &rhs, sizeof(*this));
-	printf("data_t::copy_assignment_operator\n");
+	std::printf("data_t::copy_assignment_operator\n");
 	return *this;
 }
 data_t::data_t(data_t&& src)
 {
 	std::memcpy(this, &src, sizeof(*this));
-	printf("data_t::move_constructor\n");
+	std::printf("data_t::move_constructor\n");
 }
 data_t::data_t(const data_t& src)
 {
 	std::memcpy(this, &src, sizeof(*this));
-	printf("data_t::copy_constructor\n");
+	std::printf("data_t::copy_constructor\n");
 }
 data_t::data_t()
 {
-	printf("data_t::constructor\n");
+	std::printf("data_t::constructor\n");
 }
 data_t::~data_t()
 {
-	printf("data_t::destructor\n");
+	std::printf("data_t::destructor\n");
 }
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 

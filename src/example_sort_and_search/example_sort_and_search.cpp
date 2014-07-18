@@ -42,7 +42,7 @@
 
 #include <random>//C++11 std::random
 #include <cstdint>//C++11 std::intptr_t
-#include <cstring>//memcpy()
+#include <cstring>//std::memcpy()
 
 //【VC++】例外を無効化した状態で <algorithm> <functional> <bitset> をインクルードすると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -125,7 +125,7 @@ void example_sort_and_search()
 	auto printElapsedTimeDirect = [](const double elapsed_time, const bool is_preint) -> std::chrono::system_clock::time_point
 	{
 		if (is_preint)
-			printf("*elapsed time=%.9lf sec.\n", elapsed_time);
+			std::printf("*elapsed time=%.9lf sec.\n", elapsed_time);
 		return nowTime();
 	};
 	auto printElapsedTime = [&printElapsedTimeDirect](const std::chrono::system_clock::time_point& prev_time, const bool is_print) -> std::chrono::system_clock::time_point
@@ -139,9 +139,9 @@ void example_sort_and_search()
 	{
 		const int ng = static_cast<int>(sumupUnordered(*array, predicate_default));
 		if (ng == 0)
-			printf("Array is ordered. [record(s)=%d]\n", array->size());
+			std::printf("Array is ordered. [record(s)=%d]\n", array->size());
 		else
-			printf("[NG] Array is NOT ordered! [NG=%d / record(s)=%d]\n", ng, array->size());
+			std::printf("[NG] Array is NOT ordered! [NG=%d / record(s)=%d]\n", ng, array->size());
 		{
 			std::bitset<TEST_DATA_COUNT> seq_no_map;
 			const std::size_t size = array->size();
@@ -159,11 +159,11 @@ void example_sort_and_search()
 			if (seq_no_map.count() != TEST_DATA_COUNT)
 				array_is_broken = true;
 			if (array_is_broken)
-				printf("[NG] Array is BROKEN !! Sorting-program is mistaken !\n");
+				std::printf("[NG] Array is BROKEN !! Sorting-program is mistaken !\n");
 			if (array_is_not_stable)
-				printf("Array is NOT STABLE.\n");
+				std::printf("Array is NOT STABLE.\n");
 			else
-				printf("Array is stable.\n");
+				std::printf("Array is stable.\n");
 		}
 		const bool is_print = false;
 		prev_time = printElapsedTime(prev_time, is_print);
@@ -183,7 +183,7 @@ void example_sort_and_search()
 	};
 	auto makeArray = [&prev_time, &printElapsedTime, &showArrayCondition](array_t*& array, const init_type_t type, const char* type_name)
 	{
-		printf("----- Make Array(%s) -----\n", type_name);
+		std::printf("----- Make Array(%s) -----\n", type_name);
 		array = new array_t();
 		int key = 0;
 		int same_key_num = 0;
@@ -276,7 +276,7 @@ void example_sort_and_search()
 		const std::size_t element_size = reinterpret_cast<std::intptr_t>(element1_p)-reinterpret_cast<std::intptr_t>(element0_p);
 		const std::size_t array_size = sizeof(*array);
 		const std::size_t element_count = array->size();
-		printf("array_size=%d, element_count=%d, element_size=%d, data_size=%d, element0_p=%p, element1_p=%p\n", array_size, element_count, element_size, data_size, element0_p, element1_p);
+		std::printf("array_size=%d, element_count=%d, element_size=%d, data_size=%d, element0_p=%p, element1_p=%p\n", array_size, element_count, element_size, data_size, element0_p, element1_p);
 	#endif
 	};
 	array_t* array_shuffle1 = nullptr;
@@ -301,7 +301,7 @@ void example_sort_and_search()
 	auto copyWorkArray = [&prev_time, &printElapsedTime, &array_shuffle1, &array_shuffle2, &array_shuffle3, &array_ordered, &array_reversed, &array_ordered_without_both_ends, &array_hard_with_quick_sort](array_t*& array, const init_type_t type, const char* type_name)
 	{
 	#ifdef TEST_DATA_WATCH_CONSTRUCTOR
-		printf("----- Copy Work Array(%s) -----\n", type_name);
+		std::printf("----- Copy Work Array(%s) -----\n", type_name);
 	#endif//TEST_DATA_WATCH_CONSTRUCTOR
 		array = new array_t();
 		const array_t* array_src = nullptr;
@@ -323,7 +323,7 @@ void example_sort_and_search()
 	//配列削除
 	auto deleteArray = [&prev_time, &printElapsedTime](array_t*& array, const char* type_name)
 	{
-		printf("----- Delete array(%s) -----\n", type_name);
+		std::printf("----- Delete array(%s) -----\n", type_name);
 		delete array;
 		array = nullptr;
 		const bool is_print = false;
@@ -344,7 +344,7 @@ void example_sort_and_search()
 	auto deleteWorkArray = [&prev_time, &printElapsedTime](array_t*& array, const char* type_name)
 	{
 	#ifdef TEST_DATA_WATCH_CONSTRUCTOR
-		printf("----- Delete Work Array(%s) -----\n", type_name);
+		std::printf("----- Delete Work Array(%s) -----\n", type_name);
 	#endif//TEST_DATA_WATCH_CONSTRUCTOR
 		delete array;
 		array = nullptr;
@@ -357,7 +357,7 @@ void example_sort_and_search()
 	auto sort = [&prev_time, &getElapsedTime, &printElapsedTimeDirect, &showArrayCondition](array_t*& array, sort_procedure sort_proc, double& elapsed_time, std::size_t& swapped_count)
 	{
 	#ifdef TEST_DATA_WATCH_CONSTRUCTOR
-		printf("----- Sort -----\n");
+		std::printf("----- Sort -----\n");
 	#endif//TEST_DATA_WATCH_CONSTRUCTOR
 		prev_time = nowTime();
 		swapped_count = sort_proc(array);
@@ -366,16 +366,16 @@ void example_sort_and_search()
 		prev_time = printElapsedTimeDirect(elapsed_time, is_print);
 		showArrayCondition(array);
 		if (swapped_count != 0xffffffff)
-			printf("[swapped=%d count(s)]\n", swapped_count);
+			std::printf("[swapped=%d count(s)]\n", swapped_count);
 	};
 	
 	//計測
 	auto measure = [&copyWorkArray, &sort, &deleteWorkArray](const init_type_t type, const char* type_name, sort_procedure sort_proc, double& elapsed_time, std::size_t& swapped_count)
 	{
-		printf("\n");
-		printf("------------------------------\n");
-		printf("Sort array(%s)\n", type_name);
-		printf("------------------------------\n");
+		std::printf("\n");
+		std::printf("------------------------------\n");
+		std::printf("Sort array(%s)\n", type_name);
+		std::printf("------------------------------\n");
 		array_t* array = nullptr;//配列
 		copyWorkArray(array, type, type_name);//配列初期化
 		sort(array, sort_proc, elapsed_time, swapped_count);//ソート
@@ -433,9 +433,9 @@ void example_sort_and_search()
 	//まとめて計測
 	auto measureAll = [&measure](const char* sort_type_name, sort_procedure sort_proc) -> sum_t
 	{
-		printf("============================================================\n");
-		printf("Sort type: [%s]\n", sort_type_name);
-		printf("============================================================\n");
+		std::printf("============================================================\n");
+		std::printf("Sort type: [%s]\n", sort_type_name);
+		std::printf("============================================================\n");
 
 		#define PARAM(x) init_##x, #x
 
@@ -474,33 +474,33 @@ void example_sort_and_search()
 
 		#undef PARAM
 
-		printf("\n");
-		printf("============================================================\n");
-		printf("Sort type: [%s]\n", sort_type_name);
-		printf("* Total time       = %.9lf sec.\n", sum.elapsed_time_sum);
-		printf("* Average time     = %.9lf sec.\n", sum.elapsed_time_avg);
-		printf("* Min time         = %.9lf sec.\n", sum.elapsed_time_min);
-		printf("* Max time         = %.9lf sec.\n", sum.elapsed_time_max);
+		std::printf("\n");
+		std::printf("============================================================\n");
+		std::printf("Sort type: [%s]\n", sort_type_name);
+		std::printf("* Total time       = %.9lf sec.\n", sum.elapsed_time_sum);
+		std::printf("* Average time     = %.9lf sec.\n", sum.elapsed_time_avg);
+		std::printf("* Min time         = %.9lf sec.\n", sum.elapsed_time_min);
+		std::printf("* Max time         = %.9lf sec.\n", sum.elapsed_time_max);
 		if (sum.swapped_count_sum != 0xffffffff)
 		{
-			printf("* Total Swapped    = %9u count(s)\n", sum.swapped_count_sum);
-			printf("* Average  Swapped = %9u count(s)\n", sum.swapped_count_avg);
-			printf("* Min Swapped      = %9u count(s)\n", sum.swapped_count_min);
-			printf("* Max Swapped      = %9u count(s)\n", sum.swapped_count_max);
+			std::printf("* Total Swapped    = %9u count(s)\n", sum.swapped_count_sum);
+			std::printf("* Average  Swapped = %9u count(s)\n", sum.swapped_count_avg);
+			std::printf("* Min Swapped      = %9u count(s)\n", sum.swapped_count_min);
+			std::printf("* Max Swapped      = %9u count(s)\n", sum.swapped_count_max);
 		}
-		printf("============================================================\n");
+		std::printf("============================================================\n");
 
 		return sum;
 	};
 	
 	//----------------------------------------
 	//測定開始
-	printf("============================================================\n");
-	printf("Initialize\n");
-	printf("============================================================\n");
+	std::printf("============================================================\n");
+	std::printf("Initialize\n");
+	std::printf("============================================================\n");
 	makeArraySet();
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//----------------------------------------
 	//標準ライブラリによるソート
@@ -515,8 +515,8 @@ void example_sort_and_search()
 		return 0xffffffff;
 	};
 	const sum_t sum_clib_qsort = measureAll("C-Library qsort", clib_qsort);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//--------------------
 	//STLソート1：通常関数で比較
@@ -527,8 +527,8 @@ void example_sort_and_search()
 		return 0xffffffff;
 	};
 	const sum_t sum_stl1 = measureAll("STL std::sort(with function)", stl_sort1);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//STLソート2：インライン関数で比較
 	//アルゴリズム：（同上）
@@ -538,8 +538,8 @@ void example_sort_and_search()
 		return 0xffffffff;
 	};
 	const sum_t sum_stl2 = measureAll("STL std::sort(with inline function)", stl_sort2);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//STLソート3：関数オブジェクトで比較
 	//アルゴリズム：（同上）
@@ -549,8 +549,8 @@ void example_sort_and_search()
 		return 0xffffffff;
 	};
 	const sum_t sum_stl3 = measureAll("STL std::sort(with functor)", stl_sort3);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//STLソート4：ラムダ関数で比較
 	//アルゴリズム：（同上）
@@ -560,8 +560,8 @@ void example_sort_and_search()
 		return 0xffffffff;
 	};
 	const sum_t sum_stl4 = measureAll("STL std::sort(with lamda)", stl_sort4);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//--------------------
 	//STL安定ソート
@@ -572,8 +572,8 @@ void example_sort_and_search()
 		return 0xffffffff;
 	};
 	const sum_t sum_stl_stable = measureAll("STL std::stable_sort *Not inplace", stl_stable_sort);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//----------------------------------------
 	//交換ソート
@@ -584,8 +584,8 @@ void example_sort_and_search()
 		return bubbleSort(*array, predicate_default);
 	};
 	const sum_t sum_bubble = measureAll("Bubble sort", bubble_sort);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 	
 	//アルゴリズム：シェーカーソート
 	auto shaker_sort = [](array_t* array) -> std::size_t
@@ -593,8 +593,8 @@ void example_sort_and_search()
 		return shakerSort(*array, predicate_default);
 	};
 	const sum_t sum_shaker = measureAll("Shaker sort", shaker_sort);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//アルゴリズム：奇遇転置ソート
 	auto odd_even_sort = [](array_t* array) -> std::size_t
@@ -602,8 +602,8 @@ void example_sort_and_search()
 		return oddEvenSort(*array, predicate_default);
 	};
 	const sum_t sum_odd_even = measureAll("Odd-Even sort", odd_even_sort);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//アルゴリズム：シェアソート
 	auto shear_sort = [](array_t* array) -> std::size_t
@@ -611,8 +611,8 @@ void example_sort_and_search()
 		return shearSort(*array, predicate_default);
 	};
 	const sum_t sum_shear = measureAll("Shear sort", shear_sort);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//アルゴリズム：コムソート
 	auto comb_sort = [](array_t* array) -> std::size_t
@@ -620,8 +620,8 @@ void example_sort_and_search()
 		return combSort(*array, predicate_default);
 	};
 	const sum_t sum_comb = measureAll("Comb sort", comb_sort);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//アルゴリズム：ノームソート
 	auto gnome_sort = [](array_t* array) -> std::size_t
@@ -629,8 +629,8 @@ void example_sort_and_search()
 		return gnomeSort(*array, predicate_default);
 	};
 	const sum_t sum_gnome = measureAll("Gnome sort", gnome_sort);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//アルゴリズム：クイックソート
 	auto quick_sort = [](array_t* array) -> std::size_t
@@ -638,8 +638,8 @@ void example_sort_and_search()
 		return quickSort(*array, predicate_default);
 	};
 	const sum_t sum_quick = measureAll("Quick sort", quick_sort);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//----------------------------------------
 	//選択ソート
@@ -650,8 +650,8 @@ void example_sort_and_search()
 		return selectionSort(*array, predicate_default);
 	};
 	const sum_t sum_selection = measureAll("Selection sort", selection_sort);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//アルゴリズム：ヒープソート
 	auto heap_sort = [](array_t* array) -> std::size_t
@@ -659,8 +659,8 @@ void example_sort_and_search()
 		return heapSort(*array, predicate_default);
 	};
 	const sum_t sum_heap = measureAll("Heap sort", heap_sort);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//----------------------------------------
 	//挿入ソート
@@ -671,8 +671,8 @@ void example_sort_and_search()
 		return insertionSort(*array, predicate_default);
 	};
 	const sum_t sum_insertion = measureAll("Insertion sort", insertion_sort);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//アルゴリズム：シェルソート
 	auto shell_sort = [](array_t* array) -> std::size_t
@@ -680,8 +680,8 @@ void example_sort_and_search()
 		return shellSort(*array, predicate_default);
 	};
 	const sum_t sum_shell = measureAll("Shell sort", shell_sort);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//----------------------------------------
 	//マージソート
@@ -692,8 +692,8 @@ void example_sort_and_search()
 		return inplaceMergeSort(*array, predicate_default);
 	};
 	const sum_t sum_inplace_merge = measureAll("Inplace Merge sort", inplace_merge_sort);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 #endif
 
 	//----------------------------------------
@@ -705,8 +705,8 @@ void example_sort_and_search()
 		return introSort(*array, predicate_default);
 	};
 	const sum_t sum_intro = measureAll("Intro sort", intro_sort);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//----------------------------------------
 	//非比較ソート
@@ -723,8 +723,8 @@ void example_sort_and_search()
 		return radixSort(*array, getKey());
 	};
 	const sum_t sum_radix = measureAll("Radix sort", radix_sort);
-	printf("\n");
-	printf("\n");
+	std::printf("\n");
+	std::printf("\n");
 
 	//----------------------------------------
 	//測定終了
@@ -732,7 +732,7 @@ void example_sort_and_search()
 	//結果を表示
 	auto printLine = [](const char* name, const sum_t& sum)
 	{
-		printf("- %-23s %13.9lf/%13.9lf/%13.9lf/%13.9lf",
+		std::printf("- %-23s %13.9lf/%13.9lf/%13.9lf/%13.9lf",
 			name,
 			sum.elapsed_time_sum,
 			sum.elapsed_time_avg,
@@ -740,81 +740,81 @@ void example_sort_and_search()
 			sum.elapsed_time_max);
 		if (sum.swapped_count_sum != 0xffffffff)
 		{
-			printf("%11u/%11u/%11u/%11u",
+			std::printf("%11u/%11u/%11u/%11u",
 				sum.swapped_count_sum,
 				sum.swapped_count_avg,
 				sum.swapped_count_min,
 				sum.swapped_count_max);
 		}
-		printf("\n");
+		std::printf("\n");
 	};
-	printf("============================================================\n");
-	printf("Result(Summary)\n");
-	printf("============================================================\n");
-	printf("Array Element size = %d Bytes\n", sizeof(data_t));
-	printf("Array Element(s)   = %d Count(s)\n", array_shuffle1->size());
-	printf("Total Array size   = %d Bytes\n", sizeof(*array_shuffle1));
-	printf("--------------------------------------------------------------------------------------------------------------------------------\n");
-	printf("- Sort name:                Elapsed Time (Sum/Average/Min/Max) [sec.]             Swapped (Sum/Average/Min/Max) [count(s)]\n");
-	printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+	std::printf("============================================================\n");
+	std::printf("Result(Summary)\n");
+	std::printf("============================================================\n");
+	std::printf("Array Element size = %d Bytes\n", sizeof(data_t));
+	std::printf("Array Element(s)   = %d Count(s)\n", array_shuffle1->size());
+	std::printf("Total Array size   = %d Bytes\n", sizeof(*array_shuffle1));
+	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+	std::printf("- Sort name:                Elapsed Time (Sum/Average/Min/Max) [sec.]             Swapped (Sum/Average/Min/Max) [count(s)]\n");
+	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
 #if 1
-	printf("[C-Library sort](Quick sort)\n");
+	std::printf("[C-Library sort](Quick sort)\n");
 	printLine("qsort(inline-function):", sum_clib_qsort);
-	printf("--------------------------------------------------------------------------------------------------------------------------------\n");
-	printf("[STL sort](Intro sort)\n");
+	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+	std::printf("[STL sort](Intro sort)\n");
 	printLine("std::sort(function):", sum_stl1);
 	printLine("std::sort(inline-func):", sum_stl2);
 	printLine("std::sort(functor):", sum_stl3);
 	printLine("std::sort(lambda):", sum_stl4);
-	printf("--------------------------------------------------------------------------------------------------------------------------------\n");
-	printf("[STL stable sort](Merge sort) *Not In-place sort\n");
+	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+	std::printf("[STL stable sort](Merge sort) *Not In-place sort\n");
 	printLine("std::stable_sort<S>:", sum_stl_stable);
-	printf("--------------------------------------------------------------------------------------------------------------------------------\n");
-	printf("[Exchange sorts]\n");
+	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+	std::printf("[Exchange sorts]\n");
 	printLine("Bubble sort<S>:", sum_bubble);
 	printLine("Shaker sort<S>:", sum_shaker);
 	printLine("Odd-Even sort<S>:", sum_odd_even);
 	printLine("Shear sort:", sum_shear);
 	printLine("Comb sort:", sum_comb);
 	printLine("Gnome sort<S>:", sum_gnome);
-	printf("--------------------------------------------------------------------------------------------------------------------------------\n");
-	printf("[Partition-exchange sorts]\n");
+	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+	std::printf("[Partition-exchange sorts]\n");
 	printLine("Quick sort:", sum_quick);
-	printf("--------------------------------------------------------------------------------------------------------------------------------\n");
-	printf("[Selection sorts]\n");
+	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+	std::printf("[Selection sorts]\n");
 	printLine("Selection sort:", sum_selection);
 	printLine("Heap sort:", sum_heap);
-	printf("--------------------------------------------------------------------------------------------------------------------------------\n");
-	printf("[Insertion sorts]\n");
+	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+	std::printf("[Insertion sorts]\n");
 	printLine("Insertion sort<S>:", sum_insertion);
 	printLine("Shell sort:", sum_shell);
-	printf("--------------------------------------------------------------------------------------------------------------------------------\n");
-	printf("[Merge sorts]\n");
+	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+	std::printf("[Merge sorts]\n");
 	printLine("Inplace-Merge sort<S>:", sum_inplace_merge);
-	printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
 #endif
-	printf("[Hybrid sorts]\n");
+	std::printf("[Hybrid sorts]\n");
 	printLine("Intro sort:", sum_intro);
-	printf("--------------------------------------------------------------------------------------------------------------------------------\n");
-	printf("[Distribution sorts] *Not In-place sort\n");
+	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+	std::printf("[Distribution sorts] *Not In-place sort\n");
 	printLine("Radix sort<S>:", sum_radix);
-	printf("--------------------------------------------------------------------------------------------------------------------------------\n");
-	printf("* <S> ... Stable sort algorithm.\n");
-	printf("\n");
+	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+	std::printf("* <S> ... Stable sort algorithm.\n");
+	std::printf("\n");
 
 #if 1
 	//----------------------------------------
 	//バリエーションテスト
 
-	printf("--------------------------------------------------------------------------------------------------------------------------------\n");
-	printf("Functoin variation test for sort and search.\n");
-	printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+	std::printf("Functoin variation test for sort and search.\n");
+	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
 #if 1
 	//----------------------------------------
 	//ソートのバリエーション
 	{
-		printf("\n");
-		printf("[Variation test for sort(intro-sort)]\n");
+		std::printf("\n");
+		std::printf("[Variation test for sort(intro-sort)]\n");
 		//コンテナを直接渡してソートする方法
 		array_t* arr = nullptr;//配列
 		auto _begin = [&arr, &copyWorkArray](){ copyWorkArray(arr, init_shuffle1, "shuffle1"); };
@@ -834,18 +834,18 @@ void example_sort_and_search()
 		_begin(); const std::size_t result10 = introSort(*arr); _end();
 		//専用の比較関数を設けず、比較を逆転する方法 ※ operator>(const T&, const T&) が定義されている必要あり
 		_begin(); const std::size_t result11 = introSort(*arr, std::greater<data_t>()); _end();
-		printf("(result=%u)\n", result);
-		printf("(result1=%u)\n", result1);
-		//printf("(result2=%u)\n", result2);
-		printf("(result3=%u)\n", result3);
-		printf("(result4=%u)\n", result4);
-		printf("(result5=%u)\n", result5);
-		printf("(result6=%u)\n", result6);
-		//printf("(result7=%u)\n", result7);
-		printf("(result8=%u)\n", result8);
-		printf("(result9=%u)\n", result9);
-		printf("(result10=%u)\n", result10);
-		printf("(result11=%u)\n", result11);
+		std::printf("(result=%u)\n", result);
+		std::printf("(result1=%u)\n", result1);
+		//std::printf("(result2=%u)\n", result2);
+		std::printf("(result3=%u)\n", result3);
+		std::printf("(result4=%u)\n", result4);
+		std::printf("(result5=%u)\n", result5);
+		std::printf("(result6=%u)\n", result6);
+		//std::printf("(result7=%u)\n", result7);
+		std::printf("(result8=%u)\n", result8);
+		std::printf("(result9=%u)\n", result9);
+		std::printf("(result10=%u)\n", result10);
+		std::printf("(result11=%u)\n", result11);
 	}
 #endif
 	
@@ -855,12 +855,12 @@ void example_sort_and_search()
 #if 1
 	//線形探索
 	{
-		printf("\n");
-		printf("[Variation test for linear-search]\n");
+		std::printf("\n");
+		std::printf("[Variation test for linear-search]\n");
 		int plus = 1;
 		for (int target = -1; target < 300; target += plus, plus *= 2)
 		{
-			printf("target=%d\n", target);
+			std::printf("target=%d\n", target);
 			const data_t* data_def = linearSearchValue(*array_shuffle1, target);
 			{
 				array_t& arr = *array_shuffle1;
@@ -876,19 +876,19 @@ void example_sort_and_search()
 				const data_t* data9_def = linearSearchValue(&const_arr.at(0), const_arr.size(), target);
 				const data_t* data10_def = linearSearchValue(&arr.at(0), &arr.at(0) + arr.size(), target);
 				const data_t* data11_def = linearSearchValue(&const_arr.at(0), &const_arr.at(0) + const_arr.size(), target);
-				printf("  linearSearchValue(*array_shuffle1, target);\n");
-				printf("    (data_def=%p)\n", data_def);
-				printf("    (data1_def=%p)\n", data1_def);
-				printf("    (data2_def=%p)\n", data2_def);
-				printf("    (data3_def=%p)\n", data3_def);
-				printf("    (data4_def=%p)\n", data4_def);
-				printf("    (data5_def=%p)\n", data5_def);
-				//printf("    (data6_def=%p)\n", data6_def);
-				//printf("    (data7_def=%p)\n", data7_def);
-				printf("    (data8_def=%p)\n", data8_def);
-				printf("    (data9_def=%p)\n", data9_def);
-				printf("    (data10_def=%p)\n", data10_def);
-				printf("    (data11_def=%p)\n", data11_def);
+				std::printf("  linearSearchValue(*array_shuffle1, target);\n");
+				std::printf("    (data_def=%p)\n", data_def);
+				std::printf("    (data1_def=%p)\n", data1_def);
+				std::printf("    (data2_def=%p)\n", data2_def);
+				std::printf("    (data3_def=%p)\n", data3_def);
+				std::printf("    (data4_def=%p)\n", data4_def);
+				std::printf("    (data5_def=%p)\n", data5_def);
+				//std::printf("    (data6_def=%p)\n", data6_def);
+				//std::printf("    (data7_def=%p)\n", data7_def);
+				std::printf("    (data8_def=%p)\n", data8_def);
+				std::printf("    (data9_def=%p)\n", data9_def);
+				std::printf("    (data10_def=%p)\n", data10_def);
+				std::printf("    (data11_def=%p)\n", data11_def);
 			}
 			auto search_predicate = [&target](const data_t& data) -> bool { return data.m_key == target; };
 			const data_t* data = linearSearch(*array_shuffle1, search_predicate);
@@ -906,19 +906,19 @@ void example_sort_and_search()
 				const data_t* data9 = linearSearch(&const_arr.at(0), const_arr.size(), search_predicate);
 				const data_t* data10 = linearSearch(&arr.at(0), &arr.at(0) + arr.size(), search_predicate);
 				const data_t* data11 = linearSearch(&const_arr.at(0), &const_arr.at(0) + const_arr.size(), search_predicate);
-				printf("  linearSearch(*array_shuffle1, search_predicate);\n");
-				printf("    (data=%p)\n", data);
-				printf("    (data1=%p)\n", data1);
-				printf("    (data2=%p)\n", data2);
-				printf("    (data3=%p)\n", data3);
-				printf("    (data4=%p)\n", data4);
-				printf("    (data5=%p)\n", data5);
-				//printf("    (data6=%p)\n", data6);
-				//printf("    (data7=%p)\n", data7);
-				printf("    (data8=%p)\n", data8);
-				printf("    (data9=%p)\n", data9);
-				printf("    (data10=%p)\n", data10);
-				printf("    (data11=%p)\n", data11);
+				std::printf("  linearSearch(*array_shuffle1, search_predicate);\n");
+				std::printf("    (data=%p)\n", data);
+				std::printf("    (data1=%p)\n", data1);
+				std::printf("    (data2=%p)\n", data2);
+				std::printf("    (data3=%p)\n", data3);
+				std::printf("    (data4=%p)\n", data4);
+				std::printf("    (data5=%p)\n", data5);
+				//std::printf("    (data6=%p)\n", data6);
+				//std::printf("    (data7=%p)\n", data7);
+				std::printf("    (data8=%p)\n", data8);
+				std::printf("    (data9=%p)\n", data9);
+				std::printf("    (data10=%p)\n", data10);
+				std::printf("    (data11=%p)\n", data11);
 			}
 			auto search_predicate_val = [](const data_t& data, const int target) -> bool { return data.m_key == target; };
 			const data_t* data_val = linearSearchValue(*array_shuffle1, target, search_predicate_val);
@@ -936,25 +936,25 @@ void example_sort_and_search()
 				const data_t* data9_val = linearSearchValue(&const_arr.at(0), const_arr.size(), target, search_predicate_val);
 				const data_t* data10_val = linearSearchValue(&arr.at(0), &arr.at(0) + arr.size(), target, search_predicate_val);
 				const data_t* data11_val = linearSearchValue(&const_arr.at(0), &const_arr.at(0) + const_arr.size(), target, search_predicate_val);
-				printf("  linearSearchValue(*array_shuffle1, target, search_predicate_val);\n");
-				printf("    (data_val=%p)\n", data_val);
-				printf("    (data1_val=%p)\n", data1_val);
-				printf("    (data2_val=%p)\n", data2_val);
-				printf("    (data3_val=%p)\n", data3_val);
-				printf("    (data4_val=%p)\n", data4_val);
-				printf("    (data5_val=%p)\n", data5_val);
-				//printf("    (data6_val=%p)\n", data6_val);
-				//printf("    (data7_val=%p)\n", data7_val);
-				printf("    (data8_val=%p)\n", data8_val);
-				printf("    (data9_val=%p)\n", data9_val);
-				printf("    (data10_val=%p)\n", data10_val);
-				printf("    (data11_val=%p)\n", data11_val);
+				std::printf("  linearSearchValue(*array_shuffle1, target, search_predicate_val);\n");
+				std::printf("    (data_val=%p)\n", data_val);
+				std::printf("    (data1_val=%p)\n", data1_val);
+				std::printf("    (data2_val=%p)\n", data2_val);
+				std::printf("    (data3_val=%p)\n", data3_val);
+				std::printf("    (data4_val=%p)\n", data4_val);
+				std::printf("    (data5_val=%p)\n", data5_val);
+				//std::printf("    (data6_val=%p)\n", data6_val);
+				//std::printf("    (data7_val=%p)\n", data7_val);
+				std::printf("    (data8_val=%p)\n", data8_val);
+				std::printf("    (data9_val=%p)\n", data9_val);
+				std::printf("    (data10_val=%p)\n", data10_val);
+				std::printf("    (data11_val=%p)\n", data11_val);
 			}
 
 			if (data_def)
-				printf("target=%d, linearSearch=[%d, %d]\n", target, data_def->m_key, data_def->m_seqNo);
+				std::printf("target=%d, linearSearch=[%d, %d]\n", target, data_def->m_key, data_def->m_seqNo);
 			else
-				printf("target=%d, linearSearch=nullptr\n", target);
+				std::printf("target=%d, linearSearch=nullptr\n", target);
 		}
 	}
 #endif
@@ -962,14 +962,14 @@ void example_sort_and_search()
 #if 1
 	//二分探索
 	{
-		printf("\n");
-		printf("[Variation test for binary-search]\n");
+		std::printf("\n");
+		std::printf("[Variation test for binary-search]\n");
 		auto sort_pred = [](const data_t& lhs, const data_t& rhs) -> bool { return lhs.m_key < rhs.m_key; };
 		introSort(*array_shuffle1, sort_pred);
 		int plus = 1;
 		for (int target = -1; target < 300; target += plus, plus *= 2)
 		{
-			printf("target=%d\n", target);
+			std::printf("target=%d\n", target);
 			const data_t* data_def = binarySearchValue(*array_shuffle1, target);
 			{
 				array_t& arr = *array_shuffle1;
@@ -985,19 +985,19 @@ void example_sort_and_search()
 				const data_t* data9_def = binarySearchValue(&const_arr.at(0), const_arr.size(), target);
 				const data_t* data10_def = binarySearchValue(&arr.at(0), &arr.at(0) + arr.size(), target);
 				const data_t* data11_def = binarySearchValue(&const_arr.at(0), &const_arr.at(0) + const_arr.size(), target);
-				printf("  binarySearchValue(*array_shuffle1, target);\n");
-				printf("    (data_def=%p)\n", data_def);
-				printf("    (data1_def=%p)\n", data1_def);
-				printf("    (data2_def=%p)\n", data2_def);
-				printf("    (data3_def=%p)\n", data3_def);
-				printf("    (data4_def=%p)\n", data4_def);
-				printf("    (data5_def=%p)\n", data5_def);
-				//printf("    (data6_def=%p)\n", data6_def);
-				//printf("    (data7_def=%p)\n", data7_def);
-				printf("    (data8_def=%p)\n", data8_def);
-				printf("    (data9_def=%p)\n", data9_def);
-				printf("   (data10_def=%p)\n", data10_def);
-				printf("    (data11_def=%p)\n", data11_def);
+				std::printf("  binarySearchValue(*array_shuffle1, target);\n");
+				std::printf("    (data_def=%p)\n", data_def);
+				std::printf("    (data1_def=%p)\n", data1_def);
+				std::printf("    (data2_def=%p)\n", data2_def);
+				std::printf("    (data3_def=%p)\n", data3_def);
+				std::printf("    (data4_def=%p)\n", data4_def);
+				std::printf("    (data5_def=%p)\n", data5_def);
+				//std::printf("    (data6_def=%p)\n", data6_def);
+				//std::printf("    (data7_def=%p)\n", data7_def);
+				std::printf("    (data8_def=%p)\n", data8_def);
+				std::printf("    (data9_def=%p)\n", data9_def);
+				std::printf("   (data10_def=%p)\n", data10_def);
+				std::printf("    (data11_def=%p)\n", data11_def);
 			}
 			auto comparisonForSearch = [&target](const data_t& data) -> int { return target - data.m_key; };
 			const data_t* data = binarySearch(*array_shuffle1, comparisonForSearch);
@@ -1015,19 +1015,19 @@ void example_sort_and_search()
 				const data_t* data9 = binarySearch(&const_arr.at(0), const_arr.size(), comparisonForSearch);
 				const data_t* data10 = binarySearch(&arr.at(0), &arr.at(0) + arr.size(), comparisonForSearch);
 				const data_t* data11 = binarySearch(&const_arr.at(0), &const_arr.at(0) + const_arr.size(), comparisonForSearch);
-				printf("  binarySearch(*array_shuffle1, comparisonForSearch);\n");
-				printf("    (data=%p)\n", data);
-				printf("    (data1=%p)\n", data1);
-				printf("    (data2=%p)\n", data2);
-				printf("    (data3=%p)\n", data3);
-				printf("    (data4=%p)\n", data4);
-				printf("    (data5=%p)\n", data5);
-				//printf("    (data6=%p)\n", data6);
-				//printf("    (data7=%p)\n", data7);
-				printf("    (data8=%p)\n", data8);
-				printf("    (data9=%p)\n", data9);
-				printf("    (data10=%p)\n", data10);
-				printf("    (data11=%p)\n", data11);
+				std::printf("  binarySearch(*array_shuffle1, comparisonForSearch);\n");
+				std::printf("    (data=%p)\n", data);
+				std::printf("    (data1=%p)\n", data1);
+				std::printf("    (data2=%p)\n", data2);
+				std::printf("    (data3=%p)\n", data3);
+				std::printf("    (data4=%p)\n", data4);
+				std::printf("    (data5=%p)\n", data5);
+				//std::printf("    (data6=%p)\n", data6);
+				//std::printf("    (data7=%p)\n", data7);
+				std::printf("    (data8=%p)\n", data8);
+				std::printf("    (data9=%p)\n", data9);
+				std::printf("    (data10=%p)\n", data10);
+				std::printf("    (data11=%p)\n", data11);
 			}
 			auto search_comparison_val = [](const data_t& data, const int target) -> int { return target - data.m_key; };
 			const data_t* data_val = binarySearchValue(*array_shuffle1, target, search_comparison_val);
@@ -1045,25 +1045,25 @@ void example_sort_and_search()
 				const data_t* data9_val = binarySearchValue(&const_arr.at(0), const_arr.size(), target, search_comparison_val);
 				const data_t* data10_val = binarySearchValue(&arr.at(0), &arr.at(0) + arr.size(), target, search_comparison_val);
 				const data_t* data11_val = binarySearchValue(&const_arr.at(0), &const_arr.at(0) + const_arr.size(), target, search_comparison_val);
-				printf("  binarySearchValue(*array_shuffle1, target, search_comparison_val);\n");
-				printf("    (data_val=%p)\n", data_val);
-				printf("    (data1_val=%p)\n", data1_val);
-				printf("    (data2_val=%p)\n", data2_val);
-				printf("    (data3_val=%p)\n", data3_val);
-				printf("    (data4_val=%p)\n", data4_val);
-				printf("    (data5_val=%p)\n", data5_val);
-				//printf("    (data6_val=%p)\n", data6_val);
-				//printf("    (data7_val=%p)\n", data7_val);
-				printf("    (data8_val=%p)\n", data8_val);
-				printf("    (data9_val=%p)\n", data9_val);
-				printf("    (data10_val=%p)\n", data10_val);
-				printf("    (data11_val=%p)\n", data11_val);
+				std::printf("  binarySearchValue(*array_shuffle1, target, search_comparison_val);\n");
+				std::printf("    (data_val=%p)\n", data_val);
+				std::printf("    (data1_val=%p)\n", data1_val);
+				std::printf("    (data2_val=%p)\n", data2_val);
+				std::printf("    (data3_val=%p)\n", data3_val);
+				std::printf("    (data4_val=%p)\n", data4_val);
+				std::printf("    (data5_val=%p)\n", data5_val);
+				//std::printf("    (data6_val=%p)\n", data6_val);
+				//std::printf("    (data7_val=%p)\n", data7_val);
+				std::printf("    (data8_val=%p)\n", data8_val);
+				std::printf("    (data9_val=%p)\n", data9_val);
+				std::printf("    (data10_val=%p)\n", data10_val);
+				std::printf("    (data11_val=%p)\n", data11_val);
 			}
 
 			if (data_def)
-				printf("target=%d, binarySearch=[%d, %d]\n", target, data_def->m_key, data_def->m_seqNo);
+				std::printf("target=%d, binarySearch=[%d, %d]\n", target, data_def->m_key, data_def->m_seqNo);
 			else
-				printf("target=%d, binarySearch=nullptr\n", target);
+				std::printf("target=%d, binarySearch=nullptr\n", target);
 		}
 	}
 #endif
@@ -1072,23 +1072,23 @@ void example_sort_and_search()
 
 	//----------------------------------------
 	//測定終了
-	printf("============================================================\n");
-	printf("Finalize\n");
-	printf("============================================================\n");
+	std::printf("============================================================\n");
+	std::printf("Finalize\n");
+	std::printf("============================================================\n");
 	deleteArraySet();
-	printf("\n");
-	printf("\n");
-	printf("============================================================\n");
-	printf("End\n");
-	printf("============================================================\n");
+	std::printf("\n");
+	std::printf("\n");
+	std::printf("============================================================\n");
+	std::printf("End\n");
+	std::printf("============================================================\n");
 	printElapsedTime(begin_time, true);//処理時間表示
 
 #if 0
 	//ポインタ変数のソート処理動作確認
 	{
-		printf("\n");
-		printf("\n");
-		printf("--- Test for sort with pointer ---\n");
+		std::printf("\n");
+		std::printf("\n");
+		std::printf("--- Test for sort with pointer ---\n");
 		static const std::size_t data_num = 10;
 		std::array<data_t, data_num> d_arr;
 		std::array<data_t*, data_num> p_arr;
@@ -1101,21 +1101,21 @@ void example_sort_and_search()
 		{
 			for (data_t* p : p_arr)
 			{
-				printf("[%d] ", p->m_key);
+				std::printf("[%d] ", p->m_key);
 			}
-			printf("\n");
+			std::printf("\n");
 		};
 		auto predicate = [](data_t* val1, data_t* val2){ return val1->m_key < val2->m_key; };
 		std::size_t unordered = sumupUnordered(p_arr, predicate);
-		printf("[Before]\n");
+		std::printf("[Before]\n");
 		printData();
-		printf("unordered=%d\n", unordered);
+		std::printf("unordered=%d\n", unordered);
 		introSort(p_arr, predicate);
 		unordered = sumupUnordered(p_arr, predicate);
-		printf("[After]\n");
+		std::printf("[After]\n");
 		printData();
-		printf("unordered=%d\n", unordered);
-		printf("--- End ---\n");
+		std::printf("unordered=%d\n", unordered);
+		std::printf("--- End ---\n");
 	}
 #endif
 }

@@ -15,7 +15,7 @@
 #include <gasha/scoped_stack_allocator.h>//スコープスタックアロケータ
 #include <gasha/scoped_dual_stack_allocator.h>//スコープ双方向スタックアロケータ
 
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
@@ -23,25 +23,25 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //基本テスト
 
 //テスト用マクロ
-#define EXPR_PLAIN(...) printf("> %s\n", #__VA_ARGS__); __VA_ARGS__
-#define EXPR_WITH_INFO(...) __VA_ARGS__ printf("> %s\ttsize=%d(ASC=%d,DESC=%d) remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc())
-#define EXPR(p, ...) __VA_ARGS__ printf("> %s\t%s=%p, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, #p, p, stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc())
-#define EXPR_SCOPED_PLAIN(...) printf(">\t %s\n", #__VA_ARGS__); __VA_ARGS__
-#define EXPR_SCOPED_WITH_INFO(...) __VA_ARGS__ printf(">\t %s\tsize=%d, remain=%d, count=%d\n", #__VA_ARGS__, scoped_stack.size(), scoped_stack.remain(), scoped_stack.count())
-#define EXPR_SCOPED(p, ...) __VA_ARGS__ printf(">\t %s\t%s=%p, size=%d, remain=%d, count=%d\n", #__VA_ARGS__, #p, p, scoped_stack.size(), scoped_stack.remain(), scoped_stack.count())
-#define EXPR_SCOPED_DUAL_PLAIN(...) printf(">\t %s\n", #__VA_ARGS__); __VA_ARGS__
-#define EXPR_SCOPED_DUAL_WITH_INFO(...) __VA_ARGS__ printf(">\t %s\tsize=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, scoped_stack.size(), scoped_stack.sizeAsc(), scoped_stack.sizeDesc(), scoped_stack.remain(), scoped_stack.count(), scoped_stack.countAsc(), scoped_stack.countDesc())
-#define EXPR_SCOPED_DUAL(p, ...) __VA_ARGS__ printf(">\t %s\t%s=%p, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, #p, p, scoped_stack.size(), scoped_stack.sizeAsc(), scoped_stack.sizeDesc(), scoped_stack.remain(), scoped_stack.count(), scoped_stack.countAsc(), scoped_stack.countDesc())
+#define EXPR_PLAIN(...) std::printf("> %s\n", #__VA_ARGS__); __VA_ARGS__
+#define EXPR_WITH_INFO(...) __VA_ARGS__ std::printf("> %s\ttsize=%d(ASC=%d,DESC=%d) remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc())
+#define EXPR(p, ...) __VA_ARGS__ std::printf("> %s\t%s=%p, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, #p, p, stack.size(), stack.sizeAsc(), stack.sizeDesc(), stack.remain(), stack.count(), stack.countAsc(), stack.countDesc())
+#define EXPR_SCOPED_PLAIN(...) std::printf(">\t %s\n", #__VA_ARGS__); __VA_ARGS__
+#define EXPR_SCOPED_WITH_INFO(...) __VA_ARGS__ std::printf(">\t %s\tsize=%d, remain=%d, count=%d\n", #__VA_ARGS__, scoped_stack.size(), scoped_stack.remain(), scoped_stack.count())
+#define EXPR_SCOPED(p, ...) __VA_ARGS__ std::printf(">\t %s\t%s=%p, size=%d, remain=%d, count=%d\n", #__VA_ARGS__, #p, p, scoped_stack.size(), scoped_stack.remain(), scoped_stack.count())
+#define EXPR_SCOPED_DUAL_PLAIN(...) std::printf(">\t %s\n", #__VA_ARGS__); __VA_ARGS__
+#define EXPR_SCOPED_DUAL_WITH_INFO(...) __VA_ARGS__ std::printf(">\t %s\tsize=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, scoped_stack.size(), scoped_stack.sizeAsc(), scoped_stack.sizeDesc(), scoped_stack.remain(), scoped_stack.count(), scoped_stack.countAsc(), scoped_stack.countDesc())
+#define EXPR_SCOPED_DUAL(p, ...) __VA_ARGS__ std::printf(">\t %s\t%s=%p, size=%d(ASC=%d,DESC=%d), remain=%d, count=%d(ASC=%d,DESC=%d)\n", #__VA_ARGS__, #p, p, scoped_stack.size(), scoped_stack.sizeAsc(), scoped_stack.sizeDesc(), scoped_stack.remain(), scoped_stack.count(), scoped_stack.countAsc(), scoped_stack.countDesc())
 
 //双方向スタックアロケータのテスト（共通処理）
 template<class ALLOCATOR>
 static void testDualStack(ALLOCATOR& stack)
 {
-	printf("\n");
+	std::printf("\n");
 	char message[1024];
 	for (int i = 0; i < 4; ++i)
 	{
-		printf("--------------------------------------------------\n");
+		std::printf("--------------------------------------------------\n");
 		if (i == 0)
 		{
 			EXPR_PLAIN(stack.setAllocateOrder(ALLOC_ASC));
@@ -54,7 +54,7 @@ static void testDualStack(ALLOCATOR& stack)
 		{
 			EXPR_PLAIN(stack.reversewAllocateOrder());
 		}
-		EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 		EXPR(p1, void* p1 = stack.alloc(1););
 		EXPR(p2, void* p2 = stack.alloc(1, 1););
 		EXPR(p3, void* p3 = stack.alloc(1, 1););
@@ -69,7 +69,7 @@ static void testDualStack(ALLOCATOR& stack)
 		EXPR(p12, data_t* p12 = stack.template newArray<data_t>(3, 456););
 		EXPR(p13, void* p13 = stack.alloc(1000););//アロケート失敗（サイズオーバー）
 		EXPR(p14, void* p14 = stack.alloc(10););
-		EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 		EXPR(p1, stack.free(p1););
 		EXPR(p2, stack.free(p2););
 		EXPR(p3, stack.free(p3););
@@ -84,7 +84,7 @@ static void testDualStack(ALLOCATOR& stack)
 		EXPR(p12, stack.deleteArray(p12, 3););
 		EXPR(p13, stack.free(p13););
 		EXPR(p14, stack.free(p14););//スマートスタックならここで自動クリア
-		EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 		EXPR_WITH_INFO(stack.clearAll(););
 		EXPR(p100, void* p100 = stack.alloc(10););
 		EXPR(p101, void* p101 = stack.alloc(20););
@@ -94,7 +94,7 @@ static void testDualStack(ALLOCATOR& stack)
 		EXPR_WITH_INFO(stack.rewind(p101););
 		EXPR_WITH_INFO(stack.rewind(p100););
 		EXPR_WITH_INFO(stack.clearAll(););
-		EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 		EXPR(p200, void* p200 = stack.allocOrd(ALLOC_ASC, 10););
 		EXPR(p201, void* p201 = stack.allocOrd(ALLOC_DESC, 10););
 		EXPR(p202, int* p202 = stack.template newObjOrd<int>(ALLOC_ASC););
@@ -112,7 +112,7 @@ static void testDualStack(ALLOCATOR& stack)
 		EXPR(p300, void* p300 = stack.allocOrd(ALLOC_ASC, 10););
 		EXPR(p301, void* p301 = stack.allocOrd(ALLOC_DESC, 10););
 		EXPR_WITH_INFO(stack.clear(););
-		EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 	}
 }
 
@@ -121,21 +121,21 @@ static void testDualStack(ALLOCATOR& stack)
 template<class ALLOCATOR>
 static void testScopedStack(ALLOCATOR& stack)
 {
-	printf("\n");
+	std::printf("\n");
 	char message[1024];
-	EXPR_PLAIN(stack.debugInfo(message); printf(message););
+	EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 	for (int i = 0; i < 2; ++i)
 	{
-		printf("--------------------------------------------------\n");
+		std::printf("--------------------------------------------------\n");
 		void* p = nullptr;
 		if (i == 0)
 		{
 			EXPR(p, p = stack.alloc(100););
 		}
 		{
-			printf("***** Begin : Scoped stack allocator *****\n");
+			std::printf("***** Begin : Scoped stack allocator *****\n");
 			EXPR_SCOPED_PLAIN(auto scoped_stack = stack.scopedAllocator(););//スコープスタックアロケータを取得（元になるスタックアロケータを使用してメモリ操作し、スコープを抜ける時に元の状態に戻す）
-			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); std::printf(message););
 			EXPR_SCOPED(p1, void* p1 = scoped_stack.alloc(1););
 			EXPR_SCOPED(p2, void* p2 = scoped_stack.alloc(1, 1););
 			EXPR_SCOPED(p3, void* p3 = scoped_stack.alloc(1, 1););
@@ -150,7 +150,7 @@ static void testScopedStack(ALLOCATOR& stack)
 			EXPR_SCOPED(p12, data_t* p12 = scoped_stack.template newArray<data_t>(3, 456););
 			EXPR_SCOPED(p13, void* p13 = scoped_stack.alloc(1000););//アロケート失敗（サイズオーバー）
 			EXPR_SCOPED(p14, void* p14 = scoped_stack.alloc(10););
-			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); std::printf(message););
 			EXPR_SCOPED(p1, scoped_stack.free(p1););
 			EXPR_SCOPED(p2, scoped_stack.free(p2););
 			EXPR_SCOPED(p3, scoped_stack.free(p3););
@@ -165,7 +165,7 @@ static void testScopedStack(ALLOCATOR& stack)
 			EXPR_SCOPED(p12, scoped_stack.deleteArray(p12, 3););
 			EXPR_SCOPED(p13, scoped_stack.free(p13););
 			EXPR_SCOPED(p14, scoped_stack.free(p14););//スマートスタックでも自動クリアはしない
-			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); std::printf(message););
 			EXPR_SCOPED_WITH_INFO(scoped_stack.clear(););
 			EXPR_SCOPED(p100, void* p100 = scoped_stack.alloc(10););
 			EXPR_SCOPED(p101, void* p101 = scoped_stack.alloc(20););
@@ -175,15 +175,15 @@ static void testScopedStack(ALLOCATOR& stack)
 			EXPR_SCOPED_WITH_INFO(scoped_stack.rewind(p101););
 			EXPR_SCOPED_WITH_INFO(scoped_stack.rewind(p100););
 			EXPR_SCOPED_WITH_INFO(scoped_stack.clear(););
-			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); std::printf(message););
 			EXPR_SCOPED(p200, void* p200 = scoped_stack.alloc(30););
 			EXPR_SCOPED(p201, void* p201 = scoped_stack.alloc(40););
-			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); printf(message););
-			printf("***** End : Scoped stack allocator *****\n");
+			EXPR_SCOPED_PLAIN(scoped_stack.debugInfo(message); std::printf(message););
+			std::printf("***** End : Scoped stack allocator *****\n");
 		}
-		EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 		EXPR_PLAIN(stack.clear(););
-		EXPR_PLAIN(stack.debugInfo(message); printf(message););
+		EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 	}
 }
 
@@ -191,15 +191,15 @@ static void testScopedStack(ALLOCATOR& stack)
 template<class ALLOCATOR>
 static void testScopedDualStack(ALLOCATOR& stack)
 {
-	printf("\n");
-	printf("================================================================================\n");
+	std::printf("\n");
+	std::printf("================================================================================\n");
 
-	printf("\n");
+	std::printf("\n");
 	char message[1024];
-	EXPR_PLAIN(stack.debugInfo(message); printf(message););
+	EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 	for (int i = 0; i < 2; ++i)
 	{
-		printf("--------------------------------------------------\n");
+		std::printf("--------------------------------------------------\n");
 		void* p1 = nullptr;
 		void* p2 = nullptr;
 		if (i == 0)
@@ -210,7 +210,7 @@ static void testScopedDualStack(ALLOCATOR& stack)
 		for (int j = 0; j < 4; ++j)
 		{
 			{
-				printf("***** Begin : Dual Scoped stack allocator *****\n");
+				std::printf("***** Begin : Dual Scoped stack allocator *****\n");
 				EXPR_SCOPED_DUAL_PLAIN(auto scoped_stack = stack.scopedDualAllocator(););//スコープスタックアロケータを取得（元になるスタックアロケータを使用してメモリ操作し、スコープを抜ける時に元の状態に戻す）
 				if (j == 0)
 				{
@@ -224,7 +224,7 @@ static void testScopedDualStack(ALLOCATOR& stack)
 				{
 					EXPR_SCOPED_DUAL_PLAIN(scoped_stack.reversewAllocateOrder());
 				}
-				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); printf(message););
+				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); std::printf(message););
 				EXPR_SCOPED_DUAL(p1, void* p1 = scoped_stack.alloc(1););
 				EXPR_SCOPED_DUAL(p2, void* p2 = scoped_stack.alloc(1, 1););
 				EXPR_SCOPED_DUAL(p3, void* p3 = scoped_stack.alloc(1, 1););
@@ -239,7 +239,7 @@ static void testScopedDualStack(ALLOCATOR& stack)
 				EXPR_SCOPED_DUAL(p12, data_t* p12 = scoped_stack.template newArray<data_t>(3, 456););
 				EXPR_SCOPED_DUAL(p13, void* p13 = scoped_stack.alloc(1000););//アロケート失敗（サイズオーバー）
 				EXPR_SCOPED_DUAL(p14, void* p14 = scoped_stack.alloc(10););
-				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); printf(message););
+				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); std::printf(message););
 				EXPR_SCOPED_DUAL(p1, scoped_stack.free(p1););
 				EXPR_SCOPED_DUAL(p2, scoped_stack.free(p2););
 				EXPR_SCOPED_DUAL(p3, scoped_stack.free(p3););
@@ -254,7 +254,7 @@ static void testScopedDualStack(ALLOCATOR& stack)
 				EXPR_SCOPED_DUAL(p12, scoped_stack.deleteArray(p12, 3););
 				EXPR_SCOPED_DUAL(p13, scoped_stack.free(p13););
 				EXPR_SCOPED_DUAL(p14, scoped_stack.free(p14););//スマートスタックでも自動クリアはしない
-				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); printf(message););
+				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); std::printf(message););
 				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.clearAll(););
 				EXPR_SCOPED_DUAL(p100, void* p100 = scoped_stack.alloc(10););
 				EXPR_SCOPED_DUAL(p101, void* p101 = scoped_stack.alloc(20););
@@ -264,7 +264,7 @@ static void testScopedDualStack(ALLOCATOR& stack)
 				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.rewind(p101););
 				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.rewind(p100););
 				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.clearAll(););
-				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); printf(message););
+				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); std::printf(message););
 				EXPR_SCOPED_DUAL(p200, void* p200 = scoped_stack.allocOrd(ALLOC_ASC, 10););
 				EXPR_SCOPED_DUAL(p201, void* p201 = scoped_stack.allocOrd(ALLOC_DESC, 10););
 				EXPR_SCOPED_DUAL(p202, int* p202 = scoped_stack.template newObjOrd<int>(ALLOC_ASC););
@@ -279,18 +279,18 @@ static void testScopedDualStack(ALLOCATOR& stack)
 				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.rewind(p201););
 				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.clearOrd(ALLOC_ASC););
 				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.clearOrd(ALLOC_DESC););
-				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); printf(message););
+				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); std::printf(message););
 				EXPR_SCOPED_DUAL(p300, void* p300 = scoped_stack.allocOrd(ALLOC_ASC, 10););
 				EXPR_SCOPED_DUAL(p301, void* p301 = scoped_stack.allocOrd(ALLOC_DESC, 10););
 				EXPR_SCOPED_DUAL_WITH_INFO(scoped_stack.clear(););
 				EXPR_SCOPED_DUAL(p302, void* p302 = scoped_stack.allocOrd(ALLOC_ASC, 10););
 				EXPR_SCOPED_DUAL(p303, void* p303 = scoped_stack.allocOrd(ALLOC_DESC, 10););
-				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); printf(message););
-				printf("***** End : Scoped stack allocator *****\n");
+				EXPR_SCOPED_DUAL_PLAIN(scoped_stack.debugInfo(message); std::printf(message););
+				std::printf("***** End : Scoped stack allocator *****\n");
 			}
-			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 			EXPR_PLAIN(stack.clearAll(););
-			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 		}
 	}
 }
@@ -303,59 +303,59 @@ void example_dual_stack_allocator()
 	char message[1024];
 
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[ Test for dualStackAllocator ]\n");
-		printf("--------------------------------------------------------------------------------\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[ Test for dualStackAllocator ]\n");
+		std::printf("--------------------------------------------------------------------------------\n");
 
 		//双方向スタックアロケータ
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(dualStackAllocator<lock_type> stack(buff););
-			printf("----------------------------------------\n");
+			std::printf("----------------------------------------\n");
 			testDualStack(stack);
 		}
 
 		//スマート双方向スタックアロケータ
 		//※正順か逆順のメモリ確保数が0になったら、対象方向のメモリを自動リセット
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(smartDualStackAllocator<lock_type> stack(buff););
-			printf("----------------------------------------\n");
+			std::printf("----------------------------------------\n");
 			testDualStack(stack);
 		}
 
 		//バッファ付き双方向スタックアロケータ
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(dualStackAllocator_withBuff<1024, lock_type> stack;);
-			printf("----------------------------------------\n");
-			printf("\n");
-			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			std::printf("----------------------------------------\n");
+			std::printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 		}
 
 		//バッファ付きスマート双方向スタックアロケータ
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(smartDualStackAllocator_withBuff<1024, lock_type> stack;);
-			printf("----------------------------------------\n");
-			printf("\n");
-			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			std::printf("----------------------------------------\n");
+			std::printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 		}
 
 		//型指定バッファ付き双方向スタックアロケータ
 		//※型のアラインメントサイズ分余計に領域を割り当てる
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(dualStackAllocator_withType<long long, 128, lock_type> stack;);
-			printf("----------------------------------------\n");
-			printf("\n");
-			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			std::printf("----------------------------------------\n");
+			std::printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 			EXPR(p1, long long* p1 = stack.newDefault(););
 			EXPR_PLAIN(stack.reversewAllocateOrder(););
 			EXPR(p1, long long* p2 = stack.newDefault(););
@@ -370,12 +370,12 @@ void example_dual_stack_allocator()
 		//型指定バッファ付きスマート双方向スタックアロケータ
 		//※型のアラインメントサイズ分余計に領域を割り当てる
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(smartDualStackAllocator_withType<long long, 128, lock_type> stack;);
-			printf("----------------------------------------\n");
-			printf("\n");
-			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			std::printf("----------------------------------------\n");
+			std::printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 			EXPR(p1, long long* p1 = stack.newDefault(););
 			EXPR_PLAIN(stack.reversewAllocateOrder(););
 			EXPR(p1, long long* p2 = stack.newDefault(););
@@ -389,59 +389,59 @@ void example_dual_stack_allocator()
 	}
 
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[ Test for lfDualStackAllocator ]\n");
-		printf("--------------------------------------------------------------------------------\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[ Test for lfDualStackAllocator ]\n");
+		std::printf("--------------------------------------------------------------------------------\n");
 
 		//ロックフリー双方向スタックアロケータ
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(lfDualStackAllocator<> stack(buff););
-			printf("----------------------------------------\n");
+			std::printf("----------------------------------------\n");
 			testDualStack(stack);
 		}
 
 		//ロックフリースマート双方向スタックアロケータ
 		//※正順か逆順のメモリ確保数が0になったら、対象方向のメモリを自動リセット
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(lfSmartDualStackAllocator stack(buff););
-			printf("----------------------------------------\n");
+			std::printf("----------------------------------------\n");
 			testDualStack(stack);
 		}
 
 		//バッファ付きロックフリー双方向スタックアロケータ
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(lfDualStackAllocator_withBuff<1024> stack;);
-			printf("----------------------------------------\n");
-			printf("\n");
-			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			std::printf("----------------------------------------\n");
+			std::printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 		}
 
 		//バッファ付きロックフリースマート双方向スタックアロケータ
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(lfSmartDualStackAllocator_withBuff<1024> stack;);
-			printf("----------------------------------------\n");
-			printf("\n");
-			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			std::printf("----------------------------------------\n");
+			std::printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 		}
 
 		//型指定バッファ付きロックフリー双方向スタックアロケータ
 		//※型のアラインメントサイズ分余計に領域を割り当てる
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(lfDualStackAllocator_withType<long long, 128> stack;);
-			printf("----------------------------------------\n");
-			printf("\n");
-			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			std::printf("----------------------------------------\n");
+			std::printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 			EXPR(p1, long long* p1 = stack.newDefault(););
 			EXPR_PLAIN(stack.reversewAllocateOrder(););
 			EXPR(p1, long long* p2 = stack.newDefault(););
@@ -456,12 +456,12 @@ void example_dual_stack_allocator()
 		//型指定バッファ付きロックフリースマート双方向スタックアロケータ
 		//※型のアラインメントサイズ分余計に領域を割り当てる
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(lfSmartDualStackAllocator_withType<long long, 128> stack;);
-			printf("----------------------------------------\n");
-			printf("\n");
-			EXPR_PLAIN(stack.debugInfo(message); printf(message););
+			std::printf("----------------------------------------\n");
+			std::printf("\n");
+			EXPR_PLAIN(stack.debugInfo(message); std::printf(message););
 			EXPR(p1, long long* p1 = stack.newDefault(););
 			EXPR_PLAIN(stack.reversewAllocateOrder(););
 			EXPR(p1, long long* p2 = stack.newDefault(););
@@ -475,18 +475,18 @@ void example_dual_stack_allocator()
 	}
 	
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[ Test for scoepdStackAllocator / scoepdDualStackAllocator ]\n");
-		printf("--------------------------------------------------------------------------------\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[ Test for scoepdStackAllocator / scoepdDualStackAllocator ]\n");
+		std::printf("--------------------------------------------------------------------------------\n");
 
 		//双方向スタックアロケータ
 		//※スコープスタックアロケータのテスト用
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(dualStackAllocator<lock_type> stack(buff););
-			printf("----------------------------------------\n");
+			std::printf("----------------------------------------\n");
 			testScopedStack(stack);
 			EXPR_PLAIN(stack.clearAll(););
 			testScopedDualStack(stack);
@@ -495,10 +495,10 @@ void example_dual_stack_allocator()
 		//スマート双方向スタックアロケータ
 		//※スコープスタックアロケータのテスト用
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(smartDualStackAllocator<lock_type> stack(buff););
-			printf("----------------------------------------\n");
+			std::printf("----------------------------------------\n");
 			testDualStack(stack);
 			EXPR_PLAIN(stack.clearAll(););
 			testScopedDualStack(stack);
@@ -507,10 +507,10 @@ void example_dual_stack_allocator()
 		//ロックフリー双方向スタックアロケータ
 		//※スコープスタックアロケータのテスト用
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(lfDualStackAllocator<> stack(buff););
-			printf("----------------------------------------\n");
+			std::printf("----------------------------------------\n");
 			testDualStack(stack);
 			EXPR_PLAIN(stack.clearAll(););
 			testScopedDualStack(stack);
@@ -519,10 +519,10 @@ void example_dual_stack_allocator()
 		//ロックフリースマート双方向スタックアロケータ
 		//※スコープスタックアロケータのテスト用
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(lfSmartDualStackAllocator stack(buff););
-			printf("----------------------------------------\n");
+			std::printf("----------------------------------------\n");
 			testDualStack(stack);
 			EXPR_PLAIN(stack.clearAll(););
 			testScopedDualStack(stack);

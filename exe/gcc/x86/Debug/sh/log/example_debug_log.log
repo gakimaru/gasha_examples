@@ -1,6 +1,8 @@
 [93;41;4mmessage for Standard[0m
 [93;41;4mmessage for TTY (stdout)[0m
+message for Mono-TTY (stdout)
 [93;41;4mmessage for Win (stdout)[0m
+message for Mono-Win (stdout)
 [93;41;4mmessage for VS[0m
 
 --------------------------------------------------------------------------------
@@ -8,58 +10,58 @@
 
 [37;100m[ 0]( 0)"asMoreDetail"[0m
 [37;100m	console: "TTY(stdout)"(WHITE+iBLACK)[0m
-[0m	notice: "vs-console *CUSTOM*"(STANDARD+STANDARD)[0m
+	notice: "vs-console *CUSTOM*"(STANDARD+STANDARD)
 [90;49m	next: [ 1]( 4)"asVerbose[0m
 [90;49m[ 1]( 4)"asVerbose"[0m
 [90;49m	console: "TTY(stdout)"(iBLACK+STANDARD)[0m
 [90;107m	notice: "vs-console *CHANGED*"(iBLACK+iWHITE)[0m
 [37;100m	prev: [ 0]( 0)"asMoreDetail"[0m
-[0m	next: [ 3](12)"asNormal[0m
+	next: [ 3](12)"asNormal
 [90;49m[ 1]( 5)"asDetail"[0m
 [90;49m	console: "TTY(stdout)"(iBLACK+STANDARD)[0m
 [90;107m	notice: "vs-console *CHANGED*"(iBLACK+iWHITE)[0m
 [37;100m	prev: [ 0]( 0)"asMoreDetail"[0m
-[0m	next: [ 3](12)"asNormal[0m
-[0m[ 3](12)"asNormal"[0m
-[0m	console: "win-console *CHANGED*"(STANDARD+STANDARD)[0m
+	next: [ 3](12)"asNormal
+[ 3](12)"asNormal"
+	console: "win-console *CHANGED*"(STANDARD+STANDARD)
 [30;107m	notice: "vs-console *CHANGED*"(BLACK+iWHITE)[0m
 [90;49m	prev: [ 1]( 5)"asDetail"[0m
 [36;49m	next: [ 4](17)"asAboveNormal[0m
 [36;49m[ 4](17)"asAboveNormal"[0m
 [36;49m	console: "TTY(stdout)"(CYAN+STANDARD)[0m
-[0m	prev: [ 3](12)"asNormal"[0m
+	prev: [ 3](12)"asNormal"
 [94;40m	next: [ 5](20)"asImportant[0m
 [94;40m[ 5](20)"asImportant"[0m
 [94;40m	console: "TTY(stdout)"(iBLUE+BLACK)[0m
 [94;107m	notice: "vs-console *CHANGED*"(iBLUE+iWHITE)[0m
-[0m	prev: [ 3](12)"asNormal"[0m
+	prev: [ 3](12)"asNormal"
 [95;49m	next: [ 7](28)"asWarning[0m
 [30;105m	notice: "vs-console *CHANGED*"(BLACK+iMAGENTA)[0m
 [93;101m	notice: "vs-console *CHANGED*"(iYELLOW+iRED)[0m
-[0m[11](44)"asAbsolute"[0m
-[0m	console: "TTY(stdout)"(STANDARD+STANDARD)[0m
-[0m	notice: "vs-console *CHANGED*"(STANDARD+STANDARD)[0m
+[11](44)"asAbsolute"
+	console: "TTY(stdout)"(STANDARD+STANDARD)
+	notice: "vs-console *CHANGED*"(STANDARD+STANDARD)
 [91;49m	prev: [ 9](36)"asCritical"[0m
-[0m[11](SP47)"asSilent"[0m
-[0m[12](SP48)"asSilentAbsolutely"[0m
+[11](SP47)"asSilent"
+[12](SP48)"asSilentAbsolutely"
 
 --------------------------------------------------------------------------------
 [ Enumeration of all log-categories ]
 
-( 0)"forAny"[0m
-( 3)"forFileSystem"[0m
-( 4)"forResource"[0m
-( 5)"for3D"[0m
-( 6)"for2D"[0m
-( 7)"forSound"[0m
-(10)"forMiniGame"[0m
-(20)"forTARO"[0m
-	console: "vs-console *Category CUSTOM*"[0m
-(21)"forJIRO"[0m
-	console: "vs-console *Category CUSTOM*"[0m
-(SP64)"forEvery"[0m
-(SP65)"forCallPoint"[0m
-(SP66)"forCriticalCallPoint"[0m
+( 0)"forAny"
+( 3)"forFileSystem"
+( 4)"forResource"
+( 5)"for3D"
+( 6)"for2D"
+( 7)"forSound"
+(10)"forMiniGame"
+(20)"forTARO"
+	console: "vs-console *Category CUSTOM*"
+(21)"forJIRO"
+	console: "vs-console *Category CUSTOM*"
+(SP64)"forEvery"
+(SP65)"forCallPoint"
+(SP66)"forCriticalCallPoint"
 
 --------------------------------------------------------------------------------
 [ Test for change log-level-mask & log-attribute ]
@@ -94,6 +96,18 @@
 7bx2:attr: refType=2, attr=0x00000000
 7bx3:mask: refType=2, level=48
 7bx3:attr: refType=2, attr=0x00001800
+7bx4:mask: refType=0, level=4
+7bx4:attr: refType=0, attr=0x00000000
+7bx4:mask2: refType=2, level=48
+7bx4:attr2: refType=2, attr=0x00001800
+7bx5:mask: refType=0, level=4
+7bx5:attr: refType=0, attr=0x00000000
+7bx5:mask2: refType=0, level=4
+7bx5:attr2: refType=0, attr=0x00000000
+7bx5:mask3: refType=2, level=48
+7bx5:attr3: refType=2, attr=0x00001800
+7bxx:mask: refType=1, level=48
+7bxx:attr: refType=1, attr=0x00001800
 7c:mask: refType=2, level=12
 7c:attr: refType=2, attr=0x02004000
 7d:mask: refType=1, level=12
@@ -114,11 +128,11 @@
 10:attr: refType=0, attr=0x00000000
 
 --------------------------------------------------------------------------------
-[ Enumeration of all log-level-masks : Test for output message asDetail ]
+[ Enumeration of all log-level-masks : Test for put message asDetail ]
 
-( 0)"forAny"[0m
+( 0)"forAny"
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
+[90;49m		OK ... log-message: ( 5)"asDetail", "TTY(stdout)"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 ( 1)"forDummy"[0m
@@ -126,39 +140,39 @@
 [90;49m		OK ... [0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [0m
-( 2)"forNotice"[0m
+( 2)"forNotice"
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [0m
-( 3)"forFileSystem"[0m
+( 3)"forFileSystem"
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
+[90;49m		OK ... log-message: ( 5)"asDetail", "TTY(stdout)"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 ( 4)"forResource"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
+[90;49m		OK ... log-message: ( 5)"asDetail", "TTY(stdout)"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 ( 5)"for3D"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
+[90;49m		OK ... log-message: ( 5)"asDetail", "TTY(stdout)"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 ( 6)"for2D"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
+[90;49m		OK ... log-message: ( 5)"asDetail", "TTY(stdout)"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 ( 7)"forSound"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
+[90;49m		OK ... log-message: ( 5)"asDetail", "TTY(stdout)"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 (10)"forMiniGame"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [90;49mlog-message: ( 5)"asDetail", "TTY(stdout)"[0m
+[90;49m		OK ... log-message: ( 5)"asDetail", "TTY(stdout)"[0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 (20)"forTARO"[0m
@@ -167,17 +181,17 @@
 [30;107m	mask(of notice): (12)"asNormal"[0m
 [30;107m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 (21)"forJIRO"[0m
-[0m	mask(of log): (47)"asSilent"[0m
-[0m		OK ... [90;49mlog-message: ( 5)"asDetail", "vs-console *Category CUSTOM*"[0m
-[0m	mask(of notice): (48)"asSilentAbsolutely"[0m
-[0m		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
+	mask(of log): (47)"asSilent"
+		OK ... [90;49mlog-message: ( 5)"asDetail", "vs-console *Category CUSTOM*"[0m
+	mask(of notice): (48)"asSilentAbsolutely"
+		OK ... [90;107mnotice-message: ( 5)"asDetail", "vs-console *CHANGED*"[0m
 
 --------------------------------------------------------------------------------
-[ Enumeration of all log-level-masks : Test for output message asNormal ]
+[ Enumeration of all log-level-masks : Test for put message asNormal ]
 
-( 0)"forAny"[0m
+( 0)"forAny"
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
+[90;49m		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 ( 1)"forDummy"[0m
@@ -185,56 +199,56 @@
 [90;49m		OK ... [0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [0m
-( 2)"forNotice"[0m
+( 2)"forNotice"
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [0m
-( 3)"forFileSystem"[0m
+( 3)"forFileSystem"
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
+[90;49m		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 ( 4)"forResource"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
+[90;49m		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 ( 5)"for3D"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
+[90;49m		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 ( 6)"for2D"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
+[90;49m		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 ( 7)"forSound"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
+[90;49m		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 (10)"forMiniGame"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [0mlog-message: (12)"asNormal", "win-console *CHANGED*"[0m
+[90;49m		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 (20)"forTARO"[0m
 [90;49m	mask(of log): ( 5)"asDetail"[0m
-[90;49m		OK ... [0mlog-message: (12)"asNormal", "vs-console *Category CUSTOM*"[0m
+[90;49m		OK ... log-message: (12)"asNormal", "vs-console *Category CUSTOM*"
 [30;107m	mask(of notice): (12)"asNormal"[0m
 [30;107m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 (21)"forJIRO"[0m
-[0m	mask(of log): (47)"asSilent"[0m
-[0m		OK ... [0mlog-message: (12)"asNormal", "vs-console *Category CUSTOM*"[0m
-[0m	mask(of notice): (48)"asSilentAbsolutely"[0m
-[0m		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
+	mask(of log): (47)"asSilent"
+		OK ... log-message: (12)"asNormal", "vs-console *Category CUSTOM*"
+	mask(of notice): (48)"asSilentAbsolutely"
+		OK ... [30;107mnotice-message: (12)"asNormal", "vs-console *CHANGED*"[0m
 
 --------------------------------------------------------------------------------
-[ Enumeration of all log-level-masks : Test for output message asCritical ]
+[ Enumeration of all log-level-masks : Test for put message asCritical ]
 
-( 0)"forAny"[0m
+( 0)"forAny"
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
@@ -244,12 +258,12 @@
 [90;49m		OK ... [0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [0m
-( 2)"forNotice"[0m
+( 2)"forNotice"
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [0m
-( 3)"forFileSystem"[0m
+( 3)"forFileSystem"
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
@@ -285,79 +299,79 @@
 [30;107m	mask(of notice): (12)"asNormal"[0m
 [30;107m		OK ... [93;101mnotice-message: (36)"asCritical", "vs-console *CHANGED*"[0m
 (21)"forJIRO"[0m
-[0m	mask(of log): (47)"asSilent"[0m
-[0m		OK ... [91;49mlog-message: (36)"asCritical", "vs-console *Category CUSTOM*"[0m
-[0m	mask(of notice): (48)"asSilentAbsolutely"[0m
-[0m		OK ... [93;101mnotice-message: (36)"asCritical", "vs-console *CHANGED*"[0m
+	mask(of log): (47)"asSilent"
+		OK ... [91;49mlog-message: (36)"asCritical", "vs-console *Category CUSTOM*"[0m
+	mask(of notice): (48)"asSilentAbsolutely"
+		OK ... [93;101mnotice-message: (36)"asCritical", "vs-console *CHANGED*"[0m
 
 --------------------------------------------------------------------------------
-[ Enumeration of all log-level-masks : Test for output message asAbsolute ]
+[ Enumeration of all log-level-masks : Test for put message asAbsolute ]
 
-( 0)"forAny"[0m
+( 0)"forAny"
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [0mlog-message: (44)"asAbsolute", "TTY(stdout)"[0m
+[90;49m		OK ... log-message: (44)"asAbsolute", "TTY(stdout)"
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
+[93;101m		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
 ( 1)"forDummy"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [0m
-( 2)"forNotice"[0m
+( 2)"forNotice"
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
 [90;49m		OK ... [0m
 [93;101m	mask(of notice): (36)"asCritical"[0m
 [93;101m		OK ... [0m
-( 3)"forFileSystem"[0m
+( 3)"forFileSystem"
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [0mlog-message: (44)"asAbsolute", "TTY(stdout)"[0m
+[90;49m		OK ... log-message: (44)"asAbsolute", "TTY(stdout)"
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
+[93;101m		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
 ( 4)"forResource"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [0mlog-message: (44)"asAbsolute", "TTY(stdout)"[0m
+[90;49m		OK ... log-message: (44)"asAbsolute", "TTY(stdout)"
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
+[93;101m		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
 ( 5)"for3D"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [0mlog-message: (44)"asAbsolute", "TTY(stdout)"[0m
+[90;49m		OK ... log-message: (44)"asAbsolute", "TTY(stdout)"
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
+[93;101m		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
 ( 6)"for2D"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [0mlog-message: (44)"asAbsolute", "TTY(stdout)"[0m
+[90;49m		OK ... log-message: (44)"asAbsolute", "TTY(stdout)"
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
+[93;101m		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
 ( 7)"forSound"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [0mlog-message: (44)"asAbsolute", "TTY(stdout)"[0m
+[90;49m		OK ... log-message: (44)"asAbsolute", "TTY(stdout)"
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
+[93;101m		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
 (10)"forMiniGame"[0m
 [90;49m	mask(of log): ( 4)"asVerbose"[0m
-[90;49m		OK ... [0mlog-message: (44)"asAbsolute", "TTY(stdout)"[0m
+[90;49m		OK ... log-message: (44)"asAbsolute", "TTY(stdout)"
 [93;101m	mask(of notice): (36)"asCritical"[0m
-[93;101m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
+[93;101m		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
 (20)"forTARO"[0m
 [90;49m	mask(of log): ( 5)"asDetail"[0m
-[90;49m		OK ... [0mlog-message: (44)"asAbsolute", "vs-console *Category CUSTOM*"[0m
+[90;49m		OK ... log-message: (44)"asAbsolute", "vs-console *Category CUSTOM*"
 [30;107m	mask(of notice): (12)"asNormal"[0m
-[30;107m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
+[30;107m		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
 (21)"forJIRO"[0m
-[0m	mask(of log): (47)"asSilent"[0m
-[0m		OK ... [0mlog-message: (44)"asAbsolute", "vs-console *Category CUSTOM*"[0m
-[0m	mask(of notice): (48)"asSilentAbsolutely"[0m
-[0m		OK ... [0mnotice-message: (44)"asAbsolute", "vs-console *CHANGED*"[0m
+	mask(of log): (47)"asSilent"
+		OK ... log-message: (44)"asAbsolute", "vs-console *Category CUSTOM*"
+	mask(of notice): (48)"asSilentAbsolutely"
+		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
 
 --------------------------------------------------------------------------------
-[ Test for console that output other tty ]
+[ Test for console that put other tty ]
 
 
 --------------------------------------------------------------------------------
 [ Enumeration of all log-levels ]
 
-[0m[11](SP47)"asSilent"[0m
-[0m[12](SP48)"asSilentAbsolutely"[0m
+[11](SP47)"asSilent"
+[12](SP48)"asSilentAbsolutely"
 
 --------------------------------------------------------------------------------
 [ Test for log-queue-monitor ]
@@ -607,36 +621,167 @@ message:387420489
 --------------------------------------------------------------------------------
 [ Test for print log ]
 
-[94;40m[1/00:00:00.003245/asImportant/forAny] (01)Test Message:10[0m
-[94;40m[2/00:00:00.003291] (10)Test Message:10[0m
-[94;40m[3/00:00:00.003296] (11)Test Message[0m
-[94;40m[4/00:00:00.003300] (12)TEST MESSAGE[0m
-[94;40m[5/00:00:00.003304] (13)test message[0m
-[94;40m[6/00:00:00.003308] (14)Test Message[0m
-[94;40m[7/00:00:00.003312] (15)Test Message[0m
-[94;40m[8/00:00:00.003316] (16)TEST MESSAGE[0m
-[94;40m[9/00:00:00.003321] (17)test message[0m
-[94;40m[10/00:00:00.003258] (02)Test Message:10[0m
-[94;40m[11/00:00:00.003262] (03)Test Message:10[0m
-[94;40m[12/00:00:00.003267] (04)TEST MESSAGE:10[0m
-[94;40m[13/00:00:00.003271] (05)test message:10[0m
-[94;40m[14/00:00:00.003275] (06)Test Message[0m
-[94;40m[15/00:00:00.003279] (07)Test Message[0m
-[94;40m[16/00:00:00.003283] (08)TEST MESSAGE[0m
-[94;40m[17/00:00:00.003287] (09)test message[0m
-[94;40m[00:00:00.003410] [0m(18)Test Message:10
-[94;40m[00:00:00.003422] [0m(19)Test Message:10
-[94;40m[00:00:00.003432] [0m(20)Test Message:10
-[94;40m[00:00:00.003441] [0m(21)TEST MESSAGE:10
-[94;40m[00:00:00.003448] [0m(22)test message:10
-[94;40m[00:00:00.003458] [0m(23)Test Message:10
-[94;40m[00:00:00.003465] [0m(24)TEST MESSAGE:10
-[94;40m[00:00:00.003474] [0m(25)test message:10
-[00:00:00.003481] (26)Test Message
-[00:00:00.003488] (27)Test Message
-[00:00:00.003495] (28)Test Message
-[00:00:00.003503] (29)TEST MESSAGE
-[00:00:00.003510] (30)test message
-[00:00:00.003517] (31)Test Message
-[00:00:00.003524] (32)TEST MESSAGE
-[00:00:00.003531] (33)test message
+[94;40m[1|00:00:00.003176|asImportant|forAny](01)Test Message:10[0m
+[94;40m[2|00:00:00.003226](10)Test Message:10[0m
+[94;40m[3|00:00:00.003231](11)Test Message[0m
+[94;40m[4|00:00:00.003235](12)TEST MESSAGE[0m
+[94;40m[5|00:00:00.003240](13)test message[0m
+[94;40m[6|00:00:00.003244](14)Test Message[0m
+[94;40m[7|00:00:00.003248](15)Test Message[0m
+[94;40m[8|00:00:00.003252](16)TEST MESSAGE[0m
+[94;40m[9|00:00:00.003256](17)test message[0m
+[94;40m[10|00:00:00.003186](02)Test Message:10[0m
+[94;40m[11|00:00:00.003191](03)Test Message:10[0m
+[94;40m[12|00:00:00.003201](04)TEST MESSAGE:10[0m
+[94;40m[13|00:00:00.003206](05)test message:10[0m
+[94;40m[14|00:00:00.003210](06)Test Message[0m
+[94;40m[15|00:00:00.003213](07)Test Message[0m
+[94;40m[16|00:00:00.003218](08)TEST MESSAGE[0m
+[94;40m[17|00:00:00.003222](09)test message[0m
+[94;40m[00:00:00.003363][0m(18)Test Message:10
+[94;40m[00:00:00.003376][0m(19)Test Message:10
+[94;40m[00:00:00.003386][0m(20)Test Message:10
+[94;40m[00:00:00.003396][0m(21)TEST MESSAGE:10
+[94;40m[00:00:00.003405][0m(22)test message:10
+[94;40m[00:00:00.003412][0m(23)Test Message:10
+[94;40m[00:00:00.003422][0m(24)TEST MESSAGE:10
+[94;40m[00:00:00.003431][0m(25)test message:10
+[00:00:00.003439](26)Test Message
+[00:00:00.003445](27)Test Message
+[00:00:00.003454](28)Test Message
+[00:00:00.003461](29)TEST MESSAGE
+[00:00:00.003468](30)test message
+[00:00:00.003477](31)Test Message
+[00:00:00.003484](32)TEST MESSAGE
+[00:00:00.003491](33)test message
+
+--------------------------------------------------------------------------------
+[ Test for call-point ]
+
+> recent critical-cp info
+  - name = "test"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log.cpp(953)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.003573
+> recent critical-cp info
+  - name = "test3"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log.cpp(961)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.003593
+> recent critical-cp info
+  - name = "test2"
+  - category = "forTARO"
+  - type = "isCritical"
+  - autoProfiling = "useAutoProfiling"
+  - source file = "example_debug_log.cpp(959)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.003592
+> recent critical-cp info
+  - name = "test3"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log.cpp(961)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.003593
+> recent critical-cp info
+  - name = "test4"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log.cpp(971)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.003619
+> recent critical-cp info
+  - name = "test4"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log.cpp(971)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.003619
+debugInfo(size=737):
+----- Debug-info for callPoint -----
+Thread: "(no name)"(ID=092330e8)
+Num of point: 4
+------------------------------------
+[forTARO]"test4"(addr=0x28a3f0)
+        src: example_debug_log.cpp(971)[Fri Jul 18 12:50:05 2014]
+        func:example_debug_log
+  [forTARO]"test3"(addr=0x28a360)
+          src: example_debug_log.cpp(961)[Fri Jul 18 12:50:05 2014]
+          func:example_debug_log
+    [forTARO]"test2"(addr=0x28a240)<CRITICAL><Auto-Profiling>
+            src: example_debug_log.cpp(959)[Fri Jul 18 12:50:05 2014]
+            func:example_debug_log
+      [forTARO]"test"(addr=0x28a130)
+              src: example_debug_log.cpp(953)[Fri Jul 18 12:50:05 2014]
+              func:example_debug_log
+------------------------------------
+> recent critical-cp info
+  - name = "test3"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log.cpp(961)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.003593
+> recent critical-cp info
+  - name = "test2"
+  - category = "forTARO"
+  - type = "isCritical"
+  - autoProfiling = "useAutoProfiling"
+  - source file = "example_debug_log.cpp(959)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.003592
+> recent critical-cp info
+  - name = "test2"
+  - category = "forTARO"
+  - type = "isCritical"
+  - autoProfiling = "useAutoProfiling"
+  - source file = "example_debug_log.cpp(959)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.003592
+> recent critical-cp info
+  - name = "test2"
+  - category = "forTARO"
+  - type = "isCritical"
+  - autoProfiling = "useAutoProfiling"
+  - source file = "example_debug_log.cpp(959)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.003592
+> recent critical-cp info
+  - name = "test"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log.cpp(953)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.003573
+> recent critical-cp info
+  (nothing)
+> recent critical-cp info
+  - name = "test"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log.cpp(953)[Fri Jul 18 12:50:05 2014]"
+  - function = "example_debug_log"
+  - begin time = 0.003573
+> recent critical-cp info
+  (nothing)
+> recent critical-cp info
+  (nothing)
+> recent critical-cp info
+  (nothing)
+debugInfo(size=123):
+----- Debug-info for callPoint -----
+Thread: "(no name)"(ID=092330e8)
+Num of point: 0
+------------------------------------

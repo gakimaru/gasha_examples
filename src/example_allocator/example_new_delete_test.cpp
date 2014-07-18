@@ -11,7 +11,7 @@
 #include "example_allocator.h"//アロケータテスト
 
 #include <cstddef>//std::size_t
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 //【VC++】例外を無効化した状態で <new> をインクルードすると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -46,19 +46,19 @@ void operator delete[](void* p, const forTest_t&, std::size_t&) throw()
 //new/delete演算子の挙動確認用テスト
 void example_new_delete_test()
 {
-	printf("\n");
-	printf("================================================================================\n");
+	std::printf("\n");
+	std::printf("================================================================================\n");
 	
-	printf("\n");
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[ Test for new/delete operators]\n");
-	printf("--------------------------------------------------------------------------------\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[ Test for new/delete operators]\n");
+	std::printf("--------------------------------------------------------------------------------\n");
 
 	std::size_t real_size;
 
 #define CHECK(T) \
-	{ new(forTest, real_size)T; printf("new " #T ": sizeof(" #T ")=%d, alignof(" #T ")=%d, real_size=%d\n", sizeof(T), alignof(T), real_size); } \
-	{ new(forTest, real_size)T[2]; printf("new " #T "[2]: sizeof(" #T ")=%d, alignof(" #T ")=%d, real_size=%d\n", sizeof(T), alignof(T), real_size); }
+	{ new(forTest, real_size)T; std::printf("new " #T ": sizeof(" #T ")=%d, alignof(" #T ")=%d, real_size=%d\n", sizeof(T), alignof(T), real_size); } \
+	{ new(forTest, real_size)T[2]; std::printf("new " #T "[2]: sizeof(" #T ")=%d, alignof(" #T ")=%d, real_size=%d\n", sizeof(T), alignof(T), real_size); }
 
 	struct st_n{ char m_var[1]; st_n(){} ~st_n(){} };
 	CHECK(st_n);

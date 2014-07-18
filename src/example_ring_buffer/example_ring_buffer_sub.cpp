@@ -42,7 +42,7 @@ GASHA_INSTANCING_rBuff(mt_ope_t);//template class ring_buffer::container<mt_ope_
 //　ただし、ソート用関数や探索用関数の定義、ロックオブジェクトの指定といった細かいカスタマイズはできない。
 //　シンプルコンテナも明示的なインスタンス化は可能。
 
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 //【VC++】例外を無効化した状態で <algorithm> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -53,8 +53,8 @@ GASHA_INSTANCING_rBuff(mt_ope_t);//template class ring_buffer::container<mt_ope_
 //シンプルリングバッファコンテナテスト
 void example_simple_ring_buffer()
 {
-	printf("\n");
-	printf("--- example_simple_ring_buffer ---\n");
+	std::printf("\n");
+	std::printf("--- example_simple_ring_buffer ---\n");
 
 	{
 		short arr[10];
@@ -64,25 +64,25 @@ void example_simple_ring_buffer()
 		con.push_back(3);
 		auto print = [&con]()
 		{
-			printf("data =");
+			std::printf("data =");
 			for (auto data : con)
 			{
-				printf(" %d", data);
+				std::printf(" %d", data);
 			}
-			printf("\n");
+			std::printf("\n");
 		};
 		print();
 		con.sort();
 		print();
 		auto ite = con.findValue(5);
-		printf(".findValue(5): ite=%d\n", *ite);
+		std::printf(".findValue(5): ite=%d\n", *ite);
 		ite = con.binarySearchValue(3);
-		printf(".binarySearchValue(3): ite=%d\n", *ite);
+		std::printf(".binarySearchValue(3): ite=%d\n", *ite);
 		ite = std::find(con.begin(), con.end(), 5);
-		printf("std::find(con.begin(), con.end(), 5): ite=%d\n", *ite);
+		std::printf("std::find(con.begin(), con.end(), 5): ite=%d\n", *ite);
 		if (std::binary_search(con.begin(), con.end(), 3))
 			ite = std::lower_bound(con.begin(), con.end(), 3);
-		printf("std::lower_bound(con.begin(), con.end(), 3): ite=%d\n", *ite);
+		std::printf("std::lower_bound(con.begin(), con.end(), 3): ite=%d\n", *ite);
 	}
 	{
 		//ローカルクラス（関数内クラス）を使うと、明示的なインスタンス化ができない点に注意
@@ -117,25 +117,25 @@ void example_simple_ring_buffer()
 		con.push_back(34);
 		auto print = [&con]()
 		{
-			printf("data =");
+			std::printf("data =");
 			for (auto& data : con)
 			{
-				printf(" {%d,%d}", data.m_val1, data.m_val2);
+				std::printf(" {%d,%d}", data.m_val1, data.m_val2);
 			}
-			printf("\n");
+			std::printf("\n");
 		};
 		print();
 		con.sort();
 		print();
 		auto ite = con.findValue(5);
-		printf(".find(5): ite={%d,%d}\n", ite->m_val1, ite->m_val2);
+		std::printf(".find(5): ite={%d,%d}\n", ite->m_val1, ite->m_val2);
 		ite = con.binarySearchValue(3);
-		printf(".binarySearchValue(3): ite={%d,%d}\n", ite->m_val1, ite->m_val2);
+		std::printf(".binarySearchValue(3): ite={%d,%d}\n", ite->m_val1, ite->m_val2);
 		ite = std::find(con.begin(), con.end(), 5);
-		printf("std::find(.begin(), .end(), 5): ite={%d,%d}\n", ite->m_val1, ite->m_val2);
+		std::printf("std::find(.begin(), .end(), 5): ite={%d,%d}\n", ite->m_val1, ite->m_val2);
 		//if (std::binary_search(con.begin(), con.end(), 3))//operator<(const int, const data_t&) が定義できないのでNG
 		//	ite = std::lower_bound(con.begin(), con.end(), 3);
-		//printf("std::lower_bound(.begin(), .end(), 3): ite={%d,%d}\n", ite->m_val1, ite->m_val2);
+		//std::printf("std::lower_bound(.begin(), .end(), 3): ite={%d,%d}\n", ite->m_val1, ite->m_val2);
 	}
 }
 //明示的インスタンス化する場合

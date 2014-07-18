@@ -39,7 +39,7 @@ GASHA_INSTANCING_rbTree(ope);//template class rb_tree::stack_t<OPE_TYPE>; templa
 //　ただし、ソート用関数や探索用関数の定義、ロックオブジェクトの指定といった細かいカスタマイズはできない。
 //※シンプルコンテナも明示的なインスタンス化は可能。
 
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 //【VC++】例外を無効化した状態で <algorithm> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -50,8 +50,8 @@ GASHA_INSTANCING_rbTree(ope);//template class rb_tree::stack_t<OPE_TYPE>; templa
 //シンプル赤黒木コンテナテスト
 void example_simple_rb_tree()
 {
-	printf("\n");
-	printf("--- example_simple_linked_list ---\n");
+	std::printf("\n");
+	std::printf("--- example_simple_linked_list ---\n");
 
 	{
 		simpleRBTree<short>::con con;//シンプル赤黒木コンテナ
@@ -64,16 +64,16 @@ void example_simple_rb_tree()
 		con.insert(data[2]);
 		auto print = [&con]()
 		{
-			printf("data =");
+			std::printf("data =");
 			for (auto& data : con)
 			{
-				printf(" {0x%08x,%d}", data.key(), data.value());
+				std::printf(" {0x%08x,%d}", data.key(), data.value());
 			}
-			printf("\n");
+			std::printf("\n");
 		};
 		print();
 		auto ite = con.find("KEY5");
-		printf(".findValue(\"KEY5\"): ite={0x%08x, %d}\n", ite->m_key, ite->m_value);
+		std::printf(".findValue(\"KEY5\"): ite={0x%08x, %d}\n", ite->m_key, ite->m_value);
 	}
 	{
 		//ローカルクラス（関数内クラス）を使うと、明示的なインスタンス化ができない点に注意
@@ -111,16 +111,16 @@ void example_simple_rb_tree()
 		con.insert(data[2]);
 		auto print = [&con]()
 		{
-			printf("data =");
+			std::printf("data =");
 			for (auto& data : con)
 			{
-				printf(" {0x%08x,{%d,%d}}", data.m_key, data->m_val1, data->m_val2);
+				std::printf(" {0x%08x,{%d,%d}}", data.m_key, data->m_val1, data->m_val2);
 			}
-			printf("\n");
+			std::printf("\n");
 		};
 		print();
 		auto ite = con.find("KEY5");
-		printf(".findValue(\"KEY5\"): ite={0x%08x,{%d:%d}}\n", ite->m_key, ite->m_value.m_val1, ite->m_value.m_val2);
+		std::printf(".findValue(\"KEY5\"): ite={0x%08x,{%d:%d}}\n", ite->m_key, ite->m_value.m_val1, ite->m_value.m_val2);
 	}
 }
 //明示的インスタンス化する場合

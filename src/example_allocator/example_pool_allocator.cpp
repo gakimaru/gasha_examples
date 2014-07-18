@@ -13,7 +13,7 @@
 #include <gasha/pool_allocator.h>//プールアロケータ
 #include <gasha/lf_pool_allocator.h>//ロックフリープールアロケータ
 
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
@@ -21,19 +21,19 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //基本テスト
 
 //テスト用マクロ
-#define EXPR_PLAIN(...) printf("%s\n", #__VA_ARGS__); __VA_ARGS__
-#define EXPR_WITH_INFO(...) __VA_ARGS__ printf("> %s\tsize=%d, remain=%d, pool=%d/%d\n", #__VA_ARGS__, pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize())
-#define EXPR(p, ...) __VA_ARGS__ printf("> %s\t%s=%p, size=%d, remain=%d, pool=%d/%d\n", #__VA_ARGS__, #p, p, pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize())
+#define EXPR_PLAIN(...) std::printf("%s\n", #__VA_ARGS__); __VA_ARGS__
+#define EXPR_WITH_INFO(...) __VA_ARGS__ std::printf("> %s\tsize=%d, remain=%d, pool=%d/%d\n", #__VA_ARGS__, pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize())
+#define EXPR(p, ...) __VA_ARGS__ std::printf("> %s\t%s=%p, size=%d, remain=%d, pool=%d/%d\n", #__VA_ARGS__, #p, p, pool.size(), pool.remain(), pool.usingPoolSize(), pool.poolSize())
 
 //プールアロケータのテスト（共通処理）
 template<class ALLOCATOR>
 static void testPool(ALLOCATOR& pool)
 {
-	printf("\n");
+	std::printf("\n");
 	char message[1024];
 	for (int i = 0; i < 3; ++i)//ブロックの再利用を確認するために3回ループ
 	{
-		EXPR_PLAIN(pool.debugInfo(message); printf(message););
+		EXPR_PLAIN(pool.debugInfo(message); std::printf(message););
 		EXPR(p1, void* p1 = pool.alloc(1););
 		EXPR(p2, void* p2 = pool.alloc(1, 1););
 		EXPR(p3, void* p3 = pool.alloc(1, 1););
@@ -55,7 +55,7 @@ static void testPool(ALLOCATOR& pool)
 		EXPR(p19, void* p19 = pool.alloc(10););
 		EXPR(p20, void* p20 = pool.alloc(10););
 		EXPR(p21, void* p21 = pool.alloc(10););//アロケータ失敗（プール不足）
-		EXPR_PLAIN(pool.debugInfo(message); printf(message););
+		EXPR_PLAIN(pool.debugInfo(message); std::printf(message););
 		EXPR(p1, pool.free(p1););
 		EXPR(p2, pool.free(p2););
 		EXPR(p3, pool.free(p3););
@@ -78,100 +78,100 @@ static void testPool(ALLOCATOR& pool)
 		EXPR(p20, pool.free(p20););
 		EXPR(p21, pool.free(p21););
 	}
-	EXPR_PLAIN(pool.debugInfo(message); printf(message););
+	EXPR_PLAIN(pool.debugInfo(message); std::printf(message););
 }
 
 //----------------------------------------
 //プールアロケータテスト
 void example_pool_allocator()
 {
-	printf("\n");
-	printf("================================================================================\n");
+	std::printf("\n");
+	std::printf("================================================================================\n");
 
 	char buff[1024];
 	char message[1024];
 
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[ Test for poolAllocator ]\n");
-		printf("--------------------------------------------------------------------------------\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[ Test for poolAllocator ]\n");
+		std::printf("--------------------------------------------------------------------------------\n");
 
 		//プールアロケータ
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(poolAllocator<16, lock_type> pool(buff, sizeof(buff), 32, 8););//最大プール数=16, ブロックサイズ=32, ブロックアラインメント=8
-			printf("----------------------------------------\n");
+			std::printf("----------------------------------------\n");
 			testPool(pool);
 		}
 
 		//バッファ付きプールアロケータ
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(poolAllocator_withBuff<32, 16, 8, lock_type> pool;);
-			printf("----------------------------------------\n");
-			printf("\n");
-			EXPR_PLAIN(pool.debugInfo(message); printf(message););
+			std::printf("----------------------------------------\n");
+			std::printf("\n");
+			EXPR_PLAIN(pool.debugInfo(message); std::printf(message););
 		}
 
 		//型指定バッファ付きプールアロケータ
 		//※型のアラインメントサイズ分余計に領域を割り当てる
 		{
-			printf("\n");
+			std::printf("\n");
 			struct alignas(8) block_type
 			{
 				char buff[32];
 			};
-			printf("----------------------------------------\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(poolAllocator_withType<block_type, 16, lock_type> pool;);
-			printf("----------------------------------------\n");
-			printf("\n");
-			EXPR_PLAIN(pool.debugInfo(message); printf(message););
+			std::printf("----------------------------------------\n");
+			std::printf("\n");
+			EXPR_PLAIN(pool.debugInfo(message); std::printf(message););
 			EXPR(p, block_type* p = pool.newDefault(););
 			EXPR(p, pool.deleteDefault(p););
 		}
 	}
 
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("[ Test for lfPoolAllocator ]\n");
-		printf("--------------------------------------------------------------------------------\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[ Test for lfPoolAllocator ]\n");
+		std::printf("--------------------------------------------------------------------------------\n");
 
 		//ロックフリープールアロケータ
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(lfPoolAllocator<16> pool(buff, sizeof(buff), 32, 8););//最大プール数=16, ブロックサイズ=32, ブロックアラインメント=8
-			printf("----------------------------------------\n");
+			std::printf("----------------------------------------\n");
 			testPool(pool);
 		}
 
 		//バッファ付きロックフリープールアロケータ
 		{
-			printf("\n");
-			printf("----------------------------------------\n");
+			std::printf("\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(lfPoolAllocator_withBuff<32, 16, 8> pool;);
-			printf("----------------------------------------\n");
-			printf("\n");
-			EXPR_PLAIN(pool.debugInfo(message); printf(message););
+			std::printf("----------------------------------------\n");
+			std::printf("\n");
+			EXPR_PLAIN(pool.debugInfo(message); std::printf(message););
 		}
 
 		//型指定バッファ付きロックフリープールアロケータ
 		//※型のアラインメントサイズ分余計に領域を割り当てる
 		{
-			printf("\n");
+			std::printf("\n");
 			struct alignas(8) block_type
 			{
 				char buff[32];
 			};
-			printf("----------------------------------------\n");
+			std::printf("----------------------------------------\n");
 			EXPR_PLAIN(lfPoolAllocator_withType<block_type, 16> pool;);
-			printf("----------------------------------------\n");
-			printf("\n");
-			EXPR_PLAIN(pool.debugInfo(message); printf(message););
+			std::printf("----------------------------------------\n");
+			std::printf("\n");
+			EXPR_PLAIN(pool.debugInfo(message); std::printf(message););
 			EXPR(p, block_type* p = pool.newDefault(););
 			EXPR(p, pool.deleteDefault(p););
 		}

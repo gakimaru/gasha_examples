@@ -18,8 +18,8 @@
 #include <gasha/string.h>//文字列処理：spprintf()
 
 #include <utility>//C++11 std::forward
-#include <cstring>//memcpy()
-#include <cstdio>//printf()
+#include <cstring>//std::memcpy()
+#include <cstdio>//std::printf()
 #include <cassert>//assert()
 
 //【VC++】例外を無効化した状態で <unordered_map> <algoritm> をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
@@ -43,8 +43,8 @@ data_t::data_t(const char* name, const int value) :
 	strncpy_fast(m_name, name, sizeof(m_name)-1);
 	m_name[sizeof(m_name)-1] = '\0';
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("data_t::constructor(\"%s\", value)\n", name, value);
-	//printf("    m_key=%d, m_name=[%s], m_value=%d\n", m_key, m_name, m_value);
+	std::printf("data_t::constructor(\"%s\", value)\n", name, value);
+	//std::printf("    m_key=%d, m_name=[%s], m_value=%d\n", m_key, m_name, m_value);
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
@@ -52,27 +52,27 @@ data_t::data_t(const char* name, const int value) :
 data_t& data_t::operator=(data_t&& rhs)
 {
 	std::memcpy(this, &rhs, sizeof(*this));
-	printf("data_t::move_operator\n");
+	std::printf("data_t::move_operator\n");
 	return *this;
 }
 //コピーオペレータ
 data_t& data_t::operator=(const data_t& rhs)
 {
 	std::memcpy(this, &rhs, sizeof(*this));
-	printf("data_t::copy_operator\n");
+	std::printf("data_t::copy_operator\n");
 	return *this;
 }
 //ムーブコンストラクタ
 data_t::data_t(data_t&& src)
 {
 	std::memcpy(this, &src, sizeof(*this));
-	printf("data_t::move_constructor\n");
+	std::printf("data_t::move_constructor\n");
 }
 //コピーコンストラクタ
 data_t::data_t(const data_t& src)
 {
 	std::memcpy(this, &src, sizeof(*this));
-	printf("data_t::copy_constructor\n");
+	std::printf("data_t::copy_constructor\n");
 }
 //デフォルトコンストラクタ
 data_t::data_t() :
@@ -80,13 +80,13 @@ data_t::data_t() :
 	m_value(0)
 {
 	m_name[0] = '\0';
-	printf("data_t::constructor\n");
+	std::printf("data_t::constructor\n");
 }
 //デストラクタ
 data_t::~data_t()
 {
-	printf("data_t::destructor\n");
-	//printf("  m_key=%d, m_name=[%s]\n", m_key, m_name);
+	std::printf("data_t::destructor\n");
+	//std::printf("  m_key=%d, m_name=[%s]\n", m_key, m_name);
 }
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 
@@ -96,7 +96,7 @@ data_t::~data_t()
 template<typename... Tx>
 inline int printf_detail(const char* fmt, Tx&&... args)
 {
-	return printf(fmt, std::forward<Tx>(args)...);
+	return std::printf(fmt, std::forward<Tx>(args)...);
 }
 #else//PRINT_TEST_DATA_DETAIL
 inline int printf_detail(const char* fmt, ...){ return 0; }
@@ -114,7 +114,7 @@ void example_hash_table()
 	auto printElapsedTimeDirect = [](const double elapsed_time, const bool is_preint) -> std::chrono::system_clock::time_point
 	{
 		if (is_preint)
-			printf("*elapsed time=%.9lf sec.\n", elapsed_time);
+			std::printf("*elapsed time=%.9lf sec.\n", elapsed_time);
 		return nowTime();
 	};
 	auto printElapsedTime = [&printElapsedTimeDirect](const std::chrono::system_clock::time_point& prev_time, const bool is_print) -> std::chrono::system_clock::time_point
@@ -135,7 +135,7 @@ void example_hash_table()
 		for (ope::key_type key = key_min; key <= key_max; key += key_step)
 		{
 			if (key % (1024 * 1024) == 0)
-				printf("pass ... Key:%d\n", key);
+				std::printf("pass ... Key:%d\n", key);
 			std::size_t count = 0;
 			std::size_t first_index = con.calcIndex(key);
 			std::size_t index = first_index;
@@ -146,67 +146,67 @@ void example_hash_table()
 			} while (index != first_index && count < con.getTableSize());
 			if (count != con.getTableSize())
 			{
-				printf("%u is OUT! (count=%d)\n", key, count);
+				std::printf("%u is OUT! (count=%d)\n", key, count);
 				++ng_count;
 			}
 		}
-		printf("Chek Hash Table: NG=%d/%d\n", ng_count, con.getTableSize());
+		std::printf("Chek Hash Table: NG=%d/%d\n", ng_count, con.getTableSize());
 		for (std::size_t key = 10; key <= 30; key += 1)
 		{
-			printf("Key:%u -> Index;%u\n", key, con.calcIndex(key));
+			std::printf("Key:%u -> Index;%u\n", key, con.calcIndex(key));
 		}
 	}
 #endif
 	
 	//--------------------
 	//ハッシュテーブルテスト
-	printf("\n");
-	printf("--------------------------------------------------------------------------------\n");
-	printf("Hash Table Test\n");
-	printf("--------------------------------------------------------------------------------\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("Hash Table Test\n");
+	std::printf("--------------------------------------------------------------------------------\n");
 	typedef hash_table::container<ope, TEST_DATA_TABLE_SIZE> container_t;
 	container_t* con = new container_t();
 
 	//ハッシュテーブルの基本情報表示
 	auto printTableParameter = [&con]()
 	{
-		printf("\n");
-		printf("--- Table Parameter ---\n");
-		printf(".max_size()=%u\n", con->max_size());
-		//printf(".capacity()=%u\n", con->capacity());
-		printf(".getOriginalTableSize()=%u\n", con->getOriginalTableSize());
-		printf(".getTableSize()=%u\n", con->getTableSize());
-		printf(".getTableSizeExtended()=%u\n", con->getTableSizeExtended());
-		printf(".getAutoRehashRatio()=%u\n", con->getAutoRehashRatio());
-		printf(".getAutoRehashSize()=%u\n", con->getAutoRehashSize());
-		printf(".getFindingCycleLimit()=%u\n", con->getFindingCycleLimit());
-		printf(".getKeyMin()=%u\n", con->getKeyMin());
-		printf(".getKeyMax()=%u\n", con->getKeyMax());
-		printf(".getKeyRange()=%u\n", con->getKeyRange());
+		std::printf("\n");
+		std::printf("--- Table Parameter ---\n");
+		std::printf(".max_size()=%u\n", con->max_size());
+		//std::printf(".capacity()=%u\n", con->capacity());
+		std::printf(".getOriginalTableSize()=%u\n", con->getOriginalTableSize());
+		std::printf(".getTableSize()=%u\n", con->getTableSize());
+		std::printf(".getTableSizeExtended()=%u\n", con->getTableSizeExtended());
+		std::printf(".getAutoRehashRatio()=%u\n", con->getAutoRehashRatio());
+		std::printf(".getAutoRehashSize()=%u\n", con->getAutoRehashSize());
+		std::printf(".getFindingCycleLimit()=%u\n", con->getFindingCycleLimit());
+		std::printf(".getKeyMin()=%u\n", con->getKeyMin());
+		std::printf(".getKeyMax()=%u\n", con->getKeyMax());
+		std::printf(".getKeyRange()=%u\n", con->getKeyRange());
 	};
 	printTableParameter();
 
 	//テーブル状態表示
 	auto printTableStatus = [&con]()
 	{
-		printf("\n");
-		printf("--- Table Status ---\n");
-		printf(".bucket_count()=%u\n", con->bucket_count());
-		printf(".max_bucket_count()=%u\n", con->max_bucket_count());
-		printf(".size()=%u\n", con->size());
-		printf(".empty()=%u\n", con->empty());
-		printf(".getUsingCount()=%u\n", con->getUsingCount());
-		printf(".getDeletedCount()=%u\n", con->getDeletedCount());
-		printf(".getMaxFindingCycle()=%u\n", con->getMaxFindingCycle());
-		printf(".getNotOptimizedCount()=%u\n", con->getNotOptimizedCount());
+		std::printf("\n");
+		std::printf("--- Table Status ---\n");
+		std::printf(".bucket_count()=%u\n", con->bucket_count());
+		std::printf(".max_bucket_count()=%u\n", con->max_bucket_count());
+		std::printf(".size()=%u\n", con->size());
+		std::printf(".empty()=%u\n", con->empty());
+		std::printf(".getUsingCount()=%u\n", con->getUsingCount());
+		std::printf(".getDeletedCount()=%u\n", con->getDeletedCount());
+		std::printf(".getMaxFindingCycle()=%u\n", con->getMaxFindingCycle());
+		std::printf(".getNotOptimizedCount()=%u\n", con->getNotOptimizedCount());
 	};
 	printTableStatus();
 
 	//ハッシュテーブルへのデータ登録
 	auto insertData = [&con, &printElapsedTime, &prev_time](const int begin, const int end, const int step)
 	{
-		printf("\n");
-		printf("--- Insert Data ---\n");
+		std::printf("\n");
+		std::printf("--- Insert Data ---\n");
 		int insert_success = 0;
 		int insert_failure = 0;
 		for (int i = begin; i < end; i += step)
@@ -269,7 +269,7 @@ void example_hash_table()
 				printf_detail("NG\n");
 			}
 		}
-		printf("success=%d, failure=%d\n", insert_success, insert_failure);
+		std::printf("success=%d, failure=%d\n", insert_success, insert_failure);
 		const bool is_print = true;
 		prev_time = printElapsedTime(prev_time, is_print);
 	};
@@ -310,9 +310,9 @@ void example_hash_table()
 #if defined(GASHA_HASH_TABLE_ENABLE_RANDOM_ACCESS_INTERFACE) && defined(GASHA_HASH_TABLE_ENABLE_REVERSE_ITERATOR)
 #ifdef TEST_ITERATOR_OPERATION
 	{
-		printf("\n");
-		printf("--------------------[iterator operattion:begin]\n");
-		printf("[constructor]\n");
+		std::printf("\n");
+		std::printf("--------------------[iterator operattion:begin]\n");
+		std::printf("[constructor]\n");
 		container_t::iterator ite = con->begin();
 		container_t::reverse_iterator rite = con->rbegin();
 		container_t::iterator ite_end = con->end();
@@ -321,23 +321,23 @@ void example_hash_table()
 		container_t::reverse_iterator rite2 = con->begin();
 		container_t::iterator ite2_end = con->rend();
 		container_t::reverse_iterator rite2_end = con->end();
-		if (ite.isExist()) printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
-		if (rite.isExist()) printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
-		if (ite_end.isExist()) printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
-		if (rite_end.isExist()) printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
-		if (ite2.isExist()) printf("ite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2.isDeleted() ? '*' : ' ', ite2.getIndex(), ite2.getPrimaryIndex(), ite2->m_key, ite2->m_name, ite2->m_value);
-		if (rite2.isExist()) printf("rite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2.isDeleted() ? '*' : ' ', rite2.getIndex(), rite2.getPrimaryIndex(), rite2->m_key, rite2->m_name, rite2->m_value);
-		if (ite2_end.isExist()) printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', ite2_end.getIndex(), ite2_end.getPrimaryIndex(), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
-		if (rite2_end.isExist()) printf("rite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2_end.isDeleted() ? '*' : ' ', rite2_end.getIndex(), rite2_end.getPrimaryIndex(), rite2_end->m_key, rite2_end->m_name, rite2_end->m_value);
-		printf("ite_end - ite = %d\n", ite_end - ite);
-		printf("ite - ite_end = %d\n", ite - ite_end);
-		printf("rite_end - rite = %d\n", rite_end - rite);
-		printf("rite - rite_end = %d\n", rite - rite_end);
-		printf("ite2 - ite = %d\n", ite2 - ite);
-		printf("ite - ite2 = %d\n", ite - ite2);
-		printf("rite2 - rite = %d\n", rite2 - rite);
-		printf("rite - rite2 = %d\n", rite - rite2);
-		printf("[copy operator]\n");
+		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
+		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
+		if (ite_end.isExist()) std::printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
+		if (rite_end.isExist()) std::printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
+		if (ite2.isExist()) std::printf("ite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2.isDeleted() ? '*' : ' ', ite2.getIndex(), ite2.getPrimaryIndex(), ite2->m_key, ite2->m_name, ite2->m_value);
+		if (rite2.isExist()) std::printf("rite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2.isDeleted() ? '*' : ' ', rite2.getIndex(), rite2.getPrimaryIndex(), rite2->m_key, rite2->m_name, rite2->m_value);
+		if (ite2_end.isExist()) std::printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', ite2_end.getIndex(), ite2_end.getPrimaryIndex(), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
+		if (rite2_end.isExist()) std::printf("rite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2_end.isDeleted() ? '*' : ' ', rite2_end.getIndex(), rite2_end.getPrimaryIndex(), rite2_end->m_key, rite2_end->m_name, rite2_end->m_value);
+		std::printf("ite_end - ite = %d\n", ite_end - ite);
+		std::printf("ite - ite_end = %d\n", ite - ite_end);
+		std::printf("rite_end - rite = %d\n", rite_end - rite);
+		std::printf("rite - rite_end = %d\n", rite - rite_end);
+		std::printf("ite2 - ite = %d\n", ite2 - ite);
+		std::printf("ite - ite2 = %d\n", ite - ite2);
+		std::printf("rite2 - rite = %d\n", rite2 - rite);
+		std::printf("rite - rite2 = %d\n", rite - rite2);
+		std::printf("[copy operator]\n");
 		ite = con->begin();
 		rite = con->rbegin();
 		ite_end = con->end();
@@ -346,133 +346,133 @@ void example_hash_table()
 		rite2 = con->begin();
 		ite2_end = con->rend();
 		rite2_end = con->end();
-		if (ite.isExist()) printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
-		if (rite.isExist()) printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
-		if (ite_end.isExist()) printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
-		if (rite_end.isExist()) printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
-		if (ite2.isExist()) printf("ite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2.isDeleted() ? '*' : ' ', ite2.getIndex(), ite2.getPrimaryIndex(), ite2->m_key, ite2->m_name, ite2->m_value);
-		if (rite2.isExist()) printf("rite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2.isDeleted() ? '*' : ' ', rite2.getIndex(), rite2.getPrimaryIndex(), rite2->m_key, rite2->m_name, rite2->m_value);
-		if (ite2_end.isExist()) printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', ite2_end.getIndex(), ite2_end.getPrimaryIndex(), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
-		if (rite2_end.isExist()) printf("rite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2_end.isDeleted() ? '*' : ' ', rite2_end.getIndex(), rite2_end.getPrimaryIndex(), rite2_end->m_key, rite2_end->m_name, rite2_end->m_value);
-		printf("[rite.base()]\n");
+		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
+		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
+		if (ite_end.isExist()) std::printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
+		if (rite_end.isExist()) std::printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
+		if (ite2.isExist()) std::printf("ite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2.isDeleted() ? '*' : ' ', ite2.getIndex(), ite2.getPrimaryIndex(), ite2->m_key, ite2->m_name, ite2->m_value);
+		if (rite2.isExist()) std::printf("rite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2.isDeleted() ? '*' : ' ', rite2.getIndex(), rite2.getPrimaryIndex(), rite2->m_key, rite2->m_name, rite2->m_value);
+		if (ite2_end.isExist()) std::printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', ite2_end.getIndex(), ite2_end.getPrimaryIndex(), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
+		if (rite2_end.isExist()) std::printf("rite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2_end.isDeleted() ? '*' : ' ', rite2_end.getIndex(), rite2_end.getPrimaryIndex(), rite2_end->m_key, rite2_end->m_name, rite2_end->m_value);
+		std::printf("[rite.base()]\n");
 		ite2 = rite.base();
 		ite2_end = rite_end.base();
-		if (ite2.isExist()) printf("ite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2.isDeleted() ? '*' : ' ', ite2.getIndex(), ite2.getPrimaryIndex(), ite2->m_key, ite2->m_name, ite2->m_value);
-		if (ite2_end.isExist()) printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', ite2_end.getIndex(), ite2_end.getPrimaryIndex(), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
-		printf("[++ite,--ie_end]\n");
+		if (ite2.isExist()) std::printf("ite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2.isDeleted() ? '*' : ' ', ite2.getIndex(), ite2.getPrimaryIndex(), ite2->m_key, ite2->m_name, ite2->m_value);
+		if (ite2_end.isExist()) std::printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', ite2_end.getIndex(), ite2_end.getPrimaryIndex(), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
+		std::printf("[++ite,--ie_end]\n");
 		++ite;
 		++rite;
 		--ite_end;
 		--rite_end;
-		if (ite.isExist()) printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
-		if (rite.isExist()) printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
-		if (ite_end.isExist()) printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
-		if (rite_end.isExist()) printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
-		printf("[--ite,++ie_end]\n");
+		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
+		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
+		if (ite_end.isExist()) std::printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
+		if (rite_end.isExist()) std::printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
+		std::printf("[--ite,++ie_end]\n");
 		--ite;
 		--rite;
 		++ite_end;
 		++rite_end;
-		if (ite.isExist()) printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
-		if (rite.isExist()) printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
-		if (ite_end.isExist()) printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
-		if (rite_end.isExist()) printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
+		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
+		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
+		if (ite_end.isExist()) std::printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
+		if (rite_end.isExist()) std::printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
 		for (int i = 0; i < 3; ++i)
 		{
-			printf("[ite[%d]]\n", i);
+			std::printf("[ite[%d]]\n", i);
 			ite = ite[i];
 			rite = rite[i];
-			if (ite.isExist()) printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
-			if (rite.isExist()) printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
+			if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
+			if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
 		}
-		printf("[ite+=3]\n");
+		std::printf("[ite+=3]\n");
 		ite += 3;
 		rite += 3;
-		if (ite.isExist()) printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
-		if (rite.isExist()) printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
-		printf("[ite-=3]\n");
+		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
+		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
+		std::printf("[ite-=3]\n");
 		ite -= 3;
 		rite -= 3;
-		if (ite.isExist()) printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
-		if (rite.isExist()) printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
-		printf("ite_end - ite = %d\n", ite_end - ite);
-		printf("ite - ite_end = %d\n", ite - ite_end);
-		printf("rite_end - rite = %d\n", rite_end - rite);
-		printf("rite - rite_end = %d\n", rite - rite_end);
-		printf("[ite2-=2]\n");
+		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
+		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
+		std::printf("ite_end - ite = %d\n", ite_end - ite);
+		std::printf("ite - ite_end = %d\n", ite - ite_end);
+		std::printf("rite_end - rite = %d\n", rite_end - rite);
+		std::printf("rite - rite_end = %d\n", rite - rite_end);
+		std::printf("[ite2-=2]\n");
 		ite2 -= 2;
 		rite2 -= 2;
-		printf("ite2 - ite = %d\n", ite2 - ite);
-		printf("ite - ite2 = %d\n", ite - ite2);
-		printf("rite2 - rite = %d\n", rite2 - rite);
-		printf("rite - rite2 = %d\n", rite - rite2);
-		printf("[++ite_end]\n");
+		std::printf("ite2 - ite = %d\n", ite2 - ite);
+		std::printf("ite - ite2 = %d\n", ite - ite2);
+		std::printf("rite2 - rite = %d\n", rite2 - rite);
+		std::printf("rite - rite2 = %d\n", rite - rite2);
+		std::printf("[++ite_end]\n");
 		++ite_end;
 		++rite_end;
-		printf("ite_end - ite = %d\n", ite_end - ite);
-		printf("ite - ite_end = %d\n", ite - ite_end);
-		printf("rite_end - rite = %d\n", rite_end - rite);
-		printf("rite - rite_end = %d\n", rite - rite_end);
-		printf("--------------------[iterator operattion:end]\n");
+		std::printf("ite_end - ite = %d\n", ite_end - ite);
+		std::printf("ite - ite_end = %d\n", ite - ite_end);
+		std::printf("rite_end - rite = %d\n", rite_end - rite);
+		std::printf("rite - rite_end = %d\n", rite - rite_end);
+		std::printf("--------------------[iterator operattion:end]\n");
 	}
 #endif//TEST_ITERATOR_OPERATION
 #endif//GASHA_HASH_TABLE_ENABLE_RANDOM_ACCESS_INTERFACE, GASHA_HASH_TABLE_ENABLE_REVERSE_ITERATOR
 
 #ifdef TEST_LOCK_OPERATION
 	//ロック操作テスト
-	printf("--------------------[lock operation:begin]\n");
+	std::printf("--------------------[lock operation:begin]\n");
 	{
 		auto lock(con->lockScoped());//lock_guard<container_t::lock_type> lock(*con);と同じ
-		printf(".lockScoped() ... OK\n");
+		std::printf(".lockScoped() ... OK\n");
 	}
 	{
 		auto lock(con->lockSharedScoped());//shared_lock_guard<container_t::lock_type> lock(*con);と同じ
-		printf(".lockSharedScoped() ... OK\n");
+		std::printf(".lockSharedScoped() ... OK\n");
 	}
 	{
 		auto lock(con->lockUnique());//unique_shared_lock<container_t::lock_type> lock(*con);と同じ
-		printf(".lockUnique() ... OK\n");
+		std::printf(".lockUnique() ... OK\n");
 	}
 	{
 		auto lock(con->lockUnique(with_lock));//unique_shared_lock<container_t::lock_type> lock(*con, with_lock);と同じ
-		printf(".lockUnique(with_lock) ... OK\n");
+		std::printf(".lockUnique(with_lock) ... OK\n");
 	}
 	{
 		auto lock(con->lockUnique(with_lock_shared));//unique_shared_lock<container_t::lock_type> lock(*con, with_lock_shared);と同じ
-		printf(".lockUnique(with_lock_shared) ... OK\n");
+		std::printf(".lockUnique(with_lock_shared) ... OK\n");
 	}
 	{
 		auto lock(con->lockUnique(try_to_lock));//unique_shared_lock<container_t::lock_type> lock(*con, try_to_lock);と同じ
-		printf(".lockUnique(try_to_lock) ... OK\n");
+		std::printf(".lockUnique(try_to_lock) ... OK\n");
 	}
 	{
 		auto lock(con->lockUnique(try_to_lock_shared));//unique_shared_lock<container_t::lock_type> lock(*con, try_to_lock_shared);と同じ
-		printf(".lockUnique(try_to_lock_shared) ... OK\n");
+		std::printf(".lockUnique(try_to_lock_shared) ... OK\n");
 	}
 	{
 		container_t::lock_type& lock_obj = *con;
 		lock_obj.lock();
 		auto lock(con->lockUnique(adopt_lock));//unique_shared_lock<container_t::lock_type> lock(*con, adopt_lock);と同じ
-		printf(".lockUnique(adopt_lock) ... OK\n");
+		std::printf(".lockUnique(adopt_lock) ... OK\n");
 	}
 	{
 		container_t::lock_type& lock_obj = *con;
 		lock_obj.lock_shared();
 		auto lock(con->lockUnique(adopt_shared_lock));//unique_shared_lock<container_t::lock_type> lock(*con, adopt_shared_lock);と同じ
-		printf(".lockUnique(adopt_shared_lock) ... OK\n");
+		std::printf(".lockUnique(adopt_shared_lock) ... OK\n");
 	}
 	{
 		auto lock(con->lockUnique(defer_lock));//unique_shared_lock<container_t::lock_type> lock(*con, defer_lock);と同じ
-		printf(".lockUnique(defer_lock) ... OK\n");
+		std::printf(".lockUnique(defer_lock) ... OK\n");
 	}
-	printf("--------------------[lock operation:end]\n");
+	std::printf("--------------------[lock operation:end]\n");
 #endif//TEST_LOCK_OPERATION
 
 	//ハッシュテーブルアクセス
 	auto findTable = [&con, &printElapsedTime, &prev_time]()
 	{
-		printf("\n");
-		printf("--- Find Data ---\n");
+		std::printf("\n");
+		std::printf("--- Find Data ---\n");
 		int find_success = 0;
 		int find_failure = 0;
 		for (int i = 0; i < TEST_DATA_TABLE_SIZE; ++i)
@@ -543,7 +543,7 @@ void example_hash_table()
 				++find_failure;
 			}
 		}
-		printf("success=%d, failure=%d\n", find_success, find_failure);
+		std::printf("success=%d, failure=%d\n", find_success, find_failure);
 		const bool is_print = true;
 		prev_time = printElapsedTime(prev_time, is_print);
 	};
@@ -552,8 +552,8 @@ void example_hash_table()
 	//ハッシュテーブルからのデータ削除
 	auto eraseData = [&con, &printElapsedTime, &prev_time](const int begin, const int end, const int step)
 	{
-		printf("\n");
-		printf("--- Erase Data ---\n");
+		std::printf("\n");
+		std::printf("--- Erase Data ---\n");
 		int erase_success = 0;
 		int erase_failure = 0;
 		for (int i = begin; i < end; i += step)
@@ -587,7 +587,7 @@ void example_hash_table()
 				printf_detail("NG\n");
 			}
 		}
-		printf("success=%d, failure=%d\n", erase_success, erase_failure);
+		std::printf("success=%d, failure=%d\n", erase_success, erase_failure);
 		const bool is_print = true;
 		prev_time = printElapsedTime(prev_time, is_print);
 	};
@@ -617,10 +617,10 @@ void example_hash_table()
 	//リハッシュ
 	auto rehashTable = [&con, &printElapsedTime, &prev_time]()
 	{
-		printf("\n");
-		printf("--- Rehash Table ---\n");
+		std::printf("\n");
+		std::printf("--- Rehash Table ---\n");
 		con->rehash();
-		printf("OK.\n");
+		std::printf("OK.\n");
 		const bool is_print = true;
 		prev_time = printElapsedTime(prev_time, is_print);
 	};
@@ -638,10 +638,10 @@ void example_hash_table()
 	//クリア
 	auto clearTable = [&con, &printElapsedTime, &prev_time]()
 	{
-		printf("\n");
-		printf("--- Clear Table ---\n");
+		std::printf("\n");
+		std::printf("--- Clear Table ---\n");
 		con->clear();
-		printf("OK.\n");
+		std::printf("OK.\n");
 		const bool is_print = true;
 		prev_time = printElapsedTime(prev_time, is_print);
 	};
@@ -685,17 +685,17 @@ void example_hash_table()
 	delete con;
 	con = nullptr;
 
-	printf("\n");
-	printf("End\n");
-	printf("============================================================\n");
+	std::printf("\n");
+	std::printf("End\n");
+	std::printf("============================================================\n");
 	begin_time = printElapsedTime(begin_time, true);//処理時間表示
 
 	//----------------------------------------------------------------------------------------------------
 	//【比較用】【STL版】ハッシュテーブルテスト
-	printf("\n");
-	printf("--------------------------------------------------------------------------------\n");
-	printf("[STL] Hash Table Test\n");
-	printf("--------------------------------------------------------------------------------\n");
+	std::printf("\n");
+	std::printf("--------------------------------------------------------------------------------\n");
+	std::printf("[STL] Hash Table Test\n");
+	std::printf("--------------------------------------------------------------------------------\n");
 	typedef std::unordered_map<crc32_t, data_t> stl_container_t;
 	stl_container_t* stl_con = new stl_container_t();
 	stl_con->reserve(TEST_DATA_TABLE_SIZE);
@@ -703,31 +703,31 @@ void example_hash_table()
 	//ハッシュテーブルの基本情報表示
 	auto printSTLTableParameter = [&stl_con]()
 	{
-		printf("\n");
-		printf("--- [STL] Table Parameter ---\n");
-		printf(".max_size()=%u\n", stl_con->max_size());
+		std::printf("\n");
+		std::printf("--- [STL] Table Parameter ---\n");
+		std::printf(".max_size()=%u\n", stl_con->max_size());
 	};
 	printSTLTableParameter();
 
 	//テーブル状態表示
 	auto printSTLTableStatus = [&stl_con]()
 	{
-		printf("\n");
-		printf("--- [STL] Table Status ---\n");
-		printf(".size()=%u\n", stl_con->size());
-		printf(".empty()=%u\n", stl_con->empty());
-		printf(".bucket_count()=%u\n", stl_con->bucket_count());
-		printf(".max_bucket_count()=%u\n", stl_con->max_bucket_count());
-		printf(".load_factor()=%.3f\n", stl_con->load_factor());
-		printf(".max_load_factor()=%.3f\n", stl_con->max_load_factor());
+		std::printf("\n");
+		std::printf("--- [STL] Table Status ---\n");
+		std::printf(".size()=%u\n", stl_con->size());
+		std::printf(".empty()=%u\n", stl_con->empty());
+		std::printf(".bucket_count()=%u\n", stl_con->bucket_count());
+		std::printf(".max_bucket_count()=%u\n", stl_con->max_bucket_count());
+		std::printf(".load_factor()=%.3f\n", stl_con->load_factor());
+		std::printf(".max_load_factor()=%.3f\n", stl_con->max_load_factor());
 	};
 	printSTLTableStatus();
 
 	//ハッシュテーブルへのデータ登録
 	auto insertSTLData = [&stl_con, &printElapsedTime, &prev_time](const int begin, const int end, const int step)
 	{
-		printf("\n");
-		printf("--- [STL] Insert Data ---\n");
+		std::printf("\n");
+		std::printf("--- [STL] Insert Data ---\n");
 		int insert_success = 0;
 		int insert_failure = 0;
 		for (int i = begin; i < end; i += step)
@@ -748,7 +748,7 @@ void example_hash_table()
 				printf_detail("NG\n");
 			}
 		}
-		printf("success=%d, failure=%d\n", insert_success, insert_failure);
+		std::printf("success=%d, failure=%d\n", insert_success, insert_failure);
 		const bool is_print = true;
 		prev_time = printElapsedTime(prev_time, is_print);
 	};
@@ -777,8 +777,8 @@ void example_hash_table()
 	//ハッシュテーブルアクセス
 	auto findSTLTable = [&stl_con, &printElapsedTime, &prev_time]()
 	{
-		printf("\n");
-		printf("--- [STL] Find Data ---\n");
+		std::printf("\n");
+		std::printf("--- [STL] Find Data ---\n");
 		int find_success = 0;
 		int find_failure = 0;
 		for (int i = 0; i < TEST_DATA_TABLE_SIZE; ++i)
@@ -801,7 +801,7 @@ void example_hash_table()
 				++find_failure;
 			}
 		}
-		printf("success=%d, failure=%d\n", find_success, find_failure);
+		std::printf("success=%d, failure=%d\n", find_success, find_failure);
 		const bool is_print = true;
 		prev_time = printElapsedTime(prev_time, is_print);
 	};
@@ -810,8 +810,8 @@ void example_hash_table()
 	//ハッシュテーブルからのデータ削除
 	auto eraseSTLData = [&stl_con, &printElapsedTime, &prev_time](const int begin, const int end, const int step)
 	{
-		printf("\n");
-		printf("--- [STL] Erase Data ---\n");
+		std::printf("\n");
+		std::printf("--- [STL] Erase Data ---\n");
 		int erase_success = 0;
 		int erase_failure = 0;
 		for (int i = begin; i < end; i += step)
@@ -832,7 +832,7 @@ void example_hash_table()
 				printf_detail("NG\n");
 			}
 		}
-		printf("success=%d, failure=%d\n", erase_success, erase_failure);
+		std::printf("success=%d, failure=%d\n", erase_success, erase_failure);
 		const bool is_print = true;
 		prev_time = printElapsedTime(prev_time, is_print);
 	};
@@ -862,10 +862,10 @@ void example_hash_table()
 	//リハッシュ
 	auto rehashSTLTable = [&stl_con, &printElapsedTime, &prev_time]()
 	{
-		printf("\n");
-		printf("--- [STL] Rehash Table ---\n");
+		std::printf("\n");
+		std::printf("--- [STL] Rehash Table ---\n");
 		stl_con->rehash(TEST_DATA_TABLE_SIZE);
-		printf("OK.\n");
+		std::printf("OK.\n");
 		const bool is_print = true;
 		prev_time = printElapsedTime(prev_time, is_print);
 	};
@@ -883,10 +883,10 @@ void example_hash_table()
 	//クリア
 	auto clearSTLTable = [&stl_con, &printElapsedTime, &prev_time]()
 	{
-		printf("\n");
-		printf("--- [STL] Clear Table ---\n");
+		std::printf("\n");
+		std::printf("--- [STL] Clear Table ---\n");
 		stl_con->clear();
-		printf("OK.\n");
+		std::printf("OK.\n");
 		const bool is_print = true;
 		prev_time = printElapsedTime(prev_time, is_print);
 	};
@@ -930,18 +930,18 @@ void example_hash_table()
 	delete stl_con;
 	stl_con = nullptr;
 	
-	printf("\n");
-	printf("End\n");
-	printf("============================================================\n");
+	std::printf("\n");
+	std::printf("End\n");
+	std::printf("============================================================\n");
 	printElapsedTime(begin_time, true);//処理時間表示
 
 	//----------------------------------------------------------------------------------------------------
 	//ポインタ型のハッシュテーブルテスト
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("Hash Table Test for Pointer\n");
-		printf("--------------------------------------------------------------------------------\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("Hash Table Test for Pointer\n");
+		std::printf("--------------------------------------------------------------------------------\n");
 
 		//ハッシュテーブル
 		hash_table::container<ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER> p_con;
@@ -957,12 +957,12 @@ void example_hash_table()
 		//検索して表示
 		auto printObj = [&p_con](const int key)
 		{
-			printf("[%2d] ... ", key);
+			std::printf("[%2d] ... ", key);
 			data_t** p = p_con[key];
 			if (p && *p)
-				printf("OK  name=\"%s\", val=%d\n", (*p)->m_name, (*p)->m_value);
+				std::printf("OK  name=\"%s\", val=%d\n", (*p)->m_name, (*p)->m_value);
 			else
-				printf("NG\n");
+				std::printf("NG\n");
 		};
 		printObj(10);
 		printObj(20);
@@ -979,10 +979,10 @@ void example_hash_table()
 	//----------------------------------------------------------------------------------------------------
 	//キーの範囲が狭いハッシュテーブルのテスト
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("Hash Table Test for small-range key\n");
-		printf("--------------------------------------------------------------------------------\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("Hash Table Test for small-range key\n");
+		std::printf("--------------------------------------------------------------------------------\n");
 
 		//ハッシュテーブル
 		typedef hash_table::container<narrow_range_key_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC> con_t;
@@ -1003,10 +1003,10 @@ void example_hash_table()
 	//関数型のハッシュテーブルテスト
 	//※スクリプトなどから関数名（文字列）で関数を実行するような用途を想定
 	{
-		printf("\n");
-		printf("--------------------------------------------------------------------------------\n");
-		printf("Hash Table Test for Function\n");
-		printf("--------------------------------------------------------------------------------\n");
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("Hash Table Test for Function\n");
+		std::printf("--------------------------------------------------------------------------------\n");
 		
 		//ハッシュテーブル
 		hash_table::container<func_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC> func_con;
@@ -1043,12 +1043,12 @@ void example_hash_table()
 		obj_con.emplace("calc", std::mem_fn(&calc_t::calc));//クラスメンバー関数の場合
 
 		//検索して実行
-		printf("50 + 4 = %d\n", (*func_con["+"])(50, 4));
-		printf("50 - 4 = %d\n", (*func_con["-"])(50, 4));
-		printf("50 * 4 = %d\n", (*func_con["*"])(50, 4));
-		printf("50 / 4 = %d\n", (*func_con["/"])(0, 0));//std::bind()で事前にパラメータがセット済み
+		std::printf("50 + 4 = %d\n", (*func_con["+"])(50, 4));
+		std::printf("50 - 4 = %d\n", (*func_con["-"])(50, 4));
+		std::printf("50 * 4 = %d\n", (*func_con["*"])(50, 4));
+		std::printf("50 / 4 = %d\n", (*func_con["/"])(0, 0));//std::bind()で事前にパラメータがセット済み
 		calc_t obj(3);
-		printf("obj.calc(1, 2) = %d\n", (*obj_con["calc"])(obj, 1, 2));//クラスメンバー関数の場合、オブジェクトを渡す必要がある
+		std::printf("obj.calc(1, 2) = %d\n", (*obj_con["calc"])(obj, 1, 2));//クラスメンバー関数の場合、オブジェクトを渡す必要がある
 	}
 }
 

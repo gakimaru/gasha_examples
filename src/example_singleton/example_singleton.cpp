@@ -16,7 +16,7 @@
 #include <gasha/string.h>//文字列処理：spprintf
 #include <gasha/thread_id.h>//スレッドID
 
-#include <cstdio>//printf()
+#include <cstdio>//std::printf()
 
 //【VC++】例外を無効化した状態で <thread> をインクルードすると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -32,7 +32,7 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //メソッド
 void common_data1_t::printInfo()
 {
-	printf("common_data1: val1=%d, val2=%d\n", m_val1, m_val2);
+	std::printf("common_data1: val1=%d, val2=%d\n", m_val1, m_val2);
 }
 
 //コンストラクタ
@@ -41,7 +41,7 @@ common_data1_t::common_data1_t(const int val1, const int val2) :
 	m_val2(val2)
 {
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("common_data1_t::constructor(%d, %d)\n", val1, val2);
+	std::printf("common_data1_t::constructor(%d, %d)\n", val1, val2);
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 
@@ -49,7 +49,7 @@ common_data1_t::common_data1_t(const int val1, const int val2) :
 common_data1_t::~common_data1_t()
 {
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("common_data1_t::destructor(): m_val1=%d, m_val2=%d\n", m_val1, m_val2);
+	std::printf("common_data1_t::destructor(): m_val1=%d, m_val2=%d\n", m_val1, m_val2);
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 
@@ -59,7 +59,7 @@ common_data1_t::~common_data1_t()
 //メソッド
 void common_data2_t::printInfo()
 {
-	printf("common_data2: val1=%d, val2=%d\n", m_val1, m_val2);
+	std::printf("common_data2: val1=%d, val2=%d\n", m_val1, m_val2);
 }
 
 //コンストラクタ
@@ -68,7 +68,7 @@ common_data2_t::common_data2_t() :
 	m_val2(0)
 {
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("common_data2_t::constructor(): m_val1=%d, m_val2=%d\n", m_val1, m_val2);
+	std::printf("common_data2_t::constructor(): m_val1=%d, m_val2=%d\n", m_val1, m_val2);
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 
@@ -76,7 +76,7 @@ common_data2_t::common_data2_t() :
 common_data2_t::~common_data2_t()
 {
 #ifdef TEST_DATA_WATCH_CONSTRUCTOR
-	printf("common_data2_t::destructor(): m_val1=%d, m_val2=%d\n", m_val1, m_val2);
+	std::printf("common_data2_t::destructor(): m_val1=%d, m_val2=%d\n", m_val1, m_val2);
 #endif//TEST_DATA_WATCH_CONSTRUCTOR
 }
 
@@ -84,16 +84,16 @@ common_data2_t::~common_data2_t()
 //シングルトンテスト
 void example_singleton()
 {
-	printf("----- Test for singleton -----\n");
+	std::printf("----- Test for singleton -----\n");
 
 	//シングルトンインスタンス生成
 	{
-		printf("[ Create Singleton Instance : common_data1_t ]\n");
+		std::printf("[ Create Singleton Instance : common_data1_t ]\n");
 		singleton<common_data1_t> data("test1-A", with_lock_shared);
 		data.create("test1:create", 1, 2);//明示的インスタンス生成
 	}
 	{
-		printf("[ Create Singleton Instance : common_data2_t ]\n");
+		std::printf("[ Create Singleton Instance : common_data2_t ]\n");
 		simpleSingleton<common_data2_t> data("test2-A");//暗黙的インスタンス生成
 		data->val1() = 3;
 		data->val2() = 4;
@@ -101,46 +101,46 @@ void example_singleton()
 	
 	//シングルトンアクセス
 	{
-		printf("[ Access Singleton : common_data1_t(1) ]\n");
+		std::printf("[ Access Singleton : common_data1_t(1) ]\n");
 		singleton<common_data1_t> data("test1-B");
 		data->printInfo();
 	}
 	{
-		printf("[ Access Singleton : common_data2_t(1) ]\n");
+		std::printf("[ Access Singleton : common_data2_t(1) ]\n");
 		simpleSingleton<common_data2_t> data("test2-B");
 		data->printInfo();
 	}
 
 	//シングルトンインスタンス破棄
 	{
-		printf("[ Destroy Singleton Instance : common_data1_t ]\n");
+		std::printf("[ Destroy Singleton Instance : common_data1_t ]\n");
 		singleton<common_data1_t> data("test1-C");
 		data.destroy("test1:destroy");//明示的インスタンス破棄
 	}
 	{
-		printf("[ Destroy Singleton Instance : common_data2_t ]\n");
+		std::printf("[ Destroy Singleton Instance : common_data2_t ]\n");
 		simpleSingleton<common_data2_t> data("test2-A");
 		data.destroy("test2:destroy");//明示的インスタンス破棄
 	}
 
 	//シングルトンアクセス
 	{
-		printf("[ Access Singleton : common_data1_t(2) ]\n");
+		std::printf("[ Access Singleton : common_data1_t(2) ]\n");
 		singleton<common_data1_t> data("test1-C");
 		if (data.isCreated())
 			data->printInfo();
 		else
-			printf("common_data1_t is not created.\n");
+			std::printf("common_data1_t is not created.\n");
 	}
 	{
-		printf("[ Access Singleton : common_data2_t(2) ]\n");
+		std::printf("[ Access Singleton : common_data2_t(2) ]\n");
 		simpleSingleton<common_data2_t> data("test2-C");//暗黙的インスタンス生成
 		data->printInfo();
 	}
 	
 	//シングルトンインスタンス生成
 	{
-		printf("[ Create Singleton Instance(2) : common_data1_t ]\n");
+		std::printf("[ Create Singleton Instance(2) : common_data1_t ]\n");
 		singleton<common_data1_t> data("test1-D", with_lock_shared);
 		data.create("test1:create(2)", 0, 0);//明示的インスタンス生成
 	}
@@ -237,7 +237,7 @@ void example_singleton()
 		char message[2048];
 		singleton<common_data1_t> data("test1-E", with_lock_shared);
 		data.debugInfo(message);
-		printf(message);
+		std::printf(message);
 	}
 
 	//スレッド終了待ち
@@ -250,17 +250,17 @@ void example_singleton()
 
 	//シングルトンアクセス（スレッドで更新した結果の表示）
 	{
-		printf("[ Access Singleton : common_data1_t(3) ]\n");
+		std::printf("[ Access Singleton : common_data1_t(3) ]\n");
 		singleton<common_data1_t> data("test1-F");
 		data->printInfo();
 	}
 	{
-		printf("[ Access Singleton : common_data2_t(3) ]\n");
+		std::printf("[ Access Singleton : common_data2_t(3) ]\n");
 		simpleSingleton<common_data2_t> data("test2-F");
 		data->printInfo();
 	}
 
-	printf("- end -\n");
+	std::printf("- end -\n");
 }
 
 // End of file

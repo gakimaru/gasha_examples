@@ -13,7 +13,7 @@
 #include <gasha/type_traits.h>//型特性ユーティリティ：extentof()
 
 #include <cstddef>//std::size_t
-#include <cstring>//strlen(), memcpy()
+#include <cstring>//strlen(), std::memcpy()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
