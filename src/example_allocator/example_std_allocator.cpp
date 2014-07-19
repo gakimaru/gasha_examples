@@ -30,7 +30,7 @@ static void testStdAllocator(ALLOCATOR& std_allocator)
 {
 	std::printf("\n");
 	char message[1024];
-	EXPR_PLAIN(std_allocator.debugInfo(message, sizeof(message)); std::printf(message););
+	EXPR_PLAIN(std_allocator.debugInfo(message, sizeof(message)); std::printf("%s\n", message););
 	EXPR(p1, void* p1 = std_allocator.alloc(1););
 	EXPR(p2, void* p2 = std_allocator.alloc(1, 1););
 	EXPR(p3, void* p3 = std_allocator.alloc(1, 1););
@@ -52,7 +52,7 @@ static void testStdAllocator(ALLOCATOR& std_allocator)
 	EXPR(p19, data2_t* p19 = std_allocator.template newObj<data2_t>(););//アラインメント対応版の時にはアラインメントが保証される
 	EXPR(p20, int* p20 = std_allocator.template newObj<int>(););
 	EXPR(p21, data2_t* p21 = std_allocator.template newObj<data2_t>(););//アラインメント対応版の時にはアラインメントが保証される
-	EXPR_PLAIN(std_allocator.debugInfo(message, sizeof(message)); std::printf(message););
+	EXPR_PLAIN(std_allocator.debugInfo(message, sizeof(message)); std::printf("%s\n", message););
 	EXPR(p1, std_allocator.free(p1););
 	EXPR(p2, std_allocator.free(p2););
 	EXPR(p3, std_allocator.free(p3););
@@ -74,7 +74,7 @@ static void testStdAllocator(ALLOCATOR& std_allocator)
 	EXPR(p19, std_allocator.free(p19););
 	EXPR(p20, std_allocator.free(p20););
 	EXPR(p21, std_allocator.free(p21););
-	EXPR_PLAIN(std_allocator.debugInfo(message, sizeof(message)); std::printf(message););
+	EXPR_PLAIN(std_allocator.debugInfo(message, sizeof(message)); std::printf("%s\n", message););
 }
 
 //----------------------------------------

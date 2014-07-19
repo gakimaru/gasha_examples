@@ -33,7 +33,7 @@ static void testPool(ALLOCATOR& pool)
 	char message[1024];
 	for (int i = 0; i < 3; ++i)//ブロックの再利用を確認するために3回ループ
 	{
-		EXPR_PLAIN(pool.debugInfo(message, sizeof(message)); std::printf(message););
+		EXPR_PLAIN(pool.debugInfo(message, sizeof(message)); std::printf("%s\n", message););
 		EXPR(p1, void* p1 = pool.alloc(1););
 		EXPR(p2, void* p2 = pool.alloc(1, 1););
 		EXPR(p3, void* p3 = pool.alloc(1, 1););
@@ -55,7 +55,7 @@ static void testPool(ALLOCATOR& pool)
 		EXPR(p19, void* p19 = pool.alloc(10););
 		EXPR(p20, void* p20 = pool.alloc(10););
 		EXPR(p21, void* p21 = pool.alloc(10););//アロケータ失敗（プール不足）
-		EXPR_PLAIN(pool.debugInfo(message, sizeof(message)); std::printf(message););
+		EXPR_PLAIN(pool.debugInfo(message, sizeof(message)); std::printf("%s\n", message););
 		EXPR(p1, pool.free(p1););
 		EXPR(p2, pool.free(p2););
 		EXPR(p3, pool.free(p3););
@@ -78,7 +78,7 @@ static void testPool(ALLOCATOR& pool)
 		EXPR(p20, pool.free(p20););
 		EXPR(p21, pool.free(p21););
 	}
-	EXPR_PLAIN(pool.debugInfo(message, sizeof(message)); std::printf(message););
+	EXPR_PLAIN(pool.debugInfo(message, sizeof(message)); std::printf("%s\n", message););
 }
 
 //----------------------------------------
@@ -113,7 +113,7 @@ void example_pool_allocator()
 			EXPR_PLAIN(poolAllocator_withBuff<32, 16, 8, lock_type> pool;);
 			std::printf("----------------------------------------\n");
 			std::printf("\n");
-			EXPR_PLAIN(pool.debugInfo(message, sizeof(message)); std::printf(message););
+			EXPR_PLAIN(pool.debugInfo(message, sizeof(message)); std::printf("%s\n", message););
 		}
 
 		//型指定バッファ付きプールアロケータ
@@ -128,7 +128,7 @@ void example_pool_allocator()
 			EXPR_PLAIN(poolAllocator_withType<block_type, 16, lock_type> pool;);
 			std::printf("----------------------------------------\n");
 			std::printf("\n");
-			EXPR_PLAIN(pool.debugInfo(message, sizeof(message)); std::printf(message););
+			EXPR_PLAIN(pool.debugInfo(message, sizeof(message)); std::printf("%s\n", message););
 			EXPR(p, block_type* p = pool.newDefault(););
 			EXPR(p, pool.deleteDefault(p););
 		}
@@ -156,7 +156,7 @@ void example_pool_allocator()
 			EXPR_PLAIN(lfPoolAllocator_withBuff<32, 16, 8> pool;);
 			std::printf("----------------------------------------\n");
 			std::printf("\n");
-			EXPR_PLAIN(pool.debugInfo(message, sizeof(message)); std::printf(message););
+			EXPR_PLAIN(pool.debugInfo(message, sizeof(message)); std::printf("%s\n", message););
 		}
 
 		//型指定バッファ付きロックフリープールアロケータ
@@ -171,7 +171,7 @@ void example_pool_allocator()
 			EXPR_PLAIN(lfPoolAllocator_withType<block_type, 16> pool;);
 			std::printf("----------------------------------------\n");
 			std::printf("\n");
-			EXPR_PLAIN(pool.debugInfo(message, sizeof(message)); std::printf(message););
+			EXPR_PLAIN(pool.debugInfo(message, sizeof(message)); std::printf("%s\n", message););
 			EXPR(p, block_type* p = pool.newDefault(););
 			EXPR(p, pool.deleteDefault(p););
 		}

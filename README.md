@@ -958,9 +958,7 @@ GASHAは、下記のように複数のリポジトリで構成しています。
 * `GASHA_DEBUG_FEATURE_IS_ENABLED` ... デバッグ機能有効化  
 * `GASHA_VERBOSE_DEBUG_IS_ENABLED` ... 冗長デバッグ機能有効化  
 * `GASHA_LOG_IS_ENABLED`           ... デバッグログ有効化 ※1  
-* `GASHA_ASSERTION_IS_ENABLED`     ... アサーション有効化 ※2  
-* `GASHA_BREAKPOINT_IS_ENABLED`    ... ブレークポイント有効化 ※2  
-* `GASHA_WATCHPOINT_IS_ENABLED`    ... ウォッチポイント有効化 ※2  
+* `GASHA_ASSERTION_IS_ENABLED`     ... アサーション／ブレークポイント／ウォッチポイント有効化 ※2  
 * `GASHA_CALLPOINT_IS_ENABLED`     ... コールポイント機能有効化 ※2  
 * `GASHA_PROFILE_IS_AVAILABLE`     ... プロファイル機能有効化  
 * `GASHA_DEV_TOOLS_IS_AVAILABLE`   ... 開発ツール利用可能 ※3  

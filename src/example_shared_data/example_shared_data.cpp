@@ -300,7 +300,7 @@ void easyTest()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_poolAllocator.template debugInfo<data_t>(message, sizeof(message), true, debug_print_info);
-		std::printf(message);
+		std::printf("%s\n", message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR
@@ -321,7 +321,7 @@ void easyTest()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_lfPoolAllocator.template debugInfo<data_t>(message, sizeof(message), true, debug_print_info);
-		std::printf(message);
+		std::printf("%s\n", message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_POOL_ALLOCATOR
@@ -342,7 +342,7 @@ void easyTest()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_stack.debugInfo(message, sizeof(message), true, debug_print_info);
-		std::printf(message);
+		std::printf("%s\n", message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_STACK
@@ -363,7 +363,7 @@ void easyTest()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_lfStack.debugInfo(message, sizeof(message), true, debug_print_info);
-		std::printf(message);
+		std::printf("%s\n", message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_STACK
@@ -384,7 +384,7 @@ void easyTest()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_queue.debugInfo(message, sizeof(message), true, debug_print_info);
-		std::printf(message);
+		std::printf("%s\n", message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_QUEUE
@@ -405,7 +405,7 @@ void easyTest()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_lfQueue.debugInfo(message, sizeof(message), true, debug_print_info);
-		std::printf(message);
+		std::printf("%s\n", message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_QUEUE
@@ -731,7 +731,7 @@ void thread_test()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_poolAllocator.debugInfo<data_t>(message, sizeof(message), true, debug_print_info);
-		std::printf(message);
+		std::printf("%s\n", message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_POOL_ALLOCATOR
@@ -752,7 +752,7 @@ void thread_test()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_lfPoolAllocator.debugInfo<data_t>(message, sizeof(message), true, debug_print_info);
-		std::printf(message);
+		std::printf("%s\n", message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_POOL_ALLOCATOR
@@ -773,7 +773,7 @@ void thread_test()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_stack.debugInfo(message, sizeof(message), true, debug_print_info);
-		std::printf(message);
+		std::printf("%s\n", message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_STACK
@@ -794,7 +794,7 @@ void thread_test()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_lfStack.debugInfo(message, sizeof(message), true, debug_print_info);
-		std::printf(message);
+		std::printf("%s\n", message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_STACK
@@ -815,7 +815,7 @@ void thread_test()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_queue.debugInfo(message, sizeof(message), true, debug_print_info);
-		std::printf(message);
+		std::printf("%s\n", message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_SHARED_QUEUE
@@ -836,7 +836,7 @@ void thread_test()
 	#ifdef ENABLE_TEST_PRINT_DEBUG_INFO
 		char message[2048];
 		s_lfQueue.debugInfo(message, sizeof(message), true, debug_print_info);
-		std::printf(message);
+		std::printf("%s\n", message);
 	#endif//ENABLE_TEST_PRINT_DEBUG_INFO
 	}
 #endif//ENABLE_TEST_FOR_LF_QUEUE

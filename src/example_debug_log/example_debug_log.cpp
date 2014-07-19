@@ -28,11 +28,14 @@
 #include <gasha/log_queue.h>//ログキュー
 #include <gasha/std_log_print.h>//標準ログ出力
 #include <gasha/log_queue_monitor.h>//ログキューモニター
-
 #include <gasha/log.h>//ログ操作
 #include <gasha/print.h>//ログ出力操作 ※これだけインクルードしていれば print() が使用できる
-
 #include <gasha/call_point.h>//コールポイント
+#include <gasha/assert.h>//アサート
+#include <gasha/i_debug_pause.h>//デバッグポーズインターフェス
+#include <gasha/std_debug_pause.h>//標準デバッグポーズ
+#include <gasha/stdin_debug_pause.h>//標準入力デバッグポーズ
+#include <gasha/dummy_debug_pause.h>//ダミーデバッグポーズ
 
 #include <gasha/iterator.h>//イテレータ操作
 #include <gasha/type_traits.h>//型特性ユーティリティ：toStr()
@@ -66,12 +69,12 @@ void printAllLogLevel()
 	//reverseForEach(logLevelContainer(),//逆順表示
 		[](logLevel& level_obj)
 		{
-			IConsole* print_console = level_obj.console(ofLog);
-			IConsole* notice_console = level_obj.console(ofNotice);
-			if (!print_console)
+			iConsole* print_console = level_obj.console(ofLog);
+			iConsole* print_notice_console = level_obj.console(ofNotice);
+			if (!print_console || *print_console == dummyConsole())
 				print_console = &stdOutConsole::instance();
-			if (!notice_console)
-				notice_console = &stdOutConsole::instance();
+			if (!print_notice_console || *print_notice_console == dummyConsole())
+				print_notice_console = &stdOutConsole::instance();
 			char message[1024];
 			char str_color[64];
 			print_console->changeColor(level_obj.color(ofLog));
@@ -80,9 +83,9 @@ void printAllLogLevel()
 			else
 				print_console->printf(message, "[%2d](%2d)\"%s\"", level_obj.outputLevel(), level_obj.value(), level_obj.name());
 			print_console->putCr();
-			IConsole* console = level_obj.console(ofLog);
+			iConsole* console = level_obj.console(ofLog);
 			consoleColor& color = level_obj.color(ofLog);
-			IConsole* console_of_notice = level_obj.console(ofNotice);
+			iConsole* notice_console = level_obj.console(ofNotice);
 			consoleColor& color_of_notice = level_obj.color(ofNotice);
 			logLevel prev = level_obj.prev();
 			logLevel next = level_obj.next();
@@ -92,11 +95,12 @@ void printAllLogLevel()
 				print_console->printf(message, "\tconsole: \"%s\"(%s)", console->name(), color.toStr(str_color));
 				print_console->putCr();
 			}
-			if (console_of_notice)
+			if (notice_console)
 			{
-				notice_console->changeColor(level_obj.color(ofNotice));
-				notice_console->printf(message, "\tnotice: \"%s\"(%s)", console_of_notice->name(), color_of_notice.toStr(str_color));
-				notice_console->putCr();
+				print_notice_console->changeColor(level_obj.color(ofNotice));
+				print_notice_console->printf(message, "\tnotice: \"%s\"(%s)", notice_console->name(), color_of_notice.toStr(str_color));
+				print_notice_console->putCr();
+				print_notice_console->end();//画面通知は出力終了時に改行する
 			}
 			if (prev)
 			{
@@ -127,7 +131,7 @@ void printAllLogCategory()
 	//reverseForEach(logCategoryContainer(),//逆順表示
 		[](logCategory& category_obj)
 		{
-			IConsole* print_console = category_obj.console(ofLog);
+			iConsole* print_console = category_obj.console(ofLog);
 			if (!print_console)
 				print_console = &stdOutConsole::instance();
 			char message[1024];
@@ -136,16 +140,16 @@ void printAllLogCategory()
 			else
 				print_console->printf(message, "(%2d)\"%s\"", category_obj.value(), category_obj.name());
 			print_console->putCr();
-			IConsole* console = category_obj.console(ofLog);
-			IConsole* console_of_notice = category_obj.console(ofNotice);
+			iConsole* console = category_obj.console(ofLog);
+			iConsole* notice_console = category_obj.console(ofNotice);
 			if (console)
 			{
 				print_console->printf(message, "\tconsole: \"%s\"", console->name());
 				print_console->putCr();
 			}
-			if (console_of_notice)
+			if (notice_console)
 			{
-				print_console->printf(message, "\tnotice: \"%s\"", console_of_notice->name());
+				print_console->printf(message, "\tnotice: \"%s\"", notice_console->name());
 				print_console->putCr();
 			}
 		}
@@ -170,19 +174,22 @@ void printAllLogMask(const logLevel::level_type level)
 		{
 			const logCategory& category = mask_obj.category();
 			logLevel level_mask(mask_obj.level(ofLog));
-			logLevel level_mask_of_notice(mask_obj.level(ofNotice));
-			IConsole* print_console = level_mask.console(ofLog);
-			if (!print_console)
+			logLevel notice_level_mask(mask_obj.level(ofNotice));
+			iConsole* print_console = level_obj.console(ofLog);
+			iConsole* print_notice_console = level_obj.console(ofNotice);
+			if (!print_console || *print_console == dummyConsole())
 				print_console = &stdOutConsole::instance();
+			if (!print_notice_console || *print_notice_console == dummyConsole())
+				print_notice_console = &stdOutConsole::instance();
 			char message[1024];
 			if (category.isSpecial())
 				print_console->printf(message, "(SP%2d)\"%s\"", category.value(), category.name());
 			else
 				print_console->printf(message, "(%2d)\"%s\"", category.value(), category.name());
 			print_console->putCr();
-			IConsole* console = mask_obj.console(ofLog, level_obj);
+			iConsole* console = mask_obj.console(ofLog, level_obj);
 			const consoleColor* color = mask_obj.color(ofLog, level_obj);
-			IConsole* console_of_notice = mask_obj.console(ofNotice, level_obj);
+			iConsole* notice_console = mask_obj.console(ofNotice, level_obj);
 			const consoleColor* color_of_notice = mask_obj.color(ofNotice, level_obj);
 
 			print_console->changeColor(level_mask.color(ofLog));
@@ -192,11 +199,9 @@ void printAllLogMask(const logLevel::level_type level)
 			{
 				print_console->changeColor(level_mask.color(ofLog));
 				print_console->printf(message, "\t\tOK ... ");
-				console->changeColor(*color);
-				console->printf(message, "log-message: (%2d)\"%s\", \"%s\"", level_obj.value(), level_obj.name(), console->name());
-				console->putCr();
-				if (*print_console != *console)
-					print_console->putCr();
+				print_console->changeColor(*color);
+				print_console->printf(message, "log-message: (%2d)\"%s\", \"%s\"", level_obj.value(), level_obj.name(), console->name());
+				print_console->putCr();
 			}
 			else
 			{
@@ -207,22 +212,23 @@ void printAllLogMask(const logLevel::level_type level)
 				print_console->putCr();
 			}
 		
-			print_console->changeColor(level_mask_of_notice.color(ofNotice));
-			print_console->printf(message, "\tmask(of notice): (%2d)\"%s\"", level_mask_of_notice.value(), level_mask_of_notice.name());
+			print_console->changeColor(notice_level_mask.color(ofNotice));
+			print_console->printf(message, "\tmask(of notice): (%2d)\"%s\"", notice_level_mask.value(), notice_level_mask.name());
 			print_console->putCr();
-			if (console_of_notice)
+			if (notice_console)
 			{
-				print_console->changeColor(level_mask_of_notice.color(ofNotice));
+				print_console->changeColor(notice_level_mask.color(ofNotice));
 				print_console->printf(message, "\t\tOK ... ");
-				console_of_notice->changeColor(*color_of_notice);
-				console_of_notice->printf(message, "notice-message: (%2d)\"%s\", \"%s\"", level_obj.value(), level_obj.name(), console_of_notice->name());
-				console_of_notice->putCr();
-				if (*print_console != *console_of_notice)
+				print_notice_console->changeColor(*color_of_notice);
+				print_notice_console->printf(message, "notice-message: (%2d)\"%s\", \"%s\"", level_obj.value(), level_obj.name(), notice_console->name());
+				print_notice_console->putCr();
+				print_notice_console->end();//画面通知は出力終了時に改行する
+				if (*print_console != *print_notice_console)
 					print_console->putCr();
 			}
 			else
 			{
-				print_console->changeColor(level_mask_of_notice.color(ofNotice));
+				print_console->changeColor(notice_level_mask.color(ofNotice));
 				print_console->printf(message, "\t\tMASKED! ... ");
 				print_console->changeColor(level_obj.color(ofNotice));
 				print_console->printf(message, "notice-message: (%2d)\"%s\"", level_obj.value(), level_obj.name());
@@ -368,12 +374,12 @@ void example_debug_log()
 	};
 	{
 		static vsConsole vs_console("vs-console *CUSTOM*");
-		IConsole* consoles[] = { &stdOutConsole::instance(), &vs_console };
+		iConsole* consoles[] = { &stdOutConsole::instance(), &vs_console };
 		consoleColor colors[] = { consoleColor(consoleColor::WHITE, consoleColor::iBLACK), consoleColor(consoleColor::stdColor) };
 		regLogLevel<asMoreDetail>()("asMoreDetail", consoles, colors);
 	}
 	{
-		IConsole* consoles[] = { &stdOutConsole::instance(), nullptr };
+		iConsole* consoles[] = { &stdOutConsole::instance(), nullptr };
 		consoleColor colors[] = { consoleColor(consoleColor::CYAN), consoleColor(consoleColor::stdColor) };
 		regLogLevel<asAboveNormal>()("asAboveNormal", consoles, colors);
 	}
@@ -393,7 +399,7 @@ void example_debug_log()
 	}
 	{
 		static vsConsole vs_console("vs-console *Category CUSTOM*");
-		IConsole* consoles[] = { &vs_console, nullptr };
+		iConsole* consoles[] = { &vs_console, nullptr };
 		regLogCategory<forTARO>()("forTARO", consoles);//開発者用のログはVSの出力ウインドウに
 		regLogCategory<forJIRO>()("forJIRO", consoles);//開発者用のログはVSの出力ウインドウに
 	}
@@ -444,8 +450,8 @@ void example_debug_log()
 		std::printf("2c:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
 		std::printf("2c:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 		mask.changeLevel(ofLog, asNormal, forEvery);
-		attr.add(logWithCriticalCPName);
-		attr.add(noticeWithCPName);
+		attr.add(logWithCategory);
+		attr.add(noticeWithLevel);
 		std::printf("3:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
 		std::printf("3:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 		{
@@ -463,10 +469,10 @@ void example_debug_log()
 				std::printf("6:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
 				std::printf("6:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 				mask.changeLevel(ofLog, asDetail, forEvery);
-				attr.remove(logWithCriticalCPName);
-				attr.remove(noticeWithCPName);
-				attr.add(logWithCPName);
-				attr.add(noticeWithCriticalCPName);
+				attr.remove(logWithCategory);
+				attr.remove(noticeWithLevel);
+				attr.add(logWithLevel);
+				attr.add(noticeWithCategory);
 				std::printf("7:mask: refType=%d, level=%d\n", mask.refType(), mask.level(ofLog, forAny));
 				std::printf("7:attr: refType=%d, attr=0x%08x\n", attr.refType(), attr.attrValue());
 				mask.changeRef(logMask::isLocal);
@@ -600,7 +606,7 @@ void example_debug_log()
 		//標準コンソールに戻す
 		con.replaceEachConsole(ofLog, &new_stdout_console, &stdOutConsole::instance());
 		con.replaceEachConsole(ofLog, &new_stderr_console, &stdErrConsole::instance());
-		con.replaceEachConsole(ofNotice, &stdConsoleOfNotice::instance());
+		con.replaceEachConsole(ofNotice, &stdNoticeConsole::instance());
 
 		//端末をクローズ
 		if(fp1) fclose(fp1);
@@ -627,7 +633,7 @@ void example_debug_log()
 		};
 		std::thread monitor_thread(monitor_thread_func);
 
-		//メッセージのキューイング
+		//メッセージのエンキュー
 		for (int mode = 0; mode < 4; ++mode)
 		{
 			if (mode == 1)
@@ -652,7 +658,7 @@ void example_debug_log()
 			}
 
 			logQueue queue;
-			logQueue::id_type reserved_id = queue.reserve(1);
+			logQueue::id_type reserved_id = queue.reserve(1);//エンキュー予約
 			for (int i = 1; i < 1000000000; i *= 3)
 			{
 				//エンキュー
@@ -661,8 +667,8 @@ void example_debug_log()
 					char* message = work_buff.alloc();
 					if (message)
 					{
-						std::size_t size = 0;
-						work_buff.spprintf(message, size, "message:%d", i);
+						std::size_t message_len = 0;
+						work_buff.spprintf(message, message_len, "message:%d", i);
 						logMask mask;
 						logAttr attr;
 						logLevel::level_type level = asNormal;
@@ -671,7 +677,7 @@ void example_debug_log()
 						print_info.setId(0);//IDは自動発番
 						print_info.setTime(nowElapsedTime());
 						print_info.setMessage(message);
-						print_info.setMessageSize(size + 1);
+						print_info.setMessageSize(message_len + 1);
 						print_info.setLevel(level);
 						print_info.setCategory(category);
 						print_info.setAttr(attr.attrValue());
@@ -680,8 +686,8 @@ void example_debug_log()
 							print_info.setConsole(purpose, mask.console(purpose, level, category));
 							print_info.setColor(purpose, mask.color(purpose, level, category));
 						}
-						//stdLogPrint()(print_info);//キューイングせずに直接表示する場合
-						const bool result = queue.enqueue(print_info);//キューイング
+						//stdLogPrint()(print_info);//エンキューせずに直接表示する場合
+						const bool result = queue.enqueue(print_info);//エンキュー
 						if (result)
 						{
 							//モニターに通知
@@ -715,8 +721,8 @@ void example_debug_log()
 				char* message = work_buff.alloc();
 				if (message)
 				{
-					std::size_t size = 0;
-					work_buff.spprintf(message, size, "reserved message");
+					std::size_t message_len = 0;
+					work_buff.spprintf(message, message_len, "reserved message");
 					logMask mask;
 					logAttr attr;
 					logPrintInfo print_info;
@@ -725,7 +731,7 @@ void example_debug_log()
 					print_info.setId(reserved_id);//予約したID
 					print_info.setTime(nowElapsedTime());
 					print_info.setMessage(message);
-					print_info.setMessageSize(size + 1);
+					print_info.setMessageSize(message_len + 1);
 					print_info.setLevel(level);
 					print_info.setCategory(category);
 					print_info.setAttr(attr.attrValue());
@@ -734,8 +740,8 @@ void example_debug_log()
 						print_info.setConsole(purpose, mask.console(purpose, level, category));
 						print_info.setColor(purpose, mask.color(purpose, level, category));
 					}
-					//stdLogPrint()(print_info);//キューイングせずに直接表示する場合
-					const bool result = queue.enqueue(print_info);//キューイング
+					//stdLogPrint()(print_info);//エンキューせずに直接表示する場合
+					const bool result = queue.enqueue(print_info);//エンキュー
 					if (result)
 					{
 						//モニターに通知
@@ -775,7 +781,7 @@ void example_debug_log()
 		std::printf("\n");
 		
 		char buff[256];
-		std::size_t size;
+		std::size_t message_len;
 		memConsole<128, sharedSpinLock> console;//任意のバッファサイズのメモリコンソールを作成
 		//auto& console = stdMemConsole::instance();//標準メモリコンソールを使用
 		console.printScreen();
@@ -790,8 +796,8 @@ void example_debug_log()
 		console.clear();
 		console.printScreen();
 		std::printf("\n");
-		size = console.copy(buff, sizeof(buff));
-		std::printf("%s(size=%d)\n", buff, size);
+		message_len = console.copy(buff, sizeof(buff));
+		std::printf("%s(len=%d)\n", buff, message_len);
 		for (int i = 0; i <= 32; ++i)
 		{
 			console.clear();
@@ -801,15 +807,15 @@ void example_debug_log()
 			buff[i] = '\0';
 			console.put(buff);
 			std::memset(buff, 0, sizeof(buff));
-			size = console.copy(buff, sizeof(buff));
+			message_len = console.copy(buff, sizeof(buff));
 			console.printScreen();
 			std::printf("\n");
-			std::printf("%s(size=%d)\n", buff, size);
+			std::printf("%s(len=%d)\n", buff, message_len);
 			console.put("#");
-			size = console.copy(buff, sizeof(buff));
+			message_len = console.copy(buff, sizeof(buff));
 			console.printScreen();
 			std::printf("\n");
-			std::printf("%s(size=%d)\n", buff, size);
+			std::printf("%s(len=%d)\n", buff, message_len);
 		}
 		console.clear();
 		for (int i = 0; i < 10; ++i)
@@ -823,10 +829,10 @@ void example_debug_log()
 			console.put("0");
 			console.put("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 			console.put("abcdefghijklmnopqrstuvwxyz");
-			size = console.copy(buff, sizeof(buff));
+			message_len = console.copy(buff, sizeof(buff));
 			console.printScreen();
 			std::printf("\n");
-			std::printf("%s(size=%d)\n", buff, size);
+			std::printf("%s(len=%d)\n", buff, message_len);
 		}
 	}
 	
@@ -974,8 +980,8 @@ void example_debug_log()
 						cp = std::move(cp2);
 						recent_cp = cp.find();
 						print_cp(recent_cp);
-						const std::size_t size = cp.debugInfo(message, sizeof(message));
-						printf("debugInfo(size=%d):\n%s", size, message);
+						const std::size_t message_len = cp.debugInfo(message, sizeof(message));
+						printf("debugInfo(len=%d):\n%s\n", message_len, message);
 					}
 					recent_cp = cp.find();
 					print_cp(recent_cp);
@@ -1003,8 +1009,105 @@ void example_debug_log()
 		print_cp(recent_cp);
 		recent_cp = cp.findCritical();
 		print_cp(recent_cp);
-		const std::size_t size = cp.debugInfo(message, sizeof(message));
-		printf("debugInfo(size=%d):\n%s", size, message);
+		const std::size_t message_len = cp.debugInfo(message, sizeof(message));
+		printf("debugInfo(len=%d):\n%s\n", message_len, message);
+	}
+	{
+		std::printf("\n");
+		std::printf("--------------------------------------------------------------------------------\n");
+		std::printf("[ Test for assert/break-point/watch-point ]\n");
+		std::printf("\n");
+
+		GASHA_ log log;
+		log.initialize();
+
+	#ifdef GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
+		//ログキューモニタースレッド実行
+		auto monitor_thread_func = []()
+		{
+			logQueueMonitor mon;
+			mon.monitor();
+		};
+		std::thread monitor_thread(monitor_thread_func);
+	#endif//GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
+		
+		logMask mask;
+		mask.changeLevel(ofLog, asNormal, forAny);
+		logAttr attr;
+		attr.reset();
+		attr.add(ofLog, logPurposeWithLevel | logPurposeWithCategory);
+
+		{
+		#define DISABLE_DEBUG_PAUSE//以降のテストでデバッグポーズを無効化する場合はこのマクロを有効化する
+			
+			//ダミーデバッグポーズ
+			breakPoint bp;
+		#ifdef DISABLE_DEBUG_PAUSE
+			dummyDebugPause dummy_pause;
+			bp.changeDebugPause(dummy_pause);
+		#endif//DISABLE_DEBUG_PAUSE
+
+			criticalCallPoint cp(forTARO, "CP1", GASHA_CP_ARGS);
+			{
+				criticalCallPoint cp(forJIRO, "CP2", GASHA_CP_ARGS);
+				{
+					GASHA_ASSERT(asNormal, forAny, 1 != 1, "ASSERT:%d", 123);
+					GASHA_BREAKPOINT(asNormal, forAny, "BreakPoint:%d", 123);
+					GASHA_WATCHPOINT(asNormal, forAny, 1 == 1, "WATCHPOINT:%d", 123);
+					
+					GASHA_ASSERT(asNormal, forCallPoint, 1 != 1, "ASSERT:%d", 123);
+					GASHA_BREAKPOINT(asNormal, forCallPoint, "BreakPoint:%d", 123);
+					GASHA_WATCHPOINT(asNormal, forCallPoint, 1 == 1, "WATCHPOINT:%d", 123);
+
+					GASHA_ASSERT(asDetail, forAny, 1 != 1, "ASSERT:%d", 123);
+					GASHA_BREAKPOINT(asDetail, forAny, "BreakPoint:%d", 123);
+					GASHA_WATCHPOINT(asDetail, forAny, 1 == 1, "WATCHPOINT:%d", 123);
+
+					GASHA_ASSERT(asDetail, forCriticalCallPoint, 1 != 1, "ASSERT:%d", 123);
+					GASHA_BREAKPOINT(asDetail, forCriticalCallPoint, "BreakPoint:%d", 123);
+					GASHA_WATCHPOINT(asDetail, forCriticalCallPoint, 1 == 1, "WATCHPOINT:%d", 123);
+				}
+			}
+
+		#ifndef DISABLE_DEBUG_PAUSE
+			//ダミーデバッグポーズ
+			bp.changeDebugPause(dummy_pause);
+		#endif//DISABLE_DEBUG_PAUSE
+
+			GASHA_ASSERT(asNormal, forAny, 1 != 1, "ASSERT:%d", 123);
+			GASHA_BREAKPOINT(asNormal, forAny, "BreakPoint:%d", 123);
+			GASHA_WATCHPOINT(asNormal, forAny, 1 == 1, "WATCHPOINT:%d", 123);
+
+		#ifndef DISABLE_DEBUG_PAUSE
+			//標準入力デバッグポーズ
+			stdinDebugPause stdin_pause;
+			bp.changeDebugPause(stdin_pause);
+		#endif//DISABLE_DEBUG_PAUSE
+
+			GASHA_ASSERT(asNormal, forAny, 1 != 1, "ASSERT:%d", 123);
+			GASHA_BREAKPOINT(asNormal, forAny, "BreakPoint:%d", 123);
+			GASHA_WATCHPOINT(asNormal, forAny, 1 == 1, "WATCHPOINT:%d", 123);
+
+		#ifndef DISABLE_DEBUG_PAUSE
+			//標準デバッグポーズに戻す
+			bp.changeStdDebugPause();
+		#endif//DISABLE_DEBUG_PAUSE
+			
+			GASHA_ASSERT(asNormal, forAny, 1 != 1, "ASSERT:%d", 123);
+			GASHA_BREAKPOINT(asNormal, forAny, "BreakPoint:%d", 123);
+			GASHA_WATCHPOINT(asNormal, forAny, 1 == 1, "WATCHPOINT:%d", 123);
+
+		#ifndef DISABLE_DEBUG_PAUSE
+			//標準デバッグポーズに戻す
+			bp.changeStdDebugPause();
+		#endif//DISABLE_DEBUG_PAUSE
+		}
+
+		log.abort();
+
+	#ifdef GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
+		monitor_thread.join();
+	#endif//GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
 	}
 }
 

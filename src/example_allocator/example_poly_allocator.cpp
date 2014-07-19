@@ -28,6 +28,9 @@
 #include <gasha/scoped_stack_allocator.h>//スコープスタックアロケータ
 #include <gasha/scoped_dual_stack_allocator.h>//双方向スコープスタックアロケータ
 
+#include <gasha/call_point.h>//コールポイント
+#include <gasha/log_category.h>//ログカテゴリ
+
 #include <cstdio>//std::printf()
 
 //【VC++】例外を無効化した状態で <vector> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
@@ -102,11 +105,11 @@ static void testBasic()
 		auto adapter = scoped.adapter();
 		polyAllocator poly_allocator(adapter);
 		char message[1024];
-		scoped.debugInfo(message, sizeof(message)); std::printf(message);
+		scoped.debugInfo(message, sizeof(message)); std::printf("%s\n", message);
 		data_t* p101 = new data_t;
-		scoped.debugInfo(message, sizeof(message)); std::printf(message);
+		scoped.debugInfo(message, sizeof(message)); std::printf("%s\n", message);
 		delete p101;
-		scoped.debugInfo(message, sizeof(message)); std::printf(message);
+		scoped.debugInfo(message, sizeof(message)); std::printf("%s\n", message);
 	}
 	std::printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
 }
@@ -134,10 +137,10 @@ static void testSTL()
 		EXPR_PLAIN(array.push_back(data););
 		EXPR_PLAIN(array.push_back(data););
 
-		EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););//STL内のnewがローカルのスタックアロケータを使用していることを確認
+		EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf("%s\n", message););//STL内のnewがローカルのスタックアロケータを使用していることを確認
 		std::printf("***** END BLOCK *****\n");
 	}
-	EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf(message););//スマートスタックアロケータにより、アロケータのメモリが空いたことを確認
+	EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf("%s\n", message););//スマートスタックアロケータにより、アロケータのメモリが空いたことを確認
 }
 
 //----------------------------------------
@@ -150,27 +153,27 @@ static void testAdvanced()
 	std::printf("\n");
 
 	//デバッグ用 operator new 時コールバック
-	auto at_new = [](const gasha::IAllocatorAdapter& adapter, const void* p, const std::size_t size, const std::size_t align, const gasha::newMethod_type method, const gasha::debugAllocationInfo* info)
+	auto at_new = [](const iAllocatorAdapter& adapter, const void* p, const std::size_t size, const std::size_t align, const newMethod_type method, const debugAllocationInfo* info)
 	{
 	#ifdef GASHA_DEBUG_FEATURE_IS_ENABLED
-		std::printf("[CALLBACK] Operator new%s(%d,%d)p=%p, allocator=\"%s:%s\"\n", method == gasha::methodOfNewArrays ? "[]" : "", size, align, p, adapter.name(), adapter.mode());
+		std::printf("[CALLBACK] Operator new%s(%d,%d)p=%p, allocator=\"%s:%s\"\n", method == methodOfNewArrays ? "[]" : "", size, align, p, adapter.name(), adapter.mode());
 		if (info)
-			std::printf(" %s[%d], file=\"%s\", func=\"%s\", time=%lf\n", info->m_typeName, info->m_arrayNum, info->m_fileName, info->m_funcName, info->m_time);
+			std::printf(" %s[%d], file=\"%s\", func=\"%s\", time=%lf, cp=\"%s\", criticalCp=\"%s\"\n", info->m_typeName, info->m_arrayNum, info->m_fileName, info->m_funcName, info->m_time, info->m_cpName, info->m_criticalCpName);
 	#endif//GASHA_DEBUG_FEATURE_IS_ENABLED
 	};
 	
 	//デバッグ用 operator delete 時コールバック
-	auto at_delete = [](const gasha::IAllocatorAdapter& adapter, const void* p, const gasha::deleteMethod_type method, const gasha::debugAllocationInfo* info)
+	auto at_delete = [](const iAllocatorAdapter& adapter, const void* p, const deleteMethod_type method, const debugAllocationInfo* info)
 	{
 	#ifdef GASHA_DEBUG_FEATURE_IS_ENABLED
-		std::printf("[CALLBACK] Operator delete%s(%p), allocator=\"%s:%s\"\n", method == gasha::methodOfDeleteArrays ? "[]" : "", p, adapter.name(), adapter.mode());
+		std::printf("[CALLBACK] Operator delete%s(%p), allocator=\"%s:%s\"\n", method == methodOfDeleteArrays ? "[]" : "", p, adapter.name(), adapter.mode());
 		if (info)
-			std::printf(" %s%s, file=\"%s\", func=\"%s\", time=%lf\n", info->m_typeName, method == gasha::methodOfDeleteArrays ? "[]" : "", info->m_fileName, info->m_funcName, info->m_time);
+			std::printf(" %s%s, file=\"%s\", func=\"%s\", time=%lf, cp=\"%s\", criticalCp=\"%s\"\n", info->m_typeName, method == methodOfDeleteArrays ? "[]" : "", info->m_fileName, info->m_funcName, info->m_time, info->m_cpName, info->m_criticalCpName);
 	#endif//GASHA_DEBUG_FEATURE_IS_ENABLED
 	};
 
 	//デバッグ用 多態アロケータ変更時コールバック
-	auto at_change_allocator = [](const gasha::IAllocatorAdapter& adapter, const gasha::IAllocatorAdapter& next_adapter)
+	auto at_change_allocator = [](const iAllocatorAdapter& adapter, const iAllocatorAdapter& next_adapter)
 	{
 	#ifdef GASHA_DEBUG_FEATURE_IS_ENABLED
 		std::printf("[CALLBACK] Change allocator: \"%s:%s\" -> \"%s:%s\"\n", adapter.name(), adapter.mode(), next_adapter.name(), next_adapter.mode());
@@ -178,7 +181,7 @@ static void testAdvanced()
 	};
 
 	//デバッグ用 多態アロケータ復帰時コールバック
-	auto at_return_allocator = [](const gasha::IAllocatorAdapter& adapter, const gasha::IAllocatorAdapter& prev_adapter)
+	auto at_return_allocator = [](const iAllocatorAdapter& adapter, const iAllocatorAdapter& prev_adapter)
 	{
 	#ifdef GASHA_DEBUG_FEATURE_IS_ENABLED
 		std::printf("[CALLBACK] Return allocator: \"%s:%s\" <- \"%s:%s\"\n", adapter.name(), adapter.mode(), prev_adapter.name(), prev_adapter.mode());
@@ -198,20 +201,25 @@ static void testAdvanced()
 	EXPR_PLAIN(poly.setDebugObserver(observer););//多態アロケータにオブザーバー（コールバックのセット）を追加
 
 	//GASHA_NEW でメモリ確保
+	callPoint cp1(forAny, "Test for GASHA_NEW", GASHA_CP_ARGS);
 	EXPR_PLAIN(data_t* p1 = GASHA_NEW(data_t););
-	
-	//GASHA_NEW で配列メモリ確保
-	EXPR_PLAIN(data_t* p2 = GASHA_NEW(data_t[2]););
-
-	//GASHA_NEW_ARRAY で配列メモリ確保
-	EXPR_PLAIN(data_t* p3 = GASHA_NEW_ARRAY(data_t, 3););
-
+	{
+		//GASHA_NEW で配列メモリ確保
+		criticalCallPoint cp2(forAny, "Test for GASHA_NEW[]", GASHA_CP_ARGS);
+		EXPR_PLAIN(data_t* p2 = GASHA_NEW(data_t[2]););
+		{
+			//GASHA_NEW_ARRAY で配列メモリ確保
+			callPoint cp3(forAny, "Test for GASHA_NEW_ARRAY", GASHA_CP_ARGS);
+			EXPR_PLAIN(data_t* p3 = GASHA_NEW_ARRAY(data_t, 3););
+			
+			//GASHA_DELETE_ARRAY でメモリ破棄
+			EXPR_PLAIN(GASHA_DELETE_ARRAY(p3););
+		}
+		//GASHA_DELETE_ARRAY でメモリ破棄
+		EXPR_PLAIN(GASHA_DELETE_ARRAY(p2););
+	}
 	//GASHA_DELETE でメモリ破棄
 	EXPR_PLAIN(GASHA_DELETE(p1););
-
-	//GASHA_DELETE_ARRAY でメモリ破棄
-	EXPR_PLAIN(GASHA_DELETE_ARRAY(p2););
-	EXPR_PLAIN(GASHA_DELETE_ARRAY(p3););
 
 	//STLのstd::vectorを使用
 	EXPR_PLAIN(std::vector<data_t> array;);
