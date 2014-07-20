@@ -31,16 +31,16 @@ void example_thread_id()
 	std::printf("----- Test for threadId -----\n");
 
 	threadId main_thread_id("Main Thread");
-	std::printf("MainThread: ID=0x%08x, Name=\"%s\"\n", main_thread_id.id(), main_thread_id.name());
+	std::printf("MainThread: ID=0x%08x, Name=\"%s\"(CRC=0x%08x)\n", main_thread_id.id(), main_thread_id.name(), main_thread_id.nameCrc());
 
 	auto sub_thread_func = [](const char* name, threadId src_thread_id)
 	{
 		threadId this_thread_id(name);
 		threadId copied_thread_id;
 		copied_thread_id = src_thread_id;
-		std::printf("This thread: ID=0x%08x, name=\"%s\"\n", this_thread_id.id(), this_thread_id.name());
-		std::printf("Source thread: ID=0x%08x, name=\"%s\"\n", src_thread_id.id(), src_thread_id.name());
-		std::printf("Copied thread id: ID=0x%08x, name=\"%s\"\n", copied_thread_id.id(), copied_thread_id.name());
+		std::printf("This thread: ID=0x%08x, name=\"%s\"(CRC=0x%08x)\n", this_thread_id.id(), this_thread_id.name(), this_thread_id.nameCrc());
+		std::printf("Source thread: ID=0x%08x, name=\"%s\"(CRC=0x%08x)\n", src_thread_id.id(), src_thread_id.name(), src_thread_id.nameCrc());
+		std::printf("Copied thread id: ID=0x%08x, name=\"%s\"(CRC=0x%08x)\n", copied_thread_id.id(), copied_thread_id.name(), copied_thread_id.nameCrc());
 		std::printf("src_thread_id == this_thread_id ... %s\n", toStr(src_thread_id == this_thread_id));
 		std::printf("src_thread_id != this_thread_id ... %s\n", toStr(src_thread_id != this_thread_id));
 		std::printf("src_thread_id == copied_thread_id ... %s\n", toStr(src_thread_id == copied_thread_id));

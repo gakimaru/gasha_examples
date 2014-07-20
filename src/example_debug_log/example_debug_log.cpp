@@ -28,14 +28,16 @@
 #include <gasha/log_queue.h>//ログキュー
 #include <gasha/std_log_print.h>//標準ログ出力
 #include <gasha/log_queue_monitor.h>//ログキューモニター
-#include <gasha/log.h>//ログ操作
+#include <gasha/debug_log.h>//ログ操作
 #include <gasha/print.h>//ログ出力操作 ※これだけインクルードしていれば print() が使用できる
 #include <gasha/call_point.h>//コールポイント
-#include <gasha/assert.h>//アサート
+#include <gasha/assert.h>//アサーション
 #include <gasha/i_debug_pause.h>//デバッグポーズインターフェス
 #include <gasha/std_debug_pause.h>//標準デバッグポーズ
 #include <gasha/stdin_debug_pause.h>//標準入力デバッグポーズ
 #include <gasha/dummy_debug_pause.h>//ダミーデバッグポーズ
+#include <gasha/simple_assert.h>//シンプルアサーション
+#include <gasha/profiler.h>//プロファイラ
 
 #include <gasha/iterator.h>//イテレータ操作
 #include <gasha/type_traits.h>//型特性ユーティリティ：toStr()
@@ -243,6 +245,9 @@ void printAllLogMask(const logLevel::level_type level)
 //デバッグログテスト
 void example_debug_log()
 {
+	//メインスレッドに名前を付ける
+	threadId thread_id("MainThread");
+
 	//コンソールカラー
 	consoleColor color(consoleColor::iYELLOW, consoleColor::RED, consoleColor::UNDERLINE);
 
@@ -803,7 +808,7 @@ void example_debug_log()
 			console.clear();
 			const char* str = "1234567890123456789012345678901234567890";
 			char buff[32 + 1];
-			GASHA_ strncpy_fast(buff, str, i);
+			strncpy_fast(buff, str, i);
 			buff[i] = '\0';
 			console.put(buff);
 			std::memset(buff, 0, sizeof(buff));
@@ -843,7 +848,7 @@ void example_debug_log()
 		std::printf("[ Test for print log ]\n");
 		std::printf("\n");
 		
-		GASHA_ log log;
+		debugLog log;
 		log.initialize();
 
 	#ifdef GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
@@ -956,7 +961,7 @@ void example_debug_log()
 		std::printf("[ Test for call-point ]\n");
 		std::printf("\n");
 
-		callPoint cp(forTARO, "test", GASHA_CP_ARGS);
+		callPoint cp(forTARO, "test", callPoint::useAutoProfiling, GASHA_CP_ARGS);
 		{
 			callPoint cp;
 			const callPoint* recent_cp = cp.find();
@@ -1018,15 +1023,21 @@ void example_debug_log()
 		std::printf("[ Test for assert/break-point/watch-point ]\n");
 		std::printf("\n");
 
-		GASHA_ log log;
+		debugLog log;
 		log.initialize();
 
 	#ifdef GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
 		//ログキューモニタースレッド実行
 		auto monitor_thread_func = []()
 		{
-			logQueueMonitor mon;
-			mon.monitor();
+			threadId thread_id("monitor");
+			{
+				callPoint cp(forAny, "log monitor", callPoint::useAutoProfiling, GASHA_CP_ARGS);
+				logQueueMonitor mon;
+				mon.monitor();
+			}
+			profiler prof;
+			prof.sumup(profiler::withUpdatePeriod);
 		};
 		std::thread monitor_thread(monitor_thread_func);
 	#endif//GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
@@ -1042,29 +1053,39 @@ void example_debug_log()
 			
 			//ダミーデバッグポーズ
 			breakPoint bp;
-		#ifdef DISABLE_DEBUG_PAUSE
 			dummyDebugPause dummy_pause;
+		#ifdef DISABLE_DEBUG_PAUSE
 			bp.changeDebugPause(dummy_pause);
+		#endif//DISABLE_DEBUG_PAUSE
+			
+		#ifndef DISABLE_DEBUG_PAUSE
+			GASHA_SIMPLE_ASSERT(1 == 1, "SIMPLE ASSERT:%d", 123);
+			GASHA_SIMPLE_ASSERT(1 != 1, "SIMPLE ASSERT:%d", 123);
+			GASHA_SIMPLE_BREAKPOINT("SIMPLE BREAKPOINT:%d", 123);
+			GASHA_SIMPLE_WATCHPOINT(1 != 1, "SIMPLE WATCHPOINT:%d", 123);
+			GASHA_SIMPLE_WATCHPOINT(1 == 1, "SIMPLE WATCHPOINT:%d", 123);
 		#endif//DISABLE_DEBUG_PAUSE
 
 			criticalCallPoint cp(forTARO, "CP1", GASHA_CP_ARGS);
 			{
 				criticalCallPoint cp(forJIRO, "CP2", GASHA_CP_ARGS);
 				{
+					GASHA_ASSERT(asNormal, forAny, 1 == 1, "ASSERT:%d", 123);
 					GASHA_ASSERT(asNormal, forAny, 1 != 1, "ASSERT:%d", 123);
-					GASHA_BREAKPOINT(asNormal, forAny, "BreakPoint:%d", 123);
+					GASHA_BREAKPOINT(asNormal, forAny, "BREAKPOINT:%d", 123);
+					GASHA_WATCHPOINT(asNormal, forAny, 1 != 1, "WATCHPOINT:%d", 123);
 					GASHA_WATCHPOINT(asNormal, forAny, 1 == 1, "WATCHPOINT:%d", 123);
 					
 					GASHA_ASSERT(asNormal, forCallPoint, 1 != 1, "ASSERT:%d", 123);
-					GASHA_BREAKPOINT(asNormal, forCallPoint, "BreakPoint:%d", 123);
+					GASHA_BREAKPOINT(asNormal, forCallPoint, "BREAKPOINT:%d", 123);
 					GASHA_WATCHPOINT(asNormal, forCallPoint, 1 == 1, "WATCHPOINT:%d", 123);
 
 					GASHA_ASSERT(asDetail, forAny, 1 != 1, "ASSERT:%d", 123);
-					GASHA_BREAKPOINT(asDetail, forAny, "BreakPoint:%d", 123);
+					GASHA_BREAKPOINT(asDetail, forAny, "BREAKPOINT:%d", 123);
 					GASHA_WATCHPOINT(asDetail, forAny, 1 == 1, "WATCHPOINT:%d", 123);
 
 					GASHA_ASSERT(asDetail, forCriticalCallPoint, 1 != 1, "ASSERT:%d", 123);
-					GASHA_BREAKPOINT(asDetail, forCriticalCallPoint, "BreakPoint:%d", 123);
+					GASHA_BREAKPOINT(asDetail, forCriticalCallPoint, "BREAKPOINT:%d", 123);
 					GASHA_WATCHPOINT(asDetail, forCriticalCallPoint, 1 == 1, "WATCHPOINT:%d", 123);
 				}
 			}
@@ -1075,7 +1096,7 @@ void example_debug_log()
 		#endif//DISABLE_DEBUG_PAUSE
 
 			GASHA_ASSERT(asNormal, forAny, 1 != 1, "ASSERT:%d", 123);
-			GASHA_BREAKPOINT(asNormal, forAny, "BreakPoint:%d", 123);
+			GASHA_BREAKPOINT(asNormal, forAny, "BREAKPOINT:%d", 123);
 			GASHA_WATCHPOINT(asNormal, forAny, 1 == 1, "WATCHPOINT:%d", 123);
 
 		#ifndef DISABLE_DEBUG_PAUSE
@@ -1085,7 +1106,7 @@ void example_debug_log()
 		#endif//DISABLE_DEBUG_PAUSE
 
 			GASHA_ASSERT(asNormal, forAny, 1 != 1, "ASSERT:%d", 123);
-			GASHA_BREAKPOINT(asNormal, forAny, "BreakPoint:%d", 123);
+			GASHA_BREAKPOINT(asNormal, forAny, "BREAKPOINT:%d", 123);
 			GASHA_WATCHPOINT(asNormal, forAny, 1 == 1, "WATCHPOINT:%d", 123);
 
 		#ifndef DISABLE_DEBUG_PAUSE
@@ -1094,7 +1115,7 @@ void example_debug_log()
 		#endif//DISABLE_DEBUG_PAUSE
 			
 			GASHA_ASSERT(asNormal, forAny, 1 != 1, "ASSERT:%d", 123);
-			GASHA_BREAKPOINT(asNormal, forAny, "BreakPoint:%d", 123);
+			GASHA_BREAKPOINT(asNormal, forAny, "BREAKPOINT:%d", 123);
 			GASHA_WATCHPOINT(asNormal, forAny, 1 == 1, "WATCHPOINT:%d", 123);
 
 		#ifndef DISABLE_DEBUG_PAUSE
@@ -1108,6 +1129,47 @@ void example_debug_log()
 	#ifdef GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
 		monitor_thread.join();
 	#endif//GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
+	}
+
+	{
+		profiler prof;
+		//集計	
+		prof.sumup(profiler::isNormal);
+		//カウント追加
+		for (int i = 0; i < 3; ++i)
+		{
+			callPoint cp(forAny, "test", callPoint::useAutoProfiling, GASHA_CP_ARGS);
+			std::this_thread::sleep_for(std::chrono::milliseconds(1));
+		}
+		//再度集計
+		prof.sumup(profiler::withUpdatePeriod);
+		//結果取得
+		printf("\n");
+		printf("--- Profile ---\n");
+		profiler::threadInfo thread_info_array[10];
+		const std::size_t num = prof.getThreadInfo(thread_info_array);
+		for (std::size_t i = 0; i < num; ++i)
+		{
+			const auto& thread_info = thread_info_array[i];
+			printf("----------\n");
+			printf("thread: \"%s\"\n", thread_info.threadName());
+			profiler::profileInfo prof_info_array[10];
+			const std::size_t num = prof.getProfileInfo(thread_info, prof_info_array);
+			for (std::size_t i = 0; i < num; ++i)
+			{
+				const auto& prof_info = prof_info_array[i];
+				printf("  -----");
+				printf("  Process:\"%s\"\n", prof_info.name());
+				const auto& time = prof_info.time();
+				printf("    NOW:   count=%d, time=%.9lf, max=%.9lf, min=%.9lf, avg=%.9lf\n", time.count(), time.time(), time.maxTime(), time.minTime(), time.avgTime());
+				const auto& total_time = prof_info.totalTime();
+				printf("    TOTAL: count=%d, time=%.9lf, max=%.9lf, min=%.9lf, avg=%.9lf, sum-cnt=%d, max-cnt=%d, min-cnt=%d, avg-cnt=%.2f\n", total_time.count(), total_time.time(), total_time.maxTime(), total_time.minTime(), total_time.avgTime(), total_time.summarizedCount(), total_time.maxCount(), total_time.minCount(), total_time.avgCount());
+				const auto& period_time = prof_info.periodicTime();
+				printf("    PERIOD:count=%d, time=%.9lf, max=%.9lf, min=%.9lf, avg=%.9lf, sum-cnt=%d, max-cnt=%d, min-cnt=%d, avg-cnt=%.2f\n", period_time.count(), period_time.time(), period_time.maxTime(), period_time.minTime(), period_time.avgTime(), period_time.summarizedCount(), period_time.maxCount(), period_time.minCount(), period_time.avgCount());
+			}
+		}
+		printf("--------------\n");
+		printf("\n");
 	}
 }
 
