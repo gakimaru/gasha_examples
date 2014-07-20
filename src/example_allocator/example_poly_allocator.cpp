@@ -81,7 +81,7 @@ static void testBasic()
 		
 		EXPR_PLAIN(data_t* p201 = new data_t;);//new演算子で領域確保
 		EXPR_PLAIN(data_t* p202 = new data_t[2];);//new[]演算子で領域確保
-		EXPR_PLAIN(data_t* p203 = new(std::nothrow) data_t[3];);
+		EXPR_PLAIN(data_t* p203 = new(std::nothrow) data_t[3];);//ブロックサイズオーバーでメモリ確保失敗
 		std::printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
 		
 		EXPR_PLAIN(delete p201;);//delete演算子で領域解放

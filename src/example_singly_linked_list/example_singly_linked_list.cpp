@@ -18,7 +18,7 @@
 #include <utility>//C++11 std::move, std::forward
 #include <cstring>//std::memcpy()
 #include <cstdio>//std::printf()
-#include <cassert>//assert()
+#include <gasha/simple_assert.h>//シンプルアサーション
 
 //【VC++】例外を無効化した状態で <algorithm> <forward_list> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -1025,7 +1025,7 @@ void example_singly_linked_list()
 			std::printf("[reverse sort]\n");
 			auto reverse_sort = [](const data_t& lhs, const data_t& rhs){return lhs.m_key > rhs.m_key; };
 			con->sort(reverse_sort);
-			assert(con->isOrdered(reverse_sort));
+			GASHA_SIMPLE_ASSERT(con->isOrdered(reverse_sort), "con is failed to sort.");
 			prev_time = printElapsedTime(prev_time, true);
 		#endif//ENABLE_SORT_TEST
 
@@ -1054,7 +1054,7 @@ void example_singly_linked_list()
 			std::printf("\n");
 			std::printf("[sort]\n");
 			con->sort();
-			assert(con->isOrdered());
+			GASHA_SIMPLE_ASSERT(con->isOrdered(), "con is failed to sort.");
 			prev_time = printElapsedTime(prev_time, true);
 		#endif//ENABLE_SORT_TEST
 
@@ -1090,14 +1090,14 @@ void example_singly_linked_list()
 			std::printf("\n");
 			std::printf("[reverse stable sort]\n");
 			con->stableSort(reverse_sort);
-			assert(con->isOrdered(reverse_sort));
+			GASHA_SIMPLE_ASSERT(con->isOrdered(reverse_sort), "con is failed to sort.");
 			prev_time = printElapsedTime(prev_time, true);
 
 			//正順安定ソート
 			std::printf("\n");
 			std::printf("[stable sort]\n");
 			con->stableSort();
-			assert(con->isOrdered());
+			GASHA_SIMPLE_ASSERT(con->isOrdered(), "con is failed to sort.");
 			prev_time = printElapsedTime(prev_time, true);
 		#endif//GASHA_SINGLY_LINKED_LIST_ENABLE_STABLE_SORT
 		#endif//ENABLE_STABLE_SORT_TEST

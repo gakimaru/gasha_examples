@@ -20,7 +20,6 @@
 #include <utility>//C++11 std::forward
 #include <cstring>//std::memcpy()
 #include <cstdio>//std::printf()
-#include <cassert>//assert()
 
 //【VC++】例外を無効化した状態で <unordered_map> <algoritm> をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。

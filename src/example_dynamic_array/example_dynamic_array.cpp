@@ -14,6 +14,7 @@
 
 #include <gasha/iterator.h>//イテレータ操作
 #include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
+#include <gasha/simple_assert.h>//シンプルアサーション
 
 #include <utility>//C++11 std::move, std::forward
 #include <condition_variable>//C++11 std::condition_variable用
@@ -21,7 +22,6 @@
 #include <chrono>//C++11 std::chrono用
 #include <cstring>//std::memcpy()
 #include <cstdio>//std::printf()
-#include <cassert>//assert()
 
 //【VC++】例外を無効化した状態で <thread> <mutex> <algorithm> <vector> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
@@ -1147,7 +1147,7 @@ void example_dynamic_array()
 			std::printf("[reverse sort]\n");
 			auto reverse_sort = [](const data_t& lhs, const data_t& rhs){return lhs.m_key > rhs.m_key; };
 			con->sort(reverse_sort);
-			assert(con->isOrdered(reverse_sort));
+			GASHA_SIMPLE_ASSERT(con->isOrdered(reverse_sort), "con is failed to sort.");
 			prev_time = printElapsedTime(prev_time, true);
 
 			//イテレータ(2)
@@ -1174,7 +1174,7 @@ void example_dynamic_array()
 			std::printf("\n");
 			std::printf("[sort]\n");
 			con->sort();
-			assert(con->isOrdered());
+			GASHA_SIMPLE_ASSERT(con->isOrdered(), "con is failed to sort.");
 			prev_time = printElapsedTime(prev_time, true);
 
 			//リバースイテレータ
@@ -1202,14 +1202,14 @@ void example_dynamic_array()
 			std::printf("\n");
 			std::printf("[reverse stable sort]\n");
 			con->stableSort(reverse_sort);
-			assert(con->isOrdered(reverse_sort));
+			GASHA_SIMPLE_ASSERT(con->isOrdered(reverse_sort), "con is failed to sort.");
 			prev_time = printElapsedTime(prev_time, true);
 
 			//正順安定ソート
 			std::printf("\n");
 			std::printf("[stable sort]\n");
 			con->stableSort();
-			assert(con->isOrdered());
+			GASHA_SIMPLE_ASSERT(con->isOrdered(), "con is failed to sort.");
 			prev_time = printElapsedTime(prev_time, true);
 		#endif
 

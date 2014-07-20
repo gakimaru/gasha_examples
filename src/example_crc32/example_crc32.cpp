@@ -12,9 +12,9 @@
 
 #include <gasha/crc32.h>//CRC32計算
 #include <gasha/chrono.h>//時間処理ユーティリティ：nowTime(), calcElapsedTime()
+#include <gasha/simple_assert.h>//シンプルアサーション
 
 #include <cstdio>//std::printf()
-#include <cassert>//assert()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
@@ -41,15 +41,15 @@ void example_crc32()
 		const crc32_t crc = calcStaticCRC32("1234567890");//constexprでコンパイル時に計算 ※文字列リテラルも消滅 ※const変数に代入しないとコンパイル時に計算されないので注意
 	#ifdef GASHA_HAS_CONSTEXPR//constexpr使用可能時はstatic_assertで結果をコンパイル時にチェック
 	#ifndef GASHA_CRC32_IS_CRC32C//標準CRC-32(IEEE 802.3)
-		static_assert(crc == 0x261daee5u, "invalid crc");
+		static_assert(crc == 0x261daee5u, "CRC32-result is not matched with expectation.");
 	#else//GASHA_CRC32_IS_CRC32C//CRC-32C
-		static_assert(crc == 0xf3dbd4feu, "invalid crc");
+		static_assert(crc == 0xf3dbd4feu, "CRC32-result is not matched with expectation.");
 	#endif//GASHA_CRC32_IS_CRC32C
 	#else//GASHA_HAS_CONSTEXPR
 	#ifndef GASHA_CRC32_IS_CRC32C//標準CRC-32(IEEE 802.3)
-			assert(crc == 0x261daee5u);
+			GASHA_SIMPLE_ASSERT(crc == 0x261daee5u, "CRC32-result is not matched with expectation.");
 	#else//GASHA_CRC32_IS_CRC32C//CRC-32C
-			assert(crc == 0xf3dbd4feu);
+			GASHA_SIMPLE_ASSERT(crc == 0xf3dbd4feu, "CRC32-result is not matched with expectation.");
 	#endif//GASHA_CRC32_IS_CRC32C
 	#endif//GASHA_HAS_CONSTEXPR
 		std::printf("Result of calculation CRC of \"1234567890\" by constexpr = 0x%08x\n", crc);
@@ -63,9 +63,9 @@ void example_crc32()
 		std::printf("\n");
 		const crc32_t crc = "abcdefghij"_crc32;//ユーザー定義リテラルでコンパイル時に計算 ※文字列リテラルも消滅 ※const変数に代入しないとコンパイル時に計算されないので注意
 	#ifndef GASHA_CRC32_IS_CRC32C//標準CRC-32(IEEE 802.3)
-		static_assert(crc == 0x3981703au, "invalid crc");
+		static_assert(crc == 0x3981703au, "CRC32-result is not matched with expectation.");
 	#else//GASHA_CRC32_IS_CRC32C//CRC-32C
-		static_assert(crc == 0xe6599437u, "invalid crc");
+		static_assert(crc == 0xe6599437u, "CRC32-result is not matched with expectation.");
 	#endif//GASHA_CRC32_IS_CRC32C
 		std::printf("Result of calculation CRC of \"abcdefghij\" by user-defined-literal = 0x%08x\n", crc);
 	}
@@ -76,9 +76,9 @@ void example_crc32()
 		std::printf("\n");
 		const crc32_t crc = calcCRC32("ABCDEFGHIJ");
 	#ifndef GASHA_CRC32_IS_CRC32C//標準CRC-32(IEEE 802.3)
-		assert(crc == 0x321e6d05u);
+		GASHA_SIMPLE_ASSERT(crc == 0x321e6d05u, "CRC32-result is not matched with expectation.");
 	#else//GASHA_CRC32_IS_CRC32C//CRC-32C
-		assert(crc == 0xd599aefdu);
+		GASHA_SIMPLE_ASSERT(crc == 0xd599aefdu, "CRC32-result is not matched with expectation.");
 	#endif//GASHA_CRC32_IS_CRC32C
 		std::printf("Result of calculation CRC of \"ABCDEFGHIJ\" by runtime-function = 0x%08x\n", crc);
 	}

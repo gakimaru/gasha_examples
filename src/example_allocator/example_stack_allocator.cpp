@@ -51,7 +51,7 @@ static void testStack(ALLOCATOR& stack)
 	EXPR(p13, void* p13 = stack.alloc(1000););//アロケート失敗（サイズオーバー）
 	EXPR(p14, void* p14 = stack.alloc(10););
 	EXPR_PLAIN(stack.debugInfo(message, sizeof(message)); std::printf("%s\n", message););
-	EXPR_WITH_INFO(stack.clear(););
+	//EXPR_WITH_INFO(stack.clear(););
 	EXPR(p1, stack.free(p1););
 	EXPR(p2, stack.free(p2););
 	EXPR(p3, stack.free(p3););

@@ -19,7 +19,6 @@
 #include <utility>//C++11 std::forward
 #include <cstring>//std::memcpy()
 #include <cstdio>//std::printf()
-#include <cassert>//assert()
 
 //【VC++】例外を無効化した状態で <random> <algorithm> <queue> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
 //  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。

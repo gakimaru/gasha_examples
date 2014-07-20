@@ -286,7 +286,7 @@ static void testAllSingleThread()
 
 	//ロックなしプールアロケータ＋多態アロケータのテスト
 	{
-		poolAllocator<1024> pool(buff);
+		poolAllocator<1024> pool(buff, sizeof(buff), 32);
 		auto adapter = pool.adapter();
 		polyAllocator poly_allocator(adapter);
 		auto alloc = [](const std::size_t size) -> void* { return new char[size]; };
