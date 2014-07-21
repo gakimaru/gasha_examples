@@ -44,14 +44,14 @@ void operator delete[](void* p, const forTest_t&, std::size_t&) throw()
 
 //----------------------------------------
 //new/delete演算子の挙動確認用テスト
-void example_new_delete_test()
+void examination_new_delete()
 {
 	std::printf("\n");
 	std::printf("================================================================================\n");
 	
 	std::printf("\n");
 	std::printf("--------------------------------------------------------------------------------\n");
-	std::printf("[ Test for new/delete operators]\n");
+	std::printf("[ Examination for new/delete operators ]\n");
 	std::printf("--------------------------------------------------------------------------------\n");
 
 	std::size_t real_size;

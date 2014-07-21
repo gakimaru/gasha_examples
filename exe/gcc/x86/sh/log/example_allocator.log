@@ -2,6 +2,50 @@
 ================================================================================
 
 --------------------------------------------------------------------------------
+[ Basic test for allocators ]
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Stack allocator
+data_t::data_t(123): m_val=123
+data_t::data_t(456): m_val=456
+data_t::data_t(456): m_val=456
+data_t::data_t(456): m_val=456
+data_t::~data_t(): m_val=123
+data_t::~data_t(): m_val=456
+data_t::~data_t(): m_val=456
+data_t::~data_t(): m_val=456
+data=0x28a7e0, data->m_val=123, array=0x28a7f0, array[0].m_val=456, stack.maxSize()=1024, stack.size()=96, stack.remain()=928
+
+--------------------------------------------------------------------------------
+Smart stack allocator
+p1=0x28a7c0, p2=0x28a7d4, p3=0x28a7e8, stack.maxSize()=1024, stack.size()=0, stack.remain()=1024
+
+--------------------------------------------------------------------------------
+Poly allocator
+data_t::data_t(123): m_val=123
+data_t::data_t(): m_val=0
+data_t::data_t(): m_val=0
+data_t::data_t(): m_val=0
+data_t::~data_t(): m_val=123
+data_t::~data_t(): m_val=0
+data_t::~data_t(): m_val=0
+data_t::~data_t(): m_val=0
+data_t::data_t(123): m_val=123
+data_t::data_t(): m_val=0
+data_t::data_t(): m_val=0
+data_t::data_t(): m_val=0
+data_t::~data_t(): m_val=123
+data_t::~data_t(): m_val=0
+data_t::~data_t(): m_val=0
+data_t::~data_t(): m_val=0
+data=0x28a7d4, data->m_val=123, array=0x28a7f4, array[0].m_val=0, data2=0x28a830, data2->m_val=123, array2=0x28a850, array2[0].m_val=0, stack.maxSize()=1024, stack.size()=175, stack.remain()=849
+
+================================================================================
+
+================================================================================
+
+--------------------------------------------------------------------------------
 [ Test for stackAllocator ]
 --------------------------------------------------------------------------------
 
@@ -8138,69 +8182,69 @@ stdAllocator<lock_type> std_allocator;
 
 std_allocator.debugInfo(message, sizeof(message)); std::printf("%s\n", message);
 ----- Debug-info for stdAllocator -----
-maxSize=196608, size=131768, remain=64840
+maxSize=196608, size=132120, remain=64488
 ---------------------------------------
-> void* p1 = std_allocator.alloc(1);	p1=0x800202c0, size=131784, remain=64824
-> void* p2 = std_allocator.alloc(1, 1);	p2=0x800202d0, size=131800, remain=64808
-> void* p3 = std_allocator.alloc(1, 1);	p3=0x800202e0, size=131816, remain=64792
-> void* p4 = std_allocator.alloc(1);	p4=0x800202f0, size=131832, remain=64776
-> void* p5 = std_allocator.alloc(10, 32);	p5=0x80020300, size=131848, remain=64760
-> int* p6 = std_allocator.template newObj<int>();	p6=0x80020310, size=131864, remain=64744
-> double* p7 = std_allocator.template newArray<double>(3);	p7=0x80020320, size=131896, remain=64712
-> int* p8 = std_allocator.template newObj<int>();	p8=0x80020340, size=131912, remain=64696
+> void* p1 = std_allocator.alloc(1);	p1=0x80020420, size=132136, remain=64472
+> void* p2 = std_allocator.alloc(1, 1);	p2=0x80020430, size=132152, remain=64456
+> void* p3 = std_allocator.alloc(1, 1);	p3=0x80020440, size=132168, remain=64440
+> void* p4 = std_allocator.alloc(1);	p4=0x80020450, size=132184, remain=64424
+> void* p5 = std_allocator.alloc(10, 32);	p5=0x80020460, size=132200, remain=64408
+> int* p6 = std_allocator.template newObj<int>();	p6=0x80020470, size=132216, remain=64392
+> double* p7 = std_allocator.template newArray<double>(3);	p7=0x80020480, size=132248, remain=64360
+> int* p8 = std_allocator.template newObj<int>();	p8=0x800204a0, size=132264, remain=64344
 data_t::data_t(): m_val=0
-> data_t* p9 = std_allocator.template newObj<data_t>();	p9=0x80020350, size=131936, remain=64672
-> int* p10 = std_allocator.template newObj<int>();	p10=0x80020368, size=131952, remain=64656
+> data_t* p9 = std_allocator.template newObj<data_t>();	p9=0x800204b0, size=132288, remain=64320
+> int* p10 = std_allocator.template newObj<int>();	p10=0x800204c8, size=132304, remain=64304
 data_t::data_t(123): m_val=123
-> data_t* p11 = std_allocator.template newObj<data_t>(123);	p11=0x80020378, size=131976, remain=64632
-> int* p12 = std_allocator.template newObj<int>();	p12=0x80020390, size=131992, remain=64616
+> data_t* p11 = std_allocator.template newObj<data_t>(123);	p11=0x800204d8, size=132328, remain=64280
+> int* p12 = std_allocator.template newObj<int>();	p12=0x800204f0, size=132344, remain=64264
 data_t::data_t(): m_val=0
 data_t::data_t(): m_val=0
 data_t::data_t(): m_val=0
-> data_t* p13 = std_allocator.template newArray<data_t>(3);	p13=0x800203a0, size=132048, remain=64560
+> data_t* p13 = std_allocator.template newArray<data_t>(3);	p13=0x80020500, size=132400, remain=64208
 data_t::data_t(456): m_val=456
 data_t::data_t(456): m_val=456
 data_t::data_t(456): m_val=456
-> data_t* p14 = std_allocator.template newArray<data_t>(3, 456);	p14=0x800203d8, size=132104, remain=64504
-> void* p15 = std_allocator.alloc(2000);	p15=0x80020410, size=134112, remain=62496
-> void* p16 = std_allocator.alloc(10);	p16=0x80020be8, size=134128, remain=62480
-> data2_t* p17 = std_allocator.template newObj<data2_t>();	p17=0x80020bf8, size=134168, remain=62440
-> int* p18 = std_allocator.template newObj<int>();	p18=0x80020c20, size=134184, remain=62424
-> data2_t* p19 = std_allocator.template newObj<data2_t>();	p19=0x80020c30, size=134224, remain=62384
-> int* p20 = std_allocator.template newObj<int>();	p20=0x80020c58, size=134240, remain=62368
-> data2_t* p21 = std_allocator.template newObj<data2_t>();	p21=0x80020c68, size=134280, remain=62328
+> data_t* p14 = std_allocator.template newArray<data_t>(3, 456);	p14=0x80020538, size=132456, remain=64152
+> void* p15 = std_allocator.alloc(2000);	p15=0x80020570, size=134464, remain=62144
+> void* p16 = std_allocator.alloc(10);	p16=0x80020d48, size=134480, remain=62128
+> data2_t* p17 = std_allocator.template newObj<data2_t>();	p17=0x80020d58, size=134520, remain=62088
+> int* p18 = std_allocator.template newObj<int>();	p18=0x80020d80, size=134536, remain=62072
+> data2_t* p19 = std_allocator.template newObj<data2_t>();	p19=0x80020d90, size=134576, remain=62032
+> int* p20 = std_allocator.template newObj<int>();	p20=0x80020db8, size=134592, remain=62016
+> data2_t* p21 = std_allocator.template newObj<data2_t>();	p21=0x80020dc8, size=134632, remain=61976
 std_allocator.debugInfo(message, sizeof(message)); std::printf("%s\n", message);
 ----- Debug-info for stdAllocator -----
-maxSize=196608, size=134280, remain=62328
+maxSize=196608, size=134632, remain=61976
 ---------------------------------------
-> std_allocator.free(p1);	p1=0x800202c0, size=134264, remain=62344
-> std_allocator.free(p2);	p2=0x800202d0, size=134248, remain=62360
-> std_allocator.free(p3);	p3=0x800202e0, size=134232, remain=62376
-> std_allocator.free(p4);	p4=0x800202f0, size=134216, remain=62392
-> std_allocator.free(p5);	p5=0x80020300, size=134200, remain=62408
-> std_allocator.deleteObj(p6);	p6=0x80020310, size=134184, remain=62424
-> std_allocator.deleteArray(p7, 3);	p7=0x80020320, size=134152, remain=62456
-> std_allocator.deleteObj(p8);	p8=0x80020340, size=134136, remain=62472
+> std_allocator.free(p1);	p1=0x80020420, size=134616, remain=61992
+> std_allocator.free(p2);	p2=0x80020430, size=134600, remain=62008
+> std_allocator.free(p3);	p3=0x80020440, size=134584, remain=62024
+> std_allocator.free(p4);	p4=0x80020450, size=134568, remain=62040
+> std_allocator.free(p5);	p5=0x80020460, size=134552, remain=62056
+> std_allocator.deleteObj(p6);	p6=0x80020470, size=134536, remain=62072
+> std_allocator.deleteArray(p7, 3);	p7=0x80020480, size=134504, remain=62104
+> std_allocator.deleteObj(p8);	p8=0x800204a0, size=134488, remain=62120
 data_t::~data_t(): m_val=0
-> std_allocator.deleteObj(p9);	p9=0x80020350, size=134112, remain=62496
-> std_allocator.deleteObj(p10);	p10=0x80020368, size=134096, remain=62512
+> std_allocator.deleteObj(p9);	p9=0x800204b0, size=134464, remain=62144
+> std_allocator.deleteObj(p10);	p10=0x800204c8, size=134448, remain=62160
 data_t::~data_t(): m_val=123
 data_t::~data_t(): m_val=0
 data_t::~data_t(): m_val=0
-> std_allocator.deleteArray(p11, 3);	p11=0x80020378, size=134072, remain=62536
-> std_allocator.deleteArray(p12, 3);	p12=0x80020390, size=134056, remain=62552
-> std_allocator.free(p13);	p13=0x800203a0, size=134000, remain=62608
-> std_allocator.free(p14);	p14=0x800203d8, size=133944, remain=62664
-> std_allocator.free(p15);	p15=0x80020410, size=131936, remain=64672
-> std_allocator.free(p16);	p16=0x80020be8, size=131920, remain=64688
-> std_allocator.free(p17);	p17=0x80020bf8, size=131880, remain=64728
-> std_allocator.free(p18);	p18=0x80020c20, size=131864, remain=64744
-> std_allocator.free(p19);	p19=0x80020c30, size=131824, remain=64784
-> std_allocator.free(p20);	p20=0x80020c58, size=131808, remain=64800
-> std_allocator.free(p21);	p21=0x80020c68, size=131768, remain=64840
+> std_allocator.deleteArray(p11, 3);	p11=0x800204d8, size=134424, remain=62184
+> std_allocator.deleteArray(p12, 3);	p12=0x800204f0, size=134408, remain=62200
+> std_allocator.free(p13);	p13=0x80020500, size=134352, remain=62256
+> std_allocator.free(p14);	p14=0x80020538, size=134296, remain=62312
+> std_allocator.free(p15);	p15=0x80020570, size=132288, remain=64320
+> std_allocator.free(p16);	p16=0x80020d48, size=132272, remain=64336
+> std_allocator.free(p17);	p17=0x80020d58, size=132232, remain=64376
+> std_allocator.free(p18);	p18=0x80020d80, size=132216, remain=64392
+> std_allocator.free(p19);	p19=0x80020d90, size=132176, remain=64432
+> std_allocator.free(p20);	p20=0x80020db8, size=132160, remain=64448
+> std_allocator.free(p21);	p21=0x80020dc8, size=132120, remain=64488
 std_allocator.debugInfo(message, sizeof(message)); std::printf("%s\n", message);
 ----- Debug-info for stdAllocator -----
-maxSize=196608, size=131768, remain=64840
+maxSize=196608, size=132120, remain=64488
 ---------------------------------------
 
 ----------------------------------------
@@ -8209,69 +8253,69 @@ stdAlignAllocator<lock_type> std_allocator;
 
 std_allocator.debugInfo(message, sizeof(message)); std::printf("%s\n", message);
 ----- Debug-info for stdAllocator -----
-maxSize=196608, size=131768, remain=64840
+maxSize=196608, size=132120, remain=64488
 ---------------------------------------
-> void* p1 = std_allocator.alloc(1);	p1=0x800202c0, size=131784, remain=64824
-> void* p2 = std_allocator.alloc(1, 1);	p2=0x800202d0, size=131800, remain=64808
-> void* p3 = std_allocator.alloc(1, 1);	p3=0x800202e0, size=131816, remain=64792
-> void* p4 = std_allocator.alloc(1);	p4=0x800202f0, size=131832, remain=64776
-> void* p5 = std_allocator.alloc(10, 32);	p5=0x80020300, size=131848, remain=64760
-> int* p6 = std_allocator.template newObj<int>();	p6=0x80020310, size=131864, remain=64744
-> double* p7 = std_allocator.template newArray<double>(3);	p7=0x80020320, size=131896, remain=64712
-> int* p8 = std_allocator.template newObj<int>();	p8=0x80020340, size=131912, remain=64696
+> void* p1 = std_allocator.alloc(1);	p1=0x80020420, size=132136, remain=64472
+> void* p2 = std_allocator.alloc(1, 1);	p2=0x80020430, size=132152, remain=64456
+> void* p3 = std_allocator.alloc(1, 1);	p3=0x80020440, size=132168, remain=64440
+> void* p4 = std_allocator.alloc(1);	p4=0x80020450, size=132184, remain=64424
+> void* p5 = std_allocator.alloc(10, 32);	p5=0x80020460, size=132200, remain=64408
+> int* p6 = std_allocator.template newObj<int>();	p6=0x80020470, size=132216, remain=64392
+> double* p7 = std_allocator.template newArray<double>(3);	p7=0x80020480, size=132248, remain=64360
+> int* p8 = std_allocator.template newObj<int>();	p8=0x800204a0, size=132264, remain=64344
 data_t::data_t(): m_val=0
-> data_t* p9 = std_allocator.template newObj<data_t>();	p9=0x80020350, size=131936, remain=64672
-> int* p10 = std_allocator.template newObj<int>();	p10=0x80020368, size=131952, remain=64656
+> data_t* p9 = std_allocator.template newObj<data_t>();	p9=0x800204b0, size=132288, remain=64320
+> int* p10 = std_allocator.template newObj<int>();	p10=0x800204c8, size=132304, remain=64304
 data_t::data_t(123): m_val=123
-> data_t* p11 = std_allocator.template newObj<data_t>(123);	p11=0x80020390, size=131984, remain=64624
-> int* p12 = std_allocator.template newObj<int>();	p12=0x80020378, size=132008, remain=64600
+> data_t* p11 = std_allocator.template newObj<data_t>(123);	p11=0x800204f0, size=132336, remain=64272
+> int* p12 = std_allocator.template newObj<int>();	p12=0x800204d8, size=132360, remain=64248
 data_t::data_t(): m_val=0
 data_t::data_t(): m_val=0
 data_t::data_t(): m_val=0
-> data_t* p13 = std_allocator.template newArray<data_t>(3);	p13=0x800203b0, size=132064, remain=64544
+> data_t* p13 = std_allocator.template newArray<data_t>(3);	p13=0x80020510, size=132416, remain=64192
 data_t::data_t(456): m_val=456
 data_t::data_t(456): m_val=456
 data_t::data_t(456): m_val=456
-> data_t* p14 = std_allocator.template newArray<data_t>(3, 456);	p14=0x80020400, size=132128, remain=64480
-> void* p15 = std_allocator.alloc(2000);	p15=0x80020440, size=134136, remain=62472
-> void* p16 = std_allocator.alloc(10);	p16=0x800203e8, size=134160, remain=62448
-> data2_t* p17 = std_allocator.template newObj<data2_t>();	p17=0x80020c40, size=134208, remain=62400
-> int* p18 = std_allocator.template newObj<int>();	p18=0x80020c18, size=134224, remain=62384
-> data2_t* p19 = std_allocator.template newObj<data2_t>();	p19=0x80020c80, size=134264, remain=62344
-> int* p20 = std_allocator.template newObj<int>();	p20=0x80020c70, size=134280, remain=62328
-> data2_t* p21 = std_allocator.template newObj<data2_t>();	p21=0x80020cc0, size=134320, remain=62288
+> data_t* p14 = std_allocator.template newArray<data_t>(3, 456);	p14=0x80020560, size=132480, remain=64128
+> void* p15 = std_allocator.alloc(2000);	p15=0x800205a0, size=134488, remain=62120
+> void* p16 = std_allocator.alloc(10);	p16=0x80020548, size=134512, remain=62096
+> data2_t* p17 = std_allocator.template newObj<data2_t>();	p17=0x80020da0, size=134560, remain=62048
+> int* p18 = std_allocator.template newObj<int>();	p18=0x80020d78, size=134576, remain=62032
+> data2_t* p19 = std_allocator.template newObj<data2_t>();	p19=0x80020de0, size=134616, remain=61992
+> int* p20 = std_allocator.template newObj<int>();	p20=0x80020dd0, size=134632, remain=61976
+> data2_t* p21 = std_allocator.template newObj<data2_t>();	p21=0x80020e20, size=134672, remain=61936
 std_allocator.debugInfo(message, sizeof(message)); std::printf("%s\n", message);
 ----- Debug-info for stdAllocator -----
-maxSize=196608, size=134320, remain=62288
+maxSize=196608, size=134672, remain=61936
 ---------------------------------------
-> std_allocator.free(p1);	p1=0x800202c0, size=134304, remain=62304
-> std_allocator.free(p2);	p2=0x800202d0, size=134288, remain=62320
-> std_allocator.free(p3);	p3=0x800202e0, size=134272, remain=62336
-> std_allocator.free(p4);	p4=0x800202f0, size=134256, remain=62352
-> std_allocator.free(p5);	p5=0x80020300, size=134240, remain=62368
-> std_allocator.deleteObj(p6);	p6=0x80020310, size=134224, remain=62384
-> std_allocator.deleteArray(p7, 3);	p7=0x80020320, size=134192, remain=62416
-> std_allocator.deleteObj(p8);	p8=0x80020340, size=134176, remain=62432
+> std_allocator.free(p1);	p1=0x80020420, size=134656, remain=61952
+> std_allocator.free(p2);	p2=0x80020430, size=134640, remain=61968
+> std_allocator.free(p3);	p3=0x80020440, size=134624, remain=61984
+> std_allocator.free(p4);	p4=0x80020450, size=134608, remain=62000
+> std_allocator.free(p5);	p5=0x80020460, size=134592, remain=62016
+> std_allocator.deleteObj(p6);	p6=0x80020470, size=134576, remain=62032
+> std_allocator.deleteArray(p7, 3);	p7=0x80020480, size=134544, remain=62064
+> std_allocator.deleteObj(p8);	p8=0x800204a0, size=134528, remain=62080
 data_t::~data_t(): m_val=0
-> std_allocator.deleteObj(p9);	p9=0x80020350, size=134152, remain=62456
-> std_allocator.deleteObj(p10);	p10=0x80020368, size=134136, remain=62472
+> std_allocator.deleteObj(p9);	p9=0x800204b0, size=134504, remain=62104
+> std_allocator.deleteObj(p10);	p10=0x800204c8, size=134488, remain=62120
 data_t::~data_t(): m_val=123
 data_t::~data_t(): m_val=0
 data_t::~data_t(): m_val=0
-> std_allocator.deleteArray(p11, 3);	p11=0x80020390, size=134104, remain=62504
-> std_allocator.deleteArray(p12, 3);	p12=0x80020378, size=134080, remain=62528
-> std_allocator.free(p13);	p13=0x800203b0, size=134024, remain=62584
-> std_allocator.free(p14);	p14=0x80020400, size=133960, remain=62648
-> std_allocator.free(p15);	p15=0x80020440, size=131952, remain=64656
-> std_allocator.free(p16);	p16=0x800203e8, size=131928, remain=64680
-> std_allocator.free(p17);	p17=0x80020c40, size=131880, remain=64728
-> std_allocator.free(p18);	p18=0x80020c18, size=131864, remain=64744
-> std_allocator.free(p19);	p19=0x80020c80, size=131824, remain=64784
-> std_allocator.free(p20);	p20=0x80020c70, size=131808, remain=64800
-> std_allocator.free(p21);	p21=0x80020cc0, size=131768, remain=64840
+> std_allocator.deleteArray(p11, 3);	p11=0x800204f0, size=134456, remain=62152
+> std_allocator.deleteArray(p12, 3);	p12=0x800204d8, size=134432, remain=62176
+> std_allocator.free(p13);	p13=0x80020510, size=134376, remain=62232
+> std_allocator.free(p14);	p14=0x80020560, size=134312, remain=62296
+> std_allocator.free(p15);	p15=0x800205a0, size=132304, remain=64304
+> std_allocator.free(p16);	p16=0x80020548, size=132280, remain=64328
+> std_allocator.free(p17);	p17=0x80020da0, size=132232, remain=64376
+> std_allocator.free(p18);	p18=0x80020d78, size=132216, remain=64392
+> std_allocator.free(p19);	p19=0x80020de0, size=132176, remain=64432
+> std_allocator.free(p20);	p20=0x80020dd0, size=132160, remain=64448
+> std_allocator.free(p21);	p21=0x80020e20, size=132120, remain=64488
 std_allocator.debugInfo(message, sizeof(message)); std::printf("%s\n", message);
 ----- Debug-info for stdAllocator -----
-maxSize=196608, size=131768, remain=64840
+maxSize=196608, size=132120, remain=64488
 ---------------------------------------
 
 ================================================================================
@@ -8328,15 +8372,15 @@ data_t::~data_t(): m_val=0
 > delete p104;
 data_t::~data_t(): m_val=0
 ----- Debug-info for scopedStackAllocator -----
-maxSize=877, size=0, remain=877, count=0 (INIT: buff=0x46e1f1, size=147, count=0)
+maxSize=877, size=0, remain=877, count=0 (INIT: buff=0x4ab1f1, size=147, count=0)
 -----------------------------------------------
 data_t::data_t(): m_val=0
 ----- Debug-info for scopedStackAllocator -----
-maxSize=877, size=16, remain=861, count=1 (INIT: buff=0x46e1f1, size=147, count=0)
+maxSize=877, size=16, remain=861, count=1 (INIT: buff=0x4ab1f1, size=147, count=0)
 -----------------------------------------------
 data_t::~data_t(): m_val=0
 ----- Debug-info for scopedStackAllocator -----
-maxSize=877, size=16, remain=861, count=0 (INIT: buff=0x46e1f1, size=147, count=0)
+maxSize=877, size=16, remain=861, count=0 (INIT: buff=0x4ab1f1, size=147, count=0)
 -----------------------------------------------
 stack:size=147,count=0, pool:size=0,pool=0
 
@@ -8475,127 +8519,127 @@ data_t::~data_t(): m_val=0
 
 ------------------------------------------------------------
 "smartStackAllocator<>" : 1000000 * times allocate & free
-* elapsed time = 0.004263000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.004228000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "smartStackAllocator<spinLock>" : 1000000 * times allocate & free
-* elapsed time = 0.045132000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.045478000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "smartStackAllocator<std::mutex>" : 1000000 * times allocate & free
-* elapsed time = 0.287784000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.288082000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "lfSmartStackAllocator" : 1000000 * times allocate & free
-* elapsed time = 0.027649000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.028086000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "smartStackAllocator<>::scopedAllocator" : 1000000 * times allocate & free
-* elapsed time = 0.004711000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.004590000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "polyAllocator with smartStackAllocator<>::adapter" : 1000000 * times allocate & free
-* elapsed time = 0.235666000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.235987000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "smartDualStackAllocator<>" : 1000000 * times allocate & free
-* elapsed time = 0.014297000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
+* elapsed time = 0.013970000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
 
 ------------------------------------------------------------
 "smartDualStackAllocator<spinLock>" : 1000000 * times allocate & free
-* elapsed time = 0.046931000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
+* elapsed time = 0.046988000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
 
 ------------------------------------------------------------
 "smartDualStackAllocator<std::mutex>" : 1000000 * times allocate & free
-* elapsed time = 0.287919000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
+* elapsed time = 0.289539000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
 
 ------------------------------------------------------------
 "lfSmartDualStackAllocator" : 1000000 * times allocate & free
-* elapsed time = 0.045713000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
+* elapsed time = 0.045885000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
 
 ------------------------------------------------------------
 "smartDualStackAllocator<>::scopedAllocator" : 1000000 * times allocate & free
-* elapsed time = 0.005083000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.005182000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "smartDualStackAllocator<>::scopedDualAllocator" : 1000000 * times allocate & free
-* elapsed time = 0.005001000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
+* elapsed time = 0.005145000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
 
 ------------------------------------------------------------
 "polyAllocator with smartDualStackAllocator<>::adapter" : 1000000 * times allocate & free
-* elapsed time = 0.235407000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
+* elapsed time = 0.238480000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
 
 ------------------------------------------------------------
 "monoAllocator<>" : 1000000 * times allocate & free
-* elapsed time = 0.001558000	maxSize=16384, size=0, remain=16384, isAllocated=false
+* elapsed time = 0.001557000	maxSize=16384, size=0, remain=16384, isAllocated=false
 
 ------------------------------------------------------------
 "monoAllocator<spinLock>" : 1000000 * times allocate & free
-* elapsed time = 0.046065000	maxSize=16384, size=0, remain=16384, isAllocated=false
+* elapsed time = 0.046680000	maxSize=16384, size=0, remain=16384, isAllocated=false
 
 ------------------------------------------------------------
 "monoAllocator<std::mutex>" : 1000000 * times allocate & free
-* elapsed time = 0.284620000	maxSize=16384, size=0, remain=16384, isAllocated=false
+* elapsed time = 0.288384000	maxSize=16384, size=0, remain=16384, isAllocated=false
 
 ------------------------------------------------------------
 "lfMonoAllocator" : 1000000 * times allocate & free
-* elapsed time = 0.028004000	maxSize=16384, size=0, remain=16384, isAllocated=false
+* elapsed time = 0.028148000	maxSize=16384, size=0, remain=16384, isAllocated=false
 
 ------------------------------------------------------------
 "polyAllocator with monoAllocator<>::adapter" : 1000000 * times allocate & free
-* elapsed time = 0.231152000	maxSize=16384, size=0, remain=16384, isAllocated=false
+* elapsed time = 0.235626000	maxSize=16384, size=0, remain=16384, isAllocated=false
 
 ------------------------------------------------------------
 "poolAllocator<1024>" : 1000000 * times allocate & free
-* elapsed time = 0.011010000	maxSize=16384, size=0, remain=16384, pool=0/1024
+* elapsed time = 0.011461000	maxSize=16384, size=0, remain=16384, pool=0/1024
 
 ------------------------------------------------------------
 "poolAllocator<1024, spinLock>" : 1000000 * times allocate & free
-* elapsed time = 0.053360000	maxSize=16384, size=0, remain=16384, pool=0/1024
+* elapsed time = 0.055196000	maxSize=16384, size=0, remain=16384, pool=0/1024
 
 ------------------------------------------------------------
 "poolAllocator<1024, std::mutex>" : 1000000 * times allocate & free
-* elapsed time = 0.289859000	maxSize=16384, size=0, remain=16384, pool=0/1024
+* elapsed time = 0.297460000	maxSize=16384, size=0, remain=16384, pool=0/1024
 
 ------------------------------------------------------------
 "lfPoolAllocator<1024>" : 1000000 * times allocate & free
-* elapsed time = 0.072005000	maxSize=16384, size=0, remain=16384, pool=0/1024
+* elapsed time = 0.073343000	maxSize=16384, size=0, remain=16384, pool=0/1024
 
 ------------------------------------------------------------
 "polyAllocator with poolAllocator<1024>::adapter" : 1000000 * times allocate & free
-* elapsed time = 0.197339000	maxSize=16384, size=0, remain=16384, pool=0/512
+* elapsed time = 0.201342000	maxSize=16384, size=0, remain=16384, pool=0/512
 
 ------------------------------------------------------------
 "stdAllocator<>" : 1000000 * times allocate & free
-* elapsed time = 0.150047000	maxSize=196608, size=132464, remain=64144
+* elapsed time = 0.153090000	maxSize=196608, size=132480, remain=64128
 
 ------------------------------------------------------------
 "stdAllocator<spinLock>" : 1000000 * times allocate & free
-* elapsed time = 0.173748000	maxSize=196608, size=132464, remain=64144
+* elapsed time = 0.176104000	maxSize=196608, size=132480, remain=64128
 
 ------------------------------------------------------------
 "stdAllocator<std::mutex>" : 1000000 * times allocate & free
-* elapsed time = 0.293593000	maxSize=196608, size=132512, remain=64096
+* elapsed time = 0.302124000	maxSize=196608, size=132528, remain=64080
 
 ------------------------------------------------------------
 "polyAllocator with stdAllocator<>::adapter" : 1000000 * times allocate & free
-* elapsed time = 0.390727000	maxSize=196608, size=132512, remain=64096
+* elapsed time = 0.389319000	maxSize=196608, size=132528, remain=64080
 
 ------------------------------------------------------------
 "stdAlignAllocator<>" : 1000000 * times allocate & free
-* elapsed time = 0.155267000	maxSize=196608, size=132512, remain=64096
+* elapsed time = 0.155319000	maxSize=196608, size=132528, remain=64080
 
 ------------------------------------------------------------
 "stdAlignAllocator<spinLock>" : 1000000 * times allocate & free
-* elapsed time = 0.175936000	maxSize=196608, size=132512, remain=64096
+* elapsed time = 0.177410000	maxSize=196608, size=132528, remain=64080
 
 ------------------------------------------------------------
 "stdAlignAllocator<std::mutex>" : 1000000 * times allocate & free
-* elapsed time = 0.301131000	maxSize=196608, size=132560, remain=64048
+* elapsed time = 0.306066000	maxSize=196608, size=132576, remain=64032
 
 ------------------------------------------------------------
 "polyAllocator with stdAlignAllocator<>::adapter" : 1000000 * times allocate & free
-* elapsed time = 0.398925000	maxSize=196608, size=132560, remain=64048
+* elapsed time = 0.399407000	maxSize=196608, size=132576, remain=64032
 
 --------------------------------------------------------------------------------
 [ Test for performance of multi threada ]
@@ -8603,84 +8647,84 @@ data_t::~data_t(): m_val=0
 
 ------------------------------------------------------------
 "smartStackAllocator<spinLock>" : 100000 * times allocate & free
-* elapsed time = 0.201468000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.201628000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "smartStackAllocator<std::mutex>" : 100000 * times allocate & free
-* elapsed time = 0.642702000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 1.635520000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "lfSmartStackAllocator" : 100000 * times allocate & free
-* elapsed time = 0.201584000	maxSize=16384, size=0, remain=16384, count=0
+* elapsed time = 0.201578000	maxSize=16384, size=0, remain=16384, count=0
 
 ------------------------------------------------------------
 "smartDualStackAllocator<spinLock>" : 100000 * times allocate & free
-* elapsed time = 0.201262000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
+* elapsed time = 0.202311000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
 
 ------------------------------------------------------------
 "smartDualStackAllocator<std::mutex>" : 100000 * times allocate & free
-* elapsed time = 0.636848000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
+* elapsed time = 1.641176000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
 
 ------------------------------------------------------------
 "lfSmartDualStackAllocator" : 100000 * times allocate & free
-* elapsed time = 0.201588000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
+* elapsed time = 0.201498000	maxSize=16384, size=0(ASC=0,DESC=0), remain=16384, count=0(ASC=0,DESC=0)
 
 ------------------------------------------------------------
 "monoAllocator<spinLock>" : 100000 * times allocate & free
-* elapsed time = 0.201552000	maxSize=16384, size=0, remain=16384, isAllocated=false
+* elapsed time = 0.202348000	maxSize=16384, size=0, remain=16384, isAllocated=false
 
 ------------------------------------------------------------
 "monoAllocator<std::mutex>" : 100000 * times allocate & free
-* elapsed time = 0.435952000	maxSize=16384, size=0, remain=16384, isAllocated=false
+* elapsed time = 1.128133000	maxSize=16384, size=0, remain=16384, isAllocated=false
 
 ------------------------------------------------------------
 "lfMonoAllocator" : 100000 * times allocate & free
-* elapsed time = 0.201459000	maxSize=16384, size=0, remain=16384, isAllocated=false
+* elapsed time = 0.201809000	maxSize=16384, size=0, remain=16384, isAllocated=false
 
 ------------------------------------------------------------
 "poolAllocator<1024, spinLock>" : 100000 * times allocate & free
-* elapsed time = 0.200928000	maxSize=16384, size=0, remain=16384, pool=0/1024
+* elapsed time = 0.203018000	maxSize=16384, size=0, remain=16384, pool=0/1024
 
 ------------------------------------------------------------
 "poolAllocator<1024, std::mutex>" : 100000 * times allocate & free
-* elapsed time = 0.601528000	maxSize=16384, size=0, remain=16384, pool=0/1024
+* elapsed time = 1.944031000	maxSize=16384, size=0, remain=16384, pool=0/1024
 
 ------------------------------------------------------------
 "lfPoolAllocator<1024>" : 100000 * times allocate & free
-* elapsed time = 0.201253000	maxSize=16384, size=0, remain=16384, pool=0/1024
+* elapsed time = 0.202132000	maxSize=16384, size=0, remain=16384, pool=0/1024
 
 ------------------------------------------------------------
 "stdAllocator<>" : 100000 * times allocate & free
-* elapsed time = 0.829935000	maxSize=196608, size=132896, remain=63712
+* elapsed time = 1.687243000	maxSize=196608, size=132912, remain=63696
 
 ------------------------------------------------------------
 "stdAllocator<spinLock>" : 100000 * times allocate & free
-* elapsed time = 0.711493000	maxSize=196608, size=132896, remain=63712
+* elapsed time = 1.627338000	maxSize=196608, size=132912, remain=63696
 
 ------------------------------------------------------------
 "stdAllocator<std::mutex>" : 100000 * times allocate & free
-* elapsed time = 0.594363000	maxSize=196608, size=132944, remain=63664
+* elapsed time = 0.879651000	maxSize=196608, size=132960, remain=63648
 
 ------------------------------------------------------------
 "stdAlignAllocator<>" : 100000 * times allocate & free
-* elapsed time = 0.599690000	maxSize=196608, size=132944, remain=63664
+* elapsed time = 0.789942000	maxSize=196608, size=132960, remain=63648
 
 ------------------------------------------------------------
 "stdAlignAllocator<spinLock>" : 100000 * times allocate & free
-* elapsed time = 0.590011000	maxSize=196608, size=132944, remain=63664
+* elapsed time = 2.416396000	maxSize=196608, size=132960, remain=63648
 
 ------------------------------------------------------------
 "stdAlignAllocator<std::mutex>" : 100000 * times allocate & free
-* elapsed time = 0.575507000	maxSize=196608, size=132992, remain=63616
+* elapsed time = 0.894239000	maxSize=196608, size=133008, remain=63600
 
 ------------------------------------------------------------
 "stdAlignAllocator<>" : 100000 * times allocate & free
-* elapsed time = 0.601183000	maxSize=196608, size=132992, remain=63616
+* elapsed time = 0.798931000	maxSize=196608, size=133008, remain=63600
 
 ================================================================================
 
 --------------------------------------------------------------------------------
-[ Test for new/delete operators]
+[ Examination for new/delete operators ]
 --------------------------------------------------------------------------------
 new st_n: sizeof(st_n)=1, alignof(st_n)=1, real_size=1
 new st_n[2]: sizeof(st_n)=1, alignof(st_n)=1, real_size=6

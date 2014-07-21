@@ -15,6 +15,7 @@
 //--------------------------------------------------------------------------------
 //テスト用コンパイラスイッチ／定数
 
+#define ENABLE_BASIC_TEST//アロケータ系基本テストを有効にする場合は、このマクロを有効化する
 #define ENABLE_TEST_FOR_STACK_ALLOATOR//スタックアロケータのテストを有効にする場合は、このマクロを有効化する
 #define ENABLE_TEST_FOR_DUAL_STACK_ALLOATOR//スタックアロケータのテストを有効にする場合は、このマクロを有効化する
 #define ENABLE_TEST_FOR_MONO_ALLOATOR//単一アロケータのテストを有効にする場合は、このマクロを有効化する
@@ -99,6 +100,7 @@ typedef GASHA_ dummyLock lock_type;//共有データのロックに dummyLock �
 //----------------------------------------
 //アロケータテスト
 void example_allocator();//アロケータテスト
+void example_allocator_basic_test();//アロケータ系基本テスト
 void example_stack_allocator();//スタックアロケータテスト
 void example_dual_stack_allocator();//双方向スタックアロケータテスト
 void example_mono_allocator();//単一アロケータテスト
@@ -106,7 +108,7 @@ void example_pool_allocator();//プールアロケータテスト
 void example_std_allocator();//標準アロケータテスト
 void example_poly_allocator();//多態アロケータテスト
 void example_allocator_performance();//アロケータパフォーマンステスト
-void example_new_delete_test();//new/delete演算子の挙動確認用テスト
+void examination_new_delete();//new/delete演算子の挙動確認用テスト
 
 #endif//GASHA_INCLUDED_EXAMPLE_ALLOCATOR_H
 

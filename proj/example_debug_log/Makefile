@@ -24,6 +24,10 @@ PROJ_SRC_DIR := $(SRC_BASE_DIR)/$(PROG_NAME)
 SRCS := \
 	main.cpp \
 	$(PROJ_SRC_DIR)/example_debug_log.cpp \
+	$(PROJ_SRC_DIR)/example_debug_log_sub.cpp \
+	$(PROJ_SRC_DIR)/example_debug_log_basic_test.cpp \
+	$(PROJ_SRC_DIR)/example_debug_log_feature_test.cpp \
+	$(PROJ_SRC_DIR)/example_debug_log_performance_test.cpp \
 
 # インクルードディレクトリ
 INCLIDE_DIRS := \

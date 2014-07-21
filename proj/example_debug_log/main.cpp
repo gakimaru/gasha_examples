@@ -16,7 +16,7 @@
 int main(const int argc, const char* argv[])
 {
 	//デバッグログテスト
-	example_debug_log();
+	example_debugLog();
 
 	return EXIT_SUCCESS;
 }

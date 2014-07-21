@@ -53,6 +53,10 @@ data_t::~data_t()
 //アロケータテスト
 void example_allocator()
 {
+#ifdef ENABLE_BASIC_TEST
+	example_allocator_basic_test();//アロケータ系基本テスト
+#endif//ENABLE_BASIC_TEST
+
 #ifdef ENABLE_TEST_FOR_STACK_ALLOATOR
 	example_stack_allocator();//スタックアロケータテスト
 #endif//ENABLE_TEST_FOR_STACK_ALLOATOR
@@ -82,7 +86,7 @@ void example_allocator()
 #endif//ENABLE_TEST_FOR_ALLOATOR_PERFORMANCE
 
 #ifdef ENABLE_TEST_FOR_NEW_DELETE
-	example_new_delete_test();//new/delete演算子の挙動確認用テスト
+	examination_new_delete();//new/delete演算子の挙動確認用テスト
 #endif//ENABLE_TEST_FOR_NEW_DELETE
 
 	std::printf("- end -\n");
