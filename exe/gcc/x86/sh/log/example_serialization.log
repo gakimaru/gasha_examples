@@ -1,95 +1,174 @@
---------------------
-シリアライズ：バイナリアーカイブ
+
+================================================================================
+[ Test for serialization features ]
+
+----------------------------------------
+[ Create instance ]
+----------------------------------------
+[ Make data ]
+----------------------------------------
+[ Print data(1) : before save ]
 data1=1
 data2=2.34
-data3={5, 6, 7}
-data4a:a=8,b=9,c=10.0
-data4b:a=11,b=12,c=13.0
-data5a:[0]=1,[1]=1,[2]=0,[8190]=0,[8191]=1
-data5b:[0]=0,[1]=0,[2]=1,[8190]=1,[8191]=0
-data6:[0]={a=14,b=15,c=16.0},[1]={a=17,b=18,c=19.0}
-data7a(0x0x80010c08):a=20,b=21,c=22.0
-data7b(0x0x0)
-data8a(0x0x80010c18)=26
-data8b(0x0x0)
-collector<CSaveDataSerializer>(ver=5,6)
-arc.is_read=0, arc.is_write=1
-serialize<CTest1>(ver=1,2) sizeof(CTest1)=2124
-serialize<CTest1::STRUCT>(ver=3,4) sizeof(CTest1::STRUCT)=12
-serialize<CTest1::STRUCT>(ver=3,4) sizeof(CTest1::STRUCT)=12
-serialize<CTest1::STRUCT>(ver=3,4) sizeof(CTest1::STRUCT)=12
-serialize<CTest1::STRUCT>(ver=3,4) sizeof(CTest1::STRUCT)=12
-save<CTest1>(ver=1,2)
-collector<CTest1>(ver=1,2)
-処理結果：エラーなし
---------------------
-シリアライズ：テキストアーカイブ
+data3={[0]=5,[1]=6,[2]=7,}
+data4a:{a=8,b=9,c=10.0}
+data4b:{a=11,b=12,c=13.0}
+data5a:{[0]=1,[1]=1,[2]=0,[3]=0,...,[253]=0,[254]=0,[255]=1,}
+data5b:{[0]=0,[1]=0,[2]=1,[3]=1,...,[13]=0,[14]=0,[15]=1,}
+data6={[0]={a=14,b=15,c=16.0},[1]={a=17,b=18,c=19.0},}
+data7a(0x800204f8):{a=20,b=21,c=22.0}
+data7b(0x0)
+data7c(0x0)
+data7d(0x0)
+data7e(0x0)
+data8a(0x80020508)=35
+data8b(0x0)
+data9=37
+data10=38
+data11=39
+data11_deleted=40
+data12=41
+data13:{a=42,b=43,c=44.0}
+data13_deleted:{a=45,b=46,c=47.0}
+data14:{a=48,b=49,c=50.0}
+data15a=51
+data15b=52
+data15c=53
+data15d=54.00
+data16a={[0]=55,[1]=56,[2]=57,}
+data16b={[0]=58,[1]=59,}
+data16c={[0]=60,[1]=61,[2]=62,[3]=63,}
+data16d=64
+data16e={[0]=65,[1]=66,}
+----------------------------------------
+[ Save binary ]
+-------------------- [ makeBinarySaveDataImage ]
+----------
+collector<saveData>(ver=5.6)
+----------
+serialize<testData>(ver=1.2,now_ver=1.2) sizeof(testData)=256
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<std::bitset<N>>(ver=0.0,now_ver=0.0) sizeof(std::bitset<N>)=4
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+save<testData>(ver=1.2)
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+collector<testData>(ver=1.2)
+Result:
+  Fatal-error:    nothing
+  Save data size: 1113
+  Used work-buffer size(peak): 2112
+----------------------------------------
+[ Save text ]
+-------------------- [ makeTextSaveDataImage ]
+----------
+collector<saveData>(ver=5.6)
+----------
+serialize<testData>(ver=1.2,now_ver=1.2) sizeof(testData)=256
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<std::bitset<N>>(ver=0.0,now_ver=0.0) sizeof(std::bitset<N>)=4
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+save<testData>(ver=1.2)
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+collector<testData>(ver=1.2)
+Result:
+  Fatal-error:    nothing
+  Save data size: 10013
+  Used work-buffer size(peak): 2112
+----------------------------------------
+[ Load binary ]
+-------------------- [ loadBinarySaveDataImage ]
+----------
+fatalDeserializeErrorOccurred<testData>(ver=0.0,now_ver=5.6)
+Result:
+  Fatal-error:    Occured!
+  Save data size: 0
+  Used work-buffer size(peak): 0
+  numSmallerSizeItem()=0
+  numLargerSizeItem()=0
+  numSmallerArrItem()=0
+  numLargerArrItem()=0
+  numOnlyOnSaveData()=0
+  numOnlyOnMem()=0
+  numObjOnSaveDataOnly()=0
+  numObjOnMemOnly()=0
+  numArrOnSaveDataOnly()=0
+  numArrOnMemOnly()=0
+  numPtrOnSaveDataOnly()=0
+  numPtrOnMemOnly()=0
+  numNulOnSaveDataOnly()=0
+  numNulOnMemOnly()=0
+----------------------------------------
+[ Print data(2) : after load ]
 data1=1
 data2=2.34
-data3={5, 6, 7}
-data4a:a=8,b=9,c=10.0
-data4b:a=11,b=12,c=13.0
-data5a:[0]=1,[1]=1,[2]=0,[8190]=0,[8191]=1
-data5b:[0]=0,[1]=0,[2]=1,[8190]=1,[8191]=0
-data6:[0]={a=14,b=15,c=16.0},[1]={a=17,b=18,c=19.0}
-data7a(0x0x80010c08):a=20,b=21,c=22.0
-data7b(0x0x0)
-data8a(0x0x80010c18)=26
-data8b(0x0x0)
-collector<CSaveDataSerializer>(ver=5,6)
-arc.is_read=0, arc.is_write=1
-serialize<CTest1>(ver=1,2) sizeof(CTest1)=2124
-serialize<CTest1::STRUCT>(ver=3,4) sizeof(CTest1::STRUCT)=12
-serialize<CTest1::STRUCT>(ver=3,4) sizeof(CTest1::STRUCT)=12
-serialize<CTest1::STRUCT>(ver=3,4) sizeof(CTest1::STRUCT)=12
-serialize<CTest1::STRUCT>(ver=3,4) sizeof(CTest1::STRUCT)=12
-save<CTest1>(ver=1,2)
-collector<CTest1>(ver=1,2)
-処理結果：エラーなし
---------------------
-デシリアライズ：バイナリアーカイブ
-distributor<CSaveDataSerializer>(ver=5,6)
-beforeLoad<CTest1>(ver=1,2)
-arc.is_read=1, arc.is_write=0
-serialize<CTest1>(ver=1,2) sizeof(CTest1)=2124
-load<CTest1>(ver=1,2)
-arc.is_read=1, arc.is_write=0
-serialize<CTest1>(ver=1,2) sizeof(CTest1)=2124
-serialize<CTest1::STRUCT>(ver=3,4) sizeof(CTest1::STRUCT)=12
-arc.is_read=1, arc.is_write=0
-serialize<CTest1>(ver=1,2) sizeof(CTest1)=2124
-serialize<CTest1::STRUCT>(ver=3,4) sizeof(CTest1::STRUCT)=12
-serialize<CTest1::STRUCT>(ver=3,4) sizeof(CTest1::STRUCT)=12
-arc.is_read=1, arc.is_write=0
-serialize<CTest1>(ver=1,2) sizeof(CTest1)=2124
-serialize<CTest1::STRUCT>(ver=3,4) sizeof(CTest1::STRUCT)=12
-arc.is_read=1, arc.is_write=0
-serialize<CTest1>(ver=1,2) sizeof(CTest1)=2124
-afterLoad<CTest1>(ver=1,2)
-処理結果：エラーなし
-  getNumSmallerSizeItem()=0
-  getNumLargerSizeItem()=0
-  getNumSmallerArrItem()=0
-  getNumLargerArrItem()=0
-  getNumIsOnlyOnSaveData()=0
-  getNumIsOnlyOnMem()=0
-  getNumIsObjOnSaveDataOnly()=0
-  getNumIsObjOnMemOnly()=0
-  getNumIsArrOnSaveDataOnly()=0
-  getNumIsArrOnMemOnly()=0
-  getNumIsPtrOnSaveDataOnly()=0
-  getNumIsPtrOnMemOnly()=0
-  getNumIsNulOnSaveDataOnly()=0
-  getNumIsNulOnMemOnly()=0
-data1=1
-data2=2.34
-data3={5, 6, 7}
-data4a:a=8,b=9,c=10.0
-data4b:a=11,b=12,c=13.0
-data5a:[0]=1,[1]=1,[2]=0,[8190]=0,[8191]=1
-data5b:[0]=0,[1]=0,[2]=1,[8190]=1,[8191]=0
-data6:[0]={a=14,b=15,c=16.0},[1]={a=17,b=18,c=19.0}
-data7a(0x0x80010c08):a=20,b=21,c=22.0
-data7b(0x0x0)
-data8a(0x0x80010c18)=26
-data8b(0x0x0)
+data3={[0]=5,[1]=6,[2]=7,}
+data4a:{a=8,b=9,c=10.0}
+data4b:{a=11,b=12,c=13.0}
+data5a:{[0]=1,[1]=1,[2]=0,[3]=0,...,[253]=0,[254]=0,[255]=1,}
+data5b:{[0]=0,[1]=0,[2]=1,[3]=1,...,[13]=0,[14]=0,[15]=1,}
+data6={[0]={a=14,b=15,c=16.0},[1]={a=17,b=18,c=19.0},}
+data7a(0x800204f8):{a=20,b=21,c=22.0}
+data7b(0x0)
+data7c(0x0)
+data7d(0x0)
+data7e(0x0)
+data8a(0x80020508)=35
+data8b(0x0)
+data9=37
+data10=38
+data11=39
+data11_deleted=40
+data12=41
+data13:{a=42,b=43,c=44.0}
+data13_deleted:{a=45,b=46,c=47.0}
+data14:{a=48,b=49,c=50.0}
+data15a=51
+data15b=52
+data15c=53
+data15d=54.00
+data16a={[0]=55,[1]=56,[2]=57,}
+data16b={[0]=58,[1]=59,}
+data16c={[0]=60,[1]=61,[2]=62,[3]=63,}
+data16d=64
+data16e={[0]=65,[1]=66,}
+----------------------------------------
+[ Destroy instance ]
+
+================================================================================
+finish.

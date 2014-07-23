@@ -1,0 +1,420 @@
+﻿//--------------------------------------------------------------------------------
+// feature_test.cpp
+// シリアライズテスト：機能テスト：テスト用データ定義
+//
+// Gakimaru's researched and standard library for C++ - GASHA
+//   Copyright (c) 2014 Itagaki Mamoru
+//   Released under the MIT license.
+//     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
+//--------------------------------------------------------------------------------
+
+#include "feature_test/feature_test.h"//シリアライズテスト：機能テスト
+
+#include "feature_test/save_load.h"//セーブ／ロード処理
+
+#include "work_buff.h"//ワークバッファ
+#include "file.h"//ファイル操作
+
+//--------------------
+//ファイルパス
+static const char* BINARY_SAVE_DATA_FILE_PATH = "data/example_serialization/testData.bin";//バイナリセーブデータファイルパス
+static const char* TEXT_SAVE_DATA_FILE_PATH = "data/example_serialization/testData.txt";//バイナリセーブデータファイルパス
+
+//--------------------
+//グローバルテストデータ
+static testData* s_testData = nullptr;
+
+//--------------------
+//テストデータ取得
+testData* getTestData()
+{
+	return s_testData;
+}
+
+//--------------------
+//テストデータインスタンス生成
+testData* createTestData()
+{
+	if (s_testData)
+		return s_testData;
+	s_testData = new testData();
+	return s_testData;
+}
+
+//--------------------
+//テストデータインスタンス破棄
+void destroyTestData()
+{
+	if (!s_testData)
+		return;
+	delete s_testData;
+	s_testData = nullptr;
+}
+
+//--------------------
+//テストデータ作成
+static void makeTestData()
+{
+	//テストデータ取得
+	testData& data = *getTestData();
+	
+	//データを作成
+	data.setData1(1);
+	data.setData2(2.34f);
+	data.setData3(0, 5);
+	data.setData3(1, 6);
+	data.setData3(2, 7);
+	data.data4a().m_a = 8;
+	data.data4a().m_b = 9;
+	data.data4a().m_c = 10.f;
+	data.data4b().m_a = 11;
+	data.data4b().m_b = 12;
+	data.data4b().m_c = 13.f;
+	data.setData5a(0, true);
+	data.setData5a(1, true);
+	data.setData5a(BITSET_DATA1_SIZE - 1, true);
+	data.setData5b(2, true);
+	data.setData5b(3, true);
+	data.setData5b(BITSET_DATA2_SIZE - 1, true);
+	data.data6(0).m_a = 14;
+	data.data6(0).m_b = 15;
+	data.data6(0).m_c = 16.f;
+	data.data6(1).m_a = 17;
+	data.data6(1).m_b = 18;
+	data.data6(1).m_c = 19.f;
+	if (data.data7a())
+	{
+		data.data7a()->m_a = 20;
+		data.data7a()->m_b = 21;
+		data.data7a()->m_c = 22.f;
+	}
+	if (data.data7b())
+	{
+		data.data7b()->m_a = 23;
+		data.data7b()->m_b = 24;
+		data.data7b()->m_c = 25.f;
+	}
+	if (data.data7c())
+	{
+		data.data7c()->m_a = 26;
+		data.data7c()->m_b = 27;
+		data.data7c()->m_c = 28.f;
+	}
+	if (data.data7d())
+	{
+		data.data7d()->m_a = 29;
+		data.data7d()->m_b = 30;
+		data.data7d()->m_c = 31.f;
+	}
+	if (data.data7e())
+	{
+		data.data7e()->m_a = 32;
+		data.data7e()->m_b = 33;
+		data.data7e()->m_c = 34.f;
+	}
+	if (data.data8a())
+		*data.data8a() = 35;
+	if (data.data8b())
+		*data.data8b() = 36;
+	data.setData9(37);
+	data.setData10(38);
+	data.setData11(39);
+	data.setData11_deleted(40);
+	data.setData12(41);
+	data.data13().m_a = 42;
+	data.data13().m_b = 43;
+	data.data13().m_c = 44.f;
+	data.data13_deleted().m_a = 45;
+	data.data13_deleted().m_b = 46;
+	data.data13_deleted().m_c = 47.f;
+	data.data14().m_a = 48;
+	data.data14().m_b = 49;
+	data.data14().m_c = 50.f;
+	data.setData15a(51);
+	data.setData15b(52);
+	data.setData15c(53);
+	data.setData15d(54.);
+	data.setData16a(0, 55);
+	data.setData16a(1, 56);
+	data.setData16a(2, 57);
+	data.setData16b(0, 58);
+	data.setData16b(1, 59);
+	data.setData16c(0, 60);
+	data.setData16c(1, 61);
+	data.setData16c(2, 62);
+	data.setData16c(3, 63);
+	data.setData16d(64);
+	data.setData16e(0, 65);
+	data.setData16e(1, 66);
+}
+
+//--------------------
+//テストデータの内容表示
+static void printTestData()
+{
+	//テストデータ取得
+	testData& data = *getTestData();
+
+	//データ表示
+	auto print_int = [](const char* name, const int var)
+	{
+		std::printf("%s=%d\n", name, var);
+	};
+	auto print_int_p = [](const char* name, const int* var)
+	{
+		if (var)
+			std::printf("%s(%p)=%d\n", name, var, *var);
+		else
+			std::printf("%s(%p)\n", name, var);
+	};
+	auto print_int_array = [](const char* name, const int* var, const std::size_t num)
+	{
+		std::printf("%s={", name);
+		for (std::size_t i = 0; i < num; ++i)
+			std::printf("[%d]=%d,", i, var[i]);
+		std::printf("}\n");
+	};
+	auto print_char = [](const char* name, char var)
+	{
+		std::printf("%s=%d\n", name, var);
+	};
+	auto print_char_array = [](const char* name, const char* var, const std::size_t num)
+	{
+		std::printf("%s={", name);
+		for (std::size_t i = 0; i < num; ++i)
+			std::printf("[%d]=%d,", i, var[i]);
+		std::printf("}\n");
+	};
+	auto print_longlong = [](const char* name, const long long var)
+	{
+		std::printf("%s=%lld\n", name, var);
+	};
+	auto print_float = [](const char* name, const float var)
+	{
+		std::printf("%s=%.2f\n", name, var);
+	};
+	auto print_double = [](const char* name, const double var)
+	{
+		std::printf("%s=%.2lf\n", name, var);
+	};
+	auto print_subdata = [](const char* name, const testData::subData& var)
+	{
+		std::printf("%s:{a=%d,b=%d,c=%.1f}\n", name, var.m_a, var.m_b, var.m_c);
+	};
+	auto print_subdata_p = [](const char* name, const testData::subData* var)
+	{
+		if (var)
+			std::printf("%s(%p):{a=%d,b=%d,c=%.1f}\n", name, var, var->m_a, var->m_b, var->m_c);
+		else
+			std::printf("%s(%p)\n", name, var);
+	};
+	auto print_subdata_array = [](const char* name, const testData::subData* var, const std::size_t num)
+	{
+		std::printf("%s={", name);
+		for (std::size_t i = 0; i < num; ++i)
+			std::printf("[%d]={a=%d,b=%d,c=%.1f},", i, var[i].m_a, var[i].m_b, var[i].m_c);
+		std::printf("}\n");
+	};
+	auto print_bitset1 = [](const char* name, const std::bitset<BITSET_DATA1_SIZE>& var)
+	{
+		std::printf("%s:{[0]=%d,[1]=%d,[2]=%d,[3]=%d,...,[%d]=%d,[%d]=%d,[%d]=%d,}\n", name, var[0], var[1], var[2], var[3], BITSET_DATA1_SIZE - 3, var[BITSET_DATA1_SIZE - 3], BITSET_DATA1_SIZE - 2, var[BITSET_DATA1_SIZE - 2], BITSET_DATA1_SIZE - 1, var[BITSET_DATA1_SIZE - 1]);
+	};
+	auto print_bitset2 = [](const char* name, const std::bitset<BITSET_DATA2_SIZE>& var)
+	{
+		std::printf("%s:{[0]=%d,[1]=%d,[2]=%d,[3]=%d,...,[%d]=%d,[%d]=%d,[%d]=%d,}\n", name, var[0], var[1], var[2], var[3], BITSET_DATA2_SIZE - 3, var[BITSET_DATA2_SIZE - 3], BITSET_DATA2_SIZE - 2, var[BITSET_DATA2_SIZE - 2], BITSET_DATA2_SIZE - 1, var[BITSET_DATA2_SIZE - 1]);
+	};
+
+	print_int("data1", data.data1());
+	print_float("data2", data.data2());
+	print_char_array("data3", data.data3(), data.data3_num());
+	print_subdata("data4a", data.data4a());
+	print_subdata("data4b", data.data4b());
+	print_bitset1("data5a", data.data5a());
+	print_bitset2("data5b", data.data5b());
+	print_subdata_array("data6", data.data6(), data.data6_num());
+	print_subdata_p("data7a", data.data7a());
+	print_subdata_p("data7b", data.data7b());
+	print_subdata_p("data7c", data.data7c());
+	print_subdata_p("data7d", data.data7d());
+	print_subdata_p("data7e", data.data7e());
+	print_int_p("data8a", data.data8a());
+	print_int_p("data8b", data.data8b());
+	print_int("data9", data.data9());
+	print_int("data10", data.data10());
+	print_int("data11", data.data11());
+	print_int("data11_deleted", data.data11_deleted());
+	print_int("data12", data.data12());
+	print_subdata("data13", data.data13());
+	print_subdata("data13_deleted", data.data13_deleted());
+	print_subdata("data14", data.data14());
+	print_int("data15a", data.data15a());
+	print_char("data15b", data.data15b());
+	print_longlong("data15c", data.data15c());
+	print_double("data15d", data.data15d());
+	print_int_array("data16a", data.data16a(), data.data16a_num());
+	print_int_array("data16b", data.data16b(), data.data16b_num());
+	print_int_array("data16c", data.data16c(), data.data16c_num());
+	print_int("data16d", data.data16d());
+	print_int_array("data16e", data.data16e(), data.data16e_num());
+}
+
+//--------------------
+//バイナリ形式セーブデータをセーブ
+static void saveBinary()
+{
+	//セーブデータ用バッファ取得
+	std::size_t save_data_buff_size = 0;
+	void* save_data_buff = getWrokBuff(save_data_buff_size);
+
+	//ワークバッファ取得
+	std::size_t work_buff_size = 0;
+	void* work_buff = getWrokBuff(work_buff_size);
+
+	//セーブデータ作成（シリアライズ）
+	const std::size_t save_data_size = makeBinarySaveDataImage(save_data_buff, save_data_buff_size, work_buff, work_buff_size);
+	if (save_data_size == 0)//失敗判定
+		return;
+
+	//ファイル保存
+	writeFile(BINARY_SAVE_DATA_FILE_PATH, save_data_buff, save_data_size);
+
+	//バッファ解放
+	releaseWorkBuff(save_data_buff);
+	releaseWorkBuff(work_buff);
+}
+
+//--------------------
+//テキスト形式セーブデータをセーブ
+static void saveText()
+{
+	//セーブデータ用バッファ取得
+	std::size_t save_data_buff_size = 0;
+	void* save_data_buff = getWrokBuff(save_data_buff_size);
+
+	//ワークバッファ取得
+	std::size_t work_buff_size = 0;
+	void* work_buff = getWrokBuff(work_buff_size);
+
+	//セーブデータ作成（シリアライズ）
+	const std::size_t save_data_size = makeTextSaveDataImage(save_data_buff, save_data_buff_size, work_buff, work_buff_size);
+	if (save_data_size == 0)//失敗判定
+		return;
+
+	//ファイル保存
+	writeFile(TEXT_SAVE_DATA_FILE_PATH, save_data_buff, save_data_size);
+
+	//バッファ解放
+	releaseWorkBuff(save_data_buff);
+	releaseWorkBuff(work_buff);
+}
+
+//--------------------
+//バイナリ形式セーブデータをロード
+static void loadBinary()
+{
+	//セーブデータ用バッファ取得
+	std::size_t save_data_buff_size = 0;
+	void* save_data_buff = getWrokBuff(save_data_buff_size);
+
+	//ワークバッファ取得
+	std::size_t work_buff_size = 0;
+	void* work_buff = getWrokBuff(work_buff_size);
+
+	//ファイル読み込み
+	const std::size_t save_data_size = readFile(BINARY_SAVE_DATA_FILE_PATH, save_data_buff, save_data_buff_size);
+
+	//セーブデータ読み込み（デシリアライズ）
+	loadBinarySaveDataImage(save_data_buff, save_data_size, work_buff, work_buff_size);
+	
+	//バッファ解放
+	releaseWorkBuff(save_data_buff);
+	releaseWorkBuff(work_buff);
+}
+
+#if 0//未実装
+//--------------------
+//テキスト形式セーブデータをロード
+static void loadText()
+{
+	//セーブデータ用バッファ取得
+	std::size_t save_data_buff_size = 0;
+	void* save_data_buff = getWrokBuff(save_data_buff_size);
+
+	//ワークバッファ取得
+	std::size_t work_buff_size = 0;
+	void* work_buff = getWrokBuff(work_buff_size);
+
+	//ファイル読み込み
+	const std::size_t save_data_size = readFile(TEXT_SAVE_DATA_FILE_PATH, save_data_buff, save_data_buff_size);
+
+	//セーブデータ読み込み（デシリアライズ）
+	loadTextSaveDataImage(save_data_buff, save_data_size, work_buff, work_buff_size);
+
+	//バッファ解放
+	releaseWorkBuff(save_data_buff);
+	releaseWorkBuff(work_buff);
+}
+#endif
+
+//--------------------
+//機能テスト
+void feature_test()
+{
+	std::printf("\n");
+	std::printf("================================================================================\n");
+	std::printf("[ Test for serialization features ]\n");
+	std::printf("\n");
+
+	//テストデータインスタンス生成
+	std::printf("----------------------------------------\n");
+	std::printf("[ Create instance ]\n");
+	createTestData();
+	
+	//テストデータ作成
+	std::printf("----------------------------------------\n");
+	std::printf("[ Make data ]\n");
+	makeTestData();
+	
+	//テストデータの内容表示
+	std::printf("----------------------------------------\n");
+	std::printf("[ Print data(1) : before save ]\n");
+	printTestData();
+	
+	//バイナリ形式セーブデータをセーブ
+	std::printf("----------------------------------------\n");
+	std::printf("[ Save binary ]\n");
+	saveBinary();
+
+	//テキスト形式セーブデータをセーブ
+	std::printf("----------------------------------------\n");
+	std::printf("[ Save text ]\n");
+	saveText();
+
+	//バイナリ形式セーブデータをロード
+	std::printf("----------------------------------------\n");
+	std::printf("[ Load binary ]\n");
+	loadBinary();
+
+#if 0//未実装
+	//テキスト形式セーブデータをロード
+	std::printf("----------------------------------------\n");
+	std::printf("[ Load text ]\n");
+	loadText();
+#endif
+	
+	//テストデータの内容表示
+	std::printf("----------------------------------------\n");
+	std::printf("[ Print data(2) : after load ]\n");
+	printTestData();
+	
+	//テストデータインスタンス破棄
+	std::printf("----------------------------------------\n");
+	std::printf("[ Destroy instance ]\n");
+	destroyTestData();
+
+	std::printf("\n");
+	std::printf("================================================================================\n");
+	std::printf("finish.\n");
+}
+
+// End of file

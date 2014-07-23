@@ -214,6 +214,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\example_serialization\example_serialization.cpp" />
+    <ClCompile Include="..\..\src\example_serialization\feature_test\feature_test.cpp" />
+    <ClCompile Include="..\..\src\example_serialization\feature_test\save_load.cpp" />
+    <ClCompile Include="..\..\src\example_serialization\file.cpp" />
+    <ClCompile Include="..\..\src\example_serialization\work_buff.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="standard.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -224,7 +228,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\example_serialization\example_serialization.h" />
+    <ClInclude Include="..\..\src\example_serialization\feature_test\feature_test.h" />
+    <ClInclude Include="..\..\src\example_serialization\feature_test\save_load.h" />
+    <ClInclude Include="..\..\src\example_serialization\feature_test\save_load_def.cpp.h" />
+    <ClInclude Include="..\..\src\example_serialization\feature_test\test_data.h" />
+    <ClInclude Include="..\..\src\example_serialization\file.h" />
+    <ClInclude Include="..\..\src\example_serialization\work_buff.h" />
     <ClInclude Include="standard.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\example_serialization\feature_test\test_data.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
