@@ -16,7 +16,7 @@ basicTestData
 ----------------------------------------
 [ Save binary ]
 Save file = "data/example_serialization/basic_test_data.bin"
-Binary save data image size = 167
+Binary save data image size = 139
 ----------------------------------------
 [ Save text ]
 Save file = "data/example_serialization/basic_test_data.json"
@@ -33,7 +33,7 @@ basicTestData
 ----------------------------------------
 [ Load binary ]
 Save file = "data/example_serialization/basic_test_data.bin"
-Binary save data image size = 167
+Binary save data image size = 139
 ----------------------------------------
 [ Print data(3) : after load ]
 basicTestData
@@ -64,23 +64,23 @@ data4b:{a=11,b=12,c=13.0}
 data5a:{[0]=1,[1]=1,[2]=0,[3]=0,...,[253]=0,[254]=1,[255]=1,}
 data5b:{[0]=0,[1]=0,[2]=1,[3]=1,...,[13]=1,[14]=0,[15]=1,}
 data6={[0]={a=14,b=15,c=16.0},[1]={a=17,b=18,c=19.0},}
-data7a(0000000BE942DDF0):{a=20,b=21,c=22.0}
-data7b(0000000BE942DD30):{a=23,b=24,c=25.0}
+data7a(000000C70B4EDB30):{a=20,b=21,c=22.0}
+data7b(000000C70B4EDE50):{a=23,b=24,c=25.0}
 data7c(0000000000000000)
 data7d(0000000000000000)
-data7e(0000000BE942DBF0):{a=32,b=33,c=34.0}
+data7e(000000C70B4EDBD0):{a=32,b=33,c=34.0}
 data7f:{a=35,b=36,c=37.0}
-data7g(0000000BE942DE10):{a=38,b=39,c=40.0}
+data7g(000000C70B4EDB50):{a=38,b=39,c=40.0}
 data7h={[0]={a=41,b=42,c=43.0},[1]={a=44,b=45,c=46.0},}
 data7i={[0]={a=47,b=48,c=49.0},[1]={a=50,b=51,c=52.0},}
 data7j={[0]={a=53,b=54,c=55.0},[1]={a=56,b=57,c=58.0},}
-data8a(0000000BE942DED0)=59
-data8b(0000000BE942DF90)=60
+data8a(000000C70B4EDED0)=59
+data8b(000000C70B4EDF90)=60
 data8c(0000000000000000)
 data8d(0000000000000000)
-data8e(0000000BE942DFB0)=63
+data8e(000000C70B4EDFB0)=63
 data8f=64
-data8g(0000000BE942DF30)=65
+data8g(000000C70B4EDF30)=65
 data8h={[0]=66,[1]=67,}
 data8i={[0]=68,[1]=69,}
 data8j={[0]=70,[1]=71,}
@@ -250,8 +250,8 @@ collector<testData>(ver=1.2)
 arc.isInputClass=0, arc.isOutputClass=1
 Result:
   Fatal-error:    nothing
-  Save data size: 4772
-  Used work-buffer size(peak): 12528
+  Save data size: 3764
+  Used work-buffer size(peak): 11600
   numInvalidItem()=0
 ----------------------------------------
 [ Save text ]
@@ -385,7 +385,7 @@ arc.isInputClass=0, arc.isOutputClass=1
 Result:
   Fatal-error:    nothing
   Save data size: 34054
-  Used work-buffer size(peak): 12528
+  Used work-buffer size(peak): 11600
   numInvalidItem()=0
 ----------------------------------------
 [ Load binary ]
@@ -575,8 +575,8 @@ afterLoad<testData>(ver=1.2,now_ver=1.2)
 arc.isInputClass=1, arc.isOutputClass=0
 Result:
   Fatal-error:    nothing
-  Save data size: 4772
-  Used work-buffer size(peak): 12528
+  Save data size: 3764
+  Used work-buffer size(peak): 11600
   numInvalidItem()=0
   numSmallerSizeItem()=5
   numLargerSizeItem()=7
@@ -602,23 +602,23 @@ data4b:{a=11,b=12,c=13.0}
 data5a:{[0]=1,[1]=1,[2]=0,[3]=0,...,[253]=0,[254]=1,[255]=1,}
 data5b:{[0]=0,[1]=0,[2]=1,[3]=1,...,[13]=1,[14]=0,[15]=1,}
 data6={[0]={a=14,b=15,c=16.0},[1]={a=17,b=18,c=19.0},}
-data7a(0000000BE942DCB0):{a=20,b=21,c=22.0}
-data7b(0000000BE942DD10):{a=23,b=24,c=25.0}
+data7a(000000C70B4EDC70):{a=20,b=21,c=22.0}
+data7b(000000C70B4EDB30):{a=23,b=24,c=25.0}
 data7c(0000000000000000)
-data7d(0000000BE942DD30):{a=0,b=0,c=0.0}
+data7d(000000C70B4EDD70):{a=0,b=0,c=0.0}
 data7e(0000000000000000)
 data7f:{a=38,b=39,c=40.0}
-data7g(0000000BE942DBF0):{a=35,b=36,c=37.0}
+data7g(000000C70B4EDD50):{a=35,b=36,c=37.0}
 data7h={[0]={a=41,b=42,c=43.0},[1]={a=44,b=45,c=46.0},}
 data7i={[0]={a=53,b=54,c=55.0},[1]={a=56,b=57,c=58.0},}
 data7j={[0]={a=47,b=48,c=49.0},[1]={a=50,b=51,c=52.0},}
-data8a(0000000BE9428D70)=59
-data8b(0000000BE9428E00)=60
+data8a(000000C70B4E8E70)=59
+data8b(000000C70B4E8EB0)=60
 data8c(0000000000000000)
-data8d(0000000BE9428E70)=0
+data8d(000000C70B4E8DE0)=0
 data8e(0000000000000000)
 data8f=64
-data8g(0000000BE9428DC0)=65
+data8g(000000C70B4E8E90)=65
 data8h={[0]=66,[1]=67,}
 data8i={[0]=70,[1]=71,}
 data8j={[0]=68,[1]=69,}
