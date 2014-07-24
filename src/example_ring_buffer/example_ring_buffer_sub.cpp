@@ -44,11 +44,10 @@ GASHA_INSTANCING_rBuff(mt_ope_t);//template class ring_buffer::container<mt_ope_
 
 #include <cstdio>//std::printf()
 
-//【VC++】例外を無効化した状態で <algorithm> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
-//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
-#pragma warning(disable: 4530)//C4530を抑える
-
+#pragma warning(push)//【VC++】ワーニング設定を退避
+#pragma warning(disable: 4530)//【VC++】C4530を抑える
 #include <algorithm>//std::find(), std::binary_search(), std::lower_bound()
+#pragma warning(pop)//【VC++】ワーニング設定を復元
 
 //シンプルリングバッファコンテナテスト
 void example_simple_ring_buffer()

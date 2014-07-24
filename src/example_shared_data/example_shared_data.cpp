@@ -35,13 +35,12 @@
 #include <chrono>//C++11 std::chrono
 #include <cstdio>//std::printf()
 
-//【VC++】例外を無効化した状態で <mutex> <thread> <function >をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
-//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
-#pragma warning(disable: 4530)//C4530を抑える
-
-#include <mutex>//C++11 std::mutex
-#include <thread>//C++11 std::thread
+#pragma warning(push)//【VC++】ワーニング設定を退避
+#pragma warning(disable: 4530)//【VC++】C4530を抑える
 #include <functional>//C++11 std::function
+#include <thread>//C++11 std::thread
+#include <mutex>//C++11 std::mutex
+#pragma warning(pop)//【VC++】ワーニング設定を復元
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
@@ -848,11 +847,16 @@ void thread_test()
 #include <gasha/spin_lock.h>//スピンロック
 #include <gasha/lw_spin_lock.h>//サイズ計量スピンロック
 #include <gasha/dummy_lock.h>//ダミーロック
-#include <mutex>//C++11 std::mutex
 #include <gasha/shared_spin_lock.h>//共有スピンロック
 #include <gasha/simple_shared_spin_lock.h>//単純共有スピンロック
 #include <gasha/unshared_spin_lock.h>//非共有スピンロック
 #include <gasha/dummy_shared_lock.h>//ダミー共有ロック
+
+#pragma warning(push)//【VC++】ワーニング設定を退避
+#pragma warning(disable: 4530)//【VC++】C4530を抑える
+#include <mutex>//C++11 std::mutex
+#pragma warning(pop)//【VC++】ワーニング設定を復元
+
 template<class T>
 void testScopedLock()
 {

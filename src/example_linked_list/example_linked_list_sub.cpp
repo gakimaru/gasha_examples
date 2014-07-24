@@ -42,11 +42,10 @@ GASHA_INSTANCING_lList(another_ope);//template class linked_list::container<anot
 
 #include <cstdio>//std::printf()
 
-//【VC++】例外を無効化した状態で <algorithm> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
-//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
-#pragma warning(disable: 4530)//C4530を抑える
-
-#include <algorithm>//std::find(), std::binary_search(), std::lower_bound()
+#pragma warning(push)//【VC++】ワーニング設定を退避
+#pragma warning(disable: 4530)//【VC++】C4530を抑える
+#include <algorithm>//std::for_each()
+#pragma warning(pop)//【VC++】ワーニング設定を復元
 
 //シンプル双方向連結リストコンテナテスト
 void example_simple_linked_list()

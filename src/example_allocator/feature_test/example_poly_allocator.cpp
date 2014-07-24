@@ -33,11 +33,10 @@
 
 #include <cstdio>//std::printf()
 
-//【VC++】例外を無効化した状態で <vector> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
-//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
-#pragma warning(disable: 4530)//C4530を抑える
-
+#pragma warning(push)//【VC++】ワーニング設定を退避
+#pragma warning(disable: 4530)//【VC++】C4530を抑える
 #include <vector>//std::vector
+#pragma warning(pop)//【VC++】ワーニング設定を復元
 
 //【VC++】アライメントが指定されたクラス／構造体を new すると、warning C4316 が発生する
 //  warning C4316 : '(class_name)' : ヒープで割り当てられたオブジェクトが (16) にアラインメントされていない可能性があります

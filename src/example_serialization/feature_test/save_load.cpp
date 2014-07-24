@@ -29,8 +29,13 @@ void printResult(const bool has_fatal_error, const std::size_t save_data_size, c
 	std::printf("  Save data size: %d\n", save_data_size);
 	std::printf("  Used work-buffer size(peak): %d\n", peak_work_size);
 }
-void printResult(const archive::results& result)
+void printResultForOutput(const archive::results& result)
 {
+	std::printf("  numInvalidItem()=%d\n", result.numInvalidItem());//（名前が衝突するなどして）無効となったデータ項目の数
+}
+void printResultForInput(const archive::results& result)
+{
+	std::printf("  numInvalidItem()=%d\n", result.numInvalidItem());//（名前が衝突するなどして）無効となったデータ項目の数
 	std::printf("  numSmallerSizeItem()=%d\n", result.numSmallerSizeItem());//サイズが縮小されたデータ項目の数を取得
 	std::printf("  numLargerSizeItem()=%d\n", result.numLargerSizeItem());//サイズが拡大されたデータ項目の数を取得
 	std::printf("  numSmallerArrItem()=%d\n", result.numSmallerArrItem());//配列要素数が縮小されたデータ項目の数を取得
@@ -57,6 +62,7 @@ std::size_t makeBinarySaveDataImage(void* save_data, const std::size_t save_data
 	GASHA_ archive::outputBinaryArchive arc(save_data, save_data_max_size, work_buff, work_buff_max_size);
 	arc << GASHA_ serialization::pair<saveData>("SaveData");//シリアライズ
 	printResult(arc.hasFatalError(), arc.saveDataSize(), arc.peakWorkSize());
+	printResultForOutput(arc.result());
 	return arc.saveDataSize();
 }
 
@@ -70,6 +76,7 @@ std::size_t makeTextSaveDataImage(void* save_data, const std::size_t save_data_m
 	GASHA_ archive::outputTextArchive arc(save_data, save_data_max_size, work_buff, work_buff_max_size);
 	arc << GASHA_ serialization::pair<saveData>("SaveData");//シリアライズ
 	printResult(arc.hasFatalError(), arc.saveDataSize(), arc.peakWorkSize());
+	printResultForOutput(arc.result());
 	return arc.saveDataSize();
 }
 
@@ -83,7 +90,7 @@ bool loadBinarySaveDataImage(void* save_data, const std::size_t save_data_size, 
 	GASHA_ archive::inputBinaryArchive arc(save_data, save_data_size, work_buff, work_buff_max_size);
 	arc >> GASHA_ serialization::pair<saveData>("SaveData");//デシリアライズ
 	printResult(arc.hasFatalError(), arc.saveDataSize(), arc.peakWorkSize());
-	printResult(arc.result());
+	printResultForInput(arc.result());
 	return !arc.hasFatalError();
 }
 
@@ -98,7 +105,7 @@ bool loadTextSaveDataImage(void* save_data, const std::size_t save_data_size, vo
 	GASHA_ archive::inputTextArchive arc(save_data, save_data_size, work_buff, work_buff_max_size);
 	arc >> GASHA_ serialization::pair<saveData>("SaveData");//デシリアライズ
 	printResult(arc.hasFatalError(), arc.saveDataSize(), arc.peakWorkSize());
-	printResult(arc.result());
+	printResultForInput(arc.result());
 	return !arc.hasFatalError();
 }
 #endif//未実装

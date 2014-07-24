@@ -19,7 +19,9 @@
 #define ENABLE_FEATURE_TEST//シリアライズ系機能テストを有効にする場合は、このマクロを有効化する
 //#define ENABLE_REAL_TEST//実際のゲームを想定したテストを有効にする場合は、このマクロを有効化する
 
-#define ENABLE_TO_SERIALIZE_BITSET_ON_FEATURE_TEST//機能テストで st::bitset のシリアライズを行う場合、このマクロを有効化する
+#define ENABLE_TO_SERIALIZE_BITSET_ON_FEATURE_TEST//機能テストで std::bitset のユーザー定義シリアライズを行う場合、このマクロを有効化する（セーブデータのサイズが大きくなる）
+//#define ENABLE_TO_OCCUR_FATAL_ERROR//機能テストで致命的エラーを発生させる場合、このマクロを有効化する
+//#define HAS_INVALID_ITEM//機能テストで無効なデータ（重複した名前のデータ項目を登録）を扱う場合、このマクロを有効化する
 
 //----------------------------------------
 //シリアライズテスト

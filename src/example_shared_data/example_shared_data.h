@@ -14,9 +14,6 @@
 
 #include <cstddef>//std::size_t
 
-//【VC++】ワーニング設定を退避
-#pragma warning(push)
-
 //--------------------------------------------------------------------------------
 //テスト用コンパイラスイッチ／定数
 
@@ -111,11 +108,11 @@ typedef GASHA_ spinLock lock_type;//共有データのロックに spinLock を�
 
 #elif USE_LOCK_TYPE == 2//共有データのロックに std::mutex を使用する場合
 
-//【VC++】例外を無効化した状態で <mutex> をインクルードすると、warning C4530 が発生する
-//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
-#pragma warning(disable: 4530)//C4530を抑える
-
+#pragma warning(push)//【VC++】ワーニング設定を退避
+#pragma warning(disable: 4530)//【VC++】C4530を抑える
 #include <mutex>//C++11 std::mutex
+#pragma warning(pop)//【VC++】ワーニング設定を復元
+
 typedef std::mutex lock_type;//共有データのロックに std::mutex を使用する場合は、この行を有効化する
 
 #else//if USE_LOCK_TYPE == 0//共有データのロックに dummyLock を使用する場合
@@ -150,9 +147,6 @@ typedef GASHA_ lfQueue<data_t, TEST_POOL_SIZE, TEST_TAGGED_PTR_TAG_SIZE, TEST_TA
 //----------------------------------------
 //マルチスレッド共有データテスト
 void example_shared_data();
-
-//【VC++】ワーニング設定を復元
-#pragma warning(pop)
 
 #endif//GASHA_INCLUDED_EXAMPLE_SHARED_DATA_H
 

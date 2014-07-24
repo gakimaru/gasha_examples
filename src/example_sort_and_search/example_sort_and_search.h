@@ -38,14 +38,10 @@ static const int TEST_DATA_COUNT = 100;//テストデータ件数（最大）
 #define TEST_DATA_ALIGN 16//テストデータ一件のアラインメント
 //#define TEST_DATA_ALIGN 4//テストデータ一件のアラインメント
 
-//【VC++】ワーニング設定を退避
-#pragma warning(push)
-
-//【VC++】例外を無効化した状態で <array> をインクルードすると warning C4530 が出る
-//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
-#pragma warning(disable: 4530)//C4530を抑える
-
+#pragma warning(push)//【VC++】ワーニング設定を退避
+#pragma warning(disable: 4530)//【VC++】C4530を抑える
 #include <array>//C++11 std::array
+#pragma warning(pop)//【VC++】ワーニング設定を復元
 
 //----------------------------------------
 //テスト用構造体
@@ -82,9 +78,6 @@ bool predicate_func(const data_t& lhs, const data_t& rhs);
 //----------------------------------------
 //ソート＆探索処理テスト関数
 void example_sort_and_search();
-
-//【VC++】ワーニング設定を退避
-#pragma warning(pop)
 
 #endif//GASHA_INCLUDED_EXAMPLE_SORT_AND_SEARCH_H
 

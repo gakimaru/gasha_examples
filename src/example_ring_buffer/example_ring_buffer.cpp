@@ -17,20 +17,19 @@
 #include <gasha/simple_assert.h>//シンプルアサーション
 
 #include <utility>//C++11 std::move, std::forward
-#include <condition_variable>//C++11 std::condition_variable用
-#include <atomic>//C++11 std::atomic用
-#include <chrono>//C++11 std::chrono用
+#include <condition_variable>//C++11 std::condition_variable
+#include <atomic>//C++11 std::atomic
+#include <chrono>//C++11 std::chrono
 #include <cstring>//std::memcpy()
 #include <cstdio>//std::printf()
 
-//【VC++】例外を無効化した状態で <thread> <mutex> <algorithm> <deque> をインクルードすると、もしくは、new演算子を使用すると、warning C4530 が発生する
-//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
-#pragma warning(disable: 4530)//C4530を抑える
-
-#include <thread>//C++11 std::thread用
-#include <mutex>//C++11 std::mutex用
+#pragma warning(push)//【VC++】ワーニング設定を退避
+#pragma warning(disable: 4530)//【VC++】C4530を抑える
+#include <thread>//C++11 std::thread
+#include <mutex>//C++11 std::mutex
 #include <algorithm>//std::for_each()
 #include <deque>//std::deque（比較用）
+#pragma warning(pop)//【VC++】ワーニング設定を復元
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

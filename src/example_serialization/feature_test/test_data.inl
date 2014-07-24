@@ -43,15 +43,15 @@ inline void testData::setData2(const float value)
 	m_data2 = value;
 }
 //データ3
-inline const char* testData::data3() const
+inline const short* testData::data3() const
 {
 	return m_data3;
 }
-inline char testData::data3(const int index) const
+inline short testData::data3(const int index) const
 {
 	return m_data3[index];
 }
-inline void testData::setData3(const int index, const int value)
+inline void testData::setData3(const int index, const short value)
 {
 	m_data3[index] = value;
 }
@@ -130,11 +130,7 @@ inline testData::subData* testData::data7a()
 	return m_data7a;
 }
 //データ7b
-inline const testData::subData* testData::data7b() const
-{
-	return m_data7b;
-}
-inline testData::subData* testData::data7b()
+inline testData::subData*& testData::data7b()
 {
 	return m_data7b;
 }
@@ -153,6 +149,47 @@ inline testData::subData*& testData::data7e()
 {
 	return m_data7e;
 }
+//データ7f
+inline const testData::subData& testData::data7f() const
+{
+	return m_data7f;
+}
+inline testData::subData& testData::data7f()
+{
+	return m_data7f;
+}
+//データ7g
+inline testData::subData*& testData::data7g()
+{
+	return m_data7g;
+}
+//データ7h
+inline testData::subData*& testData::data7h()
+{
+	return m_data7h;
+}
+//データ7i
+inline const testData::subData* testData::data7i()
+{
+	return m_data7i;
+}
+inline testData::subData& testData::data7i(const int index)
+{
+	return m_data7i[index];
+}
+inline const testData::subData& testData::data7i(const int index) const
+{
+	return m_data7i[index];
+}
+inline std::size_t testData::data7i_num()
+{
+	return extentof(m_data7i);
+}
+//データ7j
+inline testData::subData*& testData::data7j()
+{
+	return m_data7j;
+}
 //データ8a
 inline const int* testData::data8a() const
 {
@@ -163,13 +200,65 @@ inline int* testData::data8a()
 	return m_data8a;
 }
 //データ8b
-inline const int* testData::data8b() const
+inline int*& testData::data8b()
 {
 	return m_data8b;
 }
-inline int* testData::data8b()
+//データ8c
+inline int*& testData::data8c()
 {
-	return m_data8b;
+	return m_data8c;
+}
+//データ8d
+inline int*& testData::data8d()
+{
+	return m_data8d;
+}
+//データ8e
+inline int*& testData::data8e()
+{
+	return m_data8e;
+}
+//データ8f
+inline int testData::data8f() const
+{
+	return m_data8f;
+}
+inline void testData::setData8f(const int value)
+{
+	m_data8f = value;
+}
+//データ8g
+inline int*& testData::data8g()
+{
+	return m_data8g;
+}
+//データ8h
+inline int*& testData::data8h()
+{
+	return m_data8h;
+}
+//データ8i
+inline const int* testData::data8i() const
+{
+	return m_data8i;
+}
+inline int testData::data8i(const int index) const
+{
+	return m_data8i[index];
+}
+inline void testData::setData8i(const int index, const int value)
+{
+	m_data8i[index] = value;
+}
+inline std::size_t testData::data8i_num() const
+{
+	return extentof(m_data8i);
+}
+//データ8j
+inline int*& testData::data8j()
+{
+	return m_data8j;
 }
 //データ9
 inline int testData::data9() const
@@ -252,12 +341,12 @@ inline void testData::setData15a(const int value)
 {
 	m_data15a = value;
 }
-//データ15a
-inline char testData::data15b() const
+//データ15b
+inline short testData::data15b() const
 {
 	return m_data15b;
 }
-inline void testData::setData15b(const char value)
+inline void testData::setData15b(const short value)
 {
 	m_data15b = value;
 }
@@ -356,6 +445,200 @@ inline std::size_t testData::data16e_num() const
 {
 	return extentof(m_data16e);
 }
+//データ17a
+inline const testData::subData* testData::data17a()
+{
+	return m_data17a;
+}
+inline testData::subData& testData::data17a(const int index)
+{
+	return m_data17a[index];
+}
+inline const testData::subData& testData::data17a(const int index) const
+{
+	return m_data17a[index];
+}
+inline std::size_t testData::data17a_num()
+{
+	return extentof(m_data17a);
+}
+//データ17b
+inline const testData::subData* testData::data17b()
+{
+	return m_data17b;
+}
+inline testData::subData& testData::data17b(const int index)
+{
+	return m_data17b[index];
+}
+inline const testData::subData& testData::data17b(const int index) const
+{
+	return m_data17b[index];
+}
+inline std::size_t testData::data17b_num()
+{
+	return extentof(m_data17b);
+}
+//データ17c
+inline const testData::subData* testData::data17c()
+{
+	return m_data17c;
+}
+inline testData::subData& testData::data17c(const int index)
+{
+	return m_data17c[index];
+}
+inline const testData::subData& testData::data17c(const int index) const
+{
+	return m_data17c[index];
+}
+inline std::size_t testData::data17c_num()
+{
+	return extentof(m_data17c);
+}
+//データ17d
+inline const testData::subData& testData::data17d() const
+{
+	return m_data17d;
+}
+inline testData::subData& testData::data17d()
+{
+	return m_data17d;
+}
+//データ17e
+inline const testData::subData* testData::data17e()
+{
+	return m_data17e;
+}
+inline testData::subData& testData::data17e(const int index)
+{
+	return m_data17e[index];
+}
+inline const testData::subData& testData::data17e(const int index) const
+{
+	return m_data17e[index];
+}
+inline std::size_t testData::data17e_num()
+{
+	return extentof(m_data17e);
+}
+//データ18a
+inline int testData::data18a() const
+{
+	return m_data18a;
+}
+inline void testData::setData18a(const int value)
+{
+	m_data18a = value;
+}
+//データ18b
+inline const testData::subData& testData::data18b() const
+{
+	return m_data18b;
+}
+inline testData::subData& testData::data18b()
+{
+	return m_data18b;
+}
+//データ19a
+inline int testData::data19a() const
+{
+	return m_data19a;
+}
+inline void testData::setData19a(const int value)
+{
+	m_data19a = value;
+}
+//データ19b
+inline const testData::subData3a& testData::data19b() const
+{
+	return m_data19b;
+}
+inline testData::subData3a& testData::data19b()
+{
+	return m_data19b;
+}
+//データ20a
+inline const testData::subData& testData::data20a() const
+{
+	return m_data20a;
+}
+inline testData::subData& testData::data20a()
+{
+	return m_data20a;
+}
+//データ20b
+inline const testData::subData3a& testData::data20b() const
+{
+	return m_data20b;
+}
+inline testData::subData3a& testData::data20b()
+{
+	return m_data20b;
+}
+//データ21a
+inline const testData::subData3a& testData::data21a() const
+{
+	return m_data21a;
+}
+inline testData::subData3a& testData::data21a()
+{
+	return m_data21a;
+}
+//データ21b
+inline const testData::subData3b& testData::data21b() const
+{
+	return m_data21b;
+}
+inline testData::subData3b& testData::data21b()
+{
+	return m_data21b;
+}
+//データ21c
+inline const testData::subData3c& testData::data21c() const
+{
+	return m_data21c;
+}
+inline testData::subData3c& testData::data21c()
+{
+	return m_data21c;
+}
+//データ22a
+inline const testData::subData& testData::data22a() const
+{
+	return m_data22a;
+}
+inline testData::subData& testData::data22a()
+{
+	return m_data22a;
+}
+//データ22b
+inline const testData::subData2& testData::data22b() const
+{
+	return m_data22b;
+}
+inline testData::subData2& testData::data22b()
+{
+	return m_data22b;
+}
+//データ23
+inline const testData::subDataExt& testData::data23() const
+{
+	return m_data23;
+}
+inline testData::subDataExt& testData::data23()
+{
+	return m_data23;
+}
+//データ24
+inline const testData::subDataExt2& testData::data24() const
+{
+	return m_data24;
+}
+inline testData::subDataExt2& testData::data24()
+{
+	return m_data24;
+}
 
 //コンストラクタ
 inline testData::testData() :
@@ -368,8 +651,19 @@ inline testData::testData() :
 	m_data7c(nullptr),
 	m_data7d(nullptr),
 	m_data7e(nullptr),
+	m_data7f(),
+	m_data7g(nullptr),
+	m_data7h(nullptr),
+	m_data7j(nullptr),
 	m_data8a(nullptr),
 	m_data8b(nullptr),
+	m_data8c(nullptr),
+	m_data8d(nullptr),
+	m_data8e(nullptr),
+	m_data8f(),
+	m_data8g(nullptr),
+	m_data8h(nullptr),
+	m_data8j(nullptr),
 	m_data9(0),
 	m_data10(0),
 	m_data11(0),
@@ -382,10 +676,26 @@ inline testData::testData() :
 	m_data15b(0),
 	m_data15c(0),
 	m_data15d(0),
-	m_data16d(0)
+	m_data16d(0),
+	m_data17d(),
+	m_data18a(0),
+	m_data18b(),
+	m_data19a(0),
+	m_data19b(),
+	m_data20a(),
+	m_data20b(),
+	m_data21a(),
+	m_data21b(),
+	m_data21c(),
+	m_data22a(),
+	m_data22b(),
+	m_data23(),
+	m_data24()
 {
 	for (auto& data : m_data3)
 	 data = 0;
+	for (auto& data : m_data6)
+		data = subData();
 	m_data5a.reset();
 	m_data5b.reset();
 	m_data7a = new subData();
@@ -393,8 +703,29 @@ inline testData::testData() :
 	//m_data7c = new subData();//nullptrテストのため、メモリ確保しない
 	//m_data7d = new subData();//nullptrテストのため、メモリ確保しない
 	//m_data7e = new subData();//nullptrテストのため、メモリ確保しない
-	m_data8a = new int;
+	m_data7g = new subData();
+	m_data7h = new subData[2];
+	for (int i = 0; i < 2; ++i)
+		m_data7h[i] = subData();
+	for (auto& data : m_data7i)
+		data = subData();
+	m_data7j = new subData[2];
+	for (int i = 0; i < 2; ++i)
+		m_data7j[i] = subData();
+	m_data8a = new int(0);
 	//m_data8b = new int;//nullptrテストのため、メモリ確保しない
+	//m_data8c = new int;//nullptrテストのため、メモリ確保しない
+	//m_data8d = new int;//nullptrテストのため、メモリ確保しない
+	//m_data8e = new int;//nullptrテストのため、メモリ確保しない
+	m_data8g = new int(0);
+	m_data8h = new int[2];
+	for (int i = 0; i < 2; ++i)
+		m_data8h[i] = 0;
+	for (auto& data : m_data8i)
+		data = 0;
+	m_data8j = new int[2];
+	for (int i = 0; i < 2; ++i)
+		m_data8j[i] = 0;
 	for (auto& data : m_data16a)
 		data = 0;
 	for (auto& data : m_data16b)
@@ -403,6 +734,14 @@ inline testData::testData() :
 		data = 0;
 	for (auto& data : m_data16e)
 		data = 0;
+	for (auto& data : m_data17a)
+		data = subData();
+	for (auto& data : m_data17b)
+		data = subData();
+	for (auto& data : m_data17c)
+		data = subData();
+	for (auto& data : m_data17e)
+		data = subData();
 }
 
 //デストラクタ
@@ -418,10 +757,28 @@ inline testData::~testData()
 		delete m_data7d;
 	if (m_data7e)
 		delete m_data7e;
+	if (m_data7g)
+		delete m_data7g;
+	if (m_data7h)
+		delete[] m_data7h;
+	if (m_data7j)
+		delete[] m_data7j;
 	if (m_data8a)
 		delete m_data8a;
 	if (m_data8b)
 		delete m_data8b;
+	if (m_data8c)
+		delete m_data8c;
+	if (m_data8d)
+		delete m_data8d;
+	if (m_data8e)
+		delete m_data8e;
+	if (m_data8g)
+		delete m_data8g;
+	if (m_data8h)
+		delete[] m_data8h;
+	if (m_data8j)
+		delete[] m_data8j;
 }
 
 //ネストした構造体：コンストラクタ
@@ -429,6 +786,48 @@ inline testData::subData::subData() :
 	m_a(0),
 	m_b(0),
 	m_c(0.f)
+{}
+
+//ネストした構造体：コンストラクタ
+inline testData::subData2::subData2() :
+	m_d(0),
+	m_c(0.),
+	m_b(0),
+	m_a(0)
+{}
+
+//ネストした構造体：コンストラクタ
+inline testData::subData3a::subData3a() :
+	m_a(0),
+	m_b(0),
+	m_c(0.f)
+{}
+
+//ネストした構造体：コンストラクタ
+inline testData::subData3b::subData3b() :
+	m_a(0),
+	m_b(0)
+{}
+
+//ネストした構造体：コンストラクタ
+inline testData::subData3c::subData3c() :
+	m_a(0),
+	m_b(0),
+	m_c(0.f),
+	m_d(0)
+{}
+
+//継承した構造体：コンストラクタ
+inline testData::subDataExt::subDataExt() :
+	subData(),
+	m_z(0)
+{}
+
+//多重継承した構造体：コンストラクタ
+inline testData::subDataExt2::subDataExt2() :
+	subData(),
+	subData2(),
+	m_z(0)
 {}
 
 #endif//GASHA_INCLUDED_TEST_DATA_INL

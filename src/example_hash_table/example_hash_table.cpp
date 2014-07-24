@@ -21,12 +21,11 @@
 #include <cstring>//std::memcpy()
 #include <cstdio>//std::printf()
 
-//【VC++】例外を無効化した状態で <unordered_map> <algoritm> をインクルードすると、もしくは、new 演算子を使用すると warning C4530 が出る
-//  warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
-#pragma warning(disable: 4530)//C4530を抑える
-
+#pragma warning(push)//【VC++】ワーニング設定を退避
+#pragma warning(disable: 4530)//【VC++】C4530を抑える
 #include <algorithm>//std::for_each()
 #include <unordered_map>//C++11 std::unordered_map（比較用）
+#pragma warning(pop)//【VC++】ワーニング設定を復元
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
