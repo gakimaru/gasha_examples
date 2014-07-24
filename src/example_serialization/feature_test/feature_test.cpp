@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------
 // feature_test.cpp
-// シリアライズテスト：機能テスト：テスト用データ定義
+// シリアライズテスト：機能テスト（メイン）
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
@@ -17,8 +17,8 @@
 
 //--------------------
 //ファイルパス
-static const char* BINARY_SAVE_DATA_FILE_PATH = "data/example_serialization/testData.bin";//バイナリセーブデータファイルパス
-static const char* TEXT_SAVE_DATA_FILE_PATH = "data/example_serialization/testData.txt";//バイナリセーブデータファイルパス
+static const char* BINARY_SAVE_DATA_FILE_PATH = "data/example_serialization/feature_test_data.bin";//バイナリ形式セーブデータファイルパス
+static const char* TEXT_SAVE_DATA_FILE_PATH = "data/example_serialization/feature_test_data.json";//テキスト（json）形式セーブデータファイルパス
 
 //--------------------
 //グローバルテストデータ

@@ -4,7 +4,7 @@
 
 //--------------------------------------------------------------------------------
 // feature_test.h
-// シリアライズテスト：機能テスト
+// シリアライズテスト：機能テスト【宣言部】
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru

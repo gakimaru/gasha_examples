@@ -26,6 +26,7 @@ SRCS := \
 	$(PROJ_SRC_DIR)/example_serialization.cpp \
 	$(PROJ_SRC_DIR)/work_buff.cpp \
 	$(PROJ_SRC_DIR)/file.cpp \
+	$(PROJ_SRC_DIR)/basic_test/basic_test.cpp \
 	$(PROJ_SRC_DIR)/feature_test/feature_test.cpp \
 	$(PROJ_SRC_DIR)/feature_test/save_load.cpp \
 

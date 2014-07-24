@@ -1,5 +1,53 @@
 
 ================================================================================
+[ Test for serialization basic ]
+
+----------------------------------------
+[ Make data ]
+----------------------------------------
+[ Print data(1) : before save ]
+basicTestData
+  .m_memberA = 123
+  .m_memberB = 4.56
+  .m_memberC = { 78, 90 }
+  .m_memberD
+      .m_item1 = 987
+      .m_item2 = 654
+----------------------------------------
+[ Save binary ]
+Save file = "data/example_serialization/basic_test_data.bin"
+Binary save data image size = 139
+----------------------------------------
+[ Save text ]
+Save file = "data/example_serialization/basic_test_data.json"
+Text save data image size = 922
+----------------------------------------
+[ Print data(2) : before load ]
+basicTestData
+  .m_memberA = 0
+  .m_memberB = 0.00
+  .m_memberC = { 0, 0 }
+  .m_memberD
+      .m_item1 = 0
+      .m_item2 = 0
+----------------------------------------
+[ Load binary ]
+Save file = "data/example_serialization/basic_test_data.bin"
+Binary save data image size = 139
+----------------------------------------
+[ Print data(3) : after load ]
+basicTestData
+  .m_memberA = 123
+  .m_memberB = 4.56
+  .m_memberC = { 78, 90 }
+  .m_memberD
+      .m_item1 = 987
+      .m_item2 = 654
+
+================================================================================
+finish.
+
+================================================================================
 [ Test for serialization features ]
 
 ----------------------------------------
@@ -16,23 +64,23 @@ data4b:{a=11,b=12,c=13.0}
 data5a:{[0]=1,[1]=1,[2]=0,[3]=0,...,[253]=0,[254]=1,[255]=1,}
 data5b:{[0]=0,[1]=0,[2]=1,[3]=1,...,[13]=1,[14]=0,[15]=1,}
 data6={[0]={a=14,b=15,c=16.0},[1]={a=17,b=18,c=19.0},}
-data7a(0x800206b8):{a=20,b=21,c=22.0}
-data7b(0x80020758):{a=23,b=24,c=25.0}
+data7a(0x80048988):{a=20,b=21,c=22.0}
+data7b(0x80048a28):{a=23,b=24,c=25.0}
 data7c(0x0)
 data7d(0x0)
-data7e(0x80020768):{a=32,b=33,c=34.0}
+data7e(0x80048a38):{a=32,b=33,c=34.0}
 data7f:{a=35,b=36,c=37.0}
-data7g(0x800206c8):{a=38,b=39,c=40.0}
+data7g(0x80048998):{a=38,b=39,c=40.0}
 data7h={[0]={a=41,b=42,c=43.0},[1]={a=44,b=45,c=46.0},}
 data7i={[0]={a=47,b=48,c=49.0},[1]={a=50,b=51,c=52.0},}
 data7j={[0]={a=53,b=54,c=55.0},[1]={a=56,b=57,c=58.0},}
-data8a(0x80020718)=59
-data8b(0x80020778)=60
+data8a(0x800489e8)=59
+data8b(0x80048a48)=60
 data8c(0x0)
 data8d(0x0)
-data8e(0x80020788)=63
+data8e(0x80048a58)=63
 data8f=64
-data8g(0x80020728)=65
+data8g(0x800489f8)=65
 data8h={[0]=66,[1]=67,}
 data8i={[0]=68,[1]=69,}
 data8j={[0]=70,[1]=71,}
@@ -554,23 +602,23 @@ data4b:{a=11,b=12,c=13.0}
 data5a:{[0]=1,[1]=1,[2]=0,[3]=0,...,[253]=0,[254]=1,[255]=1,}
 data5b:{[0]=0,[1]=0,[2]=1,[3]=1,...,[13]=1,[14]=0,[15]=1,}
 data6={[0]={a=14,b=15,c=16.0},[1]={a=17,b=18,c=19.0},}
-data7a(0x80020840):{a=20,b=21,c=22.0}
-data7b(0x80020738):{a=23,b=24,c=25.0}
+data7a(0x80048988):{a=20,b=21,c=22.0}
+data7b(0x80048a28):{a=23,b=24,c=25.0}
 data7c(0x0)
-data7d(0x80020748):{a=0,b=0,c=0.0}
+data7d(0x80048a38):{a=0,b=0,c=0.0}
 data7e(0x0)
 data7f:{a=38,b=39,c=40.0}
-data7g(0x80020850):{a=35,b=36,c=37.0}
+data7g(0x80048998):{a=35,b=36,c=37.0}
 data7h={[0]={a=41,b=42,c=43.0},[1]={a=44,b=45,c=46.0},}
 data7i={[0]={a=53,b=54,c=55.0},[1]={a=56,b=57,c=58.0},}
 data7j={[0]={a=47,b=48,c=49.0},[1]={a=50,b=51,c=52.0},}
-data8a(0x800206f8)=59
-data8b(0x80020758)=60
+data8a(0x800489e8)=59
+data8b(0x80048a48)=60
 data8c(0x0)
-data8d(0x80020768)=0
+data8d(0x80048a58)=0
 data8e(0x0)
 data8f=64
-data8g(0x80020708)=65
+data8g(0x800489f8)=65
 data8h={[0]=66,[1]=67,}
 data8i={[0]=70,[1]=71,}
 data8j={[0]=68,[1]=69,}
@@ -581,7 +629,7 @@ data11_deleted=74
 data12=999
 data13:{a=0,b=0,c=0.0}
 data13_deleted:{a=77,b=78,c=79.0}
-data14:{a=1,b=2,c=3.0}
+data14:{a=998,b=997,c=996.0}
 data15a=86
 data15b=86
 data15c=86

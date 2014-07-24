@@ -10,6 +10,7 @@
 
 #include "example_serialization.h"//シリアライズテスト
 
+#include "basic_test/basic_test.h"//基本テスト
 #include "feature_test/feature_test.h"//機能テスト
 
 //----------------------------------------

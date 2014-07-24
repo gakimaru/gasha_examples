@@ -4,7 +4,7 @@
 
 //--------------------------------------------------------------------------------
 // save_load.h
-// シリアライズテスト：機能テスト：セーブ／ロード処理
+// シリアライズテスト：機能テスト：セーブ／ロード処理【宣言部】
 //
 // Gakimaru's researched and standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
