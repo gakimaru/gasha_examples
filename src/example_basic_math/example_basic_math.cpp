@@ -187,7 +187,7 @@ void example_basic_math()
 			const double elapsed_time = calcElapsedTime(prev_time);
 			std::printf("*elapsed time = %.9lf sec (bit_count_sum=0x%08x)\n", elapsed_time, bit_count_sum);
 		};
-	#ifdef ENABLE_BUILTIN_POPCNT
+	#ifdef GASHA_ENABLE_BUILTIN_POPCNT
 		print_elapsed_time(prev_time, bit_count_sum);
 		prev_time = nowTime();
 		{
@@ -197,8 +197,8 @@ void example_basic_math()
 				bit_count_sum += countBits_builtin(value);
 		}
 		print_elapsed_time(prev_time, bit_count_sum);
-	#endif//ENABLE_BUILTIN_POPCNT
-	#ifdef ENABLE_SSE_POPCNT
+	#endif//GASHA_ENABLE_BUILTIN_POPCNT
+	#ifdef GASHA_ENABLE_SSE_POPCNT
 		prev_time = nowTime();
 		{
 			std::printf("[countBits_sse() * %d times]\n", TEST_BITCOUNT_MAX);
@@ -207,7 +207,7 @@ void example_basic_math()
 				bit_count_sum += countBits_sse(value);
 		}
 		print_elapsed_time(prev_time, bit_count_sum);
-	#endif//ENABLE_SSE_POPCNT
+	#endif//GASHA_ENABLE_SSE_POPCNT
 	}
 }
 

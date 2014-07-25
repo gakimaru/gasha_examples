@@ -29,6 +29,20 @@ SRCS := \
 	$(PROJ_SRC_DIR)/basic_test/basic_test.cpp \
 	$(PROJ_SRC_DIR)/feature_test/feature_test.cpp \
 	$(PROJ_SRC_DIR)/feature_test/save_load.cpp \
+	$(PROJ_SRC_DIR)/real_test/real_test.cpp \
+	$(PROJ_SRC_DIR)/real_test/data/basic_data.cpp \
+	$(PROJ_SRC_DIR)/real_test/data/item_data.cpp \
+	$(PROJ_SRC_DIR)/real_test/data/inventory.cpp \
+	$(PROJ_SRC_DIR)/real_test/data/ability_data.cpp \
+	$(PROJ_SRC_DIR)/real_test/data/ability_collection.cpp \
+	$(PROJ_SRC_DIR)/real_test/data/chara_data.cpp \
+	$(PROJ_SRC_DIR)/real_test/data/chara_ability_data.cpp \
+	$(PROJ_SRC_DIR)/real_test/data/chara_collection.cpp \
+	$(PROJ_SRC_DIR)/real_test/data/game_status.cpp \
+	$(PROJ_SRC_DIR)/real_test/save_data/save_data.cpp \
+	$(PROJ_SRC_DIR)/real_test/save_data/save_data_version.cpp \
+	$(PROJ_SRC_DIR)/real_test/save_data/load_target.cpp \
+	$(PROJ_SRC_DIR)/real_test/test_data/test_data.cpp \
 
 # インクルードディレクトリ
 INCLIDE_DIRS := \

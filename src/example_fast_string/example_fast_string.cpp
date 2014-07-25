@@ -186,7 +186,7 @@ void example_fast_string()
 		}
 		static const char* pattern_types[] = { "1", "12", "123456789012345", "1234567890123456", "12345678901234567", "1234567890123456789012345678901", "12345678901234567890123456789012", "123456789012345678901234567890123", "Z" };
 		static const std::size_t pattern_len_types[] = { 1, 2, 15, 16, 17, 31, 32, 33, 1};
-		static_assert(extent1of_m(pattern_types) == extent1of_m(pattern_len_types), "pattern_types[] != pattern_len_types[]");
+		static_assert(GASHA_EXTENT1OF(pattern_types) == GASHA_EXTENT1OF(pattern_len_types), "pattern_types[] != pattern_len_types[]");
 		int num = 0;
 		for (std::size_t type = 0; type < extentof(pattern_types); ++type)
 		{

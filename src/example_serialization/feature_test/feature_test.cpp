@@ -15,6 +15,9 @@
 #include "work_buff.h"//ワークバッファ
 #include "file.h"//ファイル操作
 
+GASHA_USING_NAMESPACE;//ネームスペース使用
+using namespace for_feature_test;//ネームスペース使用
+
 //--------------------
 //ファイルパス
 static const char* BINARY_SAVE_DATA_FILE_PATH = "data/example_serialization/feature_test_data.bin";//バイナリ形式セーブデータファイルパス
@@ -474,9 +477,9 @@ static void saveBinary()
 	//ワークバッファ取得
 	std::size_t work_buff_size = 0;
 	void* work_buff = getWrokBuff(work_buff_size);
-#ifdef ENABLE_TO_OCCUR_FATAL_ERROR
+#ifdef FEATURE_TEST_ENABLE_TO_OCCUR_FATAL_ERROR
 	work_buff_size = 256;//ワークバッファ不足による致命的エラー発生
-#endif//ENABLE_TO_OCCUR_FATAL_ERROR
+#endif//FEATURE_TEST_ENABLE_TO_OCCUR_FATAL_ERROR
 
 	//セーブデータ作成（シリアライズ）
 	const std::size_t save_data_size = makeBinarySaveDataImage(save_data_buff, save_data_buff_size, work_buff, work_buff_size);
@@ -502,9 +505,9 @@ static void saveText()
 	//ワークバッファ取得
 	std::size_t work_buff_size = 0;
 	void* work_buff = getWrokBuff(work_buff_size);
-#ifdef ENABLE_TO_OCCUR_FATAL_ERROR
+#ifdef FEATURE_TEST_ENABLE_TO_OCCUR_FATAL_ERROR
 	work_buff_size = 256;//ワークバッファ不足による致命的エラー発生
-#endif//ENABLE_TO_OCCUR_FATAL_ERROR
+#endif//FEATURE_TEST_ENABLE_TO_OCCUR_FATAL_ERROR
 
 	//セーブデータ作成（シリアライズ）
 	const std::size_t save_data_size = makeTextSaveDataImage(save_data_buff, save_data_buff_size, work_buff, work_buff_size);
@@ -530,9 +533,9 @@ static void loadBinary()
 	//ワークバッファ取得
 	std::size_t work_buff_size = 0;
 	void* work_buff = getWrokBuff(work_buff_size);
-#ifdef ENABLE_TO_OCCUR_FATAL_ERROR
+#ifdef FEATURE_TEST_ENABLE_TO_OCCUR_FATAL_ERROR
 	work_buff_size = 256;//ワークバッファ不足による致命的エラー発生
-#endif//ENABLE_TO_OCCUR_FATAL_ERROR
+#endif//FEATURE_TEST_ENABLE_TO_OCCUR_FATAL_ERROR
 
 	//ファイル読み込み
 	const std::size_t save_data_size = readFile(BINARY_SAVE_DATA_FILE_PATH, save_data_buff, save_data_buff_size);
@@ -557,9 +560,9 @@ static void loadText()
 	//ワークバッファ取得
 	std::size_t work_buff_size = 0;
 	void* work_buff = getWrokBuff(work_buff_size);
-#ifdef ENABLE_TO_OCCUR_FATAL_ERROR
+#ifdef FEATURE_TEST_ENABLE_TO_OCCUR_FATAL_ERROR
 	work_buff_size = 256;//ワークバッファ不足による致命的エラー発生
-#endif//ENABLE_TO_OCCUR_FATAL_ERROR
+#endif//FEATURE_TEST_ENABLE_TO_OCCUR_FATAL_ERROR
 
 	//ファイル読み込み
 	const std::size_t save_data_size = readFile(TEXT_SAVE_DATA_FILE_PATH, save_data_buff, save_data_buff_size);

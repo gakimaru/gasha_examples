@@ -379,8 +379,8 @@ void example_debugLog_featureTest()
 	//独自ログレベルを追加
 	enum extLogLevel : logLevel::level_type
 	{
-		asMoreDetail = MAKE_LOG_LEVEL_VALUE(0, 0),//更に詳細
-		asAboveNormal = MAKE_LOG_LEVEL_VALUE(4, 1),//通常より少し上のレベル
+		asMoreDetail = GASHA_MAKE_LOG_LEVEL_VALUE(0, 0),//更に詳細
+		asAboveNormal = GASHA_MAKE_LOG_LEVEL_VALUE(4, 1),//通常より少し上のレベル
 	};
 	{
 		static vsConsole vs_console("vs-console *CUSTOM*");

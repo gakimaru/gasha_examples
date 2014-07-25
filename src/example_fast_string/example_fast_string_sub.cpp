@@ -105,7 +105,7 @@ static const char* s_str[] =
 	"12312312312312312312312312312312312312312312312312312312312312312312312312312312",
 	"1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
 };
-static const std::size_t STR_SET_NUM = extent1of_m(s_str);
+static const std::size_t STR_SET_NUM = GASHA_EXTENT1OF(s_str);
 static std::size_t s_strLen[STR_SET_NUM];//constexprが使えるなら extent1of(str)で良い
 
 //テスト用データ初期化

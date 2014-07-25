@@ -61,9 +61,9 @@ static const int PROFILE_TEST2_SUM_FRAMES = 30;//プロファイルテスト２�
 //独自ログカテゴリ
 enum extLogCategory : GASHA_ logCategory::category_type
 {
-	forMiniGame = MAKE_LOG_CATEGORY_VALUE(10),//ミニゲーム用
-	forTARO = MAKE_LOG_CATEGORY_VALUE(20),//開発者個人用：太郎用
-	forJIRO = MAKE_LOG_CATEGORY_VALUE(21),//開発者個人用：次郎用
+	forMiniGame = GASHA_MAKE_LOG_CATEGORY_VALUE(10),//ミニゲーム用
+	forTARO = GASHA_MAKE_LOG_CATEGORY_VALUE(20),//開発者個人用：太郎用
+	forJIRO = GASHA_MAKE_LOG_CATEGORY_VALUE(21),//開発者個人用：次郎用
 };
 
 //----------------------------------------

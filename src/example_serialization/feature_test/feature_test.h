@@ -12,6 +12,9 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
+//【注】ポインタ変数のシリアライズをテストするために、new /delete を多用。
+//　　　（スタックアロケータによるメモリ管理などは行わず、単純に処理。）
+
 #include "example_serialization.h"//シリアライズテスト
 #include "feature_test/test_data.h"//テストデータ定義
 
