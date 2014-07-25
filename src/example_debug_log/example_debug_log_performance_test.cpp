@@ -292,7 +292,7 @@ void example_debugLog_perfomanceTest()
 		auto logging_thread = [&start_count, &mutex, &cond, &pred](const int thread_no)
 		{
 			char thread_name[32];
-			GASHA_ spprintf(thread_name, "THREAD[%02d]", thread_no / 2);
+			GASHA_ spprintf(thread_name, "THREAD[%02d]", thread_no);//※名前の重複したスレッドの集計をテストする場合、 thread_no / 2 などの値を用いる
 			threadId thread_id(thread_name);
 
 			//スタート待ち
@@ -378,6 +378,9 @@ void example_debugLog_perfomanceTest()
 			std::size_t summarized_count_total = 0;
 			std::size_t count_total = 0;
 			sec_t time_total = 0;
+			std::size_t summarized_count_period = 0;
+			std::size_t count_period = 0;
+			sec_t time_period = 0;
 
 			//スレッドごとのプロファイル情報を取得
 			for (std::size_t i = 0; i < thread_info_num; ++i)
@@ -394,10 +397,14 @@ void example_debugLog_perfomanceTest()
 					summarized_count_total += total.summarizedCount();
 					count_total += total.count();
 					time_total += total.time();
+					const profiler::summarizedTimeInfo& period = profile_info_tmp.periodicTime();
+					summarized_count_period += period.summarizedCount();
+					count_period += period.count();
+					time_period += period.time();
 				}
 			}
 
-			std::printf("thread-infos=%d,processe-infos=%d,sums=%d,counts=%d,time=%.9lf\n", thread_info_num, profile_info_num_total, summarized_count_total, count_total, time_total);
+			std::printf("thread-infos=%d,processe-infos=%d,total:(sums=%d,counts=%d,time=%.9lf),period:(sums=%d,counts=%d,time=%.9lf)\n", thread_info_num, profile_info_num_total, summarized_count_total, count_total, time_total, summarized_count_period, count_period, time_period);
 		}
 	}
 

@@ -33,10 +33,10 @@ static const int PROFILE_TEST1_SUM_FRAMES = 30;//プロファイルテスト１�
 static const int PROFILE_TEST1_TIME_MIN = 100;//プロファイルテスト１：ランダム処理時間範囲最小（μ秒）
 static const int PROFILE_TEST1_TIME_MAX = 2000;//プロファイルテスト１：ランダム処理時間範囲最大（μ秒）
 
-static const int PROFILE_TEST2_THREADS = 10;//プロファイルテスト２：スレッド数 ※二スレッドごとに同じスレッド名にする
+static const int PROFILE_TEST2_THREADS = 20;//プロファイルテスト２：スレッド数
 static const int PROFILE_TEST2_FRAMES = 300;//プロファイルテスト２：総フレーム数
 static const int PROFILE_TEST2_PROCESSES = 20;//プロファイルテスト２：処理数
-static const int PROFILE_TEST2_REPEATS = 10;//プロファイルテスト２：1フレーム内での処理の繰り返し数
+static const int PROFILE_TEST2_REPEATS = 20;//プロファイルテスト２：1フレーム内での処理の繰り返し数
 static const int PROFILE_TEST2_SUM_FRAMES = 30;//プロファイルテスト２：集計フレーム数
 
 #else//GASHA_OPTIMIZED
@@ -49,10 +49,10 @@ static const int PROFILE_TEST1_SUM_FRAMES = 30;//プロファイルテスト１�
 static const int PROFILE_TEST1_TIME_MIN = 100;//プロファイルテスト１：ランダム処理時間範囲最小（μ秒）
 static const int PROFILE_TEST1_TIME_MAX = 2000;//プロファイルテスト１：ランダム処理時間範囲最大（μ秒）
 
-static const int PROFILE_TEST2_THREADS = 4;//プロファイルテスト２：スレッド数 ※二スレッドごとに同じスレッド名にする
+static const int PROFILE_TEST2_THREADS = 20;//プロファイルテスト２：スレッド数
 static const int PROFILE_TEST2_FRAMES = 120;//プロファイルテスト２：総フレーム数
 static const int PROFILE_TEST2_PROCESSES = 10;//プロファイルテスト２：処理数
-static const int PROFILE_TEST2_REPEATS = 5;//プロファイルテスト２：1フレーム内での処理の繰り返し数
+static const int PROFILE_TEST2_REPEATS = 10;//プロファイルテスト２：1フレーム内での処理の繰り返し数
 static const int PROFILE_TEST2_SUM_FRAMES = 30;//プロファイルテスト２：集計フレーム数
 
 #endif//GASHA_OPTIMIZED
