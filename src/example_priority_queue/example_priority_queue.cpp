@@ -2,7 +2,7 @@
 // exmaple_priority_queue.cpp
 // 優先度付きキューコンテナアダプタ／二分ヒープコンテナテスト
 //
-// Gakimaru's researched and standard library for C++ - GASHA
+// Gakimaru's standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
 //   Released under the MIT license.
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE

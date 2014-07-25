@@ -2,7 +2,7 @@
 // exmaple_singly_linked_list.cpp
 // 片方向連結リストコンテナテスト
 //
-// Gakimaru's researched and standard library for C++ - GASHA
+// Gakimaru's standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
 //   Released under the MIT license.
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE

@@ -6,7 +6,7 @@
 // short_string_ext.cpp.h
 // CRC付き固定長文字列【関数／実体定義部】
 //
-// Gakimaru's researched and standard library for C++ - GASHA
+// Gakimaru's standard library for C++ - GASHA
 //   Copyright (c) 2014 Itagaki Mamoru
 //   Released under the MIT license.
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
