@@ -1,1 +1,3 @@
-%~dp0..\example_crc32.exe > %~dp0log\example_crc32.log
+@ECHO OFF
+
+CALL %~dp0_run.bat %0

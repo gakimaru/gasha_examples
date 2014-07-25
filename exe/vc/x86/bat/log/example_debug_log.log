@@ -1,0 +1,1075 @@
+
+================================================================================
+
+--------------------------------------------------------------------------------
+[ Basic test for debug-log ]
+--------------------------------------------------------------------------------
+y•W€zƒƒbƒZ[ƒW‡@
+START: logQueueMonitor thread
+y•W€zƒƒbƒZ[ƒW‡A
+yÚ×zƒƒbƒZ[ƒW‡A
+[0|00:00:00.003000|asNormal|forAny]y•W€zƒƒbƒZ[ƒW‡B
+[0|00:00:00.004000|asDetail|forAny]yÚ×zƒƒbƒZ[ƒW‡B
+[0|00:00:00.004000|asNormal|forMiniGame]y’Êízyƒ~ƒjƒQ[ƒ€—pzƒƒbƒZ[ƒW‡C
+[0|00:00:00.004000|asNormal|forTARO]y’ÊízyŠJ”­ŽÒŒÂli‘¾˜Yj—pzƒƒbƒZ[ƒW‡C
+[0|00:00:00.004000|asNormal|forJIRO]y’ÊízyŠJ”­ŽÒŒÂliŽŸ˜Yj—pzƒƒbƒZ[ƒW‡C
+[0|00:00:00.004000|asDetail|forTARO]yÚ×zyŠJ”­ŽÒŒÂli‘¾˜Yj—pzƒƒbƒZ[ƒW‡D
+[0|00:00:00.004000|asDetail|forJIRO]yÚ×zyŠJ”­ŽÒŒÂliŽŸ˜Yj—pzƒƒbƒZ[ƒW‡D
+[0|00:00:00.006000|asCritical|forTARO]yd‘åzyŠJ”­ŽÒŒÂli‘¾˜Yj—pzƒƒbƒZ[ƒW‡E
+[0|00:00:00.008001|asCritical|forJIRO]yd‘åzyŠJ”­ŽÒŒÂliŽŸ˜Yj—pzƒƒbƒZ[ƒW‡E
+y’Êízyƒ~ƒjƒQ[ƒ€—pzyƒ[ƒJƒ‹ˆ—ƒuƒƒbƒN‘OzƒƒbƒZ[ƒW
+[00:00:00.010001|asNormal|forMiniGame]y’Êízyƒ~ƒjƒQ[ƒ€—pzyƒ[ƒJƒ‹ˆ—ƒuƒƒbƒN’†‡@zƒƒbƒZ[ƒW
+y’Êízyƒ~ƒjƒQ[ƒ€—pzyƒ[ƒJƒ‹ˆ—ƒuƒƒbƒNŒãzƒƒbƒZ[ƒW
+[asNormal|forMiniGame]y’ÊízyƒR[ƒ‹ƒ|ƒCƒ“ƒg—pzƒƒbƒZ[ƒW
+[asNormal|forMiniGame]y’ÊízyƒNƒŠƒeƒBƒJƒ‹ƒR[ƒ‹ƒ|ƒCƒ“ƒg—pzƒƒbƒZ[ƒW
+[asNormal|forFileSystem]y’ÊízyƒR[ƒ‹ƒ|ƒCƒ“ƒg—pzƒƒbƒZ[ƒW
+[asNormal|forMiniGame]y’ÊízyƒNƒŠƒeƒBƒJƒ‹ƒR[ƒ‹ƒ|ƒCƒ“ƒg—pzƒƒbƒZ[ƒW
+ƒƒbƒZ[ƒW•ÏŠ·‹@”\•t‚«o—ÍiŽw’è‚È‚µjFAlphabet Message
+[1]y’Êízyƒ~ƒjƒQ[ƒ€—pz—\–ñƒƒbƒZ[ƒW‡@
+ƒƒBƒZ[ƒW•ÏŠ·‹@”\•T‚«O—ÍI‘å•¶Žš‰»JFALPHABET MESSAGE
+[2]y’Êízyƒ~ƒjƒQ[ƒ€—pz—\–ñƒƒbƒZ[ƒW‡A
+ƒƒbƒz[ƒw•ÏŠ·‹@”\•t‚«o—Íi¬•¶Žš‰»jfalphabet message
+----------------------------------------
+
+thread: "MainThread"
+
+  profile: "CP level2(with perform)", max=0.000000, min=0.000000, avg=0.000000
+
+END: logQueueMonitor thread
+
+================================================================================
+
+================================================================================
+
+--------------------------------------------------------------------------------
+[ Feature test for debug-log ]
+--------------------------------------------------------------------------------
+message for Standard
+[93;41;4mmessage for TTY (stdout)[0m
+message for Mono-TTY (stdout)
+message for Win (stdout)
+message for Mono-Win (stdout)
+message for VS
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-levels ]
+
+[ 0]( 0)"asMoreDetail"
+	console: "Win(stdout)"(WHITE+iBLACK)
+	notice: "vs-console *CUSTOM*"(STANDARD+STANDARD)
+	next: [ 1]( 4)"asVerbose
+[ 1]( 4)"asVerbose"
+	console: "Win(stdout)"(iBLACK+STANDARD)
+	notice: "vs-console *CHANGED*"(iBLACK+iWHITE)
+	prev: [ 0]( 0)"asMoreDetail"
+	next: [ 3](12)"asNormal
+[ 1]( 5)"asDetail"
+	console: "Win(stdout)"(iBLACK+STANDARD)
+	notice: "vs-console *CHANGED*"(iBLACK+iWHITE)
+	prev: [ 0]( 0)"asMoreDetail"
+	next: [ 3](12)"asNormal
+[ 3](12)"asNormal"
+	console: "win-console *CHANGED*"(STANDARD+STANDARD)
+	notice: "vs-console *CHANGED*"(BLACK+iWHITE)
+	prev: [ 1]( 5)"asDetail"
+	next: [ 4](17)"asAboveNormal
+[ 4](17)"asAboveNormal"
+	console: "Win(stdout)"(CYAN+STANDARD)
+	prev: [ 3](12)"asNormal"
+	next: [ 5](20)"asImportant
+[ 5](20)"asImportant"
+	console: "Win(stdout)"(iBLUE+BLACK)
+	notice: "vs-console *CHANGED*"(iBLUE+iWHITE)
+	prev: [ 3](12)"asNormal"
+	next: [ 7](28)"asWarning
+	notice: "vs-console *CHANGED*"(BLACK+iMAGENTA)
+	notice: "vs-console *CHANGED*"(iYELLOW+iRED)
+[11](44)"asAbsolute"
+	console: "Win(stdout)"(STANDARD+STANDARD)
+	notice: "vs-console *CHANGED*"(STANDARD+STANDARD)
+	prev: [ 9](36)"asCritical"
+[11](SP47)"asSilent"
+[12](SP48)"asSilentAbsolutely"
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-categories ]
+
+( 0)"forAny"
+( 3)"forFileSystem"
+( 4)"forResource"
+( 5)"for3D"
+( 6)"for2D"
+( 7)"forSound"
+(10)"forMiniGame"
+(20)"forTARO"
+	console: "vs-console *custom*"
+(21)"forJIRO"
+	console: "vs-console *custom*"
+(SP64)"forEvery"
+(SP65)"forCallPoint"
+(SP66)"forCriticalCallPoint"
+
+--------------------------------------------------------------------------------
+[ Test for change log-level-mask & log-attribute ]
+
+1:mask: refType=0, level=12
+1:attr: refType=0, attr=0x00000000
+2:mask: refType=2, level=12
+2:attr: refType=2, attr=0x00000000
+2a:mask: refType=0, level=12
+2a:attr: refType=0, attr=0x00000000
+2b:mask: refType=0, level=12
+2b:attr: refType=0, attr=0x00000000
+2c:mask: refType=2, level=12
+2c:attr: refType=2, attr=0x00000000
+3:mask: refType=2, level=12
+3:attr: refType=2, attr=0x00801000
+4:mask: refType=1, level=12
+4:attr: refType=1, attr=0x00801000
+5:mask: refType=1, level=12
+5:attr: refType=1, attr=0x00801000
+6:mask: refType=2, level=12
+6:attr: refType=2, attr=0x00801000
+7:mask: refType=2, level=5
+7:attr: refType=2, attr=0x01000800
+7a:mask: refType=2, level=12
+7a:attr: refType=2, attr=0x00801000
+7b:mask: refType=0, level=12
+7b:attr: refType=0, attr=0x00000000
+7bx:mask: refType=1, level=12
+7bx:attr: refType=1, attr=0x00000000
+7bx2:mask: refType=2, level=12
+7bx2:attr: refType=2, attr=0x00000000
+7bx3:mask: refType=2, level=48
+7bx3:attr: refType=2, attr=0x00001800
+7bx4:mask: refType=0, level=12
+7bx4:attr: refType=0, attr=0x00000000
+7bx4:mask2: refType=2, level=48
+7bx4:attr2: refType=2, attr=0x00001800
+7bx5:mask: refType=0, level=12
+7bx5:attr: refType=0, attr=0x00000000
+7bx5:mask2: refType=0, level=12
+7bx5:attr2: refType=0, attr=0x00000000
+7bx5:mask3: refType=2, level=48
+7bx5:attr3: refType=2, attr=0x00001800
+7bxx:mask: refType=1, level=48
+7bxx:attr: refType=1, attr=0x00001800
+7c:mask: refType=2, level=12
+7c:attr: refType=2, attr=0x00801000
+7d:mask: refType=1, level=12
+7d:attr: refType=1, attr=0x00801000
+7e:mask: refType=0, level=12
+7e:attr: refType=0, attr=0x00000000
+7f:mask: refType=2, level=12
+7f:attr: refType=2, attr=0x00801000
+7g:mask: refType=0, level=12
+7g:attr: refType=0, attr=0x00000000
+8:mask: refType=1, level=12
+8:attr: refType=1, attr=0x00801000
+9:mask: refType=2, level=12
+9:attr: refType=2, attr=0x00801000
+9a:mask: refType=2, level=48
+9a:attr: refType=2, attr=0x00001800
+10:mask: refType=0, level=12
+10:attr: refType=0, attr=0x00000000
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-level-masks : Test for put message asDetail ]
+
+( 0)"forAny"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: ( 5)"asDetail", "vs-console *CHANGED*"
+( 1)"forDummy"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: ( 5)"asDetail", "Dummy"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: ( 5)"asDetail", "Dummy"
+( 2)"forNotice"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: ( 5)"asDetail", "Dummy"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: ( 5)"asDetail", "Win(stderr)"
+( 3)"forFileSystem"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: ( 5)"asDetail", "vs-console *CHANGED*"
+( 4)"forResource"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: ( 5)"asDetail", "vs-console *CHANGED*"
+( 5)"for3D"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: ( 5)"asDetail", "vs-console *CHANGED*"
+( 6)"for2D"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: ( 5)"asDetail", "vs-console *CHANGED*"
+( 7)"forSound"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: ( 5)"asDetail", "vs-console *CHANGED*"
+(10)"forMiniGame"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: ( 5)"asDetail", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: ( 5)"asDetail", "vs-console *CHANGED*"
+(20)"forTARO"
+	mask(of log): ( 5)"asDetail"
+		OK ... log-message: ( 5)"asDetail", "vs-console *custom*"
+	mask(of notice): (12)"asNormal"
+		OK ... notice-message: ( 5)"asDetail", "vs-console *CHANGED*"
+(21)"forJIRO"
+	mask(of log): (47)"asSilent"
+		OK ... log-message: ( 5)"asDetail", "vs-console *custom*"
+	mask(of notice): (48)"asSilentAbsolutely"
+		OK ... notice-message: ( 5)"asDetail", "vs-console *CHANGED*"
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-level-masks : Test for put message asNormal ]
+
+( 0)"forAny"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (12)"asNormal", "vs-console *CHANGED*"
+( 1)"forDummy"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (12)"asNormal", "Dummy"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (12)"asNormal", "Dummy"
+( 2)"forNotice"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (12)"asNormal", "Dummy"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (12)"asNormal", "Win(stderr)"
+( 3)"forFileSystem"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (12)"asNormal", "vs-console *CHANGED*"
+( 4)"forResource"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (12)"asNormal", "vs-console *CHANGED*"
+( 5)"for3D"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (12)"asNormal", "vs-console *CHANGED*"
+( 6)"for2D"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (12)"asNormal", "vs-console *CHANGED*"
+( 7)"forSound"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (12)"asNormal", "vs-console *CHANGED*"
+(10)"forMiniGame"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (12)"asNormal", "win-console *CHANGED*"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (12)"asNormal", "vs-console *CHANGED*"
+(20)"forTARO"
+	mask(of log): ( 5)"asDetail"
+		OK ... log-message: (12)"asNormal", "vs-console *custom*"
+	mask(of notice): (12)"asNormal"
+		OK ... notice-message: (12)"asNormal", "vs-console *CHANGED*"
+(21)"forJIRO"
+	mask(of log): (47)"asSilent"
+		OK ... log-message: (12)"asNormal", "vs-console *custom*"
+	mask(of notice): (48)"asSilentAbsolutely"
+		OK ... notice-message: (12)"asNormal", "vs-console *CHANGED*"
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-level-masks : Test for put message asCritical ]
+
+notice-message: (36)"asCritical", "vs-console *CHANGED*"
+notice-message: (36)"asCritical", "Dummy"
+notice-message: (36)"asCritical", "Win(stderr)"
+notice-message: (36)"asCritical", "vs-console *CHANGED*"
+notice-message: (36)"asCritical", "vs-console *CHANGED*"
+notice-message: (36)"asCritical", "vs-console *CHANGED*"
+notice-message: (36)"asCritical", "vs-console *CHANGED*"
+notice-message: (36)"asCritical", "vs-console *CHANGED*"
+notice-message: (36)"asCritical", "vs-console *CHANGED*"
+notice-message: (36)"asCritical", "vs-console *CHANGED*"
+notice-message: (36)"asCritical", "vs-console *CHANGED*"
+
+--------------------------------------------------------------------------------
+[ Enumeration of all log-level-masks : Test for put message asAbsolute ]
+
+( 0)"forAny"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
+( 1)"forDummy"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (44)"asAbsolute", "Dummy"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (44)"asAbsolute", "Dummy"
+( 2)"forNotice"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (44)"asAbsolute", "Dummy"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (44)"asAbsolute", "Win(stderr)"
+( 3)"forFileSystem"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
+( 4)"forResource"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
+( 5)"for3D"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
+( 6)"for2D"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
+( 7)"forSound"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
+(10)"forMiniGame"
+	mask(of log): (12)"asNormal"
+		OK ... log-message: (44)"asAbsolute", "Win(stdout)"
+	mask(of notice): (36)"asCritical"
+		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
+(20)"forTARO"
+	mask(of log): ( 5)"asDetail"
+		OK ... log-message: (44)"asAbsolute", "vs-console *custom*"
+	mask(of notice): (12)"asNormal"
+		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
+(21)"forJIRO"
+	mask(of log): (47)"asSilent"
+		OK ... log-message: (44)"asAbsolute", "vs-console *custom*"
+	mask(of notice): (48)"asSilentAbsolutely"
+		OK ... notice-message: (44)"asAbsolute", "vs-console *CHANGED*"
+
+--------------------------------------------------------------------------------
+[ Test for log-queue-monitor ]
+
+START: logQueueMonitor thread
+reserved message
+reserved messagemessage:1
+message:1message:3
+message:3message:9
+message:9message:27
+message:27message:81
+message:81message:243
+message:243message:729
+message:729message:2187
+message:2187message:6561
+message:6561message:19683
+message:19683message:59049
+message:59049message:177147
+message:177147message:531441
+message:531441message:1594323
+message:1594323message:4782969
+message:4782969message:14348907
+message:14348907message:43046721
+message:43046721message:129140163
+message:129140163message:387420489
+message:387420489enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu failed.
+enqueu of reservation failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making failed.
+message making of reservation failed.
+reserved message
+reserved messagemessage:1
+message:1message:3
+message:3message:9
+message:9message:27
+message:27message:81
+message:81message:243
+message:243message:729
+message:729message:2187
+message:2187message:6561
+message:6561message:19683
+message:19683message:59049
+message:59049message:177147
+message:177147message:531441
+message:531441message:1594323
+message:1594323message:4782969
+message:4782969message:14348907
+message:14348907message:43046721
+message:43046721message:129140163
+message:129140163message:387420489
+message:387420489END: logQueueMonitor thread
+
+--------------------------------------------------------------------------------
+[ Test for memory console ]
+
+
+12345678901234567890
+123456789012345
+
+(len=0)
+
+(len=0)
+#
+#(len=1)
+1
+1(len=1)
+1#
+1#(len=2)
+12
+12(len=2)
+12#
+12#(len=3)
+123
+123(len=3)
+123#
+123#(len=4)
+1234
+1234(len=4)
+1234#
+1234#(len=5)
+12345
+12345(len=5)
+12345#
+12345#(len=6)
+123456
+123456(len=6)
+123456#
+123456#(len=7)
+1234567
+1234567(len=7)
+1234567#
+1234567#(len=8)
+12345678
+12345678(len=8)
+12345678#
+12345678#(len=9)
+123456789
+123456789(len=9)
+123456789#
+123456789#(len=10)
+1234567890
+1234567890(len=10)
+1234567890#
+1234567890#(len=11)
+12345678901
+12345678901(len=11)
+12345678901#
+12345678901#(len=12)
+123456789012
+123456789012(len=12)
+123456789012#
+123456789012#(len=13)
+1234567890123
+1234567890123(len=13)
+1234567890123#
+1234567890123#(len=14)
+12345678901234
+12345678901234(len=14)
+12345678901234#
+12345678901234#(len=15)
+123456789012345
+123456789012345(len=15)
+123456789012345#
+123456789012345#(len=16)
+1234567890123456
+1234567890123456(len=16)
+1234567890123456#
+1234567890123456#(len=17)
+12345678901234567
+12345678901234567(len=17)
+12345678901234567#
+12345678901234567#(len=18)
+123456789012345678
+123456789012345678(len=18)
+123456789012345678#
+123456789012345678#(len=19)
+1234567890123456789
+1234567890123456789(len=19)
+1234567890123456789#
+1234567890123456789#(len=20)
+12345678901234567890
+12345678901234567890(len=20)
+12345678901234567890#
+12345678901234567890#(len=21)
+123456789012345678901
+123456789012345678901(len=21)
+123456789012345678901#
+123456789012345678901#(len=22)
+1234567890123456789012
+1234567890123456789012(len=22)
+1234567890123456789012#
+1234567890123456789012#(len=23)
+12345678901234567890123
+12345678901234567890123(len=23)
+12345678901234567890123#
+12345678901234567890123#(len=24)
+123456789012345678901234
+123456789012345678901234(len=24)
+123456789012345678901234#
+123456789012345678901234#(len=25)
+1234567890123456789012345
+1234567890123456789012345(len=25)
+1234567890123456789012345#
+1234567890123456789012345#(len=26)
+12345678901234567890123456
+12345678901234567890123456(len=26)
+12345678901234567890123456#
+12345678901234567890123456#(len=27)
+123456789012345678901234567
+123456789012345678901234567(len=27)
+123456789012345678901234567#
+123456789012345678901234567#(len=28)
+1234567890123456789012345678
+1234567890123456789012345678(len=28)
+1234567890123456789012345678#
+1234567890123456789012345678#(len=29)
+12345678901234567890123456789
+12345678901234567890123456789(len=29)
+12345678901234567890123456789#
+12345678901234567890123456789#(len=30)
+123456789012345678901234567890
+123456789012345678901234567890(len=30)
+123456789012345678901234567890#
+123456789012345678901234567890#(len=31)
+1234567890123456789012345678901
+1234567890123456789012345678901(len=31)
+1234567890123456789012345678901#
+1234567890123456789012345678901#(len=32)
+12345678901234567890123456789012
+12345678901234567890123456789012(len=32)
+12345678901234567890123456789012#
+12345678901234567890123456789012(len=32)
+(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(len=68)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(len=124)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(len=124)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(len=124)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(len=124)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(len=124)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(len=124)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(len=124)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(len=124)
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+7890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(null)1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(len=124)
+
+--------------------------------------------------------------------------------
+[ Test for print log ]
+
+START: logQueueMonitor thread
+[0|00:00:00.060005|asImportant|forAny](01)Test Message:10
+[1|00:00:00.060005](10)Test Message:10
+[2|00:00:00.060005](11)Test Message
+[3|00:00:00.060005](12)TEST MESSAGE
+[4|00:00:00.060005](13)test message
+[5|00:00:00.060005](14)Test Message
+[6|00:00:00.060005](15)Test Message
+[7|00:00:00.060005](16)TEST MESSAGE
+[8|00:00:00.060005](17)test message
+[9|00:00:00.060005](02)Test Message:10
+[10|00:00:00.060005](03)Test Message:10
+[11|00:00:00.060005](04)TEST MESSAGE:10
+[12|00:00:00.060005](05)test message:10
+[13|00:00:00.060005](06)Test Message
+[14|00:00:00.060005](07)Test Message
+[15|00:00:00.060005](08)TEST MESSAGE
+[16|00:00:00.060005](09)test message
+[00:00:00.061005](18)Test Message:10
+[00:00:00.061005](19)Test Message:10
+[00:00:00.061005](20)Test Message:10
+[00:00:00.061005](21)TEST MESSAGE:10
+[00:00:00.061005](22)test message:10
+[00:00:00.061005](23)Test Message:10
+[00:00:00.061005](24)TEST MESSAGE:10
+[00:00:00.061005](25)test message:10
+[00:00:00.061005](26)Test Message
+[00:00:00.061005](27)Test Message
+[00:00:00.061005](28)Test Message
+[00:00:00.061005](29)TEST MESSAGE
+[00:00:00.061005](30)test message
+[00:00:00.061005](31)Test Message
+[00:00:00.061005](32)TEST MESSAGE
+[00:00:00.061005](33)test message
+END: logQueueMonitor thread
+
+--------------------------------------------------------------------------------
+[ Test for call-point ]
+
+> recent critical-cp info
+  - name = "test"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "useAutoProfiling"
+  - source file = "example_debug_log_feature_test.cpp(957)[Sat Jul 26 04:05:00 2014]"
+  - function = "example_debugLog_featureTest"
+  - begin time = 0.065006
+> recent critical-cp info
+  - name = "test3"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log_feature_test.cpp(965)[Sat Jul 26 04:05:00 2014]"
+  - function = "example_debugLog_featureTest"
+  - begin time = 0.065006
+> recent critical-cp info
+  - name = "test2"
+  - category = "forTARO"
+  - type = "isCritical"
+  - autoProfiling = "useAutoProfiling"
+  - source file = "example_debug_log_feature_test.cpp(963)[Sat Jul 26 04:05:00 2014]"
+  - function = "example_debugLog_featureTest"
+  - begin time = 0.065006
+> recent critical-cp info
+  - name = "test3"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log_feature_test.cpp(965)[Sat Jul 26 04:05:00 2014]"
+  - function = "example_debugLog_featureTest"
+  - begin time = 0.065006
+> recent critical-cp info
+  - name = "test4"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log_feature_test.cpp(975)[Sat Jul 26 04:05:00 2014]"
+  - function = "example_debugLog_featureTest"
+  - begin time = 0.065006
+> recent critical-cp info
+  - name = "test4"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log_feature_test.cpp(975)[Sat Jul 26 04:05:00 2014]"
+  - function = "example_debugLog_featureTest"
+  - begin time = 0.065006
+debugInfo(len=827):
+----- callPoint stack info -----
+Thread: "MainThread"(ID=5a6a4c2e)
+Num of point: 4
+------------------------------------
+[forTARO]"test4"(addr=007AE7F0)
+        src: example_debug_log_feature_test.cpp(975)[Sat Jul 26 04:05:00 2014]
+        func:example_debugLog_featureTest
+ [forTARO]"test3"(addr=007AE948)
+         src: example_debug_log_feature_test.cpp(965)[Sat Jul 26 04:05:00 2014]
+         func:example_debugLog_featureTest
+  [forTARO]"test2"(addr=007AE970)<CRITICAL><Auto-Profiling>
+          src: example_debug_log_feature_test.cpp(963)[Sat Jul 26 04:05:00 2014]
+          func:example_debugLog_featureTest
+   [forTARO]"test"(addr=007AEA10)<Auto-Profiling>
+           src: example_debug_log_feature_test.cpp(957)[Sat Jul 26 04:05:00 2014]
+           func:example_debugLog_featureTest
+------------------------------------
+> recent critical-cp info
+  - name = "test3"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "noProfiling"
+  - source file = "example_debug_log_feature_test.cpp(965)[Sat Jul 26 04:05:00 2014]"
+  - function = "example_debugLog_featureTest"
+  - begin time = 0.065006
+> recent critical-cp info
+  - name = "test2"
+  - category = "forTARO"
+  - type = "isCritical"
+  - autoProfiling = "useAutoProfiling"
+  - source file = "example_debug_log_feature_test.cpp(963)[Sat Jul 26 04:05:00 2014]"
+  - function = "example_debugLog_featureTest"
+  - begin time = 0.065006
+> recent critical-cp info
+  - name = "test2"
+  - category = "forTARO"
+  - type = "isCritical"
+  - autoProfiling = "useAutoProfiling"
+  - source file = "example_debug_log_feature_test.cpp(963)[Sat Jul 26 04:05:00 2014]"
+  - function = "example_debugLog_featureTest"
+  - begin time = 0.065006
+> recent critical-cp info
+  - name = "test2"
+  - category = "forTARO"
+  - type = "isCritical"
+  - autoProfiling = "useAutoProfiling"
+  - source file = "example_debug_log_feature_test.cpp(963)[Sat Jul 26 04:05:00 2014]"
+  - function = "example_debugLog_featureTest"
+  - begin time = 0.065006
+> recent critical-cp info
+  - name = "test"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "useAutoProfiling"
+  - source file = "example_debug_log_feature_test.cpp(957)[Sat Jul 26 04:05:00 2014]"
+  - function = "example_debugLog_featureTest"
+  - begin time = 0.065006
+> recent critical-cp info
+  (nothing)
+> recent critical-cp info
+  - name = "test"
+  - category = "forTARO"
+  - type = "isNormal"
+  - autoProfiling = "useAutoProfiling"
+  - source file = "example_debug_log_feature_test.cpp(957)[Sat Jul 26 04:05:00 2014]"
+  - function = "example_debugLog_featureTest"
+  - begin time = 0.065006
+> recent critical-cp info
+  (nothing)
+> recent critical-cp info
+  (nothing)
+> recent critical-cp info
+  (nothing)
+debugInfo(len=119):
+----- callPoint stack info -----
+Thread: "MainThread"(ID=5a6a4c2e)
+Num of point: 0
+------------------------------------
+
+--------------------------------------------------------------------------------
+[ Test for assert/break-point/watch-point ]
+
+START: logQueueMonitor thread
+END: logQueueMonitor thread
+
+--- Profile ---
+----------
+thread: "MainThread"
+  -----  Process:"test"
+    TOTAL: count=4, time=0.004000300, max=0.001999400, min=0.001000000, avg=0.001000075, sum-cnt=2, max-cnt=3, min-cnt=1, avg-cnt=2.00
+    PERIOD:count=4, time=0.004000300, max=0.001999400, min=0.001000000, avg=0.001000075, sum-cnt=2, max-cnt=3, min-cnt=1, avg-cnt=2.00
+  -----  Process:"test2"
+    TOTAL: count=1, time=0.000000000, max=0.000000000, min=0.000000000, avg=0.000000000, sum-cnt=2, max-cnt=1, min-cnt=0, avg-cnt=0.50
+    PERIOD:count=1, time=0.000000000, max=0.000000000, min=0.000000000, avg=0.000000000, sum-cnt=2, max-cnt=1, min-cnt=0, avg-cnt=0.50
+  -----  Process:"CP level2(with perform)"
+    TOTAL: count=1, time=0.000000000, max=0.000000000, min=0.000000000, avg=0.000000000, sum-cnt=3, max-cnt=1, min-cnt=0, avg-cnt=0.33
+    PERIOD:count=0, time=0.000000000, max=0.000000000, min=0.000000000, avg=0.000000000, sum-cnt=2, max-cnt=0, min-cnt=0, avg-cnt=0.00
+--------------
+
+
+================================================================================
+
+================================================================================
+
+--------------------------------------------------------------------------------
+[ Prformance test for debug-log ]
+--------------------------------------------------------------------------------
+START: logQueueMonitor thread
+
+--------------------------------------------------------------------------------
+Many thread printing
+
+[0]Normal-message(00) on THREAD[09]
+[0]Normal-message(00) on THREAD[05]
+[0][0]Normal-message(00) on THREAD[01]
+Normal-message(00) on THREAD[04]
+[0]Normal-message(00) on THREAD[07]
+[0]Normal-message(00) on THREAD[00][0]Normal-message(00) on THREAD[06]
+[0]Normal-message(00) on THREAD[08]
+
+[0]Normal-message(00) on THREAD[02]
+[0]Normal-message(00) on THREAD[03]
+[1]Reserved-message(00) on THREAD[09]
+[2]Reserved-message(00) on THREAD[05]
+[3]Reserved-message(00) on THREAD[04]
+[4]Reserved-message(00) on THREAD[01]
+[5]Reserved-message(00) on THREAD[00]
+[6]Reserved-message(00) on THREAD[02]
+[7]Reserved-message(00) on THREAD[08]
+[8]Reserved-message(00) on THREAD[06]
+[0]Normal-message(01) on THREAD[07]
+[0]Normal-message(01) on THREAD[05]
+[0][0]Normal-message(01) on THREAD[08]
+Normal-message(01) on THREAD[09][0]
+Normal-message(01) on THREAD[01][0]Normal-message(01) on THREAD[00]
+[9]Reserved-message(00) on THREAD[03]
+[10]
+Reserved-message(00) on THREAD[07]
+[0]Normal-message(01) on THREAD[02][0]Normal-message(01) on THREAD[04]
+[0]
+[0]Normal-message(01) on THREAD[03]Normal-message(01) on THREAD[06]
+
+[11]Reserved-message(01) on THREAD[07]
+[12]Reserved-message(01) on THREAD[05]
+[13]Reserved-message(01) on THREAD[01]
+[14]Reserved-message(01) on THREAD[09]
+[15]Reserved-message(01) on THREAD[06]
+[16]Reserved-message(01) on THREAD[08]
+[17]Reserved-message(01) on THREAD[02]
+[18]Reserved-message(01) on THREAD[04]
+[19]Reserved-message(01) on THREAD[00]
+[20]Reserved-message(01) on THREAD[03]
+[0]Normal-message(02) on THREAD[09]
+[0]Normal-message(02) on THREAD[07]
+[0]Normal-message(02) on THREAD[01]
+[0]Normal-message(02) on THREAD[08]
+[0]Normal-message(02) on THREAD[00]
+[0]Normal-message(02) on THREAD[05][0]Normal-message(02) on THREAD[02]
+
+[0]Normal-message(02) on THREAD[03]
+[0]Normal-message(02) on THREAD[06]
+[0]Normal-message(02) on THREAD[04][21]Reserved-message(02) on THREAD[07]
+[22]Reserved-message(02) on THREAD[08]
+[23]Reserved-message(02) on THREAD[09]
+
+[24]Reserved-message(02) on THREAD[01]
+[25]Reserved-message(02) on THREAD[00]
+[26]Reserved-message(02) on THREAD[05]
+[27]Reserved-message(02) on THREAD[03]
+[0][0]Normal-message(03) on THREAD[01][0]Normal-message(03) on THREAD[09]
+
+Normal-message(03) on THREAD[08]
+[28]Reserved-message(02) on THREAD[04]
+[29]Reserved-message(02) on THREAD[02]
+[30]Reserved-message(02) on THREAD[06]
+[0]Normal-message(03) on THREAD[05]
+[0][0]Normal-message(03) on THREAD[00]
+Normal-message(03) on THREAD[07]
+[0]Normal-message(03) on THREAD[06]
+[0]Normal-message(03) on THREAD[02]
+[31]Reserved-message(03) on THREAD[09]
+[0]Normal-message(03) on THREAD[03]
+[32]Reserved-message(03) on THREAD[01]
+[33][0]Normal-message(03) on THREAD[04]
+Reserved-message(03) on THREAD[08]
+[34]Reserved-message(03) on THREAD[00]
+[35]Reserved-message(03) on THREAD[05]
+[36]Reserved-message(03) on THREAD[07]
+[37]Reserved-message(03) on THREAD[03]
+[38]Reserved-message(03) on THREAD[02]
+[39]Reserved-message(03) on THREAD[06]
+[40]Reserved-message(03) on THREAD[04]
+[0][0]Normal-message(04) on THREAD[01]
+[0]Normal-message(04) on THREAD[05]Normal-message(04) on THREAD[06]
+[0]Normal-message(04) on THREAD[09]
+
+[0]Normal-message(04) on THREAD[04]
+[0]Normal-message(04) on THREAD[08]
+[0]Normal-message(04) on THREAD[07]
+[0]Normal-message(04) on THREAD[00]
+[41]Reserved-message(04) on THREAD[01]
+[0]Normal-message(04) on THREAD[02]
+[0]Normal-message(04) on THREAD[03]
+[42]Reserved-message(04) on THREAD[09]
+[43]Reserved-message(04) on THREAD[05]
+[0]Normal-message(05) on THREAD[01]
+[44]Reserved-message(04) on THREAD[06]
+[45]Reserved-message(04) on THREAD[08]
+[46]Reserved-message(04) on THREAD[00]
+[47]Reserved-message(04) on THREAD[02]
+[48]Reserved-message(04) on THREAD[04]
+[49]Reserved-message(04) on THREAD[03]
+[50]Reserved-message(04) on THREAD[07]
+[0]Normal-message(05) on THREAD[07]
+[0]Normal-message(05) on THREAD[09]
+[0][0]Normal-message(05) on THREAD[00]
+[0]Normal-message(05) on THREAD[04]Normal-message(05) on THREAD[08]
+
+[0][0]Normal-message(05) on THREAD[02]Normal-message(05) on THREAD[06]
+
+[51][0]Reserved-message(05) on THREAD[01]
+[0]Normal-message(05) on THREAD[05]
+Normal-message(05) on THREAD[03]
+[52]Reserved-message(05) on THREAD[07]
+[53]Reserved-message(05) on THREAD[00]
+[54]Reserved-message(05) on THREAD[09]
+[55]Reserved-message(05) on THREAD[04]
+[56]Reserved-message(05) on THREAD[05]
+[57]Reserved-message(05) on THREAD[08]
+[58]Reserved-message(05) on THREAD[06]
+[59]Reserved-message(05) on THREAD[03]
+[60]Reserved-message(05) on THREAD[02]
+[0]Normal-message(06) on THREAD[01][0]Normal-message(06) on THREAD[07]
+
+[0]Normal-message(06) on THREAD[08][0]
+Normal-message(06) on THREAD[04]
+[0]Normal-message(06) on THREAD[09]
+[0][0][0]Normal-message(06) on THREAD[03]
+Normal-message(06) on THREAD[00]Normal-message(06) on THREAD[06][61]
+
+Reserved-message(06) on THREAD[01]
+[0]Normal-message(06) on THREAD[05][0]Normal-message(06) on THREAD[02]
+[62]Reserved-message(06) on THREAD[07]
+
+[63]Reserved-message(06) on THREAD[04]
+[64]Reserved-message(06) on THREAD[08]
+[0]Normal-message(07) on THREAD[04]
+[0]Normal-message(07) on THREAD[01]
+[65]Reserved-message(06) on THREAD[09]
+[66]Reserved-message(06) on THREAD[00]
+[67]Reserved-message(06) on THREAD[06]
+[68]Reserved-message(06) on THREAD[02]
+[69]Reserved-message(06) on THREAD[03]
+[70]Reserved-message(06) on THREAD[05]
+[0]Normal-message(07) on THREAD[07]
+[0]Normal-message(07) on THREAD[08][0]Normal-message(07) on THREAD[03]
+[0]Normal-message(07) on THREAD[06]
+
+[71]Reserved-message(07) on THREAD[04]
+[0]Normal-message(07) on THREAD[00]
+[72]Reserved-message(07) on THREAD[01]
+[0]Normal-message(07) on THREAD[02]
+[0]Normal-message(07) on THREAD[05]
+[73]Reserved-message(07) on THREAD[08]
+[0][74]Normal-message(07) on THREAD[09]
+Reserved-message(07) on THREAD[07][0]
+Normal-message(08) on THREAD[04]
+[75]Reserved-message(07) on THREAD[00]
+[76]Reserved-message(07) on THREAD[06]
+[0]Normal-message(08) on THREAD[01]
+[77]Reserved-message(07) on THREAD[03]
+[78]Reserved-message(07) on THREAD[05]
+[79]Reserved-message(07) on THREAD[02]
+[0]Normal-message(08) on THREAD[03]
+[0]Normal-message(08) on THREAD[06]
+[0]Normal-message(08) on THREAD[07]
+[0]Normal-message(08) on THREAD[08]
+[0][80]Reserved-message(07) on THREAD[09]
+Normal-message(08) on THREAD[00]
+[81]Reserved-message(08) on THREAD[04]
+[82]Reserved-message(08) on THREAD[01]
+[83]Reserved-message(08) on THREAD[06]
+[0]Normal-message(08) on THREAD[02]
+[84]Reserved-message(08) on THREAD[03]
+[0]Normal-message(08) on THREAD[05]
+[85]Reserved-message(08) on THREAD[07]
+[86]Reserved-message(08) on THREAD[08]
+[87]Reserved-message(08) on THREAD[00]
+[0]Normal-message(08) on THREAD[09]
+[0]Normal-message(09) on THREAD[04][88]Reserved-message(08) on THREAD[02]
+[0]
+Normal-message(09) on THREAD[01]
+[89]Reserved-message(08) on THREAD[05]
+[0]Normal-message(09) on THREAD[06]
+[0]Normal-message(09) on THREAD[00]
+[0]Normal-message(09) on THREAD[08]
+[0]Normal-message(09) on THREAD[03]
+[90][0]Normal-message(09) on THREAD[07]
+Reserved-message(08) on THREAD[09]
+[91]Reserved-message(09) on THREAD[04]
+[92]Reserved-message(09) on THREAD[01]
+[0]Normal-message(09) on THREAD[02]
+[0]Normal-message(09) on THREAD[05]
+[0]Normal-message(09) on THREAD[09]
+[93]Reserved-message(09) on THREAD[06]
+[94]Reserved-message(09) on THREAD[08]
+[95]Reserved-message(09) on THREAD[00]
+[96]Reserved-message(09) on THREAD[03]
+[97]Reserved-message(09) on THREAD[07]
+[98]Reserved-message(09) on THREAD[02]
+[99]Reserved-message(09) on THREAD[05]
+[100]Reserved-message(09) on THREAD[09]
+*elapsed time: output=0.055004000 sec, flush=0.056004300 sec
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Many thread profiling(1) : 1+4 threads, 120 frames, 2 processes, 2 repeats, sum on 30 frames
+
+*elapsed time: finish=0.941036300 sec
+--------------------------------------------------------------------------------
+----------------------------------------
+THREAD:"MainThread"
+  PROFILE:"MAIN-PROC[01]"
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.114006(max=0.003020,min=0.001000,avg=0.001900)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.454953(max=0.005799,min=0.001000,avg=0.001896)
+  PROFILE:"MAIN-PROC[00]"
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.120006(max=0.003006,min=0.001000,avg=0.002000)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.473102(max=0.004751,min=0.001000,avg=0.001971)
+----------------------------------------
+THREAD:"THREAD[02]"
+  PROFILE:"PROC[01]"
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.112055(max=0.003020,min=0.001000,avg=0.001868)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.472006(max=0.006800,min=0.001000,avg=0.001967)
+  PROFILE:"PROC[00]"
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.122941(max=0.003006,min=0.001000,avg=0.002049)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.469031(max=0.004751,min=0.001000,avg=0.001954)
+----------------------------------------
+THREAD:"THREAD[01]"
+  PROFILE:"PROC[00]"
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.117048(max=0.003027,min=0.001000,avg=0.001951)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.466000(max=0.005500,min=0.001000,avg=0.001942)
+  PROFILE:"PROC[01]"
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.112959(max=0.003020,min=0.001000,avg=0.001883)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.463056(max=0.005799,min=0.001000,avg=0.001929)
+----------------------------------------
+THREAD:"THREAD[03]"
+  PROFILE:"PROC[00]"
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.121989(max=0.003027,min=0.001000,avg=0.002033)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.472952(max=0.006800,min=0.001000,avg=0.001971)
+  PROFILE:"PROC[01]"
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.118007(max=0.003020,min=0.001000,avg=0.001967)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.453084(max=0.004843,min=0.001000,avg=0.001888)
+----------------------------------------
+THREAD:"THREAD[00]"
+  PROFILE:"PROC[00]"
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.113059(max=0.003027,min=0.001000,avg=0.001884)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.457919(max=0.005799,min=0.001000,avg=0.001908)
+  PROFILE:"PROC[01]"
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.116954(max=0.003001,min=0.001000,avg=0.001949)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.475134(max=0.004843,min=0.001000,avg=0.001980)
+
+--------------------------------------------------------------------------------
+Many thread profiling(2) : 1+20 threads, 300 frames, 20 processes, 20 repeats, sum on 30 frames
+
+*elapsed time: finish=14.652871000 sec
+--------------------------------------------------------------------------------
+thread-infos=20,processe-infos=400,total:(sums=120000,counts=2400000,time=288.277395900),period:(sums=12000,counts=240000,time=29.290589300)
+END: logQueueMonitor thread
+
+================================================================================

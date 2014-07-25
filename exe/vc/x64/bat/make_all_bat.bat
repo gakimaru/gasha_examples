@@ -1,0 +1,22 @@
+@ECHO OFF
+
+ECHO ----------------------------------------
+ECHO [ %~dp0 ]
+
+FOR %%F IN (..\example_*.exe) DO CALL :COPY_TEMPLATE %%F
+
+EXIT /B
+GOTO :EOF
+
+:COPY_TEMPLATE
+SET PROG_NAME=%~n1
+SET TEMPLATE_BAT_NAME=_template.bat
+SET BAT_NAME=%PROG_NAME%.bat
+SET CMD=COPY %TEMPLATE_BAT_NAME% %BAT_NAME%
+IF NOT EXIST %BAT_NAME% CALL :RUN_CMD %CMD%
+GOTO :EOF
+
+:RUN_CMD
+ECHO %*
+%*
+GOTO :EOF

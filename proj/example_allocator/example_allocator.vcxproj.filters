@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="プリコンパイル済みヘッダー">
+      <UniqueIdentifier>{7ef016ed-f570-4324-b5ac-0ae9f7621f6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="example">
+      <UniqueIdentifier>{925716df-6e93-4299-a2eb-fc23a05529d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="example\feature_test">
+      <UniqueIdentifier>{30365a27-3613-416f-b656-ec6fed465ccf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="example\performance_test">
+      <UniqueIdentifier>{14d8650a-fbab-4b73-9bcd-231261fa1234}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="example\basic_test">
+      <UniqueIdentifier>{81f4a97c-850e-4b6f-9cee-521ddb0a4deb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="example\examination">
+      <UniqueIdentifier>{34e737d0-bfed-44c3-8470-258d3f0bce96}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="standard.cpp">
+      <Filter>プリコンパイル済みヘッダー</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>example</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_allocator\example_allocator_sub.cpp">
+      <Filter>example</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_allocator\example_allocator.cpp">
+      <Filter>example</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_allocator\examination\example_new_delete_test.cpp">
+      <Filter>example\examination</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_allocator\performance_test\example_allocator_performance.cpp">
+      <Filter>example\performance_test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_allocator\feature_test\example_mono_allocator.cpp">
+      <Filter>example\feature_test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_allocator\feature_test\example_poly_allocator.cpp">
+      <Filter>example\feature_test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_allocator\feature_test\example_pool_allocator.cpp">
+      <Filter>example\feature_test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_allocator\feature_test\example_stack_allocator.cpp">
+      <Filter>example\feature_test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_allocator\feature_test\example_std_allocator.cpp">
+      <Filter>example\feature_test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_allocator\feature_test\example_dual_stack_allocator.cpp">
+      <Filter>example\feature_test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_allocator\basic_test\example_allocator_basic_test.cpp">
+      <Filter>example\basic_test</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\example_allocator\example_allocator.h">
+      <Filter>example</Filter>
+    </ClInclude>
+    <ClInclude Include="standard.h">
+      <Filter>プリコンパイル済みヘッダー</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

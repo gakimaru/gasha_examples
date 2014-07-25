@@ -1,0 +1,80 @@
+
+----- Calculate pow for Runtime -----
+pow<int, e>(2) = {1, 2, 4, 8, 16} (e=0, 1, 2, 3, 4)
+pow<float, e>(2.f) = {1.0, 2.0, 4.0, 8.0, 16.0} (e=0, 1, 2, 3, 4)
+negaPow<float, -e>(2.f) = {1.0000, 0.5000, 0.2500, 0.1250, 0.0625} (e=0, -1, -2, -3, -4)
+
+----- Calculate pow for Meta-programming -----
+staticPow<2, e> = {1, 2, 4, 8, 16} (e=0, 1, 2, 3, 4)
+
+----- Check and Make Prime for Runtime -----
+     0 is NOT prime. [prev=     0(     0), next=     2(     2)]
+     1 is NOT prime. [prev=     0(     0), next=     2(     2)]
+     2 is PRIME.     [prev=     0(     2), next=     3(     2)]
+     3 is PRIME.     [prev=     2(     3), next=     5(     3)]
+     4 is NOT prime. [prev=     3(     3), next=     5(     5)]
+     5 is PRIME.     [prev=     3(     5), next=     7(     5)]
+     6 is NOT prime. [prev=     5(     5), next=     7(     7)]
+     7 is PRIME.     [prev=     5(     7), next=    11(     7)]
+     8 is NOT prime. [prev=     7(     7), next=    11(    11)]
+     9 is NOT prime. [prev=     7(     7), next=    11(    11)]
+    10 is NOT prime. [prev=     7(     7), next=    11(    11)]
+
+----- Check and Make Prime for Meta-programming -----
+     0 is NOT prime. [prev=     0(     0), next=     2(     2)]
+     1 is NOT prime. [prev=     0(     0), next=     2(     2)]
+     2 is PRIME.     [prev=     0(     2), next=     3(     2)]
+     3 is PRIME.     [prev=     2(     3), next=     5(     3)]
+     4 is NOT prime. [prev=     3(     3), next=     5(     5)]
+     5 is PRIME.     [prev=     3(     5), next=     7(     5)]
+     6 is NOT prime. [prev=     5(     5), next=     7(     7)]
+     7 is PRIME.     [prev=     5(     7), next=    11(     7)]
+     8 is NOT prime. [prev=     7(     7), next=    11(    11)]
+     9 is NOT prime. [prev=     7(     7), next=    11(    11)]
+    10 is NOT prime. [prev=     7(     7), next=    11(    11)]
+
+----- Calculate bits for Runtime -----
+0x00000000 : count= 0, MSB=-1, LSB=-1, near-pow2(GE)=0x00000000, near-pow2(LE)=0x00000000, adjustAlign<ALIGN>=0x00000000,0x00000000(ALIGN=4,256)
+0xffffffff : count=32, MSB=31, LSB= 0, near-pow2(GE)=0x00000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0x00000000,0x00000000(ALIGN=4,256)
+0x80000000 : count= 1, MSB=31, LSB=31, near-pow2(GE)=0x80000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0x80000000,0x80000000(ALIGN=4,256)
+0x00000001 : count= 1, MSB= 0, LSB= 0, near-pow2(GE)=0x00000001, near-pow2(LE)=0x00000001, adjustAlign<ALIGN>=0x00000004,0x00000100(ALIGN=4,256)
+0x55555555 : count=16, MSB=30, LSB= 0, near-pow2(GE)=0x80000000, near-pow2(LE)=0x40000000, adjustAlign<ALIGN>=0x55555558,0x55555600(ALIGN=4,256)
+0xaaaaaaaa : count=16, MSB=31, LSB= 1, near-pow2(GE)=0x00000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0xaaaaaaac,0xaaaaab00(ALIGN=4,256)
+0xffff0000 : count=16, MSB=31, LSB=16, near-pow2(GE)=0x00000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0xffff0000,0xffff0000(ALIGN=4,256)
+0x0000ffff : count=16, MSB=15, LSB= 0, near-pow2(GE)=0x00010000, near-pow2(LE)=0x00008000, adjustAlign<ALIGN>=0x00010000,0x00010000(ALIGN=4,256)
+0x00ffff00 : count=16, MSB=23, LSB= 8, near-pow2(GE)=0x01000000, near-pow2(LE)=0x00800000, adjustAlign<ALIGN>=0x00ffff00,0x00ffff00(ALIGN=4,256)
+0x12345678 : count=13, MSB=28, LSB= 3, near-pow2(GE)=0x20000000, near-pow2(LE)=0x10000000, adjustAlign<ALIGN>=0x12345678,0x12345700(ALIGN=4,256)
+0xfedcba98 : count=20, MSB=31, LSB= 3, near-pow2(GE)=0x00000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0xfedcba98,0xfedcbb00(ALIGN=4,256)
+0x11111111 : count= 8, MSB=28, LSB= 0, near-pow2(GE)=0x20000000, near-pow2(LE)=0x10000000, adjustAlign<ALIGN>=0x11111114,0x11111200(ALIGN=4,256)
+0x88888888 : count= 8, MSB=31, LSB= 3, near-pow2(GE)=0x00000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0x88888888,0x88888900(ALIGN=4,256)
+0x01010101 : count= 4, MSB=24, LSB= 0, near-pow2(GE)=0x02000000, near-pow2(LE)=0x01000000, adjustAlign<ALIGN>=0x01010104,0x01010200(ALIGN=4,256)
+0x08080800 : count= 3, MSB=27, LSB=11, near-pow2(GE)=0x10000000, near-pow2(LE)=0x08000000, adjustAlign<ALIGN>=0x08080800,0x08080800(ALIGN=4,256)
+0x00010001 : count= 2, MSB=16, LSB= 0, near-pow2(GE)=0x00020000, near-pow2(LE)=0x00010000, adjustAlign<ALIGN>=0x00010004,0x00010100(ALIGN=4,256)
+0x80008000 : count= 2, MSB=31, LSB=15, near-pow2(GE)=0x00000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0x80008000,0x80008000(ALIGN=4,256)
+
+----- Calculate bits for Meta-programming -----
+0x00000000 : count= 0, MSB=-1, LSB=-1, near-pow2(GE)=0x00000000, near-pow2(LE)=0x00000000, adjustAlign<ALIGN>=0x00000000,0x00000000(ALIGN=4,256)
+0xffffffff : count=32, MSB=31, LSB= 0, near-pow2(GE)=0x00000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0x00000000,0x00000000(ALIGN=4,256)
+0x80000000 : count= 1, MSB=31, LSB=31, near-pow2(GE)=0x80000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0x80000000,0x80000000(ALIGN=4,256)
+0x00000001 : count= 1, MSB= 0, LSB= 0, near-pow2(GE)=0x00000001, near-pow2(LE)=0x00000001, adjustAlign<ALIGN>=0x00000004,0x00000100(ALIGN=4,256)
+0x55555555 : count=16, MSB=30, LSB= 0, near-pow2(GE)=0x80000000, near-pow2(LE)=0x40000000, adjustAlign<ALIGN>=0x55555558,0x55555600(ALIGN=4,256)
+0xaaaaaaaa : count=16, MSB=31, LSB= 1, near-pow2(GE)=0x00000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0xaaaaaaac,0xaaaaab00(ALIGN=4,256)
+0xffff0000 : count=16, MSB=31, LSB=16, near-pow2(GE)=0x00000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0xffff0000,0xffff0000(ALIGN=4,256)
+0x0000ffff : count=16, MSB=15, LSB= 0, near-pow2(GE)=0x00010000, near-pow2(LE)=0x00008000, adjustAlign<ALIGN>=0x00010000,0x00010000(ALIGN=4,256)
+0x00ffff00 : count=16, MSB=23, LSB= 8, near-pow2(GE)=0x01000000, near-pow2(LE)=0x00800000, adjustAlign<ALIGN>=0x00ffff00,0x00ffff00(ALIGN=4,256)
+0x12345678 : count=13, MSB=28, LSB= 3, near-pow2(GE)=0x20000000, near-pow2(LE)=0x10000000, adjustAlign<ALIGN>=0x12345678,0x12345700(ALIGN=4,256)
+0xfedcba98 : count=20, MSB=31, LSB= 3, near-pow2(GE)=0x00000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0xfedcba98,0xfedcbb00(ALIGN=4,256)
+0x11111111 : count= 8, MSB=28, LSB= 0, near-pow2(GE)=0x20000000, near-pow2(LE)=0x10000000, adjustAlign<ALIGN>=0x11111114,0x11111200(ALIGN=4,256)
+0x88888888 : count= 8, MSB=31, LSB= 3, near-pow2(GE)=0x00000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0x88888888,0x88888900(ALIGN=4,256)
+0x01010101 : count= 4, MSB=24, LSB= 0, near-pow2(GE)=0x02000000, near-pow2(LE)=0x01000000, adjustAlign<ALIGN>=0x01010104,0x01010200(ALIGN=4,256)
+0x08080800 : count= 3, MSB=27, LSB=11, near-pow2(GE)=0x10000000, near-pow2(LE)=0x08000000, adjustAlign<ALIGN>=0x08080800,0x08080800(ALIGN=4,256)
+0x00010001 : count= 2, MSB=16, LSB= 0, near-pow2(GE)=0x00020000, near-pow2(LE)=0x00010000, adjustAlign<ALIGN>=0x00010004,0x00010100(ALIGN=4,256)
+0x80008000 : count= 2, MSB=31, LSB=15, near-pow2(GE)=0x00000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0x80008000,0x80008000(ALIGN=4,256)
+
+----- Performance test for coutnBits() -----
+[countBits_custom() * 10000000 times]
+*elapsed time = 0.128033700 sec (bit_count_sum=0x06d22240)
+[countBits_builtin() * 10000000 times]
+*elapsed time = 0.033001900 sec (bit_count_sum=0x06d22240)
+[countBits_sse() * 10000000 times]
+*elapsed time = 0.032975900 sec (bit_count_sum=0x06d22240)

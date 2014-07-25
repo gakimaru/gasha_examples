@@ -1,0 +1,1047 @@
+
+================================================================================
+[ Test for serialization basic ]
+
+----------------------------------------
+[ Make data ]
+----------------------------------------
+[ Print data(1) : before save ]
+basicTestData
+  .m_memberA = 123
+  .m_memberB = 4.56
+  .m_memberC = { 78, 90 }
+  .m_memberD
+      .m_item1 = 987
+      .m_item2 = 654
+----------------------------------------
+[ Save binary ]
+Save file = "data/example_serialization/basic_test_data.bin"
+Binary save data image size = 139
+----------------------------------------
+[ Save text ]
+Save file = "data/example_serialization/basic_test_data.json"
+Text save data image size = 922
+----------------------------------------
+[ Print data(2) : before load ]
+basicTestData
+  .m_memberA = 0
+  .m_memberB = 0.00
+  .m_memberC = { 0, 0 }
+  .m_memberD
+      .m_item1 = 0
+      .m_item2 = 0
+----------------------------------------
+[ Load binary ]
+Save file = "data/example_serialization/basic_test_data.bin"
+Binary save data image size = 139
+----------------------------------------
+[ Print data(3) : after load ]
+basicTestData
+  .m_memberA = 123
+  .m_memberB = 4.56
+  .m_memberC = { 78, 90 }
+  .m_memberD
+      .m_item1 = 987
+      .m_item2 = 654
+
+================================================================================
+finish.
+
+================================================================================
+[ Test for serialization features ]
+
+----------------------------------------
+[ Create instance ]
+----------------------------------------
+[ Make data ]
+----------------------------------------
+[ Print data(1) : before save ]
+data1=1
+data2=2.34
+data3={[0]=5,[1]=6,[2]=7,}
+data4a:{a=8,b=9,c=10.0}
+data4b:{a=11,b=12,c=13.0}
+data5a:{[0]=1,[1]=1,[2]=0,[3]=0,...,[253]=0,[254]=1,[255]=1,}
+data5b:{[0]=0,[1]=0,[2]=1,[3]=1,...,[13]=1,[14]=0,[15]=1,}
+data6={[0]={a=14,b=15,c=16.0},[1]={a=17,b=18,c=19.0},}
+data7a(0x80048998):{a=20,b=21,c=22.0}
+data7b(0x80048a38):{a=23,b=24,c=25.0}
+data7c(0x0)
+data7d(0x0)
+data7e(0x80048a48):{a=32,b=33,c=34.0}
+data7f:{a=35,b=36,c=37.0}
+data7g(0x800489a8):{a=38,b=39,c=40.0}
+data7h={[0]={a=41,b=42,c=43.0},[1]={a=44,b=45,c=46.0},}
+data7i={[0]={a=47,b=48,c=49.0},[1]={a=50,b=51,c=52.0},}
+data7j={[0]={a=53,b=54,c=55.0},[1]={a=56,b=57,c=58.0},}
+data8a(0x800489f8)=59
+data8b(0x80048a58)=60
+data8c(0x0)
+data8d(0x0)
+data8e(0x80048a68)=63
+data8f=64
+data8g(0x80048a08)=65
+data8h={[0]=66,[1]=67,}
+data8i={[0]=68,[1]=69,}
+data8j={[0]=70,[1]=71,}
+data9=72
+data10=73
+data11=74
+data11_deleted=75
+data12=76
+data13:{a=77,b=78,c=79.0}
+data13_deleted:{a=80,b=81,c=82.0}
+data14:{a=83,b=84,c=85.0}
+data15a=86
+data15b=87
+data15c=88
+data15d=89.00
+data16a={[0]=90,[1]=91,[2]=92,}
+data16b={[0]=93,[1]=94,}
+data16c={[0]=95,[1]=96,[2]=97,[3]=98,}
+data16d=99
+data16e={[0]=100,[1]=101,}
+data17a={[0]={a=102,b=103,c=104.0},[1]={a=105,b=106,c=107.0},[2]={a=108,b=109,c=110.0},}
+data17b={[0]={a=111,b=112,c=113.0},[1]={a=114,b=115,c=116.0},}
+data17c={[0]={a=117,b=118,c=119.0},[1]={a=120,b=121,c=122.0},[2]={a=123,b=124,c=125.0},[3]={a=126,b=127,c=128.0},}
+data17d:{a=129,b=130,c=131.0}
+data17e={[0]={a=132,b=133,c=134.0},[1]={a=135,b=136,c=137.0},}
+data18a=138
+data18b:{a=139,b=140,c=141.0}
+data19a=142
+data19b:{a=143,b=144,c=145.0}
+data20a:{a=146,b=147,c=148.0}
+data20b:{a=149,b=150,c=151.0}
+data21a:{a=152,b=153,c=154.0}
+data21b:{a=155,b=156}
+data21c:{a=157,b=158,c=159.0,d=160}
+data22a:{a=161,b=162,c=163.0}
+data22b:{a=164,b=165,c=166.0,d=167}
+data23:{{a=168,b=169,c=170.0},z=171}
+data24:{{a=172,b=173,c=174.0},{a=175,b=176,c=177.0,d=178},z=179}
+----------------------------------------
+[ Save binary ]
+-------------------- [ makeBinarySaveDataImage ]
+----------
+collector<saveData>(ver=5.6)
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData>(ver=1.2,now_ver=1.2) sizeof(testData)=704
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<std::bitset<16>>(ver=0.0,now_ver=0.0) sizeof(std::bitset<16>)=4
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subDataExt>(ver=0.0,now_ver=0.0) sizeof(testData::subDataExt)=24
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subDataExt2>(ver=0.0,now_ver=0.0) sizeof(testData::subDataExt2)=48
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData2>(ver=0.0,now_ver=0.0) sizeof(testData::subData2)=24
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+save<testData>(ver=1.2)
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData2>(ver=0.0,now_ver=0.0) sizeof(testData::subData2)=24
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+collector<testData>(ver=1.2)
+arc.isInputClass=0, arc.isOutputClass=1
+Result:
+  Fatal-error:    nothing
+  Save data size: 3764
+  Used work-buffer size(peak): 6496
+  numInvalidItem()=0
+----------------------------------------
+[ Save text ]
+-------------------- [ makeTextSaveDataImage ]
+----------
+collector<saveData>(ver=5.6)
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData>(ver=1.2,now_ver=1.2) sizeof(testData)=704
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<std::bitset<16>>(ver=0.0,now_ver=0.0) sizeof(std::bitset<16>)=4
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subDataExt>(ver=0.0,now_ver=0.0) sizeof(testData::subDataExt)=24
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subDataExt2>(ver=0.0,now_ver=0.0) sizeof(testData::subDataExt2)=48
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData2>(ver=0.0,now_ver=0.0) sizeof(testData::subData2)=24
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+save<testData>(ver=1.2)
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData2>(ver=0.0,now_ver=0.0) sizeof(testData::subData2)=24
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=0, arc.isOutputClass=1
+----------
+collector<testData>(ver=1.2)
+arc.isInputClass=0, arc.isOutputClass=1
+Result:
+  Fatal-error:    nothing
+  Save data size: 33415
+  Used work-buffer size(peak): 6496
+  numInvalidItem()=0
+----------------------------------------
+[ Load binary ]
+-------------------- [ loadBinarySaveDataImage ]
+----------
+distributor<saveData>(ver=5.6,now_ver=5.6), target_item="(null)"
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+beforeLoad<testData>(ver=1.2,now_ver=1.2)
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+serialize<testData>(ver=1.2,now_ver=1.2) sizeof(testData)=704
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+load<testData>(ver=1.2,now_ver=1.2)
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data4b"
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data5b"
+----------
+serialize<std::bitset<16>>(ver=0.0,now_ver=0.0) sizeof(std::bitset<16>)=4
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<std::bitset<N>>:Special deserialize item="no0"
+***** serialize<std::bitset<N>>:Special deserialize item="no1"
+***** serialize<std::bitset<N>>:Special deserialize item="no2"
+***** serialize<std::bitset<N>>:Special deserialize item="no3"
+***** serialize<std::bitset<N>>:Special deserialize item="no4"
+***** serialize<std::bitset<N>>:Special deserialize item="no5"
+***** serialize<std::bitset<N>>:Special deserialize item="no6"
+***** serialize<std::bitset<N>>:Special deserialize item="no7"
+***** serialize<std::bitset<N>>:Special deserialize item="no8"
+***** serialize<std::bitset<N>>:Special deserialize item="no9"
+***** serialize<std::bitset<N>>:Special deserialize item="no10"
+***** serialize<std::bitset<N>>:Special deserialize item="no11"
+***** serialize<std::bitset<N>>:Special deserialize item="no12"
+***** serialize<std::bitset<N>>:Special deserialize item="no13"
+***** serialize<std::bitset<N>>:Special deserialize item="no14"
+***** serialize<std::bitset<N>>:Special deserialize item="no15"
+***** serialize<testData>:Deserialize object="data6"
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data7a"
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data7b"
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data7c"
+***** serialize<testData>:Deserialize object="data7d"
+***** serialize<testData>:Deserialize object="data7e"
+***** serialize<testData>:Deserialize object="data7h"
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data23"
+----------
+serialize<testData::subDataExt>(ver=0.0,now_ver=0.0) sizeof(testData::subDataExt)=24
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData::subDataExt>:Deserialize object="subData"
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data24"
+----------
+serialize<testData::subDataExt2>(ver=0.0,now_ver=0.0) sizeof(testData::subDataExt2)=48
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData::subDataExt2>:Deserialize object="subData"
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData::subDataExt2>:Deserialize object="subData2"
+----------
+serialize<testData::subData2>(ver=0.0,now_ver=0.0) sizeof(testData::subData2)=24
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data7f"
+***** load<testData>:Deserialize object="data7f"
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data7g"
+***** load<testData>:Deserialize object="data7g"
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data7i"
+***** load<testData>:Deserialize object="data7i"
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data7j"
+***** load<testData>:Deserialize object="data7j"
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** load<testData>:Special deserialize item="data10"
+----------
+noticeUnrecognizedItem<testData>(ver=1.2,now_ver=1.2), unrecognized_item="(no-name)"(0x8606d499, type=v)
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+noticeUnrecognizedItem<testData>(ver=1.2,now_ver=1.2), unrecognized_item="(no-name)"(0x673da46e, type=v)
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+noticeUnrecognizedItem<testData>(ver=1.2,now_ver=1.2), unrecognized_item="(no-name)"(0x673da46e, type=N8testData7subDataE)
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data17a"
+***** load<testData>:Deserialize object="data17a"
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data17b"
+***** load<testData>:Deserialize object="data17b"
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data17c"
+***** load<testData>:Deserialize object="data17c"
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data17d"
+***** load<testData>:Deserialize object="data17d"
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data17e"
+***** load<testData>:Deserialize object="data17e"
+----------
+serialize<testData::subData>(ver=3.4,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data18a"
+***** load<testData>:Deserialize object="data18a"
+***** serialize<testData>:Deserialize object="data20b"
+***** load<testData>:Deserialize object="data20b"
+***** serialize<testData>:Deserialize object="data22a"
+***** load<testData>:Deserialize object="data22a"
+----------
+serialize<testData::subData>(ver=0.0,now_ver=3.4) sizeof(testData::subData)=12
+arc.isInputClass=1, arc.isOutputClass=0
+***** serialize<testData>:Deserialize object="data22b"
+***** load<testData>:Deserialize object="data22b"
+----------
+serialize<testData::subData2>(ver=3.4,now_ver=0.0) sizeof(testData::subData2)=24
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+noticeUnloadedItem<testData>(ver=1.2,now_ver=1.2), unloaded_item="data12"(0x9556276d,type=i)
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+noticeUnloadedItem<testData>(ver=1.2,now_ver=1.2), unloaded_item="data14"(0xb3f7c085,type=N8testData7subDataE)
+arc.isInputClass=1, arc.isOutputClass=0
+----------
+afterLoad<testData>(ver=1.2,now_ver=1.2)
+arc.isInputClass=1, arc.isOutputClass=0
+Result:
+  Fatal-error:    nothing
+  Save data size: 3764
+  Used work-buffer size(peak): 6496
+  numInvalidItem()=0
+  numSmallerSizeItem()=5
+  numLargerSizeItem()=7
+  numSmallerArrItem()=4
+  numLargerArrItem()=4
+  numOnlyOnSaveData()=21
+  numOnlyOnMem()=3
+  numObjOnSaveDataOnly()=2
+  numObjOnMemOnly()=2
+  numArrOnSaveDataOnly()=2
+  numArrOnMemOnly()=2
+  numPtrOnSaveDataOnly()=3
+  numPtrOnMemOnly()=3
+  numNulOnSaveDataOnly()=2
+  numNulOnMemOnly()=2
+----------------------------------------
+[ Print data(2) : after load ]
+data1=1
+data2=2.34
+data3={[0]=5,[1]=6,[2]=7,}
+data4a:{a=8,b=9,c=10.0}
+data4b:{a=11,b=12,c=13.0}
+data5a:{[0]=1,[1]=1,[2]=0,[3]=0,...,[253]=0,[254]=1,[255]=1,}
+data5b:{[0]=0,[1]=0,[2]=1,[3]=1,...,[13]=1,[14]=0,[15]=1,}
+data6={[0]={a=14,b=15,c=16.0},[1]={a=17,b=18,c=19.0},}
+data7a(0x80048998):{a=20,b=21,c=22.0}
+data7b(0x80048a38):{a=23,b=24,c=25.0}
+data7c(0x0)
+data7d(0x80048a48):{a=0,b=0,c=0.0}
+data7e(0x0)
+data7f:{a=38,b=39,c=40.0}
+data7g(0x800489a8):{a=35,b=36,c=37.0}
+data7h={[0]={a=41,b=42,c=43.0},[1]={a=44,b=45,c=46.0},}
+data7i={[0]={a=53,b=54,c=55.0},[1]={a=56,b=57,c=58.0},}
+data7j={[0]={a=47,b=48,c=49.0},[1]={a=50,b=51,c=52.0},}
+data8a(0x800489f8)=59
+data8b(0x80048a58)=60
+data8c(0x0)
+data8d(0x80048a68)=0
+data8e(0x0)
+data8f=64
+data8g(0x80048a08)=65
+data8h={[0]=66,[1]=67,}
+data8i={[0]=70,[1]=71,}
+data8j={[0]=68,[1]=69,}
+data9=18
+data10=73
+data11=0
+data11_deleted=74
+data12=999
+data13:{a=0,b=0,c=0.0}
+data13_deleted:{a=77,b=78,c=79.0}
+data14:{a=998,b=997,c=996.0}
+data15a=86
+data15b=86
+data15c=86
+data15d=0.00
+data16a={[0]=90,[1]=91,[2]=92,}
+data16b={[0]=90,[1]=91,}
+data16c={[0]=90,[1]=91,[2]=92,[3]=0,}
+data16d=90
+data16e={[0]=99,[1]=0,}
+data17a={[0]={a=102,b=103,c=104.0},[1]={a=105,b=106,c=107.0},[2]={a=108,b=109,c=110.0},}
+data17b={[0]={a=102,b=103,c=104.0},[1]={a=105,b=106,c=107.0},}
+data17c={[0]={a=102,b=103,c=104.0},[1]={a=105,b=106,c=107.0},[2]={a=108,b=109,c=110.0},[3]={a=0,b=0,c=0.0},}
+data17d:{a=102,b=103,c=104.0}
+data17e={[0]={a=129,b=130,c=131.0},[1]={a=0,b=0,c=0.0},}
+data18a=0
+data18b:{a=138,b=0,c=0.0}
+data19a=143
+data19b:{a=142,b=0,c=0.0}
+data20a:{a=149,b=150,c=151.0}
+data20b:{a=0,b=0,c=0.0}
+data21a:{a=152,b=153,c=154.0}
+data21b:{a=152,b=153}
+data21c:{a=152,b=153,c=154.0,d=0}
+data22a:{a=164,b=165,c=166.0}
+data22b:{a=161,b=162,c=163.0,d=0}
+data23:{{a=168,b=169,c=170.0},z=171}
+data24:{{a=172,b=173,c=174.0},{a=175,b=176,c=177.0,d=178},z=179}
+----------------------------------------
+[ Destroy instance ]
+
+================================================================================
+finish.
+------------------------------------------------------------
+【全データリセット】
+------------------------------------------------------------
+【テストデータ作成】(pattern=0)
+------------------------------------------------------------
+【現在のデータを表示】
+--- インベントリ ---
+ID="r00010"(0x9f7895f8), name="回復薬001", atk=0, def=0, recover=5, num=10
+ID="r00020"(0xab9f3d61), name="回復薬002", atk=0, def=0, recover=7, num=10
+ID="r00030"(0xb83da516), name="回復薬003", atk=0, def=0, recover=9, num=10
+ID="w00010"(0xc2bdc996), name="武器001", atk=10, def=0, recover=0, num=1
+ID="w00020"(0xf65a610f), name="武器002", atk=11, def=0, recover=0, num=1
+                              title="性能:+1"
+ID="w00030"(0xe5f8f978), name="武器003", atk=12, def=1, recover=0, num=1
+                              title="性能:+2"
+ID="w00040"(0x9f95303d), name="武器004", atk=13, def=1, recover=0, num=1
+                              title="性能:+3"
+ID="w00050"(0x8c37a84a), name="武器005", atk=14, def=2, recover=0, num=1
+                              title="性能:+4"
+ID="s00010"(0x7048fee1), name="盾001", atk=0, def=5, recover=0, num=1
+ID="s00020"(0x44af5678), name="盾002", atk=0, def=6, recover=0, num=1
+                              title="グレード:B"
+ID="s00030"(0x570dce0f), name="盾003", atk=0, def=7, recover=0, num=1
+                              title="グレード:C"
+ID="s00040"(0x2d60074a), name="盾004", atk=0, def=8, recover=0, num=1
+                              title="グレード:D"
+ID="s00050"(0x3ec29f3d), name="盾005", atk=0, def=9, recover=0, num=1
+                              title="グレード:E"
+--- アビリティ ---
+ID="a00010"(0x6bc86e1c), name="特技001", atk=5, def=4
+ID="a00020"(0x5f2fc685), name="特技002", atk=8, def=6
+ID="a00030"(0x4c8d5ef2), name="特技003", atk=11, def=8
+ID="a00040"(0x36e097b7), name="特技004", atk=14, def=10
+ID="a00050"(0x25420fc0), name="特技005", atk=17, def=12
+ID="a00060"(0x11a5a759), name="特技006", atk=20, def=14
+ID="a00070"(0x02073f2e), name="特技007", atk=23, def=16
+ID="a00080"(0xe57e35d3), name="特技008", atk=26, def=18
+ID="a00090"(0xf6dcada4), name="特技009", atk=29, def=20
+ID="a00100"(0xdd2b6415), name="特技010", atk=32, def=22
+--- キャラ ---
+ID="c00030"(0x9701fe31), name="さぶろう", level=30, atk=55, def=3
+                              weapon=武器001
+                              shield=盾003
+                              [特技005]
+ID="c00020"(0x84a36646), name="じろう", level=20, atk=25, def=40
+                              weapon=武器005
+                              shield=盾001
+ID="c00010"(0xb044cedf), name="たろう", level=10, atk=15, def=20
+                              weapon=武器002
+                              shield=盾002
+                              [特技003]
+                              [特技002]
+                              [特技005]
+                              [特技001]
+--- ゲーム状態 ---
+pahse=7
+flags:
+  [ 1]"flag A"(0x83f44f4d)=false
+  [ 2]"flag B"(0x90a4bcb9)=false
+  [ 3]"flag C"(0x62cf3fba)=true
+  [ 4]"flag D"(0xb6055b51)=true
+  [61]"flag X"(0xeb1853ee)=true
+  [62]"flag Y"(0x1973d0ed)=true
+  [63]"flag Z"(0x0a232319)=false
+------------------------------------------------------------
+【セーブデータバージョン】
+現在のバージョン:                 1.0
+ロード済みorセーブ済みバージョン: 0.0
+セーブ日時:                       2014/07/26(Sat) 07:12:21
+・セーブしたか？ = no
+・ロードしたか？ = no
+-------------------- [ makeBinarySaveDataImage ]
+Result:
+  Fatal-error:    nothing
+  Save data size: 7856
+  Used work-buffer size(peak): 667
+  numInvalidItem()=0
+-------------------- [ makeTextSaveDataImage ]
+Result:
+  Fatal-error:    nothing
+  Save data size: 69727
+  Used work-buffer size(peak): 667
+  numInvalidItem()=0
+------------------------------------------------------------
+【セーブデータバージョン】
+現在のバージョン:                 1.0
+ロード済みorセーブ済みバージョン: 1.0
+セーブ日時:                       2014/07/26(Sat) 07:12:21
+・セーブしたか？ = yes
+・ロードしたか？ = no
+------------------------------------------------------------
+【全データリセット】
+------------------------------------------------------------
+【現在のデータを表示】
+--- インベントリ ---
+--- アビリティ ---
+--- キャラ ---
+--- ゲーム状態 ---
+pahse=0
+flags:
+  [ 1]"flag A"(0x83f44f4d)=false
+  [ 2]"flag B"(0x90a4bcb9)=false
+  [ 3]"flag C"(0x62cf3fba)=false
+  [ 4]"flag D"(0xb6055b51)=false
+  [61]"flag X"(0xeb1853ee)=false
+  [62]"flag Y"(0x1973d0ed)=false
+  [63]"flag Z"(0x0a232319)=false
+-------------------- [ loadBinarySaveDataImage ]
+Result:
+  Fatal-error:    nothing
+  Save data size: 7856
+  Used work-buffer size(peak): 667
+  numInvalidItem()=0
+  numSmallerSizeItem()=0
+  numLargerSizeItem()=0
+  numSmallerArrItem()=0
+  numLargerArrItem()=0
+  numOnlyOnSaveData()=0
+  numOnlyOnMem()=0
+  numObjOnSaveDataOnly()=0
+  numObjOnMemOnly()=0
+  numArrOnSaveDataOnly()=0
+  numArrOnMemOnly()=0
+  numPtrOnSaveDataOnly()=0
+  numPtrOnMemOnly()=0
+  numNulOnSaveDataOnly()=5
+  numNulOnMemOnly()=0
+------------------------------------------------------------
+【セーブデータバージョン】
+現在のバージョン:                 1.0
+ロード済みorセーブ済みバージョン: 1.0
+セーブ日時:                       2014/07/26(Sat) 07:12:21
+・セーブしたか？ = yes
+・ロードしたか？ = yes
+------------------------------------------------------------
+【現在のデータを表示】
+--- インベントリ ---
+ID="r00010"(0x9f7895f8), name="回復薬001", atk=0, def=0, recover=5, num=10
+ID="r00020"(0xab9f3d61), name="回復薬002", atk=0, def=0, recover=7, num=10
+ID="r00030"(0xb83da516), name="回復薬003", atk=0, def=0, recover=9, num=10
+ID="w00010"(0xc2bdc996), name="武器001", atk=10, def=0, recover=0, num=1
+ID="w00020"(0xf65a610f), name="武器002", atk=11, def=0, recover=0, num=1
+                              title="性能:+1"
+ID="w00030"(0xe5f8f978), name="武器003", atk=12, def=1, recover=0, num=1
+                              title="性能:+2"
+ID="w00040"(0x9f95303d), name="武器004", atk=13, def=1, recover=0, num=1
+                              title="性能:+3"
+ID="w00050"(0x8c37a84a), name="武器005", atk=14, def=2, recover=0, num=1
+                              title="性能:+4"
+ID="s00010"(0x7048fee1), name="盾001", atk=0, def=5, recover=0, num=1
+ID="s00020"(0x44af5678), name="盾002", atk=0, def=6, recover=0, num=1
+                              title="グレード:B"
+ID="s00030"(0x570dce0f), name="盾003", atk=0, def=7, recover=0, num=1
+                              title="グレード:C"
+ID="s00040"(0x2d60074a), name="盾004", atk=0, def=8, recover=0, num=1
+                              title="グレード:D"
+ID="s00050"(0x3ec29f3d), name="盾005", atk=0, def=9, recover=0, num=1
+                              title="グレード:E"
+--- アビリティ ---
+ID="a00010"(0x6bc86e1c), name="特技001", atk=5, def=4
+ID="a00020"(0x5f2fc685), name="特技002", atk=8, def=6
+ID="a00030"(0x4c8d5ef2), name="特技003", atk=11, def=8
+ID="a00040"(0x36e097b7), name="特技004", atk=14, def=10
+ID="a00050"(0x25420fc0), name="特技005", atk=17, def=12
+ID="a00060"(0x11a5a759), name="特技006", atk=20, def=14
+ID="a00070"(0x02073f2e), name="特技007", atk=23, def=16
+ID="a00080"(0xe57e35d3), name="特技008", atk=26, def=18
+ID="a00090"(0xf6dcada4), name="特技009", atk=29, def=20
+ID="a00100"(0xdd2b6415), name="特技010", atk=32, def=22
+--- キャラ ---
+ID="c00030"(0x9701fe31), name="さぶろう", level=30, atk=55, def=3
+                              weapon=武器001
+                              shield=盾003
+                              [特技005]
+ID="c00020"(0x84a36646), name="じろう", level=20, atk=25, def=40
+                              weapon=武器005
+                              shield=盾001
+ID="c00010"(0xb044cedf), name="たろう", level=10, atk=15, def=20
+                              weapon=武器002
+                              shield=盾002
+                              [特技003]
+                              [特技002]
+                              [特技005]
+                              [特技001]
+--- ゲーム状態 ---
+pahse=7
+flags:
+  [ 1]"flag A"(0x83f44f4d)=false
+  [ 2]"flag B"(0x90a4bcb9)=false
+  [ 3]"flag C"(0x62cf3fba)=true
+  [ 4]"flag D"(0xb6055b51)=true
+  [61]"flag X"(0xeb1853ee)=true
+  [62]"flag Y"(0x1973d0ed)=true
+  [63]"flag Z"(0x0a232319)=false
+------------------------------------------------------------
+【全データリセット】
+------------------------------------------------------------
+【テストデータ作成】(pattern=1)
+------------------------------------------------------------
+【現在のデータを表示】
+--- インベントリ ---
+ID="r00020"(0xab9f3d61), name="回復薬002", atk=0, def=0, recover=7, num=10
+ID="r00030"(0xb83da516), name="回復薬003", atk=0, def=0, recover=9, num=10
+ID="r00040"(0xc2506c53), name="回復薬004", atk=0, def=0, recover=11, num=10
+ID="r00050"(0xd1f2f424), name="回復薬005", atk=0, def=0, recover=13, num=10
+ID="r00060"(0xe5155cbd), name="回復薬006", atk=0, def=0, recover=15, num=10
+ID="w00010"(0xc2bdc996), name="武器001", atk=10, def=0, recover=0, num=1
+ID="w00030"(0xe5f8f978), name="武器003", atk=12, def=1, recover=0, num=1
+                              title="性能:+2"
+ID="w00050"(0x8c37a84a), name="武器005", atk=14, def=2, recover=0, num=1
+                              title="性能:+4"
+ID="w00070"(0xab7298a4), name="武器007", atk=16, def=3, recover=0, num=1
+                              title="性能:+6"
+ID="w00090"(0x5fa90a2e), name="武器009", atk=18, def=4, recover=0, num=1
+                              title="性能:+8"
+ID="w00110"(0x67fc5be8), name="武器011", atk=20, def=5, recover=0, num=1
+                              title="性能:+10"
+ID="w00130"(0x40b96b06), name="武器013", atk=22, def=6, recover=0, num=1
+                              title="性能:+12"
+ID="w00150"(0x29763a34), name="武器015", atk=24, def=7, recover=0, num=1
+                              title="性能:+14"
+ID="s00010"(0x7048fee1), name="盾001", atk=0, def=5, recover=0, num=1
+ID="s00030"(0x570dce0f), name="盾003", atk=0, def=7, recover=0, num=1
+                              title="グレード:C"
+ID="s00050"(0x3ec29f3d), name="盾005", atk=0, def=9, recover=0, num=1
+                              title="グレード:E"
+ID="s00070"(0x1987afd3), name="盾007", atk=0, def=11, recover=0, num=1
+                              title="グレード:G"
+ID="s00090"(0xed5c3d59), name="盾009", atk=0, def=13, recover=0, num=1
+                              title="グレード:I"
+ID="s00110"(0xd5096c9f), name="盾011", atk=0, def=15, recover=0, num=1
+                              title="グレード:K"
+ID="s00130"(0xf24c5c71), name="盾013", atk=0, def=17, recover=0, num=1
+                              title="グレード:M"
+ID="s00150"(0x9b830d43), name="盾015", atk=0, def=19, recover=0, num=1
+                              title="グレード:O"
+--- アビリティ ---
+ID="a00020"(0x5f2fc685), name="特技002", atk=8, def=6
+ID="a00030"(0x4c8d5ef2), name="特技003", atk=11, def=8
+ID="a00040"(0x36e097b7), name="特技004", atk=14, def=10
+ID="a00050"(0x25420fc0), name="特技005", atk=17, def=12
+ID="a00060"(0x11a5a759), name="特技006", atk=20, def=14
+ID="a00070"(0x02073f2e), name="特技007", atk=23, def=16
+ID="a00080"(0xe57e35d3), name="特技008", atk=26, def=18
+ID="a00090"(0xf6dcada4), name="特技009", atk=29, def=20
+ID="a00100"(0xdd2b6415), name="特技010", atk=32, def=22
+ID="a00110"(0xce89fc62), name="特技011", atk=35, def=24
+ID="a00120"(0xfa6e54fb), name="特技012", atk=38, def=26
+ID="a00130"(0xe9cccc8c), name="特技013", atk=41, def=28
+ID="a00140"(0x93a105c9), name="特技014", atk=44, def=30
+ID="a00150"(0x80039dbe), name="特技015", atk=47, def=32
+ID="a00160"(0xb4e43527), name="特技016", atk=50, def=34
+ID="a00170"(0xa746ad50), name="特技017", atk=53, def=36
+ID="a00180"(0x403fa7ad), name="特技018", atk=56, def=38
+ID="a00190"(0x539d3fda), name="特技019", atk=59, def=40
+ID="a00200"(0x3705a466), name="特技020", atk=62, def=42
+--- キャラ ---
+ID="c00010"(0xb044cedf), name="たろう", level=11, atk=15, def=20
+                              weapon=武器003
+                              shield=盾003
+                              [特技003]
+ID="c00020"(0x84a36646), name="じろう", level=21, atk=25, def=40
+                              weapon=武器005
+                              shield=盾001
+ID="c00040"(0xed6c3774), name="しろう", level=41, atk=55, def=3
+                              weapon=武器009
+                              shield=盾009
+                              [特技002]
+ID="c00030"(0x9701fe31), name="さぶろう", level=31, atk=55, def=3
+                              weapon=武器007
+                              shield=盾005
+                              [特技005]
+                              [特技004]
+--- ゲーム状態 ---
+pahse=4
+flags:
+  [ 1]"flag A"(0x83f44f4d)=true
+  [ 2]"flag B"(0x90a4bcb9)=true
+  [ 3]"flag C"(0x62cf3fba)=false
+  [ 4]"flag D"(0xb6055b51)=false
+  [61]"flag X"(0xeb1853ee)=false
+  [62]"flag Y"(0x1973d0ed)=false
+  [63]"flag Z"(0x0a232319)=true
+-------------------- [ loadBinarySaveDataImage ]
+Result:
+  Fatal-error:    nothing
+  Save data size: 7856
+  Used work-buffer size(peak): 667
+  numInvalidItem()=0
+  numSmallerSizeItem()=0
+  numLargerSizeItem()=0
+  numSmallerArrItem()=0
+  numLargerArrItem()=0
+  numOnlyOnSaveData()=0
+  numOnlyOnMem()=0
+  numObjOnSaveDataOnly()=0
+  numObjOnMemOnly()=0
+  numArrOnSaveDataOnly()=0
+  numArrOnMemOnly()=0
+  numPtrOnSaveDataOnly()=0
+  numPtrOnMemOnly()=0
+  numNulOnSaveDataOnly()=0
+  numNulOnMemOnly()=0
+------------------------------------------------------------
+【現在のデータを表示】
+--- インベントリ ---
+ID="r00020"(0xab9f3d61), name="回復薬002", atk=0, def=0, recover=7, num=10
+ID="r00030"(0xb83da516), name="回復薬003", atk=0, def=0, recover=9, num=10
+ID="r00040"(0xc2506c53), name="回復薬004", atk=0, def=0, recover=11, num=10
+ID="r00050"(0xd1f2f424), name="回復薬005", atk=0, def=0, recover=13, num=10
+ID="r00060"(0xe5155cbd), name="回復薬006", atk=0, def=0, recover=15, num=10
+ID="w00010"(0xc2bdc996), name="武器001", atk=10, def=0, recover=0, num=1
+ID="w00030"(0xe5f8f978), name="武器003", atk=12, def=1, recover=0, num=1
+                              title="性能:+2"
+ID="w00050"(0x8c37a84a), name="武器005", atk=14, def=2, recover=0, num=1
+                              title="性能:+4"
+ID="w00070"(0xab7298a4), name="武器007", atk=16, def=3, recover=0, num=1
+                              title="性能:+6"
+ID="w00090"(0x5fa90a2e), name="武器009", atk=18, def=4, recover=0, num=1
+                              title="性能:+8"
+ID="w00110"(0x67fc5be8), name="武器011", atk=20, def=5, recover=0, num=1
+                              title="性能:+10"
+ID="w00130"(0x40b96b06), name="武器013", atk=22, def=6, recover=0, num=1
+                              title="性能:+12"
+ID="w00150"(0x29763a34), name="武器015", atk=24, def=7, recover=0, num=1
+                              title="性能:+14"
+ID="s00010"(0x7048fee1), name="盾001", atk=0, def=5, recover=0, num=1
+ID="s00030"(0x570dce0f), name="盾003", atk=0, def=7, recover=0, num=1
+                              title="グレード:C"
+ID="s00050"(0x3ec29f3d), name="盾005", atk=0, def=9, recover=0, num=1
+                              title="グレード:E"
+ID="s00070"(0x1987afd3), name="盾007", atk=0, def=11, recover=0, num=1
+                              title="グレード:G"
+ID="s00090"(0xed5c3d59), name="盾009", atk=0, def=13, recover=0, num=1
+                              title="グレード:I"
+ID="s00110"(0xd5096c9f), name="盾011", atk=0, def=15, recover=0, num=1
+                              title="グレード:K"
+ID="s00130"(0xf24c5c71), name="盾013", atk=0, def=17, recover=0, num=1
+                              title="グレード:M"
+ID="s00150"(0x9b830d43), name="盾015", atk=0, def=19, recover=0, num=1
+                              title="グレード:O"
+--- アビリティ ---
+ID="a00020"(0x5f2fc685), name="特技002", atk=8, def=6
+ID="a00030"(0x4c8d5ef2), name="特技003", atk=11, def=8
+ID="a00040"(0x36e097b7), name="特技004", atk=14, def=10
+ID="a00050"(0x25420fc0), name="特技005", atk=17, def=12
+ID="a00060"(0x11a5a759), name="特技006", atk=20, def=14
+ID="a00070"(0x02073f2e), name="特技007", atk=23, def=16
+ID="a00080"(0xe57e35d3), name="特技008", atk=26, def=18
+ID="a00090"(0xf6dcada4), name="特技009", atk=29, def=20
+ID="a00100"(0xdd2b6415), name="特技010", atk=32, def=22
+ID="a00110"(0xce89fc62), name="特技011", atk=35, def=24
+ID="a00120"(0xfa6e54fb), name="特技012", atk=38, def=26
+ID="a00130"(0xe9cccc8c), name="特技013", atk=41, def=28
+ID="a00140"(0x93a105c9), name="特技014", atk=44, def=30
+ID="a00150"(0x80039dbe), name="特技015", atk=47, def=32
+ID="a00160"(0xb4e43527), name="特技016", atk=50, def=34
+ID="a00170"(0xa746ad50), name="特技017", atk=53, def=36
+ID="a00180"(0x403fa7ad), name="特技018", atk=56, def=38
+ID="a00190"(0x539d3fda), name="特技019", atk=59, def=40
+ID="a00200"(0x3705a466), name="特技020", atk=62, def=42
+--- キャラ ---
+ID="c00030"(0x9701fe31), name="さぶろう", level=30, atk=55, def=3
+                              weapon=武器001
+                              shield=盾003
+                              [特技005]
+ID="c00020"(0x84a36646), name="じろう", level=20, atk=25, def=40
+                              weapon=武器005
+                              shield=盾001
+ID="c00010"(0xb044cedf), name="たろう", level=10, atk=15, def=20
+                              [特技003]
+                              [特技002]
+                              [特技005]
+--- ゲーム状態 ---
+pahse=4
+flags:
+  [ 1]"flag A"(0x83f44f4d)=true
+  [ 2]"flag B"(0x90a4bcb9)=true
+  [ 3]"flag C"(0x62cf3fba)=false
+  [ 4]"flag D"(0xb6055b51)=false
+  [61]"flag X"(0xeb1853ee)=false
+  [62]"flag Y"(0x1973d0ed)=false
+  [63]"flag Z"(0x0a232319)=true

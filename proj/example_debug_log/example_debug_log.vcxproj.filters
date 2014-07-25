@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="プリコンパイル済みヘッダー">
+      <UniqueIdentifier>{7ef016ed-f570-4324-b5ac-0ae9f7621f6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="example">
+      <UniqueIdentifier>{925716df-6e93-4299-a2eb-fc23a05529d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="example\basic_test">
+      <UniqueIdentifier>{25207c4d-01da-4705-9a4a-7295ff22943e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="example\feature_test">
+      <UniqueIdentifier>{4a3c2743-f311-4c51-be35-4218688fe9c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="example\performance_test">
+      <UniqueIdentifier>{2bd099b6-246a-4f8f-a114-77eab2db0a70}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\example_debug_log\example_debug_log.cpp">
+      <Filter>example</Filter>
+    </ClCompile>
+    <ClCompile Include="standard.cpp">
+      <Filter>プリコンパイル済みヘッダー</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>example</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_debug_log\example_debug_log_basic_test.cpp">
+      <Filter>example\basic_test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_debug_log\example_debug_log_feature_test.cpp">
+      <Filter>example\feature_test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_debug_log\example_debug_log_performance_test.cpp">
+      <Filter>example\performance_test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_debug_log\example_debug_log_sub.cpp">
+      <Filter>example</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\example_debug_log\example_debug_log.h">
+      <Filter>example</Filter>
+    </ClInclude>
+    <ClInclude Include="standard.h">
+      <Filter>プリコンパイル済みヘッダー</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
