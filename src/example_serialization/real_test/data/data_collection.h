@@ -12,6 +12,7 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
+#include <gasha/singleton.h>//シングルトン
 #include<gasha/pool_allocator.h>//プールアロケータ
 #include<gasha/hash_table.h>//ハッシュテーブル
 #include<gasha/dynamic_array.h>//動的配列
@@ -27,6 +28,8 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 template<class T, std::size_t _POOL_SIZE>
 class dataCollection
 {
+	//シングルトン用のフレンド設定
+	GASHA_SINGLETON_FRIEND_CLASS();
 public:
 	//定数
 	static const std::size_t POOL_SIZE = _POOL_SIZE;//最大データ数
@@ -77,6 +80,7 @@ public:
 	void unregist(const crc32_t key);
 	//整列
 	void sort(const bool is_descendant = false);
+//protected://※コンストラクタは protected にしたかったが、やむを得ず public。（現状、std::is_defautl_constructible による private/protected なデフォルトコンストラクタの判定がうまくいかない）
 public:
 	//デフォルトコンストラクタ
 	inline dataCollection();

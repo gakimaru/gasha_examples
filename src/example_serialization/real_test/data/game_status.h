@@ -12,6 +12,7 @@
 //     https://github.com/gakimaru/gasha_examples/blob/master/LICENSE
 //--------------------------------------------------------------------------------
 
+#include <gasha/singleton.h>//シングルトン
 #include <gasha/hash_table.h>//ハッシュテーブル
 #include <gasha/rb_tree.h>//赤黒木
 #include <gasha/stack_allocator.h>//スタックアロケータ
@@ -34,6 +35,8 @@ class gameStatus
 {
 	//シリアライズ用のフレンド設定
 	GASHA_SERIALIZATION_FRIENDS();
+	//シングルトン用のフレンド設定
+	GASHA_SINGLETON_FRIEND_CLASS();
 public:
 	//定数
 	static const std::size_t FLAG_SET_SIZE = 64;//フラグ数
@@ -112,6 +115,7 @@ public:
 	void registFlagIndex(const char* flag_name, const index_type index);//フラグインデックスを登録
 	void registFlagSettings();//フラグ設定を登録
 	void clear();//全ての登録情報をクリア
+//private://※コンストラクタは protected にしたかったが、やむを得ず public。（現状、std::is_defautl_constructible による private/protected なデフォルトコンストラクタの判定がうまくいかない）
 public:
 	//デフォルトコンストラクタ
 	inline gameStatus();

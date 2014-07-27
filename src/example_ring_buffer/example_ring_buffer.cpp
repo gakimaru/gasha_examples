@@ -292,7 +292,7 @@ void example_ring_buffer()
 		con.resize(12, 1000);//12件に拡張
 		printAll();//全件表示
 
-		//ソ―ト
+		//ソート
 		std::printf("\n");
 		std::printf("[sort]\n");
 	#ifdef USE_STL_ALGORITM
@@ -313,7 +313,7 @@ void example_ring_buffer()
 	#endif//USE_STL_ALGORITM
 		printAll();//全件表示
 
-		//安定ソ―ト
+		//安定ソート
 		std::printf("\n");
 		std::printf("[stable_sort]\n");
 	#ifdef USE_STL_ALGORITM
@@ -687,7 +687,7 @@ void example_ring_buffer()
 		}
 		printAll();
 
-		//ソ―ト
+		//ソート
 		std::printf("\n");
 		std::printf("[sort]\n");
 	#ifdef USE_STL_ALGORITM
@@ -708,7 +708,7 @@ void example_ring_buffer()
 	#endif//USE_STL_ALGORITM
 		printAll();//全件表示
 
-		//安定ソ―ト
+		//安定ソート
 		std::printf("\n");
 		std::printf("[stable_sort]\n");
 	#ifdef USE_STL_ALGORITM
@@ -1106,7 +1106,7 @@ void example_ring_buffer()
 		};
 		printAll();
 
-		//ソ―ト
+		//ソート
 		std::printf("\n");
 		std::printf("[sort]\n");
 		con.sort();//高速ソート
@@ -1281,7 +1281,7 @@ void example_ring_buffer()
 		std::printf("[sort(before)]\n");
 		printAll();
 
-		//ソ―ト
+		//ソート
 		std::printf("\n");
 		std::printf("[sort(after)]\n");
 		//con.sort();//高速ソート

@@ -1,0 +1,604 @@
+
+================================================================================
+x86, Release,
+
+--------------------------------------------------------------------------------
+[ ../sub/gasha_src/proj ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Release/sub/gasha_src/../src/debug/console/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/sub/gasha_src/../src/debug/console/std_console.d -c ../src/debug/console/std_console.cpp -o _gcc/x86/Release/sub/gasha_src/../src/debug/console/std_console.o
+mkdir -p _gcc/x86/Release/sub/gasha_src/../src/debug/log/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/sub/gasha_src/../src/debug/log/default_log_level.d -c ../src/debug/log/default_log_level.cpp -o _gcc/x86/Release/sub/gasha_src/../src/debug/log/default_log_level.o
+mkdir -p _gcc/x86/Release/sub/gasha_src/../src/debug/log/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/sub/gasha_src/../src/debug/log/default_log_category.d -c ../src/debug/log/default_log_category.cpp -o _gcc/x86/Release/sub/gasha_src/../src/debug/log/default_log_category.o
+mkdir -p _gcc/x86/Release/sub/gasha_src/../src/debug/log/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/sub/gasha_src/../src/debug/log/debug_log.d -c ../src/debug/log/debug_log.cpp -o _gcc/x86/Release/sub/gasha_src/../src/debug/log/debug_log.o
+mkdir -p _gcc/x86/Release/sub/gasha_src/../src/debug/call_point/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/sub/gasha_src/../src/debug/call_point/call_point.d -c ../src/debug/call_point/call_point.cpp -o _gcc/x86/Release/sub/gasha_src/../src/debug/call_point/call_point.o
+mkdir -p _gcc/x86/Release/sub/gasha_src/../src/debug/assert/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/sub/gasha_src/../src/debug/assert/assert.d -c ../src/debug/assert/assert.cpp -o _gcc/x86/Release/sub/gasha_src/../src/debug/assert/assert.o
+mkdir -p _gcc/x86/Release/sub/gasha_src/../src/debug/profiler/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/sub/gasha_src/../src/debug/profiler/profiler.d -c ../src/debug/profiler/profiler.cpp -o _gcc/x86/Release/sub/gasha_src/../src/debug/profiler/profiler.o
+mkdir -p _gcc/x86/Release/sub/gasha_src/../src/archive/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/sub/gasha_src/../src/archive/archive_base.d -c ../src/archive/archive_base.cpp -o _gcc/x86/Release/sub/gasha_src/../src/archive/archive_base.o
+mkdir -p _gcc/x86/Release/sub/gasha_src/../src/archive/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/sub/gasha_src/../src/archive/archive_adapter_base.d -c ../src/archive/archive_adapter_base.cpp -o _gcc/x86/Release/sub/gasha_src/../src/archive/archive_adapter_base.o
+mkdir -p _gcc/x86/Release/sub/gasha_src/../src/archive/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/sub/gasha_src/../src/archive/output_archive_adapter.d -c ../src/archive/output_archive_adapter.cpp -o _gcc/x86/Release/sub/gasha_src/../src/archive/output_archive_adapter.o
+mkdir -p _gcc/x86/Release/sub/gasha_src/../src/archive/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/sub/gasha_src/../src/archive/input_archive_adapter.d -c ../src/archive/input_archive_adapter.cpp -o _gcc/x86/Release/sub/gasha_src/../src/archive/input_archive_adapter.o
+mkdir -p _gcc/x86/Release/sub/gasha_src/../src/archive/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/sub/gasha_src/../src/archive/output_binary_archive_format.d -c ../src/archive/output_binary_archive_format.cpp -o _gcc/x86/Release/sub/gasha_src/../src/archive/output_binary_archive_format.o
+mkdir -p _gcc/x86/Release/sub/gasha_src/../src/archive/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/sub/gasha_src/../src/archive/input_binary_archive_format.d -c ../src/archive/input_binary_archive_format.cpp -o _gcc/x86/Release/sub/gasha_src/../src/archive/input_binary_archive_format.o
+mkdir -p _gcc/x86/Release/sub/gasha_src/../src/archive/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/sub/gasha_src/../src/archive/output_text_archive_format.d -c ../src/archive/output_text_archive_format.cpp -o _gcc/x86/Release/sub/gasha_src/../src/archive/output_text_archive_format.o
+mkdir -p _gcc/x86/Release/sub/gasha_src/../src/archive/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/sub/gasha_src/../src/archive/input_text_archive_format.d -c ../src/archive/input_text_archive_format.cpp -o _gcc/x86/Release/sub/gasha_src/../src/archive/input_text_archive_format.o
+mkdir -p ../../gasha/lib/gcc/; \
+ar rcsv ../../gasha/lib/gcc/gasha_x86.a _gcc/x86/Release/sub/gasha_src/../src/build_settings/build_settings_diag.o _gcc/x86/Release/sub/gasha_src/../src/utility/cpuid.o _gcc/x86/Release/sub/gasha_src/../src/utility/type_traits.o _gcc/x86/Release/sub/gasha_src/../src/utility/chrono.o _gcc/x86/Release/sub/gasha_src/../src/math/basic_math.o _gcc/x86/Release/sub/gasha_src/../src/math/crc32.o _gcc/x86/Release/sub/gasha_src/../src/string/string.o _gcc/x86/Release/sub/gasha_src/../src/string/fast_string.o _gcc/x86/Release/sub/gasha_src/../src/string/strconv.o _gcc/x86/Release/sub/gasha_src/../src/thread/thread_id.o _gcc/x86/Release/sub/gasha_src/../src/thread/lock/lock_common.o _gcc/x86/Release/sub/gasha_src/../src/thread/lock/spin_lock.o _gcc/x86/Release/sub/gasha_src/../src/thread/lock/lw_spin_lock.o _gcc/x86/Release/sub/gasha_src/../src/thread/lock/shared_spin_lock.o _gcc/x86/Release/sub/gasha_src/../src/thread/lock/simple_shared_spin_lock.o _gcc/x86/Release/sub/gasha_src/../src/thread/lock/unshared_spin_lock.o _gcc/x86/Release/sub/gasha_src/../src/memory/lf_mono_allocator.o _gcc/x86/Release/sub/gasha_src/../src/memory/poly_allocator.o _gcc/x86/Release/sub/gasha_src/../src/memory/new.o _gcc/x86/Release/sub/gasha_src/../src/debug/console/console_color.o _gcc/x86/Release/sub/gasha_src/../src/debug/console/tty_console.o _gcc/x86/Release/sub/gasha_src/../src/debug/console/win_console.o _gcc/x86/Release/sub/gasha_src/../src/debug/console/vs_console.o _gcc/x86/Release/sub/gasha_src/../src/debug/console/dummy_console.o _gcc/x86/Release/sub/gasha_src/../src/debug/console/std_console.o _gcc/x86/Release/sub/gasha_src/../src/debug/log/log_level.o _gcc/x86/Release/sub/gasha_src/../src/debug/log/default_log_level.o _gcc/x86/Release/sub/gasha_src/../src/debug/log/log_category.o _gcc/x86/Release/sub/gasha_src/../src/debug/log/default_log_category.o _gcc/x86/Release/sub/gasha_src/../src/debug/log/log_mask.o _gcc/x86/Release/sub/gasha_src/../src/debug/log/log_attr.o _gcc/x86/Release/sub/gasha_src/../src/debug/log/log_work_buff.o _gcc/x86/Release/sub/gasha_src/../src/debug/log/log_queue.o _gcc/x86/Release/sub/gasha_src/../src/debug/log/log_queue_monitor.o _gcc/x86/Release/sub/gasha_src/../src/debug/log/debug_log.o _gcc/x86/Release/sub/gasha_src/../src/debug/call_point/call_point.o _gcc/x86/Release/sub/gasha_src/../src/debug/assert/assert.o _gcc/x86/Release/sub/gasha_src/../src/debug/assert/stdin_debug_pause.o _gcc/x86/Release/sub/gasha_src/../src/debug/assert/dummy_debug_pause.o _gcc/x86/Release/sub/gasha_src/../src/debug/assert/std_debug_pause.o _gcc/x86/Release/sub/gasha_src/../src/debug/profiler/profiler.o _gcc/x86/Release/sub/gasha_src/../src/serialization/type_ctrl.o _gcc/x86/Release/sub/gasha_src/../src/serialization/type_ctrl_base.o _gcc/x86/Release/sub/gasha_src/../src/serialization/item_info_base.o _gcc/x86/Release/sub/gasha_src/../src/archive/results.o _gcc/x86/Release/sub/gasha_src/../src/archive/archive_base.o _gcc/x86/Release/sub/gasha_src/../src/archive/archive_adapter_base.o _gcc/x86/Release/sub/gasha_src/../src/archive/output_archive_adapter.o _gcc/x86/Release/sub/gasha_src/../src/archive/input_archive_adapter.o _gcc/x86/Release/sub/gasha_src/../src/archive/binary_archive_format_base.o _gcc/x86/Release/sub/gasha_src/../src/archive/output_binary_archive_format.o _gcc/x86/Release/sub/gasha_src/../src/archive/input_binary_archive_format.o _gcc/x86/Release/sub/gasha_src/../src/archive/output_text_archive_format.o _gcc/x86/Release/sub/gasha_src/../src/archive/input_text_archive_format.o
+r - _gcc/x86/Release/sub/gasha_src/../src/build_settings/build_settings_diag.o
+r - _gcc/x86/Release/sub/gasha_src/../src/utility/cpuid.o
+r - _gcc/x86/Release/sub/gasha_src/../src/utility/type_traits.o
+r - _gcc/x86/Release/sub/gasha_src/../src/utility/chrono.o
+r - _gcc/x86/Release/sub/gasha_src/../src/math/basic_math.o
+r - _gcc/x86/Release/sub/gasha_src/../src/math/crc32.o
+r - _gcc/x86/Release/sub/gasha_src/../src/string/string.o
+r - _gcc/x86/Release/sub/gasha_src/../src/string/fast_string.o
+r - _gcc/x86/Release/sub/gasha_src/../src/string/strconv.o
+r - _gcc/x86/Release/sub/gasha_src/../src/thread/thread_id.o
+r - _gcc/x86/Release/sub/gasha_src/../src/thread/lock/lock_common.o
+r - _gcc/x86/Release/sub/gasha_src/../src/thread/lock/spin_lock.o
+r - _gcc/x86/Release/sub/gasha_src/../src/thread/lock/lw_spin_lock.o
+r - _gcc/x86/Release/sub/gasha_src/../src/thread/lock/shared_spin_lock.o
+r - _gcc/x86/Release/sub/gasha_src/../src/thread/lock/simple_shared_spin_lock.o
+r - _gcc/x86/Release/sub/gasha_src/../src/thread/lock/unshared_spin_lock.o
+r - _gcc/x86/Release/sub/gasha_src/../src/memory/lf_mono_allocator.o
+r - _gcc/x86/Release/sub/gasha_src/../src/memory/poly_allocator.o
+r - _gcc/x86/Release/sub/gasha_src/../src/memory/new.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/console/console_color.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/console/tty_console.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/console/win_console.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/console/vs_console.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/console/dummy_console.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/console/std_console.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/log/log_level.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/log/default_log_level.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/log/log_category.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/log/default_log_category.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/log/log_mask.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/log/log_attr.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/log/log_work_buff.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/log/log_queue.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/log/log_queue_monitor.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/log/debug_log.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/call_point/call_point.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/assert/assert.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/assert/stdin_debug_pause.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/assert/dummy_debug_pause.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/assert/std_debug_pause.o
+r - _gcc/x86/Release/sub/gasha_src/../src/debug/profiler/profiler.o
+r - _gcc/x86/Release/sub/gasha_src/../src/serialization/type_ctrl.o
+r - _gcc/x86/Release/sub/gasha_src/../src/serialization/type_ctrl_base.o
+r - _gcc/x86/Release/sub/gasha_src/../src/serialization/item_info_base.o
+r - _gcc/x86/Release/sub/gasha_src/../src/archive/results.o
+r - _gcc/x86/Release/sub/gasha_src/../src/archive/archive_base.o
+r - _gcc/x86/Release/sub/gasha_src/../src/archive/archive_adapter_base.o
+r - _gcc/x86/Release/sub/gasha_src/../src/archive/output_archive_adapter.o
+r - _gcc/x86/Release/sub/gasha_src/../src/archive/input_archive_adapter.o
+r - _gcc/x86/Release/sub/gasha_src/../src/archive/binary_archive_format_base.o
+r - _gcc/x86/Release/sub/gasha_src/../src/archive/output_binary_archive_format.o
+r - _gcc/x86/Release/sub/gasha_src/../src/archive/input_binary_archive_format.o
+r - _gcc/x86/Release/sub/gasha_src/../src/archive/output_text_archive_format.o
+r - _gcc/x86/Release/sub/gasha_src/../src/archive/input_text_archive_format.o
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_allocator ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_allocator -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_allocator/main.o _gcc/x86/Release/proj/example_allocator/../../src/example_allocator/example_allocator.o _gcc/x86/Release/proj/example_allocator/../../src/example_allocator/example_allocator_sub.o _gcc/x86/Release/proj/example_allocator/../../src/example_allocator/basic_test/example_allocator_basic_test.o _gcc/x86/Release/proj/example_allocator/../../src/example_allocator/feature_test/example_stack_allocator.o _gcc/x86/Release/proj/example_allocator/../../src/example_allocator/feature_test/example_dual_stack_allocator.o _gcc/x86/Release/proj/example_allocator/../../src/example_allocator/feature_test/example_mono_allocator.o _gcc/x86/Release/proj/example_allocator/../../src/example_allocator/feature_test/example_pool_allocator.o _gcc/x86/Release/proj/example_allocator/../../src/example_allocator/feature_test/example_std_allocator.o _gcc/x86/Release/proj/example_allocator/../../src/example_allocator/feature_test/example_poly_allocator.o _gcc/x86/Release/proj/example_allocator/../../src/example_allocator/performance_test/example_allocator_performance.o _gcc/x86/Release/proj/example_allocator/../../src/example_allocator/examination/example_new_delete_test.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_allocator
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_basic_math ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_basic_math -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_basic_math/main.o _gcc/x86/Release/proj/example_basic_math/../../src/example_basic_math/example_basic_math.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_basic_math
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_build_settings ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_build_settings -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_build_settings/main.o _gcc/x86/Release/proj/example_build_settings/../../src/example_build_settings/example_build_settings.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_build_settings
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_crc32 ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_crc32 -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_crc32/main.o _gcc/x86/Release/proj/example_crc32/../../src/example_crc32/example_crc32.o _gcc/x86/Release/proj/example_crc32/../../src/example_crc32/example_crc32_sub.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_crc32
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_debug_log ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Release/proj/example_debug_log/../../src/example_debug_log/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_debug_log -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_debug_log/../../src/example_debug_log/example_debug_log_basic_test.d -c ../../src/example_debug_log/example_debug_log_basic_test.cpp -o _gcc/x86/Release/proj/example_debug_log/../../src/example_debug_log/example_debug_log_basic_test.o
+mkdir -p _gcc/x86/Release/proj/example_debug_log/../../src/example_debug_log/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_debug_log -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_debug_log/../../src/example_debug_log/example_debug_log_feature_test.d -c ../../src/example_debug_log/example_debug_log_feature_test.cpp -o _gcc/x86/Release/proj/example_debug_log/../../src/example_debug_log/example_debug_log_feature_test.o
+mkdir -p _gcc/x86/Release/proj/example_debug_log/../../src/example_debug_log/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_debug_log -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_debug_log/../../src/example_debug_log/example_debug_log_performance_test.d -c ../../src/example_debug_log/example_debug_log_performance_test.cpp -o _gcc/x86/Release/proj/example_debug_log/../../src/example_debug_log/example_debug_log_performance_test.o
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_debug_log -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_debug_log/main.o _gcc/x86/Release/proj/example_debug_log/../../src/example_debug_log/example_debug_log.o _gcc/x86/Release/proj/example_debug_log/../../src/example_debug_log/example_debug_log_sub.o _gcc/x86/Release/proj/example_debug_log/../../src/example_debug_log/example_debug_log_basic_test.o _gcc/x86/Release/proj/example_debug_log/../../src/example_debug_log/example_debug_log_feature_test.o _gcc/x86/Release/proj/example_debug_log/../../src/example_debug_log/example_debug_log_performance_test.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_debug_log
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_dynamic_array ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Release/proj/example_dynamic_array/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_dynamic_array -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_dynamic_array/main.d -c main.cpp -o _gcc/x86/Release/proj/example_dynamic_array/main.o
+mkdir -p _gcc/x86/Release/proj/example_dynamic_array/../../src/example_dynamic_array/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_dynamic_array -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_dynamic_array/../../src/example_dynamic_array/example_dynamic_array.d -c ../../src/example_dynamic_array/example_dynamic_array.cpp -o _gcc/x86/Release/proj/example_dynamic_array/../../src/example_dynamic_array/example_dynamic_array.o
+mkdir -p _gcc/x86/Release/proj/example_dynamic_array/../../src/example_dynamic_array/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_dynamic_array -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_dynamic_array/../../src/example_dynamic_array/example_dynamic_array_sub.d -c ../../src/example_dynamic_array/example_dynamic_array_sub.cpp -o _gcc/x86/Release/proj/example_dynamic_array/../../src/example_dynamic_array/example_dynamic_array_sub.o
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_dynamic_array -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_dynamic_array/main.o _gcc/x86/Release/proj/example_dynamic_array/../../src/example_dynamic_array/example_dynamic_array.o _gcc/x86/Release/proj/example_dynamic_array/../../src/example_dynamic_array/example_dynamic_array_sub.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_dynamic_array
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_fast_math ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_fast_math -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_fast_math/main.o _gcc/x86/Release/proj/example_fast_math/../../src/example_fast_math/example_fast_math.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_fast_math
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_fast_string ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_fast_string -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_fast_string/main.o _gcc/x86/Release/proj/example_fast_string/../../src/example_fast_string/example_fast_string.o _gcc/x86/Release/proj/example_fast_string/../../src/example_fast_string/example_fast_string_sub.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_fast_string
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_hash_table ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_hash_table -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_hash_table/main.o _gcc/x86/Release/proj/example_hash_table/../../src/example_hash_table/example_hash_table.o _gcc/x86/Release/proj/example_hash_table/../../src/example_hash_table/example_hash_table_sub.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_hash_table
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_linked_list ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Release/proj/example_linked_list/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_linked_list -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_linked_list/main.d -c main.cpp -o _gcc/x86/Release/proj/example_linked_list/main.o
+mkdir -p _gcc/x86/Release/proj/example_linked_list/../../src/example_linked_list/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_linked_list -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_linked_list/../../src/example_linked_list/example_linked_list.d -c ../../src/example_linked_list/example_linked_list.cpp -o _gcc/x86/Release/proj/example_linked_list/../../src/example_linked_list/example_linked_list.o
+mkdir -p _gcc/x86/Release/proj/example_linked_list/../../src/example_linked_list/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_linked_list -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_linked_list/../../src/example_linked_list/example_linked_list_sub.d -c ../../src/example_linked_list/example_linked_list_sub.cpp -o _gcc/x86/Release/proj/example_linked_list/../../src/example_linked_list/example_linked_list_sub.o
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_linked_list -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_linked_list/main.o _gcc/x86/Release/proj/example_linked_list/../../src/example_linked_list/example_linked_list.o _gcc/x86/Release/proj/example_linked_list/../../src/example_linked_list/example_linked_list_sub.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_linked_list
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_priority_queue ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_priority_queue -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_priority_queue/main.o _gcc/x86/Release/proj/example_priority_queue/../../src/example_priority_queue/example_priority_queue.o _gcc/x86/Release/proj/example_priority_queue/../../src/example_priority_queue/example_priority_queue_sub.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_priority_queue
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_rb_tree ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Release/proj/example_rb_tree/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_rb_tree -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_rb_tree/main.d -c main.cpp -o _gcc/x86/Release/proj/example_rb_tree/main.o
+mkdir -p _gcc/x86/Release/proj/example_rb_tree/../../src/example_rb_tree/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_rb_tree -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_rb_tree/../../src/example_rb_tree/example_rb_tree.d -c ../../src/example_rb_tree/example_rb_tree.cpp -o _gcc/x86/Release/proj/example_rb_tree/../../src/example_rb_tree/example_rb_tree.o
+mkdir -p _gcc/x86/Release/proj/example_rb_tree/../../src/example_rb_tree/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_rb_tree -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_rb_tree/../../src/example_rb_tree/example_rb_tree_sub.d -c ../../src/example_rb_tree/example_rb_tree_sub.cpp -o _gcc/x86/Release/proj/example_rb_tree/../../src/example_rb_tree/example_rb_tree_sub.o
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_rb_tree -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_rb_tree/main.o _gcc/x86/Release/proj/example_rb_tree/../../src/example_rb_tree/example_rb_tree.o _gcc/x86/Release/proj/example_rb_tree/../../src/example_rb_tree/example_rb_tree_sub.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_rb_tree
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_ring_buffer ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Release/proj/example_ring_buffer/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_ring_buffer -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_ring_buffer/main.d -c main.cpp -o _gcc/x86/Release/proj/example_ring_buffer/main.o
+mkdir -p _gcc/x86/Release/proj/example_ring_buffer/../../src/example_ring_buffer/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_ring_buffer -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_ring_buffer/../../src/example_ring_buffer/example_ring_buffer.d -c ../../src/example_ring_buffer/example_ring_buffer.cpp -o _gcc/x86/Release/proj/example_ring_buffer/../../src/example_ring_buffer/example_ring_buffer.o
+mkdir -p _gcc/x86/Release/proj/example_ring_buffer/../../src/example_ring_buffer/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_ring_buffer -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_ring_buffer/../../src/example_ring_buffer/example_ring_buffer_sub.d -c ../../src/example_ring_buffer/example_ring_buffer_sub.cpp -o _gcc/x86/Release/proj/example_ring_buffer/../../src/example_ring_buffer/example_ring_buffer_sub.o
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_ring_buffer -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_ring_buffer/main.o _gcc/x86/Release/proj/example_ring_buffer/../../src/example_ring_buffer/example_ring_buffer.o _gcc/x86/Release/proj/example_ring_buffer/../../src/example_ring_buffer/example_ring_buffer_sub.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_ring_buffer
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_serialization ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/basic_test/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/basic_test/basic_test.d -c ../../src/example_serialization/basic_test/basic_test.cpp -o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/basic_test/basic_test.o
+mkdir -p _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/feature_test/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/feature_test/save_load.d -c ../../src/example_serialization/feature_test/save_load.cpp -o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/feature_test/save_load.o
+mkdir -p _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/inventory.d -c ../../src/example_serialization/real_test/data/inventory.cpp -o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/inventory.o
+mkdir -p _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/ability_collection.d -c ../../src/example_serialization/real_test/data/ability_collection.cpp -o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/ability_collection.o
+mkdir -p _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/chara_data.d -c ../../src/example_serialization/real_test/data/chara_data.cpp -o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/chara_data.o
+mkdir -p _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/chara_collection.d -c ../../src/example_serialization/real_test/data/chara_collection.cpp -o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/chara_collection.o
+mkdir -p _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/game_status.d -c ../../src/example_serialization/real_test/data/game_status.cpp -o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/game_status.o
+mkdir -p _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/save_data/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/save_data/save_data.d -c ../../src/example_serialization/real_test/save_data/save_data.cpp -o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/save_data/save_data.o
+mkdir -p _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/test_data/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/test_data/test_data.d -c ../../src/example_serialization/real_test/test_data/test_data.cpp -o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/test_data/test_data.o
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_serialization/main.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/example_serialization.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/work_buff.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/file.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/basic_test/basic_test.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/feature_test/feature_test.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/feature_test/save_load.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/real_test.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/basic_data.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/item_data.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/inventory.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/ability_data.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/ability_collection.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/chara_data.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/chara_ability_data.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/chara_collection.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/data/game_status.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/save_data/save_data.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/save_data/save_data_version.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/save_data/load_target.o _gcc/x86/Release/proj/example_serialization/../../src/example_serialization/real_test/test_data/test_data.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_serialization
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_shared_data ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_shared_data -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_shared_data/main.o _gcc/x86/Release/proj/example_shared_data/../../src/example_shared_data/example_shared_data.o _gcc/x86/Release/proj/example_shared_data/../../src/example_shared_data/example_shared_data_sub1.o _gcc/x86/Release/proj/example_shared_data/../../src/example_shared_data/example_shared_data_sub2.o _gcc/x86/Release/proj/example_shared_data/../../src/example_shared_data/example_shared_data_sub3.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_shared_data
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_singleton ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Release/proj/example_singleton/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_singleton -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_singleton/main.d -c main.cpp -o _gcc/x86/Release/proj/example_singleton/main.o
+mkdir -p _gcc/x86/Release/proj/example_singleton/../../src/example_singleton/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_singleton -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_singleton/../../src/example_singleton/example_singleton.d -c ../../src/example_singleton/example_singleton.cpp -o _gcc/x86/Release/proj/example_singleton/../../src/example_singleton/example_singleton.o
+mkdir -p _gcc/x86/Release/proj/example_singleton/../../src/example_singleton/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_singleton -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_singleton/../../src/example_singleton/example_singleton_sub.d -c ../../src/example_singleton/example_singleton_sub.cpp -o _gcc/x86/Release/proj/example_singleton/../../src/example_singleton/example_singleton_sub.o
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_singleton -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_singleton/main.o _gcc/x86/Release/proj/example_singleton/../../src/example_singleton/example_singleton.o _gcc/x86/Release/proj/example_singleton/../../src/example_singleton/example_singleton_sub.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_singleton
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_singly_linked_list ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Release/proj/example_singly_linked_list/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_singly_linked_list -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_singly_linked_list/main.d -c main.cpp -o _gcc/x86/Release/proj/example_singly_linked_list/main.o
+mkdir -p _gcc/x86/Release/proj/example_singly_linked_list/../../src/example_singly_linked_list/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_singly_linked_list -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_singly_linked_list/../../src/example_singly_linked_list/example_singly_linked_list.d -c ../../src/example_singly_linked_list/example_singly_linked_list.cpp -o _gcc/x86/Release/proj/example_singly_linked_list/../../src/example_singly_linked_list/example_singly_linked_list.o
+mkdir -p _gcc/x86/Release/proj/example_singly_linked_list/../../src/example_singly_linked_list/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_singly_linked_list -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Release/proj/example_singly_linked_list/../../src/example_singly_linked_list/example_singly_linked_list_sub.d -c ../../src/example_singly_linked_list/example_singly_linked_list_sub.cpp -o _gcc/x86/Release/proj/example_singly_linked_list/../../src/example_singly_linked_list/example_singly_linked_list_sub.o
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_singly_linked_list -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_singly_linked_list/main.o _gcc/x86/Release/proj/example_singly_linked_list/../../src/example_singly_linked_list/example_singly_linked_list.o _gcc/x86/Release/proj/example_singly_linked_list/../../src/example_singly_linked_list/example_singly_linked_list_sub.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_singly_linked_list
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_sort_and_search ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_sort_and_search -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_sort_and_search/main.o _gcc/x86/Release/proj/example_sort_and_search/../../src/example_sort_and_search/example_sort_and_search.o _gcc/x86/Release/proj/example_sort_and_search/../../src/example_sort_and_search/example_sort_and_search_sub.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_sort_and_search
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_thread_id ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_thread_id -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_thread_id/main.o _gcc/x86/Release/proj/example_thread_id/../../src/example_thread_id/example_thread_id.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_thread_id
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_type_traits ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_type_traits -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_type_traits/main.o _gcc/x86/Release/proj/example_type_traits/../../src/example_type_traits/example_type_traits.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_type_traits
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_utility ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_utility -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -O3  -m32  -DNDEBUG   -include standard.h  _gcc/x86/Release/proj/example_utility/main.o _gcc/x86/Release/proj/example_utility/../../src/example_utility/example_utility.o ../../sub/gasha/lib/gcc/gasha_x86.a -o ../../exe/gcc/x86/example_utility
+--------------------------------------------------------------------------------
+================================================================================
+
+================================================================================
+x86, Debug,
+
+--------------------------------------------------------------------------------
+[ ../sub/gasha_src/proj ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Debug/sub/gasha_src/../src/debug/console/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/sub/gasha_src/../src/debug/console/std_console.d -c ../src/debug/console/std_console.cpp -o _gcc/x86/Debug/sub/gasha_src/../src/debug/console/std_console.o
+mkdir -p _gcc/x86/Debug/sub/gasha_src/../src/debug/log/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/sub/gasha_src/../src/debug/log/default_log_level.d -c ../src/debug/log/default_log_level.cpp -o _gcc/x86/Debug/sub/gasha_src/../src/debug/log/default_log_level.o
+mkdir -p _gcc/x86/Debug/sub/gasha_src/../src/debug/log/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/sub/gasha_src/../src/debug/log/default_log_category.d -c ../src/debug/log/default_log_category.cpp -o _gcc/x86/Debug/sub/gasha_src/../src/debug/log/default_log_category.o
+mkdir -p _gcc/x86/Debug/sub/gasha_src/../src/debug/log/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/sub/gasha_src/../src/debug/log/debug_log.d -c ../src/debug/log/debug_log.cpp -o _gcc/x86/Debug/sub/gasha_src/../src/debug/log/debug_log.o
+mkdir -p _gcc/x86/Debug/sub/gasha_src/../src/debug/call_point/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/sub/gasha_src/../src/debug/call_point/call_point.d -c ../src/debug/call_point/call_point.cpp -o _gcc/x86/Debug/sub/gasha_src/../src/debug/call_point/call_point.o
+mkdir -p _gcc/x86/Debug/sub/gasha_src/../src/debug/assert/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/sub/gasha_src/../src/debug/assert/assert.d -c ../src/debug/assert/assert.cpp -o _gcc/x86/Debug/sub/gasha_src/../src/debug/assert/assert.o
+mkdir -p _gcc/x86/Debug/sub/gasha_src/../src/debug/profiler/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/sub/gasha_src/../src/debug/profiler/profiler.d -c ../src/debug/profiler/profiler.cpp -o _gcc/x86/Debug/sub/gasha_src/../src/debug/profiler/profiler.o
+mkdir -p _gcc/x86/Debug/sub/gasha_src/../src/archive/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/sub/gasha_src/../src/archive/archive_base.d -c ../src/archive/archive_base.cpp -o _gcc/x86/Debug/sub/gasha_src/../src/archive/archive_base.o
+mkdir -p _gcc/x86/Debug/sub/gasha_src/../src/archive/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/sub/gasha_src/../src/archive/archive_adapter_base.d -c ../src/archive/archive_adapter_base.cpp -o _gcc/x86/Debug/sub/gasha_src/../src/archive/archive_adapter_base.o
+mkdir -p _gcc/x86/Debug/sub/gasha_src/../src/archive/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/sub/gasha_src/../src/archive/output_archive_adapter.d -c ../src/archive/output_archive_adapter.cpp -o _gcc/x86/Debug/sub/gasha_src/../src/archive/output_archive_adapter.o
+mkdir -p _gcc/x86/Debug/sub/gasha_src/../src/archive/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/sub/gasha_src/../src/archive/input_archive_adapter.d -c ../src/archive/input_archive_adapter.cpp -o _gcc/x86/Debug/sub/gasha_src/../src/archive/input_archive_adapter.o
+mkdir -p _gcc/x86/Debug/sub/gasha_src/../src/archive/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/sub/gasha_src/../src/archive/output_binary_archive_format.d -c ../src/archive/output_binary_archive_format.cpp -o _gcc/x86/Debug/sub/gasha_src/../src/archive/output_binary_archive_format.o
+mkdir -p _gcc/x86/Debug/sub/gasha_src/../src/archive/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/sub/gasha_src/../src/archive/input_binary_archive_format.d -c ../src/archive/input_binary_archive_format.cpp -o _gcc/x86/Debug/sub/gasha_src/../src/archive/input_binary_archive_format.o
+mkdir -p _gcc/x86/Debug/sub/gasha_src/../src/archive/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/sub/gasha_src/../src/archive/output_text_archive_format.d -c ../src/archive/output_text_archive_format.cpp -o _gcc/x86/Debug/sub/gasha_src/../src/archive/output_text_archive_format.o
+mkdir -p _gcc/x86/Debug/sub/gasha_src/../src/archive/; \
+g++ -std=c++11  -I./ -I.  -I../../gasha/include -I../../gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/sub/gasha_src/../src/archive/input_text_archive_format.d -c ../src/archive/input_text_archive_format.cpp -o _gcc/x86/Debug/sub/gasha_src/../src/archive/input_text_archive_format.o
+mkdir -p ../../gasha/lib/gcc/; \
+ar rcsv ../../gasha/lib/gcc/gasha_x86_debug.a _gcc/x86/Debug/sub/gasha_src/../src/build_settings/build_settings_diag.o _gcc/x86/Debug/sub/gasha_src/../src/utility/cpuid.o _gcc/x86/Debug/sub/gasha_src/../src/utility/type_traits.o _gcc/x86/Debug/sub/gasha_src/../src/utility/chrono.o _gcc/x86/Debug/sub/gasha_src/../src/math/basic_math.o _gcc/x86/Debug/sub/gasha_src/../src/math/crc32.o _gcc/x86/Debug/sub/gasha_src/../src/string/string.o _gcc/x86/Debug/sub/gasha_src/../src/string/fast_string.o _gcc/x86/Debug/sub/gasha_src/../src/string/strconv.o _gcc/x86/Debug/sub/gasha_src/../src/thread/thread_id.o _gcc/x86/Debug/sub/gasha_src/../src/thread/lock/lock_common.o _gcc/x86/Debug/sub/gasha_src/../src/thread/lock/spin_lock.o _gcc/x86/Debug/sub/gasha_src/../src/thread/lock/lw_spin_lock.o _gcc/x86/Debug/sub/gasha_src/../src/thread/lock/shared_spin_lock.o _gcc/x86/Debug/sub/gasha_src/../src/thread/lock/simple_shared_spin_lock.o _gcc/x86/Debug/sub/gasha_src/../src/thread/lock/unshared_spin_lock.o _gcc/x86/Debug/sub/gasha_src/../src/memory/lf_mono_allocator.o _gcc/x86/Debug/sub/gasha_src/../src/memory/poly_allocator.o _gcc/x86/Debug/sub/gasha_src/../src/memory/new.o _gcc/x86/Debug/sub/gasha_src/../src/debug/console/console_color.o _gcc/x86/Debug/sub/gasha_src/../src/debug/console/tty_console.o _gcc/x86/Debug/sub/gasha_src/../src/debug/console/win_console.o _gcc/x86/Debug/sub/gasha_src/../src/debug/console/vs_console.o _gcc/x86/Debug/sub/gasha_src/../src/debug/console/dummy_console.o _gcc/x86/Debug/sub/gasha_src/../src/debug/console/std_console.o _gcc/x86/Debug/sub/gasha_src/../src/debug/log/log_level.o _gcc/x86/Debug/sub/gasha_src/../src/debug/log/default_log_level.o _gcc/x86/Debug/sub/gasha_src/../src/debug/log/log_category.o _gcc/x86/Debug/sub/gasha_src/../src/debug/log/default_log_category.o _gcc/x86/Debug/sub/gasha_src/../src/debug/log/log_mask.o _gcc/x86/Debug/sub/gasha_src/../src/debug/log/log_attr.o _gcc/x86/Debug/sub/gasha_src/../src/debug/log/log_work_buff.o _gcc/x86/Debug/sub/gasha_src/../src/debug/log/log_queue.o _gcc/x86/Debug/sub/gasha_src/../src/debug/log/log_queue_monitor.o _gcc/x86/Debug/sub/gasha_src/../src/debug/log/debug_log.o _gcc/x86/Debug/sub/gasha_src/../src/debug/call_point/call_point.o _gcc/x86/Debug/sub/gasha_src/../src/debug/assert/assert.o _gcc/x86/Debug/sub/gasha_src/../src/debug/assert/stdin_debug_pause.o _gcc/x86/Debug/sub/gasha_src/../src/debug/assert/dummy_debug_pause.o _gcc/x86/Debug/sub/gasha_src/../src/debug/assert/std_debug_pause.o _gcc/x86/Debug/sub/gasha_src/../src/debug/profiler/profiler.o _gcc/x86/Debug/sub/gasha_src/../src/serialization/type_ctrl.o _gcc/x86/Debug/sub/gasha_src/../src/serialization/type_ctrl_base.o _gcc/x86/Debug/sub/gasha_src/../src/serialization/item_info_base.o _gcc/x86/Debug/sub/gasha_src/../src/archive/results.o _gcc/x86/Debug/sub/gasha_src/../src/archive/archive_base.o _gcc/x86/Debug/sub/gasha_src/../src/archive/archive_adapter_base.o _gcc/x86/Debug/sub/gasha_src/../src/archive/output_archive_adapter.o _gcc/x86/Debug/sub/gasha_src/../src/archive/input_archive_adapter.o _gcc/x86/Debug/sub/gasha_src/../src/archive/binary_archive_format_base.o _gcc/x86/Debug/sub/gasha_src/../src/archive/output_binary_archive_format.o _gcc/x86/Debug/sub/gasha_src/../src/archive/input_binary_archive_format.o _gcc/x86/Debug/sub/gasha_src/../src/archive/output_text_archive_format.o _gcc/x86/Debug/sub/gasha_src/../src/archive/input_text_archive_format.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/build_settings/build_settings_diag.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/utility/cpuid.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/utility/type_traits.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/utility/chrono.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/math/basic_math.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/math/crc32.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/string/string.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/string/fast_string.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/string/strconv.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/thread/thread_id.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/thread/lock/lock_common.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/thread/lock/spin_lock.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/thread/lock/lw_spin_lock.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/thread/lock/shared_spin_lock.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/thread/lock/simple_shared_spin_lock.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/thread/lock/unshared_spin_lock.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/memory/lf_mono_allocator.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/memory/poly_allocator.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/memory/new.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/console/console_color.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/console/tty_console.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/console/win_console.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/console/vs_console.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/console/dummy_console.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/console/std_console.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/log/log_level.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/log/default_log_level.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/log/log_category.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/log/default_log_category.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/log/log_mask.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/log/log_attr.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/log/log_work_buff.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/log/log_queue.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/log/log_queue_monitor.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/log/debug_log.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/call_point/call_point.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/assert/assert.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/assert/stdin_debug_pause.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/assert/dummy_debug_pause.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/assert/std_debug_pause.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/debug/profiler/profiler.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/serialization/type_ctrl.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/serialization/type_ctrl_base.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/serialization/item_info_base.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/archive/results.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/archive/archive_base.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/archive/archive_adapter_base.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/archive/output_archive_adapter.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/archive/input_archive_adapter.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/archive/binary_archive_format_base.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/archive/output_binary_archive_format.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/archive/input_binary_archive_format.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/archive/output_text_archive_format.o
+r - _gcc/x86/Debug/sub/gasha_src/../src/archive/input_text_archive_format.o
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_allocator ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_allocator -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_allocator/main.o _gcc/x86/Debug/proj/example_allocator/../../src/example_allocator/example_allocator.o _gcc/x86/Debug/proj/example_allocator/../../src/example_allocator/example_allocator_sub.o _gcc/x86/Debug/proj/example_allocator/../../src/example_allocator/basic_test/example_allocator_basic_test.o _gcc/x86/Debug/proj/example_allocator/../../src/example_allocator/feature_test/example_stack_allocator.o _gcc/x86/Debug/proj/example_allocator/../../src/example_allocator/feature_test/example_dual_stack_allocator.o _gcc/x86/Debug/proj/example_allocator/../../src/example_allocator/feature_test/example_mono_allocator.o _gcc/x86/Debug/proj/example_allocator/../../src/example_allocator/feature_test/example_pool_allocator.o _gcc/x86/Debug/proj/example_allocator/../../src/example_allocator/feature_test/example_std_allocator.o _gcc/x86/Debug/proj/example_allocator/../../src/example_allocator/feature_test/example_poly_allocator.o _gcc/x86/Debug/proj/example_allocator/../../src/example_allocator/performance_test/example_allocator_performance.o _gcc/x86/Debug/proj/example_allocator/../../src/example_allocator/examination/example_new_delete_test.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_allocator
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_basic_math ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_basic_math -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_basic_math/main.o _gcc/x86/Debug/proj/example_basic_math/../../src/example_basic_math/example_basic_math.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_basic_math
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_build_settings ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_build_settings -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_build_settings/main.o _gcc/x86/Debug/proj/example_build_settings/../../src/example_build_settings/example_build_settings.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_build_settings
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_crc32 ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_crc32 -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_crc32/main.o _gcc/x86/Debug/proj/example_crc32/../../src/example_crc32/example_crc32.o _gcc/x86/Debug/proj/example_crc32/../../src/example_crc32/example_crc32_sub.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_crc32
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_debug_log ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Debug/proj/example_debug_log/../../src/example_debug_log/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_debug_log -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_debug_log/../../src/example_debug_log/example_debug_log_basic_test.d -c ../../src/example_debug_log/example_debug_log_basic_test.cpp -o _gcc/x86/Debug/proj/example_debug_log/../../src/example_debug_log/example_debug_log_basic_test.o
+mkdir -p _gcc/x86/Debug/proj/example_debug_log/../../src/example_debug_log/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_debug_log -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_debug_log/../../src/example_debug_log/example_debug_log_feature_test.d -c ../../src/example_debug_log/example_debug_log_feature_test.cpp -o _gcc/x86/Debug/proj/example_debug_log/../../src/example_debug_log/example_debug_log_feature_test.o
+mkdir -p _gcc/x86/Debug/proj/example_debug_log/../../src/example_debug_log/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_debug_log -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_debug_log/../../src/example_debug_log/example_debug_log_performance_test.d -c ../../src/example_debug_log/example_debug_log_performance_test.cpp -o _gcc/x86/Debug/proj/example_debug_log/../../src/example_debug_log/example_debug_log_performance_test.o
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_debug_log -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_debug_log/main.o _gcc/x86/Debug/proj/example_debug_log/../../src/example_debug_log/example_debug_log.o _gcc/x86/Debug/proj/example_debug_log/../../src/example_debug_log/example_debug_log_sub.o _gcc/x86/Debug/proj/example_debug_log/../../src/example_debug_log/example_debug_log_basic_test.o _gcc/x86/Debug/proj/example_debug_log/../../src/example_debug_log/example_debug_log_feature_test.o _gcc/x86/Debug/proj/example_debug_log/../../src/example_debug_log/example_debug_log_performance_test.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_debug_log
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_dynamic_array ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Debug/proj/example_dynamic_array/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_dynamic_array -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_dynamic_array/main.d -c main.cpp -o _gcc/x86/Debug/proj/example_dynamic_array/main.o
+mkdir -p _gcc/x86/Debug/proj/example_dynamic_array/../../src/example_dynamic_array/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_dynamic_array -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_dynamic_array/../../src/example_dynamic_array/example_dynamic_array.d -c ../../src/example_dynamic_array/example_dynamic_array.cpp -o _gcc/x86/Debug/proj/example_dynamic_array/../../src/example_dynamic_array/example_dynamic_array.o
+mkdir -p _gcc/x86/Debug/proj/example_dynamic_array/../../src/example_dynamic_array/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_dynamic_array -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_dynamic_array/../../src/example_dynamic_array/example_dynamic_array_sub.d -c ../../src/example_dynamic_array/example_dynamic_array_sub.cpp -o _gcc/x86/Debug/proj/example_dynamic_array/../../src/example_dynamic_array/example_dynamic_array_sub.o
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_dynamic_array -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_dynamic_array/main.o _gcc/x86/Debug/proj/example_dynamic_array/../../src/example_dynamic_array/example_dynamic_array.o _gcc/x86/Debug/proj/example_dynamic_array/../../src/example_dynamic_array/example_dynamic_array_sub.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_dynamic_array
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_fast_math ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_fast_math -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_fast_math/main.o _gcc/x86/Debug/proj/example_fast_math/../../src/example_fast_math/example_fast_math.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_fast_math
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_fast_string ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_fast_string -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_fast_string/main.o _gcc/x86/Debug/proj/example_fast_string/../../src/example_fast_string/example_fast_string.o _gcc/x86/Debug/proj/example_fast_string/../../src/example_fast_string/example_fast_string_sub.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_fast_string
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_hash_table ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_hash_table -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_hash_table/main.o _gcc/x86/Debug/proj/example_hash_table/../../src/example_hash_table/example_hash_table.o _gcc/x86/Debug/proj/example_hash_table/../../src/example_hash_table/example_hash_table_sub.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_hash_table
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_linked_list ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Debug/proj/example_linked_list/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_linked_list -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_linked_list/main.d -c main.cpp -o _gcc/x86/Debug/proj/example_linked_list/main.o
+mkdir -p _gcc/x86/Debug/proj/example_linked_list/../../src/example_linked_list/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_linked_list -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_linked_list/../../src/example_linked_list/example_linked_list.d -c ../../src/example_linked_list/example_linked_list.cpp -o _gcc/x86/Debug/proj/example_linked_list/../../src/example_linked_list/example_linked_list.o
+mkdir -p _gcc/x86/Debug/proj/example_linked_list/../../src/example_linked_list/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_linked_list -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_linked_list/../../src/example_linked_list/example_linked_list_sub.d -c ../../src/example_linked_list/example_linked_list_sub.cpp -o _gcc/x86/Debug/proj/example_linked_list/../../src/example_linked_list/example_linked_list_sub.o
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_linked_list -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_linked_list/main.o _gcc/x86/Debug/proj/example_linked_list/../../src/example_linked_list/example_linked_list.o _gcc/x86/Debug/proj/example_linked_list/../../src/example_linked_list/example_linked_list_sub.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_linked_list
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_priority_queue ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_priority_queue -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_priority_queue/main.o _gcc/x86/Debug/proj/example_priority_queue/../../src/example_priority_queue/example_priority_queue.o _gcc/x86/Debug/proj/example_priority_queue/../../src/example_priority_queue/example_priority_queue_sub.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_priority_queue
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_rb_tree ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Debug/proj/example_rb_tree/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_rb_tree -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_rb_tree/main.d -c main.cpp -o _gcc/x86/Debug/proj/example_rb_tree/main.o
+mkdir -p _gcc/x86/Debug/proj/example_rb_tree/../../src/example_rb_tree/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_rb_tree -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_rb_tree/../../src/example_rb_tree/example_rb_tree.d -c ../../src/example_rb_tree/example_rb_tree.cpp -o _gcc/x86/Debug/proj/example_rb_tree/../../src/example_rb_tree/example_rb_tree.o
+mkdir -p _gcc/x86/Debug/proj/example_rb_tree/../../src/example_rb_tree/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_rb_tree -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_rb_tree/../../src/example_rb_tree/example_rb_tree_sub.d -c ../../src/example_rb_tree/example_rb_tree_sub.cpp -o _gcc/x86/Debug/proj/example_rb_tree/../../src/example_rb_tree/example_rb_tree_sub.o
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_rb_tree -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_rb_tree/main.o _gcc/x86/Debug/proj/example_rb_tree/../../src/example_rb_tree/example_rb_tree.o _gcc/x86/Debug/proj/example_rb_tree/../../src/example_rb_tree/example_rb_tree_sub.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_rb_tree
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_ring_buffer ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Debug/proj/example_ring_buffer/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_ring_buffer -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_ring_buffer/main.d -c main.cpp -o _gcc/x86/Debug/proj/example_ring_buffer/main.o
+mkdir -p _gcc/x86/Debug/proj/example_ring_buffer/../../src/example_ring_buffer/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_ring_buffer -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_ring_buffer/../../src/example_ring_buffer/example_ring_buffer.d -c ../../src/example_ring_buffer/example_ring_buffer.cpp -o _gcc/x86/Debug/proj/example_ring_buffer/../../src/example_ring_buffer/example_ring_buffer.o
+mkdir -p _gcc/x86/Debug/proj/example_ring_buffer/../../src/example_ring_buffer/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_ring_buffer -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_ring_buffer/../../src/example_ring_buffer/example_ring_buffer_sub.d -c ../../src/example_ring_buffer/example_ring_buffer_sub.cpp -o _gcc/x86/Debug/proj/example_ring_buffer/../../src/example_ring_buffer/example_ring_buffer_sub.o
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_ring_buffer -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_ring_buffer/main.o _gcc/x86/Debug/proj/example_ring_buffer/../../src/example_ring_buffer/example_ring_buffer.o _gcc/x86/Debug/proj/example_ring_buffer/../../src/example_ring_buffer/example_ring_buffer_sub.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_ring_buffer
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_serialization ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/basic_test/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/basic_test/basic_test.d -c ../../src/example_serialization/basic_test/basic_test.cpp -o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/basic_test/basic_test.o
+mkdir -p _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/feature_test/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/feature_test/save_load.d -c ../../src/example_serialization/feature_test/save_load.cpp -o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/feature_test/save_load.o
+mkdir -p _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/inventory.d -c ../../src/example_serialization/real_test/data/inventory.cpp -o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/inventory.o
+mkdir -p _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/ability_collection.d -c ../../src/example_serialization/real_test/data/ability_collection.cpp -o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/ability_collection.o
+mkdir -p _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/chara_data.d -c ../../src/example_serialization/real_test/data/chara_data.cpp -o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/chara_data.o
+mkdir -p _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/chara_collection.d -c ../../src/example_serialization/real_test/data/chara_collection.cpp -o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/chara_collection.o
+mkdir -p _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/game_status.d -c ../../src/example_serialization/real_test/data/game_status.cpp -o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/game_status.o
+mkdir -p _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/save_data/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/save_data/save_data.d -c ../../src/example_serialization/real_test/save_data/save_data.cpp -o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/save_data/save_data.o
+mkdir -p _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/test_data/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/test_data/test_data.d -c ../../src/example_serialization/real_test/test_data/test_data.cpp -o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/test_data/test_data.o
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_serialization -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_serialization/main.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/example_serialization.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/work_buff.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/file.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/basic_test/basic_test.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/feature_test/feature_test.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/feature_test/save_load.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/real_test.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/basic_data.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/item_data.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/inventory.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/ability_data.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/ability_collection.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/chara_data.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/chara_ability_data.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/chara_collection.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/data/game_status.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/save_data/save_data.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/save_data/save_data_version.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/save_data/load_target.o _gcc/x86/Debug/proj/example_serialization/../../src/example_serialization/real_test/test_data/test_data.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_serialization
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_shared_data ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_shared_data -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_shared_data/main.o _gcc/x86/Debug/proj/example_shared_data/../../src/example_shared_data/example_shared_data.o _gcc/x86/Debug/proj/example_shared_data/../../src/example_shared_data/example_shared_data_sub1.o _gcc/x86/Debug/proj/example_shared_data/../../src/example_shared_data/example_shared_data_sub2.o _gcc/x86/Debug/proj/example_shared_data/../../src/example_shared_data/example_shared_data_sub3.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_shared_data
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_singleton ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Debug/proj/example_singleton/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_singleton -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_singleton/main.d -c main.cpp -o _gcc/x86/Debug/proj/example_singleton/main.o
+mkdir -p _gcc/x86/Debug/proj/example_singleton/../../src/example_singleton/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_singleton -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_singleton/../../src/example_singleton/example_singleton.d -c ../../src/example_singleton/example_singleton.cpp -o _gcc/x86/Debug/proj/example_singleton/../../src/example_singleton/example_singleton.o
+mkdir -p _gcc/x86/Debug/proj/example_singleton/../../src/example_singleton/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_singleton -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_singleton/../../src/example_singleton/example_singleton_sub.d -c ../../src/example_singleton/example_singleton_sub.cpp -o _gcc/x86/Debug/proj/example_singleton/../../src/example_singleton/example_singleton_sub.o
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_singleton -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_singleton/main.o _gcc/x86/Debug/proj/example_singleton/../../src/example_singleton/example_singleton.o _gcc/x86/Debug/proj/example_singleton/../../src/example_singleton/example_singleton_sub.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_singleton
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_singly_linked_list ]
+--------------------------------------------------------------------------------
+mkdir -p _gcc/x86/Debug/proj/example_singly_linked_list/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_singly_linked_list -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_singly_linked_list/main.d -c main.cpp -o _gcc/x86/Debug/proj/example_singly_linked_list/main.o
+mkdir -p _gcc/x86/Debug/proj/example_singly_linked_list/../../src/example_singly_linked_list/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_singly_linked_list -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_singly_linked_list/../../src/example_singly_linked_list/example_singly_linked_list.d -c ../../src/example_singly_linked_list/example_singly_linked_list.cpp -o _gcc/x86/Debug/proj/example_singly_linked_list/../../src/example_singly_linked_list/example_singly_linked_list.o
+mkdir -p _gcc/x86/Debug/proj/example_singly_linked_list/../../src/example_singly_linked_list/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_singly_linked_list -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  -MD -MP -MF _gcc/x86/Debug/proj/example_singly_linked_list/../../src/example_singly_linked_list/example_singly_linked_list_sub.d -c ../../src/example_singly_linked_list/example_singly_linked_list_sub.cpp -o _gcc/x86/Debug/proj/example_singly_linked_list/../../src/example_singly_linked_list/example_singly_linked_list_sub.o
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_singly_linked_list -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_singly_linked_list/main.o _gcc/x86/Debug/proj/example_singly_linked_list/../../src/example_singly_linked_list/example_singly_linked_list.o _gcc/x86/Debug/proj/example_singly_linked_list/../../src/example_singly_linked_list/example_singly_linked_list_sub.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_singly_linked_list
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_sort_and_search ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_sort_and_search -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_sort_and_search/main.o _gcc/x86/Debug/proj/example_sort_and_search/../../src/example_sort_and_search/example_sort_and_search.o _gcc/x86/Debug/proj/example_sort_and_search/../../src/example_sort_and_search/example_sort_and_search_sub.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_sort_and_search
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_thread_id ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_thread_id -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_thread_id/main.o _gcc/x86/Debug/proj/example_thread_id/../../src/example_thread_id/example_thread_id.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_thread_id
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_type_traits ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_type_traits -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_type_traits/main.o _gcc/x86/Debug/proj/example_type_traits/../../src/example_type_traits/example_type_traits.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_type_traits
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[ example_utility ]
+--------------------------------------------------------------------------------
+mkdir -p ../../exe/gcc/x86/Debug/; \
+g++ -std=c++11  -I./ -I. -I../../src/example_utility -I../../sub/gasha/include -I../../sub/gasha_settings/include   -Wall -Wno-switch -Wno-unknown-pragmas -Wno-unused-local-typedefs -Wno-unused-value -mavx -fabi-version=0 -fopenmp -U__STRICT_ANSI__  -g  -m32  -D_DEBUG   -include standard.h  _gcc/x86/Debug/proj/example_utility/main.o _gcc/x86/Debug/proj/example_utility/../../src/example_utility/example_utility.o ../../sub/gasha/lib/gcc/gasha_x86_debug.a -o ../../exe/gcc/x86/Debug/example_utility
+--------------------------------------------------------------------------------
+================================================================================

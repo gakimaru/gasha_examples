@@ -305,7 +305,7 @@ void example_singly_linked_list()
 		//データを逆順に表示
 		printReverse();
 
-		//ソ―ト
+		//ソート
 		std::printf("\n");
 		std::printf("[sort]\n");
 		con.sort();//通常ソート
@@ -319,7 +319,7 @@ void example_singly_linked_list()
 		printAll();//全件表示
 
 	#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_STABLE_SORT
-		//安定ソ―ト
+		//安定ソート
 		std::printf("\n");
 		std::printf("[stable_sort]\n");
 		con.stableSort();//安定ソート
@@ -824,7 +824,7 @@ void example_singly_linked_list()
 		};
 		printAll();
 
-		//ソ―ト
+		//ソート
 		std::printf("\n");
 		std::printf("[sort]\n");
 		con.sort();//通常ソート

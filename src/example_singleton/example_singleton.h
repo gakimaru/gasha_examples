@@ -39,7 +39,7 @@ public:
 	typedef sharedSpinLock lock_type;//ロック型
 	typedef singletonDebug<50, sharedSpinLock> debug_type;//シングルトンデバッグ型
 	//フレンド宣言
-	GASHA_SINGLETON_FRIEND_CLASS(common_data1_t);
+	GASHA_SINGLETON_FRIEND_CLASS();
 public:
 	//アクセッサ
 	int val1() const { return m_val1; }
