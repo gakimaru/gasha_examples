@@ -84,7 +84,7 @@ Released under the [MIT license][MIT].
 > $ nkf -Lu --overwrite *.sh  
 > $ chmod +x *.sh  
 > 
-> 以上は、gasha_examples ディレクトリに移動し、直下のシェルスクリプト（.sh ファイル）に対する改行コード変換と実行属性の付与を行う操作です。  
+> 以上は、gasha_examples/ ディレクトリ上のシェルスクリプト（.sh ファイル）に対する改行コード変換と実行属性の付与を行う操作です。  
 > その後、一括変換のシェルスクリプトを実行して下さい。Makefile用の変換シェルスクリプトもあります。  
 > 
 > $ conv_sh_lf.sh  
