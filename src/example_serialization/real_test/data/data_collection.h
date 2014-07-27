@@ -80,8 +80,7 @@ public:
 	void unregist(const crc32_t key);
 	//整列
 	void sort(const bool is_descendant = false);
-//protected://※コンストラクタは protected にしたかったが、やむを得ず public。（現状、std::is_defautl_constructible による private/protected なデフォルトコンストラクタの判定がうまくいかない）
-public:
+protected://※シングルトン専用に付き、protected 化
 	//デフォルトコンストラクタ
 	inline dataCollection();
 	//デストラクタ

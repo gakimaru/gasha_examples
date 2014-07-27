@@ -115,8 +115,7 @@ public:
 	void registFlagIndex(const char* flag_name, const index_type index);//フラグインデックスを登録
 	void registFlagSettings();//フラグ設定を登録
 	void clear();//全ての登録情報をクリア
-//private://※コンストラクタは protected にしたかったが、やむを得ず public。（現状、std::is_defautl_constructible による private/protected なデフォルトコンストラクタの判定がうまくいかない）
-public:
+private://※シングルトン専用に付き、private 化
 	//デフォルトコンストラクタ
 	inline gameStatus();
 	//デストラクタ

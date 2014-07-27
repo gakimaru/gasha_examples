@@ -143,6 +143,12 @@ void example_singleton()
 		singleton<common_data1_t> data("test1-D", with_lock_shared);
 		data.create("test1:create(2)", 0, 0);//明示的インスタンス生成
 	}
+	{
+		char message[2048];
+		singleton<common_data1_t> data("test1-D'", with_lock_shared);
+		data.debugInfo(message, sizeof(message));
+		std::printf("%s\n", message);
+	}
 
 	//スレッド用関数１Ａ
 	auto thread_func1a = [](const std::size_t thread_no)
@@ -150,24 +156,25 @@ void example_singleton()
 		char name[20];
 		GASHA_ spprintf(name, "Thread1A(%d)", thread_no);
 		threadId thread_id(name);
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));//100ミリ秒スリープ
+		std::this_thread::sleep_for(std::chrono::milliseconds(20));//20ミリ秒スリープ
 		for (int i = 0; i < 10; ++i)
 		{
-			for (int j = 0; j < 100; ++j)
+			for (int j = 0; j < 20; ++j)
 			{
-				char procedure[20];
-				GASHA_ spprintf(procedure, "Proc[%d][%d]", i, j);
+				char procedure[32];
+				GASHA_ spprintf(procedure, "Write-Proc[%d][%d]", i, j);
 				//シングルトンアクセス
 				{
 					singleton<common_data1_t> data(procedure, with_lock_shared);//共有ロックでシングルトンにアクセス
 					{
 						data.lock().upgrade();//共有ロックを排他ロックに昇格
+						//シングルトンの情報を更新
 						data->val1()++;
 						data->val2()--;
 					}
+					std::this_thread::sleep_for(std::chrono::microseconds(10));//10マイクロ秒スリープ
 				}
 			}
-			std::this_thread::sleep_for(std::chrono::microseconds(10));//10マイクロ秒スリープ
 		}
 	};
 
@@ -177,12 +184,19 @@ void example_singleton()
 		char name[20];
 		GASHA_ spprintf(name, "Thread1B(%d)", thread_no);
 		threadId thread_id(name);
-		char procedure[20];
-		GASHA_ spprintf(procedure, "Proc");
-		//シングルトンアクセス
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));//1ミリ秒スリープ
+		for (int i = 0; i < 10; ++i)
 		{
-			singleton<common_data1_t> data(procedure, with_lock_shared);//共有ロックでシングルトンにアクセス
-			std::this_thread::sleep_for(std::chrono::milliseconds(500));//500ミリ秒スリープ
+			for (int j = 0; j < 20; ++j)
+			{
+				char procedure[32];
+				GASHA_ spprintf(procedure, "Read-Proc[%d][%d]", i, j);
+				//シングルトンアクセス
+				{
+					const singleton<common_data1_t> data(procedure, with_lock_shared);//共有ロックでシングルトンにアクセス
+					std::this_thread::sleep_for(std::chrono::microseconds(10));//10マイクロ秒スリープ
+				}
+			}
 		}
 	};
 
@@ -192,21 +206,21 @@ void example_singleton()
 		char name[20];
 		GASHA_ spprintf(name, "Thread2(%d)", thread_no);
 		threadId thread_id(name);
-		std::this_thread::sleep_for(std::chrono::milliseconds(10));//10ミリ秒スリープ
+		std::this_thread::sleep_for(std::chrono::milliseconds(20));//20ミリ秒スリープ
 		for (int i = 0; i < 10; ++i)
 		{
-			for (int j = 0; j < 100; ++j)
+			for (int j = 0; j < 20; ++j)
 			{
 				char procedure[20];
-				GASHA_ spprintf(procedure, "Proc[%d][%d]", i, j);
+				GASHA_ spprintf(procedure, "Write-Proc[%d][%d]", i, j);
 				//シングルトンアクセス
 				{
-					simpleSingleton<common_data2_t> data(procedure);//排他ロックでシングルトンにアクセス
+					simpleSingleton<common_data2_t> data(procedure);//ロックなしでシングルトンにアクセス
 					data->val1()++;
 					data->val2()--;
 				}
+				std::this_thread::sleep_for(std::chrono::microseconds(10));//10マイクロ秒スリープ
 			}
-			std::this_thread::sleep_for(std::chrono::microseconds(10));//10マイクロ秒スリープ
 		}
 	};
 
@@ -228,13 +242,13 @@ void example_singleton()
 			th[i] = new std::thread(thread_func2, i);
 	}
 
-	//10ミリ秒待ち
-	std::this_thread::sleep_for(std::chrono::milliseconds(10));
+	//100ミリ秒待ち
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
 	//シングルトンアクセス中情報を表示
 	{
 		char message[2048];
-		singleton<common_data1_t> data("test1-E", with_lock_shared);
+		singleton<common_data1_t> data("test1-E", with_lock_shared);//共有ロックでシングルトンにアクセス
 		data.debugInfo(message, sizeof(message));
 		std::printf("%s\n", message);
 	}
@@ -257,6 +271,20 @@ void example_singleton()
 		std::printf("[ Access Singleton : common_data2_t(3) ]\n");
 		simpleSingleton<common_data2_t> data("test2-F");
 		data->printInfo();
+	}
+
+	//シングルトンを破棄
+	{
+		singleton<common_data1_t> data("test1-G");
+		data.destroy("test1:destroy");//明示的インスタンス破棄
+	}
+
+	//シングルトンアクセス後情報を表示
+	{
+		char message[2048];
+		singleton<common_data1_t> data("test1-G'", with_lock_shared);
+		data.debugInfo(message, sizeof(message));
+		std::printf("%s\n", message);
 	}
 
 	std::printf("- end -\n");

@@ -30,8 +30,7 @@ class inventory : public ::_private::itemCollection
 {
 	//シングルトン用のフレンド設定
 	GASHA_SINGLETON_FRIEND_CLASS(); 
-//private://※コンストラクタは protected にしたかったが、やむを得ず public。（現状、std::is_defautl_constructible による private/protected なデフォルトコンストラクタの判定がうまくいかない）
-public:
+private://※シングルトン専用に付き、private 化
 	//コンストラクタ
 	inline inventory();
 	//デストラクタ
