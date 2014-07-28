@@ -1,0 +1,41 @@
+----- Test for singleton -----
+[ Create Singleton Instance : common_data1_t ]
+[ Create Singleton Instance : common_data2_t ]
+[ Access Singleton : common_data1_t(1) ]
+common_data1: val1=1, val2=2
+[ Access Singleton : common_data2_t(1) ]
+common_data2: val1=3, val2=4
+[ Destroy Singleton Instance : common_data1_t ]
+[ Destroy Singleton Instance : common_data2_t ]
+[ Access Singleton : common_data1_t(2) ]
+common_data1_t is not created.
+[ Access Singleton : common_data2_t(2) ]
+common_data2: val1=0, val2=0
+[ Create Singleton Instance(2) : common_data1_t ]
+----- Debug-info for singletonDebug -----
+Accessing Count: 1
+Created:         0.000076000 sec, "test1:create(2)"
+Destroyed:       0.000000000 sec, "(null)"
+Access Info: (Count=1)
+  - [2] 0.000078000 sec, "test1-D'": thread="(no name)"(0x96182228)
+-----------------------------------------
+----- Debug-info for singletonDebug -----
+Accessing Count: 3
+Created:         0.000076000 sec, "test1:create(2)"
+Destroyed:       0.000000000 sec, "(null)"
+Access Info: (Count=3)
+  - [113] 0.152336000 sec, "Write-Proc[0][10]": thread="Thread1A(9)"(0x98f4f762)
+  - [116] 0.158361000 sec, "Write-Proc[0][2]": thread="Thread1A(3)"(0xd6ca6b01)
+  - [115] 0.158361000 sec, "test1-E": thread="MainThread"(0x96182228)
+-----------------------------------------
+[ Access Singleton : common_data1_t(3) ]
+common_data1: val1=1000, val2=-1000
+[ Access Singleton : common_data2_t(3) ]
+common_data2: val1=1000, val2=-1000
+----- Debug-info for singletonDebug -----
+Accessing Count: 0
+Created:         0.000076000 sec, "test1:create(2)"
+Destroyed:       2.199283000 sec, "test1:destroy"
+Access Info: (Count=0)
+-----------------------------------------
+- end -

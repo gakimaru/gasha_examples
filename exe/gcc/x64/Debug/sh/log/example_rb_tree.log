@@ -1,0 +1,201 @@
+--- Make table ---
+[ 6:1000] [ 6:1001] [ 8:1002] [ 9:1003] [ 7:1004] [ 9:1005] [ 6:1006] [ 9:1007] [ 5:1008] [ 7:1009] [ 7:1010] [ 4:1011] [ 5:1012] [ 3:1013] [ 9:1014] [ 1:1015] [10:1016] [ 3:1017] [ 4:1018] [ 5:1019] 
+20 registered.
+*elapsed_time=0.000099000 sec
+--- Show tree (count=20) ---
+depth_max=4 (limit for showing=4)
+                      .----------------------{ 7:B}----------------------.                      
+          .----------{ 5:R}----------.                    .----------{ 9:B}----------.          
+    .----{ 3:B}----.        .----{ 6:B}----.        .----{ 7:R}----.        .----{ 9:R}----.    
+   [ 1:B]    .-{ 4:B}-.  .-{ 5:R}-.    [ 6:B]      [ 7:B]      [ 8:B]      [ 9:B]      [ 9:B}-. 
+            [ 3:R][ 4:R][ 5:B][ 6:B]                                                      [10:R]
+*elapsed_time=0.000029000 sec
+--- Show nodes count (count=20) ---
+depth_max=4, width_max=16
+    0:[ 1] blacks=3, reds=1, total=4 (illegal=0)
+    2:[ 3] blacks=3, reds=2, total=5 (illegal=0)
+    3:[ 4] blacks=3, reds=2, total=5 (illegal=0)
+    4:[ 5] blacks=3, reds=2, total=5 (illegal=0)
+    5:[ 6] blacks=3, reds=2, total=5 (illegal=0)
+    6:[ 6] blacks=3, reds=1, total=4 (illegal=0)
+    8:[ 7] blacks=3, reds=1, total=4 (illegal=0)
+   10:[ 8] blacks=3, reds=1, total=4 (illegal=0)
+   12:[ 9] blacks=3, reds=1, total=4 (illegal=0)
+   14:[ 9] blacks=3, reds=1, total=4 (illegal=0)
+   15:[10] blacks=3, reds=2, total=5 (illegal=0)
+max: blacks=3, reds=2, total=5
+min: blacks=3, reds=1, total=4
+diff:blacks=0, reds=1, total=1 (illegal=0)
+*elapsed_time=0.000010000 sec
+--- Show nodes ascending (count=20) ---
+[ 1:1015] [ 3:1013] [ 3:1017] [ 4:1011] [ 4:1018] [ 5:1008] [ 5:1012] [ 5:1019] [ 6:1000] [ 6:1001] [ 6:1006] [ 7:1004] [ 7:1009] [ 7:1010] [ 8:1002] [ 9:1003] [ 9:1005] [ 9:1007] [ 9:1014] [10:1016] 
+*elapsed_time=0.000007000 sec
+--- Show nodes descending (count=20) ---
+[10:1016] [ 9:1014] [ 9:1007] [ 9:1005] [ 9:1003] [ 8:1002] [ 7:1010] [ 7:1009] [ 7:1004] [ 6:1006] [ 6:1001] [ 6:1000] [ 5:1019] [ 5:1012] [ 5:1008] [ 4:1018] [ 4:1011] [ 3:1017] [ 3:1013] [ 1:1015] 
+*elapsed_time=0.000009000 sec
+
+--------------------[iterator operattion:begin]
+[constructor]
+constructor
+ite:key=1, value=1015
+rite:key=10, value=1016
+ite2_end:key=1, value=1015
+rite2_end:key=10, value=1016
+ite_end - ite = 20
+ite - ite_end = -20
+rite_end - rite = 20
+rite - rite_end = -20
+ite2 - ite = 20
+ite - ite2 = -20
+rite2 - rite = 20
+rite - rite2 = -20
+[copy operator]
+ite:key=1, value=1015
+rite:key=10, value=1016
+ite2_end:key=1, value=1015
+rite2_end:key=10, value=1016
+[rite.base()]
+ite2_end: key=1, value=1015
+[++ite,--ie_end]
+ite:key=3, value=1013
+rite:key=9, value=1014
+ite_end:key=10, value=1016
+rite_end:key=1, value=1015
+[--ite,++ite_end]
+ite:key=1, value=1015
+rite:key=10, value=1016
+[ite[0]]
+ite:key=1, value=1015
+rite:key=10, value=1016
+[ite[1]]
+ite:key=3, value=1013
+rite:key=9, value=1014
+[ite[2]]
+ite:key=4, value=1011
+rite:key=9, value=1005
+[ite+=3]
+ite:key=5, value=1012
+rite:key=7, value=1010
+[ite-=3]
+ite:key=4, value=1011
+rite:key=9, value=1005
+ite_end - ite = 17
+ite - ite_end = -17
+rite_end - rite = 17
+rite - rite_end = -17
+[ite2-=2]
+ite2 - ite = 15
+ite - ite2 = -15
+rite2 - rite = 15
+rite - rite2 = -15
+[++ite_end]
+ite_end - ite = 0
+ite - ite_end = 0
+rite_end - rite = 0
+rite - rite_end = 0
+--------------------[iterator operattion:end]
+--------------------[lock operation:begin]
+.lockScoped() ... OK
+.lockSharedScoped() ... OK
+.lockUnique() ... OK
+.lockUnique(with_lock) ... OK
+.lockUnique(with_lock_shared) ... OK
+.lockUnique(try_to_lock) ... OK
+.lockUnique(try_to_lock_shared) ... OK
+.lockUnique(adopt_lock) ... OK
+.lockUnique(adopt_shared_lock) ... OK
+.lockUnique(defer_lock) ... OK
+--------------------[lock operation:end]
+--- Search each key nodes ---
+ 1(1):[ 1] 
+ 3(2):[ 3] [ 3] 
+ 4(2):[ 4] [ 4] 
+ 5(3):[ 5] [ 5] [ 5] 
+ 6(3):[ 6] [ 6] [ 6] 
+ 7(3):[ 7] [ 7] [ 7] 
+ 8(1):[ 8] 
+ 9(4):[ 9] [ 9] [ 9] [ 9] 
+10(1):[10] 
+*elapsed_time=0.000049000 sec
+--- Search each nearest key nodes for smaller ---
+ 2:[ 1] [ 3] [ 3] [ 4] 
+*elapsed_time=0.000005000 sec
+--- Search each nearest key nodes for larger ---
+ 2:[ 3] [ 3] [ 4] [ 4] 
+*elapsed_time=0.000027000 sec
+--- Remove nodes ---
+[ 5] [10] [ 8] [ 1] [ 4] 5 removed.
+*elapsed_time=0.000029000 sec
+--- Show tree (count=15) ---
+depth_max=4 (limit for showing=4)
+                      .----------------------{ 7:B}----------------------.                      
+          .----------{ 5:R}----------.                    .----------{ 9:B}----------.          
+    .----{ 4:B}----.        .----{ 6:B}----.        .----{ 7:B]             .----{ 9:R}----.    
+ .-{ 3:B]      [ 5:B]      [ 6:B]      [ 6:B]      [ 7:R]                  [ 9:B]      [ 9:B]   
+[ 3:R]                                                                                          
+*elapsed_time=0.000015000 sec
+--- Show nodes count (count=15) ---
+depth_max=4, width_max=16
+    0:[ 3] blacks=3, reds=2, total=5 (illegal=0)
+    1:[ 3] blacks=3, reds=1, total=4 (illegal=0)
+    2:[ 5] blacks=3, reds=1, total=4 (illegal=0)
+    4:[ 6] blacks=3, reds=1, total=4 (illegal=0)
+    6:[ 6] blacks=3, reds=1, total=4 (illegal=0)
+    8:[ 7] blacks=3, reds=1, total=4 (illegal=0)
+   10:[ 7] blacks=3, reds=0, total=3 (illegal=0)
+   12:[ 9] blacks=3, reds=1, total=4 (illegal=0)
+   14:[ 9] blacks=3, reds=1, total=4 (illegal=0)
+max: blacks=3, reds=2, total=5
+min: blacks=3, reds=0, total=3
+diff:blacks=0, reds=2, total=2 (illegal=0)
+*elapsed_time=0.000008000 sec
+--- Show nodes ascending (count=15) ---
+[ 3:1013] [ 3:1017] [ 4:1018] [ 5:1012] [ 5:1019] [ 6:1000] [ 6:1001] [ 6:1006] [ 7:1004] [ 7:1009] [ 7:1010] [ 9:1003] [ 9:1005] [ 9:1007] [ 9:1014] 
+*elapsed_time=0.000004000 sec
+--- Remove each key nodes ---
+[ 3] [ 4] [ 5] [ 6] [ 7] [ 9] 6 removed.
+*elapsed_time=0.000006000 sec
+--- Show tree (count=9) ---
+depth_max=3 (limit for showing=4)
+          .----------{ 6:B}----------.          
+    .----{ 5:B}----.        .----{ 9:B}----.    
+   [ 3:B]      [ 6:B]    .-{ 7:B}-.    [ 9:B]   
+                        [ 7:R][ 9:R]            
+*elapsed_time=0.000007000 sec
+--- Show nodes count (count=9) ---
+depth_max=3, width_max=8
+    0:[ 3] blacks=3, reds=0, total=3 (illegal=0)
+    2:[ 6] blacks=3, reds=0, total=3 (illegal=0)
+    4:[ 7] blacks=3, reds=1, total=4 (illegal=0)
+    5:[ 9] blacks=3, reds=1, total=4 (illegal=0)
+    6:[ 9] blacks=3, reds=0, total=3 (illegal=0)
+max: blacks=3, reds=1, total=4
+min: blacks=3, reds=0, total=3
+diff:blacks=0, reds=1, total=1 (illegal=0)
+*elapsed_time=0.000005000 sec
+--- Show nodes ascending (count=9) ---
+[ 3:1017] [ 5:1019] [ 6:1001] [ 6:1006] [ 7:1009] [ 7:1010] [ 9:1005] [ 9:1007] [ 9:1014] 
+*elapsed_time=0.000003000 sec
+--- Remove all nodes ---
+[ 3] [ 5] [ 6] [ 6] [ 7] [ 7] [ 9] [ 9] [ 9] 9 removed.
+*elapsed_time=0.000006000 sec
+--- Show tree (count=0) ---
+depth_max=-1 (limit for showing=4)
+*elapsed_time=0.000002000 sec
+--- Show nodes count (count=0) ---
+depth_max=-1, width_max=0
+max: blacks=0, reds=0, total=0
+min: blacks=0, reds=0, total=0
+diff:blacks=0, reds=0, total=0 (illegal=0)
+*elapsed_time=0.000002000 sec
+--- Show nodes ascending (count=0) ---
+(nothing)
+*elapsed_time=0.000001000 sec
+--- end ---
+*elapsed_time=0.000324000 sec
+
+--- example_simple_linked_list ---
+data = {0x07b1eeba,11} {0xc02b79a5,15} {0xe68a9e4d,13}
+.findValue("KEY5"): ite={0xc02b79a5, 15}
+data = {0x07b1eeba,{1,2}} {0xc02b79a5,{5,6}} {0xe68a9e4d,{3,4}}
+.findValue("KEY5"): ite={0xc02b79a5,{5:6}}
