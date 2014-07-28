@@ -59,19 +59,19 @@ void example_fast_string()
 			{
 				ret1 = strlen_fast(getStr(src_buff, i, loop));
 				if (test_mode == 0)
-					std::printf("strlen_fast(str[%d]): ret=%d\n", i, ret1);
+					std::printf("strlen_fast(str[%d]): ret=%d\n", static_cast<int>(i), static_cast<int>(ret1));
 			}
 			if (test_mode == 0 || test_mode == 2)
 			{
 				ret2 = strlen_sse(getStr(src_buff, i, loop));
 				if (test_mode == 0)
-					std::printf("strlen_sse( str[%d]): ret=%d\n", i, ret2);
+					std::printf("strlen_sse( str[%d]): ret=%d\n", static_cast<int>(i), static_cast<int>(ret2));
 			}
 			if (test_mode == 0 || test_mode == 3)
 			{
 				ret3 = GASHA_ strlen(getStr(src_buff, i, loop));
 				if (test_mode == 0)
-					std::printf("strlen(     str[%d]): ret=%d\n", i, ret3);
+					std::printf("strlen(     str[%d]): ret=%d\n", static_cast<int>(i), static_cast<int>(ret3));
 			}
 			if (test_mode == 0)
 			{
@@ -105,19 +105,19 @@ void example_fast_string()
 				{
 					ret1 = strnlen_fast(getStr(src_buff, i, loop), max_len);
 					if (test_mode == 0)
-						std::printf("strnlen_fast(str[%d], %d): ret=%d (strlen=%d)\n", i, max_len, ret1, getStrLen(i, loop));
+						std::printf("strnlen_fast(str[%d], %d): ret=%d (strlen=%d)\n", static_cast<int>(i), static_cast<int>(max_len), static_cast<int>(ret1), static_cast<int>(getStrLen(i, loop)));
 				}
 				if (test_mode == 0 || test_mode == 2)
 				{
 					ret2 = strnlen_sse(getStr(src_buff, i, loop), max_len);
 					if (test_mode == 0)
-						std::printf("strnlen_sse( str[%d], %d): ret=%d (strlen=%d)\n", i, max_len, ret2, getStrLen(i, loop));
+						std::printf("strnlen_sse( str[%d], %d): ret=%d (strlen=%d)\n", static_cast<int>(i), static_cast<int>(max_len), static_cast<int>(ret2), static_cast<int>(getStrLen(i, loop)));
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
 					ret3 = GASHA_ strnlen(getStr(src_buff, i, loop), max_len);
 					if (test_mode == 0)
-						std::printf("strnlen(     str[%d], %d): ret=%d (strlen=%d)\n", i, max_len, ret3, getStrLen(i, loop));
+						std::printf("strnlen(     str[%d], %d): ret=%d (strlen=%d)\n", static_cast<int>(i), static_cast<int>(max_len), static_cast<int>(ret3), static_cast<int>(getStrLen(i, loop)));
 				}
 				if (test_mode == 0)
 				{
@@ -152,19 +152,19 @@ void example_fast_string()
 				{
 					ret1 = strcmp_fast(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						std::printf("strcmp_fast(str[%d], \"%s\"): ret=%d\n", i, pattern, ret1);
+						std::printf("strcmp_fast(str[%d], \"%s\"): ret=%d\n", static_cast<int>(i), pattern, ret1);
 				}
 				if (test_mode == 0 || test_mode == 2)
 				{
 					ret2 = strcmp_sse(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						std::printf("strcmp_sse( str[%d], \"%s\"): ret=%d\n", i, pattern, ret2);
+						std::printf("strcmp_sse( str[%d], \"%s\"): ret=%d\n", static_cast<int>(i), pattern, ret2);
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
 					ret3 = GASHA_ strcmp(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						std::printf("strcmp(     str[%d], \"%s\"): ret=%d\n", i, pattern, ret3);
+						std::printf("strcmp(     str[%d], \"%s\"): ret=%d\n", static_cast<int>(i), pattern, ret3);
 				}
 				if (test_mode == 0)
 				{
@@ -204,19 +204,19 @@ void example_fast_string()
 					{
 						ret1 = strncmp_fast(getStr(src_buff, i, loop), pattern, max_len);
 						if (test_mode == 0)
-							std::printf("strncmp_fast(str[%d], \"%s\", %d): ret=%d\n", i, pattern, max_len, ret1);
+							std::printf("strncmp_fast(str[%d], \"%s\", %d): ret=%d\n", static_cast<int>(i), pattern, static_cast<int>(max_len), ret1);
 					}
 					if (test_mode == 0 || test_mode == 2)
 					{
 						ret2 = strncmp_sse(getStr(src_buff, i, loop), pattern, max_len);
 						if (test_mode == 0)
-							std::printf("strncmp_sse( str[%d], \"%s\", %d): ret=%d\n", i, pattern, max_len, ret2);
+							std::printf("strncmp_sse( str[%d], \"%s\", %d): ret=%d\n", static_cast<int>(i), pattern, static_cast<int>(max_len), ret2);
 					}
 					if (test_mode == 0 || test_mode == 3)
 					{
 						ret3 = GASHA_ strncmp(getStr(src_buff, i, loop), pattern, max_len);
 						if (test_mode == 0)
-							std::printf("strncmp(     str[%d], \"%s\", %d): ret=%d\n", i, pattern, max_len, ret3);
+							std::printf("strncmp(     str[%d], \"%s\", %d): ret=%d\n", static_cast<int>(i), pattern, static_cast<int>(max_len), ret3);
 					}
 					if (test_mode == 0)
 					{
@@ -252,19 +252,19 @@ void example_fast_string()
 				{
 					ret1 = strchr_fast(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						std::printf("strchr_fast(str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret1, ret1);
+						std::printf("strchr_fast(str[%d], \'%c\'): ret=%p(\"%s\")\n", static_cast<int>(i), pattern, ret1, ret1);
 				}
 				if (test_mode == 0 || test_mode == 2)
 				{
 					ret2 = strchr_sse(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						std::printf("strchr_sse( str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret2, ret2);
+						std::printf("strchr_sse( str[%d], \'%c\'): ret=%p(\"%s\")\n", static_cast<int>(i), pattern, ret2, ret2);
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
 					ret3 = strchr(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						std::printf("strchr(     str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret3, ret3);
+						std::printf("strchr(     str[%d], \'%c\'): ret=%p(\"%s\")\n", static_cast<int>(i), pattern, ret3, ret3);
 				}
 				if (test_mode == 0)
 				{
@@ -299,19 +299,19 @@ void example_fast_string()
 				{
 					ret1 = strrchr_fast(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						std::printf("strrchr_fast(str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret1, ret1);
+						std::printf("strrchr_fast(str[%d], \'%c\'): ret=%p(\"%s\")\n", static_cast<int>(i), pattern, ret1, ret1);
 				}
 				if (test_mode == 0 || test_mode == 2)
 				{
 					ret2 = strrchr_sse(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						std::printf("strrchr_sse( str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret2, ret2);
+						std::printf("strrchr_sse( str[%d], \'%c\'): ret=%p(\"%s\")\n", static_cast<int>(i), pattern, ret2, ret2);
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
 					ret3 = strrchr(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						std::printf("strrchr(     str[%d], \'%c\'): ret=%p(\"%s\")\n", i, pattern, ret3, ret3);
+						std::printf("strrchr(     str[%d], \'%c\'): ret=%p(\"%s\")\n", static_cast<int>(i), pattern, ret3, ret3);
 				}
 				if (test_mode == 0)
 				{
@@ -346,19 +346,19 @@ void example_fast_string()
 				{
 					ret1 = strstr_fast(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						std::printf("strstr_fast(str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret1, ret1);
+						std::printf("strstr_fast(str[%d], \"%s\"): ret=%p(\"%s\")\n", static_cast<int>(i), pattern, ret1, ret1);
 				}
 				if (test_mode == 0 || test_mode == 2)
 				{
 					ret2 = strstr_sse(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						std::printf("strstr_sse( str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret2, ret2);
+						std::printf("strstr_sse( str[%d], \"%s\"): ret=%p(\"%s\")\n", static_cast<int>(i), pattern, ret2, ret2);
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
 					ret3 = GASHA_ strstr(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						std::printf("strstr(     str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret3, ret3);
+						std::printf("strstr(     str[%d], \"%s\"): ret=%p(\"%s\")\n", static_cast<int>(i), pattern, ret3, ret3);
 				}
 				if (test_mode == 0)
 				{
@@ -407,7 +407,7 @@ void example_fast_string()
 					ret1 = strstrbm_fast(getStr(src_buff, i, loop), pattern, found_it);
 					found_count1 = found_count;
 					if (test_mode == 0)
-						std::printf("strstrbm_fast(str[%d], \"%s\", found_it): ret=%p(\"%s\") found_count=%d\n", i, pattern, ret1, ret1, found_count);
+						std::printf("strstrbm_fast(str[%d], \"%s\", found_it): ret=%p(\"%s\") found_count=%d\n", static_cast<int>(i), pattern, ret1, ret1, found_count);
 				}
 				if (test_mode == 0 || test_mode == 2)
 				{
@@ -415,7 +415,7 @@ void example_fast_string()
 					ret2 = strstrbm_sse(getStr(src_buff, i, loop), pattern, found_it);
 					found_count2 = found_count;
 					if (test_mode == 0)
-						std::printf("strstrbm_sse( str[%d], \"%s\", found_it): ret=%p(\"%s\") found_count=%d\n", i, pattern, ret2, ret2, found_count);
+						std::printf("strstrbm_sse( str[%d], \"%s\", found_it): ret=%p(\"%s\") found_count=%d\n", static_cast<int>(i), pattern, ret2, ret2, found_count);
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
@@ -423,7 +423,7 @@ void example_fast_string()
 					ret3 = strstrbm(getStr(src_buff, i, loop), pattern, found_it);
 					found_count3 = found_count;
 					if (test_mode == 0)
-						std::printf("strstrbm(     str[%d], \"%s\", found_it): ret=%p(\"%s\") found_count=%d\n", i, pattern, ret3, ret3, found_count);
+						std::printf("strstrbm(     str[%d], \"%s\", found_it): ret=%p(\"%s\") found_count=%d\n", static_cast<int>(i), pattern, ret3, ret3, found_count);
 				}
 				if (test_mode == 0)
 				{
@@ -458,19 +458,19 @@ void example_fast_string()
 				{
 					ret1 = strstr0_fast(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						std::printf("strstr0_fast(str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret1, ret1);
+						std::printf("strstr0_fast(str[%d], \"%s\"): ret=%p(\"%s\")\n", static_cast<int>(i), pattern, ret1, ret1);
 				}
 				if (test_mode == 0 || test_mode == 2)
 				{
 					ret2 = strstr0_sse(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						std::printf("strstr0_sse( str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret2, ret2);
+						std::printf("strstr0_sse( str[%d], \"%s\"): ret=%p(\"%s\")\n", static_cast<int>(i), pattern, ret2, ret2);
 				}
 				if (test_mode == 0 || test_mode == 3)
 				{
 					ret3 = strstr0(getStr(src_buff, i, loop), pattern);
 					if (test_mode == 0)
-						std::printf("strstr0(     str[%d], \"%s\"): ret=%p(\"%s\")\n", i, pattern, ret3, ret3);
+						std::printf("strstr0(     str[%d], \"%s\"): ret=%p(\"%s\")\n", static_cast<int>(i), pattern, ret3, ret3);
 				}
 				if (test_mode == 0)
 				{
@@ -507,7 +507,7 @@ void example_fast_string()
 				if (test_mode == 0)
 				{
 					crc1 = calcCRC32(ret1);
-					std::printf("strcpy_fast(buff, str[%d]): ret=%p, buff=\"%s\"\n", i, ret1, buff);
+					std::printf("strcpy_fast(buff, str[%d]): ret=%p, buff=\"%s\"\n", static_cast<int>(i), ret1, buff);
 				}
 			}
 			if (test_mode == 0 || test_mode == 2)
@@ -517,7 +517,7 @@ void example_fast_string()
 				if (test_mode == 0)
 				{
 					crc2 = calcCRC32(ret2);
-					std::printf("strcpy_sse( buff, str[%d]): ret=%p, buff=\"%s\"\n", i, ret2, buff);
+					std::printf("strcpy_sse( buff, str[%d]): ret=%p, buff=\"%s\"\n", static_cast<int>(i), ret2, buff);
 				}
 			}
 			if (test_mode == 0 || test_mode == 3)
@@ -527,7 +527,7 @@ void example_fast_string()
 				if (test_mode == 0)
 				{
 					crc3 = calcCRC32(ret3);
-					std::printf("strcpy(     buff, str[%d]): ret=%p, buff=\"%s\"\n", i, ret3, buff);
+					std::printf("strcpy(     buff, str[%d]): ret=%p, buff=\"%s\"\n", static_cast<int>(i), ret3, buff);
 				}
 			}
 			if (test_mode == 0)
@@ -568,7 +568,7 @@ void example_fast_string()
 					if (test_mode == 0)
 					{
 						crc1 = calcCRC32(ret1);
-						std::printf("strncpy_fast(buff, str[%d], %d): ret=%p, buff=\"%s\"\n", i, max_len, ret1, buff);
+						std::printf("strncpy_fast(buff, str[%d], %d): ret=%p, buff=\"%s\"\n", static_cast<int>(i), static_cast<int>(max_len), ret1, buff);
 					}
 				}
 				if (test_mode == 0 || test_mode == 2)
@@ -578,7 +578,7 @@ void example_fast_string()
 					if (test_mode == 0)
 					{
 						crc2 = calcCRC32(ret2);
-						std::printf("strncpy_sse( buff, str[%d], %d): ret=%p, buff=\"%s\"\n", i, max_len, ret2, buff);
+						std::printf("strncpy_sse( buff, str[%d], %d): ret=%p, buff=\"%s\"\n", static_cast<int>(i), static_cast<int>(max_len), ret2, buff);
 					}
 				}
 				if (test_mode == 0 || test_mode == 3)
@@ -588,7 +588,7 @@ void example_fast_string()
 					if (test_mode == 0)
 					{
 						crc3 = calcCRC32(ret3);
-						std::printf("strncpy(     buff, str[%d], %d): ret=%p, buff=\"%s\"\n", i, max_len, ret3, buff);
+						std::printf("strncpy(     buff, str[%d], %d): ret=%p, buff=\"%s\"\n", static_cast<int>(i), static_cast<int>(max_len), ret3, buff);
 					}
 				}
 				if (test_mode == 0)
@@ -730,7 +730,7 @@ void example_fast_string()
 	std::printf("[ Test for logic ]\n");
 	std::printf("\n");
 	for (std::size_t i = 0; i < getStrSetNum(); ++i)
-		std::printf("str[%d]=\"%s\"\n", i, getStr(src_buff, i, 0));
+		std::printf("str[%d]=\"%s\"\n", static_cast<int>(i), getStr(src_buff, i, 0));
 	std::printf("\n");
 	test_strlen(0, 0);
 	test_strnlen(0, 0);
@@ -754,7 +754,7 @@ void example_fast_string()
 		memset(buff, 0xcd, sizeof(buff));
 		std::size_t pos = 0;
 		int ret;
-		#define EXPR(expr) expr; std::printf("%s buff=\"%s\", pos=%d, ret=%d\n", #expr, buff, pos, ret);
+	#define EXPR(expr) expr; std::printf("%s buff=\"%s\", pos=%d, ret=%d\n", #expr, buff, static_cast<int>(pos), ret);
 
 		std::printf("char buff[10];\n");
 		EXPR(ret = spprintf(buff, 10, pos, "1"););

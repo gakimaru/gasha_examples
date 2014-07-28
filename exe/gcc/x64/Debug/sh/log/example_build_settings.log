@@ -1,0 +1,252 @@
+
+================================================================================
+
+Compiler: name="GCC", Ver=[4(0x00000004).7(0x00000007)]
+    This compiler is "GCC"
+
+Compiler-language: C++ (C++ Ver.=2011)
+    C++ is available.
+        C++ is implemented C++98.
+        C++ is implemented C++03.
+        C++ is implemented C++11.
+
+Plataform: "Linux"(x64 64bits, little-endian), Ver=[0(0x00000000).0(0x00000000)]
+    Target plarform is "Linux"
+
+__FILE__="../../src/example_build_settings/example_build_settings.cpp"
+__LINE__=138
+__FUNCTION__="func"
+__PRETTY_FUNCTION__="static void example_build_settings()::test::func()"
+__FUNCSIG__="static void example_build_settings()::test::func()"
+__func__="func"
+__FUNCDNAME__=""
+__DATE__="Jul 28 2014"
+__TIME__="22:36:02"
+__TIMESTAMP__="Mon Jul 28 16:29:46 2014"
+
+GASHA_FUNC_NAME()="func"
+GASHA_SRC_FILE_LINE()="example_build_settings.cpp(149)"
+GASHA_SRC_FILE_LINE_TIME()="example_build_settings.cpp(150)[Mon Jul 28 16:29:46 2014]"
+This is normal func.
+This is inline func.
+This is noinline func.
+This is always inline func.
+
+nullptr_var=(nil)
+    'nullptr' is featured.
+
+This is override func.
+    'override' is featured.
+
+constexpr_var=6
+constexpr_calc(1, 2)=3
+    'constexpr' is featured.
+
+user_defined_literal_var=10
+    'operator ""'(user defined literal) is featured.
+
+TLS Variable=123
+
+==============================================================================
+Diagnostic Mode: Library
+==============================================================================
+
+------------------------------------------------------------------------------
+[ GASHA version : 1.1 ]
+
+------------------------------------------------------------------------------
+[ Build-settings diagnostic test ]
+
+[ENABLED] Poly-allocator(override on standard new/delete operator) is AVAILABLE.
+[OK] Debugger-break-point is AVAILABLE.
+[OK] Debug-log is ENABLED.
+[--] Debug-log NOT use log-queue.
+[OK] TLS initializer is COMPLETE.
+[OK] `stdin` is AVAILABLE.
+cpu_string="Genunteline"
+[OK] 'SSE' is SUPPORTED.
+[OK] 'SSE2' is SUPPORTED.
+[OK] 'SSE3' is SUPPORTED.
+[--] 'SSE4a' is not used.
+[OK] 'SSE4.1' is SUPPORTED.
+[OK] 'SSE4.2' is SUPPORTED.
+[OK] 'POPCNT' is SUPPORTED.
+[--] 'AES' is not used.
+[OK] 'AVX' is SUPPORTED.
+[--] 'AVX2' is not used.
+
+------------------------------------------------------------------------------
+[ Compiler specification ]
+
+Platform: Linux (Target Versionn=0.0)
+CPU Architecture: x64 (64 bit, little endian) [x86] [x64]
+
+Compiler: GCC (Version=4.7)
+Language: C++ (__cplusplus=201103) [C++98] [C++03] [C++11]
+
+[Yes]       `nullptr` is AVAILABLE.
+[Yes]       `override` is AVAILABLE.
+[Yes]       `final` is AVAILABLE.
+[Yes]       `auto` is AVAILABLE.
+[Yes]       `decltype()` is AVAILABLE.
+[Yes]       `default` & `delete` is AVAILABLE.
+[Yes]       `constexpr` is AVAILABLE.
+[Yes]       'User-defined-literal' is AVAILABLE.
+[Yes]       'Lambda-expression' is AVAILABLE.
+[Yes]       'Range-based `for`' is AVAILABLE.
+[Yes]       '`enum` class' is AVAILABLE.
+[Yes]       'Variadic-template' is AVAILABLE.
+[Yes]       'Template-aliases' is AVAILABLE.
+[Yes]       'Delegating-constructors' is AVAILABLE.
+[No]        'Inheriting-constructors' is NOT available.
+[Yes]       'Uniform-initializer' is AVAILABLE.
+[Yes]       'Initializer-list' is AVAILABLE.
+[Yes]       'Rvalue-reference' & 'std::move' is AVAILABLE.
+[Yes]       `static_assert()` is AVAILABLE.
+[Camouflage]`thread_local` is available.
+[Yes]       `noexcept` is AVAILABLE. -> [Yes] `GASHA_NOEXCEPT` is AVAILABLE.
+[Camouflage]`alignas()` is available.
+            liomit of `alignas()` = 256
+[Yes]       `alignof()` is AVAILABLE.
+[Yes]       `alignas(alignof())` is AVAILABLE. -> [Yes] `GASHA_ALIGNAS_OF()` is AVAILABLE.
+
+[Camouflage]`_aligned_malloc()`(VC++ style) is available.
+[Camouflage]`_aligned_free()`(VC++ style) is available.
+[Yes]       `mallinfo()`(GCC style) is AVAILABLE.
+[Camouflage]`__cpuid()`,_`xgetbv()`,`_XCR_XFEATURE_ENABLED_MASK`(VC++ style) is available.
+[Camouflage]`GASHA_NOINLINE` is available.
+[Camouflage]`GASHA_ALWAYS_INLINE` is available.
+
+[Yes]       `__FILE__` is AVAILABLE. (ex. __FILE__ = "../../gasha/include/gasha/build_settings/build_settings_diag.inl")
+[Yes]       `__LINE__` is AVAILABLE. (ex. __LINE__ = 610)
+[Yes]       `__DATE__` is AVAILABLE. (ex. __DATE__ = "Jul 28 2014")
+[Yes]       `__TIME__` is AVAILABLE. (ex. __TIME__ = "22:35:42")
+[Yes]       `__TIMESTAMP__` is AVAILABLE. (ex. __TIMESTAMP__ = "Mon Jul 28 12:20:33 2014")
+[Yes]       `__FUNCTION__` is AVAILABLE. (ex. __FUNCTION__ = "buildSettingsDiagnosticTest")
+[Yes]       `__PRETTY_FUNCTION__`(GCC Style) is AVAILABLE. (ex. __PRETTY_FUNCTION__ = "bool gasha::buildSettingsDiagnosticTest(char*, std::size_t, std::size_t&, MODE) [with MODE = gasha::diagForLibrary_internal_t; std::size_t = long unsigned int]")
+[Yes]       `__func__`(GCC Style) is AVAILABLE. (ex. __func__ = "buildSettingsDiagnosticTest")
+[Camouflage]`__FUNCSIG__`(VC++ Style) is available. (ex. __FUNCSIG__ = "bool gasha::buildSettingsDiagnosticTest(char*, std::size_t, std::size_t&, MODE) [with MODE = gasha::diagForLibrary_internal_t; std::size_t = long unsigned int]")
+[Dummy]     `__FUNCDNAME__`(VC++ Style) is available. (ex. __FUNCDNAME__ = "")
+
+[Yes]       `GASHA_FUNC_NAME()` is AVAILABLE. (ex. GASHA_FUNC_NAME() = "buildSettingsDiagnosticTest")
+[Yes]       `GASHA_SRC_FILE()` is AVAILABLE. (ex. GASHA_SRC_FILE() = "build_settings_diag.inl")
+[Yes]       `GASHA_SRC_FILE_LINE()` is AVAILABLE. (ex. GASHA_SRC_FILE_LINE() = "build_settings_diag.inl(751)")
+[Yes]       `GASHA_SRC_FILE_LINE_TIME()` is AVAILABLE. (ex. GASHA_SRC_FILE_LINE_TIME() = "build_settings_diag.inl(752)[Mon Jul 28 12:20:33 2014]")
+
+------------------------------------------------------------------------------
+[ Build-configuratoin ]
+
+Configuration name: FULL_DEBUG
+
+[Yes] 'Debug-feature' is AVAILABLE. (with VERBOSE mode)
+[Yes] 'Assertion' is ENABLED.
+[No]  'Optimize' is none.
+[---] 'File-system' is flexible (for ROM or for local-PC).
+[Yes] 'Unit-test' is AVAILABLE.
+[Yes] 'Symbols' are contained.
+
+------------------------------------------------------------------------------
+message size = 4799 bytes.
+
+==============================================================================
+Diagnostic Mode: Current
+==============================================================================
+
+------------------------------------------------------------------------------
+[ GASHA version : 1.1 ]
+
+------------------------------------------------------------------------------
+[ Build-settings diagnostic test ]
+
+[ENABLED] Poly-allocator(override on standard new/delete operator) is AVAILABLE.
+[OK] Debugger-break-point is AVAILABLE.
+[OK] Debug-log is ENABLED.
+[--] Debug-log NOT use log-queue.
+[OK] TLS initializer is COMPLETE.
+[OK] `stdin` is AVAILABLE.
+cpu_string="Genunteline"
+[OK] 'SSE' is SUPPORTED.
+[OK] 'SSE2' is SUPPORTED.
+[OK] 'SSE3' is SUPPORTED.
+[--] 'SSE4a' is not used.
+[OK] 'SSE4.1' is SUPPORTED.
+[OK] 'SSE4.2' is SUPPORTED.
+[OK] 'POPCNT' is SUPPORTED.
+[--] 'AES' is not used.
+[OK] 'AVX' is SUPPORTED.
+[--] 'AVX2' is not used.
+
+------------------------------------------------------------------------------
+[ Compiler specification ]
+
+Platform: Linux (Target Versionn=0.0)
+CPU Architecture: x64 (64 bit, little endian) [x86] [x64]
+
+Compiler: GCC (Version=4.7)
+Language: C++ (__cplusplus=201103) [C++98] [C++03] [C++11]
+
+[Yes]       `nullptr` is AVAILABLE.
+[Yes]       `override` is AVAILABLE.
+[Yes]       `final` is AVAILABLE.
+[Yes]       `auto` is AVAILABLE.
+[Yes]       `decltype()` is AVAILABLE.
+[Yes]       `default` & `delete` is AVAILABLE.
+[Yes]       `constexpr` is AVAILABLE.
+[Yes]       'User-defined-literal' is AVAILABLE.
+[Yes]       'Lambda-expression' is AVAILABLE.
+[Yes]       'Range-based `for`' is AVAILABLE.
+[Yes]       '`enum` class' is AVAILABLE.
+[Yes]       'Variadic-template' is AVAILABLE.
+[Yes]       'Template-aliases' is AVAILABLE.
+[Yes]       'Delegating-constructors' is AVAILABLE.
+[No]        'Inheriting-constructors' is NOT available.
+[Yes]       'Uniform-initializer' is AVAILABLE.
+[Yes]       'Initializer-list' is AVAILABLE.
+[Yes]       'Rvalue-reference' & 'std::move' is AVAILABLE.
+[Yes]       `static_assert()` is AVAILABLE.
+[Camouflage]`thread_local` is available.
+[Yes]       `noexcept` is AVAILABLE. -> [Yes] `GASHA_NOEXCEPT` is AVAILABLE.
+[Camouflage]`alignas()` is available.
+            liomit of `alignas()` = 256
+[Yes]       `alignof()` is AVAILABLE.
+[Yes]       `alignas(alignof())` is AVAILABLE. -> [Yes] `GASHA_ALIGNAS_OF()` is AVAILABLE.
+
+[Camouflage]`_aligned_malloc()`(VC++ style) is available.
+[Camouflage]`_aligned_free()`(VC++ style) is available.
+[Yes]       `mallinfo()`(GCC style) is AVAILABLE.
+[Camouflage]`__cpuid()`,_`xgetbv()`,`_XCR_XFEATURE_ENABLED_MASK`(VC++ style) is available.
+[Camouflage]`GASHA_NOINLINE` is available.
+[Camouflage]`GASHA_ALWAYS_INLINE` is available.
+
+[Yes]       `__FILE__` is AVAILABLE. (ex. __FILE__ = "../../sub/gasha/include/gasha/build_settings/build_settings_diag.inl")
+[Yes]       `__LINE__` is AVAILABLE. (ex. __LINE__ = 610)
+[Yes]       `__DATE__` is AVAILABLE. (ex. __DATE__ = "Jul 28 2014")
+[Yes]       `__TIME__` is AVAILABLE. (ex. __TIME__ = "22:36:02")
+[Yes]       `__TIMESTAMP__` is AVAILABLE. (ex. __TIMESTAMP__ = "Mon Jul 28 12:20:33 2014")
+[Yes]       `__FUNCTION__` is AVAILABLE. (ex. __FUNCTION__ = "buildSettingsDiagnosticTest")
+[Yes]       `__PRETTY_FUNCTION__`(GCC Style) is AVAILABLE. (ex. __PRETTY_FUNCTION__ = "bool gasha::buildSettingsDiagnosticTest(char*, std::size_t, std::size_t&, MODE) [with MODE = gasha::diagForProject_t; std::size_t = long unsigned int]")
+[Yes]       `__func__`(GCC Style) is AVAILABLE. (ex. __func__ = "buildSettingsDiagnosticTest")
+[Camouflage]`__FUNCSIG__`(VC++ Style) is available. (ex. __FUNCSIG__ = "bool gasha::buildSettingsDiagnosticTest(char*, std::size_t, std::size_t&, MODE) [with MODE = gasha::diagForProject_t; std::size_t = long unsigned int]")
+[Dummy]     `__FUNCDNAME__`(VC++ Style) is available. (ex. __FUNCDNAME__ = "")
+
+[Yes]       `GASHA_FUNC_NAME()` is AVAILABLE. (ex. GASHA_FUNC_NAME() = "buildSettingsDiagnosticTest")
+[Yes]       `GASHA_SRC_FILE()` is AVAILABLE. (ex. GASHA_SRC_FILE() = "build_settings_diag.inl")
+[Yes]       `GASHA_SRC_FILE_LINE()` is AVAILABLE. (ex. GASHA_SRC_FILE_LINE() = "build_settings_diag.inl(751)")
+[Yes]       `GASHA_SRC_FILE_LINE_TIME()` is AVAILABLE. (ex. GASHA_SRC_FILE_LINE_TIME() = "build_settings_diag.inl(752)[Mon Jul 28 12:20:33 2014]")
+
+------------------------------------------------------------------------------
+[ Build-configuratoin ]
+
+Configuration name: FULL_DEBUG
+
+[Yes] 'Debug-feature' is AVAILABLE. (with VERBOSE mode)
+[Yes] 'Assertion' is ENABLED.
+[No]  'Optimize' is none.
+[---] 'File-system' is flexible (for ROM or for local-PC).
+[Yes] 'Unit-test' is AVAILABLE.
+[Yes] 'Symbols' are contained.
+
+------------------------------------------------------------------------------
+message size = 4785 bytes.
+
+- End -

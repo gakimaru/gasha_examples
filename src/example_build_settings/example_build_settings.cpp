@@ -183,7 +183,7 @@ void example_build_settings()
 	//【C++11仕様】ユーザー定義リテラルテスト
 #ifdef GASHA_HAS_USER_DEFINED_LITERAL
 	std::printf("\n");
-	std::printf("user_defined_literal_var=%d\n", user_defined_literal_var);
+	std::printf("user_defined_literal_var=%d\n", static_cast<int>(user_defined_literal_var));
 #endif//GASHA_HAS_USER_DEFINED_LITERAL
 #ifdef GASHA_HAS_USER_DEFINED_LITERAL
 	std::printf("    'operator \"\"'(user defined literal) is featured.\n");

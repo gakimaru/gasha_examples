@@ -14,31 +14,31 @@ common_data2: val1=0, val2=0
 [ Create Singleton Instance(2) : common_data1_t ]
 ----- Debug-info for singletonDebug -----
 Accessing Count: 1
-Created:         0.000000000 sec, "test1:create(2)"
+Created:         0.000982700 sec, "test1:create(2)"
 Destroyed:       0.000000000 sec, "(null)"
 Access Info: (Count=1)
-  - [2] 0.000000000 sec, "test1-D'": thread="(no name)"(0x05c678c9)
+  - [2] 0.000982700 sec, "test1-D'": thread="(no name)"(0x42d1bf28)
 -----------------------------------------
 ----- Debug-info for singletonDebug -----
 Accessing Count: 6
-Created:         0.000000000 sec, "test1:create(2)"
+Created:         0.000982700 sec, "test1:create(2)"
 Destroyed:       0.000000000 sec, "(null)"
 Access Info: (Count=6)
-  - [114] 0.071030900 sec, "Write-Proc[0][5]": thread="Thread1A(6)"(0x047c94e4)
-  - [133] 0.101007300 sec, "Write-Proc[0][11]": thread="Thread1A(3)"(0xca4d1893)
-  - [145] 0.116007300 sec, "Read-Proc[1][2]": thread="Thread1B(10)"(0x3474b8df)
-  - [146] 0.116007300 sec, "Read-Proc[0][16]": thread="Thread1B(13)"(0xa7ab9946)
-  - [147] 0.116007300 sec, "test1-E": thread="MainThread"(0x05c678c9)
-  - [148] 0.116007300 sec, "Read-Proc[0][19]": thread="Thread1B(4)"(0x392c1dbe)
+  - [123] 0.084986100 sec, "Write-Proc[0][2]": thread="Thread1A(9)"(0x3e21cc97)
+  - [139] 0.102985600 sec, "Write-Proc[0][9]": thread="Thread1A(3)"(0x4838daeb)
+  - [141] 0.106987700 sec, "Write-Proc[0][10]": thread="Thread1A(12)"(0xb80c36bf)
+  - [142] 0.110005200 sec, "Read-Proc[1][1]": thread="Thread1B(7)"(0x3b25933e)
+  - [144] 0.110005200 sec, "test1-E": thread="MainThread"(0x42d1bf28)
+  - [143] 0.110005200 sec, "Write-Proc[0][6]": thread="Thread1A(0)"(0x3dab9544)
 -----------------------------------------
 [ Access Singleton : common_data1_t(3) ]
 common_data1: val1=1000, val2=-1000
 [ Access Singleton : common_data2_t(3) ]
-common_data2: val1=915, val2=-932
+common_data2: val1=924, val2=-961
 ----- Debug-info for singletonDebug -----
 Accessing Count: 0
-Created:         0.000000000 sec, "test1:create(2)"
-Destroyed:       2.522164200 sec, "test1:destroy"
+Created:         0.000982700 sec, "test1:create(2)"
+Destroyed:       2.407119400 sec, "test1:destroy"
 Access Info: (Count=0)
 -----------------------------------------
 - end -

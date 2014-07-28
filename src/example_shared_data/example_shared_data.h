@@ -63,7 +63,8 @@ static const int TEST_POOL_SIZE = 10;//テスト用プールアロケータの�
 #else//TEST_1_TIME
 #ifdef GASHA_OPTIMIZED
 
-static const int TEST_COUNT = 1000000;//テスト回数
+//static const int TEST_COUNT = 1000000;//テスト回数
+static const int TEST_COUNT = 10000;//テスト回数 ※仮装マシンだとあまりに遅いのでテスト回数を少なくする
 static const int TEST_PRINT_COUNT = 5;//テスト中のメッセージ表示回数
 static const int TEST_PUSH_THREADS = 3;//テスト用のプッシュ／エンキュースレッド数
 static const int TEST_POP_THREADS = 2;//テスト用のポップ／デキュースレッド数

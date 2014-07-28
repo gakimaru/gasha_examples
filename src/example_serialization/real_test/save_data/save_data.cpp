@@ -50,8 +50,8 @@ namespace for_real_test
 	{
 		std::printf("Result:\n");
 		std::printf("  Fatal-error:    %s\n", has_fatal_error ? "Occured!" : "nothing");
-		std::printf("  Save data size: %d\n", save_data_size);
-		std::printf("  Used work-buffer size(peak): %d\n", peak_work_size);
+		std::printf("  Save data size: %d\n", static_cast<int>(save_data_size));
+		std::printf("  Used work-buffer size(peak): %d\n", static_cast<int>(peak_work_size));
 	}
 	void printResultForOutput(const archive::results& result)
 	{

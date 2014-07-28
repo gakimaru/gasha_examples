@@ -56,6 +56,9 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //----------------------------------------
 //テスト用の比較処理
 
+//定数
+static const std::size_t INITIAL_SWAPPED_COUNT = ~static_cast<std::size_t>(0);//交換回数の初期値
+
 //※qsort用関数
 inline int predicate_func_qsort(const void*lhs, const void*rhs)
 {
@@ -138,9 +141,9 @@ void example_sort_and_search()
 	{
 		const int ng = static_cast<int>(sumupUnordered(*array, predicate_default));
 		if (ng == 0)
-			std::printf("Array is ordered. [record(s)=%d]\n", array->size());
+			std::printf("Array is ordered. [record(s)=%d]\n", static_cast<int>(array->size()));
 		else
-			std::printf("[NG] Array is NOT ordered! [NG=%d / record(s)=%d]\n", ng, array->size());
+			std::printf("[NG] Array is NOT ordered! [NG=%d / record(s)=%d]\n", ng, static_cast<int>(array->size()));
 		{
 			std::bitset<TEST_DATA_COUNT> seq_no_map;
 			const std::size_t size = array->size();
@@ -364,8 +367,8 @@ void example_sort_and_search()
 		const bool is_print = true;
 		prev_time = printElapsedTimeDirect(elapsed_time, is_print);
 		showArrayCondition(array);
-		if (swapped_count != 0xffffffff)
-			std::printf("[swapped=%d count(s)]\n", swapped_count);
+		if (swapped_count != INITIAL_SWAPPED_COUNT)
+			std::printf("[swapped=%d count(s)]\n", static_cast<int>(swapped_count));
 	};
 	
 	//計測
@@ -404,15 +407,15 @@ void example_sort_and_search()
 				elapsed_time_min = elapsed_time;
 			if (elapsed_time_max == -1. || elapsed_time_max < elapsed_time)
 				elapsed_time_max = elapsed_time;
-			if (swapped_count != 0xffffffff)
+			if (swapped_count != INITIAL_SWAPPED_COUNT)
 			{
-				if (swapped_count_sum == 0xffffffff)
+				if (swapped_count_sum == INITIAL_SWAPPED_COUNT)
 					swapped_count_sum = 0;
 				swapped_count_sum += swapped_count;
 				swapped_count_avg = swapped_count_sum / static_cast<std::size_t>(count);
-				if (swapped_count_min == 0xffffffff || swapped_count_min > swapped_count)
+				if (swapped_count_min == INITIAL_SWAPPED_COUNT || swapped_count_min > swapped_count)
 					swapped_count_min = swapped_count;
-				if (swapped_count_max == 0xffffffff || swapped_count_max < swapped_count)
+				if (swapped_count_max == INITIAL_SWAPPED_COUNT || swapped_count_max < swapped_count)
 					swapped_count_max = swapped_count;
 			}
 		}
@@ -422,10 +425,10 @@ void example_sort_and_search()
 			elapsed_time_avg(-1.),
 			elapsed_time_min(-1.),
 			elapsed_time_max(-1.),
-			swapped_count_sum(0xffffffff),
-			swapped_count_avg(0xffffffff),
-			swapped_count_min(0xffffffff),
-			swapped_count_max(0xffffffff)
+			swapped_count_sum(INITIAL_SWAPPED_COUNT),
+			swapped_count_avg(INITIAL_SWAPPED_COUNT),
+			swapped_count_min(INITIAL_SWAPPED_COUNT),
+			swapped_count_max(INITIAL_SWAPPED_COUNT)
 		{}
 	};
 	
@@ -480,12 +483,12 @@ void example_sort_and_search()
 		std::printf("* Average time     = %.9lf sec.\n", sum.elapsed_time_avg);
 		std::printf("* Min time         = %.9lf sec.\n", sum.elapsed_time_min);
 		std::printf("* Max time         = %.9lf sec.\n", sum.elapsed_time_max);
-		if (sum.swapped_count_sum != 0xffffffff)
+		if (sum.swapped_count_sum != INITIAL_SWAPPED_COUNT)
 		{
-			std::printf("* Total Swapped    = %9u count(s)\n", sum.swapped_count_sum);
-			std::printf("* Average  Swapped = %9u count(s)\n", sum.swapped_count_avg);
-			std::printf("* Min Swapped      = %9u count(s)\n", sum.swapped_count_min);
-			std::printf("* Max Swapped      = %9u count(s)\n", sum.swapped_count_max);
+			std::printf("* Total Swapped    = %9u count(s)\n", static_cast<int>(sum.swapped_count_sum));
+			std::printf("* Average  Swapped = %9u count(s)\n", static_cast<int>(sum.swapped_count_avg));
+			std::printf("* Min Swapped      = %9u count(s)\n", static_cast<int>(sum.swapped_count_min));
+			std::printf("* Max Swapped      = %9u count(s)\n", static_cast<int>(sum.swapped_count_max));
 		}
 		std::printf("============================================================\n");
 
@@ -511,7 +514,7 @@ void example_sort_and_search()
 	auto clib_qsort = [](array_t* array) -> std::size_t
 	{
 		qsort(&array->at(0), array->size(),sizeof(data_t), predicate_func_qsort);
-		return 0xffffffff;
+		return INITIAL_SWAPPED_COUNT;
 	};
 	const sum_t sum_clib_qsort = measureAll("C-Library qsort", clib_qsort);
 	std::printf("\n");
@@ -523,7 +526,7 @@ void example_sort_and_search()
 	auto stl_sort1 = [](array_t* array) -> std::size_t
 	{
 		std::sort(array->begin(), array->end(), predicate_func);
-		return 0xffffffff;
+		return INITIAL_SWAPPED_COUNT;
 	};
 	const sum_t sum_stl1 = measureAll("STL std::sort(with function)", stl_sort1);
 	std::printf("\n");
@@ -534,7 +537,7 @@ void example_sort_and_search()
 	auto stl_sort2 = [](array_t* array) -> std::size_t
 	{
 		std::sort(array->begin(), array->end(), predicate_func_inline);
-		return 0xffffffff;
+		return INITIAL_SWAPPED_COUNT;
 	};
 	const sum_t sum_stl2 = measureAll("STL std::sort(with inline function)", stl_sort2);
 	std::printf("\n");
@@ -545,7 +548,7 @@ void example_sort_and_search()
 	auto stl_sort3 = [](array_t* array) -> std::size_t
 	{
 		std::sort(array->begin(), array->end(), predicate_functor());
-		return 0xffffffff;
+		return INITIAL_SWAPPED_COUNT;
 	};
 	const sum_t sum_stl3 = measureAll("STL std::sort(with functor)", stl_sort3);
 	std::printf("\n");
@@ -556,7 +559,7 @@ void example_sort_and_search()
 	auto stl_sort4 = [](array_t* array) -> std::size_t
 	{
 		std::sort(array->begin(), array->end(), predicate_lambda);
-		return 0xffffffff;
+		return INITIAL_SWAPPED_COUNT;
 	};
 	const sum_t sum_stl4 = measureAll("STL std::sort(with lamda)", stl_sort4);
 	std::printf("\n");
@@ -568,7 +571,7 @@ void example_sort_and_search()
 	auto stl_stable_sort = [](array_t* array) -> std::size_t
 	{
 		std::stable_sort(array->begin(), array->end(), predicate_func);
-		return 0xffffffff;
+		return INITIAL_SWAPPED_COUNT;
 	};
 	const sum_t sum_stl_stable = measureAll("STL std::stable_sort *Not inplace", stl_stable_sort);
 	std::printf("\n");
@@ -737,22 +740,22 @@ void example_sort_and_search()
 			sum.elapsed_time_avg,
 			sum.elapsed_time_min,
 			sum.elapsed_time_max);
-		if (sum.swapped_count_sum != 0xffffffff)
+		if (sum.swapped_count_sum != INITIAL_SWAPPED_COUNT)
 		{
 			std::printf("%11u/%11u/%11u/%11u",
-				sum.swapped_count_sum,
-				sum.swapped_count_avg,
-				sum.swapped_count_min,
-				sum.swapped_count_max);
+				static_cast<int>(sum.swapped_count_sum),
+				static_cast<int>(sum.swapped_count_avg),
+				static_cast<int>(sum.swapped_count_min),
+				static_cast<int>(sum.swapped_count_max));
 		}
 		std::printf("\n");
 	};
 	std::printf("============================================================\n");
 	std::printf("Result(Summary)\n");
 	std::printf("============================================================\n");
-	std::printf("Array Element size = %d Bytes\n", sizeof(data_t));
-	std::printf("Array Element(s)   = %d Count(s)\n", array_shuffle1->size());
-	std::printf("Total Array size   = %d Bytes\n", sizeof(*array_shuffle1));
+	std::printf("Array Element size = %d Bytes\n", static_cast<int>(sizeof(data_t)));
+	std::printf("Array Element(s)   = %d Count(s)\n", static_cast<int>(array_shuffle1->size()));
+	std::printf("Total Array size   = %d Bytes\n", static_cast<int>(sizeof(*array_shuffle1)));
 	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
 	std::printf("- Sort name:                Elapsed Time (Sum/Average/Min/Max) [sec.]             Swapped (Sum/Average/Min/Max) [count(s)]\n");
 	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
@@ -833,18 +836,18 @@ void example_sort_and_search()
 		_begin(); const std::size_t result10 = introSort(*arr); _end();
 		//専用の比較関数を設けず、比較を逆転する方法 ※ operator>(const T&, const T&) が定義されている必要あり
 		_begin(); const std::size_t result11 = introSort(*arr, std::greater<data_t>()); _end();
-		std::printf("(result=%u)\n", result);
-		std::printf("(result1=%u)\n", result1);
-		//std::printf("(result2=%u)\n", result2);
-		std::printf("(result3=%u)\n", result3);
-		std::printf("(result4=%u)\n", result4);
-		std::printf("(result5=%u)\n", result5);
-		std::printf("(result6=%u)\n", result6);
-		//std::printf("(result7=%u)\n", result7);
-		std::printf("(result8=%u)\n", result8);
-		std::printf("(result9=%u)\n", result9);
-		std::printf("(result10=%u)\n", result10);
-		std::printf("(result11=%u)\n", result11);
+		std::printf("(result=%llu)\n", static_cast<unsigned long long>(result));
+		std::printf("(result1=%llu)\n", static_cast<unsigned long long>(result1));
+		//std::printf("(result2=%llu)\n", static_cast<unsigned long long>(result2));
+		std::printf("(result3=%llu)\n", static_cast<unsigned long long>(result3));
+		std::printf("(result4=%llu)\n", static_cast<unsigned long long>(result4));
+		std::printf("(result5=%llu)\n", static_cast<unsigned long long>(result5));
+		std::printf("(result6=%llu)\n", static_cast<unsigned long long>(result6));
+		//std::printf("(result7=%llu)\n", static_cast<unsigned long long>(result7));
+		std::printf("(result8=%llu)\n", static_cast<unsigned long long>(result8));
+		std::printf("(result9=%llu)\n", static_cast<unsigned long long>(result9));
+		std::printf("(result10=%llu)\n", static_cast<unsigned long long>(result10));
+		std::printf("(result11=%llu)\n", static_cast<unsigned long long>(result11));
 	}
 #endif
 	

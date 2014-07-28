@@ -144,14 +144,14 @@ void example_hash_table()
 			} while (index != first_index && count < con.getTableSize());
 			if (count != con.getTableSize())
 			{
-				std::printf("%u is OUT! (count=%d)\n", key, count);
+				std::printf("%llu is OUT! (count=%d)\n", static_cast<unsigned long long>(key), static_cast<int>(count));
 				++ng_count;
 			}
 		}
-		std::printf("Chek Hash Table: NG=%d/%d\n", ng_count, con.getTableSize());
+		std::printf("Chek Hash Table: NG=%d/%d\n", static_cast<int>(ng_count), static_cast<int>(con.getTableSize()));
 		for (std::size_t key = 10; key <= 30; key += 1)
 		{
-			std::printf("Key:%u -> Index;%u\n", key, con.calcIndex(key));
+			std::printf("Key:%llu -> Index:%llu\n", static_cast<unsigned long long>(key), static_cast<unsigned long long>(con.calcIndex(key)));
 		}
 	}
 #endif
@@ -170,17 +170,17 @@ void example_hash_table()
 	{
 		std::printf("\n");
 		std::printf("--- Table Parameter ---\n");
-		std::printf(".max_size()=%u\n", con->max_size());
-		//std::printf(".capacity()=%u\n", con->capacity());
-		std::printf(".getOriginalTableSize()=%u\n", con->getOriginalTableSize());
-		std::printf(".getTableSize()=%u\n", con->getTableSize());
-		std::printf(".getTableSizeExtended()=%u\n", con->getTableSizeExtended());
-		std::printf(".getAutoRehashRatio()=%u\n", con->getAutoRehashRatio());
-		std::printf(".getAutoRehashSize()=%u\n", con->getAutoRehashSize());
-		std::printf(".getFindingCycleLimit()=%u\n", con->getFindingCycleLimit());
-		std::printf(".getKeyMin()=%u\n", con->getKeyMin());
-		std::printf(".getKeyMax()=%u\n", con->getKeyMax());
-		std::printf(".getKeyRange()=%u\n", con->getKeyRange());
+		std::printf(".max_size()=%d\n", static_cast<int>(con->max_size()));
+		//std::printf(".capacity()=%d\n", static_cast<int>(con->capacity()));
+		std::printf(".getOriginalTableSize()=%d\n", static_cast<int>(con->getOriginalTableSize()));
+		std::printf(".getTableSize()=%d\n", static_cast<int>(con->getTableSize()));
+		std::printf(".getTableSizeExtended()=%d\n", static_cast<int>(con->getTableSizeExtended()));
+		std::printf(".getAutoRehashRatio()=%d\n", static_cast<int>(con->getAutoRehashRatio()));
+		std::printf(".getAutoRehashSize()=%d\n", static_cast<int>(con->getAutoRehashSize()));
+		std::printf(".getFindingCycleLimit()=%d\n", con->getFindingCycleLimit());
+		std::printf(".getKeyMin()=%llu\n", static_cast<unsigned long long>(con->getKeyMin()));
+		std::printf(".getKeyMax()=%llu\n", static_cast<unsigned long long>(con->getKeyMax()));
+		std::printf(".getKeyRange()=%llu\n", static_cast<unsigned long long>(con->getKeyRange()));
 	};
 	printTableParameter();
 
@@ -189,14 +189,14 @@ void example_hash_table()
 	{
 		std::printf("\n");
 		std::printf("--- Table Status ---\n");
-		std::printf(".bucket_count()=%u\n", con->bucket_count());
-		std::printf(".max_bucket_count()=%u\n", con->max_bucket_count());
-		std::printf(".size()=%u\n", con->size());
-		std::printf(".empty()=%u\n", con->empty());
-		std::printf(".getUsingCount()=%u\n", con->getUsingCount());
-		std::printf(".getDeletedCount()=%u\n", con->getDeletedCount());
-		std::printf(".getMaxFindingCycle()=%u\n", con->getMaxFindingCycle());
-		std::printf(".getNotOptimizedCount()=%u\n", con->getNotOptimizedCount());
+		std::printf(".bucket_count()=%d\n", static_cast<int>(con->bucket_count()));
+		std::printf(".max_bucket_count()=%d\n", static_cast<int>(con->max_bucket_count()));
+		std::printf(".size()=%d\n", static_cast<int>(con->size()));
+		std::printf(".empty()=%d\n", con->empty());
+		std::printf(".getUsingCount()=%d\n", con->getUsingCount());
+		std::printf(".getDeletedCount()=%d\n", con->getDeletedCount());
+		std::printf(".getMaxFindingCycle()=%d\n", con->getMaxFindingCycle());
+		std::printf(".getNotOptimizedCount()=%d\n", con->getNotOptimizedCount());
 	};
 	printTableStatus();
 
@@ -319,14 +319,14 @@ void example_hash_table()
 		container_t::reverse_iterator rite2 = con->begin();
 		container_t::iterator ite2_end = con->rend();
 		container_t::reverse_iterator rite2_end = con->end();
-		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
-		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
-		if (ite_end.isExist()) std::printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
-		if (rite_end.isExist()) std::printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
-		if (ite2.isExist()) std::printf("ite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2.isDeleted() ? '*' : ' ', ite2.getIndex(), ite2.getPrimaryIndex(), ite2->m_key, ite2->m_name, ite2->m_value);
-		if (rite2.isExist()) std::printf("rite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2.isDeleted() ? '*' : ' ', rite2.getIndex(), rite2.getPrimaryIndex(), rite2->m_key, rite2->m_name, rite2->m_value);
-		if (ite2_end.isExist()) std::printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', ite2_end.getIndex(), ite2_end.getPrimaryIndex(), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
-		if (rite2_end.isExist()) std::printf("rite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2_end.isDeleted() ? '*' : ' ', rite2_end.getIndex(), rite2_end.getPrimaryIndex(), rite2_end->m_key, rite2_end->m_name, rite2_end->m_value);
+		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', static_cast<int>(ite.getIndex()), static_cast<int>(ite.getPrimaryIndex()), ite->m_key, ite->m_name, ite->m_value);
+		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', static_cast<int>(rite.getIndex()), static_cast<int>(rite.getPrimaryIndex()), rite->m_key, rite->m_name, rite->m_value);
+		if (ite_end.isExist()) std::printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', static_cast<int>(ite_end.getIndex()), static_cast<int>(ite_end.getPrimaryIndex()), ite_end->m_key, ite_end->m_name, ite_end->m_value);
+		if (rite_end.isExist()) std::printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', static_cast<int>(rite_end.getIndex()), static_cast<int>(rite_end.getPrimaryIndex()), rite_end->m_key, rite_end->m_name, rite_end->m_value);
+		if (ite2.isExist()) std::printf("ite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2.isDeleted() ? '*' : ' ', static_cast<int>(ite2.getIndex()), static_cast<int>(ite2.getPrimaryIndex()), ite2->m_key, ite2->m_name, ite2->m_value);
+		if (rite2.isExist()) std::printf("rite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2.isDeleted() ? '*' : ' ', static_cast<int>(rite2.getIndex()), static_cast<int>(rite2.getPrimaryIndex()), rite2->m_key, rite2->m_name, rite2->m_value);
+		if (ite2_end.isExist()) std::printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', static_cast<int>(ite2_end.getIndex()), static_cast<int>(ite2_end.getPrimaryIndex()), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
+		if (rite2_end.isExist()) std::printf("rite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2_end.isDeleted() ? '*' : ' ', static_cast<int>(rite2_end.getIndex()), static_cast<int>(rite2_end.getPrimaryIndex()), rite2_end->m_key, rite2_end->m_name, rite2_end->m_value);
 		std::printf("ite_end - ite = %d\n", ite_end - ite);
 		std::printf("ite - ite_end = %d\n", ite - ite_end);
 		std::printf("rite_end - rite = %d\n", rite_end - rite);
@@ -344,55 +344,55 @@ void example_hash_table()
 		rite2 = con->begin();
 		ite2_end = con->rend();
 		rite2_end = con->end();
-		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
-		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
-		if (ite_end.isExist()) std::printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
-		if (rite_end.isExist()) std::printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
-		if (ite2.isExist()) std::printf("ite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2.isDeleted() ? '*' : ' ', ite2.getIndex(), ite2.getPrimaryIndex(), ite2->m_key, ite2->m_name, ite2->m_value);
-		if (rite2.isExist()) std::printf("rite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2.isDeleted() ? '*' : ' ', rite2.getIndex(), rite2.getPrimaryIndex(), rite2->m_key, rite2->m_name, rite2->m_value);
-		if (ite2_end.isExist()) std::printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', ite2_end.getIndex(), ite2_end.getPrimaryIndex(), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
-		if (rite2_end.isExist()) std::printf("rite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2_end.isDeleted() ? '*' : ' ', rite2_end.getIndex(), rite2_end.getPrimaryIndex(), rite2_end->m_key, rite2_end->m_name, rite2_end->m_value);
+		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', static_cast<int>(ite.getIndex()), static_cast<int>(ite.getPrimaryIndex()), ite->m_key, ite->m_name, ite->m_value);
+		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', static_cast<int>(rite.getIndex()), static_cast<int>(rite.getPrimaryIndex()), rite->m_key, rite->m_name, rite->m_value);
+		if (ite_end.isExist()) std::printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', static_cast<int>(ite_end.getIndex()), static_cast<int>(ite_end.getPrimaryIndex()), ite_end->m_key, ite_end->m_name, ite_end->m_value);
+		if (rite_end.isExist()) std::printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', static_cast<int>(rite_end.getIndex()), static_cast<int>(rite_end.getPrimaryIndex()), rite_end->m_key, rite_end->m_name, rite_end->m_value);
+		if (ite2.isExist()) std::printf("ite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2.isDeleted() ? '*' : ' ', static_cast<int>(ite2.getIndex()), static_cast<int>(ite2.getPrimaryIndex()), ite2->m_key, ite2->m_name, ite2->m_value);
+		if (rite2.isExist()) std::printf("rite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2.isDeleted() ? '*' : ' ', static_cast<int>(rite2.getIndex()), static_cast<int>(rite2.getPrimaryIndex()), rite2->m_key, rite2->m_name, rite2->m_value);
+		if (ite2_end.isExist()) std::printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', static_cast<int>(ite2_end.getIndex()), static_cast<int>(ite2_end.getPrimaryIndex()), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
+		if (rite2_end.isExist()) std::printf("rite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite2_end.isDeleted() ? '*' : ' ', static_cast<int>(rite2_end.getIndex()), static_cast<int>(rite2_end.getPrimaryIndex()), rite2_end->m_key, rite2_end->m_name, rite2_end->m_value);
 		std::printf("[rite.base()]\n");
 		ite2 = rite.base();
 		ite2_end = rite_end.base();
-		if (ite2.isExist()) std::printf("ite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2.isDeleted() ? '*' : ' ', ite2.getIndex(), ite2.getPrimaryIndex(), ite2->m_key, ite2->m_name, ite2->m_value);
-		if (ite2_end.isExist()) std::printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', ite2_end.getIndex(), ite2_end.getPrimaryIndex(), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
+		if (ite2.isExist()) std::printf("ite2:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2.isDeleted() ? '*' : ' ', static_cast<int>(ite2.getIndex()), static_cast<int>(ite2.getPrimaryIndex()), ite2->m_key, ite2->m_name, ite2->m_value);
+		if (ite2_end.isExist()) std::printf("ite2_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite2_end.isDeleted() ? '*' : ' ', static_cast<int>(ite2_end.getIndex()), static_cast<int>(ite2_end.getPrimaryIndex()), ite2_end->m_key, ite2_end->m_name, ite2_end->m_value);
 		std::printf("[++ite,--ie_end]\n");
 		++ite;
 		++rite;
 		--ite_end;
 		--rite_end;
-		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
-		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
-		if (ite_end.isExist()) std::printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
-		if (rite_end.isExist()) std::printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
+		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', static_cast<int>(ite.getIndex()), static_cast<int>(ite.getPrimaryIndex()), ite->m_key, ite->m_name, ite->m_value);
+		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', static_cast<int>(rite.getIndex()), static_cast<int>(rite.getPrimaryIndex()), rite->m_key, rite->m_name, rite->m_value);
+		if (ite_end.isExist()) std::printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', static_cast<int>(ite_end.getIndex()), static_cast<int>(ite_end.getPrimaryIndex()), ite_end->m_key, ite_end->m_name, ite_end->m_value);
+		if (rite_end.isExist()) std::printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', static_cast<int>(rite_end.getIndex()), static_cast<int>(rite_end.getPrimaryIndex()), rite_end->m_key, rite_end->m_name, rite_end->m_value);
 		std::printf("[--ite,++ie_end]\n");
 		--ite;
 		--rite;
 		++ite_end;
 		++rite_end;
-		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
-		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
-		if (ite_end.isExist()) std::printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', ite_end.getIndex(), ite_end.getPrimaryIndex(), ite_end->m_key, ite_end->m_name, ite_end->m_value);
-		if (rite_end.isExist()) std::printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', rite_end.getIndex(), rite_end.getPrimaryIndex(), rite_end->m_key, rite_end->m_name, rite_end->m_value);
+		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', static_cast<int>(ite.getIndex()), static_cast<int>(ite.getPrimaryIndex()), ite->m_key, ite->m_name, ite->m_value);
+		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', static_cast<int>(rite.getIndex()), static_cast<int>(rite.getPrimaryIndex()), rite->m_key, rite->m_name, rite->m_value);
+		if (ite_end.isExist()) std::printf("ite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite_end.isDeleted() ? '*' : ' ', static_cast<int>(ite_end.getIndex()), static_cast<int>(ite_end.getPrimaryIndex()), ite_end->m_key, ite_end->m_name, ite_end->m_value);
+		if (rite_end.isExist()) std::printf("rite_end:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite_end.isDeleted() ? '*' : ' ', static_cast<int>(rite_end.getIndex()), static_cast<int>(rite_end.getPrimaryIndex()), rite_end->m_key, rite_end->m_name, rite_end->m_value);
 		for (int i = 0; i < 3; ++i)
 		{
 			std::printf("[ite[%d]]\n", i);
 			ite = ite[i];
 			rite = rite[i];
-			if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
-			if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
+			if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', static_cast<int>(ite.getIndex()), static_cast<int>(ite.getPrimaryIndex()), ite->m_key, ite->m_name, ite->m_value);
+			if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', static_cast<int>(rite.getIndex()), static_cast<int>(rite.getPrimaryIndex()), rite->m_key, rite->m_name, rite->m_value);
 		}
 		std::printf("[ite+=3]\n");
 		ite += 3;
 		rite += 3;
-		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
-		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
+		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', static_cast<int>(ite.getIndex()), static_cast<int>(ite.getPrimaryIndex()), ite->m_key, ite->m_name, ite->m_value);
+		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', static_cast<int>(rite.getIndex()), static_cast<int>(rite.getPrimaryIndex()), rite->m_key, rite->m_name, rite->m_value);
 		std::printf("[ite-=3]\n");
 		ite -= 3;
 		rite -= 3;
-		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', ite.getIndex(), ite.getPrimaryIndex(), ite->m_key, ite->m_name, ite->m_value);
-		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', rite.getIndex(), rite.getPrimaryIndex(), rite->m_key, rite->m_name, rite->m_value);
+		if (ite.isExist()) std::printf("ite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", ite.isDeleted() ? '*' : ' ', static_cast<int>(ite.getIndex()), static_cast<int>(ite.getPrimaryIndex()), ite->m_key, ite->m_name, ite->m_value);
+		if (rite.isExist()) std::printf("rite:%c[%d](%d) key=0x%08x, name=\"%s\", value=%d\n", rite.isDeleted() ? '*' : ' ', static_cast<int>(rite.getIndex()), static_cast<int>(rite.getPrimaryIndex()), rite->m_key, rite->m_name, rite->m_value);
 		std::printf("ite_end - ite = %d\n", ite_end - ite);
 		std::printf("ite - ite_end = %d\n", ite - ite_end);
 		std::printf("rite_end - rite = %d\n", rite_end - rite);
@@ -703,7 +703,7 @@ void example_hash_table()
 	{
 		std::printf("\n");
 		std::printf("--- [STL] Table Parameter ---\n");
-		std::printf(".max_size()=%u\n", stl_con->max_size());
+		std::printf(".max_size()=%u\n", static_cast<int>(stl_con->max_size()));
 	};
 	printSTLTableParameter();
 
@@ -712,10 +712,10 @@ void example_hash_table()
 	{
 		std::printf("\n");
 		std::printf("--- [STL] Table Status ---\n");
-		std::printf(".size()=%u\n", stl_con->size());
-		std::printf(".empty()=%u\n", stl_con->empty());
-		std::printf(".bucket_count()=%u\n", stl_con->bucket_count());
-		std::printf(".max_bucket_count()=%u\n", stl_con->max_bucket_count());
+		std::printf(".size()=%d\n", static_cast<int>(stl_con->size()));
+		std::printf(".empty()=%d\n", static_cast<int>(stl_con->empty()));
+		std::printf(".bucket_count()=%d\n", static_cast<int>(stl_con->bucket_count()));
+		std::printf(".max_bucket_count()=%d\n", static_cast<int>(stl_con->max_bucket_count()));
 		std::printf(".load_factor()=%.3f\n", stl_con->load_factor());
 		std::printf(".max_load_factor()=%.3f\n", stl_con->max_load_factor());
 	};

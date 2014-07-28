@@ -60,7 +60,7 @@ namespace serialization
 			if (!deserialize_obj)
 			{
 				std::printf("----------\n");
-				std::printf("serialize<testData>(ver=%d.%d,now_ver=%d.%d) sizeof(testData)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), sizeof(testData));
+				std::printf("serialize<testData>(ver=%d.%d,now_ver=%d.%d) sizeof(testData)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), static_cast<int>(sizeof(testData)));
 				std::printf("arc.isInputClass=%d, arc.isOutputClass=%d\n", arc.isInputClass, arc.isOutputClass);
 			}
 			else
@@ -111,7 +111,7 @@ namespace serialization
 			if (!deserialize_obj)
 			{
 				std::printf("----------\n");
-				std::printf("serialize<testData::subData>(ver=%d.%d,now_ver=%d.%d) sizeof(testData::subData)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), sizeof(testData::subData));
+				std::printf("serialize<testData::subData>(ver=%d.%d,now_ver=%d.%d) sizeof(testData::subData)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), static_cast<int>(sizeof(testData::subData)));
 				std::printf("arc.isInputClass=%d, arc.isOutputClass=%d\n", arc.isInputClass, arc.isOutputClass);
 			}
 			else
@@ -137,7 +137,7 @@ namespace serialization
 			if (!deserialize_obj)
 			{
 				std::printf("----------\n");
-				std::printf("serialize<testData::subData2>(ver=%d.%d,now_ver=%d.%d) sizeof(testData::subData2)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), sizeof(testData::subData2));
+				std::printf("serialize<testData::subData2>(ver=%d.%d,now_ver=%d.%d) sizeof(testData::subData2)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), static_cast<int>(sizeof(testData::subData2)));
 				std::printf("arc.isInputClass=%d, arc.isOutputClass=%d\n", arc.isInputClass, arc.isOutputClass);
 			}
 			else
@@ -164,7 +164,7 @@ namespace serialization
 			if (!deserialize_obj)
 			{
 				std::printf("----------\n");
-				std::printf("serialize<testData::subDataExt>(ver=%d.%d,now_ver=%d.%d) sizeof(testData::subDataExt)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), sizeof(testData::subDataExt));
+				std::printf("serialize<testData::subDataExt>(ver=%d.%d,now_ver=%d.%d) sizeof(testData::subDataExt)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), static_cast<int>(sizeof(testData::subDataExt)));
 				std::printf("arc.isInputClass=%d, arc.isOutputClass=%d\n", arc.isInputClass, arc.isOutputClass);
 			}
 			else
@@ -189,7 +189,7 @@ namespace serialization
 			if (!deserialize_obj)
 			{
 				std::printf("----------\n");
-				std::printf("serialize<testData::subDataExt2>(ver=%d.%d,now_ver=%d.%d) sizeof(testData::subDataExt2)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), sizeof(testData::subDataExt2));
+				std::printf("serialize<testData::subDataExt2>(ver=%d.%d,now_ver=%d.%d) sizeof(testData::subDataExt2)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), static_cast<int>(sizeof(testData::subDataExt2)));
 				std::printf("arc.isInputClass=%d, arc.isOutputClass=%d\n", arc.isInputClass, arc.isOutputClass);
 			}
 			else
@@ -213,31 +213,32 @@ namespace serialization
 	//※必要に応じて定義する。
 	template<class ARCHIVE, std::size_t N>
 	struct serialize<ARCHIVE, std::bitset<N>> {
+		static bool bit;//※特殊なデシリアライズのためのワークバッファ
 		void operator()(ARCHIVE& arc, const std::bitset<N>& obj, const version& ver, const version& now_ver, const itemInfoBase* deserialize_obj)
 		{
 			if (!deserialize_obj)
 			{
 				std::printf("----------\n");
-				std::printf("serialize<std::bitset<%d>>(ver=%d.%d,now_ver=%d.%d) sizeof(std::bitset<%d>)=%d\n", N, ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), N, sizeof(std::bitset<N>));
+				std::printf("serialize<std::bitset<%d>>(ver=%d.%d,now_ver=%d.%d) sizeof(std::bitset<%d>)=%d\n", static_cast<int>(N), ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), static_cast<int>(N), static_cast<int>(sizeof(std::bitset<N>)));
 				std::printf("arc.isInputClass=%d, arc.isOutputClass=%d\n", arc.isInputClass, arc.isOutputClass);
 			}
 			else
 			{
-				printf("***** serialize<std::bitset<%d>>:Deserialize object=\"%s\"\n", N, deserialize_obj->name());
+				printf("***** serialize<std::bitset<%d>>:Deserialize object=\"%s\"\n", static_cast<int>(N), deserialize_obj->name());
 			}
 
 			//シリアライズ対象項目の指定
-			for (int i = 0; i < N; ++i)
+			for (std::size_t i = 0; i < N; ++i)
 			{
 				char name[16];
 				GASHA_ spprintf(name, "no%d", i);
-				static bool bit = false;//※デシリアライズはこの関数を抜けた後で処理するため、ワークバッファは静的な領域である必要がある
+				//bool bit = false;//※デシリアライズはこの関数を抜けた後で処理するため、ワークバッファは静的な領域である必要がある
 				if (arc.isOutputClass)
 					bit = obj[i];
 				std::function<void(std::bitset<N>&, const itemInfoBase&)> load_bit = [](std::bitset<N>& obj, const itemInfoBase& item)//※個別デシリアライズ処理
 				{
-					printf("***** serialize<std::bitset<N>>:Special deserialize item=\"%s\"\n", item.name());
-					for (int i = 0; i < N; ++i)
+					printf("***** serialize<std::bitset<%d>>:Special deserialize item=\"%s\"\n", static_cast<int>(N), item.name());
+					for (std::size_t i = 0; i < N; ++i)
 					{
 						char name[16];
 						GASHA_ spprintf(name, "no%d", i);
@@ -252,6 +253,8 @@ namespace serialization
 			}
 		}
 	};
+	template<class ARCHIVE, std::size_t N>
+	bool serialize<ARCHIVE, std::bitset<N>>::bit = false;//※特殊なデシリアライズのためのワークバッファ（インスタンス化）
 #endif//FEATURE_TEST_ENABLE_TO_SERIALIZE_BITSET
 
 	//--------------------
@@ -276,8 +279,8 @@ namespace serialization
 			arc & pair("data8g", obj.m_data8g);//プリミティブ型の実体をポインタに変更...という扱い（8fを8gとしてシリアライズする）
 			arc & pairArray("data8i", obj.m_data8j, 2);//プリミティブ型のポインタに実体の配列に変更...という扱い（8jを8iとしてシリアライズする）
 			arc & pair("data8j", obj.m_data8i);//プリミティブ型の実体の配列をポインタに変更...という扱い（8iを8jとしてシリアライズする）
-			int eccrypted_data10 = obj.m_data10 ^ 0xa5a5a5a5;//暗号化データをこの場で作成
-			arc & pair("data10", eccrypted_data10);//※暗号化データ
+			int encrypted_data10 = obj.m_data10 ^ 0xa5a5a5a5;//暗号化データをこの場で作成
+			arc & pair("data10", encrypted_data10);//※暗号化データ
 			arc & pair("data11", obj.m_data11);//※削除されたデータ項目...という扱い（セーブデータにだけ存在し、実際のデータ構造からは削除されたデータ項目のテスト用）
 			arc & pair("data13", obj.m_data13);//※削除されたデータ項目（オブジェクト）...という扱い
 			arc & pair("data15a", obj.m_data15a);
@@ -321,6 +324,7 @@ namespace serialization
 	//　　　　　以上の内容は、struct load と strcut serialize の両方に当てはまる。
 	template<class ARCHIVE>
 	struct load<ARCHIVE, testData> {
+		static int encrypted_data10;//※特殊なデシリアライズのためのワークバッファ
 		void operator()(ARCHIVE& arc, const testData& obj, const version& ver, const version& now_ver, const itemInfoBase* deserialize_obj)
 		{
 			if (!deserialize_obj)
@@ -343,13 +347,13 @@ namespace serialization
 			arc & pair("data8g", obj.m_data8g);//プリミティブ型の実体をポインタに変更...という扱い（8fを8gとしてシリアライズする）
 			arc & pair("data8i", obj.m_data8i);//プリミティブ型のポインタに実体の配列に変更...という扱い（8jを8iとしてシリアライズする）
 			arc & pairArray("data8j", obj.m_data8j, 2);//プリミティブ型の実体の配列をポインタに変更...という扱い（8iを8jとしてシリアライズする）
-			static int eccrypted_data10 = 0;//※デシリアライズはこの関数を抜けた後で処理するため、ワークバッファは静的な領域である必要がある
+			//int encrypted_data10 = 0;//※デシリアライズはこの関数を抜けた後で処理するため、ワークバッファは静的な領域である必要がある
 			std::function<void(testData&, const itemInfoBase&)> decrypt_data10 = [](testData& obj, const itemInfoBase& item)//※個別デシリアライズ処理（暗号化データの複合化）
 			{
 				printf("***** load<testData>:Special deserialize item=\"%s\"\n", item.name());
-				obj.m_data10 = eccrypted_data10 ^ 0xa5a5a5a5;
+				obj.m_data10 = encrypted_data10 ^ 0xa5a5a5a5;
 			};
-			arc & pair("data10", eccrypted_data10, decrypt_data10);//※暗号化データ
+			arc & pair("data10", encrypted_data10, decrypt_data10);//※暗号化データ
 			arc & pair("data12", obj.m_data12);//※追加されたデータ項目...という扱い（セーブデータに存在せず、実際のデータ構造に追加されたデータ項目のテスト用）
 			arc & pair("data14", obj.m_data14);//※追加されたデータ項目（オブジェクト）...という扱い
 			arc & pair("data15a", obj.m_data15a);
@@ -379,6 +383,8 @@ namespace serialization
 			arc & pair("data22b", obj.m_data22b);//※構造体（専用シリアライズあり）のメンバーと順序が変更された...という扱い（22aを22bとしてシリアライズする）
 		}
 	};
+	template<class ARCHIVE>
+	int load<ARCHIVE, testData>::encrypted_data10;;//※特殊なデシリアライズのためのワークバッファ（インスタンス化）
 
 	//--------------------
 	//デシリアライズ前処理：testData 用

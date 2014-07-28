@@ -144,7 +144,7 @@ void testForVectorPerformance(const char* caption)
 	{
 		TYPE vec1[N] = { 0 };
 		TYPE vec2[N] = { 0 };
-		for (int i = 0; i < N && i < 3; ++i)
+		for (int i = 0; i < static_cast<int>(N) && i < 3; ++i)
 		{
 			vec1[i] = rnd_distribution(rnd_engine);
 			vec2[i] = rnd_distribution(rnd_engine);
@@ -169,7 +169,7 @@ void testForVectorPerformance(const char* caption)
 				result10 +
 				result11
 			);
-		for (int i = 0; i < N; ++i)
+		for (int i = 0; i < static_cast<int>(N); ++i)
 			total += (
 				result3[i] +
 				result4[i] +
@@ -180,7 +180,7 @@ void testForVectorPerformance(const char* caption)
 		if (N == 3 || N == 4)
 		{
 			const auto result12 = cross(fast_arith_class(vec1), fast_arith_class(vec2));
-			for (int i = 0; i < N; ++i)
+			for (int i = 0; i < static_cast<int>(N); ++i)
 				total += result12[i];
 		}
 	}
@@ -203,7 +203,7 @@ void testForVectorPerformanceDirect(const char* caption)
 	{
 		TYPE vec1[N] = { 0 };
 		TYPE vec2[N] = { 0 };
-		for (int i = 0; i < N && i < 3; ++i)
+		for (int i = 0; i < static_cast<int>(N) && i < 3; ++i)
 		{
 			vec1[i] = rnd_distribution(rnd_engine);
 			vec2[i] = rnd_distribution(rnd_engine);
@@ -228,7 +228,7 @@ void testForVectorPerformanceDirect(const char* caption)
 			result10 +
 			result11
 			);
-		for (int i = 0; i < N; ++i)
+		for (int i = 0; i < static_cast<int>(N); ++i)
 			total += (
 				result3[i] +
 				result4[i] +
@@ -239,7 +239,7 @@ void testForVectorPerformanceDirect(const char* caption)
 		if (N == 3 || N == 4)
 		{
 			TYPE result12[N] = { 0 }; cross(result12, vec1, vec2);
-			for (int i = 0; i < N; ++i)
+			for (int i = 0; i < static_cast<int>(N); ++i)
 				total += result12[i];
 		}
 	}
@@ -264,7 +264,7 @@ void testForVectorPerformanceDummy(const char* caption)
 	{
 		TYPE vec1[N] = { 0 };
 		TYPE vec2[N] = { 0 };
-		for (int i = 0; i < N && i < 3; ++i)
+		for (int i = 0; i < static_cast<int>(N) && i < 3; ++i)
 		{
 			vec1[i] = rnd_distribution(rnd_engine);
 			vec2[i] = rnd_distribution(rnd_engine);
@@ -289,7 +289,7 @@ void testForVectorPerformanceDummy(const char* caption)
 				result10 +
 				result11
 			);
-		for (int i = 0; i < N; ++i)
+		for (int i = 0; i < static_cast<int>(N); ++i)
 			total += (
 				result3[i] +
 				result4[i] +
@@ -300,7 +300,7 @@ void testForVectorPerformanceDummy(const char* caption)
 		if (N == 3 || N == 4)
 		{
 			TYPE result12[N] = { 0 }; cross(result12, fast_arith_class(vec1), fast_arith_class(vec2));
-			for (int i = 0; i < N; ++i)
+			for (int i = 0; i < static_cast<int>(N); ++i)
 				total += result12[i];
 		}
 	}
@@ -326,11 +326,11 @@ void testForMatrixPerformance(const char* caption)
 	TYPE total = static_cast<TYPE>(0);
 	for (int repeat = 1; repeat < TEST_MATRIX_REPEAT_NUM; ++repeat)
 	{
-		TYPE mat1[N][M] = { 0 };
-		TYPE mat2[N][M] = { 0 };
-		for (int i = 0; i < N; ++i)
+		TYPE mat1[N][M] = { { 0 } };
+		TYPE mat2[N][M] = { { 0 } };
+		for (int i = 0; i < static_cast<int>(N); ++i)
 		{
-			for (int j = 0; j < M; ++j)
+			for (int j = 0; j < static_cast<int>(M); ++j)
 			{
 				mat1[i][j] = rnd_distribution(rnd_engine);
 				mat2[i][j] = rnd_distribution(rnd_engine);
@@ -341,9 +341,9 @@ void testForMatrixPerformance(const char* caption)
 		const auto result2 = sub(fast_arith_class(mat1), fast_arith_class(mat2));
 		const auto result3 = mul(fast_arith_class(mat1), scalar);
 		const auto result4 = mul(fast_arith_class(mat1), fast_arith_class(mat2));
-		for (int i = 0; i < N; ++i)
+		for (int i = 0; i < static_cast<int>(N); ++i)
 		{
-			for (int j = 0; j < M; ++j)
+			for (int j = 0; j < static_cast<int>(M); ++j)
 			{
 				total += (
 					result1[i][j] +
@@ -371,28 +371,28 @@ void testForMatrixPerformanceDirect(const char* caption)
 	TYPE total = static_cast<TYPE>(0);
 	for (int repeat = 1; repeat < TEST_MATRIX_REPEAT_NUM; ++repeat)
 	{
-		TYPE mat1[N][M] = { 0 };
-		TYPE mat2[N][M] = { 0 };
-		for (int i = 0; i < N; ++i)
+		TYPE mat1[N][M] = { { 0 } };
+		TYPE mat2[N][M] = { { 0 } };
+		for (int i = 0; i < static_cast<int>(N); ++i)
 		{
-			for (int j = 0; j < M; ++j)
+			for (int j = 0; j < static_cast<int>(M); ++j)
 			{
 				mat1[i][j] = rnd_distribution(rnd_engine);
 				mat2[i][j] = rnd_distribution(rnd_engine);
 			}
 		}
 		TYPE scalar = rnd_distribution(rnd_engine);
-		TYPE result1[N][M] = { 0 };
-		TYPE result2[N][M] = { 0 };
-		TYPE result3[N][M] = { 0 };
-		TYPE result4[N][M] = { 0 };
+		TYPE result1[N][M] = { { 0 } };
+		TYPE result2[N][M] = { { 0 } };
+		TYPE result3[N][M] = { { 0 } };
+		TYPE result4[N][M] = { { 0 } };
 		add(result1, mat1, mat2);
 		sub(result2, mat1, mat2);
 		mul(result3, mat1, scalar);
 		mul(result4, mat1, mat2);
-		for (int i = 0; i < N; ++i)
+		for (int i = 0; i < static_cast<int>(N); ++i)
 		{
-			for (int j = 0; j < M; ++j)
+			for (int j = 0; j < static_cast<int>(M); ++j)
 			{
 				total += (
 						result1[i][j] +
@@ -420,28 +420,28 @@ void testForMatrixPerformanceDirectLU(const char* caption)
 	TYPE total = static_cast<TYPE>(0);
 	for (int repeat = 1; repeat < TEST_MATRIX_REPEAT_NUM; ++repeat)
 	{
-		TYPE mat1[N][M] = { 0 };
-		TYPE mat2[N][M] = { 0 };
-		for (int i = 0; i < N; ++i)
+		TYPE mat1[N][M] = { { 0 } };
+		TYPE mat2[N][M] = { { 0 } };
+		for (int i = 0; i < static_cast<int>(N); ++i)
 		{
-			for (int j = 0; j < M; ++j)
+			for (int j = 0; j < static_cast<int>(M); ++j)
 			{
 				mat1[i][j] = rnd_distribution(rnd_engine);
 				mat2[i][j] = rnd_distribution(rnd_engine);
 			}
 		}
 		TYPE scalar = rnd_distribution(rnd_engine);
-		TYPE result1[N][M] = { 0 };
-		TYPE result2[N][M] = { 0 };
-		TYPE result3[N][M] = { 0 };
-		TYPE result4[N][M] = { 0 };
+		TYPE result1[N][M] = { { 0 } };
+		TYPE result2[N][M] = { { 0 } };
+		TYPE result3[N][M] = { { 0 } };
+		TYPE result4[N][M] = { { 0 } };
 		addLU(result1, mat1, mat2);
 		subLU(result2, mat1, mat2);
 		mulLU(result3, mat1, scalar);
 		mulLU(result4, mat1, mat2);
-		for (int i = 0; i < N; ++i)
+		for (int i = 0; i < static_cast<int>(N); ++i)
 		{
-			for (int j = 0; j < M; ++j)
+			for (int j = 0; j < static_cast<int>(M); ++j)
 			{
 				total += (
 					result1[i][j] +
@@ -471,28 +471,28 @@ void testForMatrixPerformanceDummy(const char* caption)
 	TYPE total = static_cast<TYPE>(0);
 	for (int repeat = 1; repeat < TEST_MATRIX_REPEAT_NUM; ++repeat)
 	{
-		TYPE mat1[N][M] = { 0 };
-		TYPE mat2[N][M] = { 0 };
-		for (int i = 0; i < N; ++i)
+		TYPE mat1[N][M] = { { 0 } };
+		TYPE mat2[N][M] = { { 0 } };
+		for (int i = 0; i < static_cast<int>(N); ++i)
 		{
-			for (int j = 0; j < M; ++j)
+			for (int j = 0; j < static_cast<int>(M); ++j)
 			{
 				mat1[i][j] = rnd_distribution(rnd_engine);
 				mat2[i][j] = rnd_distribution(rnd_engine);
 			}
 		}
 		TYPE scalar = rnd_distribution(rnd_engine);
-		TYPE result1[N][M] = { 0 };
-		TYPE result2[N][M] = { 0 };
-		TYPE result3[N][M] = { 0 };
-		TYPE result4[N][M] = { 0 };
+		TYPE result1[N][M] = { { 0 } };
+		TYPE result2[N][M] = { { 0 } };
+		TYPE result3[N][M] = { { 0 } };
+		TYPE result4[N][M] = { { 0 } };
 		add(result1, fast_arith_class(mat1), fast_arith_class(mat2));
 		sub(result2, fast_arith_class(mat1), fast_arith_class(mat2));
 		mul(result3, fast_arith_class(mat1), scalar);
 		mul(result4, fast_arith_class(mat1), fast_arith_class(mat2));
-		for (int i = 0; i < N; ++i)
+		for (int i = 0; i < static_cast<int>(N); ++i)
 		{
-			for (int j = 0; j < M; ++j)
+			for (int j = 0; j < static_cast<int>(M); ++j)
 			{
 				total += (
 					result1[i][j] +
@@ -726,7 +726,7 @@ void example_fast_math()
 	std::printf("[ Test for vector operation ]\n");
 
 	{
-		#define TEST_VECTOR_OPE1(expr, space)  { double result = static_cast<double>(expr); std::printf(#expr space " = %.5lf\n", result); }
+		#define TEST_VECTOR_OPE1(expr, space)  { const double result = static_cast<double>(expr); std::printf(#expr space " = %.5lf\n", result); }
 		#define TEST_VECTOR_OPE2(expr, space, result)  { expr; std::printf(#expr space " = [%.5lf][%.5f]\n", static_cast<double>(result[0]), static_cast<double>(result[1])); }
 		#define TEST_VECTOR_OPE3(expr, space, result)  { expr; std::printf(#expr space " = [%.5lf][%.5f][%.5f]\n", static_cast<double>(result[0]), static_cast<double>(result[1]), static_cast<double>(result[2])); }
 		std::printf("\n");
@@ -1063,45 +1063,45 @@ void example_fast_math()
 
 	{
 		float x1[4][4] = { { 1.f, 2.f, 3.f, 4.f }, { 5.f, 6.f, 7.f, 8.f }, { 9.f, 10.f, 11.f, 12.f }, { 13.f, 14.f, 15.f, 16.f } };
-		float x2[4][4] = { { .1f, .2f, .3f, .4f }, { .5f, .6f, .7f, .8f }, { .9f, .10f, .11f, .12f }, { .13f, .14f, .15f, .16f } };
+		float x2[4][4] = { { .2f, .2f, .3f, .4f }, { .5f, .6f, .7f, .8f }, { .9f, .10f, .11f, .12f }, { .13f, .14f, .15f, .16f } };
 		float x3[4][4];
 		add(x3, x1, x2);
-		std::printf("add:   x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		std::printf("add:   x3 = { {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
 		addLU(x3, x1, x2);
-		std::printf("addLU: x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		std::printf("addLU: x3 = { {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
 		sub(x3, x1, x2);
-		std::printf("sub:   x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		std::printf("sub:   x3 = { {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
 		subLU(x3, x1, x2);
-		std::printf("subLU: x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		std::printf("subLU: x3 = { {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
 		mul(x3, x1, 10.f);
-		std::printf("mul:   x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		std::printf("mul:   x3 = { {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
 		mulLU(x3, x1, 10.f);
-		std::printf("mulLU: x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		std::printf("mulLU: x3 = { {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
 		mul(x3, x1, x2);
-		std::printf("mul:   x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		std::printf("mul:   x3 = { {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
 		mulLU(x3, x1, x2);
-		std::printf("mulLU: x3 = { {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f}, {%.1f, %.1f, %.1f, %.1f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
+		std::printf("mulLU: x3 = { {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f}, {%.2f, %.2f, %.2f, %.2f} }\n", x3[0][0], x3[0][1], x3[0][2], x3[0][3], x3[1][0], x3[1][1], x3[1][2], x3[1][3], x3[2][0], x3[2][1], x3[2][2], x3[2][3], x3[3][0], x3[3][1], x3[3][2], x3[3][3]);
 	}
-{
+	{
 		double x1[3][3] = { { 1., 2., 3. }, { 4., 5., 6. }, { 7., 8., 9. } };
 		double x2[3][3] = { { .1, .2, .3 }, { .4, .5, .6 }, { .7, .8, .9 } };
 		double x3[3][3];
 		add(x3, x1, x2);
-		std::printf("add:   x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		std::printf("add:   x3 = { {%.2lf, %.2lf, %.2lf}, {%.2lf, %.2lf, %.2lf}, {%.2lf, %.2lf, %.2lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
 		addLU(x3, x1, x2);
-		std::printf("addLU: x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		std::printf("addLU: x3 = { {%.2lf, %.2lf, %.2lf}, {%.2lf, %.2lf, %.2lf}, {%.2lf, %.2lf, %.2lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
 		sub(x3, x1, x2);
-		std::printf("sub:   x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		std::printf("sub:   x3 = { {%.2lf, %.2lf, %.2lf}, {%.2lf, %.2lf, %.2lf}, {%.2lf, %.2lf, %.2lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
 		subLU(x3, x1, x2);
-		std::printf("subLU: x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		std::printf("subLU: x3 = { {%.2lf, %.2lf, %.2lf}, {%.2lf, %.2lf, %.2lf}, {%.2lf, %.2lf, %.2lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
 		mul(x3, x1, 10.);
-		std::printf("mul:   x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		std::printf("mul:   x3 = { {%.2lf, %.2lf, %.2lf}, {%.2lf, %.2lf, %.2lf}, {%.2lf, %.2lf, %.2lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
 		mulLU(x3, x1, 10.);
-		std::printf("mulLU: x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		std::printf("mulLU: x3 = { {%.2lf, %.2lf, %.2lf}, {%.2lf, %.2lf, %.2lf}, {%.2lf, %.2lf, %.2lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
 		mul(x3, x1, x2);
-		std::printf("mul:   x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		std::printf("mul:   x3 = { {%.2lf, %.2lf, %.2lf}, {%.2lf, %.2lf, %.2lf}, {%.2lf, %.2lf, %.2lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
 		mulLU(x3, x1, x2);
-		std::printf("mulLU: x3 = { {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf}, {%.1lf, %.1lf, %.1lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
+		std::printf("mulLU: x3 = { {%.2lf, %.2lf, %.2lf}, {%.2lf, %.2lf, %.2lf}, {%.2lf, %.2lf, %.2lf} }\n", x3[0][0], x3[0][1], x3[0][2], x3[1][0], x3[1][1], x3[1][2], x3[2][0], x3[2][1], x3[2][2]);
 	}
 
 	//パフォーマンス計測

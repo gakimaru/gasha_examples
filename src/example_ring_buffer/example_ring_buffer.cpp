@@ -131,7 +131,7 @@ void example_ring_buffer()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			std::printf("offset=%d, size=%d, max_size=%d\n", con.offset(), con.size(), con.max_size());
+			std::printf("offset=%d, size=%d, max_size=%d\n", static_cast<int>(con.offset()), static_cast<int>(con.size()), static_cast<int>(con.max_size()));
 			std::printf("array=");
 			if (con.empty())
 				std::printf("(empty)");
@@ -143,7 +143,7 @@ void example_ring_buffer()
 		//データを逆順に表示
 		auto printReverse = [&con]()
 		{
-			std::printf("offset=%d, size=%d, max_size=%d\n", con.offset(), con.size(), con.max_size());
+			std::printf("offset=%d, size=%d, max_size=%d\n", static_cast<int>(con.offset()), static_cast<int>(con.size()), static_cast<int>(con.max_size()));
 			std::printf("array(reverse)=");
 			if (con.empty())
 				std::printf("(empty)");
@@ -502,7 +502,7 @@ void example_ring_buffer()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			std::printf("offset=%d, size=%d, max_size=%d\n", con.offset(), con.size(), con.max_size());
+			std::printf("offset=%d, size=%d, max_size=%d\n", static_cast<int>(con.offset()), static_cast<int>(con.size()), static_cast<int>(con.max_size()));
 			std::printf("array=");
 			if (con.empty())
 			{
@@ -519,7 +519,7 @@ void example_ring_buffer()
 		//データを逆順に表示
 		auto printReverse = [&con]()
 		{
-			std::printf("offset=%d, size=%d, max_size=%d\n", con.offset(), con.size(), con.max_size());
+			std::printf("offset=%d, size=%d, max_size=%d\n", static_cast<int>(con.offset()), static_cast<int>(con.size()), static_cast<int>(con.max_size()));
 			std::printf("array(reverse)=");
 			if (con.empty())
 			{
@@ -742,14 +742,14 @@ void example_ring_buffer()
 			container_t::reverse_iterator rite2 = con.begin();
 			container_t::iterator ite2_end = con.rend();
 			container_t::reverse_iterator rite2_end = con.end();
-			if (ite.isExist()) std::printf("ite:[%d(%d)] key=%d, value=%d\n", ite.getIndex(), ite.getRealIndex(), ite->m_key, ite->m_val);
-			if (rite.isExist()) std::printf("rite:[%d(%d)] key=%d, value=%d\n", rite.getIndex(), rite.getRealIndex(), rite->m_key, rite->m_val);
-			if (ite_end.isExist()) std::printf("ite_end:[%d(%d)] key=%d, value=%d\n", ite_end.getIndex(), ite_end.getRealIndex(), ite_end->m_key, ite_end->m_val);
-			if (rite_end.isExist()) std::printf("rite_end:[%d(%d)] key=%d, value=%d\n", rite_end.getIndex(), rite_end.getRealIndex(), rite_end->m_key, rite_end->m_val);
-			if (ite2.isExist()) std::printf("ite2:[%d(%d)] key=%d, value=%d\n", ite2.getIndex(), ite2.getRealIndex(), ite2->m_key, ite2->m_val);
-			if (rite2.isExist()) std::printf("rite2:[%d(%d)] key=%d, value=%d\n", rite2.getIndex(), rite2.getRealIndex(), rite2->m_key, rite2->m_val);
-			if (ite2_end.isExist()) std::printf("ite2_end:[%d(%d)] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end.getRealIndex(), ite2_end->m_key, ite2_end->m_val);
-			if (rite2_end.isExist()) std::printf("rite2_end:[%d(%d)] key=%d, value=%d\n", rite2_end.getIndex(), rite2_end.getRealIndex(), rite2_end->m_key, rite2_end->m_val);
+			if (ite.isExist()) std::printf("ite:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite.getIndex()), static_cast<int>(ite.getRealIndex()), ite->m_key, ite->m_val);
+			if (rite.isExist()) std::printf("rite:[%d(%d)] key=%d, value=%d\n", static_cast<int>(rite.getIndex()), static_cast<int>(rite.getRealIndex()), rite->m_key, rite->m_val);
+			if (ite_end.isExist()) std::printf("ite_end:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite_end.getIndex()), static_cast<int>(ite_end.getRealIndex()), ite_end->m_key, ite_end->m_val);
+			if (rite_end.isExist()) std::printf("rite_end:[%d(%d)] key=%d, value=%d\n", static_cast<int>(rite_end.getIndex()), static_cast<int>(rite_end.getRealIndex()), rite_end->m_key, rite_end->m_val);
+			if (ite2.isExist()) std::printf("ite2:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite2.getIndex()), static_cast<int>(ite2.getRealIndex()), ite2->m_key, ite2->m_val);
+			if (rite2.isExist()) std::printf("rite2:[%d(%d)] key=%d, value=%d\n", static_cast<int>(rite2.getIndex()), static_cast<int>(rite2.getRealIndex()), rite2->m_key, rite2->m_val);
+			if (ite2_end.isExist()) std::printf("ite2_end:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite2_end.getIndex()), static_cast<int>(ite2_end.getRealIndex()), ite2_end->m_key, ite2_end->m_val);
+			if (rite2_end.isExist()) std::printf("rite2_end:[%d(%d)] key=%d, value=%d\n", static_cast<int>(rite2_end.getIndex()), static_cast<int>(rite2_end.getRealIndex()), rite2_end->m_key, rite2_end->m_val);
 			std::printf("ite_end - ite = %d\n", ite_end - ite);
 			std::printf("ite - ite_end = %d\n", ite - ite_end);
 			std::printf("rite_end - rite = %d\n", rite_end - rite);
@@ -767,55 +767,55 @@ void example_ring_buffer()
 			rite2 = con.begin();
 			ite2_end = con.rend();
 			rite2_end = con.end();
-			if (ite.isExist()) std::printf("ite:[%d(%d)] key=%d, value=%d\n", ite.getIndex(), ite.getRealIndex(), ite->m_key, ite->m_val);
-			if (rite.isExist()) std::printf("rite:[%d(%d)] key=%d, value=%d\n", rite.getIndex(), rite.getRealIndex(), rite->m_key, rite->m_val);
-			if (ite_end.isExist()) std::printf("ite_end:[%d(%d)] key=%d, value=%d\n", ite_end.getIndex(), ite_end.getRealIndex(), ite_end->m_key, ite_end->m_val);
-			if (rite_end.isExist()) std::printf("rite_end:[%d(%d)] key=%d, value=%d\n", rite_end.getIndex(), rite_end.getRealIndex(), rite_end->m_key, rite_end->m_val);
-			if (ite2.isExist()) std::printf("ite2:[%d(%d)] key=%d, value=%d\n", ite2.getIndex(), ite2.getRealIndex(), ite2->m_key, ite2->m_val);
-			if (rite2.isExist()) std::printf("rite2:[%d(%d)] key=%d, value=%d\n", rite2.getIndex(), rite2.getRealIndex(), rite2->m_key, rite2->m_val);
-			if (ite2_end.isExist()) std::printf("ite2_end:[%d(%d)] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end.getRealIndex(), ite2_end->m_key, ite2_end->m_val);
-			if (rite2_end.isExist()) std::printf("rite2_end:[%d(%d)] key=%d, value=%d\n", rite2_end.getIndex(), rite2_end.getRealIndex(), rite2_end->m_key, rite2_end->m_val);
+			if (ite.isExist()) std::printf("ite:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite.getIndex()), static_cast<int>(ite.getRealIndex()), ite->m_key, ite->m_val);
+			if (rite.isExist()) std::printf("rite:[%d(%d)] key=%d, value=%d\n", static_cast<int>(rite.getIndex()), static_cast<int>(rite.getRealIndex()), rite->m_key, rite->m_val);
+			if (ite_end.isExist()) std::printf("ite_end:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite_end.getIndex()), static_cast<int>(ite_end.getRealIndex()), ite_end->m_key, ite_end->m_val);
+			if (rite_end.isExist()) std::printf("rite_end:[%d(%d)] key=%d, value=%d\n", static_cast<int>(rite_end.getIndex()), static_cast<int>(rite_end.getRealIndex()), rite_end->m_key, rite_end->m_val);
+			if (ite2.isExist()) std::printf("ite2:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite2.getIndex()), static_cast<int>(ite2.getRealIndex()), ite2->m_key, ite2->m_val);
+			if (rite2.isExist()) std::printf("rite2:[%d(%d)] key=%d, value=%d\n", static_cast<int>(rite2.getIndex()), static_cast<int>(rite2.getRealIndex()), rite2->m_key, rite2->m_val);
+			if (ite2_end.isExist()) std::printf("ite2_end:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite2_end.getIndex()), static_cast<int>(ite2_end.getRealIndex()), ite2_end->m_key, ite2_end->m_val);
+			if (rite2_end.isExist()) std::printf("rite2_end:[%d(%d)] key=%d, value=%d\n", static_cast<int>(rite2_end.getIndex()), static_cast<int>(rite2_end.getRealIndex()), rite2_end->m_key, rite2_end->m_val);
 			std::printf("[rite.base()]\n");
 			ite2 = rite.base();
 			ite2_end = rite_end.base();
-			if (ite2.isExist()) std::printf("ite2:[%d(%d)] key=%d, value=%d\n", ite2.getIndex(), ite2.getRealIndex(), ite2->m_key, ite2->m_val);
-			if (ite2_end.isExist()) std::printf("ite2_end:[%d(%d)] key=%d, value=%d\n", ite2_end.getIndex(), ite2_end.getRealIndex(), ite2_end->m_key, ite2_end->m_val);
+			if (ite2.isExist()) std::printf("ite2:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite2.getIndex()), static_cast<int>(ite2.getRealIndex()), ite2->m_key, ite2->m_val);
+			if (ite2_end.isExist()) std::printf("ite2_end:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite2_end.getIndex()), static_cast<int>(ite2_end.getRealIndex()), ite2_end->m_key, ite2_end->m_val);
 			std::printf("[++ite,--ie_end]\n");
 			++ite;
 			++rite;
 			--ite_end;
 			--rite_end;
-			if (ite.isExist()) std::printf("ite:[%d(%d)] key=%d, value=%d\n", ite.getIndex(), ite.getRealIndex(), ite->m_key, ite->m_val);
-			if (rite.isExist()) std::printf("rite:[%d(%d)] key=%d, value=%d\n", rite.getIndex(), rite.getRealIndex(), rite->m_key, rite->m_val);
-			if (ite_end.isExist()) std::printf("ite_end:[%d(%d)] key=%d, value=%d\n", ite_end.getIndex(), ite_end.getRealIndex(), ite_end->m_key, ite_end->m_val);
-			if (rite_end.isExist()) std::printf("rite_end:[%d(%d)] key=%d, value=%d\n", rite_end.getIndex(), rite_end.getRealIndex(), rite_end->m_key, rite_end->m_val);
+			if (ite.isExist()) std::printf("ite:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite.getIndex()), static_cast<int>(ite.getRealIndex()), ite->m_key, ite->m_val);
+			if (rite.isExist()) std::printf("rite:[%d(%d)] key=%d, value=%d\n", static_cast<int>(rite.getIndex()), static_cast<int>(rite.getRealIndex()), rite->m_key, rite->m_val);
+			if (ite_end.isExist()) std::printf("ite_end:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite_end.getIndex()), static_cast<int>(ite_end.getRealIndex()), ite_end->m_key, ite_end->m_val);
+			if (rite_end.isExist()) std::printf("rite_end:[%d(%d)] key=%d, value=%d\n", static_cast<int>(rite_end.getIndex()), static_cast<int>(rite_end.getRealIndex()), rite_end->m_key, rite_end->m_val);
 			std::printf("[--ite,++ie_end]\n");
 			--ite;
 			--rite;
 			++ite_end;
 			++rite_end;
-			if (ite.isExist()) std::printf("ite:[%d(%d)] key=%d, value=%d\n", ite.getIndex(), ite.getRealIndex(), ite->m_key, ite->m_val);
-			if (rite.isExist()) std::printf("rite:[%d(%d)] key=%d, value=%d\n", rite.getIndex(), rite.getRealIndex(), rite->m_key, rite->m_val);
-			if (ite_end.isExist()) std::printf("ite_end:[%d(%d)] key=%d, value=%d\n", ite_end.getIndex(), ite_end.getRealIndex(), ite_end->m_key, ite_end->m_val);
-			if (rite_end.isExist()) std::printf("rite_end:[%d(%d)] key=%d, value=%d\n", rite_end.getIndex(), rite_end.getRealIndex(), rite_end->m_key, rite_end->m_val);
+			if (ite.isExist()) std::printf("ite:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite.getIndex()), static_cast<int>(ite.getRealIndex()), ite->m_key, ite->m_val);
+			if (rite.isExist()) std::printf("rite:[%d(%d)] key=%d, value=%d\n", static_cast<int>(rite.getIndex()), static_cast<int>(rite.getRealIndex()), rite->m_key, rite->m_val);
+			if (ite_end.isExist()) std::printf("ite_end:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite_end.getIndex()), static_cast<int>(ite_end.getRealIndex()), ite_end->m_key, ite_end->m_val);
+			if (rite_end.isExist()) std::printf("rite_end:[%d(%d)] key=%d, value=%d\n", static_cast<int>(rite_end.getIndex()), static_cast<int>(rite_end.getRealIndex()), rite_end->m_key, rite_end->m_val);
 			for (int i = 0; i < 3; ++i)
 			{
 				std::printf("[ite[%d]]\n", i);
 				ite = ite[i];
 				rite = rite[i];
-				if (ite.isExist()) std::printf("ite:[%d(%d)] key=%d, value=%d\n", ite.getIndex(), ite.getRealIndex(), ite->m_key, ite->m_val);
-				if (rite.isExist()) std::printf("rite:[%d(%d)] key=%d, value=%d\n", rite.getIndex(), rite.getRealIndex(), rite->m_key, rite->m_val);
+				if (ite.isExist()) std::printf("ite:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite.getIndex()), static_cast<int>(ite.getRealIndex()), ite->m_key, ite->m_val);
+				if (rite.isExist()) std::printf("rite:[%d(%d)] key=%d, value=%d\n", static_cast<int>(rite.getIndex()), static_cast<int>(rite.getRealIndex()), rite->m_key, rite->m_val);
 			}
 			std::printf("[ite+=3]\n");
 			ite += 3;
 			rite += 3;
-			if (ite.isExist()) std::printf("ite:[%d(%d)] key=%d, value=%d\n", ite.getIndex(), ite.getRealIndex(), ite->m_key, ite->m_val);
-			if (rite.isExist()) std::printf("rite:[%d(%d)] key=%d, value=%d\n", rite.getIndex(), rite.getRealIndex(), rite->m_key, rite->m_val);
+			if (ite.isExist()) std::printf("ite:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite.getIndex()), static_cast<int>(ite.getRealIndex()), ite->m_key, ite->m_val);
+			if (rite.isExist()) std::printf("rite:[%d(%d)] key=%d, value=%d\n", static_cast<int>(rite.getIndex()), static_cast<int>(rite.getRealIndex()), rite->m_key, rite->m_val);
 			std::printf("[ite-=3]\n");
 			ite -= 3;
 			rite -= 3;
-			if (ite.isExist()) std::printf("ite:[%d(%d)] key=%d, value=%d\n", ite.getIndex(), ite.getRealIndex(), ite->m_key, ite->m_val);
-			if (rite.isExist()) std::printf("rite:[%d(%d)] key=%d, value=%d\n", rite.getIndex(), rite.getRealIndex(), rite->m_key, rite->m_val);
+			if (ite.isExist()) std::printf("ite:[%d(%d)] key=%d, value=%d\n", static_cast<int>(ite.getIndex()), static_cast<int>(ite.getRealIndex()), ite->m_key, ite->m_val);
+			if (rite.isExist()) std::printf("rite:[%d(%d)] key=%d, value=%d\n", static_cast<int>(rite.getIndex()), static_cast<int>(rite.getRealIndex()), rite->m_key, rite->m_val);
 			std::printf("ite_end - ite = %d\n", ite_end - ite);
 			std::printf("ite - ite_end = %d\n", ite - ite_end);
 			std::printf("rite_end - rite = %d\n", rite_end - rite);
@@ -1091,7 +1091,7 @@ void example_ring_buffer()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			std::printf("offset=%d, size=%d, max_size=%d\n", con.offset(), con.size(), con.max_size());
+			std::printf("offset=%d, size=%d, max_size=%d\n", static_cast<int>(con.offset()), static_cast<int>(con.size()), static_cast<int>(con.max_size()));
 			std::printf("array=");
 			if (con.empty())
 			{
@@ -1264,7 +1264,7 @@ void example_ring_buffer()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			std::printf("offset=%d, size=%d, max_size=%d\n", con.offset(), con.size(), con.max_size());
+			std::printf("offset=%d, size=%d, max_size=%d\n", static_cast<int>(con.offset()), static_cast<int>(con.size()), static_cast<int>(con.max_size()));
 			std::printf("array=");
 			if (con.empty())
 			{
@@ -1771,7 +1771,7 @@ void testThread(const char* container_type)
 		{
 			shared_lock_guard<lock_type> lock(con);//リード・ロック取得 ※コンテナを渡してスコープロック
 			std::printf("(%s)\n", caption);
-			std::printf("offset=%d, size=%d, max_size=%d\n", con.offset(), con.size(), con.max_size());
+			std::printf("offset=%d, size=%d, max_size=%d\n", static_cast<int>(con.offset()), static_cast<int>(con.size()), static_cast<int>(con.max_size()));
 			std::this_thread::sleep_for(std::chrono::microseconds(1));
 			std::printf("array=");
 			if (con.empty())

@@ -17,27 +17,30 @@ Accessing Count: 1
 Created:         0.000000000 sec, "test1:create(2)"
 Destroyed:       0.000000000 sec, "(null)"
 Access Info: (Count=1)
-  - [2] 0.000000000 sec, "test1-D'": thread="(no name)"(0x5a114412)
+  - [2] 0.000000000 sec, "test1-D'": thread="(no name)"(0xa692cd27)
 -----------------------------------------
 ----- Debug-info for singletonDebug -----
-Accessing Count: 5
+Accessing Count: 8
 Created:         0.000000000 sec, "test1:create(2)"
 Destroyed:       0.000000000 sec, "(null)"
-Access Info: (Count=5)
-  - [173] 0.162006500 sec, "Write-Proc[0][13]": thread="Thread1A(0)"(0x8f33e99e)
-  - [176] 0.167035500 sec, "Write-Proc[0][3]": thread="Thread1A(6)"(0x7ec54a73)
-  - [177] 0.167035500 sec, "Write-Proc[0][11]": thread="Thread1A(3)"(0xfe3075f4)
-  - [178] 0.169037000 sec, "test1-E": thread="MainThread"(0x5a114412)
-  - [179] 0.169037000 sec, "Write-Proc[0][9]": thread="Thread1A(12)"(0xf8c2e2b0)
+Access Info: (Count=8)
+  - [122] 0.088005500 sec, "Write-Proc[0][5]": thread="Thread1A(0)"(0xa1af07db)
+  - [140] 0.104005200 sec, "Write-Proc[0][8]": thread="Thread1A(12)"(0x3e57a440)
+  - [141] 0.104005200 sec, "Write-Proc[0][7]": thread="Thread1A(6)"(0xa449f1b6)
+  - [147] 0.114007300 sec, "Write-Proc[0][9]": thread="Thread1A(3)"(0xfb46fa88)
+  - [150] 0.118005800 sec, "Write-Proc[0][6]": thread="Thread1A(9)"(0x2e764fe6)
+  - [151] 0.118005800 sec, "Read-Proc[1][0]": thread="Thread1B(7)"(0xe0a91050)
+  - [153] 0.118005800 sec, "Read-Proc[1][10]": thread="Thread1B(1)"(0x5e8c28f1)
+  - [152] 0.118005800 sec, "test1-E": thread="MainThread"(0xa692cd27)
 -----------------------------------------
 [ Access Singleton : common_data1_t(3) ]
 common_data1: val1=1000, val2=-1000
 [ Access Singleton : common_data2_t(3) ]
-common_data2: val1=954, val2=-942
+common_data2: val1=938, val2=-938
 ----- Debug-info for singletonDebug -----
 Accessing Count: 0
 Created:         0.000000000 sec, "test1:create(2)"
-Destroyed:       2.636163300 sec, "test1:destroy"
+Destroyed:       2.472142400 sec, "test1:destroy"
 Access Info: (Count=0)
 -----------------------------------------
 - end -

@@ -43,6 +43,8 @@
 #include <gasha/type_traits.h>//型特性ユーティリティ：toStr()
 #include <gasha/shared_spin_lock.h>//共有スピンロック
 #include <gasha/strconv.h>//文字列変換
+#include <gasha/string.h>//文字列処理：spprintf()
+#include <gasha/fast_string.h>//高速文字列処理：strcpy_fast()
 #include <gasha/chrono.h>//時間処理ユーティリティ：nowElapsedTime()
 
 #include <cstdio>//FILE, std::printf()
@@ -570,22 +572,45 @@ void example_debugLog_featureTest()
 		std::printf("\n");
 		
 		//端末をオープン
-		//※dev/pty*/はCygwinの端末
-		int fd1 = open("/dev/pty1", O_WRONLY | O_NDELAY | O_NOCTTY);//書き込み専用＋（可能なら）非停止モード＋制御端末割り当て禁止（端末でCtrl+Cなどの制御が効かない）
-		int fd2 = open("/dev/pty2", O_WRONLY | O_NDELAY | O_NOCTTY);//書き込み専用＋（可能なら）非停止モード＋制御端末割り当て禁止（端末でCtrl+Cなどの制御が効かない）
-		int fd3 = open("/dev/pty3", O_WRONLY | O_NDELAY | O_NOCTTY);//書き込み専用＋（可能なら）非停止モード＋制御端末割り当て禁止（端末でCtrl+Cなどの制御が効かない）
-		std::FILE* fp1 = stdout;
-		std::FILE* fp2 = stderr;
-		std::FILE* fp3 = stderr;
-		const char* consle_name_fp1 = "stdout(/dev/pty1 open failed)";
-		const char* consle_name_fp2 = "stderr(/dev/pty2 open failed)";
-		const char* consle_name_fp3 = "stderr(/dev/pty3 open failed)";
-		if(fd1 >= 0){ fp1 = fdopen(fd1, "w"); if(fp1) consle_name_fp1 = "/dev/pty1"; else fp1 = stdout; }
-		if(fd2 >= 0){ fp2 = fdopen(fd2, "w"); if(fp2) consle_name_fp2 = "/dev/pty2"; else fp2 = stderr; }
-		if(fd3 >= 0){ fp3 = fdopen(fd3, "w"); if(fp3) consle_name_fp3 = "/dev/pty3"; else fp3 = stderr; }
-		ttyConsole new_stdout_console(fp1, consle_name_fp1);
-		ttyConsole new_stderr_console(fp2, consle_name_fp2);
-		ttyConsole new_notice_console(fp3, consle_name_fp3);
+		//※dev/pty/* は、主にLinuxで用いらている端末名
+		//※dev/pty*/ は、主にCygwinで用いらている端末名
+		int fd[3] = { -1, -1, -1 };
+		std::FILE* fp[3] = { stdout, stderr, stderr };
+		bool tty_opened[3] = { false, false, false };
+		static char tty_name[3][32] = { "stdout(log)", "stderr(log)", "stderr(notice)" };
+		int tty_no = 1;
+		for(int i = 0; i < 3; ++i)
+		{
+			while(tty_no < 10)
+			{
+				for(int type = 0; type < 2; ++type)
+				{
+					const char* tty_fmt = type == 0 ? "/dev/pts/%d" : "/dev/pty%d";
+					char tty_name_tmp[32];
+					spprintf(tty_name_tmp, tty_fmt, tty_no);
+					int fd_tmp = open(tty_name_tmp, O_WRONLY | O_NDELAY | O_NOCTTY);//書き込み専用＋（可能なら）非停止モード＋制御端末割り当て禁止（端末でCtrl+Cなどの制御が効かない）
+					if(fd_tmp >= 0)
+					{
+						std::FILE* fp_tmp = fdopen(fd_tmp, "w");
+						if(fp_tmp)
+						{
+							fd[i] = fd_tmp;
+							fp[i] = fp_tmp;
+							tty_opened[i] = true;
+							strcpy_fast(tty_name[i], tty_name_tmp);
+							break;
+						}
+						close(fd_tmp);
+					}
+				}
+				++tty_no;
+				if(tty_opened[i])
+					break;
+			}
+		}
+		ttyConsole new_stdout_console(fp[0], tty_name[0]);
+		ttyConsole new_stderr_console(fp[1], tty_name[1]);
+		ttyConsole new_notice_console(fp[2], tty_name[2]);
 
 		//ログレベルにコンソールを割り当て
 		logLevelContainer con;
@@ -602,12 +627,19 @@ void example_debugLog_featureTest()
 		con.replaceEachConsole(ofNotice, &stdNoticeConsole::instance());
 
 		//端末をクローズ
-		if(fp1) fclose(fp1);
-		if(fp2) fclose(fp2);
-		if(fp3) fclose(fp3);
-		if (fd1 >= 0) close(fd1);
-		if (fd1 >= 1) close(fd2);
-		if (fd1 >= 2) close(fd3);
+		for(int i = 0; i < 3; ++i)
+		{
+			if(tty_opened[i] && fp[i])
+			{
+				fclose(fp[i]);
+				fp[i] = nullptr;
+			}
+			if(fd[i] >= 0)
+			{
+				close(fd[i]);
+				fd[i] = -1;
+			}
+		}
 	}
 #endif//GASHA_IS_GCC
 
@@ -792,7 +824,7 @@ void example_debugLog_featureTest()
 		console.printScreen();
 		std::printf("\n");
 		message_len = console.copy(buff, sizeof(buff));
-		std::printf("%s(len=%d)\n", buff, message_len);
+		std::printf("%s(len=%d)\n", buff, static_cast<int>(message_len));
 		for (int i = 0; i <= 32; ++i)
 		{
 			console.clear();
@@ -805,12 +837,12 @@ void example_debugLog_featureTest()
 			message_len = console.copy(buff, sizeof(buff));
 			console.printScreen();
 			std::printf("\n");
-			std::printf("%s(len=%d)\n", buff, message_len);
+			std::printf("%s(len=%d)\n", buff, static_cast<int>(message_len));
 			console.put("#");
 			message_len = console.copy(buff, sizeof(buff));
 			console.printScreen();
 			std::printf("\n");
-			std::printf("%s(len=%d)\n", buff, message_len);
+			std::printf("%s(len=%d)\n", buff, static_cast<int>(message_len));
 		}
 		console.clear();
 		for (int i = 0; i < 10; ++i)
@@ -827,7 +859,7 @@ void example_debugLog_featureTest()
 			message_len = console.copy(buff, sizeof(buff));
 			console.printScreen();
 			std::printf("\n");
-			std::printf("%s(len=%d)\n", buff, message_len);
+			std::printf("%s(len=%d)\n", buff, static_cast<int>(message_len));
 		}
 	}
 	
@@ -979,7 +1011,7 @@ void example_debugLog_featureTest()
 						recent_cp = cp.find();
 						print_cp(recent_cp);
 						const std::size_t message_len = cp.debugInfo(message, sizeof(message));
-						std::printf("debugInfo(len=%d):\n%s\n", message_len, message);
+						std::printf("debugInfo(len=%d):\n%s\n", static_cast<int>(message_len), message);
 					}
 					recent_cp = cp.find();
 					print_cp(recent_cp);
@@ -1008,7 +1040,7 @@ void example_debugLog_featureTest()
 		recent_cp = cp.findCritical();
 		print_cp(recent_cp);
 		const std::size_t message_len = cp.debugInfo(message, sizeof(message));
-		std::printf("debugInfo(len=%d):\n%s\n", message_len, message);
+		std::printf("debugInfo(len=%d):\n%s\n", static_cast<int>(message_len), message);
 	}
 	{
 		std::printf("\n");
