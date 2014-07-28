@@ -224,7 +224,7 @@ namespace serialization
 			}
 			else
 			{
-				printf("***** serialize<std::bitset<%d>>:Deserialize object=\"%s\"\n", N, deserialize_obj->name());
+				printf("***** serialize<std::bitset<%d>>:Deserialize object=\"%s\"\n", static_cast<int>(N), deserialize_obj->name());
 			}
 
 			//シリアライズ対象項目の指定
@@ -237,7 +237,7 @@ namespace serialization
 					bit = obj[i];
 				std::function<void(std::bitset<N>&, const itemInfoBase&)> load_bit = [](std::bitset<N>& obj, const itemInfoBase& item)//※個別デシリアライズ処理
 				{
-					printf("***** serialize<std::bitset<N>>:Special deserialize item=\"%s\"\n", item.name());
+					printf("***** serialize<std::bitset<%d>>:Special deserialize item=\"%s\"\n", static_cast<int>(N), item.name());
 					for (std::size_t i = 0; i < N; ++i)
 					{
 						char name[16];

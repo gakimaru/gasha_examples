@@ -753,9 +753,9 @@ void example_sort_and_search()
 	std::printf("============================================================\n");
 	std::printf("Result(Summary)\n");
 	std::printf("============================================================\n");
-	std::printf("Array Element size = %d Bytes\n", sizeof(data_t));
-	std::printf("Array Element(s)   = %d Count(s)\n", array_shuffle1->size());
-	std::printf("Total Array size   = %d Bytes\n", sizeof(*array_shuffle1));
+	std::printf("Array Element size = %d Bytes\n", static_cast<int>(sizeof(data_t)));
+	std::printf("Array Element(s)   = %d Count(s)\n", static_cast<int>(array_shuffle1->size()));
+	std::printf("Total Array size   = %d Bytes\n", static_cast<int>(sizeof(*array_shuffle1)));
 	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
 	std::printf("- Sort name:                Elapsed Time (Sum/Average/Min/Max) [sec.]             Swapped (Sum/Average/Min/Max) [count(s)]\n");
 	std::printf("--------------------------------------------------------------------------------------------------------------------------------\n");
@@ -836,18 +836,18 @@ void example_sort_and_search()
 		_begin(); const std::size_t result10 = introSort(*arr); _end();
 		//専用の比較関数を設けず、比較を逆転する方法 ※ operator>(const T&, const T&) が定義されている必要あり
 		_begin(); const std::size_t result11 = introSort(*arr, std::greater<data_t>()); _end();
-		std::printf("(result=%u)\n", result);
-		std::printf("(result1=%u)\n", result1);
-		//std::printf("(result2=%u)\n", result2);
-		std::printf("(result3=%u)\n", result3);
-		std::printf("(result4=%u)\n", result4);
-		std::printf("(result5=%u)\n", result5);
-		std::printf("(result6=%u)\n", result6);
-		//std::printf("(result7=%u)\n", result7);
-		std::printf("(result8=%u)\n", result8);
-		std::printf("(result9=%u)\n", result9);
-		std::printf("(result10=%u)\n", result10);
-		std::printf("(result11=%u)\n", result11);
+		std::printf("(result=%llu)\n", static_cast<unsigned long long>(result));
+		std::printf("(result1=%llu)\n", static_cast<unsigned long long>(result1));
+		//std::printf("(result2=%llu)\n", static_cast<unsigned long long>(result2));
+		std::printf("(result3=%llu)\n", static_cast<unsigned long long>(result3));
+		std::printf("(result4=%llu)\n", static_cast<unsigned long long>(result4));
+		std::printf("(result5=%llu)\n", static_cast<unsigned long long>(result5));
+		std::printf("(result6=%llu)\n", static_cast<unsigned long long>(result6));
+		//std::printf("(result7=%llu)\n", static_cast<unsigned long long>(result7));
+		std::printf("(result8=%llu)\n", static_cast<unsigned long long>(result8));
+		std::printf("(result9=%llu)\n", static_cast<unsigned long long>(result9));
+		std::printf("(result10=%llu)\n", static_cast<unsigned long long>(result10));
+		std::printf("(result11=%llu)\n", static_cast<unsigned long long>(result11));
 	}
 #endif
 	

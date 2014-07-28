@@ -131,7 +131,7 @@ void example_linked_list()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			std::printf("size=%d\n", con.size());
+			std::printf("size=%d\n", static_cast<int>(con.size()));
 			std::printf("list=");
 			if (con.empty())
 			{
@@ -148,7 +148,7 @@ void example_linked_list()
 		//データを逆順に表示
 		auto printReverse = [&con]()
 		{
-			std::printf("size=%d\n", con.size());
+			std::printf("size=%d\n", static_cast<int>(con.size()));
 			std::printf("list(reverse)=");
 			if (con.empty())
 			{
@@ -700,7 +700,7 @@ void example_linked_list()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			std::printf("size=%d\n", con.size());
+			std::printf("size=%d\n", static_cast<int>(con.size()));
 			std::printf("list=");
 			if (con.empty())
 			{

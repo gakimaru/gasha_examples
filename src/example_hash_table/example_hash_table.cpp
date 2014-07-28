@@ -144,14 +144,14 @@ void example_hash_table()
 			} while (index != first_index && count < con.getTableSize());
 			if (count != con.getTableSize())
 			{
-				std::printf("%u is OUT! (count=%d)\n", key, count);
+				std::printf("%llu is OUT! (count=%d)\n", static_cast<unsigned long long>(key), static_cast<int>(count));
 				++ng_count;
 			}
 		}
-		std::printf("Chek Hash Table: NG=%d/%d\n", ng_count, con.getTableSize());
+		std::printf("Chek Hash Table: NG=%d/%d\n", static_cast<int>(ng_count), static_cast<int>(con.getTableSize()));
 		for (std::size_t key = 10; key <= 30; key += 1)
 		{
-			std::printf("Key:%u -> Index;%u\n", key, con.calcIndex(key));
+			std::printf("Key:%llu -> Index:%llu\n", static_cast<unsigned long long>(key), static_cast<unsigned long long>(con.calcIndex(key)));
 		}
 	}
 #endif
@@ -170,17 +170,17 @@ void example_hash_table()
 	{
 		std::printf("\n");
 		std::printf("--- Table Parameter ---\n");
-		std::printf(".max_size()=%u\n", con->max_size());
-		//std::printf(".capacity()=%u\n", con->capacity());
-		std::printf(".getOriginalTableSize()=%u\n", con->getOriginalTableSize());
-		std::printf(".getTableSize()=%u\n", con->getTableSize());
-		std::printf(".getTableSizeExtended()=%u\n", con->getTableSizeExtended());
-		std::printf(".getAutoRehashRatio()=%u\n", con->getAutoRehashRatio());
-		std::printf(".getAutoRehashSize()=%u\n", con->getAutoRehashSize());
-		std::printf(".getFindingCycleLimit()=%u\n", con->getFindingCycleLimit());
-		std::printf(".getKeyMin()=%u\n", con->getKeyMin());
-		std::printf(".getKeyMax()=%u\n", con->getKeyMax());
-		std::printf(".getKeyRange()=%u\n", con->getKeyRange());
+		std::printf(".max_size()=%d\n", static_cast<int>(con->max_size()));
+		//std::printf(".capacity()=%d\n", static_cast<int>(con->capacity()));
+		std::printf(".getOriginalTableSize()=%d\n", static_cast<int>(con->getOriginalTableSize()));
+		std::printf(".getTableSize()=%d\n", static_cast<int>(con->getTableSize()));
+		std::printf(".getTableSizeExtended()=%d\n", static_cast<int>(con->getTableSizeExtended()));
+		std::printf(".getAutoRehashRatio()=%d\n", static_cast<int>(con->getAutoRehashRatio()));
+		std::printf(".getAutoRehashSize()=%d\n", static_cast<int>(con->getAutoRehashSize()));
+		std::printf(".getFindingCycleLimit()=%d\n", con->getFindingCycleLimit());
+		std::printf(".getKeyMin()=%llu\n", static_cast<unsigned long long>(con->getKeyMin()));
+		std::printf(".getKeyMax()=%llu\n", static_cast<unsigned long long>(con->getKeyMax()));
+		std::printf(".getKeyRange()=%llu\n", static_cast<unsigned long long>(con->getKeyRange()));
 	};
 	printTableParameter();
 
@@ -189,14 +189,14 @@ void example_hash_table()
 	{
 		std::printf("\n");
 		std::printf("--- Table Status ---\n");
-		std::printf(".bucket_count()=%u\n", con->bucket_count());
-		std::printf(".max_bucket_count()=%u\n", con->max_bucket_count());
-		std::printf(".size()=%u\n", con->size());
-		std::printf(".empty()=%u\n", con->empty());
-		std::printf(".getUsingCount()=%u\n", con->getUsingCount());
-		std::printf(".getDeletedCount()=%u\n", con->getDeletedCount());
-		std::printf(".getMaxFindingCycle()=%u\n", con->getMaxFindingCycle());
-		std::printf(".getNotOptimizedCount()=%u\n", con->getNotOptimizedCount());
+		std::printf(".bucket_count()=%d\n", static_cast<int>(con->bucket_count()));
+		std::printf(".max_bucket_count()=%d\n", static_cast<int>(con->max_bucket_count()));
+		std::printf(".size()=%d\n", static_cast<int>(con->size()));
+		std::printf(".empty()=%d\n", con->empty());
+		std::printf(".getUsingCount()=%d\n", con->getUsingCount());
+		std::printf(".getDeletedCount()=%d\n", con->getDeletedCount());
+		std::printf(".getMaxFindingCycle()=%d\n", con->getMaxFindingCycle());
+		std::printf(".getNotOptimizedCount()=%d\n", con->getNotOptimizedCount());
 	};
 	printTableStatus();
 
@@ -703,7 +703,7 @@ void example_hash_table()
 	{
 		std::printf("\n");
 		std::printf("--- [STL] Table Parameter ---\n");
-		std::printf(".max_size()=%u\n", stl_con->max_size());
+		std::printf(".max_size()=%u\n", static_cast<int>(stl_con->max_size()));
 	};
 	printSTLTableParameter();
 
@@ -712,10 +712,10 @@ void example_hash_table()
 	{
 		std::printf("\n");
 		std::printf("--- [STL] Table Status ---\n");
-		std::printf(".size()=%u\n", stl_con->size());
-		std::printf(".empty()=%u\n", stl_con->empty());
-		std::printf(".bucket_count()=%u\n", stl_con->bucket_count());
-		std::printf(".max_bucket_count()=%u\n", stl_con->max_bucket_count());
+		std::printf(".size()=%d\n", static_cast<int>(stl_con->size()));
+		std::printf(".empty()=%d\n", static_cast<int>(stl_con->empty()));
+		std::printf(".bucket_count()=%d\n", static_cast<int>(stl_con->bucket_count()));
+		std::printf(".max_bucket_count()=%d\n", static_cast<int>(stl_con->max_bucket_count()));
 		std::printf(".load_factor()=%.3f\n", stl_con->load_factor());
 		std::printf(".max_load_factor()=%.3f\n", stl_con->max_load_factor());
 	};

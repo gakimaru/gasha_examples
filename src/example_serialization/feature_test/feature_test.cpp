@@ -388,7 +388,7 @@ static void printTestData()
 	auto print_subdata_array = [](const char* name, const testData::subData* var, const std::size_t num)
 	{
 		std::printf("%s={", name);
-		for (std::size_t i = 0; i < num; ++i)
+		for (int i = 0; i < static_cast<int>(num); ++i)
 			std::printf("[%d]={a=%d,b=%d,c=%.1f},", i, var[i].m_a, var[i].m_b, var[i].m_c);
 		std::printf("}\n");
 	};

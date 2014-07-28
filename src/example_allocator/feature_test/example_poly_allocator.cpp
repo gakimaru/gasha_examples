@@ -155,9 +155,9 @@ static void testAdvanced()
 	auto at_new = [](const iAllocatorAdapter& adapter, const void* p, const std::size_t size, const std::size_t align, const newMethod_type method, const debugAllocationInfo* info)
 	{
 	#ifdef GASHA_DEBUG_FEATURE_IS_ENABLED
-		std::printf("[CALLBACK] Operator new%s(%d,%d)p=%p, allocator=\"%s:%s\"\n", method == methodOfNewArrays ? "[]" : "", size, align, p, adapter.name(), adapter.mode());
+		std::printf("[CALLBACK] Operator new%s(%d,%d)p=%p, allocator=\"%s:%s\"\n", method == methodOfNewArrays ? "[]" : "", static_cast<int>(size), static_cast<int>(align), p, adapter.name(), adapter.mode());
 		if (info)
-			std::printf(" %s[%d], file=\"%s\", func=\"%s\", time=%lf, cp=\"%s\", criticalCp=\"%s\"\n", info->m_typeName, info->m_arrayNum, info->m_fileName, info->m_funcName, info->m_time, info->m_cpName, info->m_criticalCpName);
+			std::printf(" %s[%d], file=\"%s\", func=\"%s\", time=%lf, cp=\"%s\", criticalCp=\"%s\"\n", info->m_typeName, static_cast<int>(info->m_arrayNum), info->m_fileName, info->m_funcName, info->m_time, info->m_cpName, info->m_criticalCpName);
 	#endif//GASHA_DEBUG_FEATURE_IS_ENABLED
 	};
 	

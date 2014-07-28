@@ -189,7 +189,7 @@ void example_rb_tree()
 	//木を表示
 	auto showTree = [&con]()
 	{
-		std::printf("--- Show tree (count=%d) ---\n", con.size());
+		std::printf("--- Show tree (count=%d) ---\n", static_cast<int>(con.size()));
 		//static const int depth_limit = 5;//最大でも5段階目までを表示（0段階目から数えるので最大で6段階表示される→最大：1+2+4+8+16+32=63個）
 		static const int depth_limit = 4;//最大でも4段階目までを表示（0段階目から数えるので最大で5段階表示される→最大：1+2+4+8+16=31個）
 		const int _depth_max = con.maxDepth();
@@ -258,7 +258,7 @@ void example_rb_tree()
 	//※条件③と条件④違反確認
 	auto showNodesCount = [&con]()
 	{
-		std::printf("--- Show nodes count (count=%d) ---\n", con.size());
+		std::printf("--- Show nodes count (count=%d) ---\n", static_cast<int>(con.size()));
 		const int depth_max = con.maxDepth();
 		const unsigned long long width_max = depth_max < 0 ? 0llu : 1llu << depth_max;//static_cast<long long>(std::pow(2, static_cast<long long>(depth_max)));
 		std::printf("depth_max=%d, width_max=%llu\n", depth_max, width_max);
@@ -336,7 +336,7 @@ void example_rb_tree()
 	//一番小さいノードから昇順に全ノードをリストアップ
 	auto showListAsc = [&con]()
 	{
-		std::printf("--- Show nodes ascending (count=%d) ---\n", con.size());
+		std::printf("--- Show nodes ascending (count=%d) ---\n", static_cast<int>(con.size()));
 		bool is_found = false;
 		for (const data_t& obj : con)
 		{
@@ -355,7 +355,7 @@ void example_rb_tree()
 	//一番大きいノードから降順に全ノードをリストアップ
 	auto showListDesc = [&con]()
 	{
-		std::printf("--- Show nodes descending (count=%d) ---\n", con.size());
+		std::printf("--- Show nodes descending (count=%d) ---\n", static_cast<int>(con.size()));
 		bool is_found = false;
 		std::for_each(con.rbegin(), con.rend(),//リバースイテレータ
 			[&is_found](const data_t& obj)
