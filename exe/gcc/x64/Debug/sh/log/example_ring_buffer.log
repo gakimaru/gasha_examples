@@ -619,7 +619,7 @@ offset=0, size=0, max_size=100
 array=(empty)
 (after)
 offset=0, size=10, max_size=100
-array= [2:2] [4:4] [8:8] [7:7] [9:9] [2:12] [4:14] [8:18] [7:17] [9:19]
+array= [7:7] [5:5] [1:1] [2:2] [8:18] [5:15] [6:16] [1:11] [2:12] [9:19]
 
 [multi-thread container]
 (before)
@@ -627,15 +627,15 @@ offset=0, size=0, max_size=100
 array=(empty)
 (after)
 offset=0, size=10, max_size=100
-array= [7:17] [1:11] [9:19] [6:16] [8:18] [3:13] [5:15] [0:10] [4:14] [2:12]
+array= [8:18] [0:10] [2:12] [9:19] [1:11] [6:16] [3:13] [4:14] [7:17] [5:15]
 --------------------------------------------------------------------------------
 [Test for performance ring_buffer]
 
 [create container & assign() * 10]
-*elapsed_time=0.000003000 sec
+*elapsed_time=0.000004000 sec
 
 [clear() * 10]
-*elapsed_time=0.000017000 sec
+*elapsed_time=0.000018000 sec
 
 [push_back() * 10]
 num=10
@@ -648,7 +648,7 @@ num=10
 *elapsed_time=0.000004000 sec
 
 [reverse sort]
-*elapsed_time=0.000007000 sec
+*elapsed_time=0.000008000 sec
 
 [iterator(2)]
 offset=5, size=10, max_size=10
@@ -679,12 +679,12 @@ num=10
 *elapsed_time=0.000001000 sec
 
 [finish]
-*elapsed_time=0.000067000 sec
+*elapsed_time=0.000070000 sec
 --------------------------------------------------------------------------------
 [Test for performance std::deque]
 
 [create container & assign() * 10]
-*elapsed_time=0.000004000 sec
+*elapsed_time=0.000005000 sec
 
 [clear() * 10]
 *elapsed_time=0.000002000 sec
@@ -700,7 +700,7 @@ num=10
 *elapsed_time=0.000003000 sec
 
 [reverse sort]
-*elapsed_time=0.000005000 sec
+*elapsed_time=0.000004000 sec
 
 [iterator(2)]
 size=10, max_size=-1
