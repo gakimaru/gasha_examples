@@ -178,9 +178,9 @@ void taggedPtrTest()
 	b.set(p, tag);
 	c.set(p, tag);
 	std::printf("p=0x%p, tag=%d\n", p, tag);
-	std::printf("taggedPtr<int, 32, 32>: .value()=0x%016llx, .ptr()=0x%p, .tag()=%d\n", a.value(), a.ptr(), a.tag());
-	std::printf("taggedPtr<int,  2,  0>: .value()=0x%016llx, .ptr()=0x%p, .tag()=%d\n", b.value(), b.ptr(), b.tag());
-	std::printf("taggedPtr<int,  8, -8>: .value()=0x%016llx, .ptr()=0x%p, .tag()=%d\n", c.value(), c.ptr(), c.tag());
+	std::printf("taggedPtr<int, 32, 32>: .value()=0x%016llx, .ptr()=0x%p, .tag()=%d\n", static_cast<unsigned long long>(a.value()), a.ptr(), a.tag());
+	std::printf("taggedPtr<int,  2,  0>: .value()=0x%016llx, .ptr()=0x%p, .tag()=%d\n", static_cast<unsigned long long>(b.value()), b.ptr(), b.tag());
+	std::printf("taggedPtr<int,  8, -8>: .value()=0x%016llx, .ptr()=0x%p, .tag()=%d\n", static_cast<unsigned long long>(c.value()), c.ptr(), c.tag());
 }
 #endif//ENABLE_TAGGED_PTRTEST
 
@@ -948,23 +948,23 @@ void testScopedSharedLock()
 void example_shared_data()
 {
 	std::printf("----- Basic information -----\n");
-	std::printf("alignof(data_t)=%d\n", alignof(data_t));
-	std::printf("sizeof(lf_stack_t)=%d\n", sizeof(lf_stack_t));
-	std::printf("alignof(lf_stack_t)=%d\n", alignof(lf_stack_t));
-	std::printf("sizeof(lf_stack_t::stack_t)=%d\n", sizeof(lf_stack_t::stack_t));
-	std::printf("alignof(lf_stack_t::stack_t)=%d\n", alignof(lf_stack_t::stack_t));
-	std::printf("lf_stack_t::TAGGED_PTR_TAG_BITS=%d\n", lf_stack_t::TAGGED_PTR_TAG_BITS);
-	std::printf("lf_stack_t::TAGGED_PTR_TAG_SHIFT=%d\n", lf_stack_t::TAGGED_PTR_TAG_SHIFT);
-	std::printf("lf_stack_t::stack_ptr_type::TAG_BITS=%d\n", lf_stack_t::stack_ptr_type::TAG_BITS);
-	std::printf("lf_stack_t::stack_ptr_type::TAG_SHIFT=%d\n", lf_stack_t::stack_ptr_type::TAG_SHIFT);
-	std::printf("sizeof(lf_queue_t)=%d\n", sizeof(lf_queue_t));
-	std::printf("alignof(lf_queue_t)=%d\n", alignof(lf_queue_t));
-	std::printf("sizeof(lf_queue_t::queue_t)=%d\n", sizeof(lf_queue_t::queue_t));
-	std::printf("alignof(lf_queue_t::queue_t)=%d\n", alignof(lf_queue_t::queue_t));
-	std::printf("lf_queue_t::TAGGED_PTR_TAG_BITS=%d\n", lf_queue_t::TAGGED_PTR_TAG_BITS);
-	std::printf("lf_queue_t::TAGGED_PTR_TAG_SHIFT=%d\n", lf_queue_t::TAGGED_PTR_TAG_SHIFT);
-	std::printf("lf_queue_t::queue_ptr_type::TAG_BITS=%d\n", lf_queue_t::queue_ptr_type::TAG_BITS);
-	std::printf("lf_queue_t::queue_ptr_type::TAG_SHIFT=%d\n", lf_queue_t::queue_ptr_type::TAG_SHIFT);
+	std::printf("alignof(data_t)=%d\n", static_cast<int>(alignof(data_t)));
+	std::printf("sizeof(lf_stack_t)=%d\n", static_cast<int>(sizeof(lf_stack_t)));
+	std::printf("alignof(lf_stack_t)=%d\n", static_cast<int>(alignof(lf_stack_t)));
+	std::printf("sizeof(lf_stack_t::stack_t)=%d\n", static_cast<int>(sizeof(lf_stack_t::stack_t)));
+	std::printf("alignof(lf_stack_t::stack_t)=%d\n", static_cast<int>(alignof(lf_stack_t::stack_t)));
+	std::printf("lf_stack_t::TAGGED_PTR_TAG_BITS=%d\n", static_cast<int>(lf_stack_t::TAGGED_PTR_TAG_BITS));
+	std::printf("lf_stack_t::TAGGED_PTR_TAG_SHIFT=%d\n", static_cast<int>(lf_stack_t::TAGGED_PTR_TAG_SHIFT));
+	std::printf("lf_stack_t::stack_ptr_type::TAG_BITS=%d\n", static_cast<int>(lf_stack_t::stack_ptr_type::TAG_BITS));
+	std::printf("lf_stack_t::stack_ptr_type::TAG_SHIFT=%d\n", static_cast<int>(lf_stack_t::stack_ptr_type::TAG_SHIFT));
+	std::printf("sizeof(lf_queue_t)=%d\n", static_cast<int>(sizeof(lf_queue_t)));
+	std::printf("alignof(lf_queue_t)=%d\n", static_cast<int>(alignof(lf_queue_t)));
+	std::printf("sizeof(lf_queue_t::queue_t)=%d\n", static_cast<int>(sizeof(lf_queue_t::queue_t)));
+	std::printf("alignof(lf_queue_t::queue_t)=%d\n", static_cast<int>(alignof(lf_queue_t::queue_t)));
+	std::printf("lf_queue_t::TAGGED_PTR_TAG_BITS=%d\n", static_cast<int>(lf_queue_t::TAGGED_PTR_TAG_BITS));
+	std::printf("lf_queue_t::TAGGED_PTR_TAG_SHIFT=%d\n", static_cast<int>(lf_queue_t::TAGGED_PTR_TAG_SHIFT));
+	std::printf("lf_queue_t::queue_ptr_type::TAG_BITS=%d\n", static_cast<int>(lf_queue_t::queue_ptr_type::TAG_BITS));
+	std::printf("lf_queue_t::queue_ptr_type::TAG_SHIFT=%d\n", static_cast<int>(lf_queue_t::queue_ptr_type::TAG_SHIFT));
 	std::printf("-----------------------------\n");
 	std::printf("\n");
 

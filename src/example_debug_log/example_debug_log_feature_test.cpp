@@ -792,7 +792,7 @@ void example_debugLog_featureTest()
 		console.printScreen();
 		std::printf("\n");
 		message_len = console.copy(buff, sizeof(buff));
-		std::printf("%s(len=%d)\n", buff, message_len);
+		std::printf("%s(len=%d)\n", buff, static_cast<int>(message_len));
 		for (int i = 0; i <= 32; ++i)
 		{
 			console.clear();
@@ -805,12 +805,12 @@ void example_debugLog_featureTest()
 			message_len = console.copy(buff, sizeof(buff));
 			console.printScreen();
 			std::printf("\n");
-			std::printf("%s(len=%d)\n", buff, message_len);
+			std::printf("%s(len=%d)\n", buff, static_cast<int>(message_len));
 			console.put("#");
 			message_len = console.copy(buff, sizeof(buff));
 			console.printScreen();
 			std::printf("\n");
-			std::printf("%s(len=%d)\n", buff, message_len);
+			std::printf("%s(len=%d)\n", buff, static_cast<int>(message_len));
 		}
 		console.clear();
 		for (int i = 0; i < 10; ++i)
@@ -827,7 +827,7 @@ void example_debugLog_featureTest()
 			message_len = console.copy(buff, sizeof(buff));
 			console.printScreen();
 			std::printf("\n");
-			std::printf("%s(len=%d)\n", buff, message_len);
+			std::printf("%s(len=%d)\n", buff, static_cast<int>(message_len));
 		}
 	}
 	
@@ -979,7 +979,7 @@ void example_debugLog_featureTest()
 						recent_cp = cp.find();
 						print_cp(recent_cp);
 						const std::size_t message_len = cp.debugInfo(message, sizeof(message));
-						std::printf("debugInfo(len=%d):\n%s\n", message_len, message);
+						std::printf("debugInfo(len=%d):\n%s\n", static_cast<int>(message_len), message);
 					}
 					recent_cp = cp.find();
 					print_cp(recent_cp);
@@ -1008,7 +1008,7 @@ void example_debugLog_featureTest()
 		recent_cp = cp.findCritical();
 		print_cp(recent_cp);
 		const std::size_t message_len = cp.debugInfo(message, sizeof(message));
-		std::printf("debugInfo(len=%d):\n%s\n", message_len, message);
+		std::printf("debugInfo(len=%d):\n%s\n", static_cast<int>(message_len), message);
 	}
 	{
 		std::printf("\n");
