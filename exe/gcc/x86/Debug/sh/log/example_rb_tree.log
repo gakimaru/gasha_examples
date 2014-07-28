@@ -1,7 +1,7 @@
 --- Make table ---
 [ 6:1000] [ 6:1001] [ 8:1002] [ 9:1003] [ 7:1004] [ 9:1005] [ 6:1006] [ 9:1007] [ 5:1008] [ 7:1009] [ 7:1010] [ 4:1011] [ 5:1012] [ 3:1013] [ 9:1014] [ 1:1015] [10:1016] [ 3:1017] [ 4:1018] [ 5:1019] 
 20 registered.
-*elapsed_time=0.000117000 sec
+*elapsed_time=0.000147000 sec
 --- Show tree (count=20) ---
 depth_max=4 (limit for showing=4)
                       .----------------------{ 7:B}----------------------.                      
@@ -29,10 +29,10 @@ diff:blacks=0, reds=1, total=1 (illegal=0)
 *elapsed_time=0.000023000 sec
 --- Show nodes ascending (count=20) ---
 [ 1:1015] [ 3:1013] [ 3:1017] [ 4:1011] [ 4:1018] [ 5:1008] [ 5:1012] [ 5:1019] [ 6:1000] [ 6:1001] [ 6:1006] [ 7:1004] [ 7:1009] [ 7:1010] [ 8:1002] [ 9:1003] [ 9:1005] [ 9:1007] [ 9:1014] [10:1016] 
-*elapsed_time=0.000018000 sec
+*elapsed_time=0.000017000 sec
 --- Show nodes descending (count=20) ---
 [10:1016] [ 9:1014] [ 9:1007] [ 9:1005] [ 9:1003] [ 8:1002] [ 7:1010] [ 7:1009] [ 7:1004] [ 6:1006] [ 6:1001] [ 6:1000] [ 5:1019] [ 5:1012] [ 5:1008] [ 4:1018] [ 4:1011] [ 3:1017] [ 3:1013] [ 1:1015] 
-*elapsed_time=0.000019000 sec
+*elapsed_time=0.000023000 sec
 
 --------------------[iterator operattion:begin]
 [constructor]
@@ -116,16 +116,16 @@ rite - rite_end = 0
  8(1):[ 8] 
  9(4):[ 9] [ 9] [ 9] [ 9] 
 10(1):[10] 
-*elapsed_time=0.000072000 sec
+*elapsed_time=0.000075000 sec
 --- Search each nearest key nodes for smaller ---
  2:[ 1] [ 3] [ 3] [ 4] 
-*elapsed_time=0.000010000 sec
+*elapsed_time=0.000011000 sec
 --- Search each nearest key nodes for larger ---
  2:[ 3] [ 3] [ 4] [ 4] 
-*elapsed_time=0.000009000 sec
+*elapsed_time=0.000010000 sec
 --- Remove nodes ---
 [ 5] [10] [ 8] [ 1] [ 4] 5 removed.
-*elapsed_time=0.000035000 sec
+*elapsed_time=0.000036000 sec
 --- Show tree (count=15) ---
 depth_max=4 (limit for showing=4)
                       .----------------------{ 7:B}----------------------.                      
@@ -133,7 +133,7 @@ depth_max=4 (limit for showing=4)
     .----{ 4:B}----.        .----{ 6:B}----.        .----{ 7:B]             .----{ 9:R}----.    
  .-{ 3:B]      [ 5:B]      [ 6:B]      [ 6:B]      [ 7:R]                  [ 9:B]      [ 9:B]   
 [ 3:R]                                                                                          
-*elapsed_time=0.000085000 sec
+*elapsed_time=0.000084000 sec
 --- Show nodes count (count=15) ---
 depth_max=4, width_max=16
     0:[ 3] blacks=3, reds=2, total=5 (illegal=0)
@@ -148,20 +148,20 @@ depth_max=4, width_max=16
 max: blacks=3, reds=2, total=5
 min: blacks=3, reds=0, total=3
 diff:blacks=0, reds=2, total=2 (illegal=0)
-*elapsed_time=0.000018000 sec
+*elapsed_time=0.000019000 sec
 --- Show nodes ascending (count=15) ---
 [ 3:1013] [ 3:1017] [ 4:1018] [ 5:1012] [ 5:1019] [ 6:1000] [ 6:1001] [ 6:1006] [ 7:1004] [ 7:1009] [ 7:1010] [ 9:1003] [ 9:1005] [ 9:1007] [ 9:1014] 
-*elapsed_time=0.000013000 sec
+*elapsed_time=0.000018000 sec
 --- Remove each key nodes ---
 [ 3] [ 4] [ 5] [ 6] [ 7] [ 9] 6 removed.
-*elapsed_time=0.000015000 sec
+*elapsed_time=0.000016000 sec
 --- Show tree (count=9) ---
 depth_max=3 (limit for showing=4)
           .----------{ 6:B}----------.          
     .----{ 5:B}----.        .----{ 9:B}----.    
    [ 3:B]      [ 6:B]    .-{ 7:B}-.    [ 9:B]   
                         [ 7:R][ 9:R]            
-*elapsed_time=0.000049000 sec
+*elapsed_time=0.000036000 sec
 --- Show nodes count (count=9) ---
 depth_max=3, width_max=8
     0:[ 3] blacks=3, reds=0, total=3 (illegal=0)
@@ -172,27 +172,27 @@ depth_max=3, width_max=8
 max: blacks=3, reds=1, total=4
 min: blacks=3, reds=0, total=3
 diff:blacks=0, reds=1, total=1 (illegal=0)
-*elapsed_time=0.000014000 sec
+*elapsed_time=0.000013000 sec
 --- Show nodes ascending (count=9) ---
 [ 3:1017] [ 5:1019] [ 6:1001] [ 6:1006] [ 7:1009] [ 7:1010] [ 9:1005] [ 9:1007] [ 9:1014] 
 *elapsed_time=0.000011000 sec
 --- Remove all nodes ---
 [ 3] [ 5] [ 6] [ 6] [ 7] [ 7] [ 9] [ 9] [ 9] 9 removed.
-*elapsed_time=0.000017000 sec
+*elapsed_time=0.000016000 sec
 --- Show tree (count=0) ---
 depth_max=-1 (limit for showing=4)
-*elapsed_time=0.000007000 sec
+*elapsed_time=0.000006000 sec
 --- Show nodes count (count=0) ---
 depth_max=-1, width_max=0
 max: blacks=0, reds=0, total=0
 min: blacks=0, reds=0, total=0
 diff:blacks=0, reds=0, total=0 (illegal=0)
-*elapsed_time=0.000007000 sec
+*elapsed_time=0.000008000 sec
 --- Show nodes ascending (count=0) ---
 (nothing)
-*elapsed_time=0.000006000 sec
+*elapsed_time=0.000005000 sec
 --- end ---
-*elapsed_time=0.000658000 sec
+*elapsed_time=0.000688000 sec
 
 --- example_simple_linked_list ---
 data = {0x07b1eeba,11} {0xc02b79a5,15} {0xe68a9e4d,13}

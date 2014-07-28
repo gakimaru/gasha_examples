@@ -544,10 +544,10 @@ array= [1:102] [1:101] [2:103] [2:104] [3:105] [3:106] [4:107] [4:108] [5:109] [
 [normal container]
 (before)
 offset=0, size=0, max_size=100
-array= [0:0] [1:1] [2:2] [3:3] [6:6] [5:5] [7:7] [8:8] [4:4] [9:9]
+array= [1:1] [0:0] [3:3] [4:4] [2:2] [5:5] [6:6] [8:8] [7:7] [9:9]
 (after)
 offset=0, size=10, max_size=100
-array= [2:2] [3:3] [5:5] [4:4] [9:9] [2:12] [6:16] [4:14] [9:19] [8:18]
+array= [3:3] [4:4] [8:8] [7:7] [9:9] [0:10] [4:14] [3:13] [6:16] [9:19]
 
 [multi-thread container]
 (before)
@@ -555,95 +555,95 @@ offset=0, size=0, max_size=100
 array=(empty)
 (after)
 offset=0, size=10, max_size=100
-array= [0:10] [5:15] [4:14] [8:18] [3:13] [2:12] [1:11] [7:17] [6:16] [9:19]
+array= [0:10] [1:11] [3:13] [5:15] [2:12] [6:16] [4:14] [8:18] [9:19] [7:17]
 --------------------------------------------------------------------------------
 [Test for performance ring_buffer]
 
 [create container & assign() * 10000000]
-*elapsed_time=0.023001500 sec
+*elapsed_time=0.023002400 sec
 
 [clear() * 10000000]
-*elapsed_time=0.003000000 sec
+*elapsed_time=0.002999400 sec
 
 [push_back() * 10000000]
 num=10000000
-*elapsed_time=0.030005000 sec
+*elapsed_time=0.031002100 sec
 
 [iterator(1)]
 num=10000000
-*elapsed_time=0.043999300 sec
+*elapsed_time=0.044001900 sec
 
 [reverse sort]
-*elapsed_time=0.339019200 sec
+*elapsed_time=0.343020100 sec
 
 [iterator(2)]
 num=10000000
-*elapsed_time=0.030004200 sec
+*elapsed_time=0.034004100 sec
 
 [sort]
-*elapsed_time=0.334015700 sec
+*elapsed_time=0.337018100 sec
 
 [reverse_iterator]
 num=10000000
-*elapsed_time=0.038002100 sec
+*elapsed_time=0.039002100 sec
 
 [findValue]
 num=100
-*elapsed_time=0.982059300 sec
+*elapsed_time=0.987056200 sec
 
 [binarySearchValue]
 num=10000000
-*elapsed_time=1.384079100 sec
+*elapsed_time=1.452102800 sec
 
 [delete container]
-*elapsed_time=0.007000300 sec
+*elapsed_time=0.008982200 sec
 
 [finish]
-*elapsed_time=3.214185700 sec
+*elapsed_time=3.302191400 sec
 --------------------------------------------------------------------------------
 [Test for performance std::deque]
 
 [create container & assign() * 10000000]
-*elapsed_time=0.356019500 sec
+*elapsed_time=0.357019900 sec
 
 [clear() * 10000000]
-*elapsed_time=0.183011000 sec
+*elapsed_time=0.200010400 sec
 
 [push_back() * 10000000]
 num=10000000
-*elapsed_time=0.319018000 sec
+*elapsed_time=0.314020900 sec
 
 [iterator(1)]
 num=10000000
-*elapsed_time=0.030001500 sec
+*elapsed_time=0.031001000 sec
 
 [reverse sort]
-*elapsed_time=1.742098900 sec
+*elapsed_time=1.830104600 sec
 
 [iterator(2)]
 num=10000000
-*elapsed_time=0.016000300 sec
+*elapsed_time=0.017002400 sec
 
 [sort]
-*elapsed_time=1.753101300 sec
+*elapsed_time=1.805101600 sec
 
 [reverse_iterator]
 num=10000000
-*elapsed_time=0.018000900 sec
+*elapsed_time=0.023003300 sec
 
 [findValue]
 num=100
-*elapsed_time=1.456108100 sec
+*elapsed_time=1.563089700 sec
 
 [binarySearchValue]
 num=10000000
-*elapsed_time=1.832100300 sec
+*elapsed_time=1.911107400 sec
 
 [delete container]
-*elapsed_time=0.182991300 sec
+*elapsed_time=0.185010400 sec
 
 [finish]
-*elapsed_time=7.888451100 sec
+*elapsed_time=8.236471600 sec
 
 - end -
 
