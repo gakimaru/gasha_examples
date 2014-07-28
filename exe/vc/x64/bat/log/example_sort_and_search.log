@@ -31,35 +31,35 @@ Sort type: [C-Library qsort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.002000000 sec.
+*elapsed time=0.003000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.003000300 sec.
+*elapsed time=0.003000900 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.003000600 sec.
+*elapsed time=0.001998800 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ------------------------------
 Sort array(ordered)
 ------------------------------
-*elapsed time=0.000999700 sec.
+*elapsed time=0.001000300 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.001000000 sec.
+*elapsed time=0.001001200 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
@@ -73,16 +73,16 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.003000000 sec.
+*elapsed time=0.001998500 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ============================================================
 Sort type: [C-Library qsort]
-* Total time       = 0.013000600 sec.
-* Average time     = 0.001857229 sec.
+* Total time       = 0.011999700 sec.
+* Average time     = 0.001714243 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.003000600 sec.
+* Max time         = 0.003000900 sec.
 ============================================================
 
 
@@ -100,7 +100,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.001000000 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
@@ -121,28 +121,28 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.000000000 sec.
+*elapsed time=0.000999700 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.001000000 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.000998000 sec.
+*elapsed time=0.001000300 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ============================================================
 Sort type: [STL std::sort(with function)]
-* Total time       = 0.004998300 sec.
-* Average time     = 0.000714043 sec.
+* Total time       = 0.004000300 sec.
+* Average time     = 0.000571471 sec.
 * Min time         = 0.000000000 sec.
 * Max time         = 0.001000300 sec.
 ============================================================
@@ -155,21 +155,21 @@ Sort type: [STL std::sort(with inline function)]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.001007600 sec.
+*elapsed time=0.001000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.001002100 sec.
+*elapsed time=0.001000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.000993200 sec.
+*elapsed time=0.001000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
@@ -190,23 +190,23 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.000999500 sec.
+*elapsed time=0.001000500 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.001000800 sec.
+*elapsed time=0.001000300 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ============================================================
 Sort type: [STL std::sort(with inline function)]
-* Total time       = 0.005003200 sec.
-* Average time     = 0.000714743 sec.
+* Total time       = 0.005000800 sec.
+* Average time     = 0.000714400 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.001007600 sec.
+* Max time         = 0.001000500 sec.
 ============================================================
 
 
@@ -216,84 +216,22 @@ Sort type: [STL std::sort(with functor)]
 
 ------------------------------
 Sort array(shuffle1)
-------------------------------
-*elapsed time=0.000999700 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(shuffle2)
-------------------------------
-*elapsed time=0.001000000 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(shuffle3)
 ------------------------------
 *elapsed time=0.000999500 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ------------------------------
-Sort array(ordered)
-------------------------------
-*elapsed time=0.000000000 sec.
-Array is ordered. [record(s)=10000]
-Array is stable.
-
-------------------------------
-Sort array(reversed)
-------------------------------
-*elapsed time=0.000000000 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(ordered_without_both_ends)
-------------------------------
-*elapsed time=0.000999700 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
-Sort array(hard_with_quick_sort)
-------------------------------
-*elapsed time=0.000000000 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-============================================================
-Sort type: [STL std::sort(with functor)]
-* Total time       = 0.003998900 sec.
-* Average time     = 0.000571271 sec.
-* Min time         = 0.000000000 sec.
-* Max time         = 0.001000000 sec.
-============================================================
-
-
-============================================================
-Sort type: [STL std::sort(with lamda)]
-============================================================
-
-------------------------------
-Sort array(shuffle1)
-------------------------------
-*elapsed time=0.000000000 sec.
-Array is ordered. [record(s)=10000]
-Array is NOT STABLE.
-
-------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.001000000 sec.
+*elapsed time=0.001000300 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.001000800 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
@@ -307,7 +245,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.001000000 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
@@ -321,78 +259,140 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.001000100 sec.
+*elapsed time=0.001000800 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 
 ============================================================
-Sort type: [STL std::sort(with lamda)]
-* Total time       = 0.004000900 sec.
-* Average time     = 0.000571557 sec.
+Sort type: [STL std::sort(with functor)]
+* Total time       = 0.003000600 sec.
+* Average time     = 0.000428657 sec.
 * Min time         = 0.000000000 sec.
 * Max time         = 0.001000800 sec.
 ============================================================
 
 
 ============================================================
-Sort type: [STL std::stable_sort *Not inplace]
+Sort type: [STL std::sort(with lamda)]
 ============================================================
 
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.000999100 sec.
+*elapsed time=0.000999800 sec.
 Array is ordered. [record(s)=10000]
-Array is stable.
+Array is NOT STABLE.
 
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.001000900 sec.
+*elapsed time=0.001000000 sec.
 Array is ordered. [record(s)=10000]
-Array is stable.
+Array is NOT STABLE.
 
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.002000000 sec.
+*elapsed time=0.001000000 sec.
 Array is ordered. [record(s)=10000]
-Array is stable.
+Array is NOT STABLE.
 
 ------------------------------
 Sort array(ordered)
 ------------------------------
-*elapsed time=0.001000300 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.000999200 sec.
+*elapsed time=0.000000000 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(ordered_without_both_ends)
+------------------------------
+*elapsed time=0.000000000 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+------------------------------
+Sort array(hard_with_quick_sort)
+------------------------------
+*elapsed time=0.000000000 sec.
+Array is ordered. [record(s)=10000]
+Array is NOT STABLE.
+
+============================================================
+Sort type: [STL std::sort(with lamda)]
+* Total time       = 0.002999800 sec.
+* Average time     = 0.000428543 sec.
+* Min time         = 0.000000000 sec.
+* Max time         = 0.001000000 sec.
+============================================================
+
+
+============================================================
+Sort type: [STL std::stable_sort *Not inplace]
+============================================================
+
+------------------------------
+Sort array(shuffle1)
+------------------------------
+*elapsed time=0.001000300 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 
 ------------------------------
-Sort array(ordered_without_both_ends)
+Sort array(shuffle2)
+------------------------------
+*elapsed time=0.002000300 sec.
+Array is ordered. [record(s)=10000]
+Array is stable.
+
+------------------------------
+Sort array(shuffle3)
 ------------------------------
 *elapsed time=0.001000000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 
 ------------------------------
+Sort array(ordered)
+------------------------------
+*elapsed time=0.001001800 sec.
+Array is ordered. [record(s)=10000]
+Array is stable.
+
+------------------------------
+Sort array(reversed)
+------------------------------
+*elapsed time=0.001000000 sec.
+Array is ordered. [record(s)=10000]
+Array is stable.
+
+------------------------------
+Sort array(ordered_without_both_ends)
+------------------------------
+*elapsed time=0.001000600 sec.
+Array is ordered. [record(s)=10000]
+Array is stable.
+
+------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.001000300 sec.
+*elapsed time=0.001999400 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 
 ============================================================
 Sort type: [STL std::stable_sort *Not inplace]
-* Total time       = 0.007999800 sec.
-* Average time     = 0.001142829 sec.
-* Min time         = 0.000999100 sec.
-* Max time         = 0.002000000 sec.
+* Total time       = 0.009002400 sec.
+* Average time     = 0.001286057 sec.
+* Min time         = 0.001000000 sec.
+* Max time         = 0.002000300 sec.
 ============================================================
 
 
@@ -403,7 +403,7 @@ Sort type: [Bubble sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.232011300 sec.
+*elapsed time=0.229013100 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=25018590 count(s)]
@@ -411,7 +411,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.219014000 sec.
+*elapsed time=0.227013100 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=24895289 count(s)]
@@ -419,7 +419,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.215009600 sec.
+*elapsed time=0.224012800 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=24704876 count(s)]
@@ -435,7 +435,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.264014300 sec.
+*elapsed time=0.262015500 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=49985001 count(s)]
@@ -451,17 +451,17 @@ Array is stable.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.241013400 sec.
+*elapsed time=0.238013700 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=37392840 count(s)]
 
 ============================================================
 Sort type: [Bubble sort]
-* Total time       = 1.235066300 sec.
-* Average time     = 0.176438043 sec.
+* Total time       = 1.244071900 sec.
+* Average time     = 0.177724557 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.264014300 sec.
+* Max time         = 0.262015500 sec.
 * Total Swapped    = 162016591 count(s)
 * Average  Swapped =  23145227 count(s)
 * Min Swapped      =         0 count(s)
@@ -476,7 +476,7 @@ Sort type: [Shaker sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.192009800 sec.
+*elapsed time=0.177009800 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=25018590 count(s)]
@@ -484,7 +484,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.180009500 sec.
+*elapsed time=0.179012100 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=24895289 count(s)]
@@ -492,7 +492,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.192011800 sec.
+*elapsed time=0.179010400 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=24704876 count(s)]
@@ -508,7 +508,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.251011500 sec.
+*elapsed time=0.249013200 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=49985001 count(s)]
@@ -524,17 +524,17 @@ Array is stable.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.237034500 sec.
+*elapsed time=0.228013100 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=37392840 count(s)]
 
 ============================================================
 Sort type: [Shaker sort]
-* Total time       = 1.052077100 sec.
-* Average time     = 0.150296729 sec.
+* Total time       = 1.012058600 sec.
+* Average time     = 0.144579800 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.251011500 sec.
+* Max time         = 0.249013200 sec.
 * Total Swapped    = 162016591 count(s)
 * Average  Swapped =  23145227 count(s)
 * Min Swapped      =         0 count(s)
@@ -549,7 +549,7 @@ Sort type: [Odd-Even sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.156988900 sec.
+*elapsed time=0.081003700 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=25018590 count(s)]
@@ -557,7 +557,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.154008900 sec.
+*elapsed time=0.086006300 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=24895289 count(s)]
@@ -565,7 +565,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.158008500 sec.
+*elapsed time=0.082003700 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=24704876 count(s)]
@@ -581,7 +581,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.290016800 sec.
+*elapsed time=0.114007300 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=49985001 count(s)]
@@ -589,7 +589,7 @@ Array is stable.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.071004200 sec.
+*elapsed time=0.040001600 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=19995 count(s)]
@@ -597,17 +597,17 @@ Array is stable.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.182011800 sec.
+*elapsed time=0.099005200 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=37392840 count(s)]
 
 ============================================================
 Sort type: [Odd-Even sort]
-* Total time       = 1.012039100 sec.
-* Average time     = 0.144577014 sec.
+* Total time       = 0.502027800 sec.
+* Average time     = 0.071718257 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.290016800 sec.
+* Max time         = 0.114007300 sec.
 * Total Swapped    = 162016591 count(s)
 * Average  Swapped =  23145227 count(s)
 * Min Swapped      =         0 count(s)
@@ -622,7 +622,7 @@ Sort type: [Shear sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.007000000 sec.
+*elapsed time=0.003000300 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=1922616 count(s)]
@@ -630,7 +630,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.006000300 sec.
+*elapsed time=0.004000300 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=1902755 count(s)]
@@ -638,7 +638,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.006000000 sec.
+*elapsed time=0.003000600 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=1895908 count(s)]
@@ -646,7 +646,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered)
 ------------------------------
-*elapsed time=0.001000000 sec.
+*elapsed time=0.001000300 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=494802 count(s)]
@@ -654,7 +654,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.004000000 sec.
+*elapsed time=0.004000300 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=1474414 count(s)]
@@ -662,7 +662,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.001000100 sec.
+*elapsed time=0.002000300 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=514605 count(s)]
@@ -670,17 +670,17 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.005000300 sec.
+*elapsed time=0.003999700 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=1903279 count(s)]
 
 ============================================================
 Sort type: [Shear sort]
-* Total time       = 0.030000700 sec.
-* Average time     = 0.004285814 sec.
-* Min time         = 0.001000000 sec.
-* Max time         = 0.007000000 sec.
+* Total time       = 0.021001800 sec.
+* Average time     = 0.003000257 sec.
+* Min time         = 0.001000300 sec.
+* Max time         = 0.004000300 sec.
 * Total Swapped    =  10108379 count(s)
 * Average  Swapped =   1444054 count(s)
 * Min Swapped      =    494802 count(s)
@@ -695,7 +695,7 @@ Sort type: [Comb sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.001000500 sec.
+*elapsed time=0.001999400 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=57500 count(s)]
@@ -703,7 +703,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.001999800 sec.
+*elapsed time=0.001001500 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=57587 count(s)]
@@ -711,7 +711,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.001000300 sec.
+*elapsed time=0.000998800 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=57584 count(s)]
@@ -727,7 +727,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.001000200 sec.
+*elapsed time=0.001000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=18345 count(s)]
@@ -735,7 +735,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.001000600 sec.
+*elapsed time=0.001000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=7303 count(s)]
@@ -743,17 +743,17 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.000998600 sec.
+*elapsed time=0.000999700 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=58823 count(s)]
 
 ============================================================
 Sort type: [Comb sort]
-* Total time       = 0.007000000 sec.
-* Average time     = 0.001000000 sec.
+* Total time       = 0.006999400 sec.
+* Average time     = 0.000999914 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.001999800 sec.
+* Max time         = 0.001999400 sec.
 * Total Swapped    =    257142 count(s)
 * Average  Swapped =     36734 count(s)
 * Min Swapped      =         0 count(s)
@@ -768,7 +768,7 @@ Sort type: [Gnome sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.166011200 sec.
+*elapsed time=0.153010600 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=25018590 count(s)]
@@ -776,7 +776,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.123008200 sec.
+*elapsed time=0.123006500 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=24895289 count(s)]
@@ -784,7 +784,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.132007900 sec.
+*elapsed time=0.121006100 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=24704876 count(s)]
@@ -800,7 +800,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.286015900 sec.
+*elapsed time=0.254015500 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=49985001 count(s)]
@@ -808,7 +808,7 @@ Array is stable.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.000000000 sec.
+*elapsed time=0.000998800 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=19995 count(s)]
@@ -816,17 +816,17 @@ Array is stable.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.197009800 sec.
+*elapsed time=0.192012200 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=37392840 count(s)]
 
 ============================================================
 Sort type: [Gnome sort]
-* Total time       = 0.904053000 sec.
-* Average time     = 0.129150429 sec.
+* Total time       = 0.844049700 sec.
+* Average time     = 0.120578529 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.286015900 sec.
+* Max time         = 0.254015500 sec.
 * Total Swapped    = 162016591 count(s)
 * Average  Swapped =  23145227 count(s)
 * Min Swapped      =         0 count(s)
@@ -841,7 +841,7 @@ Sort type: [Quick sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.001000900 sec.
+*elapsed time=0.001000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=33719 count(s)]
@@ -849,7 +849,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.001000300 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=33677 count(s)]
@@ -857,7 +857,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.000999400 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=33444 count(s)]
@@ -865,7 +865,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered)
 ------------------------------
-*elapsed time=0.000000000 sec.
+*elapsed time=0.000999400 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=3333 count(s)]
@@ -881,7 +881,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.001000300 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=3334 count(s)]
@@ -889,17 +889,17 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.000000000 sec.
+*elapsed time=0.001000300 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=36402 count(s)]
 
 ============================================================
 Sort type: [Quick sort]
-* Total time       = 0.004000900 sec.
-* Average time     = 0.000571557 sec.
+* Total time       = 0.002999700 sec.
+* Average time     = 0.000428529 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.001000900 sec.
+* Max time         = 0.001000300 sec.
 * Total Swapped    =    152242 count(s)
 * Average  Swapped =     21748 count(s)
 * Min Swapped      =      3333 count(s)
@@ -914,7 +914,7 @@ Sort type: [Selection sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.127006700 sec.
+*elapsed time=0.124007300 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=9990 count(s)]
@@ -922,7 +922,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.127010600 sec.
+*elapsed time=0.125007000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=9995 count(s)]
@@ -930,7 +930,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.126019000 sec.
+*elapsed time=0.124007000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=9990 count(s)]
@@ -938,7 +938,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered)
 ------------------------------
-*elapsed time=0.127990600 sec.
+*elapsed time=0.125007700 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=0 count(s)]
@@ -946,7 +946,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.128008000 sec.
+*elapsed time=0.125006700 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=8333 count(s)]
@@ -954,7 +954,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.127005800 sec.
+*elapsed time=0.125007300 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=3 count(s)]
@@ -962,17 +962,17 @@ Array is stable.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.125007300 sec.
+*elapsed time=0.125007000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=9989 count(s)]
 
 ============================================================
 Sort type: [Selection sort]
-* Total time       = 0.888048000 sec.
-* Average time     = 0.126864000 sec.
-* Min time         = 0.125007300 sec.
-* Max time         = 0.128008000 sec.
+* Total time       = 0.873050000 sec.
+* Average time     = 0.124721429 sec.
+* Min time         = 0.124007000 sec.
+* Max time         = 0.125007700 sec.
 * Total Swapped    =     48300 count(s)
 * Average  Swapped =      6900 count(s)
 * Min Swapped      =         0 count(s)
@@ -987,7 +987,7 @@ Sort type: [Heap sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.002000900 sec.
+*elapsed time=0.002001800 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=129635 count(s)]
@@ -995,7 +995,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.003000000 sec.
+*elapsed time=0.001998500 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=129583 count(s)]
@@ -1011,7 +1011,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered)
 ------------------------------
-*elapsed time=0.002000000 sec.
+*elapsed time=0.002000300 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=218680 count(s)]
@@ -1019,7 +1019,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.002008800 sec.
+*elapsed time=0.002000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=116627 count(s)]
@@ -1027,7 +1027,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.002991800 sec.
+*elapsed time=0.002000300 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=213143 count(s)]
@@ -1035,17 +1035,17 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.002000000 sec.
+*elapsed time=0.002999400 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=123006 count(s)]
 
 ============================================================
 Sort type: [Heap sort]
-* Total time       = 0.016001500 sec.
-* Average time     = 0.002285929 sec.
-* Min time         = 0.002000000 sec.
-* Max time         = 0.003000000 sec.
+* Total time       = 0.015000300 sec.
+* Average time     = 0.002142900 sec.
+* Min time         = 0.001998500 sec.
+* Max time         = 0.002999400 sec.
 * Total Swapped    =   1060452 count(s)
 * Average  Swapped =    151493 count(s)
 * Min Swapped      =    116627 count(s)
@@ -1060,7 +1060,7 @@ Sort type: [Insertion sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.134026700 sec.
+*elapsed time=0.123010000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=9985 count(s)]
@@ -1068,7 +1068,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.137007600 sec.
+*elapsed time=0.146006500 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=9987 count(s)]
@@ -1076,7 +1076,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.131005900 sec.
+*elapsed time=0.157010000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=9983 count(s)]
@@ -1092,7 +1092,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.266025700 sec.
+*elapsed time=0.313018600 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=9999 count(s)]
@@ -1108,17 +1108,17 @@ Array is stable.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.214001700 sec.
+*elapsed time=0.234012500 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=9994 count(s)]
 
 ============================================================
 Sort type: [Insertion sort]
-* Total time       = 0.882067600 sec.
-* Average time     = 0.126009657 sec.
+* Total time       = 0.973057600 sec.
+* Average time     = 0.139008229 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.266025700 sec.
+* Max time         = 0.313018600 sec.
 * Total Swapped    =     59947 count(s)
 * Average  Swapped =      8563 count(s)
 * Min Swapped      =         0 count(s)
@@ -1133,7 +1133,7 @@ Sort type: [Shell sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.001000300 sec.
+*elapsed time=0.001000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=48473 count(s)]
@@ -1149,7 +1149,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.001000000 sec.
+*elapsed time=0.001999700 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=48799 count(s)]
@@ -1165,7 +1165,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.000000000 sec.
+*elapsed time=0.001000300 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=37222 count(s)]
@@ -1181,17 +1181,17 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.001000000 sec.
+*elapsed time=0.002000600 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=49469 count(s)]
 
 ============================================================
 Sort type: [Shell sort]
-* Total time       = 0.004000300 sec.
-* Average time     = 0.000571471 sec.
+* Total time       = 0.007000600 sec.
+* Average time     = 0.001000086 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.001000300 sec.
+* Max time         = 0.002000600 sec.
 * Total Swapped    =    238044 count(s)
 * Average  Swapped =     34006 count(s)
 * Min Swapped      =         0 count(s)
@@ -1206,7 +1206,7 @@ Sort type: [Inplace Merge sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.072004300 sec.
+*elapsed time=0.103005500 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=58291 count(s)]
@@ -1214,7 +1214,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.086006600 sec.
+*elapsed time=0.082016600 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=58193 count(s)]
@@ -1222,7 +1222,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.096006100 sec.
+*elapsed time=0.073991100 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=58188 count(s)]
@@ -1238,7 +1238,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.190009500 sec.
+*elapsed time=0.159009400 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=60442 count(s)]
@@ -1246,7 +1246,7 @@ Array is stable.
 ------------------------------
 Sort array(ordered_without_both_ends)
 ------------------------------
-*elapsed time=0.001000300 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=10006 count(s)]
@@ -1254,17 +1254,17 @@ Array is stable.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.180011300 sec.
+*elapsed time=0.120006800 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=58404 count(s)]
 
 ============================================================
 Sort type: [Inplace Merge sort]
-* Total time       = 0.625038100 sec.
-* Average time     = 0.089291157 sec.
+* Total time       = 0.538029400 sec.
+* Average time     = 0.076861343 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.190009500 sec.
+* Max time         = 0.159009400 sec.
 * Total Swapped    =    303524 count(s)
 * Average  Swapped =     43360 count(s)
 * Min Swapped      =         0 count(s)
@@ -1279,7 +1279,7 @@ Sort type: [Intro sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.001000000 sec.
+*elapsed time=0.000999700 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=31152 count(s)]
@@ -1295,7 +1295,7 @@ Array is NOT STABLE.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.000999700 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is NOT STABLE.
 [swapped=31256 count(s)]
@@ -1334,8 +1334,8 @@ Array is NOT STABLE.
 
 ============================================================
 Sort type: [Intro sort]
-* Total time       = 0.004000000 sec.
-* Average time     = 0.000571429 sec.
+* Total time       = 0.003000000 sec.
+* Average time     = 0.000428571 sec.
 * Min time         = 0.000000000 sec.
 * Max time         = 0.001000300 sec.
 * Total Swapped    =    134548 count(s)
@@ -1352,7 +1352,7 @@ Sort type: [Radix sort]
 ------------------------------
 Sort array(shuffle1)
 ------------------------------
-*elapsed time=0.001000300 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=9996 count(s)]
@@ -1360,7 +1360,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle2)
 ------------------------------
-*elapsed time=0.000999400 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=10000 count(s)]
@@ -1368,7 +1368,7 @@ Array is stable.
 ------------------------------
 Sort array(shuffle3)
 ------------------------------
-*elapsed time=0.001000600 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=9998 count(s)]
@@ -1384,7 +1384,7 @@ Array is stable.
 ------------------------------
 Sort array(reversed)
 ------------------------------
-*elapsed time=0.000000000 sec.
+*elapsed time=0.001000300 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=10000 count(s)]
@@ -1400,17 +1400,17 @@ Array is stable.
 ------------------------------
 Sort array(hard_with_quick_sort)
 ------------------------------
-*elapsed time=0.001002300 sec.
+*elapsed time=0.000000000 sec.
 Array is ordered. [record(s)=10000]
 Array is stable.
 [swapped=9999 count(s)]
 
 ============================================================
 Sort type: [Radix sort]
-* Total time       = 0.004002600 sec.
-* Average time     = 0.000571800 sec.
+* Total time       = 0.001000300 sec.
+* Average time     = 0.000142900 sec.
 * Min time         = 0.000000000 sec.
-* Max time         = 0.001002300 sec.
+* Max time         = 0.001000300 sec.
 * Total Swapped    =     49997 count(s)
 * Average  Swapped =      7142 count(s)
 * Min Swapped      =         0 count(s)
@@ -1428,44 +1428,44 @@ Total Array size   = 800000 Bytes
 - Sort name:                Elapsed Time (Sum/Average/Min/Max) [sec.]             Swapped (Sum/Average/Min/Max) [count(s)]
 --------------------------------------------------------------------------------------------------------------------------------
 [C-Library sort](Quick sort)
-- qsort(inline-function):   0.013000600/  0.001857229/  0.000000000/  0.003000600
+- qsort(inline-function):   0.011999700/  0.001714243/  0.000000000/  0.003000900
 --------------------------------------------------------------------------------------------------------------------------------
 [STL sort](Intro sort)
-- std::sort(function):      0.004998300/  0.000714043/  0.000000000/  0.001000300
-- std::sort(inline-func):   0.005003200/  0.000714743/  0.000000000/  0.001007600
-- std::sort(functor):       0.003998900/  0.000571271/  0.000000000/  0.001000000
-- std::sort(lambda):        0.004000900/  0.000571557/  0.000000000/  0.001000800
+- std::sort(function):      0.004000300/  0.000571471/  0.000000000/  0.001000300
+- std::sort(inline-func):   0.005000800/  0.000714400/  0.000000000/  0.001000500
+- std::sort(functor):       0.003000600/  0.000428657/  0.000000000/  0.001000800
+- std::sort(lambda):        0.002999800/  0.000428543/  0.000000000/  0.001000000
 --------------------------------------------------------------------------------------------------------------------------------
 [STL stable sort](Merge sort) *Not In-place sort
-- std::stable_sort<S>:      0.007999800/  0.001142829/  0.000999100/  0.002000000
+- std::stable_sort<S>:      0.009002400/  0.001286057/  0.001000000/  0.002000300
 --------------------------------------------------------------------------------------------------------------------------------
 [Exchange sorts]
-- Bubble sort<S>:           1.235066300/  0.176438043/  0.000000000/  0.264014300  162016591/   23145227/          0/   49985001
-- Shaker sort<S>:           1.052077100/  0.150296729/  0.000000000/  0.251011500  162016591/   23145227/          0/   49985001
-- Odd-Even sort<S>:         1.012039100/  0.144577014/  0.000000000/  0.290016800  162016591/   23145227/          0/   49985001
-- Shear sort:               0.030000700/  0.004285814/  0.001000000/  0.007000000   10108379/    1444054/     494802/    1922616
-- Comb sort:                0.007000000/  0.001000000/  0.000000000/  0.001999800     257142/      36734/          0/      58823
-- Gnome sort<S>:            0.904053000/  0.129150429/  0.000000000/  0.286015900  162016591/   23145227/          0/   49985001
+- Bubble sort<S>:           1.244071900/  0.177724557/  0.000000000/  0.262015500  162016591/   23145227/          0/   49985001
+- Shaker sort<S>:           1.012058600/  0.144579800/  0.000000000/  0.249013200  162016591/   23145227/          0/   49985001
+- Odd-Even sort<S>:         0.502027800/  0.071718257/  0.000000000/  0.114007300  162016591/   23145227/          0/   49985001
+- Shear sort:               0.021001800/  0.003000257/  0.001000300/  0.004000300   10108379/    1444054/     494802/    1922616
+- Comb sort:                0.006999400/  0.000999914/  0.000000000/  0.001999400     257142/      36734/          0/      58823
+- Gnome sort<S>:            0.844049700/  0.120578529/  0.000000000/  0.254015500  162016591/   23145227/          0/   49985001
 --------------------------------------------------------------------------------------------------------------------------------
 [Partition-exchange sorts]
-- Quick sort:               0.004000900/  0.000571557/  0.000000000/  0.001000900     152242/      21748/       3333/      36402
+- Quick sort:               0.002999700/  0.000428529/  0.000000000/  0.001000300     152242/      21748/       3333/      36402
 --------------------------------------------------------------------------------------------------------------------------------
 [Selection sorts]
-- Selection sort:           0.888048000/  0.126864000/  0.125007300/  0.128008000      48300/       6900/          0/       9995
-- Heap sort:                0.016001500/  0.002285929/  0.002000000/  0.003000000    1060452/     151493/     116627/     218680
+- Selection sort:           0.873050000/  0.124721429/  0.124007000/  0.125007700      48300/       6900/          0/       9995
+- Heap sort:                0.015000300/  0.002142900/  0.001998500/  0.002999400    1060452/     151493/     116627/     218680
 --------------------------------------------------------------------------------------------------------------------------------
 [Insertion sorts]
-- Insertion sort<S>:        0.882067600/  0.126009657/  0.000000000/  0.266025700      59947/       8563/          0/       9999
-- Shell sort:               0.004000300/  0.000571471/  0.000000000/  0.001000300     238044/      34006/          0/      49469
+- Insertion sort<S>:        0.973057600/  0.139008229/  0.000000000/  0.313018600      59947/       8563/          0/       9999
+- Shell sort:               0.007000600/  0.001000086/  0.000000000/  0.002000600     238044/      34006/          0/      49469
 --------------------------------------------------------------------------------------------------------------------------------
 [Merge sorts]
-- Inplace-Merge sort<S>:    0.625038100/  0.089291157/  0.000000000/  0.190009500     303524/      43360/          0/      60442
+- Inplace-Merge sort<S>:    0.538029400/  0.076861343/  0.000000000/  0.159009400     303524/      43360/          0/      60442
 --------------------------------------------------------------------------------------------------------------------------------
 [Hybrid sorts]
-- Intro sort:               0.004000000/  0.000571429/  0.000000000/  0.001000300     134548/      19221/          0/      33844
+- Intro sort:               0.003000000/  0.000428571/  0.000000000/  0.001000300     134548/      19221/          0/      33844
 --------------------------------------------------------------------------------------------------------------------------------
 [Distribution sorts] *Not In-place sort
-- Radix sort<S>:            0.004002600/  0.000571800/  0.000000000/  0.001002300      49997/       7142/          0/      10000
+- Radix sort<S>:            0.001000300/  0.000142900/  0.000000000/  0.001000300      49997/       7142/          0/      10000
 --------------------------------------------------------------------------------------------------------------------------------
 * <S> ... Stable sort algorithm.
 
@@ -1523,283 +1523,283 @@ target=-1
 target=-1, linearSearch=nullptr
 target=0
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00000067F358C290)
-    (data1_def=00000067F358C290)
-    (data2_def=00000067F358C290)
-    (data3_def=00000067F358C290)
-    (data4_def=00000067F358C290)
-    (data5_def=00000067F358C290)
-    (data8_def=00000067F358C290)
-    (data9_def=00000067F358C290)
-    (data10_def=00000067F358C290)
-    (data11_def=00000067F358C290)
+    (data_def=0000007479B7C290)
+    (data1_def=0000007479B7C290)
+    (data2_def=0000007479B7C290)
+    (data3_def=0000007479B7C290)
+    (data4_def=0000007479B7C290)
+    (data5_def=0000007479B7C290)
+    (data8_def=0000007479B7C290)
+    (data9_def=0000007479B7C290)
+    (data10_def=0000007479B7C290)
+    (data11_def=0000007479B7C290)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00000067F358C290)
-    (data1=00000067F358C290)
-    (data2=00000067F358C290)
-    (data3=00000067F358C290)
-    (data4=00000067F358C290)
-    (data5=00000067F358C290)
-    (data8=00000067F358C290)
-    (data9=00000067F358C290)
-    (data10=00000067F358C290)
-    (data11=00000067F358C290)
+    (data=0000007479B7C290)
+    (data1=0000007479B7C290)
+    (data2=0000007479B7C290)
+    (data3=0000007479B7C290)
+    (data4=0000007479B7C290)
+    (data5=0000007479B7C290)
+    (data8=0000007479B7C290)
+    (data9=0000007479B7C290)
+    (data10=0000007479B7C290)
+    (data11=0000007479B7C290)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00000067F358C290)
-    (data1_val=00000067F358C290)
-    (data2_val=00000067F358C290)
-    (data3_val=00000067F358C290)
-    (data4_val=00000067F358C290)
-    (data5_val=00000067F358C290)
-    (data8_val=00000067F358C290)
-    (data9_val=00000067F358C290)
-    (data10_val=00000067F358C290)
-    (data11_val=00000067F358C290)
+    (data_val=0000007479B7C290)
+    (data1_val=0000007479B7C290)
+    (data2_val=0000007479B7C290)
+    (data3_val=0000007479B7C290)
+    (data4_val=0000007479B7C290)
+    (data5_val=0000007479B7C290)
+    (data8_val=0000007479B7C290)
+    (data9_val=0000007479B7C290)
+    (data10_val=0000007479B7C290)
+    (data11_val=0000007479B7C290)
 target=0, linearSearch=[0, 2342]
 target=2
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00000067F3569A60)
-    (data1_def=00000067F3569A60)
-    (data2_def=00000067F3569A60)
-    (data3_def=00000067F3569A60)
-    (data4_def=00000067F3569A60)
-    (data5_def=00000067F3569A60)
-    (data8_def=00000067F3569A60)
-    (data9_def=00000067F3569A60)
-    (data10_def=00000067F3569A60)
-    (data11_def=00000067F3569A60)
+    (data_def=0000007479B59A60)
+    (data1_def=0000007479B59A60)
+    (data2_def=0000007479B59A60)
+    (data3_def=0000007479B59A60)
+    (data4_def=0000007479B59A60)
+    (data5_def=0000007479B59A60)
+    (data8_def=0000007479B59A60)
+    (data9_def=0000007479B59A60)
+    (data10_def=0000007479B59A60)
+    (data11_def=0000007479B59A60)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00000067F3569A60)
-    (data1=00000067F3569A60)
-    (data2=00000067F3569A60)
-    (data3=00000067F3569A60)
-    (data4=00000067F3569A60)
-    (data5=00000067F3569A60)
-    (data8=00000067F3569A60)
-    (data9=00000067F3569A60)
-    (data10=00000067F3569A60)
-    (data11=00000067F3569A60)
+    (data=0000007479B59A60)
+    (data1=0000007479B59A60)
+    (data2=0000007479B59A60)
+    (data3=0000007479B59A60)
+    (data4=0000007479B59A60)
+    (data5=0000007479B59A60)
+    (data8=0000007479B59A60)
+    (data9=0000007479B59A60)
+    (data10=0000007479B59A60)
+    (data11=0000007479B59A60)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00000067F3569A60)
-    (data1_val=00000067F3569A60)
-    (data2_val=00000067F3569A60)
-    (data3_val=00000067F3569A60)
-    (data4_val=00000067F3569A60)
-    (data5_val=00000067F3569A60)
-    (data8_val=00000067F3569A60)
-    (data9_val=00000067F3569A60)
-    (data10_val=00000067F3569A60)
-    (data11_val=00000067F3569A60)
+    (data_val=0000007479B59A60)
+    (data1_val=0000007479B59A60)
+    (data2_val=0000007479B59A60)
+    (data3_val=0000007479B59A60)
+    (data4_val=0000007479B59A60)
+    (data5_val=0000007479B59A60)
+    (data8_val=0000007479B59A60)
+    (data9_val=0000007479B59A60)
+    (data10_val=0000007479B59A60)
+    (data11_val=0000007479B59A60)
 target=2, linearSearch=[2, 575]
 target=6
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00000067F35724D0)
-    (data1_def=00000067F35724D0)
-    (data2_def=00000067F35724D0)
-    (data3_def=00000067F35724D0)
-    (data4_def=00000067F35724D0)
-    (data5_def=00000067F35724D0)
-    (data8_def=00000067F35724D0)
-    (data9_def=00000067F35724D0)
-    (data10_def=00000067F35724D0)
-    (data11_def=00000067F35724D0)
+    (data_def=0000007479B624D0)
+    (data1_def=0000007479B624D0)
+    (data2_def=0000007479B624D0)
+    (data3_def=0000007479B624D0)
+    (data4_def=0000007479B624D0)
+    (data5_def=0000007479B624D0)
+    (data8_def=0000007479B624D0)
+    (data9_def=0000007479B624D0)
+    (data10_def=0000007479B624D0)
+    (data11_def=0000007479B624D0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00000067F35724D0)
-    (data1=00000067F35724D0)
-    (data2=00000067F35724D0)
-    (data3=00000067F35724D0)
-    (data4=00000067F35724D0)
-    (data5=00000067F35724D0)
-    (data8=00000067F35724D0)
-    (data9=00000067F35724D0)
-    (data10=00000067F35724D0)
-    (data11=00000067F35724D0)
+    (data=0000007479B624D0)
+    (data1=0000007479B624D0)
+    (data2=0000007479B624D0)
+    (data3=0000007479B624D0)
+    (data4=0000007479B624D0)
+    (data5=0000007479B624D0)
+    (data8=0000007479B624D0)
+    (data9=0000007479B624D0)
+    (data10=0000007479B624D0)
+    (data11=0000007479B624D0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00000067F35724D0)
-    (data1_val=00000067F35724D0)
-    (data2_val=00000067F35724D0)
-    (data3_val=00000067F35724D0)
-    (data4_val=00000067F35724D0)
-    (data5_val=00000067F35724D0)
-    (data8_val=00000067F35724D0)
-    (data9_val=00000067F35724D0)
-    (data10_val=00000067F35724D0)
-    (data11_val=00000067F35724D0)
+    (data_val=0000007479B624D0)
+    (data1_val=0000007479B624D0)
+    (data2_val=0000007479B624D0)
+    (data3_val=0000007479B624D0)
+    (data4_val=0000007479B624D0)
+    (data5_val=0000007479B624D0)
+    (data8_val=0000007479B624D0)
+    (data9_val=0000007479B624D0)
+    (data10_val=0000007479B624D0)
+    (data11_val=0000007479B624D0)
 target=6, linearSearch=[6, 1018]
 target=14
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00000067F3589860)
-    (data1_def=00000067F3589860)
-    (data2_def=00000067F3589860)
-    (data3_def=00000067F3589860)
-    (data4_def=00000067F3589860)
-    (data5_def=00000067F3589860)
-    (data8_def=00000067F3589860)
-    (data9_def=00000067F3589860)
-    (data10_def=00000067F3589860)
-    (data11_def=00000067F3589860)
+    (data_def=0000007479B79860)
+    (data1_def=0000007479B79860)
+    (data2_def=0000007479B79860)
+    (data3_def=0000007479B79860)
+    (data4_def=0000007479B79860)
+    (data5_def=0000007479B79860)
+    (data8_def=0000007479B79860)
+    (data9_def=0000007479B79860)
+    (data10_def=0000007479B79860)
+    (data11_def=0000007479B79860)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00000067F3589860)
-    (data1=00000067F3589860)
-    (data2=00000067F3589860)
-    (data3=00000067F3589860)
-    (data4=00000067F3589860)
-    (data5=00000067F3589860)
-    (data8=00000067F3589860)
-    (data9=00000067F3589860)
-    (data10=00000067F3589860)
-    (data11=00000067F3589860)
+    (data=0000007479B79860)
+    (data1=0000007479B79860)
+    (data2=0000007479B79860)
+    (data3=0000007479B79860)
+    (data4=0000007479B79860)
+    (data5=0000007479B79860)
+    (data8=0000007479B79860)
+    (data9=0000007479B79860)
+    (data10=0000007479B79860)
+    (data11=0000007479B79860)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00000067F3589860)
-    (data1_val=00000067F3589860)
-    (data2_val=00000067F3589860)
-    (data3_val=00000067F3589860)
-    (data4_val=00000067F3589860)
-    (data5_val=00000067F3589860)
-    (data8_val=00000067F3589860)
-    (data9_val=00000067F3589860)
-    (data10_val=00000067F3589860)
-    (data11_val=00000067F3589860)
+    (data_val=0000007479B79860)
+    (data1_val=0000007479B79860)
+    (data2_val=0000007479B79860)
+    (data3_val=0000007479B79860)
+    (data4_val=0000007479B79860)
+    (data5_val=0000007479B79860)
+    (data8_val=0000007479B79860)
+    (data9_val=0000007479B79860)
+    (data10_val=0000007479B79860)
+    (data11_val=0000007479B79860)
 target=14, linearSearch=[14, 2207]
 target=30
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00000067F357CCA0)
-    (data1_def=00000067F357CCA0)
-    (data2_def=00000067F357CCA0)
-    (data3_def=00000067F357CCA0)
-    (data4_def=00000067F357CCA0)
-    (data5_def=00000067F357CCA0)
-    (data8_def=00000067F357CCA0)
-    (data9_def=00000067F357CCA0)
-    (data10_def=00000067F357CCA0)
-    (data11_def=00000067F357CCA0)
+    (data_def=0000007479B6CCA0)
+    (data1_def=0000007479B6CCA0)
+    (data2_def=0000007479B6CCA0)
+    (data3_def=0000007479B6CCA0)
+    (data4_def=0000007479B6CCA0)
+    (data5_def=0000007479B6CCA0)
+    (data8_def=0000007479B6CCA0)
+    (data9_def=0000007479B6CCA0)
+    (data10_def=0000007479B6CCA0)
+    (data11_def=0000007479B6CCA0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00000067F357CCA0)
-    (data1=00000067F357CCA0)
-    (data2=00000067F357CCA0)
-    (data3=00000067F357CCA0)
-    (data4=00000067F357CCA0)
-    (data5=00000067F357CCA0)
-    (data8=00000067F357CCA0)
-    (data9=00000067F357CCA0)
-    (data10=00000067F357CCA0)
-    (data11=00000067F357CCA0)
+    (data=0000007479B6CCA0)
+    (data1=0000007479B6CCA0)
+    (data2=0000007479B6CCA0)
+    (data3=0000007479B6CCA0)
+    (data4=0000007479B6CCA0)
+    (data5=0000007479B6CCA0)
+    (data8=0000007479B6CCA0)
+    (data9=0000007479B6CCA0)
+    (data10=0000007479B6CCA0)
+    (data11=0000007479B6CCA0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00000067F357CCA0)
-    (data1_val=00000067F357CCA0)
-    (data2_val=00000067F357CCA0)
-    (data3_val=00000067F357CCA0)
-    (data4_val=00000067F357CCA0)
-    (data5_val=00000067F357CCA0)
-    (data8_val=00000067F357CCA0)
-    (data9_val=00000067F357CCA0)
-    (data10_val=00000067F357CCA0)
-    (data11_val=00000067F357CCA0)
+    (data_val=0000007479B6CCA0)
+    (data1_val=0000007479B6CCA0)
+    (data2_val=0000007479B6CCA0)
+    (data3_val=0000007479B6CCA0)
+    (data4_val=0000007479B6CCA0)
+    (data5_val=0000007479B6CCA0)
+    (data8_val=0000007479B6CCA0)
+    (data9_val=0000007479B6CCA0)
+    (data10_val=0000007479B6CCA0)
+    (data11_val=0000007479B6CCA0)
 target=30, linearSearch=[30, 1555]
 target=62
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00000067F3571940)
-    (data1_def=00000067F3571940)
-    (data2_def=00000067F3571940)
-    (data3_def=00000067F3571940)
-    (data4_def=00000067F3571940)
-    (data5_def=00000067F3571940)
-    (data8_def=00000067F3571940)
-    (data9_def=00000067F3571940)
-    (data10_def=00000067F3571940)
-    (data11_def=00000067F3571940)
+    (data_def=0000007479B61940)
+    (data1_def=0000007479B61940)
+    (data2_def=0000007479B61940)
+    (data3_def=0000007479B61940)
+    (data4_def=0000007479B61940)
+    (data5_def=0000007479B61940)
+    (data8_def=0000007479B61940)
+    (data9_def=0000007479B61940)
+    (data10_def=0000007479B61940)
+    (data11_def=0000007479B61940)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00000067F3571940)
-    (data1=00000067F3571940)
-    (data2=00000067F3571940)
-    (data3=00000067F3571940)
-    (data4=00000067F3571940)
-    (data5=00000067F3571940)
-    (data8=00000067F3571940)
-    (data9=00000067F3571940)
-    (data10=00000067F3571940)
-    (data11=00000067F3571940)
+    (data=0000007479B61940)
+    (data1=0000007479B61940)
+    (data2=0000007479B61940)
+    (data3=0000007479B61940)
+    (data4=0000007479B61940)
+    (data5=0000007479B61940)
+    (data8=0000007479B61940)
+    (data9=0000007479B61940)
+    (data10=0000007479B61940)
+    (data11=0000007479B61940)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00000067F3571940)
-    (data1_val=00000067F3571940)
-    (data2_val=00000067F3571940)
-    (data3_val=00000067F3571940)
-    (data4_val=00000067F3571940)
-    (data5_val=00000067F3571940)
-    (data8_val=00000067F3571940)
-    (data9_val=00000067F3571940)
-    (data10_val=00000067F3571940)
-    (data11_val=00000067F3571940)
+    (data_val=0000007479B61940)
+    (data1_val=0000007479B61940)
+    (data2_val=0000007479B61940)
+    (data3_val=0000007479B61940)
+    (data4_val=0000007479B61940)
+    (data5_val=0000007479B61940)
+    (data8_val=0000007479B61940)
+    (data9_val=0000007479B61940)
+    (data10_val=0000007479B61940)
+    (data11_val=0000007479B61940)
 target=62, linearSearch=[62, 981]
 target=126
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00000067F3577980)
-    (data1_def=00000067F3577980)
-    (data2_def=00000067F3577980)
-    (data3_def=00000067F3577980)
-    (data4_def=00000067F3577980)
-    (data5_def=00000067F3577980)
-    (data8_def=00000067F3577980)
-    (data9_def=00000067F3577980)
-    (data10_def=00000067F3577980)
-    (data11_def=00000067F3577980)
+    (data_def=0000007479B67980)
+    (data1_def=0000007479B67980)
+    (data2_def=0000007479B67980)
+    (data3_def=0000007479B67980)
+    (data4_def=0000007479B67980)
+    (data5_def=0000007479B67980)
+    (data8_def=0000007479B67980)
+    (data9_def=0000007479B67980)
+    (data10_def=0000007479B67980)
+    (data11_def=0000007479B67980)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00000067F3577980)
-    (data1=00000067F3577980)
-    (data2=00000067F3577980)
-    (data3=00000067F3577980)
-    (data4=00000067F3577980)
-    (data5=00000067F3577980)
-    (data8=00000067F3577980)
-    (data9=00000067F3577980)
-    (data10=00000067F3577980)
-    (data11=00000067F3577980)
+    (data=0000007479B67980)
+    (data1=0000007479B67980)
+    (data2=0000007479B67980)
+    (data3=0000007479B67980)
+    (data4=0000007479B67980)
+    (data5=0000007479B67980)
+    (data8=0000007479B67980)
+    (data9=0000007479B67980)
+    (data10=0000007479B67980)
+    (data11=0000007479B67980)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00000067F3577980)
-    (data1_val=00000067F3577980)
-    (data2_val=00000067F3577980)
-    (data3_val=00000067F3577980)
-    (data4_val=00000067F3577980)
-    (data5_val=00000067F3577980)
-    (data8_val=00000067F3577980)
-    (data9_val=00000067F3577980)
-    (data10_val=00000067F3577980)
-    (data11_val=00000067F3577980)
+    (data_val=0000007479B67980)
+    (data1_val=0000007479B67980)
+    (data2_val=0000007479B67980)
+    (data3_val=0000007479B67980)
+    (data4_val=0000007479B67980)
+    (data5_val=0000007479B67980)
+    (data8_val=0000007479B67980)
+    (data9_val=0000007479B67980)
+    (data10_val=0000007479B67980)
+    (data11_val=0000007479B67980)
 target=126, linearSearch=[126, 1289]
 target=254
   linearSearchValue(*array_shuffle1, target);
-    (data_def=00000067F35FDBC0)
-    (data1_def=00000067F35FDBC0)
-    (data2_def=00000067F35FDBC0)
-    (data3_def=00000067F35FDBC0)
-    (data4_def=00000067F35FDBC0)
-    (data5_def=00000067F35FDBC0)
-    (data8_def=00000067F35FDBC0)
-    (data9_def=00000067F35FDBC0)
-    (data10_def=00000067F35FDBC0)
-    (data11_def=00000067F35FDBC0)
+    (data_def=0000007479BEDBC0)
+    (data1_def=0000007479BEDBC0)
+    (data2_def=0000007479BEDBC0)
+    (data3_def=0000007479BEDBC0)
+    (data4_def=0000007479BEDBC0)
+    (data5_def=0000007479BEDBC0)
+    (data8_def=0000007479BEDBC0)
+    (data9_def=0000007479BEDBC0)
+    (data10_def=0000007479BEDBC0)
+    (data11_def=0000007479BEDBC0)
   linearSearch(*array_shuffle1, search_predicate);
-    (data=00000067F35FDBC0)
-    (data1=00000067F35FDBC0)
-    (data2=00000067F35FDBC0)
-    (data3=00000067F35FDBC0)
-    (data4=00000067F35FDBC0)
-    (data5=00000067F35FDBC0)
-    (data8=00000067F35FDBC0)
-    (data9=00000067F35FDBC0)
-    (data10=00000067F35FDBC0)
-    (data11=00000067F35FDBC0)
+    (data=0000007479BEDBC0)
+    (data1=0000007479BEDBC0)
+    (data2=0000007479BEDBC0)
+    (data3=0000007479BEDBC0)
+    (data4=0000007479BEDBC0)
+    (data5=0000007479BEDBC0)
+    (data8=0000007479BEDBC0)
+    (data9=0000007479BEDBC0)
+    (data10=0000007479BEDBC0)
+    (data11=0000007479BEDBC0)
   linearSearchValue(*array_shuffle1, target, search_predicate_val);
-    (data_val=00000067F35FDBC0)
-    (data1_val=00000067F35FDBC0)
-    (data2_val=00000067F35FDBC0)
-    (data3_val=00000067F35FDBC0)
-    (data4_val=00000067F35FDBC0)
-    (data5_val=00000067F35FDBC0)
-    (data8_val=00000067F35FDBC0)
-    (data9_val=00000067F35FDBC0)
-    (data10_val=00000067F35FDBC0)
-    (data11_val=00000067F35FDBC0)
+    (data_val=0000007479BEDBC0)
+    (data1_val=0000007479BEDBC0)
+    (data2_val=0000007479BEDBC0)
+    (data3_val=0000007479BEDBC0)
+    (data4_val=0000007479BEDBC0)
+    (data5_val=0000007479BEDBC0)
+    (data8_val=0000007479BEDBC0)
+    (data9_val=0000007479BEDBC0)
+    (data10_val=0000007479BEDBC0)
+    (data11_val=0000007479BEDBC0)
 target=254, linearSearch=[254, 8157]
 
 [Variation test for binary-search]
@@ -1840,283 +1840,283 @@ target=-1
 target=-1, binarySearch=nullptr
 target=0
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00000067F355E6B0)
-    (data1_def=00000067F355E6B0)
-    (data2_def=00000067F355E6B0)
-    (data3_def=00000067F355E6B0)
-    (data4_def=00000067F355E6B0)
-    (data5_def=00000067F355E6B0)
-    (data8_def=00000067F355E6B0)
-    (data9_def=00000067F355E6B0)
-   (data10_def=00000067F355E6B0)
-    (data11_def=00000067F355E6B0)
+    (data_def=0000007479B4E6B0)
+    (data1_def=0000007479B4E6B0)
+    (data2_def=0000007479B4E6B0)
+    (data3_def=0000007479B4E6B0)
+    (data4_def=0000007479B4E6B0)
+    (data5_def=0000007479B4E6B0)
+    (data8_def=0000007479B4E6B0)
+    (data9_def=0000007479B4E6B0)
+   (data10_def=0000007479B4E6B0)
+    (data11_def=0000007479B4E6B0)
   binarySearch(*array_shuffle1, comparisonForSearch);
-    (data=00000067F355E6B0)
-    (data1=00000067F355E6B0)
-    (data2=00000067F355E6B0)
-    (data3=00000067F355E6B0)
-    (data4=00000067F355E6B0)
-    (data5=00000067F355E6B0)
-    (data8=00000067F355E6B0)
-    (data9=00000067F355E6B0)
-    (data10=00000067F355E6B0)
-    (data11=00000067F355E6B0)
+    (data=0000007479B4E6B0)
+    (data1=0000007479B4E6B0)
+    (data2=0000007479B4E6B0)
+    (data3=0000007479B4E6B0)
+    (data4=0000007479B4E6B0)
+    (data5=0000007479B4E6B0)
+    (data8=0000007479B4E6B0)
+    (data9=0000007479B4E6B0)
+    (data10=0000007479B4E6B0)
+    (data11=0000007479B4E6B0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00000067F355E6B0)
-    (data1_val=00000067F355E6B0)
-    (data2_val=00000067F355E6B0)
-    (data3_val=00000067F355E6B0)
-    (data4_val=00000067F355E6B0)
-    (data5_val=00000067F355E6B0)
-    (data8_val=00000067F355E6B0)
-    (data9_val=00000067F355E6B0)
-    (data10_val=00000067F355E6B0)
-    (data11_val=00000067F355E6B0)
+    (data_val=0000007479B4E6B0)
+    (data1_val=0000007479B4E6B0)
+    (data2_val=0000007479B4E6B0)
+    (data3_val=0000007479B4E6B0)
+    (data4_val=0000007479B4E6B0)
+    (data5_val=0000007479B4E6B0)
+    (data8_val=0000007479B4E6B0)
+    (data9_val=0000007479B4E6B0)
+    (data10_val=0000007479B4E6B0)
+    (data11_val=0000007479B4E6B0)
 target=0, binarySearch=[0, 2342]
 target=2
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00000067F355E890)
-    (data1_def=00000067F355E890)
-    (data2_def=00000067F355E890)
-    (data3_def=00000067F355E890)
-    (data4_def=00000067F355E890)
-    (data5_def=00000067F355E890)
-    (data8_def=00000067F355E890)
-    (data9_def=00000067F355E890)
-   (data10_def=00000067F355E890)
-    (data11_def=00000067F355E890)
+    (data_def=0000007479B4E890)
+    (data1_def=0000007479B4E890)
+    (data2_def=0000007479B4E890)
+    (data3_def=0000007479B4E890)
+    (data4_def=0000007479B4E890)
+    (data5_def=0000007479B4E890)
+    (data8_def=0000007479B4E890)
+    (data9_def=0000007479B4E890)
+   (data10_def=0000007479B4E890)
+    (data11_def=0000007479B4E890)
   binarySearch(*array_shuffle1, comparisonForSearch);
-    (data=00000067F355E890)
-    (data1=00000067F355E890)
-    (data2=00000067F355E890)
-    (data3=00000067F355E890)
-    (data4=00000067F355E890)
-    (data5=00000067F355E890)
-    (data8=00000067F355E890)
-    (data9=00000067F355E890)
-    (data10=00000067F355E890)
-    (data11=00000067F355E890)
+    (data=0000007479B4E890)
+    (data1=0000007479B4E890)
+    (data2=0000007479B4E890)
+    (data3=0000007479B4E890)
+    (data4=0000007479B4E890)
+    (data5=0000007479B4E890)
+    (data8=0000007479B4E890)
+    (data9=0000007479B4E890)
+    (data10=0000007479B4E890)
+    (data11=0000007479B4E890)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00000067F355E890)
-    (data1_val=00000067F355E890)
-    (data2_val=00000067F355E890)
-    (data3_val=00000067F355E890)
-    (data4_val=00000067F355E890)
-    (data5_val=00000067F355E890)
-    (data8_val=00000067F355E890)
-    (data9_val=00000067F355E890)
-    (data10_val=00000067F355E890)
-    (data11_val=00000067F355E890)
+    (data_val=0000007479B4E890)
+    (data1_val=0000007479B4E890)
+    (data2_val=0000007479B4E890)
+    (data3_val=0000007479B4E890)
+    (data4_val=0000007479B4E890)
+    (data5_val=0000007479B4E890)
+    (data8_val=0000007479B4E890)
+    (data9_val=0000007479B4E890)
+    (data10_val=0000007479B4E890)
+    (data11_val=0000007479B4E890)
 target=2, binarySearch=[2, 6831]
 target=6
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00000067F355EC50)
-    (data1_def=00000067F355EC50)
-    (data2_def=00000067F355EC50)
-    (data3_def=00000067F355EC50)
-    (data4_def=00000067F355EC50)
-    (data5_def=00000067F355EC50)
-    (data8_def=00000067F355EC50)
-    (data9_def=00000067F355EC50)
-   (data10_def=00000067F355EC50)
-    (data11_def=00000067F355EC50)
+    (data_def=0000007479B4EC50)
+    (data1_def=0000007479B4EC50)
+    (data2_def=0000007479B4EC50)
+    (data3_def=0000007479B4EC50)
+    (data4_def=0000007479B4EC50)
+    (data5_def=0000007479B4EC50)
+    (data8_def=0000007479B4EC50)
+    (data9_def=0000007479B4EC50)
+   (data10_def=0000007479B4EC50)
+    (data11_def=0000007479B4EC50)
   binarySearch(*array_shuffle1, comparisonForSearch);
-    (data=00000067F355EC50)
-    (data1=00000067F355EC50)
-    (data2=00000067F355EC50)
-    (data3=00000067F355EC50)
-    (data4=00000067F355EC50)
-    (data5=00000067F355EC50)
-    (data8=00000067F355EC50)
-    (data9=00000067F355EC50)
-    (data10=00000067F355EC50)
-    (data11=00000067F355EC50)
+    (data=0000007479B4EC50)
+    (data1=0000007479B4EC50)
+    (data2=0000007479B4EC50)
+    (data3=0000007479B4EC50)
+    (data4=0000007479B4EC50)
+    (data5=0000007479B4EC50)
+    (data8=0000007479B4EC50)
+    (data9=0000007479B4EC50)
+    (data10=0000007479B4EC50)
+    (data11=0000007479B4EC50)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00000067F355EC50)
-    (data1_val=00000067F355EC50)
-    (data2_val=00000067F355EC50)
-    (data3_val=00000067F355EC50)
-    (data4_val=00000067F355EC50)
-    (data5_val=00000067F355EC50)
-    (data8_val=00000067F355EC50)
-    (data9_val=00000067F355EC50)
-    (data10_val=00000067F355EC50)
-    (data11_val=00000067F355EC50)
+    (data_val=0000007479B4EC50)
+    (data1_val=0000007479B4EC50)
+    (data2_val=0000007479B4EC50)
+    (data3_val=0000007479B4EC50)
+    (data4_val=0000007479B4EC50)
+    (data5_val=0000007479B4EC50)
+    (data8_val=0000007479B4EC50)
+    (data9_val=0000007479B4EC50)
+    (data10_val=0000007479B4EC50)
+    (data11_val=0000007479B4EC50)
 target=6, binarySearch=[6, 1018]
 target=14
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00000067F355F3D0)
-    (data1_def=00000067F355F3D0)
-    (data2_def=00000067F355F3D0)
-    (data3_def=00000067F355F3D0)
-    (data4_def=00000067F355F3D0)
-    (data5_def=00000067F355F3D0)
-    (data8_def=00000067F355F3D0)
-    (data9_def=00000067F355F3D0)
-   (data10_def=00000067F355F3D0)
-    (data11_def=00000067F355F3D0)
+    (data_def=0000007479B4F3D0)
+    (data1_def=0000007479B4F3D0)
+    (data2_def=0000007479B4F3D0)
+    (data3_def=0000007479B4F3D0)
+    (data4_def=0000007479B4F3D0)
+    (data5_def=0000007479B4F3D0)
+    (data8_def=0000007479B4F3D0)
+    (data9_def=0000007479B4F3D0)
+   (data10_def=0000007479B4F3D0)
+    (data11_def=0000007479B4F3D0)
   binarySearch(*array_shuffle1, comparisonForSearch);
-    (data=00000067F355F3D0)
-    (data1=00000067F355F3D0)
-    (data2=00000067F355F3D0)
-    (data3=00000067F355F3D0)
-    (data4=00000067F355F3D0)
-    (data5=00000067F355F3D0)
-    (data8=00000067F355F3D0)
-    (data9=00000067F355F3D0)
-    (data10=00000067F355F3D0)
-    (data11=00000067F355F3D0)
+    (data=0000007479B4F3D0)
+    (data1=0000007479B4F3D0)
+    (data2=0000007479B4F3D0)
+    (data3=0000007479B4F3D0)
+    (data4=0000007479B4F3D0)
+    (data5=0000007479B4F3D0)
+    (data8=0000007479B4F3D0)
+    (data9=0000007479B4F3D0)
+    (data10=0000007479B4F3D0)
+    (data11=0000007479B4F3D0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00000067F355F3D0)
-    (data1_val=00000067F355F3D0)
-    (data2_val=00000067F355F3D0)
-    (data3_val=00000067F355F3D0)
-    (data4_val=00000067F355F3D0)
-    (data5_val=00000067F355F3D0)
-    (data8_val=00000067F355F3D0)
-    (data9_val=00000067F355F3D0)
-    (data10_val=00000067F355F3D0)
-    (data11_val=00000067F355F3D0)
+    (data_val=0000007479B4F3D0)
+    (data1_val=0000007479B4F3D0)
+    (data2_val=0000007479B4F3D0)
+    (data3_val=0000007479B4F3D0)
+    (data4_val=0000007479B4F3D0)
+    (data5_val=0000007479B4F3D0)
+    (data8_val=0000007479B4F3D0)
+    (data9_val=0000007479B4F3D0)
+    (data10_val=0000007479B4F3D0)
+    (data11_val=0000007479B4F3D0)
 target=14, binarySearch=[14, 4706]
 target=30
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00000067F35602D0)
-    (data1_def=00000067F35602D0)
-    (data2_def=00000067F35602D0)
-    (data3_def=00000067F35602D0)
-    (data4_def=00000067F35602D0)
-    (data5_def=00000067F35602D0)
-    (data8_def=00000067F35602D0)
-    (data9_def=00000067F35602D0)
-   (data10_def=00000067F35602D0)
-    (data11_def=00000067F35602D0)
+    (data_def=0000007479B502D0)
+    (data1_def=0000007479B502D0)
+    (data2_def=0000007479B502D0)
+    (data3_def=0000007479B502D0)
+    (data4_def=0000007479B502D0)
+    (data5_def=0000007479B502D0)
+    (data8_def=0000007479B502D0)
+    (data9_def=0000007479B502D0)
+   (data10_def=0000007479B502D0)
+    (data11_def=0000007479B502D0)
   binarySearch(*array_shuffle1, comparisonForSearch);
-    (data=00000067F35602D0)
-    (data1=00000067F35602D0)
-    (data2=00000067F35602D0)
-    (data3=00000067F35602D0)
-    (data4=00000067F35602D0)
-    (data5=00000067F35602D0)
-    (data8=00000067F35602D0)
-    (data9=00000067F35602D0)
-    (data10=00000067F35602D0)
-    (data11=00000067F35602D0)
+    (data=0000007479B502D0)
+    (data1=0000007479B502D0)
+    (data2=0000007479B502D0)
+    (data3=0000007479B502D0)
+    (data4=0000007479B502D0)
+    (data5=0000007479B502D0)
+    (data8=0000007479B502D0)
+    (data9=0000007479B502D0)
+    (data10=0000007479B502D0)
+    (data11=0000007479B502D0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00000067F35602D0)
-    (data1_val=00000067F35602D0)
-    (data2_val=00000067F35602D0)
-    (data3_val=00000067F35602D0)
-    (data4_val=00000067F35602D0)
-    (data5_val=00000067F35602D0)
-    (data8_val=00000067F35602D0)
-    (data9_val=00000067F35602D0)
-    (data10_val=00000067F35602D0)
-    (data11_val=00000067F35602D0)
+    (data_val=0000007479B502D0)
+    (data1_val=0000007479B502D0)
+    (data2_val=0000007479B502D0)
+    (data3_val=0000007479B502D0)
+    (data4_val=0000007479B502D0)
+    (data5_val=0000007479B502D0)
+    (data8_val=0000007479B502D0)
+    (data9_val=0000007479B502D0)
+    (data10_val=0000007479B502D0)
+    (data11_val=0000007479B502D0)
 target=30, binarySearch=[30, 5065]
 target=62
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00000067F35620D0)
-    (data1_def=00000067F35620D0)
-    (data2_def=00000067F35620D0)
-    (data3_def=00000067F35620D0)
-    (data4_def=00000067F35620D0)
-    (data5_def=00000067F35620D0)
-    (data8_def=00000067F35620D0)
-    (data9_def=00000067F35620D0)
-   (data10_def=00000067F35620D0)
-    (data11_def=00000067F35620D0)
+    (data_def=0000007479B520D0)
+    (data1_def=0000007479B520D0)
+    (data2_def=0000007479B520D0)
+    (data3_def=0000007479B520D0)
+    (data4_def=0000007479B520D0)
+    (data5_def=0000007479B520D0)
+    (data8_def=0000007479B520D0)
+    (data9_def=0000007479B520D0)
+   (data10_def=0000007479B520D0)
+    (data11_def=0000007479B520D0)
   binarySearch(*array_shuffle1, comparisonForSearch);
-    (data=00000067F35620D0)
-    (data1=00000067F35620D0)
-    (data2=00000067F35620D0)
-    (data3=00000067F35620D0)
-    (data4=00000067F35620D0)
-    (data5=00000067F35620D0)
-    (data8=00000067F35620D0)
-    (data9=00000067F35620D0)
-    (data10=00000067F35620D0)
-    (data11=00000067F35620D0)
+    (data=0000007479B520D0)
+    (data1=0000007479B520D0)
+    (data2=0000007479B520D0)
+    (data3=0000007479B520D0)
+    (data4=0000007479B520D0)
+    (data5=0000007479B520D0)
+    (data8=0000007479B520D0)
+    (data9=0000007479B520D0)
+    (data10=0000007479B520D0)
+    (data11=0000007479B520D0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00000067F35620D0)
-    (data1_val=00000067F35620D0)
-    (data2_val=00000067F35620D0)
-    (data3_val=00000067F35620D0)
-    (data4_val=00000067F35620D0)
-    (data5_val=00000067F35620D0)
-    (data8_val=00000067F35620D0)
-    (data9_val=00000067F35620D0)
-    (data10_val=00000067F35620D0)
-    (data11_val=00000067F35620D0)
+    (data_val=0000007479B520D0)
+    (data1_val=0000007479B520D0)
+    (data2_val=0000007479B520D0)
+    (data3_val=0000007479B520D0)
+    (data4_val=0000007479B520D0)
+    (data5_val=0000007479B520D0)
+    (data8_val=0000007479B520D0)
+    (data9_val=0000007479B520D0)
+    (data10_val=0000007479B520D0)
+    (data11_val=0000007479B520D0)
 target=62, binarySearch=[62, 9221]
 target=126
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00000067F3565CD0)
-    (data1_def=00000067F3565CD0)
-    (data2_def=00000067F3565CD0)
-    (data3_def=00000067F3565CD0)
-    (data4_def=00000067F3565CD0)
-    (data5_def=00000067F3565CD0)
-    (data8_def=00000067F3565CD0)
-    (data9_def=00000067F3565CD0)
-   (data10_def=00000067F3565CD0)
-    (data11_def=00000067F3565CD0)
+    (data_def=0000007479B55CD0)
+    (data1_def=0000007479B55CD0)
+    (data2_def=0000007479B55CD0)
+    (data3_def=0000007479B55CD0)
+    (data4_def=0000007479B55CD0)
+    (data5_def=0000007479B55CD0)
+    (data8_def=0000007479B55CD0)
+    (data9_def=0000007479B55CD0)
+   (data10_def=0000007479B55CD0)
+    (data11_def=0000007479B55CD0)
   binarySearch(*array_shuffle1, comparisonForSearch);
-    (data=00000067F3565CD0)
-    (data1=00000067F3565CD0)
-    (data2=00000067F3565CD0)
-    (data3=00000067F3565CD0)
-    (data4=00000067F3565CD0)
-    (data5=00000067F3565CD0)
-    (data8=00000067F3565CD0)
-    (data9=00000067F3565CD0)
-    (data10=00000067F3565CD0)
-    (data11=00000067F3565CD0)
+    (data=0000007479B55CD0)
+    (data1=0000007479B55CD0)
+    (data2=0000007479B55CD0)
+    (data3=0000007479B55CD0)
+    (data4=0000007479B55CD0)
+    (data5=0000007479B55CD0)
+    (data8=0000007479B55CD0)
+    (data9=0000007479B55CD0)
+    (data10=0000007479B55CD0)
+    (data11=0000007479B55CD0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00000067F3565CD0)
-    (data1_val=00000067F3565CD0)
-    (data2_val=00000067F3565CD0)
-    (data3_val=00000067F3565CD0)
-    (data4_val=00000067F3565CD0)
-    (data5_val=00000067F3565CD0)
-    (data8_val=00000067F3565CD0)
-    (data9_val=00000067F3565CD0)
-    (data10_val=00000067F3565CD0)
-    (data11_val=00000067F3565CD0)
+    (data_val=0000007479B55CD0)
+    (data1_val=0000007479B55CD0)
+    (data2_val=0000007479B55CD0)
+    (data3_val=0000007479B55CD0)
+    (data4_val=0000007479B55CD0)
+    (data5_val=0000007479B55CD0)
+    (data8_val=0000007479B55CD0)
+    (data9_val=0000007479B55CD0)
+    (data10_val=0000007479B55CD0)
+    (data11_val=0000007479B55CD0)
 target=126, binarySearch=[126, 1289]
 target=254
   binarySearchValue(*array_shuffle1, target);
-    (data_def=00000067F356D4D0)
-    (data1_def=00000067F356D4D0)
-    (data2_def=00000067F356D4D0)
-    (data3_def=00000067F356D4D0)
-    (data4_def=00000067F356D4D0)
-    (data5_def=00000067F356D4D0)
-    (data8_def=00000067F356D4D0)
-    (data9_def=00000067F356D4D0)
-   (data10_def=00000067F356D4D0)
-    (data11_def=00000067F356D4D0)
+    (data_def=0000007479B5D4D0)
+    (data1_def=0000007479B5D4D0)
+    (data2_def=0000007479B5D4D0)
+    (data3_def=0000007479B5D4D0)
+    (data4_def=0000007479B5D4D0)
+    (data5_def=0000007479B5D4D0)
+    (data8_def=0000007479B5D4D0)
+    (data9_def=0000007479B5D4D0)
+   (data10_def=0000007479B5D4D0)
+    (data11_def=0000007479B5D4D0)
   binarySearch(*array_shuffle1, comparisonForSearch);
-    (data=00000067F356D4D0)
-    (data1=00000067F356D4D0)
-    (data2=00000067F356D4D0)
-    (data3=00000067F356D4D0)
-    (data4=00000067F356D4D0)
-    (data5=00000067F356D4D0)
-    (data8=00000067F356D4D0)
-    (data9=00000067F356D4D0)
-    (data10=00000067F356D4D0)
-    (data11=00000067F356D4D0)
+    (data=0000007479B5D4D0)
+    (data1=0000007479B5D4D0)
+    (data2=0000007479B5D4D0)
+    (data3=0000007479B5D4D0)
+    (data4=0000007479B5D4D0)
+    (data5=0000007479B5D4D0)
+    (data8=0000007479B5D4D0)
+    (data9=0000007479B5D4D0)
+    (data10=0000007479B5D4D0)
+    (data11=0000007479B5D4D0)
   binarySearchValue(*array_shuffle1, target, search_comparison_val);
-    (data_val=00000067F356D4D0)
-    (data1_val=00000067F356D4D0)
-    (data2_val=00000067F356D4D0)
-    (data3_val=00000067F356D4D0)
-    (data4_val=00000067F356D4D0)
-    (data5_val=00000067F356D4D0)
-    (data8_val=00000067F356D4D0)
-    (data9_val=00000067F356D4D0)
-    (data10_val=00000067F356D4D0)
-    (data11_val=00000067F356D4D0)
+    (data_val=0000007479B5D4D0)
+    (data1_val=0000007479B5D4D0)
+    (data2_val=0000007479B5D4D0)
+    (data3_val=0000007479B5D4D0)
+    (data4_val=0000007479B5D4D0)
+    (data5_val=0000007479B5D4D0)
+    (data8_val=0000007479B5D4D0)
+    (data9_val=0000007479B5D4D0)
+    (data10_val=0000007479B5D4D0)
+    (data11_val=0000007479B5D4D0)
 target=254, binarySearch=[254, 8763]
 ============================================================
 Finalize
@@ -2133,4 +2133,4 @@ Finalize
 ============================================================
 End
 ============================================================
-*elapsed time=6.747385300 sec.
+*elapsed time=6.117351700 sec.
