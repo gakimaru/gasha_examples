@@ -62,7 +62,7 @@ void printCalcBits(const unsigned int (&values)[N])
 	for (unsigned int i = 0; i < N; ++i)
 	{
 		const unsigned int value = values[i];
-		std::printf("0x%08x : count=%2d, MSB=%2d, LSB=%2d, near-pow2(GE)=0x%08x, near-pow2(LE)=0x%08x, adjustAlign<ALIGN>=0x%08x,0x%08x(ALIGN=4,256)\n", value, countBits(value), calcMSB(value), calcLSB(value), calcNearPow2GE(value), calcNearPow2LE(value), adjustAlign<4>(value), adjustAlign<256>(value));
+		std::printf("0x%08x : count=%2d, MSB=%2d, LSB=%2d, near-pow2(GE)=0x%08x, near-pow2(LE)=0x%08x, adjustAlign<ALIGN>=0x%08x,0x%08x(ALIGN=4,256)\n", value, countBits(value), calcMSB(value), calcLSB(value), calcNearPow2GE(value), calcNearPow2LE(value), static_cast<int>(adjustAlign<4>(value)), static_cast<int>(adjustAlign<256>(value)));
 	}
 }
 
@@ -72,7 +72,7 @@ void printCalcBits(const unsigned int (&values)[N])
 template<unsigned int N>
 void _printCalcStaticBits()
 {
-	std::printf("0x%08x : count=%2d, MSB=%2d, LSB=%2d, near-pow2(GE)=0x%08x, near-pow2(LE)=0x%08x, adjustAlign<ALIGN>=0x%08x,0x%08x(ALIGN=4,256)\n", N, countStaticBits<N>::value, calcStaticMSB<N>::value, calcStaticLSB<N>::value, calcStaticNearPow2GE<N>::value, calcStaticNearPow2LE<N>::value, adjustStaticAlign<N, 4>::value, adjustStaticAlign<N, 256>::value);
+	std::printf("0x%08x : count=%2d, MSB=%2d, LSB=%2d, near-pow2(GE)=0x%08x, near-pow2(LE)=0x%08x, adjustAlign<ALIGN>=0x%08x,0x%08x(ALIGN=4,256)\n", N, countStaticBits<N>::value, calcStaticMSB<N>::value, calcStaticLSB<N>::value, calcStaticNearPow2GE<N>::value, calcStaticNearPow2LE<N>::value, static_cast<int>(adjustStaticAlign<N, 4>::value), static_cast<int>(adjustStaticAlign<N, 256>::value));
 }
 template<unsigned int N, unsigned int... Nx>
 struct printCalcStaticBits{

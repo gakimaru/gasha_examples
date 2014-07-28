@@ -93,7 +93,7 @@ static void saveBinary(const basicTestData& data)
 
 	//終了
 	std::printf("Save file = \"%s\"\n", BINARY_SAVE_DATA_FILE_PATH);
-	std::printf("Binary save data image size = %d\n", arc.saveDataSize());
+	std::printf("Binary save data image size = %d\n", static_cast<int>(arc.saveDataSize()));
 }
 
 //--------------------
@@ -117,7 +117,7 @@ static void saveText(const basicTestData& data)
 
 	//終了
 	std::printf("Save file = \"%s\"\n", TEXT_SAVE_DATA_FILE_PATH);
-	std::printf("Text save data image size = %d\n", arc.saveDataSize());
+	std::printf("Text save data image size = %d\n", static_cast<int>(arc.saveDataSize()));
 }
 
 //--------------------
@@ -141,7 +141,7 @@ static void loadBinary(basicTestData& data)
 
 	//終了
 	std::printf("Save file = \"%s\"\n", BINARY_SAVE_DATA_FILE_PATH);
-	std::printf("Binary save data image size = %d\n", arc.saveDataSize());
+	std::printf("Binary save data image size = %d\n", static_cast<int>(arc.saveDataSize()));
 }
 
 #if 0//未実装

@@ -72,7 +72,7 @@ void example_debugLog_perfomanceTest()
 
 		//ログ出力スレッド
 		std::atomic<bool> start;//一斉スタート用
-		std::atomic<std::size_t> start_count(0);//一斉スタート用
+		std::atomic<int> start_count(0);//一斉スタート用
 		std::mutex mutex;//一斉スタート用
 		std::condition_variable cond;//一斉スタート用
 		auto pred = [&start]() -> bool { return start.load(); };//一斉スタート用
@@ -404,7 +404,7 @@ void example_debugLog_perfomanceTest()
 				}
 			}
 
-			std::printf("thread-infos=%d,processe-infos=%d,total:(sums=%d,counts=%d,time=%.9lf),period:(sums=%d,counts=%d,time=%.9lf)\n", thread_info_num, profile_info_num_total, summarized_count_total, count_total, time_total, summarized_count_period, count_period, time_period);
+			std::printf("thread-infos=%d,processe-infos=%d,total:(sums=%d,counts=%d,time=%.9lf),period:(sums=%d,counts=%d,time=%.9lf)\n", static_cast<int>(thread_info_num), static_cast<int>(profile_info_num_total), static_cast<int>(summarized_count_total), static_cast<int>(count_total), static_cast<double>(time_total), static_cast<int>(summarized_count_period), static_cast<int>(count_period), static_cast<double>(time_period));
 		}
 	}
 

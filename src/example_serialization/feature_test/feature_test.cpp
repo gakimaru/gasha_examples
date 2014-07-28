@@ -324,7 +324,7 @@ static void printTestData()
 	{
 		std::printf("%s={", name);
 		for (std::size_t i = 0; i < num; ++i)
-			std::printf("[%d]=%d,", i, var[i]);
+			std::printf("[%d]=%d,", static_cast<int>(i), var[i]);
 		std::printf("}\n");
 	};
 	auto print_short = [](const char* name, short var)
@@ -335,7 +335,7 @@ static void printTestData()
 	{
 		std::printf("%s={", name);
 		for (std::size_t i = 0; i < num; ++i)
-			std::printf("[%d]=%d,", i, var[i]);
+			std::printf("[%d]=%d,", static_cast<int>(i), var[i]);
 		std::printf("}\n");
 	};
 	auto print_longlong = [](const char* name, const long long var)
@@ -394,11 +394,11 @@ static void printTestData()
 	};
 	auto print_bitset1 = [](const char* name, const std::bitset<BITSET_DATA1_SIZE>& var)
 	{
-		std::printf("%s:{[0]=%d,[1]=%d,[2]=%d,[3]=%d,...,[%d]=%d,[%d]=%d,[%d]=%d,}\n", name, var[0], var[1], var[2], var[3], BITSET_DATA1_SIZE - 3, var[BITSET_DATA1_SIZE - 3], BITSET_DATA1_SIZE - 2, var[BITSET_DATA1_SIZE - 2], BITSET_DATA1_SIZE - 1, var[BITSET_DATA1_SIZE - 1]);
+		std::printf("%s:{[0]=%d,[1]=%d,[2]=%d,[3]=%d,...,[%d]=%d,[%d]=%d,[%d]=%d,}\n", name, var[0], var[1], var[2], var[3], static_cast<int>(BITSET_DATA1_SIZE - 3), var[BITSET_DATA1_SIZE - 3], static_cast<int>(BITSET_DATA1_SIZE - 2), var[BITSET_DATA1_SIZE - 2], static_cast<int>(BITSET_DATA1_SIZE - 1), var[BITSET_DATA1_SIZE - 1]);
 	};
 	auto print_bitset2 = [](const char* name, const std::bitset<BITSET_DATA2_SIZE>& var)
 	{
-		std::printf("%s:{[0]=%d,[1]=%d,[2]=%d,[3]=%d,...,[%d]=%d,[%d]=%d,[%d]=%d,}\n", name, var[0], var[1], var[2], var[3], BITSET_DATA2_SIZE - 3, var[BITSET_DATA2_SIZE - 3], BITSET_DATA2_SIZE - 2, var[BITSET_DATA2_SIZE - 2], BITSET_DATA2_SIZE - 1, var[BITSET_DATA2_SIZE - 1]);
+		std::printf("%s:{[0]=%d,[1]=%d,[2]=%d,[3]=%d,...,[%d]=%d,[%d]=%d,[%d]=%d,}\n", name, var[0], var[1], var[2], var[3], static_cast<int>(BITSET_DATA2_SIZE - 3), var[BITSET_DATA2_SIZE - 3], static_cast<int>(BITSET_DATA2_SIZE - 2), var[BITSET_DATA2_SIZE - 2], static_cast<int>(BITSET_DATA2_SIZE - 1), var[BITSET_DATA2_SIZE - 1]);
 	};
 
 	print_int("data1", data.data1());

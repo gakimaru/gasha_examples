@@ -127,7 +127,7 @@ void example_dynamic_array()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			std::printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
+			std::printf("size=%d, max_size=%d(%d)\n", static_cast<int>(con.size()), static_cast<int>(con.max_size()), static_cast<int>(con.max_sizeReal()));
 			std::printf("array=");
 			if (con.empty())
 				std::printf("(empty)");
@@ -139,7 +139,7 @@ void example_dynamic_array()
 		//データを逆順に表示
 		auto printReverse = [&con]()
 		{
-			std::printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
+			std::printf("size=%d, max_size=%d(%d)\n", static_cast<int>(con.size()), static_cast<int>(con.max_size()), static_cast<int>(con.max_sizeReal()));
 			std::printf("array(reverse)=");
 			if (con.empty())
 				std::printf("(empty)");
@@ -392,7 +392,7 @@ void example_dynamic_array()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			std::printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
+			std::printf("size=%d, max_size=%d(%d)\n", static_cast<int>(con.size()), static_cast<int>(con.max_size()), static_cast<int>(con.max_sizeReal()));
 			std::printf("array=");
 			if (con.empty())
 			{
@@ -409,7 +409,7 @@ void example_dynamic_array()
 		//データを逆順に表示
 		auto printReverse = [&con]()
 		{
-			std::printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
+			std::printf("size=%d, max_size=%d(%d)\n", static_cast<int>(con.size()), static_cast<int>(con.max_size()), static_cast<int>(con.max_sizeReal()));
 			std::printf("array(reverse)=");
 			if (con.empty())
 			{
@@ -864,7 +864,7 @@ void example_dynamic_array()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			std::printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
+			std::printf("size=%d, max_size=%d(%d)\n", static_cast<int>(con.size()), static_cast<int>(con.max_size()), static_cast<int>(con.max_sizeReal()));
 			std::printf("array=");
 			if (con.empty())
 			{
@@ -1036,7 +1036,7 @@ void example_dynamic_array()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			std::printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
+			std::printf("size=%d, max_size=%d(%d)\n", static_cast<int>(con.size()), static_cast<int>(con.max_size()), static_cast<int>(con.max_sizeReal()));
 			std::printf("array=");
 			if (con.empty())
 			{
@@ -1523,7 +1523,7 @@ void testThread(const char* container_type)
 			//GASHA_ shared_lock_guard<typename container_t::lock_type> lock(con);//リード・ロック取得 ※スコープロック
 			auto lock = con.lockSharedScoped();//（上の処理と同じ意味）
 			std::printf("(%s)\n", caption);
-			std::printf("size=%d, max_size=%d(%d)\n", con.size(), con.max_size(), con.max_sizeReal());
+			std::printf("size=%d, max_size=%d(%d)\n", static_cast<int>(con.size()), static_cast<int>(con.max_size()), static_cast<int>(con.max_sizeReal()));
 			std::this_thread::sleep_for(std::chrono::microseconds(1));
 			std::printf("array=");
 			if (con.empty())

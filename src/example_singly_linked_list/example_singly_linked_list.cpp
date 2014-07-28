@@ -129,7 +129,7 @@ void example_singly_linked_list()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			std::printf("size=%d\n", con.size());
+			std::printf("size=%d\n", static_cast<int>(con.size()));
 			std::printf("list=");
 			if (con.empty())
 			{
@@ -149,7 +149,7 @@ void example_singly_linked_list()
 		auto printReverse = [&con]()
 		{
 		#ifdef GASHA_SINGLY_LINKED_LIST_ENABLE_REVERSE_ITERATOR
-			std::printf("size=%d\n", con.size());
+			std::printf("size=%d\n", static_cast<int>(con.size()));
 			std::printf("list(reverse)=");
 			if (con.empty())
 			{
@@ -809,7 +809,7 @@ void example_singly_linked_list()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			std::printf("size=%d\n", con.size());
+			std::printf("size=%d\n", static_cast<int>(con.size()));
 			std::printf("list=");
 			if (con.empty())
 			{

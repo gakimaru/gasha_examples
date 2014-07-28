@@ -31,13 +31,13 @@ int main(const int argc, const char* argv[])
 		std::printf("\n");
 		buildSettingsDiagnosticTest(message, sizeof(message), size, diagForLibrary);
 		std::printf(message);
-		std::printf("message size = %d bytes.\n", size);
+		std::printf("message size = %d bytes.\n", static_cast<int>(size));
 
 		//現在のビルド設定を診断
 		std::printf("\n");
 		buildSettingsDiagnosticTest(message, sizeof(message), size, diagForProject);
 		std::printf(message);
-		std::printf("message size = %d bytes.\n", size);
+		std::printf("message size = %d bytes.\n", static_cast<int>(size));
 	}
 
 	std::printf("\n");

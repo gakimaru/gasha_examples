@@ -144,7 +144,7 @@ void testForVectorPerformance(const char* caption)
 	{
 		TYPE vec1[N] = { 0 };
 		TYPE vec2[N] = { 0 };
-		for (int i = 0; i < N && i < 3; ++i)
+		for (int i = 0; i < static_cast<int>(N) && i < 3; ++i)
 		{
 			vec1[i] = rnd_distribution(rnd_engine);
 			vec2[i] = rnd_distribution(rnd_engine);
@@ -169,7 +169,7 @@ void testForVectorPerformance(const char* caption)
 				result10 +
 				result11
 			);
-		for (int i = 0; i < N; ++i)
+		for (int i = 0; i < static_cast<int>(N); ++i)
 			total += (
 				result3[i] +
 				result4[i] +
@@ -180,7 +180,7 @@ void testForVectorPerformance(const char* caption)
 		if (N == 3 || N == 4)
 		{
 			const auto result12 = cross(fast_arith_class(vec1), fast_arith_class(vec2));
-			for (int i = 0; i < N; ++i)
+			for (int i = 0; i < static_cast<int>(N); ++i)
 				total += result12[i];
 		}
 	}
@@ -203,7 +203,7 @@ void testForVectorPerformanceDirect(const char* caption)
 	{
 		TYPE vec1[N] = { 0 };
 		TYPE vec2[N] = { 0 };
-		for (int i = 0; i < N && i < 3; ++i)
+		for (int i = 0; i < static_cast<int>(N) && i < 3; ++i)
 		{
 			vec1[i] = rnd_distribution(rnd_engine);
 			vec2[i] = rnd_distribution(rnd_engine);
@@ -228,7 +228,7 @@ void testForVectorPerformanceDirect(const char* caption)
 			result10 +
 			result11
 			);
-		for (int i = 0; i < N; ++i)
+		for (int i = 0; i < static_cast<int>(N); ++i)
 			total += (
 				result3[i] +
 				result4[i] +
@@ -239,7 +239,7 @@ void testForVectorPerformanceDirect(const char* caption)
 		if (N == 3 || N == 4)
 		{
 			TYPE result12[N] = { 0 }; cross(result12, vec1, vec2);
-			for (int i = 0; i < N; ++i)
+			for (int i = 0; i < static_cast<int>(N); ++i)
 				total += result12[i];
 		}
 	}
@@ -264,7 +264,7 @@ void testForVectorPerformanceDummy(const char* caption)
 	{
 		TYPE vec1[N] = { 0 };
 		TYPE vec2[N] = { 0 };
-		for (int i = 0; i < N && i < 3; ++i)
+		for (int i = 0; i < static_cast<int>(N) && i < 3; ++i)
 		{
 			vec1[i] = rnd_distribution(rnd_engine);
 			vec2[i] = rnd_distribution(rnd_engine);
@@ -289,7 +289,7 @@ void testForVectorPerformanceDummy(const char* caption)
 				result10 +
 				result11
 			);
-		for (int i = 0; i < N; ++i)
+		for (int i = 0; i < static_cast<int>(N); ++i)
 			total += (
 				result3[i] +
 				result4[i] +
@@ -300,7 +300,7 @@ void testForVectorPerformanceDummy(const char* caption)
 		if (N == 3 || N == 4)
 		{
 			TYPE result12[N] = { 0 }; cross(result12, fast_arith_class(vec1), fast_arith_class(vec2));
-			for (int i = 0; i < N; ++i)
+			for (int i = 0; i < static_cast<int>(N); ++i)
 				total += result12[i];
 		}
 	}
@@ -326,11 +326,11 @@ void testForMatrixPerformance(const char* caption)
 	TYPE total = static_cast<TYPE>(0);
 	for (int repeat = 1; repeat < TEST_MATRIX_REPEAT_NUM; ++repeat)
 	{
-		TYPE mat1[N][M] = { 0 };
-		TYPE mat2[N][M] = { 0 };
-		for (int i = 0; i < N; ++i)
+		TYPE mat1[N][M] = { { 0 } };
+		TYPE mat2[N][M] = { { 0 } };
+		for (int i = 0; i < static_cast<int>(N); ++i)
 		{
-			for (int j = 0; j < M; ++j)
+			for (int j = 0; j < static_cast<int>(M); ++j)
 			{
 				mat1[i][j] = rnd_distribution(rnd_engine);
 				mat2[i][j] = rnd_distribution(rnd_engine);
@@ -341,9 +341,9 @@ void testForMatrixPerformance(const char* caption)
 		const auto result2 = sub(fast_arith_class(mat1), fast_arith_class(mat2));
 		const auto result3 = mul(fast_arith_class(mat1), scalar);
 		const auto result4 = mul(fast_arith_class(mat1), fast_arith_class(mat2));
-		for (int i = 0; i < N; ++i)
+		for (int i = 0; i < static_cast<int>(N); ++i)
 		{
-			for (int j = 0; j < M; ++j)
+			for (int j = 0; j < static_cast<int>(M); ++j)
 			{
 				total += (
 					result1[i][j] +
@@ -371,28 +371,28 @@ void testForMatrixPerformanceDirect(const char* caption)
 	TYPE total = static_cast<TYPE>(0);
 	for (int repeat = 1; repeat < TEST_MATRIX_REPEAT_NUM; ++repeat)
 	{
-		TYPE mat1[N][M] = { 0 };
-		TYPE mat2[N][M] = { 0 };
-		for (int i = 0; i < N; ++i)
+		TYPE mat1[N][M] = { { 0 } };
+		TYPE mat2[N][M] = { { 0 } };
+		for (int i = 0; i < static_cast<int>(N); ++i)
 		{
-			for (int j = 0; j < M; ++j)
+			for (int j = 0; j < static_cast<int>(M); ++j)
 			{
 				mat1[i][j] = rnd_distribution(rnd_engine);
 				mat2[i][j] = rnd_distribution(rnd_engine);
 			}
 		}
 		TYPE scalar = rnd_distribution(rnd_engine);
-		TYPE result1[N][M] = { 0 };
-		TYPE result2[N][M] = { 0 };
-		TYPE result3[N][M] = { 0 };
-		TYPE result4[N][M] = { 0 };
+		TYPE result1[N][M] = { { 0 } };
+		TYPE result2[N][M] = { { 0 } };
+		TYPE result3[N][M] = { { 0 } };
+		TYPE result4[N][M] = { { 0 } };
 		add(result1, mat1, mat2);
 		sub(result2, mat1, mat2);
 		mul(result3, mat1, scalar);
 		mul(result4, mat1, mat2);
-		for (int i = 0; i < N; ++i)
+		for (int i = 0; i < static_cast<int>(N); ++i)
 		{
-			for (int j = 0; j < M; ++j)
+			for (int j = 0; j < static_cast<int>(M); ++j)
 			{
 				total += (
 						result1[i][j] +
@@ -420,28 +420,28 @@ void testForMatrixPerformanceDirectLU(const char* caption)
 	TYPE total = static_cast<TYPE>(0);
 	for (int repeat = 1; repeat < TEST_MATRIX_REPEAT_NUM; ++repeat)
 	{
-		TYPE mat1[N][M] = { 0 };
-		TYPE mat2[N][M] = { 0 };
-		for (int i = 0; i < N; ++i)
+		TYPE mat1[N][M] = { { 0 } };
+		TYPE mat2[N][M] = { { 0 } };
+		for (int i = 0; i < static_cast<int>(N); ++i)
 		{
-			for (int j = 0; j < M; ++j)
+			for (int j = 0; j < static_cast<int>(M); ++j)
 			{
 				mat1[i][j] = rnd_distribution(rnd_engine);
 				mat2[i][j] = rnd_distribution(rnd_engine);
 			}
 		}
 		TYPE scalar = rnd_distribution(rnd_engine);
-		TYPE result1[N][M] = { 0 };
-		TYPE result2[N][M] = { 0 };
-		TYPE result3[N][M] = { 0 };
-		TYPE result4[N][M] = { 0 };
+		TYPE result1[N][M] = { { 0 } };
+		TYPE result2[N][M] = { { 0 } };
+		TYPE result3[N][M] = { { 0 } };
+		TYPE result4[N][M] = { { 0 } };
 		addLU(result1, mat1, mat2);
 		subLU(result2, mat1, mat2);
 		mulLU(result3, mat1, scalar);
 		mulLU(result4, mat1, mat2);
-		for (int i = 0; i < N; ++i)
+		for (int i = 0; i < static_cast<int>(N); ++i)
 		{
-			for (int j = 0; j < M; ++j)
+			for (int j = 0; j < static_cast<int>(M); ++j)
 			{
 				total += (
 					result1[i][j] +
@@ -471,28 +471,28 @@ void testForMatrixPerformanceDummy(const char* caption)
 	TYPE total = static_cast<TYPE>(0);
 	for (int repeat = 1; repeat < TEST_MATRIX_REPEAT_NUM; ++repeat)
 	{
-		TYPE mat1[N][M] = { 0 };
-		TYPE mat2[N][M] = { 0 };
-		for (int i = 0; i < N; ++i)
+		TYPE mat1[N][M] = { { 0 } };
+		TYPE mat2[N][M] = { { 0 } };
+		for (int i = 0; i < static_cast<int>(N); ++i)
 		{
-			for (int j = 0; j < M; ++j)
+			for (int j = 0; j < static_cast<int>(M); ++j)
 			{
 				mat1[i][j] = rnd_distribution(rnd_engine);
 				mat2[i][j] = rnd_distribution(rnd_engine);
 			}
 		}
 		TYPE scalar = rnd_distribution(rnd_engine);
-		TYPE result1[N][M] = { 0 };
-		TYPE result2[N][M] = { 0 };
-		TYPE result3[N][M] = { 0 };
-		TYPE result4[N][M] = { 0 };
+		TYPE result1[N][M] = { { 0 } };
+		TYPE result2[N][M] = { { 0 } };
+		TYPE result3[N][M] = { { 0 } };
+		TYPE result4[N][M] = { { 0 } };
 		add(result1, fast_arith_class(mat1), fast_arith_class(mat2));
 		sub(result2, fast_arith_class(mat1), fast_arith_class(mat2));
 		mul(result3, fast_arith_class(mat1), scalar);
 		mul(result4, fast_arith_class(mat1), fast_arith_class(mat2));
-		for (int i = 0; i < N; ++i)
+		for (int i = 0; i < static_cast<int>(N); ++i)
 		{
-			for (int j = 0; j < M; ++j)
+			for (int j = 0; j < static_cast<int>(M); ++j)
 			{
 				total += (
 					result1[i][j] +
@@ -726,7 +726,7 @@ void example_fast_math()
 	std::printf("[ Test for vector operation ]\n");
 
 	{
-		#define TEST_VECTOR_OPE1(expr, space)  { double result = static_cast<double>(expr); std::printf(#expr space " = %.5lf\n", result); }
+		#define TEST_VECTOR_OPE1(expr, space)  { const double result = static_cast<double>(expr); std::printf(#expr space " = %.5lf\n", result); }
 		#define TEST_VECTOR_OPE2(expr, space, result)  { expr; std::printf(#expr space " = [%.5lf][%.5f]\n", static_cast<double>(result[0]), static_cast<double>(result[1])); }
 		#define TEST_VECTOR_OPE3(expr, space, result)  { expr; std::printf(#expr space " = [%.5lf][%.5f][%.5f]\n", static_cast<double>(result[0]), static_cast<double>(result[1]), static_cast<double>(result[2])); }
 		std::printf("\n");

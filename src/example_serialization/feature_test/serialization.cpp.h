@@ -60,7 +60,7 @@ namespace serialization
 			if (!deserialize_obj)
 			{
 				std::printf("----------\n");
-				std::printf("serialize<testData>(ver=%d.%d,now_ver=%d.%d) sizeof(testData)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), sizeof(testData));
+				std::printf("serialize<testData>(ver=%d.%d,now_ver=%d.%d) sizeof(testData)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), static_cast<int>(sizeof(testData)));
 				std::printf("arc.isInputClass=%d, arc.isOutputClass=%d\n", arc.isInputClass, arc.isOutputClass);
 			}
 			else
@@ -111,7 +111,7 @@ namespace serialization
 			if (!deserialize_obj)
 			{
 				std::printf("----------\n");
-				std::printf("serialize<testData::subData>(ver=%d.%d,now_ver=%d.%d) sizeof(testData::subData)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), sizeof(testData::subData));
+				std::printf("serialize<testData::subData>(ver=%d.%d,now_ver=%d.%d) sizeof(testData::subData)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), static_cast<int>(sizeof(testData::subData)));
 				std::printf("arc.isInputClass=%d, arc.isOutputClass=%d\n", arc.isInputClass, arc.isOutputClass);
 			}
 			else
@@ -137,7 +137,7 @@ namespace serialization
 			if (!deserialize_obj)
 			{
 				std::printf("----------\n");
-				std::printf("serialize<testData::subData2>(ver=%d.%d,now_ver=%d.%d) sizeof(testData::subData2)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), sizeof(testData::subData2));
+				std::printf("serialize<testData::subData2>(ver=%d.%d,now_ver=%d.%d) sizeof(testData::subData2)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), static_cast<int>(sizeof(testData::subData2)));
 				std::printf("arc.isInputClass=%d, arc.isOutputClass=%d\n", arc.isInputClass, arc.isOutputClass);
 			}
 			else
@@ -164,7 +164,7 @@ namespace serialization
 			if (!deserialize_obj)
 			{
 				std::printf("----------\n");
-				std::printf("serialize<testData::subDataExt>(ver=%d.%d,now_ver=%d.%d) sizeof(testData::subDataExt)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), sizeof(testData::subDataExt));
+				std::printf("serialize<testData::subDataExt>(ver=%d.%d,now_ver=%d.%d) sizeof(testData::subDataExt)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), static_cast<int>(sizeof(testData::subDataExt)));
 				std::printf("arc.isInputClass=%d, arc.isOutputClass=%d\n", arc.isInputClass, arc.isOutputClass);
 			}
 			else
@@ -189,7 +189,7 @@ namespace serialization
 			if (!deserialize_obj)
 			{
 				std::printf("----------\n");
-				std::printf("serialize<testData::subDataExt2>(ver=%d.%d,now_ver=%d.%d) sizeof(testData::subDataExt2)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), sizeof(testData::subDataExt2));
+				std::printf("serialize<testData::subDataExt2>(ver=%d.%d,now_ver=%d.%d) sizeof(testData::subDataExt2)=%d\n", ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), static_cast<int>(sizeof(testData::subDataExt2)));
 				std::printf("arc.isInputClass=%d, arc.isOutputClass=%d\n", arc.isInputClass, arc.isOutputClass);
 			}
 			else
@@ -219,7 +219,7 @@ namespace serialization
 			if (!deserialize_obj)
 			{
 				std::printf("----------\n");
-				std::printf("serialize<std::bitset<%d>>(ver=%d.%d,now_ver=%d.%d) sizeof(std::bitset<%d>)=%d\n", N, ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), N, sizeof(std::bitset<N>));
+				std::printf("serialize<std::bitset<%d>>(ver=%d.%d,now_ver=%d.%d) sizeof(std::bitset<%d>)=%d\n", static_cast<int>(N), ver.majorVer(), ver.minorVer(), now_ver.majorVer(), now_ver.minorVer(), static_cast<int>(N), static_cast<int>(sizeof(std::bitset<N>)));
 				std::printf("arc.isInputClass=%d, arc.isOutputClass=%d\n", arc.isInputClass, arc.isOutputClass);
 			}
 			else
@@ -228,7 +228,7 @@ namespace serialization
 			}
 
 			//シリアライズ対象項目の指定
-			for (int i = 0; i < N; ++i)
+			for (std::size_t i = 0; i < N; ++i)
 			{
 				char name[16];
 				GASHA_ spprintf(name, "no%d", i);
@@ -238,7 +238,7 @@ namespace serialization
 				std::function<void(std::bitset<N>&, const itemInfoBase&)> load_bit = [](std::bitset<N>& obj, const itemInfoBase& item)//※個別デシリアライズ処理
 				{
 					printf("***** serialize<std::bitset<N>>:Special deserialize item=\"%s\"\n", item.name());
-					for (int i = 0; i < N; ++i)
+					for (std::size_t i = 0; i < N; ++i)
 					{
 						char name[16];
 						GASHA_ spprintf(name, "no%d", i);

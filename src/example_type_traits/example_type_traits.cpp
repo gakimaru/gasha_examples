@@ -10,9 +10,9 @@
 
 #include "example_type_traits.h"//型特性ユーティリティテスト
 
-#include <gasha/type_traits.h>//型特性ユーティリティ：rankof(), sizeof(), sizeofelemof()
+#include <gasha/type_traits.h>//型特性ユーティリティ：rankof(), sizeof()), static_cast<int>(sizeofelemof()
 
-#include <type_traits>//std::rank, std::extent
+#include <type_traits>//std::rank, static_cast<int>(std::extent
 #include <cstdio>//std::printf()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
@@ -26,20 +26,20 @@ void example_type_traits()
 		std::printf("----- Test for rankof, elementof, sizeofelemof -----\n");
 		int var0 = 0;
 		int var1[1] = { 0 };
-		int var2[2][3] = { 0 };
-		int var3[4][5][6] = { 0 };
-		int var4[7][8][9][10] = { 0 };
-		std::printf("var0(Rank=%d, Total=%d, ElemtSize=%d)\n", rankof(var0), extentof(var0), sizeofelemof(var0));
-		std::printf("var1[%d](Rank=%d, Total=%d, ElemtSize=%d)\n", extent1of(var1), rankof(var1), extentof(var1), sizeofelemof(var1));
-		std::printf("var2[%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", extent1of(var2), extent2of(var2), rankof(var2), extentof(var2), sizeofelemof(var2));
-		std::printf("var3[%d][%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", extent1of(var3), extent2of(var3), extent3of(var3), rankof(var3), extentof(var3), sizeofelemof(var3));
-		std::printf("var4[%d][%d][%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", extent1of(var4), extent2of(var4), extent3of(var4), extent4of(var4), rankof(var4), extentof(var4), sizeofelemof(var4));
+		int var2[2][3] = { { 0 } };
+		int var3[4][5][6] = { { { 0 } } };
+		int var4[7][8][9][10] = { { { { 0 } } } };
+		std::printf("var0(Rank=%d, Total=%d, ElemtSize=%d)\n", static_cast<int>(rankof(var0)), static_cast<int>(extentof(var0)), static_cast<int>(sizeofelemof(var0)));
+		std::printf("var1[%d](Rank=%d, Total=%d, ElemtSize=%d)\n", static_cast<int>(extent1of(var1)), static_cast<int>(rankof(var1)), static_cast<int>(extentof(var1)), static_cast<int>(sizeofelemof(var1)));
+		std::printf("var2[%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", static_cast<int>(extent1of(var2)), static_cast<int>(extent2of(var2)), static_cast<int>(rankof(var2)), static_cast<int>(extentof(var2)), static_cast<int>(sizeofelemof(var2)));
+		std::printf("var3[%d][%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", static_cast<int>(extent1of(var3)), static_cast<int>(extent2of(var3)), static_cast<int>(extent3of(var3)), static_cast<int>(rankof(var3)), static_cast<int>(extentof(var3)), static_cast<int>(sizeofelemof(var3)));
+		std::printf("var4[%d][%d][%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", static_cast<int>(extent1of(var4)), static_cast<int>(extent2of(var4)), static_cast<int>(extent3of(var4)), static_cast<int>(extent4of(var4)), static_cast<int>(rankof(var4)), static_cast<int>(extentof(var4)), static_cast<int>(sizeofelemof(var4)));
 		std::printf("\n");
-		std::printf("var0[%d][%d][%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", extent1of(var0), extent2of(var0), extent3of(var0), extent4of(var0), rankof(var0), extentof(var0), sizeofelemof(var0));
-		std::printf("var1[%d][%d][%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", extent1of(var1), extent2of(var1), extent3of(var1), extent4of(var1), rankof(var1), extentof(var1), sizeofelemof(var1));
-		std::printf("var2[%d][%d][%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", extent1of(var2), extent2of(var2), extent3of(var2), extent4of(var2), rankof(var2), extentof(var2), sizeofelemof(var2));
-		std::printf("var3[%d][%d][%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", extent1of(var3), extent2of(var3), extent3of(var3), extent4of(var3), rankof(var3), extentof(var3), sizeofelemof(var3));
-		std::printf("var4[%d][%d][%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", extent1of(var4), extent2of(var4), extent3of(var4), extent4of(var4), rankof(var4), extentof(var4), sizeofelemof(var4));
+		std::printf("var0[%d][%d][%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", static_cast<int>(extent1of(var0)), static_cast<int>(extent2of(var0)), static_cast<int>(extent3of(var0)), static_cast<int>(extent4of(var0)), static_cast<int>(rankof(var0)), static_cast<int>(extentof(var0)), static_cast<int>(sizeofelemof(var0)));
+		std::printf("var1[%d][%d][%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", static_cast<int>(extent1of(var1)), static_cast<int>(extent2of(var1)), static_cast<int>(extent3of(var1)), static_cast<int>(extent4of(var1)), static_cast<int>(rankof(var1)), static_cast<int>(extentof(var1)), static_cast<int>(sizeofelemof(var1)));
+		std::printf("var2[%d][%d][%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", static_cast<int>(extent1of(var2)), static_cast<int>(extent2of(var2)), static_cast<int>(extent3of(var2)), static_cast<int>(extent4of(var2)), static_cast<int>(rankof(var2)), static_cast<int>(extentof(var2)), static_cast<int>(sizeofelemof(var2)));
+		std::printf("var3[%d][%d][%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", static_cast<int>(extent1of(var3)), static_cast<int>(extent2of(var3)), static_cast<int>(extent3of(var3)), static_cast<int>(extent4of(var3)), static_cast<int>(rankof(var3)), static_cast<int>(extentof(var3)), static_cast<int>(sizeofelemof(var3)));
+		std::printf("var4[%d][%d][%d][%d](Rank=%d, Total=%d, ElemtSize=%d)\n", static_cast<int>(extent1of(var4)), static_cast<int>(extent2of(var4)), static_cast<int>(extent3of(var4)), static_cast<int>(extent4of(var4)), static_cast<int>(rankof(var4)), static_cast<int>(extentof(var4)), static_cast<int>(sizeofelemof(var4)));
 	}
 	{
 	std::printf("\n");
@@ -52,30 +52,30 @@ void example_type_traits()
 	data_t* var2;
 	var1.m_val[0] = 0;
 	var2 = &var1;
-	std::printf("sizeof(var1)=%d, sizeof(var2)=%d\n", sizeof(var1), sizeof(var2));
-	std::printf("sizeofvalueof(var1)=%d, sizeofvalueof(var2)=%d\n", sizeofvalueof(var1), sizeofvalueof(var2));
+	std::printf("sizeof(var1)=%d, sizeof(var2)=%d\n", static_cast<int>(sizeof(var1)), static_cast<int>(sizeof(var2)));
+	std::printf("sizeofvalueof(var1)=%d, sizeofvalueof(var2)=%d\n", static_cast<int>(sizeofvalueof(var1)), static_cast<int>(sizeofvalueof(var2)));
 }
 
-	//比較用：std::rank, std::extent
+	//比較用：std::rank, static_cast<int>(std::extent
 	{
 		std::printf("\n");
-		std::printf("----- Test for std::rank, std::extent -----\n");
+		std::printf("----- Test for std::rank, static_cast<int>(std::extent -----\n");
 		typedef int arr0_t;
 		typedef int arr1_t[1];
 		typedef int arr2_t[2][3];
 		typedef int arr3_t[4][5][6];
 		typedef int arr4_t[7][8][9][10];
-		std::printf("arr0_t(Rank=%d)\n", std::rank<arr0_t>::value);
-		std::printf("arr1_t[%d](Rank=%d)\n", std::extent<arr1_t, 0>::value, std::rank<arr1_t>::value);
-		std::printf("arr2_t[%d][%d](Rank=%d)\n", std::extent<arr2_t, 0>::value, std::extent<arr2_t, 1>::value, std::rank<arr2_t>::value);
-		std::printf("arr3_t[%d][%d][%d](Rank=%d)\n", std::extent<arr3_t, 0>::value, std::extent<arr3_t, 1>::value, std::extent<arr3_t, 2>::value, std::rank<arr3_t>::value);
-		std::printf("arr4_t[%d][%d][%d][%d](Rank=%d)\n", std::extent<arr4_t, 0>::value, std::extent<arr4_t, 1>::value, std::extent<arr4_t, 2>::value, std::extent<arr4_t, 3>::value, std::rank<arr4_t>::value);
+		std::printf("arr0_t(Rank=%d)\n", static_cast<int>(std::rank<arr0_t>::value));
+		std::printf("arr1_t[%d](Rank=%d)\n", static_cast<int>(std::extent<arr1_t, 0>::value), static_cast<int>(std::rank<arr1_t>::value));
+		std::printf("arr2_t[%d][%d](Rank=%d)\n", static_cast<int>(std::extent<arr2_t, 0>::value), static_cast<int>(std::extent<arr2_t, 1>::value), static_cast<int>(std::rank<arr2_t>::value));
+		std::printf("arr3_t[%d][%d][%d](Rank=%d)\n", static_cast<int>(std::extent<arr3_t, 0>::value), static_cast<int>(std::extent<arr3_t, 1>::value), static_cast<int>(std::extent<arr3_t, 2>::value), static_cast<int>(std::rank<arr3_t>::value));
+		std::printf("arr4_t[%d][%d][%d][%d](Rank=%d)\n", static_cast<int>(std::extent<arr4_t, 0>::value), static_cast<int>(std::extent<arr4_t, 1>::value), static_cast<int>(std::extent<arr4_t, 2>::value), static_cast<int>(std::extent<arr4_t, 3>::value), static_cast<int>(std::rank<arr4_t>::value));
 		std::printf("\n");
-		std::printf("arr0_t[%d][%d][%d][%d](Rank=%d)\n", std::extent<arr0_t, 0>::value, std::extent<arr0_t, 1>::value, std::extent<arr0_t, 2>::value, std::extent<arr0_t, 3>::value, std::rank<arr0_t>::value);
-		std::printf("arr1_t[%d][%d][%d][%d](Rank=%d)\n", std::extent<arr1_t, 0>::value, std::extent<arr1_t, 1>::value, std::extent<arr1_t, 2>::value, std::extent<arr1_t, 3>::value, std::rank<arr1_t>::value);
-		std::printf("arr2_t[%d][%d][%d][%d](Rank=%d)\n", std::extent<arr2_t, 0>::value, std::extent<arr2_t, 1>::value, std::extent<arr2_t, 2>::value, std::extent<arr2_t, 3>::value, std::rank<arr2_t>::value);
-		std::printf("arr3_t[%d][%d][%d][%d](Rank=%d)\n", std::extent<arr3_t, 0>::value, std::extent<arr3_t, 1>::value, std::extent<arr3_t, 2>::value, std::extent<arr3_t, 3>::value, std::rank<arr3_t>::value);
-		std::printf("arr4_t[%d][%d][%d][%d](Rank=%d)\n", std::extent<arr4_t, 0>::value, std::extent<arr4_t, 1>::value, std::extent<arr4_t, 2>::value, std::extent<arr4_t, 3>::value, std::rank<arr4_t>::value);
+		std::printf("arr0_t[%d][%d][%d][%d](Rank=%d)\n", static_cast<int>(std::extent<arr0_t, 0>::value), static_cast<int>(std::extent<arr0_t, 1>::value), static_cast<int>(std::extent<arr0_t, 2>::value), static_cast<int>(std::extent<arr0_t, 3>::value), static_cast<int>(std::rank<arr0_t>::value));
+		std::printf("arr1_t[%d][%d][%d][%d](Rank=%d)\n", static_cast<int>(std::extent<arr1_t, 0>::value), static_cast<int>(std::extent<arr1_t, 1>::value), static_cast<int>(std::extent<arr1_t, 2>::value), static_cast<int>(std::extent<arr1_t, 3>::value), static_cast<int>(std::rank<arr1_t>::value));
+		std::printf("arr2_t[%d][%d][%d][%d](Rank=%d)\n", static_cast<int>(std::extent<arr2_t, 0>::value), static_cast<int>(std::extent<arr2_t, 1>::value), static_cast<int>(std::extent<arr2_t, 2>::value), static_cast<int>(std::extent<arr2_t, 3>::value), static_cast<int>(std::rank<arr2_t>::value));
+		std::printf("arr3_t[%d][%d][%d][%d](Rank=%d)\n", static_cast<int>(std::extent<arr3_t, 0>::value), static_cast<int>(std::extent<arr3_t, 1>::value), static_cast<int>(std::extent<arr3_t, 2>::value), static_cast<int>(std::extent<arr3_t, 3>::value), static_cast<int>(std::rank<arr3_t>::value));
+		std::printf("arr4_t[%d][%d][%d][%d](Rank=%d)\n", static_cast<int>(std::extent<arr4_t, 0>::value), static_cast<int>(std::extent<arr4_t, 1>::value), static_cast<int>(std::extent<arr4_t, 2>::value), static_cast<int>(std::extent<arr4_t, 3>::value), static_cast<int>(std::rank<arr4_t>::value));
 	}
 
 	//文字列化

@@ -131,7 +131,7 @@ void example_ring_buffer()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			std::printf("offset=%d, size=%d, max_size=%d\n", con.offset(), con.size(), con.max_size());
+			std::printf("offset=%d, size=%d, max_size=%d\n", static_cast<int>(con.offset()), static_cast<int>(con.size()), static_cast<int>(con.max_size()));
 			std::printf("array=");
 			if (con.empty())
 				std::printf("(empty)");
@@ -143,7 +143,7 @@ void example_ring_buffer()
 		//データを逆順に表示
 		auto printReverse = [&con]()
 		{
-			std::printf("offset=%d, size=%d, max_size=%d\n", con.offset(), con.size(), con.max_size());
+			std::printf("offset=%d, size=%d, max_size=%d\n", static_cast<int>(con.offset()), static_cast<int>(con.size()), static_cast<int>(con.max_size()));
 			std::printf("array(reverse)=");
 			if (con.empty())
 				std::printf("(empty)");
@@ -502,7 +502,7 @@ void example_ring_buffer()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			std::printf("offset=%d, size=%d, max_size=%d\n", con.offset(), con.size(), con.max_size());
+			std::printf("offset=%d, size=%d, max_size=%d\n", static_cast<int>(con.offset()), static_cast<int>(con.size()), static_cast<int>(con.max_size()));
 			std::printf("array=");
 			if (con.empty())
 			{
@@ -519,7 +519,7 @@ void example_ring_buffer()
 		//データを逆順に表示
 		auto printReverse = [&con]()
 		{
-			std::printf("offset=%d, size=%d, max_size=%d\n", con.offset(), con.size(), con.max_size());
+			std::printf("offset=%d, size=%d, max_size=%d\n", static_cast<int>(con.offset()), static_cast<int>(con.size()), static_cast<int>(con.max_size()));
 			std::printf("array(reverse)=");
 			if (con.empty())
 			{
@@ -1091,7 +1091,7 @@ void example_ring_buffer()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			std::printf("offset=%d, size=%d, max_size=%d\n", con.offset(), con.size(), con.max_size());
+			std::printf("offset=%d, size=%d, max_size=%d\n", static_cast<int>(con.offset()), static_cast<int>(con.size()), static_cast<int>(con.max_size()));
 			std::printf("array=");
 			if (con.empty())
 			{
@@ -1264,7 +1264,7 @@ void example_ring_buffer()
 		//データを表示
 		auto printAll = [&con]()
 		{
-			std::printf("offset=%d, size=%d, max_size=%d\n", con.offset(), con.size(), con.max_size());
+			std::printf("offset=%d, size=%d, max_size=%d\n", static_cast<int>(con.offset()), static_cast<int>(con.size()), static_cast<int>(con.max_size()));
 			std::printf("array=");
 			if (con.empty())
 			{
@@ -1771,7 +1771,7 @@ void testThread(const char* container_type)
 		{
 			shared_lock_guard<lock_type> lock(con);//リード・ロック取得 ※コンテナを渡してスコープロック
 			std::printf("(%s)\n", caption);
-			std::printf("offset=%d, size=%d, max_size=%d\n", con.offset(), con.size(), con.max_size());
+			std::printf("offset=%d, size=%d, max_size=%d\n", static_cast<int>(con.offset()), static_cast<int>(con.size()), static_cast<int>(con.max_size()));
 			std::this_thread::sleep_for(std::chrono::microseconds(1));
 			std::printf("array=");
 			if (con.empty())

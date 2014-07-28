@@ -56,8 +56,8 @@ void examination_new_delete()
 	std::size_t real_size;
 
 #define CHECK(T) \
-	{ new(forTest, real_size)T; std::printf("new " #T ": sizeof(" #T ")=%d, alignof(" #T ")=%d, real_size=%d\n", sizeof(T), alignof(T), real_size); } \
-	{ new(forTest, real_size)T[2]; std::printf("new " #T "[2]: sizeof(" #T ")=%d, alignof(" #T ")=%d, real_size=%d\n", sizeof(T), alignof(T), real_size); }
+	{ new(forTest, real_size)T; std::printf("new " #T ": sizeof(" #T ")=%d, alignof(" #T ")=%d, real_size=%d\n", static_cast<int>(sizeof(T)), static_cast<int>(alignof(T)), static_cast<int>(real_size)); } \
+	{ new(forTest, real_size)T[2]; std::printf("new " #T "[2]: sizeof(" #T ")=%d, alignof(" #T ")=%d, real_size=%d\n", static_cast<int>(sizeof(T)), static_cast<int>(alignof(T)), static_cast<int>(real_size)); }
 
 	struct st_n{ char m_var[1]; st_n(){} ~st_n(){} };
 	CHECK(st_n);
