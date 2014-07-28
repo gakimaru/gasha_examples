@@ -35,7 +35,7 @@ staticPow<2, e> = {1, 2, 4, 8, 16} (e=0, 1, 2, 3, 4)
 
 ----- Calculate bits for Runtime -----
 0x00000000 : count= 0, MSB=-1, LSB=-1, near-pow2(GE)=0x00000000, near-pow2(LE)=0x00000000, adjustAlign<ALIGN>=0x00000000,0x00000000(ALIGN=4,256)
-0xffffffff : count=32, MSB=31, LSB= 0, near-pow2(GE)=0x00000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0x00000000,0x00000000(ALIGN=4,256)
+0xffffffff : count=32, MSB=31, LSB= 0, near-pow2(GE)=0x00000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0x100000000,0x100000000(ALIGN=4,256)
 0x80000000 : count= 1, MSB=31, LSB=31, near-pow2(GE)=0x80000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0x80000000,0x80000000(ALIGN=4,256)
 0x00000001 : count= 1, MSB= 0, LSB= 0, near-pow2(GE)=0x00000001, near-pow2(LE)=0x00000001, adjustAlign<ALIGN>=0x00000004,0x00000100(ALIGN=4,256)
 0x55555555 : count=16, MSB=30, LSB= 0, near-pow2(GE)=0x80000000, near-pow2(LE)=0x40000000, adjustAlign<ALIGN>=0x55555558,0x55555600(ALIGN=4,256)
@@ -54,7 +54,7 @@ staticPow<2, e> = {1, 2, 4, 8, 16} (e=0, 1, 2, 3, 4)
 
 ----- Calculate bits for Meta-programming -----
 0x00000000 : count= 0, MSB=-1, LSB=-1, near-pow2(GE)=0x00000000, near-pow2(LE)=0x00000000, adjustAlign<ALIGN>=0x00000000,0x00000000(ALIGN=4,256)
-0xffffffff : count=32, MSB=31, LSB= 0, near-pow2(GE)=0x00000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0x00000000,0x00000000(ALIGN=4,256)
+0xffffffff : count=32, MSB=31, LSB= 0, near-pow2(GE)=0x00000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0x100000000,0x100000000(ALIGN=4,256)
 0x80000000 : count= 1, MSB=31, LSB=31, near-pow2(GE)=0x80000000, near-pow2(LE)=0x80000000, adjustAlign<ALIGN>=0x80000000,0x80000000(ALIGN=4,256)
 0x00000001 : count= 1, MSB= 0, LSB= 0, near-pow2(GE)=0x00000001, near-pow2(LE)=0x00000001, adjustAlign<ALIGN>=0x00000004,0x00000100(ALIGN=4,256)
 0x55555555 : count=16, MSB=30, LSB= 0, near-pow2(GE)=0x80000000, near-pow2(LE)=0x40000000, adjustAlign<ALIGN>=0x55555558,0x55555600(ALIGN=4,256)
@@ -73,8 +73,8 @@ staticPow<2, e> = {1, 2, 4, 8, 16} (e=0, 1, 2, 3, 4)
 
 ----- Performance test for coutnBits() -----
 [countBits_custom() * 10000000 times]
-*elapsed time = 0.128033700 sec (bit_count_sum=0x06d22240)
+*elapsed time = 0.130007000 sec (bit_count_sum=0x06d22240)
 [countBits_builtin() * 10000000 times]
-*elapsed time = 0.033001900 sec (bit_count_sum=0x06d22240)
+*elapsed time = 0.023001500 sec (bit_count_sum=0x06d22240)
 [countBits_sse() * 10000000 times]
-*elapsed time = 0.032975900 sec (bit_count_sum=0x06d22240)
+*elapsed time = 0.024000100 sec (bit_count_sum=0x06d22240)

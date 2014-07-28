@@ -42,7 +42,7 @@ Released under the [MIT license][MIT].
 > コンパイル時にコンパイラの種類とバージョンを自動判別し、コンパイラ固有仕様をC++11仕様に偽装するなどして、ソースコードレベルでの共通性を高めています。  
 > 
 > * 例えば、alignof(), alignas(), thread_local などのC++11仕様を、非対応のコンパイラでも使用できるようにしています。  
-> * 現状では、Visual C++ 12.0（Visual Studio 2013）の Win32, x64、および、GCC4.6 に対応しています。  
+> * 現状では、Visual C++ 12.0（Visual Studio 2013）の Win32, x64、および、GCC4.7 以上に対応しています。  
 
 ###プロジェクト固有のライブラリのカスタマイズに対応しています。###
 > より柔軟に多様なプラットフォーム／プロジェクトでライブラリを共通利用できるように、ライブラリの挙動をカスタマイズし易いように構成しています。  
@@ -126,11 +126,13 @@ Released under the [MIT license][MIT].
 
 **【推奨コンパイラ】**  
 * Visual C++ 12.0 (Visual Studio 2013) 以降  
-* GCC 4.6 以降  
+* GCC 4.7 以降  
 
 開発には下記のコンパイラを用いています。  
 * Visual C++ 12.0 (Visual Studio 2013)  ※Win32, x64 プラットフォームで開発
 * GCC 4.8.2 (32bit版Cygwin環境)  
+* GCC 4.7.2 (64bit版FedoraCore18)  
+* GCC 4.8.2 (64bit版CentOD7.0)  
 
 > 今後 Clang への対応を検討しています。  
 
@@ -204,7 +206,7 @@ Released under the [MIT license][MIT].
 > * コンパイラの種類やバージョンを判別し、必要に応じて `nullptr`, `override`, `alignas`, `thread_local` などのC++11仕様に合わせた処理の偽装版を有効化し、コード互換性の向上に寄与します。  
 > * 同様に、`__FUNCTION__`, `__PRETTY_FUNCTION__` などの標準的なマクロも各コンパイラで共通利用可能にします。  
 > * プロジェクト固有のカスタマイズが、対象プラットフォーム上で動作するかチェックする関数 `buildSettingsDiagnosticTest()` を用意しています。  
-> * 現状、x86/x64系CPU ／ Windows + VC++12.0(VS2013) ／ Cygwin + GCC4.8.2 の環境でしか動作確認しておらず、他の環境に適合する状態ではありませんが、対象環境を拡張し易いように構成しています。  
+> * 現状、x86/x64系CPU ／ Windows + VC++12.0(VS2013) ／ Cygwin(32bit) + GCC4.8.2 ／ Linux(64bit) + GCC4.7.2/4.8.2 の環境でしか動作確認しておらず、他の環境に適合する状態ではありませんが、対象環境を拡張し易いように構成しています。  
 
 > ＜注釈＞  
 > * **※1**：build_settings.h が幾つかの設定ファイルをインクルードしてまとめています。

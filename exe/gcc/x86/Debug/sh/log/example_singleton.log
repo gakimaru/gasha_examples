@@ -14,32 +14,34 @@ common_data2: val1=0, val2=0
 [ Create Singleton Instance(2) : common_data1_t ]
 ----- Debug-info for singletonDebug -----
 Accessing Count: 1
-Created:         0.000086000 sec, "test1:create(2)"
+Created:         0.000091000 sec, "test1:create(2)"
 Destroyed:       0.000000000 sec, "(null)"
 Access Info: (Count=1)
-  - [2] 0.000087000 sec, "test1-D'": thread="(no name)"(0x092330e8)
+  - [2] 0.000092000 sec, "test1-D'": thread="(no name)"(0x092330e8)
 -----------------------------------------
 ----- Debug-info for singletonDebug -----
-Accessing Count: 6
-Created:         0.000086000 sec, "test1:create(2)"
+Accessing Count: 7
+Created:         0.000091000 sec, "test1:create(2)"
 Destroyed:       0.000000000 sec, "(null)"
-Access Info: (Count=7)
-  - [107] 0.028328000 sec, "Write-Proc[0][3]": thread="Thread1A(3)"(0x52973fb2)
-  - [167] 0.089333000 sec, "Write-Proc[0][8]": thread="Thread1A(0)"(0x9cd97637)
-  - [173] 0.096328000 sec, "Write-Proc[0][14]": thread="Thread1A(12)"(0xc424000a)
-  - [179] 0.104332000 sec, "test1-E": thread="MainThread"(0x092330e8)
-  - [178] 0.104332000 sec, "Read-Proc[1][8]": thread="Thread1B(10)"(0x1b765313)
-  - [180] 0.104333000 sec, "Write-Proc[0][11]": thread="Thread1A(9)"(0x0eb3394d)
-  - [181] 0.104334000 sec, "Write-Proc[0][3]": thread="Thread1A(6)"(0xcf8d96f5)
+Access Info: (Count=9)
+  - [210] 0.118859000 sec, "Write-Proc[0][13]": thread="Thread1A(12)"(0xc424000a)
+  - [225] 0.134867000 sec, "Write-Proc[0][12]": thread="Thread1A(3)"(0x52973fb2)
+  - [235] 0.141851000 sec, "Write-Proc[0][19]": thread="Thread1A(0)"(0x9cd97637)
+  - [240] 0.145884000 sec, "Write-Proc[0][16]": thread="Thread1A(9)"(0x877b3d62)
+  - [242] 0.147865000 sec, "Read-Proc[1][12]": thread="Thread1B(7)"(0x0670768b)
+  - [243] 0.147865000 sec, "Read-Proc[1][7]": thread="Thread1B(10)"(0x1b765313)
+  - [244] 0.147865000 sec, "test1-E": thread="MainThread"(0x092330e8)
+  - [245] 0.147866000 sec, "Read-Proc[1][9]": thread="Thread1B(4)"(0xd6e3a4e9)
+  - [246] 0.147867000 sec, "Write-Proc[0][6]": thread="Thread1A(6)"(0xcf8d96f5)
 -----------------------------------------
 [ Access Singleton : common_data1_t(3) ]
 common_data1: val1=1000, val2=-1000
 [ Access Singleton : common_data2_t(3) ]
-common_data2: val1=913, val2=-966
+common_data2: val1=961, val2=-975
 ----- Debug-info for singletonDebug -----
 Accessing Count: 0
-Created:         0.000086000 sec, "test1:create(2)"
-Destroyed:       2.000593000 sec, "test1:destroy"
+Created:         0.000091000 sec, "test1:create(2)"
+Destroyed:       1.869108000 sec, "test1:destroy"
 Access Info: (Count=0)
 -----------------------------------------
 - end -
