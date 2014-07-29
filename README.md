@@ -86,6 +86,9 @@ Ver.`1.01` [master] `Jul.28.2014` M.Itagaki
 > > `sub/gasha` ライブラリ本体  
 > > `sub/gasha_settings` プロジェクト固有のライブラリ挙動カスタマイズ用  
 > > `sub/gasha_src` ライブラリソース
+> 
+> なお、最初にリポジトリをクローンする際に、`--recursive` オプションを指定すると、クローンとサブモジュールの更新を一括して行うことができます。  
+> $ git clone https://github.com/gakimaru/gasha_examples.git --recursive
 
 3. **シェルスクリプト／ソースファイルの改行コード調整**  
 > Widnowsでリポジトリのクローンを作成すると、gitの自動改行コード変換により、シェルスクリプトの改行コードが CRLF となってしまい、Cygwin で実行できなくなります。  
