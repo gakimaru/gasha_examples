@@ -38,6 +38,18 @@
 #include <mutex>//C++11 std::mutex
 #pragma warning(pop)//【VC++】ワーニング設定を復元
 
+//【関数／実体定義部】のインクルード
+//※明示的なインスタンス化を不要にするために最初にインクルードする
+//※通常は、project_last_settings.h にて、GASHA_***_ALLOCATOR_ALLWAYS_TOGETHER_CPP_H を有効化する方が良い。
+#include <gasha/mono_allocator.cpp.h>//単一アロケータ
+#include <gasha/stack_allocator.cpp.h>//スタックアロケータ
+#include <gasha/lf_stack_allocator.cpp.h>//ロックフリースタックアロケータ
+#include <gasha/dual_stack_allocator.cpp.h>//双方向スタックアロケータ
+#include <gasha/lf_dual_stack_allocator.cpp.h>//ロックフリー双方向スタックアロケータ
+#include <gasha/pool_allocator.cpp.h>//プールアロケータ
+#include <gasha/lf_pool_allocator.cpp.h>//ロックフリープールアロケータ
+#include <gasha/std_allocator.cpp.h>//標準アロケータ
+
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
 //----------------------------------------

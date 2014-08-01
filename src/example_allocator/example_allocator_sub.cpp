@@ -10,6 +10,8 @@
 
 #include "example_allocator.h"//アロケータテスト
 
+GASHA_USING_NAMESPACE;//ネームスペース使用
+
 //明示的なインスタンス化
 
 #include <gasha/stack_allocator.cpp.h>//スタックアロケータ
@@ -20,12 +22,6 @@
 #include <gasha/pool_allocator.cpp.h>//プールアロケータ
 #include <gasha/lf_pool_allocator.cpp.h>//ロックフリープールアロケータ
 #include <gasha/std_allocator.cpp.h>//標準アロケータ
-
-#include <gasha/spin_lock.h>//スピンロック
-
-GASHA_USING_NAMESPACE;//ネームスペース使用
-
-#if 1
 
 GASHA_INSTANCING_stackAllocator_withLock(lock_type);
 GASHA_INSTANCING_smartStackAllocator_withLock(lock_type);
@@ -39,12 +35,11 @@ GASHA_INSTANCING_lfSmartDualStackAllocator();
 
 GASHA_INSTANCING_poolAllocator_withLock(16, lock_type);
 GASHA_INSTANCING_lfPoolAllocator(16);
+GASHA_INSTANCING_poolAllocator(8);
 
 GASHA_INSTANCING_monoAllocator_withLock(lock_type);
 
 GASHA_INSTANCING_stdAllocator_withLock(lock_type);
 GASHA_INSTANCING_stdAlignAllocator_withLock(lock_type);
-
-#endif
 
 // End of file

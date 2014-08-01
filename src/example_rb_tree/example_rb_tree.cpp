@@ -373,6 +373,7 @@ void example_rb_tree()
 	showListDesc();
 	prev_time = printElapsedTime(prev_time);//経過時間を表示
 
+#ifdef GASHA_RB_TREE_ENABLE_RANDOM_ACCESS_INTERFACE
 #ifdef TEST_ITERATOR_OPERATION
 	{
 		std::printf("\n");
@@ -481,7 +482,8 @@ void example_rb_tree()
 		std::printf("rite - rite_end = %d\n", rite - rite_end);
 		std::printf("--------------------[iterator operattion:end]\n");
 	}
-#endif
+#endif//TEST_ITERATOR_OPERATION
+#endif//GASHA_RB_TREE_ENABLE_RANDOM_ACCESS_INTERFACE
 
 #ifdef TEST_LOCK_OPERATION
 	//ロック操作テスト

@@ -312,6 +312,20 @@ void testAllAdapters()
 		EXPR_PLAIN(polyAllocator poly_allocator(adapter););
 	}
 
+	//プールアロケータ
+	{
+		EXPR_PLAIN(poolAllocator<16> pool_allocator(buff, sizeof(buff), 32, 8););
+		EXPR_PLAIN(auto adapter = pool_allocator.adapter(););
+		EXPR_PLAIN(polyAllocator poly_allocator(adapter););
+	}
+
+	//ロックフリープールアロケータ
+	{
+		EXPR_PLAIN(lfPoolAllocator<16> lf_pool_allocator(buff, sizeof(buff), 32, 8););
+		EXPR_PLAIN(auto adapter = lf_pool_allocator.adapter(););
+		EXPR_PLAIN(polyAllocator poly_allocator(adapter););
+	}
+
 	//標準アロケータ
 	{
 		EXPR_PLAIN(stdAllocator<> std_allocator;);

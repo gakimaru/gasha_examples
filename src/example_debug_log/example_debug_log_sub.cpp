@@ -27,6 +27,7 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 static std::thread* s_threadInstance = nullptr;
 #endif//GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
 
+#ifdef GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
 //----------------------------------------
 //ログキューモニタースレッド
 static void monitor_thread()
@@ -42,6 +43,7 @@ static void monitor_thread()
 	//終了メッセージ
 	std::printf("END: logQueueMonitor thread\n");
 };
+#endif//GASHA_LOG_IS_ENABLED//デバッグログ無効時は無効化
 
 //----------------------------------------
 //ログキューモニタースレッドを起動

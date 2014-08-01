@@ -1,10 +1,55 @@
 ----- Test for namedRef -----
-s_valA=0
-load<int>(): val_a=0, s_valA=0
-ref<int>(): val_a=1, s_valA=1
-cref<int>(): val_a=1, s_valA=1
-store<int>(): s_valA=3
-load<int>(): val_b=123, s_valB=123
-ref<data_t>(): data_c={ 1, {2, 3}, 4.0}, s_dataC={ 1, {2, 3}, 4.0}
-ref<data_t>(): data_c={ 1, {2, 3}, 4.0}, s_dataC={ 1, {2, 3}, 4.0}
+load<int>(): valA=0
+load<int>(): valA=0
+store<int>(): valA=1
+ref<int>(): valA=2
+cref<int>(): valA=2
+load<int>(): valB=123
+cref<int>(): valB=123
+ref<data_t>(): dataC={ 1, {2, 3}, 4.0}
+ref<data_t>(): dataC={ 1, {2, 3}, 4.0}
+inc<int>: valA=3
+incWA<int>: valA=4
+incSA<int>: valA=5
+dec<int>: valA=4
+decWA<int>: valA=3
+decSA<int>: valA=2
+add<int>: valA=3
+addWA<int>: valA=4
+addSA<int>: valA=5
+sub<int>: valA=4
+subWA<int>: valA=3
+subSA<int>: valA=2
+mul<int>: valA=4
+mulWA<int>: valA=8
+mulSA<int>: valA=10
+div<int>: valA=5
+mod<int>: valA=1
+bitAnd<int>: valA=1
+bitOr<int>: valA=15
+bitXor<int>: valA=0
+bitNot<int>: valA=-1
+lShift<int>: valA=-4
+rShift<int>: valA=-1
+bitOn<int>: valA=-1
+bitOff<int>: valA=-256
+eq<int>: valA=false
+ne<int>: valA=true
+gt<int>: valA=false
+ge<int>: valA=false
+lt<int>: valA=true
+le<int>: valA=true
+inOn<int>: valA=false
+inOff<int>: valA=true
+logicalAnd<int>: valA=true
+logicalOr<int>: valA=true
+isTrue<int>: valA=true
+isFalse<int>: valA=false
+----------------------------------------
+Registered data items:(num=5)
+data: name(crc)=0x214007cc, type=struct data_t, readble=yes, writable=yes
+data: name(crc)=0x4f464796, type=float, readble=yes, writable=yes
+data: name(crc)=0x7ab7538a, type=int, readble=yes, writable=yes
+data: name(crc)=0xbd2dc495, type=double, readble=yes, writable=yes
+data: name(crc)=0x69e7a07e, type=int, readble=yes, writable=no
 - end -

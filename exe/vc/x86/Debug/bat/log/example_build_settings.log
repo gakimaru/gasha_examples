@@ -19,8 +19,8 @@ __PRETTY_FUNCTION__="void __cdecl example_build_settings::test::func(void)"
 __FUNCSIG__="void __cdecl example_build_settings::test::func(void)"
 __func__="example_build_settings::test::func"
 __FUNCDNAME__="?func@test@?1??example_build_settings@@YAXXZ@SAXXZ"
-__DATE__="Jul 29 2014"
-__TIME__="07:37:26"
+__DATE__="Aug  1 2014"
+__TIME__="21:27:29"
 __TIMESTAMP__="Mon Jul 28 23:18:46 2014"
 
 GASHA_FUNC_NAME()="example_build_settings::test::func"
@@ -55,7 +55,7 @@ Diagnostic Mode: Library
 [ENABLED] Poly-allocator(override on standard new/delete operator) is AVAILABLE.
 [OK] Debugger-break-point is AVAILABLE.
 [OK] Debug-log is ENABLED.
-[--] Debug-log NOT use log-queue.
+[OK] Debug-log USE log-queue.
 [OK] TLS initializer is COMPLETE.
 [OK] `stdin` is AVAILABLE.
 cpu_string="Genunteline"
@@ -108,15 +108,19 @@ Language: C++ (__cplusplus=199711) [C++98] [C++03]
 [Yes]       `_aligned_malloc()`(VC++ style) is AVAILABLE.
 [Yes]       `_aligned_free()`(VC++ style) is AVAILABLE.
 [No]        `mallinfo()`(GCC style) is available.
+[No]        `__attribute__((constructor))`(GCC style) is AVAILABLE.
+[No]        `__attribute__((constructor(PRIORITY)))`(GCC style) is AVAILABLE.
+[No]        `__attribute__((destructor))`(GCC style) is AVAILABLE.
+[No]        `__attribute__((destructor(PRIORITY)))`(GCC style) is AVAILABLE.
 [Yes]       `__cpuid()`,_`xgetbv()`,`_XCR_XFEATURE_ENABLED_MASK`(VC++ style) is AVAILABLE.
 [Camouflage]`GASHA_NOINLINE` is available.
 [Camouflage]`GASHA_ALWAYS_INLINE` is available.
 
 [Yes]       `__FILE__` is AVAILABLE. (ex. __FILE__ = "e:\work\github\gasha_examples\sub\gasha\include\gasha\build_settings\build_settings_diag.inl")
-[Yes]       `__LINE__` is AVAILABLE. (ex. __LINE__ = 610)
-[Yes]       `__DATE__` is AVAILABLE. (ex. __DATE__ = "Jul 29 2014")
-[Yes]       `__TIME__` is AVAILABLE. (ex. __TIME__ = "07:37:04")
-[Yes]       `__TIMESTAMP__` is AVAILABLE. (ex. __TIMESTAMP__ = "Sat Jul 26 08:30:47 2014")
+[Yes]       `__LINE__` is AVAILABLE. (ex. __LINE__ = 632)
+[Yes]       `__DATE__` is AVAILABLE. (ex. __DATE__ = "Aug  1 2014")
+[Yes]       `__TIME__` is AVAILABLE. (ex. __TIME__ = "21:27:05")
+[Yes]       `__TIMESTAMP__` is AVAILABLE. (ex. __TIMESTAMP__ = "Thu Jul 31 17:14:59 2014")
 [Yes]       `__FUNCTION__` is AVAILABLE. (ex. __FUNCTION__ = "gasha::buildSettingsDiagnosticTest")
 [Camouflage]`__PRETTY_FUNCTION__`(GCC Style) is available. (ex. __PRETTY_FUNCTION__ = "bool __cdecl gasha::buildSettingsDiagnosticTest<struct gasha::diagForLibrary_internal_t>(char *,const unsigned int,unsigned int &,const struct gasha::diagForLibrary_internal_t)")
 [Camouflage]`__func__`(GCC Style) is available. (ex. __func__ = "gasha::buildSettingsDiagnosticTest")
@@ -125,8 +129,8 @@ Language: C++ (__cplusplus=199711) [C++98] [C++03]
 
 [Yes]       `GASHA_FUNC_NAME()` is AVAILABLE. (ex. GASHA_FUNC_NAME() = "gasha::buildSettingsDiagnosticTest")
 [Yes]       `GASHA_SRC_FILE()` is AVAILABLE. (ex. GASHA_SRC_FILE() = "build_settings_diag.inl")
-[Yes]       `GASHA_SRC_FILE_LINE()` is AVAILABLE. (ex. GASHA_SRC_FILE_LINE() = "build_settings_diag.inl(751)")
-[Yes]       `GASHA_SRC_FILE_LINE_TIME()` is AVAILABLE. (ex. GASHA_SRC_FILE_LINE_TIME() = "build_settings_diag.inl(752)[Sat Jul 26 08:30:47 2014]")
+[Yes]       `GASHA_SRC_FILE_LINE()` is AVAILABLE. (ex. GASHA_SRC_FILE_LINE() = "build_settings_diag.inl(773)")
+[Yes]       `GASHA_SRC_FILE_LINE_TIME()` is AVAILABLE. (ex. GASHA_SRC_FILE_LINE_TIME() = "build_settings_diag.inl(774)[Thu Jul 31 17:14:59 2014]")
 
 ------------------------------------------------------------------------------
 [ Build-configuratoin ]
@@ -141,7 +145,7 @@ Configuration name: FULL_DEBUG
 [Yes] 'Symbols' are contained.
 
 ------------------------------------------------------------------------------
-message size = 5047 bytes.
+message size = 5333 bytes.
 
 ==============================================================================
 Diagnostic Mode: Current
@@ -156,7 +160,7 @@ Diagnostic Mode: Current
 [ENABLED] Poly-allocator(override on standard new/delete operator) is AVAILABLE.
 [OK] Debugger-break-point is AVAILABLE.
 [OK] Debug-log is ENABLED.
-[--] Debug-log NOT use log-queue.
+[OK] Debug-log USE log-queue.
 [OK] TLS initializer is COMPLETE.
 [OK] `stdin` is AVAILABLE.
 cpu_string="Genunteline"
@@ -209,15 +213,19 @@ Language: C++ (__cplusplus=199711) [C++98] [C++03]
 [Yes]       `_aligned_malloc()`(VC++ style) is AVAILABLE.
 [Yes]       `_aligned_free()`(VC++ style) is AVAILABLE.
 [No]        `mallinfo()`(GCC style) is available.
+[No]        `__attribute__((constructor))`(GCC style) is AVAILABLE.
+[No]        `__attribute__((constructor(PRIORITY)))`(GCC style) is AVAILABLE.
+[No]        `__attribute__((destructor))`(GCC style) is AVAILABLE.
+[No]        `__attribute__((destructor(PRIORITY)))`(GCC style) is AVAILABLE.
 [Yes]       `__cpuid()`,_`xgetbv()`,`_XCR_XFEATURE_ENABLED_MASK`(VC++ style) is AVAILABLE.
 [Camouflage]`GASHA_NOINLINE` is available.
 [Camouflage]`GASHA_ALWAYS_INLINE` is available.
 
 [Yes]       `__FILE__` is AVAILABLE. (ex. __FILE__ = "e:\work\github\gasha_examples\sub\gasha\include\gasha\build_settings\build_settings_diag.inl")
-[Yes]       `__LINE__` is AVAILABLE. (ex. __LINE__ = 610)
-[Yes]       `__DATE__` is AVAILABLE. (ex. __DATE__ = "Jul 29 2014")
-[Yes]       `__TIME__` is AVAILABLE. (ex. __TIME__ = "07:37:26")
-[Yes]       `__TIMESTAMP__` is AVAILABLE. (ex. __TIMESTAMP__ = "Sat Jul 26 08:30:47 2014")
+[Yes]       `__LINE__` is AVAILABLE. (ex. __LINE__ = 632)
+[Yes]       `__DATE__` is AVAILABLE. (ex. __DATE__ = "Aug  1 2014")
+[Yes]       `__TIME__` is AVAILABLE. (ex. __TIME__ = "21:27:29")
+[Yes]       `__TIMESTAMP__` is AVAILABLE. (ex. __TIMESTAMP__ = "Thu Jul 31 17:14:59 2014")
 [Yes]       `__FUNCTION__` is AVAILABLE. (ex. __FUNCTION__ = "gasha::buildSettingsDiagnosticTest")
 [Camouflage]`__PRETTY_FUNCTION__`(GCC Style) is available. (ex. __PRETTY_FUNCTION__ = "bool __cdecl gasha::buildSettingsDiagnosticTest<struct gasha::diagForProject_t>(char *,const unsigned int,unsigned int &,const struct gasha::diagForProject_t)")
 [Camouflage]`__func__`(GCC Style) is available. (ex. __func__ = "gasha::buildSettingsDiagnosticTest")
@@ -226,8 +234,8 @@ Language: C++ (__cplusplus=199711) [C++98] [C++03]
 
 [Yes]       `GASHA_FUNC_NAME()` is AVAILABLE. (ex. GASHA_FUNC_NAME() = "gasha::buildSettingsDiagnosticTest")
 [Yes]       `GASHA_SRC_FILE()` is AVAILABLE. (ex. GASHA_SRC_FILE() = "build_settings_diag.inl")
-[Yes]       `GASHA_SRC_FILE_LINE()` is AVAILABLE. (ex. GASHA_SRC_FILE_LINE() = "build_settings_diag.inl(751)")
-[Yes]       `GASHA_SRC_FILE_LINE_TIME()` is AVAILABLE. (ex. GASHA_SRC_FILE_LINE_TIME() = "build_settings_diag.inl(752)[Sat Jul 26 08:30:47 2014]")
+[Yes]       `GASHA_SRC_FILE_LINE()` is AVAILABLE. (ex. GASHA_SRC_FILE_LINE() = "build_settings_diag.inl(773)")
+[Yes]       `GASHA_SRC_FILE_LINE_TIME()` is AVAILABLE. (ex. GASHA_SRC_FILE_LINE_TIME() = "build_settings_diag.inl(774)[Thu Jul 31 17:14:59 2014]")
 
 ------------------------------------------------------------------------------
 [ Build-configuratoin ]
@@ -242,6 +250,6 @@ Configuration name: FULL_DEBUG
 [Yes] 'Symbols' are contained.
 
 ------------------------------------------------------------------------------
-message size = 4993 bytes.
+message size = 5279 bytes.
 
 - End -
