@@ -24,6 +24,7 @@ PROJ_SRC_DIR := $(SRC_BASE_DIR)/$(PROG_NAME)
 SRCS := \
 	main.cpp \
 	$(PROJ_SRC_DIR)/example_named_ref.cpp \
+	$(PROJ_SRC_DIR)/example_named_ref_sub.cpp \
 
 # インクルードディレクトリ
 INCLIDE_DIRS := \
