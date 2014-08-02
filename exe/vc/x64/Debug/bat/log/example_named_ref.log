@@ -809,6 +809,72 @@ logicalOr<T>("valL", true): true
 isTrue<T>("valL"): true
 isFalse<T>("valL"): false
 
+--- testCommon1<struct uint128_t>("valM") ---
+isRegistered<T>("valM"): true
+isReadOnly<T>("valM"): false
+isReadable<T>("valM"): true
+isWritable<T>("valM"): true
+isWritableRanged<T>("valM"): true
+isWritableWraparound<T>("valM"): true
+isWritableSaturation<T>("valM"): false
+max<T>("valM"): 3
+min<T>("valM"): 1
+load<T>("valM"): 123
+cref<T>("valM"): 123
+ref<T>("valM"): 313326368
+ref<T>("valM")=1: 1
+store<T>("valM", 1): 2
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+dec<T>("valM"): 2
+dec<T>("valM"): 1
+dec<T>("valM"): 1
+dec<T>("valM"): 1
+dec<T>("valM"): 1
+dec<T>("valM"): 1
+dec<T>("valM"): 1
+dec<T>("valM"): 1
+dec<T>("valM"): 1
+dec<T>("valM"): 1
+add<T>("valM", 5): 3
+add<T>("valM", 5): 2
+add<T>("valM", 5): 1
+add<T>("valM", 5): 3
+add<T>("valM", 5): 2
+add<T>("valM", 5): 1
+add<T>("valM", 5): 3
+add<T>("valM", 5): 2
+add<T>("valM", 5): 1
+add<T>("valM", 5): 3
+sub<T>("valM", 5): 1
+sub<T>("valM", 5): 2
+sub<T>("valM", 5): 3
+sub<T>("valM", 5): 1
+sub<T>("valM", 5): 2
+sub<T>("valM", 5): 3
+sub<T>("valM", 5): 1
+sub<T>("valM", 5): 2
+sub<T>("valM", 5): 3
+sub<T>("valM", 5): 1
+eq<T>("valM", 15): false
+ne<T>("valM", 15): true
+gt<T>("valM", 15): false
+ge<T>("valM", 15): true
+lt<T>("valM", 15): true
+le<T>("valM", 15): true
+logicalAnd<T>("valM", 15): true
+logicalOr<T>("valM", 15): true
+isTrue<T>("valM"): true
+isFalse<T>("valM"): false
+
 --- testCommon2<int>("unregistered data") ---
 isRegistered<T>("unregistered data"): false
 isReadOnly<T>("unregistered data"): false
@@ -827,9 +893,10 @@ isWritableRanged<T>("valA"): false
 isWritableWraparound<T>("valA"): false
 isWritableSaturation<T>("valA"): false
 ----------------------------------------
-Registered data items:(num=13)
+Registered data items:(num=14)
 data: name(crc)=0x69e7a07e, type=int, access_type=ReadOnly
 data: name(crc)=0xe33ef8b1, type=double, access_type=Writable(Wrap-around)
+data: name(crc)=0x37f49c5a, type=struct uint128_t, access_type=Writable(Wrap-around)
 data: name(crc)=0xbd2dc495, type=double, access_type=Writable
 data: name(crc)=0x11557bb2, type=double, access_type=Writable(Saturation)
 data: name(crc)=0x5c16b462, type=unsigned short, access_type=Writable(Saturation)

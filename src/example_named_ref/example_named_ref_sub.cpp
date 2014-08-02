@@ -32,6 +32,7 @@ namespace//匿名ネームスペース
 	static double s_valJ = 123.;//double型データ
 	static double s_valK = 123.;//double型データ
 	static bool s_valL = true;//bool型データ
+	static uint128_t s_valM(0, 123);//uint128型
 
 	//名前付きデータ参照の自動登録
 	static void registNamedRef() GASHA_CONSTRUCTOR_ATTRIBUTE;
@@ -57,6 +58,8 @@ namespace//匿名ネームスペース
 		static const double s_valK_max = 3.5f, s_valK_min = 1.5f;
 		refTbl.regist("valK", s_valK, refTableWithLock::saturation, s_valK_max, s_valK_min);
 		refTbl.regist("valL", s_valL);
+		static const uint128_t s_valM_max(0, 3), s_valM_min(0, 1);
+		refTbl.regist("valM", s_valM, refTableWithLock::wraparound, s_valM_max, s_valM_min);
 	}
 	//名前付きデータ参照の登録解除
 	//※デストラクタ処理のテスト用（本来プログラム終了に合わせて登録を解除する必要はない）
@@ -77,6 +80,7 @@ namespace//匿名ネームスペース
 		refTbl.unregist("valJ");
 		refTbl.unregist("valK");
 		refTbl.unregist("valL");
+		refTbl.unregist("valM");
 	}
 #if !defined(GASHA_HAS_CONSTRUCTOR_ATTRIBUTE) || !defined(GASHA_HAS_DESTRUCTOR_ATTRIBUTE)
 	//コンストラクタ／デストラクタ属性非対応のコンパイラ用呼び出し処理

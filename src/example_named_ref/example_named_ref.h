@@ -14,8 +14,10 @@
 
 #include <gasha/named_ref.h>//名前付きデータ参照
 #include <gasha/shared_spin_lock.h>//共有スピンロック
+#include <gasha/limits.h>//限界値
 
 #include <cstddef>//std::size_t
+#include <cstdint>//C++11 std::int64_t, std::uint64_t
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
@@ -44,6 +46,62 @@ struct data_t
 	char m_memberB[2];
 	float m_memberC;
 };
+
+//----------------------------------------
+//簡易符号無し128ビット型
+//※加減算のみ対応
+struct uint128_t
+{
+	std::uint64_t m_hi;
+	std::uint64_t m_lo;
+
+	inline bool operator==(const uint128_t rhs) const { return m_hi == rhs.m_hi && m_lo == rhs.m_lo; }
+	inline bool operator!=(const uint128_t rhs) const { return m_hi != rhs.m_hi || m_lo != rhs.m_lo; }
+	inline bool operator<(const uint128_t rhs) const { return m_hi < rhs.m_hi || (m_hi == rhs.m_hi && m_lo < rhs.m_lo); }
+	inline bool operator<=(const uint128_t rhs) const { return m_hi <= rhs.m_hi || (m_hi == rhs.m_hi && m_lo <= rhs.m_lo); }
+	inline bool operator>(const uint128_t rhs) const { return m_hi > rhs.m_hi || (m_hi == rhs.m_hi && m_lo > rhs.m_lo); }
+	inline bool operator>=(const uint128_t rhs) const { return m_hi >= rhs.m_hi || (m_hi == rhs.m_hi && m_lo >= rhs.m_lo); }
+
+	inline bool operator==(const std::uint64_t rhs) const { return m_hi == 0 && m_lo == rhs; }
+	inline bool operator!=(const std::uint64_t rhs) const { return m_hi != 0 || m_lo != rhs; }
+	inline bool operator<(const std::uint64_t rhs) const { return m_hi < 0 || (m_hi == 0 && m_lo < rhs); }
+	inline bool operator<=(const std::uint64_t rhs) const { return m_hi <= 0 || (m_hi == 0 && m_lo <= rhs); }
+	inline bool operator>(const std::uint64_t rhs) const { return m_hi > 0 || (m_hi == 0 && m_lo > rhs); }
+	inline bool operator>=(const std::uint64_t rhs) const { return m_hi >= 0 || (m_hi == 0 && m_lo >= rhs); }
+
+	inline operator bool() const { return m_hi != 0 || m_lo != 0; }
+
+	inline uint128_t& operator++(){ ++m_lo; if (m_lo == 0) ++m_hi; return *this; }
+	inline uint128_t operator++(int){ const uint128_t prev = *this; ++(*this); return prev; }
+	inline uint128_t& operator--(){ --m_lo; if (m_lo == 0xffffffff) --m_hi; return *this; }
+	inline uint128_t operator--(int){ const uint128_t prev = *this; --(*this); return prev; }
+	inline uint128_t& operator+=(const uint128_t rhs){ const std::uint64_t prev = m_lo; m_lo += rhs.m_lo; m_hi += rhs.m_hi; if (prev > m_lo) ++m_hi; return *this; }
+	inline uint128_t operator+(const uint128_t rhs) const { uint128_t result = *this; result += rhs; return result; }
+	inline uint128_t& operator-=(const uint128_t rhs){ const std::uint64_t prev = m_lo; m_lo -= rhs.m_lo; m_hi -= rhs.m_hi; if (prev < m_lo) --m_hi; return *this; }
+	inline uint128_t operator-(const uint128_t rhs) const { uint128_t result = *this; result -= rhs; return result; }
+
+	inline uint128_t& operator=(uint128_t&& rhs){ m_hi = rhs.m_hi; m_lo = rhs.m_lo; return *this; }
+	inline uint128_t& operator=(const uint128_t& rhs){ m_hi = rhs.m_hi; m_lo = rhs.m_lo; return *this; }
+	inline uint128_t& operator=(const std::uint64_t rhs){ m_hi = 0; m_lo = rhs; return *this; }
+	
+	inline constexpr uint128_t(uint128_t&& obj) : m_hi(obj.m_hi), m_lo(obj.m_lo) {}
+	inline constexpr uint128_t(const uint128_t& obj) : m_hi(obj.m_hi), m_lo(obj.m_lo) {}
+	inline constexpr uint128_t(const std::uint64_t hi, const std::uint64_t lo) : m_hi(hi), m_lo(lo) {}
+	inline constexpr uint128_t(const std::uint64_t val) : m_hi(0), m_lo(val) {}
+	inline constexpr uint128_t() : m_hi(0), m_lo(0) {}
+};
+//型の限界値情報：std::int8_t型
+GASHA_NAMESPACE_BEGIN;//ネームスペース：開始
+template<>
+class numeric_limits<::uint128_t>
+{
+public:
+	static const std::size_t SIZE = sizeof(uint128_t);//サイズ
+	static inline constexpr uint128_t zero(){ return uint128_t(); }//ゼロ
+	static inline constexpr uint128_t min(){ return uint128_t(0x00000000, 0x00000000); }//最小値
+	static inline constexpr uint128_t max(){ return uint128_t(0xffffffff, 0xffffffff); }//最大値
+};
+GASHA_NAMESPACE_END;//ネームスペース：終了
 
 //----------------------------------------
 //名前付きデータ参照テスト

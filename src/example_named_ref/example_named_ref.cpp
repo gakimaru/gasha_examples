@@ -286,6 +286,63 @@ void testCommon5(named_ref::table<TABLE_TYPE>& table, const char* name)
 	std::printf("isTrue<T>(\"%s\"): %s\n", name, toStr(table.template isTrue<T>(name)));
 	std::printf("isFalse<T>(\"%s\"): %s\n", name, toStr(table.template isFalse<T>(name)));
 }
+//共通処理
+template<class TABLE_TYPE, typename T>
+void testCommon6(named_ref::table<TABLE_TYPE>& table, const char* name)
+{
+	std::printf("\n");
+	std::printf("--- testCommon1<%s>(\"%s\") ---\n", typeid(T).name(), name);
+	std::printf("isRegistered<T>(\"%s\"): %s\n", name, toStr(table.isRegistered(name)));
+	std::printf("isReadOnly<T>(\"%s\"): %s\n", name, toStr(table.template isReadOnly<T>(name)));
+	std::printf("isReadable<T>(\"%s\"): %s\n", name, toStr(table.template isReadable<T>(name)));
+	std::printf("isWritable<T>(\"%s\"): %s\n", name, toStr(table.template isWritable<T>(name)));
+	std::printf("isWritableRanged<T>(\"%s\"): %s\n", name, toStr(table.template isWritableRanged<T>(name)));
+	std::printf("isWritableWraparound<T>(\"%s\"): %s\n", name, toStr(table.template isWritableWraparound<T>(name)));
+	std::printf("isWritableSaturation<T>(\"%s\"): %s\n", name, toStr(table.template isWritableSaturation<T>(name)));
+	if (table.template isWritableRanged<T>(name))
+	{
+		std::printf("max<T>(\"%s\"): %llu\n", name, table.template max<T>(name).m_lo);
+		std::printf("min<T>(\"%s\"): %llu\n", name, table.template min<T>(name).m_lo);
+	}
+	std::printf("load<T>(\"%s\"): %llu\n", name, table.template load<T>(name).m_lo);
+	std::printf("cref<T>(\"%s\"): %llu\n", name, table.template cref<T>(name)->m_lo);
+	if (table.template isWritable<T>(name))
+	{
+		std::printf("ref<T>(\"%s\"): %llu\n", name, table.template ref<T>(name)->m_lo);
+		*table.template ref<T>(name) = 1; std::printf("ref<T>(\"%s\")=1: %llu\n", name, table.template load<T>(name).m_lo);
+		table.template store<T>(name, 2); std::printf("store<T>(\"%s\", 1): %llu\n", name, table.template load<T>(name).m_lo);
+		for (int i = 0; i < 10; ++i)
+		{
+			table.template inc<T>(name);
+			std::printf("inc<T>(\"%s\"): %llu\n", name, table.template load<T>(name).m_lo);
+		}
+		for (int i = 0; i < 10; ++i)
+		{
+			table.template dec<T>(name);
+			std::printf("dec<T>(\"%s\"): %llu\n", name, table.template load<T>(name).m_lo);
+		}
+		for (int i = 0; i < 10; ++i)
+		{
+			table.template add<T>(name, 5);
+			std::printf("add<T>(\"%s\", 5): %llu\n", name, table.template load<T>(name).m_lo);
+		}
+		for (int i = 0; i < 10; ++i)
+		{
+			table.template sub<T>(name, 5);
+			std::printf("sub<T>(\"%s\", 5): %llu\n", name, table.template load<T>(name).m_lo);
+		}
+	}
+	std::printf("eq<T>(\"%s\", 15): %s\n", name, toStr(table.template eq<T>(name, 15)));
+	std::printf("ne<T>(\"%s\", 15): %s\n", name, toStr(table.template ne<T>(name, 15)));
+	std::printf("gt<T>(\"%s\", 15): %s\n", name, toStr(table.template gt<T>(name, 15)));
+	std::printf("ge<T>(\"%s\", 15): %s\n", name, toStr(table.template ge<T>(name, 15)));
+	std::printf("lt<T>(\"%s\", 15): %s\n", name, toStr(table.template lt<T>(name, 15)));
+	std::printf("le<T>(\"%s\", 15): %s\n", name, toStr(table.template le<T>(name, 15)));
+	std::printf("logicalAnd<T>(\"%s\", 15): %s\n", name, toStr(table.template logicalAnd<T>(name, 15)));
+	std::printf("logicalOr<T>(\"%s\", 15): %s\n", name, toStr(table.template logicalOr<T>(name, 15)));
+	std::printf("isTrue<T>(\"%s\"): %s\n", name, toStr(table.template isTrue<T>(name)));
+	std::printf("isFalse<T>(\"%s\"): %s\n", name, toStr(table.template isFalse<T>(name)));
+}
 
 //----------------------------------------
 //名前付きデータ参照テスト
@@ -432,6 +489,7 @@ void example_named_ref()
 	testCommon4<refTableWithLock_type, double>(refTbl, "valJ");
 	testCommon4<refTableWithLock_type, double>(refTbl, "valK");
 	testCommon5<refTableWithLock_type, bool>(refTbl, "valL");
+	testCommon6<refTableWithLock_type, uint128_t>(refTbl, "valM");
 	testCommon2<refTableWithLock_type, int>(refTbl, "unregistered data");
 	testCommon2<refTableWithLock_type, char>(refTbl, "valA");
 
