@@ -59,7 +59,7 @@ void gameStatus::clear()
 #include <gasha/rb_tree.cpp.h>//赤黒木【関数／実体定義部】
 #include <gasha/stack_allocator.cpp.h>//スタックアロケータ【関数／実体定義部】
 
-GASHA_INSTANCING_hTable(gameStatus::flagNameTableOpe, gameStatus::FLAG_NAME_POOL_SIZE);
+GASHA_INSTANCING_hTable(gameStatus::flagNameTableOpe);
 GASHA_INSTANCING_rbTree(gameStatus::flagIndexTableOpe);
 GASHA_INSTANCING_stackAllocator();
 

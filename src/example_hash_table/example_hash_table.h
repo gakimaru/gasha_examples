@@ -108,7 +108,7 @@ private:
 
 //----------------------------------------
 //テストデータ操作クラス
-struct ope : public hash_table::baseOpe<ope, data_t, crc32_t>
+struct ope : public hash_table::baseOpe<ope, TEST_DATA_TABLE_SIZE, data_t, crc32_t>
 {
 	//データ置換属性
 	//※デフォルト（NEVER_REPLACE）のままとする
@@ -133,7 +133,7 @@ struct ope : public hash_table::baseOpe<ope, data_t, crc32_t>
 
 //----------------------------------------
 //テストデータ操作クラス：ポインター型
-struct ptr_ope : public hash_table::baseOpe<ptr_ope, data_t*, int>
+struct ptr_ope : public hash_table::baseOpe<ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER, data_t*, int>
 {
 	//データ置換属性
 	//※デフォルト（NEVER_REPLACE）のままとする
@@ -149,7 +149,7 @@ struct ptr_ope : public hash_table::baseOpe<ptr_ope, data_t*, int>
 
 //----------------------------------------
 //テストデータ操作クラス：キーの範囲が小さいデータ
-struct narrow_range_key_ope : public hash_table::baseOpe<narrow_range_key_ope, int, char>
+struct narrow_range_key_ope : public hash_table::baseOpe<narrow_range_key_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC, int, char>
 {
 	static const key_type KEY_MIN = -2;//キーの最小値 ※範囲外のキーは登録不可
 	static const key_type KEY_MAX = 2;//キーの最大値 ※範囲外のキーは登録不可
@@ -158,13 +158,13 @@ struct narrow_range_key_ope : public hash_table::baseOpe<narrow_range_key_ope, i
 
 //----------------------------------------
 //テストデータ操作クラス：関数型
-struct func_ope : public hash_table::baseOpe<func_ope, std::function<int(int, int)>, crc32_t>
+struct func_ope : public hash_table::baseOpe<func_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC, std::function<int(int, int)>, crc32_t>
 {
 };
 
 //----------------------------------------
 //テストデータ操作クラス：クラスメンバー関数型
-struct obj_ope : public hash_table::baseOpe<func_ope, std::function<int(calc_t&, int, int)>, crc32_t>
+struct obj_ope : public hash_table::baseOpe<func_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC, std::function<int(calc_t&, int, int)>, crc32_t>
 {
 };
 

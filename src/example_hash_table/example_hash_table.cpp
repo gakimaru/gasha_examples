@@ -162,7 +162,7 @@ void example_hash_table()
 	std::printf("--------------------------------------------------------------------------------\n");
 	std::printf("Hash Table Test\n");
 	std::printf("--------------------------------------------------------------------------------\n");
-	typedef hash_table::container<ope, TEST_DATA_TABLE_SIZE> container_t;
+	typedef hash_table::container<ope> container_t;
 	container_t* con = new container_t();
 
 	//ハッシュテーブルの基本情報表示
@@ -942,7 +942,7 @@ void example_hash_table()
 		std::printf("--------------------------------------------------------------------------------\n");
 
 		//ハッシュテーブル
-		hash_table::container<ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER> p_con;
+		hash_table::container<ptr_ope> p_con;
 
 		//登録
 		data_t obj1("0010", 123);
@@ -983,7 +983,7 @@ void example_hash_table()
 		std::printf("--------------------------------------------------------------------------------\n");
 
 		//ハッシュテーブル
-		typedef hash_table::container<narrow_range_key_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC> con_t;
+		typedef hash_table::container<narrow_range_key_ope> con_t;
 		 con_t con;
 		
 		//登録
@@ -1007,8 +1007,8 @@ void example_hash_table()
 		std::printf("--------------------------------------------------------------------------------\n");
 		
 		//ハッシュテーブル
-		hash_table::container<func_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC> func_con;
-		hash_table::container<obj_ope, TEST_DATA_TABLE_SIZE_FOR_FUNC> obj_con;
+		hash_table::container<func_ope> func_con;
+		hash_table::container<obj_ope> obj_con;
 
 		//関数型ハッシュテーブルテスト用関数：通常関数
 		extern int func_add(int a, int b);

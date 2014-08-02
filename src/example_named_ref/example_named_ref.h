@@ -22,15 +22,19 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //----------------------------------------
 //名前付きデータ参照定義
 
+//名前付きデータ参照テーブル用定数
+static const std::size_t REF_TABLE_WITH_LOCK_SIZE = 32;
+static const std::size_t REF_TABLE_SIZE = 10;
+
 //名前付きデータ参照インスタンス識別用構造体
-struct refTableWithLock_type{};//共有ロック付き参照テーブル
-struct refTable_type{};//ロックなし参照テーブル
+struct refTableWithLock_type : public named_ref::baseOpe<refTableWithLock_type, REF_TABLE_WITH_LOCK_SIZE>//共有ロック付き参照テーブル
+{};
+struct refTable_type : public named_ref::baseOpe<refTable_type, REF_TABLE_SIZE>//ロックなし参照テーブル
+{};
 
 //名前付きデータ参照の型宣言
-static const std::size_t REF_TABLE_WITH_LOCK_SIZE = 10;
-static const std::size_t REF_TABLE_SIZE = 10;
-using refTableWithLock = namedRef<refTableWithLock_type, REF_TABLE_WITH_LOCK_SIZE, sharedSpinLock>;
-using refTable = namedRef<refTable_type, REF_TABLE_SIZE>;
+using refTableWithLock = named_ref::table<refTableWithLock_type>;
+using refTable = named_ref::table<refTable_type>;
 
 //----------------------------------------
 //名前付きデータ参照用構造体

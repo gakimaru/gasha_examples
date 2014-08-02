@@ -91,7 +91,7 @@ void dataCollection<T, _POOL_SIZE>::sort(const bool is_descendant)
 #define INSTANCING_dataCollection(T, _POOL_SIZE) \
 	template class dataCollection<T, _POOL_SIZE>; \
 	template class GASHA_ poolAllocator<dataCollection<T, _POOL_SIZE>::POOL_SIZE>; \
-	template class GASHA_ hash_table::container<typename dataCollection<T, _POOL_SIZE>::searchTableOpe, dataCollection<T, _POOL_SIZE>::SEARCH_TABLE_SIZE>; \
+	template class GASHA_ hash_table::container<typename dataCollection<T, _POOL_SIZE>::searchTableOpe>; \
 	template class GASHA_ dynamic_array::container<typename dataCollection<T, _POOL_SIZE>::orderTableOpe>;
 
 #endif//GASHA_INCLUDED_DATA_COLLECTION_CPP_H

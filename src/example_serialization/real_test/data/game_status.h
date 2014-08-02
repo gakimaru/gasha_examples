@@ -60,7 +60,7 @@ public:
 		inline flagNameInfo(const char* name, const crc32_t name_crc, const index_type index);
 	};
 	typedef std::bitset<FLAG_SET_SIZE> flagSet_type;//フラグセット型
-	struct flagNameTableOpe : public hash_table::baseOpe<flagNameTableOpe, flagNameInfo, crc32_t>//フラグ名テーブル操作型
+	struct flagNameTableOpe : public hash_table::baseOpe<flagNameTableOpe, FLAG_NAME_POOL_SIZE, flagNameInfo, crc32_t>//フラグ名テーブル操作型
 	{};
 	struct flagIndexTableOpe : public rb_tree::baseOpe<flagIndexTableOpe, flagNameInfo, index_type>//フラグインデックステーブル操作型
 	{
@@ -79,7 +79,7 @@ public:
 		//キーを取得
 		inline static key_type getKey(const node_type& node){ return node.m_index; }
 	};
-	typedef hash_table::container<flagNameTableOpe, FLAG_NAME_POOL_SIZE> flagNameTable_type;//フラグ名テーブル型
+	typedef hash_table::container<flagNameTableOpe> flagNameTable_type;//フラグ名テーブル型
 	typedef rb_tree::container<flagIndexTableOpe> flagIndexTable_type;//フラグインデックステーブル型
 	typedef stackAllocator_withBuff<FLAG_NAME_BUFF_SIZE> m_flagNameBuff_type;//フラグ名バッファ型
 	typedef flagIndexTable_type::iterator iterator;//イテレータ型
