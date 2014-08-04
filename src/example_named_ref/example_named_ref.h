@@ -13,6 +13,7 @@
 //--------------------------------------------------------------------------------
 
 #include <gasha/named_ref.h>//名前付きデータ参照
+#include <gasha/named_func.h>//名前付き関数
 #include <gasha/shared_spin_lock.h>//共有スピンロック
 #include <gasha/limits.h>//限界値
 
@@ -25,18 +26,35 @@ GASHA_USING_NAMESPACE;//ネームスペース使用
 //名前付きデータ参照定義
 
 //名前付きデータ参照テーブル用定数
-static const std::size_t REF_TABLE_WITH_LOCK_SIZE = 32;
-static const std::size_t REF_TABLE_SIZE = 10;
+static const std::size_t REF_TABLE_SIZE = 32;
+static const std::size_t REF_TABLE_EX_SIZE = 10;
 
-//名前付きデータ参照インスタンス識別用構造体
-struct refTableWithLock_type : public named_ref::baseOpe<refTableWithLock_type, REF_TABLE_WITH_LOCK_SIZE>//共有ロック付き参照テーブル
-{};
-struct refTable_type : public named_ref::baseOpe<refTable_type, REF_TABLE_SIZE>//ロックなし参照テーブル
-{};
+//名前付きデータ参照操作用構造体
+//※インスタンスの区別を用途として兼ねる
+struct refTable_type : public named_ref::baseOpe<refTable_type, REF_TABLE_SIZE>
+{
+	typedef sharedSpinLock lock_type;//ロックポリシー
+};
 
 //名前付きデータ参照の型宣言
-using refTableWithLock = named_ref::table<refTableWithLock_type>;
 using refTable = named_ref::table<refTable_type>;
+
+//※複数インスタンスも生成可能
+struct refTableEx_type : public named_ref::baseOpe<refTableEx_type, REF_TABLE_EX_SIZE>{};
+using refTableEx = named_ref::table<refTableEx_type>;
+
+//名前付き関数テーブル用定数
+static const std::size_t FUNC_GROUP_TABLE_SIZE = 8;
+static const std::size_t FUNC_TABLE_SIZE = 32;
+
+//名前付き関数操作用構造体
+struct funcTable_type : public named_func::baseOpe<funcTable_type, FUNC_GROUP_TABLE_SIZE, FUNC_TABLE_SIZE>
+{
+	typedef sharedSpinLock lock_type;//ロックポリシー
+};
+
+//名前付き関数の型宣言
+using funcTable = named_func::table<funcTable_type>;
 
 //----------------------------------------
 //名前付きデータ参照用構造体
@@ -101,6 +119,17 @@ public:
 	static inline constexpr uint128_t min(){ return uint128_t(0x00000000, 0x00000000); }//最小値
 	static inline constexpr uint128_t max(){ return uint128_t(0xffffffff, 0xffffffff); }//最大値
 };
+
+//----------------------------------------
+//名前付き関数テスト用
+struct objType
+{
+	bool memberA(const int a, const int b);
+	void memberB() const;
+	void memberB_noconst();
+	int m_mem;
+};
+
 GASHA_NAMESPACE_END;//ネームスペース：終了
 
 //----------------------------------------

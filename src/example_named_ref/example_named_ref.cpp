@@ -13,7 +13,6 @@
 #include "gasha/type_traits.h"//型特性ユーティリティ：toStr()
 
 #include <cstdio>//std::printf()
-#include <utility>//std::declval()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
@@ -351,7 +350,7 @@ void example_named_ref()
 	std::printf("----- Test for namedRef -----\n");
 	
 	//名前付きデータ参照
-	refTableWithLock refTbl;
+	refTable ref_tbl;
 
 	//名前をCRC値取得
 	constexpr crc32_t name_valA = calcStaticCRC32("valA");
@@ -361,107 +360,107 @@ void example_named_ref()
 	//読み書き可能データとして登録されたデータにアクセス
 
 	//値の取得①
-	if (refTbl.isReadable<int>(name_valA))//読み取り可能判定（必要に応じて使用）
+	if (ref_tbl.isReadable<int>(name_valA))//読み取り可能判定（必要に応じて使用）
 	{
-		auto val = refTbl.load<int>(name_valA);//値の取得
+		auto val = ref_tbl.load<int>(name_valA);//値の取得
 		std::printf("load<int>(): valA=%d\n", val);
 	}
 	//値の取得②：名前で直接指定
-	if (refTbl.isReadable<int>("valA"))//※名前を直接指定してもよい（事前計算している方が当然速い）
+	if (ref_tbl.isReadable<int>("valA"))//※名前を直接指定してもよい（事前計算している方が当然速い）
 	{
-		auto val = refTbl.load<int>("valA");//※名前を直接指定してもよい
+		auto val = ref_tbl.load<int>("valA");//※名前を直接指定してもよい
 		std::printf("load<int>(): valA=%d\n", val);
 	}
 	//値の変更
-	if (refTbl.isWritable<int>(name_valA))//書き込み可能判定（必要に応じて使用）
+	if (ref_tbl.isWritable<int>(name_valA))//書き込み可能判定（必要に応じて使用）
 	{
-		refTbl.store<int>(name_valA, 1);//値の変更 ※何も返さない
-		auto val = refTbl.load<int>(name_valA);//値の取得
+		ref_tbl.store<int>(name_valA, 1);//値の変更 ※何も返さない
+		auto val = ref_tbl.load<int>(name_valA);//値の取得
 		std::printf("store<int>(): valA=%d\n", val);
 	}
 	//値の変更①：読み書き可能参照
-	if (refTbl.isWritable<int>(name_valA))//書き込み可能判定（必要に応じて使用）
+	if (ref_tbl.isWritable<int>(name_valA))//書き込み可能判定（必要に応じて使用）
 	{
-		auto val = refTbl.ref<int>(name_valA);//参照を取得 ※戻り値が有効なスコープの間、排他ロックを取得することに注意
+		auto val = ref_tbl.ref<int>(name_valA);//参照を取得 ※戻り値が有効なスコープの間、排他ロックを取得することに注意
 		*val = 2;//値を変更
 		std::printf("ref<int>(): valA=%d\n", *val);
 	}
 	//値の変更②：読み取り専用参照
-	if (refTbl.isReadable<int>(name_valA))//読み取り可能判定（必要に応じて使用）
+	if (ref_tbl.isReadable<int>(name_valA))//読み取り可能判定（必要に応じて使用）
 	{
-		auto val = refTbl.cref<int>(name_valA);
+		auto val = ref_tbl.cref<int>(name_valA);
 		//*val = 3;//変更不可
 		std::printf("cref<int>(): valA=%d\n", *val);
 	}
 	//誤ったデータ型でアクセス①：読み込み
-	if (refTbl.isReadable<short>(name_valA))//読み取り可能判定（必要に応じて使用）
+	if (ref_tbl.isReadable<short>(name_valA))//読み取り可能判定（必要に応じて使用）
 	{
-		auto val = refTbl.load<short>(name_valA);//値の取得
+		auto val = ref_tbl.load<short>(name_valA);//値の取得
 		std::printf("load<int>(): valA=%d\n", val);
 	}
 	//誤ったデータ型でアクセス②：書き込み
-	if (refTbl.isWritable<short>(name_valA))//読み取り可能判定（必要に応じて使用）
+	if (ref_tbl.isWritable<short>(name_valA))//読み取り可能判定（必要に応じて使用）
 	{
-		refTbl.store<int>(name_valA, 4);//値の変更 ※何も返さない
-		auto val = refTbl.load<int>(name_valA);//値の取得
+		ref_tbl.store<int>(name_valA, 4);//値の変更 ※何も返さない
+		auto val = ref_tbl.load<int>(name_valA);//値の取得
 		std::printf("load<int>(): valA=%d\n", val);
 	}
 
 	//読み取り専用データとして登録されたデータにアクセス
 
 	//値の取得①
-	if (refTbl.isReadable<int>(name_valB))//読み取り可能判定（必要に応じて使用）
+	if (ref_tbl.isReadable<int>(name_valB))//読み取り可能判定（必要に応じて使用）
 	{
-		auto val = refTbl.load<int>(name_valB);//値の取得
+		auto val = ref_tbl.load<int>(name_valB);//値の取得
 		std::printf("load<int>(): valB=%d\n", val);
 	}
 	//値の取得②：名前で直接指定
-	if (refTbl.isReadable<int>("valB"))//※名前を直接指定してもよい（事前計算している方が当然速い）
+	if (ref_tbl.isReadable<int>("valB"))//※名前を直接指定してもよい（事前計算している方が当然速い）
 	{
-		auto val = refTbl.load<int>("valB");//※名前を直接指定してもよい
+		auto val = ref_tbl.load<int>("valB");//※名前を直接指定してもよい
 		std::printf("load<int>(): valB=%d\n", val);
 	}
 	//値の変更
-	if (refTbl.isWritable<int>(name_valB))//書き込み可能判定（必要に応じて使用）
+	if (ref_tbl.isWritable<int>(name_valB))//書き込み可能判定（必要に応じて使用）
 	{
-		refTbl.store<int>(name_valB, 1);//値の変更 ※何も返さない
-		auto val = refTbl.load<int>(name_valB);//値の取得
+		ref_tbl.store<int>(name_valB, 1);//値の変更 ※何も返さない
+		auto val = ref_tbl.load<int>(name_valB);//値の取得
 		std::printf("store<int>(): valB=%d\n", val);
 	}
 	//値の変更①：読み書き可能参照
-	if (refTbl.isWritable<int>(name_valB))//書き込み可能判定（必要に応じて使用）
+	if (ref_tbl.isWritable<int>(name_valB))//書き込み可能判定（必要に応じて使用）
 	{
-		auto val = refTbl.ref<int>(name_valB);//参照を取得 ※戻り値 val が有効なスコープの間、排他ロックすることに注意
+		auto val = ref_tbl.ref<int>(name_valB);//参照を取得 ※戻り値 val が有効なスコープの間、排他ロックすることに注意
 		*val = 2;//値を変更
 		std::printf("ref<int>(): valB=%d\n", *val);
 	}
 	//値の変更②：読み取り専用参照
-	if (refTbl.isReadable<int>(name_valB))//読み取り可能判定（必要に応じて使用）
+	if (ref_tbl.isReadable<int>(name_valB))//読み取り可能判定（必要に応じて使用）
 	{
-		auto val = refTbl.cref<int>(name_valB);//参照を取得 ※戻り値 val が有効なスコープの間、共有ロックすることに注意
+		auto val = ref_tbl.cref<int>(name_valB);//参照を取得 ※戻り値 val が有効なスコープの間、共有ロックすることに注意
 		//*val = 3;//変更不可
 		std::printf("cref<int>(): valB=%d\n", *val);
 	}
 	//誤ったデータ型でアクセス①：読み込み
-	if (refTbl.isReadable<short>(name_valB))//読み取り可能判定（必要に応じて使用）
+	if (ref_tbl.isReadable<short>(name_valB))//読み取り可能判定（必要に応じて使用）
 	{
-		auto val = refTbl.load<short>(name_valB);//値の取得
+		auto val = ref_tbl.load<short>(name_valB);//値の取得
 		std::printf("load<int>(): valB=%d\n", val);
 	}
 	//誤ったデータ型でアクセス②：書き込み
-	if (refTbl.isWritable<short>(name_valB))//読み取り可能判定（必要に応じて使用）
+	if (ref_tbl.isWritable<short>(name_valB))//読み取り可能判定（必要に応じて使用）
 	{
-		refTbl.store<int>(name_valB, 4);//値の変更 ※何も返さない
-		auto val = refTbl.load<int>(name_valB);//値の取得
+		ref_tbl.store<int>(name_valB, 4);//値の変更 ※何も返さない
+		auto val = ref_tbl.load<int>(name_valB);//値の取得
 		std::printf("load<int>(): valB=%d\n", val);
 	}
 
 	//構造体にアクセス
 
 	//値の変更①：読み書き可能参照
-	if (refTbl.isWritable<data_t>(name_dataC))//書き込み可能判定（必要に応じて使用）
+	if (ref_tbl.isWritable<data_t>(name_dataC))//書き込み可能判定（必要に応じて使用）
 	{
-		auto data_c = refTbl.ref<data_t>(name_dataC);//参照を取得 ※戻り値 val が有効なスコープの間、排他ロックすることに注意
+		auto data_c = ref_tbl.ref<data_t>(name_dataC);//参照を取得 ※戻り値 val が有効なスコープの間、排他ロックすることに注意
 		data_c->m_memberA = 1;
 		data_c->m_memberB[0] = 2;
 		data_c->m_memberB[1] = 3;
@@ -469,36 +468,120 @@ void example_named_ref()
 		std::printf("ref<data_t>(): dataC={ %d, {%d, %d}, %.1f}\n", data_c->m_memberA, data_c->m_memberB[0], data_c->m_memberB[1], data_c->m_memberC);
 	}
 	//値の変更②：読み取り専用参照
-	if (refTbl.isReadable<data_t>(name_dataC))//読み取り可能判定（必要に応じて使用）
+	if (ref_tbl.isReadable<data_t>(name_dataC))//読み取り可能判定（必要に応じて使用）
 	{
-		auto data_c = refTbl.cref<data_t>(name_dataC);//参照を取得 ※戻り値 val が有効なスコープの間、共有ロックすることに注意
+		auto data_c = ref_tbl.cref<data_t>(name_dataC);//参照を取得 ※戻り値 val が有効なスコープの間、共有ロックすることに注意
 		std::printf("ref<data_t>(): dataC={ %d, {%d, %d}, %.1f}\n", data_c->m_memberA, data_c->m_memberB[0], data_c->m_memberB[1], data_c->m_memberC);
 	}
 	
 	//演算
-	testCommon1<refTableWithLock_type, int>(refTbl, "valA");
-	testCommon1<refTableWithLock_type, int>(refTbl, "valA'");
-	testCommon1<refTableWithLock_type, int>(refTbl, "valB");
-	testCommon2<refTableWithLock_type, data_t>(refTbl, "dataC");
-	testCommon3<refTableWithLock_type, float>(refTbl, "valD");
-	testCommon4<refTableWithLock_type, double>(refTbl, "valE");
-	testCommon1<refTableWithLock_type, int>(refTbl, "valF");
-	testCommon1<refTableWithLock_type, unsigned short>(refTbl, "valG");
-	testCommon3<refTableWithLock_type, float>(refTbl, "valH");
-	testCommon3<refTableWithLock_type, float>(refTbl, "valI");
-	testCommon4<refTableWithLock_type, double>(refTbl, "valJ");
-	testCommon4<refTableWithLock_type, double>(refTbl, "valK");
-	testCommon5<refTableWithLock_type, bool>(refTbl, "valL");
-	testCommon6<refTableWithLock_type, uint128_t>(refTbl, "valM");
-	testCommon2<refTableWithLock_type, int>(refTbl, "unregistered data");
-	testCommon2<refTableWithLock_type, char>(refTbl, "valA");
+	testCommon1<refTable_type, int>(ref_tbl, "valA");
+	testCommon1<refTable_type, int>(ref_tbl, "valA'");
+	testCommon1<refTable_type, int>(ref_tbl, "valB");
+	testCommon2<refTable_type, data_t>(ref_tbl, "dataC");
+	testCommon3<refTable_type, float>(ref_tbl, "valD");
+	testCommon4<refTable_type, double>(ref_tbl, "valE");
+	testCommon1<refTable_type, int>(ref_tbl, "valF");
+	testCommon1<refTable_type, unsigned short>(ref_tbl, "valG");
+	testCommon3<refTable_type, float>(ref_tbl, "valH");
+	testCommon3<refTable_type, float>(ref_tbl, "valI");
+	testCommon4<refTable_type, double>(ref_tbl, "valJ");
+	testCommon4<refTable_type, double>(ref_tbl, "valK");
+	testCommon5<refTable_type, bool>(ref_tbl, "valL");
+	testCommon6<refTable_type, uint128_t>(ref_tbl, "valM");
+	testCommon2<refTable_type, int>(ref_tbl, "unregistered data");
+	testCommon2<refTable_type, char>(ref_tbl, "valA");
+
+	//名前付き関数呼び出し
+	funcTable func_tbl;
+	objType obj;
+	obj.m_mem = 123;
+	const objType const_obj(obj);
+
+	if (func_tbl.isRegistered("funcGroupA", "funcA") && func_tbl.isWritable<bool>("funcGroupA", "funcA"))
+	{
+		const bool ret = func_tbl.func<bool>("funcGroupA", "funcA", 1, 2); std::printf("funcA:ret=%d\n", ret);
+	}
+	if (func_tbl.isRegistered("funcGroupB", "lambdaA") && func_tbl.isWritable<bool>("funcGroupB", "lambdaA"))
+	{
+		const bool ret = func_tbl.func<bool>("funcGroupB", "lambdaA", 3, 4); std::printf("lambdaA:ret=%d\n", ret);
+	}
+	if (func_tbl.isRegistered("funcGroupC", "functorA") && func_tbl.isWritable<bool>("funcGroupC", "functorA"))
+	{
+		const bool ret = func_tbl.func<bool>("funcGroupC", "functorA", 5, 6); std::printf("functorA:ret=%d\n", ret);
+	}
+	if (func_tbl.isRegistered("funcGroupD", "memberA") && func_tbl.isWritableObj<bool, objType>("funcGroupD", "memberA"))
+	{
+		const bool ret = func_tbl.func<bool>(obj, "funcGroupD", "memberA", 7, 8); std::printf("memberA:ret=%d\n", ret);
+	}
+
+	if (func_tbl.isRegistered("funcGroupA", "funcA const") && func_tbl.isConstType<bool>("funcGroupA", "funcA const"))
+	{
+		const bool ret = func_tbl.func<bool>("funcGroupA", "funcA const", 1, 2); std::printf("funcA:ret=%d\n", ret);
+	}
+	if (func_tbl.isRegistered("funcGroupB", "lambdaA const") && func_tbl.isConstType<bool>("funcGroupB", "lambdaA const"))
+	{
+		const bool ret = func_tbl.func<bool>("funcGroupB", "lambdaA const", 3, 4); std::printf("lambdaA:ret=%d\n", ret);
+	}
+	if (func_tbl.isRegistered("funcGroupC", "functorA const") && func_tbl.isConstType<bool>("funcGroupC", "functorA const"))
+	{
+		const bool ret = func_tbl.func<bool>("funcGroupC", "functorA const", 5, 6); std::printf("functorA:ret=%d\n", ret);
+	}
+	if (func_tbl.isRegistered("funcGroupD", "memberA const") && func_tbl.isConstObj<bool, objType>("funcGroupD", "memberA const"))
+	{
+		const bool ret = func_tbl.func<bool>(const_obj, "funcGroupD", "memberA const", 7, 8); std::printf("memberA:ret=%d\n", ret);
+	}
+
+	if (func_tbl.isRegistered("funcGroupA", "funcB") && func_tbl.isWritable<void>("funcGroupA", "funcB"))
+	{
+		func_tbl.proc("funcGroupA", "funcB");
+	}
+	if (func_tbl.isRegistered("funcGroupB", "lambdaB") && func_tbl.isWritable<void>("funcGroupB", "lambdaB"))
+	{
+		func_tbl.proc("funcGroupB", "lambdaB");
+	}
+	if (func_tbl.isRegistered("funcGroupC", "functorB") && func_tbl.isWritable<void>("funcGroupC", "functorB"))
+	{
+		func_tbl.proc("funcGroupC", "functorB");
+	}
+	if (func_tbl.isRegistered("funcGroupD", "memberB") && func_tbl.isWritableObj<void, objType>("funcGroupD", "memberB"))
+	{
+		func_tbl.proc(obj, "funcGroupD", "memberB");
+	}
+
+	if (func_tbl.isRegistered("funcGroupA", "funcB const") && func_tbl.isConstType<void>("funcGroupA", "funcB const"))
+	{
+		func_tbl.proc("funcGroupA", "funcB const");
+	}
+	if (func_tbl.isRegistered("funcGroupB", "lambdaB const") && func_tbl.isConstType<void>("funcGroupB", "lambdaB const"))
+	{
+		func_tbl.proc("funcGroupB", "lambdaB const");
+	}
+	if (func_tbl.isRegistered("funcGroupC", "functorB const") && func_tbl.isConstType<void>("funcGroupC", "functorB const"))
+	{
+		func_tbl.proc("funcGroupC", "functorB const");
+	}
+	if (func_tbl.isRegistered("funcGroupD", "memberB const") && func_tbl.isConstObj<void, objType>("funcGroupD", "memberB const"))
+	{
+		func_tbl.proc(const_obj, "funcGroupD", "memberB const");
+	}
 
 	//列挙
 	std::printf("----------------------------------------\n");
-	std::printf("Registered data items:(num=%d)\n", refTbl.size());
-	for (const auto& info : refTbl)
+	std::printf("Registered named-ref items:(num=%d)\n", ref_tbl.size());
+	for (const auto& info : ref_tbl)
 	{
-		std::printf("data: name(crc)=0x%08x, type=%s, access_type=%s\n", info.m_nameCrc, info.m_typeInfo ? info.m_typeInfo->name() : "(unknown)", info.m_accessType == refTableWithLock::READ_ONLY ? "ReadOnly" : info.m_accessType == refTableWithLock::WRITABLE ? "Writable" : info.m_accessType == refTableWithLock::WRITABLE_WRAPAROUND ? "Writable(Wrap-around)" : info.m_accessType == refTableWithLock::WRITABLE_SATURATION ? "Writable(Saturation)" : "(Unknown)");
+		std::printf("  ref: name(crc)=0x%08x, type=%s, access_type=%s\n", info.m_nameCrc, info.m_typeInfo ? info.m_typeInfo->name() : "(unknown)", info.m_accessType == refTable::READ_ONLY ? "ReadOnly" : info.m_accessType == refTable::WRITABLE ? "Writable" : info.m_accessType == refTable::WRITABLE_WRAPAROUND ? "Writable(Wrap-around)" : info.m_accessType == refTable::WRITABLE_SATURATION ? "Writable(Saturation)" : "(Unknown)");
+	}
+	std::printf("----------------------------------------\n");
+	std::printf("Registered named-func items:(num=%d)\n", func_tbl.size());
+	for (const auto& group_info : func_tbl)
+	{
+		std::printf("  group: group-name(crc)=0x%08x\n", group_info.m_groupNameCrc);
+		for (const auto& func_info : group_info.m_funcList)
+		{
+			std::printf("    func: name(crc)=0x%08x, funcType=%s, ret=%s, obj=%s\n", func_info.m_key.m_nameCrc, func_info.m_funcType == funcTable::CONST_FUNCTION ? "Const" : "Writable", func_info.m_retTypeInfo ? func_info.m_retTypeInfo->name() : "(null)", func_info.m_objTypeInfo ? func_info.m_objTypeInfo->name() : "(none)");
+		}
 	}
 
 	std::printf("- end -\n");

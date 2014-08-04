@@ -105,7 +105,6 @@ private:
 	int m_val;
 };
 
-
 //----------------------------------------
 //テストデータ操作クラス
 struct ope : public hash_table::baseOpe<ope, TEST_DATA_TABLE_SIZE, data_t, crc32_t>
