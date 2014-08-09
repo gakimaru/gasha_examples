@@ -76,9 +76,15 @@ void charaData::addAbility(const crc32_t ability_id)
 //キャラ習得アビリティを取得
 abilityData* charaData::getAbility(const int index)
 {
-	charaAbilityData* chara_ability = m_abilities.at(index);
+	auto chara_ability = m_abilities.begin();
 	if (!chara_ability)
 		return nullptr;
+	for (int step = 0; step < index; ++step)
+	{
+		++chara_ability;
+		if (!chara_ability)
+			return nullptr;
+	}
 	return chara_ability->m_ability;
 }
 

@@ -60,8 +60,8 @@ static void testBasic()
 	std::printf("[ Test for polyAllocator with new/delete operator ]\n");
 	std::printf("\n");
 
-	EXPR_PLAIN(auto adapter = s_stackAllocator.adapter());//スタックアロケータのアダプターを取得（変数を直接操作することはない）
-	EXPR_PLAIN(polyAllocator poly_allocator(adapter););//多態アロケータにアダプターをセット（変数を直接操作することはない）
+	EXPR_PLAIN(auto adapter = s_stackAllocator.adapter());//スタックアロケータのアダプタを取得（変数を直接操作することはない）
+	EXPR_PLAIN(polyAllocator poly_allocator(adapter););//多態アロケータにアダプタをセット（変数を直接操作することはない）
 	std::printf("poly_allocator: name=\"%s\", mode=\"%s\"\n", poly_allocator.name(), poly_allocator.mode());
 	std::printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
 	
@@ -73,8 +73,8 @@ static void testBasic()
 	{
 		//ネストした処理ブロックで別のアロケータに切り替え
 		std::printf("***** BEGIN BLOCK *****\n");
-		EXPR_PLAIN(auto nested_adapter = s_poolAllocator.adapter());//プールアロケータのアダプターを取得
-		EXPR_PLAIN(polyAllocator nested_poly_allocator(nested_adapter););//多態アロケータにアダプターをセット
+		EXPR_PLAIN(auto nested_adapter = s_poolAllocator.adapter());//プールアロケータのアダプタを取得
+		EXPR_PLAIN(polyAllocator nested_poly_allocator(nested_adapter););//多態アロケータにアダプタをセット
 		std::printf("nested_poly_allocator: name=\"%s\", mode=\"%s\"\n", nested_poly_allocator.name(), nested_poly_allocator.mode());
 		std::printf("stack:size=%d,count=%d, pool:size=%d,pool=%d\n", s_stackAllocator.size(), s_stackAllocator.count(), s_poolAllocator.size(), s_poolAllocator.usingPoolSize());
 		
@@ -99,7 +99,7 @@ static void testBasic()
 	EXPR_PLAIN(delete[] p103;);
 	EXPR_PLAIN(delete p104;);
 	{
-		//スコープスタックもアダプター化可能
+		//スコープスタックもアダプタ化可能
 		auto scoped = s_stackAllocator.scopedAllocator();
 		auto adapter = scoped.adapter();
 		polyAllocator poly_allocator(adapter);
@@ -127,8 +127,8 @@ static void testSTL()
 	EXPR_PLAIN(smartStackAllocator_withBuff<2048> stack;);//スタックアロケータ
 	{
 		std::printf("***** BEGIN BLOCK *****\n");
-		EXPR_PLAIN(auto adapter = stack.adapter(););//スタックアロケータのアダプターを取得
-		EXPR_PLAIN(polyAllocator poly(adapter););//多態アロケータにアダプターをセット（処理ブロックを抜ける時に元に戻る）
+		EXPR_PLAIN(auto adapter = stack.adapter(););//スタックアロケータのアダプタを取得
+		EXPR_PLAIN(polyAllocator poly(adapter););//多態アロケータにアダプタをセット（処理ブロックを抜ける時に元に戻る）
 
 		EXPR_PLAIN(std::vector<data_t> array;);//STLのstd::vectorを使用
 		EXPR_PLAIN(data_t data;);
@@ -188,8 +188,8 @@ static void testAdvanced()
 	};
 
 	EXPR_PLAIN(smartStackAllocator_withBuff<2048> stack;);//スタックアロケータ
-	EXPR_PLAIN(auto adapter = stack.adapter(););//スタックアロケータのアダプターを取得
-	EXPR_PLAIN(polyAllocator poly(adapter););//多態アロケータにアダプターをセット
+	EXPR_PLAIN(auto adapter = stack.adapter(););//スタックアロケータのアダプタを取得
+	EXPR_PLAIN(polyAllocator poly(adapter););//多態アロケータにアダプタをセット
 
 	//デバッグ用オブザーバー（観察者）を多態アロケータに登録
 	EXPR_PLAIN(debugAllocationObserver observer;);
@@ -230,8 +230,8 @@ static void testAdvanced()
 	{
 		//ネストした処理ブロックで別のアロケータに切り替え
 		std::printf("***** BEGIN BLOCK *****\n");
-		EXPR_PLAIN(auto nested_adapter = s_poolAllocator.adapter());//プールアロケータのアダプターを取得
-		EXPR_PLAIN(polyAllocator nested_poly_allocator(nested_adapter););//多態アロケータにアダプターをセット
+		EXPR_PLAIN(auto nested_adapter = s_poolAllocator.adapter());//プールアロケータのアダプタを取得
+		EXPR_PLAIN(polyAllocator nested_poly_allocator(nested_adapter););//多態アロケータにアダプタをセット
 		std::printf("***** END BLOCK *****\n");
 	}
 	
@@ -240,7 +240,7 @@ static void testAdvanced()
 }
 
 //----------------------------------------
-//全種オブジェクトのアダプター化を確認
+//全種オブジェクトのアダプタ化を確認
 void testAllAdapters()
 {
 	std::printf("\n");
@@ -312,6 +312,20 @@ void testAllAdapters()
 		EXPR_PLAIN(polyAllocator poly_allocator(adapter););
 	}
 
+	//プールアロケータ
+	{
+		EXPR_PLAIN(poolAllocator<16> pool_allocator(buff, sizeof(buff), 32, 8););
+		EXPR_PLAIN(auto adapter = pool_allocator.adapter(););
+		EXPR_PLAIN(polyAllocator poly_allocator(adapter););
+	}
+
+	//ロックフリープールアロケータ
+	{
+		EXPR_PLAIN(lfPoolAllocator<16> lf_pool_allocator(buff, sizeof(buff), 32, 8););
+		EXPR_PLAIN(auto adapter = lf_pool_allocator.adapter(););
+		EXPR_PLAIN(polyAllocator poly_allocator(adapter););
+	}
+
 	//標準アロケータ
 	{
 		EXPR_PLAIN(stdAllocator<> std_allocator;);
@@ -343,7 +357,7 @@ void example_poly_allocator()
 	//多態アロケータ応用例：GASHA_NEW / GASHA_DELETE マクロでアラインメント保証＆デバッグ情報取得
 	testAdvanced();
 
-	//全種オブジェクトのアダプター化を確認
+	//全種オブジェクトのアダプタ化を確認
 	testAllAdapters();
 }
 

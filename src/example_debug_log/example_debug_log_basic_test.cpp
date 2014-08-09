@@ -30,7 +30,7 @@
 
 #include <gasha/call_point.h>//コールポイント ※コールポイントを使用する場合にインクルード
 #include <gasha/strconv.h>//文字列変換 ※ログ出力時に文字コード変換を行う場合にインクルード
-#include <gasha/profiler.h>//プロファイラー ※プロファイルの集計および集計結果の取得を行う場合にインクルード
+#include <gasha/profiler.h>//プロファイラ ※プロファイルの集計および集計結果の取得を行う場合にインクルード
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 

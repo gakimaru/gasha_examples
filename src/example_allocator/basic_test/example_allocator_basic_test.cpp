@@ -89,8 +89,8 @@ void example_allocator_basic_test()
 		std::printf("Poly allocator\n");
 
 		stackAllocator_withBuff<1024> stack;//スタックアロケータを用意
-		auto adapter = stack.adapter();//アロケータアダプターを取得　⇒　この auto 型は allocatorAdapter<stackAllocator<>>
-		polyAllocator poly(adapter);//多態アロケータにアダプターを渡す
+		auto adapter = stack.adapter();//アロケータアダプタを取得　⇒　この auto 型は allocatorAdapter<stackAllocator<>>
+		polyAllocator poly(adapter);//多態アロケータにアダプタを渡す
 		//以上により、処理ブロック（スコープ）内での new/new[]/delte/delete[] が、暗黙的にスタックアロケータを使用するようになる
 
 		data_t* data = new data_t(123);

@@ -15,7 +15,7 @@
 #include <gasha/log_attr.h>//ログ属性
 #include <gasha/log_mask.h>//ログレベルマスク
 #include <gasha/call_point.h>//コールポイント
-#include <gasha/profiler.h>//プロファイラー
+#include <gasha/profiler.h>//プロファイラ
 #include <gasha/thread_id.h>//スレッドID
 #include <gasha/lock_common.h>//ロック共通設定
 

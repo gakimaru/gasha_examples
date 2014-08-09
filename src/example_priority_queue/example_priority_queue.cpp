@@ -188,7 +188,7 @@ void showTree(const HEAP& heap)
 void example_priority_queue()
 {
 	//プライオリティキューコンテナ生成
-	typedef priority_queue::container<ope, TEST_DATA_MAX> pqueue_t;
+	typedef priority_queue::container<ope> pqueue_t;
 	pqueue_t* con = new pqueue_t();
 
 	//処理時間計測開始
@@ -577,7 +577,7 @@ void example_priority_queue()
 		std::printf("\n");
 
 		//プライオリティキュー
-		priority_queue::container<ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER> p_con;
+		priority_queue::container<ptr_ope> p_con;
 
 		//エンキュー
 		data_t obj1(NORMAL, 1);
@@ -651,7 +651,7 @@ void example_priority_queue()
 void example_binary_heap()
 {
 	//ヒープコンテナ生成
-	typedef binary_heap::container<heap_ope, TEST_DATA_MAX> heap_t;
+	typedef binary_heap::container<heap_ope> heap_t;
 	heap_t* heap = new heap_t();
 
 	//処理時間計測開始

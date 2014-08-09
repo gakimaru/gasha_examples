@@ -42,14 +42,14 @@ public:
 	typedef crc32_t key_type;//キー型
 public:
 	//コンテナ操作型
-	struct searchTableOpe : public hash_table::baseOpe<searchTableOpe, reference, key_type>//検索テーブル操作型
+	struct searchTableOpe : public hash_table::baseOpe<searchTableOpe, SEARCH_TABLE_SIZE, reference, key_type>//検索テーブル操作型
 	{
 		inline static key_type getKey(const reference& value){ return value->key(); }
 	};
 	struct orderTableOpe : public dynamic_array::baseOpe<orderTableOpe, reference>{};//整列テーブル操作型
 public:
 	//コンテナ型
-	typedef hash_table::container<searchTableOpe, SEARCH_TABLE_SIZE> searchTable;//検索テーブル型
+	typedef hash_table::container<searchTableOpe> searchTable;//検索テーブル型
 	typedef dynamic_array::container<orderTableOpe> orderTable;//整列テーブル型
 	typedef typename orderTable::iterator iterator;//イテレータ型
 	typedef typename orderTable::const_iterator const_iterator;//イテレータ型

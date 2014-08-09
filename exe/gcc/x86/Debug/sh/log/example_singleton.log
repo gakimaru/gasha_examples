@@ -14,30 +14,29 @@ common_data2: val1=0, val2=0
 [ Create Singleton Instance(2) : common_data1_t ]
 ----- Debug-info for singletonDebug -----
 Accessing Count: 1
-Created:         0.000091000 sec, "test1:create(2)"
+Created:         0.000129000 sec, "test1:create(2)"
 Destroyed:       0.000000000 sec, "(null)"
 Access Info: (Count=1)
-  - [2] 0.000092000 sec, "test1-D'": thread="(no name)"(0x092330e8)
+  - [2] 0.000130000 sec, "test1-D'": thread="(no name)"(0x092330e8)
 -----------------------------------------
 ----- Debug-info for singletonDebug -----
-Accessing Count: 5
-Created:         0.000091000 sec, "test1:create(2)"
+Accessing Count: 4
+Created:         0.000129000 sec, "test1:create(2)"
 Destroyed:       0.000000000 sec, "(null)"
-Access Info: (Count=5)
-  - [178] 0.090129000 sec, "Write-Proc[0][2]": thread="Thread1A(9)"(0x877b3d62)
-  - [243] 0.150134000 sec, "Write-Proc[0][4]": thread="Thread1A(3)"(0x52973fb2)
-  - [244] 0.153135000 sec, "Read-Proc[2][18]": thread="Thread1B(10)"(0x1b765313)
-  - [246] 0.153136000 sec, "Write-Proc[2][4]": thread="Thread1A(6)"(0xcf8d96f5)
-  - [245] 0.153136000 sec, "test1-E": thread="MainThread"(0x092330e8)
+Access Info: (Count=4)
+  - [173] 0.097308000 sec, "Write-Proc[0][9]": thread="Thread1A(6)"(0x673877ce)
+  - [174] 0.097309000 sec, "Write-Proc[0][17]": thread="Thread1A(3)"(0x52973fb2)
+  - [176] 0.099321000 sec, "Write-Proc[0][1]": thread="Thread1A(0)"(0x9cd97637)
+  - [177] 0.101318000 sec, "test1-E": thread="MainThread"(0x092330e8)
 -----------------------------------------
 [ Access Singleton : common_data1_t(3) ]
 common_data1: val1=1000, val2=-1000
 [ Access Singleton : common_data2_t(3) ]
-common_data2: val1=994, val2=-994
+common_data2: val1=994, val2=-986
 ----- Debug-info for singletonDebug -----
 Accessing Count: 0
-Created:         0.000091000 sec, "test1:create(2)"
-Destroyed:       1.894336000 sec, "test1:destroy"
+Created:         0.000129000 sec, "test1:create(2)"
+Destroyed:       1.970485000 sec, "test1:destroy"
 Access Info: (Count=0)
 -----------------------------------------
 - end -

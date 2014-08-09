@@ -107,7 +107,7 @@ struct data_t
 };
 //----------------------------------------
 //テストデータ操作クラス：優先度付きキュー用
-struct ope : public priority_queue::baseOpe<ope, data_t, PRIORITY, int>
+struct ope : public priority_queue::baseOpe<ope, TEST_DATA_MAX, data_t, PRIORITY, int>
 {
 	//優先度を取得
 	inline static priority_type getPriority(const node_type& node){ return node.m_priority; }
@@ -127,7 +127,7 @@ struct ope : public priority_queue::baseOpe<ope, data_t, PRIORITY, int>
 };
 //----------------------------------------
 //テストデータ操作クラス：優先度付きキュー用（ポインター操作用）
-struct ptr_ope : public priority_queue::baseOpe<ptr_ope, data_t*, PRIORITY, int>
+struct ptr_ope : public priority_queue::baseOpe<ptr_ope, TEST_DATA_TABLE_SIZE_FOR_POINTER, data_t*, PRIORITY, int>
 {
 	inline static priority_type getPriority(const node_type& node){ return node->m_priority; }
 	inline static void setPriority(node_type& node, const priority_type priority){ node->m_priority = priority; }
@@ -140,7 +140,7 @@ struct ptr_ope : public priority_queue::baseOpe<ptr_ope, data_t*, PRIORITY, int>
 };
 //----------------------------------------
 //テストデータ操作クラス：二分ヒープ用
-struct heap_ope : public binary_heap::baseOpe<heap_ope, data_t>
+struct heap_ope : public binary_heap::baseOpe<heap_ope, TEST_DATA_MAX, data_t>
 {
 	//キーを比較
 	//※lhsの方が小さいければ true を返す

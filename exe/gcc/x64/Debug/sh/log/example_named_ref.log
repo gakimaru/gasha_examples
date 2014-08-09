@@ -1,0 +1,1063 @@
+----- Test for namedRef -----
+
+----------------------------------------
+Named ref
+
+load<int>(): valA=123
+load<int>(): valA=123
+store<int>(): valA=1
+ref<int>(): valA=2
+cref<int>(): valA=2
+load<int>(): valB=123
+load<int>(): valB=123
+cref<int>(): valB=123
+ref<data_t>(): dataC={ 1, {2, 3}, 4.0}
+ref<data_t>(): dataC={ 1, {2, 3}, 4.0}
+
+--- testNamedRefCommon1<i>("valA") ---
+isRegistered<T>("valA"): true
+isReadOnly<T>("valA"): false
+isReadable<T>("valA"): true
+isWritable<T>("valA"): true
+isWritableRanged<T>("valA"): false
+isWritableWraparound<T>("valA"): false
+isWritableSaturation<T>("valA"): false
+load<T>("valA"): 2
+cref<T>("valA"): 2
+ref<T>("valA"): 2
+ref<T>("valA")=1: 1
+store<T>("valA", 1): 2
+inc<T>("valA"): 3
+inc<T>("valA"): 4
+inc<T>("valA"): 5
+inc<T>("valA"): 6
+inc<T>("valA"): 7
+inc<T>("valA"): 8
+inc<T>("valA"): 9
+inc<T>("valA"): 10
+inc<T>("valA"): 11
+inc<T>("valA"): 12
+dec<T>("valA"): 11
+dec<T>("valA"): 10
+dec<T>("valA"): 9
+dec<T>("valA"): 8
+dec<T>("valA"): 7
+dec<T>("valA"): 6
+dec<T>("valA"): 5
+dec<T>("valA"): 4
+dec<T>("valA"): 3
+dec<T>("valA"): 2
+add<T>("valA", 5): 7
+add<T>("valA", 5): 12
+add<T>("valA", 5): 17
+add<T>("valA", 5): 22
+add<T>("valA", 5): 27
+add<T>("valA", 5): 32
+add<T>("valA", 5): 37
+add<T>("valA", 5): 42
+add<T>("valA", 5): 47
+add<T>("valA", 5): 52
+sub<T>("valA", 5): 47
+sub<T>("valA", 5): 42
+sub<T>("valA", 5): 37
+sub<T>("valA", 5): 32
+sub<T>("valA", 5): 27
+sub<T>("valA", 5): 22
+sub<T>("valA", 5): 17
+sub<T>("valA", 5): 12
+sub<T>("valA", 5): 7
+sub<T>("valA", 5): 2
+mul<T>("valA", 2): 4
+mul<T>("valA", 2): 8
+mul<T>("valA", 2): 16
+mul<T>("valA", 2): 32
+mul<T>("valA", 2): 64
+mul<T>("valA", 2): 128
+mul<T>("valA", 2): 256
+mul<T>("valA", 2): 512
+mul<T>("valA", 2): 1024
+mul<T>("valA", 2): 2048
+div<T>("valA", 3): 682
+mod<T>("valA", 5): 2
+bitAnd<T>("valA", 15): 2
+bitOr<T>("valA", 15): 15
+bitXor<T>("valA", 15): 0
+bitNot<T>("valA"): -1
+lShift<T>("valA", 2): -4
+rShift<T>("valA", 2): -1
+bitOn<T>("valA", 15): -1
+bitOff<T>("valA", 255): -256
+eq<T>("valA", 15): false
+ne<T>("valA", 15): true
+gt<T>("valA", 15): false
+ge<T>("valA", 15): false
+lt<T>("valA", 15): true
+le<T>("valA", 15): true
+inOn<T>("valA", 15): false
+inOff<T>("valA", 15): true
+logicalAnd<T>("valA", 15): true
+logicalOr<T>("valA", 15): true
+isTrue<T>("valA"): true
+isFalse<T>("valA"): false
+
+--- testNamedRefCommon1<i>("valA'") ---
+isRegistered<T>("valA'"): true
+isReadOnly<T>("valA'"): true
+isReadable<T>("valA'"): true
+isWritable<T>("valA'"): false
+isWritableRanged<T>("valA'"): false
+isWritableWraparound<T>("valA'"): false
+isWritableSaturation<T>("valA'"): false
+load<T>("valA'"): -256
+cref<T>("valA'"): -256
+eq<T>("valA'", 15): false
+ne<T>("valA'", 15): true
+gt<T>("valA'", 15): false
+ge<T>("valA'", 15): false
+lt<T>("valA'", 15): true
+le<T>("valA'", 15): true
+inOn<T>("valA'", 15): false
+inOff<T>("valA'", 15): true
+logicalAnd<T>("valA'", 15): true
+logicalOr<T>("valA'", 15): true
+isTrue<T>("valA'"): true
+isFalse<T>("valA'"): false
+
+--- testNamedRefCommon1<i>("valB") ---
+isRegistered<T>("valB"): true
+isReadOnly<T>("valB"): true
+isReadable<T>("valB"): true
+isWritable<T>("valB"): false
+isWritableRanged<T>("valB"): false
+isWritableWraparound<T>("valB"): false
+isWritableSaturation<T>("valB"): false
+load<T>("valB"): 123
+cref<T>("valB"): 123
+eq<T>("valB", 15): false
+ne<T>("valB", 15): true
+gt<T>("valB", 15): true
+ge<T>("valB", 15): true
+lt<T>("valB", 15): false
+le<T>("valB", 15): false
+inOn<T>("valB", 15): true
+inOff<T>("valB", 15): false
+logicalAnd<T>("valB", 15): true
+logicalOr<T>("valB", 15): true
+isTrue<T>("valB"): true
+isFalse<T>("valB"): false
+
+--- testNamedRefCommon2<6data_t>("dataC") ---
+isRegistered<T>("dataC"): true
+isReadOnly<T>("dataC"): false
+isReadable<T>("dataC"): true
+isWritable<T>("dataC"): true
+isWritableRanged<T>("dataC"): false
+isWritableWraparound<T>("dataC"): false
+isWritableSaturation<T>("dataC"): false
+
+--- testNamedRefCommon3<f>("valD") ---
+isRegistered<T>("valD"): true
+isReadOnly<T>("valD"): false
+isReadable<T>("valD"): true
+isWritable<T>("valD"): true
+isWritableRanged<T>("valD"): false
+isWritableWraparound<T>("valD"): false
+isWritableSaturation<T>("valD"): false
+load<T>("valD"): 123.000000
+cref<T>("valD"): 123.000000
+ref<T>("valD"): 123.000000
+ref<T>("valD")=1.f: 1.000000
+store<T>("valD", 1.f): 2.000000
+inc<T>("valD"): 3.000000
+inc<T>("valD"): 4.000000
+inc<T>("valD"): 5.000000
+inc<T>("valD"): 6.000000
+inc<T>("valD"): 7.000000
+inc<T>("valD"): 8.000000
+inc<T>("valD"): 9.000000
+inc<T>("valD"): 10.000000
+inc<T>("valD"): 11.000000
+inc<T>("valD"): 12.000000
+dec<T>("valD"): 11.000000
+dec<T>("valD"): 10.000000
+dec<T>("valD"): 9.000000
+dec<T>("valD"): 8.000000
+dec<T>("valD"): 7.000000
+dec<T>("valD"): 6.000000
+dec<T>("valD"): 5.000000
+dec<T>("valD"): 4.000000
+dec<T>("valD"): 3.000000
+dec<T>("valD"): 2.000000
+add<T>("valD", 5.f): 7.000000
+add<T>("valD", 5.f): 12.000000
+add<T>("valD", 5.f): 17.000000
+add<T>("valD", 5.f): 22.000000
+add<T>("valD", 5.f): 27.000000
+add<T>("valD", 5.f): 32.000000
+add<T>("valD", 5.f): 37.000000
+add<T>("valD", 5.f): 42.000000
+add<T>("valD", 5.f): 47.000000
+add<T>("valD", 5.f): 52.000000
+sub<T>("valD", 5.f): 47.000000
+sub<T>("valD", 5.f): 42.000000
+sub<T>("valD", 5.f): 37.000000
+sub<T>("valD", 5.f): 32.000000
+sub<T>("valD", 5.f): 27.000000
+sub<T>("valD", 5.f): 22.000000
+sub<T>("valD", 5.f): 17.000000
+sub<T>("valD", 5.f): 12.000000
+sub<T>("valD", 5.f): 7.000000
+sub<T>("valD", 5.f): 2.000000
+mul<T>("valD", 2.f): 4.000000
+mul<T>("valD", 2.f): 8.000000
+mul<T>("valD", 2.f): 16.000000
+mul<T>("valD", 2.f): 32.000000
+mul<T>("valD", 2.f): 64.000000
+mul<T>("valD", 2.f): 128.000000
+mul<T>("valD", 2.f): 256.000000
+mul<T>("valD", 2.f): 512.000000
+mul<T>("valD", 2.f): 1024.000000
+mul<T>("valD", 2.f): 2048.000000
+div<T>("valD", 3.f): 682.666687
+eq<T>("valD", 15.f): false
+ne<T>("valD", 15.f): true
+gt<T>("valD", 15.f): true
+ge<T>("valD", 15.f): true
+lt<T>("valD", 15.f): false
+le<T>("valD", 15.f): false
+logicalAnd<T>("valD", 15.f): true
+logicalOr<T>("valD", 15.f): true
+isTrue<T>("valD"): true
+isFalse<T>("valD"): false
+
+--- testNamedRefCommon4<d>("valE") ---
+isRegistered<T>("valE"): true
+isReadOnly<T>("valE"): false
+isReadable<T>("valE"): true
+isWritable<T>("valE"): true
+isWritableRanged<T>("valE"): false
+isWritableWraparound<T>("valE"): false
+isWritableSaturation<T>("valE"): false
+load<T>("valE"): 123.000000
+cref<T>("valE"): 123.000000
+ref<T>("valE"): 123.000000
+ref<T>("valE")=1.: 1.000000
+store<T>("valE", 1.): 2.000000
+inc<T>("valE"): 3.000000
+inc<T>("valE"): 4.000000
+inc<T>("valE"): 5.000000
+inc<T>("valE"): 6.000000
+inc<T>("valE"): 7.000000
+inc<T>("valE"): 8.000000
+inc<T>("valE"): 9.000000
+inc<T>("valE"): 10.000000
+inc<T>("valE"): 11.000000
+inc<T>("valE"): 12.000000
+dec<T>("valE"): 11.000000
+dec<T>("valE"): 10.000000
+dec<T>("valE"): 9.000000
+dec<T>("valE"): 8.000000
+dec<T>("valE"): 7.000000
+dec<T>("valE"): 6.000000
+dec<T>("valE"): 5.000000
+dec<T>("valE"): 4.000000
+dec<T>("valE"): 3.000000
+dec<T>("valE"): 2.000000
+add<T>("valE", 5.): 7.000000
+add<T>("valE", 5.): 12.000000
+add<T>("valE", 5.): 17.000000
+add<T>("valE", 5.): 22.000000
+add<T>("valE", 5.): 27.000000
+add<T>("valE", 5.): 32.000000
+add<T>("valE", 5.): 37.000000
+add<T>("valE", 5.): 42.000000
+add<T>("valE", 5.): 47.000000
+add<T>("valE", 5.): 52.000000
+sub<T>("valE", 5.): 47.000000
+sub<T>("valE", 5.): 42.000000
+sub<T>("valE", 5.): 37.000000
+sub<T>("valE", 5.): 32.000000
+sub<T>("valE", 5.): 27.000000
+sub<T>("valE", 5.): 22.000000
+sub<T>("valE", 5.): 17.000000
+sub<T>("valE", 5.): 12.000000
+sub<T>("valE", 5.): 7.000000
+sub<T>("valE", 5.): 2.000000
+mul<T>("valE", 2.): 4.000000
+mul<T>("valE", 2.): 8.000000
+mul<T>("valE", 2.): 16.000000
+mul<T>("valE", 2.): 32.000000
+mul<T>("valE", 2.): 64.000000
+mul<T>("valE", 2.): 128.000000
+mul<T>("valE", 2.): 256.000000
+mul<T>("valE", 2.): 512.000000
+mul<T>("valE", 2.): 1024.000000
+mul<T>("valE", 2.): 2048.000000
+div<T>("valE", 3.): 682.666667
+eq<T>("valE", 15.): false
+ne<T>("valE", 15.): true
+gt<T>("valE", 15.): true
+ge<T>("valE", 15.): true
+lt<T>("valE", 15.): false
+le<T>("valE", 15.): false
+logicalAnd<T>("valE", 15.): true
+logicalOr<T>("valE", 15.): true
+isTrue<T>("valE"): true
+isFalse<T>("valE"): false
+
+--- testNamedRefCommon1<i>("valF") ---
+isRegistered<T>("valF"): true
+isReadOnly<T>("valF"): false
+isReadable<T>("valF"): true
+isWritable<T>("valF"): true
+isWritableRanged<T>("valF"): true
+isWritableWraparound<T>("valF"): true
+isWritableSaturation<T>("valF"): false
+max<T>("valF"): 5
+min<T>("valF"): -5
+load<T>("valF"): 123
+cref<T>("valF"): 123
+ref<T>("valF"): 123
+ref<T>("valF")=1: 1
+store<T>("valF", 1): 2
+inc<T>("valF"): 3
+inc<T>("valF"): 4
+inc<T>("valF"): 5
+inc<T>("valF"): 5
+inc<T>("valF"): 5
+inc<T>("valF"): 5
+inc<T>("valF"): 5
+inc<T>("valF"): 5
+inc<T>("valF"): 5
+inc<T>("valF"): 5
+dec<T>("valF"): 4
+dec<T>("valF"): 3
+dec<T>("valF"): 2
+dec<T>("valF"): 1
+dec<T>("valF"): 0
+dec<T>("valF"): -1
+dec<T>("valF"): -2
+dec<T>("valF"): -3
+dec<T>("valF"): -4
+dec<T>("valF"): -5
+add<T>("valF", 5): 0
+add<T>("valF", 5): 5
+add<T>("valF", 5): -1
+add<T>("valF", 5): 4
+add<T>("valF", 5): -2
+add<T>("valF", 5): 3
+add<T>("valF", 5): -3
+add<T>("valF", 5): 2
+add<T>("valF", 5): -4
+add<T>("valF", 5): 1
+sub<T>("valF", 5): -4
+sub<T>("valF", 5): 2
+sub<T>("valF", 5): -3
+sub<T>("valF", 5): 3
+sub<T>("valF", 5): -2
+sub<T>("valF", 5): 4
+sub<T>("valF", 5): -1
+sub<T>("valF", 5): 5
+sub<T>("valF", 5): 0
+sub<T>("valF", 5): -5
+mul<T>("valF", 2): 1
+mul<T>("valF", 2): 2
+mul<T>("valF", 2): 4
+mul<T>("valF", 2): -3
+mul<T>("valF", 2): 5
+mul<T>("valF", 2): -1
+mul<T>("valF", 2): -2
+mul<T>("valF", 2): -4
+mul<T>("valF", 2): 3
+mul<T>("valF", 2): -5
+div<T>("valF", 3): -1
+mod<T>("valF", 5): -1
+bitAnd<T>("valF", 15): 15
+bitOr<T>("valF", 15): 15
+bitXor<T>("valF", 15): 0
+bitNot<T>("valF"): -1
+lShift<T>("valF", 2): -4
+rShift<T>("valF", 2): -1
+bitOn<T>("valF", 15): -1
+bitOff<T>("valF", 255): -256
+eq<T>("valF", 15): false
+ne<T>("valF", 15): true
+gt<T>("valF", 15): false
+ge<T>("valF", 15): false
+lt<T>("valF", 15): true
+le<T>("valF", 15): true
+inOn<T>("valF", 15): false
+inOff<T>("valF", 15): true
+logicalAnd<T>("valF", 15): true
+logicalOr<T>("valF", 15): true
+isTrue<T>("valF"): true
+isFalse<T>("valF"): false
+
+--- testNamedRefCommon1<t>("valG") ---
+isRegistered<T>("valG"): true
+isReadOnly<T>("valG"): false
+isReadable<T>("valG"): true
+isWritable<T>("valG"): true
+isWritableRanged<T>("valG"): true
+isWritableWraparound<T>("valG"): false
+isWritableSaturation<T>("valG"): true
+max<T>("valG"): 3
+min<T>("valG"): 1
+load<T>("valG"): 123
+cref<T>("valG"): 123
+ref<T>("valG"): 123
+ref<T>("valG")=1: 1
+store<T>("valG", 1): 2
+inc<T>("valG"): 3
+inc<T>("valG"): 3
+inc<T>("valG"): 3
+inc<T>("valG"): 3
+inc<T>("valG"): 3
+inc<T>("valG"): 3
+inc<T>("valG"): 3
+inc<T>("valG"): 3
+inc<T>("valG"): 3
+inc<T>("valG"): 3
+dec<T>("valG"): 2
+dec<T>("valG"): 1
+dec<T>("valG"): 1
+dec<T>("valG"): 1
+dec<T>("valG"): 1
+dec<T>("valG"): 1
+dec<T>("valG"): 1
+dec<T>("valG"): 1
+dec<T>("valG"): 1
+dec<T>("valG"): 1
+add<T>("valG", 5): 3
+add<T>("valG", 5): 3
+add<T>("valG", 5): 3
+add<T>("valG", 5): 3
+add<T>("valG", 5): 3
+add<T>("valG", 5): 3
+add<T>("valG", 5): 3
+add<T>("valG", 5): 3
+add<T>("valG", 5): 3
+add<T>("valG", 5): 3
+sub<T>("valG", 5): 3
+sub<T>("valG", 5): 3
+sub<T>("valG", 5): 3
+sub<T>("valG", 5): 3
+sub<T>("valG", 5): 3
+sub<T>("valG", 5): 3
+sub<T>("valG", 5): 3
+sub<T>("valG", 5): 3
+sub<T>("valG", 5): 3
+sub<T>("valG", 5): 3
+mul<T>("valG", 2): 3
+mul<T>("valG", 2): 3
+mul<T>("valG", 2): 3
+mul<T>("valG", 2): 3
+mul<T>("valG", 2): 3
+mul<T>("valG", 2): 3
+mul<T>("valG", 2): 3
+mul<T>("valG", 2): 3
+mul<T>("valG", 2): 3
+mul<T>("valG", 2): 3
+div<T>("valG", 3): 1
+mod<T>("valG", 5): 1
+bitAnd<T>("valG", 15): 1
+bitOr<T>("valG", 15): 15
+bitXor<T>("valG", 15): 0
+bitNot<T>("valG"): 65535
+lShift<T>("valG", 2): 65532
+rShift<T>("valG", 2): 16383
+bitOn<T>("valG", 15): 16383
+bitOff<T>("valG", 255): 16128
+eq<T>("valG", 15): false
+ne<T>("valG", 15): true
+gt<T>("valG", 15): true
+ge<T>("valG", 15): true
+lt<T>("valG", 15): false
+le<T>("valG", 15): false
+inOn<T>("valG", 15): false
+inOff<T>("valG", 15): true
+logicalAnd<T>("valG", 15): true
+logicalOr<T>("valG", 15): true
+isTrue<T>("valG"): true
+isFalse<T>("valG"): false
+
+--- testNamedRefCommon3<f>("valH") ---
+isRegistered<T>("valH"): true
+isReadOnly<T>("valH"): false
+isReadable<T>("valH"): true
+isWritable<T>("valH"): true
+isWritableRanged<T>("valH"): true
+isWritableWraparound<T>("valH"): true
+isWritableSaturation<T>("valH"): false
+max<T>("valH"): 5.500000
+min<T>("valH"): -5.500000
+load<T>("valH"): 123.000000
+cref<T>("valH"): 123.000000
+ref<T>("valH"): 123.000000
+ref<T>("valH")=1.f: 1.000000
+store<T>("valH", 1.f): 2.000000
+inc<T>("valH"): 3.000000
+inc<T>("valH"): 4.000000
+inc<T>("valH"): 5.000000
+inc<T>("valH"): -5.500000
+inc<T>("valH"): -4.500000
+inc<T>("valH"): -3.500000
+inc<T>("valH"): -2.500000
+inc<T>("valH"): -1.500000
+inc<T>("valH"): -0.500000
+inc<T>("valH"): 0.500000
+dec<T>("valH"): -0.500000
+dec<T>("valH"): -1.500000
+dec<T>("valH"): -2.500000
+dec<T>("valH"): -3.500000
+dec<T>("valH"): -4.500000
+dec<T>("valH"): -5.500000
+dec<T>("valH"): -5.500000
+dec<T>("valH"): -5.500000
+dec<T>("valH"): -5.500000
+dec<T>("valH"): -5.500000
+add<T>("valH", 5.f): -0.500000
+add<T>("valH", 5.f): 4.500000
+add<T>("valH", 5.f): -1.500000
+add<T>("valH", 5.f): 3.500000
+add<T>("valH", 5.f): -2.500000
+add<T>("valH", 5.f): 2.500000
+add<T>("valH", 5.f): -3.500000
+add<T>("valH", 5.f): 1.500000
+add<T>("valH", 5.f): -4.500000
+add<T>("valH", 5.f): 0.500000
+sub<T>("valH", 5.f): -4.500000
+sub<T>("valH", 5.f): 1.500000
+sub<T>("valH", 5.f): -3.500000
+sub<T>("valH", 5.f): 2.500000
+sub<T>("valH", 5.f): -2.500000
+sub<T>("valH", 5.f): 3.500000
+sub<T>("valH", 5.f): -1.500000
+sub<T>("valH", 5.f): 4.500000
+sub<T>("valH", 5.f): -0.500000
+sub<T>("valH", 5.f): -5.500000
+mul<T>("valH", 2.f): 0.000000
+mul<T>("valH", 2.f): 0.000000
+mul<T>("valH", 2.f): 0.000000
+mul<T>("valH", 2.f): 0.000000
+mul<T>("valH", 2.f): 0.000000
+mul<T>("valH", 2.f): 0.000000
+mul<T>("valH", 2.f): 0.000000
+mul<T>("valH", 2.f): 0.000000
+mul<T>("valH", 2.f): 0.000000
+mul<T>("valH", 2.f): 0.000000
+div<T>("valH", 3.f): 0.000000
+eq<T>("valH", 15.f): false
+ne<T>("valH", 15.f): true
+gt<T>("valH", 15.f): false
+ge<T>("valH", 15.f): false
+lt<T>("valH", 15.f): true
+le<T>("valH", 15.f): true
+logicalAnd<T>("valH", 15.f): false
+logicalOr<T>("valH", 15.f): true
+isTrue<T>("valH"): false
+isFalse<T>("valH"): true
+
+--- testNamedRefCommon3<f>("valI") ---
+isRegistered<T>("valI"): true
+isReadOnly<T>("valI"): false
+isReadable<T>("valI"): true
+isWritable<T>("valI"): true
+isWritableRanged<T>("valI"): true
+isWritableWraparound<T>("valI"): false
+isWritableSaturation<T>("valI"): true
+max<T>("valI"): 3.500000
+min<T>("valI"): 1.500000
+load<T>("valI"): 123.000000
+cref<T>("valI"): 123.000000
+ref<T>("valI"): 123.000000
+ref<T>("valI")=1.f: 1.000000
+store<T>("valI", 1.f): 2.000000
+inc<T>("valI"): 3.000000
+inc<T>("valI"): 3.500000
+inc<T>("valI"): 3.500000
+inc<T>("valI"): 3.500000
+inc<T>("valI"): 3.500000
+inc<T>("valI"): 3.500000
+inc<T>("valI"): 3.500000
+inc<T>("valI"): 3.500000
+inc<T>("valI"): 3.500000
+inc<T>("valI"): 3.500000
+dec<T>("valI"): 2.500000
+dec<T>("valI"): 1.500000
+dec<T>("valI"): 1.500000
+dec<T>("valI"): 1.500000
+dec<T>("valI"): 1.500000
+dec<T>("valI"): 1.500000
+dec<T>("valI"): 1.500000
+dec<T>("valI"): 1.500000
+dec<T>("valI"): 1.500000
+dec<T>("valI"): 1.500000
+add<T>("valI", 5.f): 3.500000
+add<T>("valI", 5.f): 3.500000
+add<T>("valI", 5.f): 3.500000
+add<T>("valI", 5.f): 3.500000
+add<T>("valI", 5.f): 3.500000
+add<T>("valI", 5.f): 3.500000
+add<T>("valI", 5.f): 3.500000
+add<T>("valI", 5.f): 3.500000
+add<T>("valI", 5.f): 3.500000
+add<T>("valI", 5.f): 3.500000
+sub<T>("valI", 5.f): 1.500000
+sub<T>("valI", 5.f): 1.500000
+sub<T>("valI", 5.f): 1.500000
+sub<T>("valI", 5.f): 1.500000
+sub<T>("valI", 5.f): 1.500000
+sub<T>("valI", 5.f): 1.500000
+sub<T>("valI", 5.f): 1.500000
+sub<T>("valI", 5.f): 1.500000
+sub<T>("valI", 5.f): 1.500000
+sub<T>("valI", 5.f): 1.500000
+mul<T>("valI", 2.f): 3.000000
+mul<T>("valI", 2.f): 3.500000
+mul<T>("valI", 2.f): 3.500000
+mul<T>("valI", 2.f): 3.500000
+mul<T>("valI", 2.f): 3.500000
+mul<T>("valI", 2.f): 3.500000
+mul<T>("valI", 2.f): 3.500000
+mul<T>("valI", 2.f): 3.500000
+mul<T>("valI", 2.f): 3.500000
+mul<T>("valI", 2.f): 3.500000
+div<T>("valI", 3.f): 1.166667
+eq<T>("valI", 15.f): false
+ne<T>("valI", 15.f): true
+gt<T>("valI", 15.f): false
+ge<T>("valI", 15.f): false
+lt<T>("valI", 15.f): true
+le<T>("valI", 15.f): true
+logicalAnd<T>("valI", 15.f): true
+logicalOr<T>("valI", 15.f): true
+isTrue<T>("valI"): true
+isFalse<T>("valI"): false
+
+--- testNamedRefCommon4<d>("valJ") ---
+isRegistered<T>("valJ"): true
+isReadOnly<T>("valJ"): false
+isReadable<T>("valJ"): true
+isWritable<T>("valJ"): true
+isWritableRanged<T>("valJ"): true
+isWritableWraparound<T>("valJ"): true
+isWritableSaturation<T>("valJ"): false
+max<T>("valJ"): 5.500000
+min<T>("valJ"): -5.500000
+load<T>("valJ"): 123.000000
+cref<T>("valJ"): 123.000000
+ref<T>("valJ"): 123.000000
+ref<T>("valJ")=1.: 1.000000
+store<T>("valJ", 1.): 2.000000
+inc<T>("valJ"): 3.000000
+inc<T>("valJ"): 4.000000
+inc<T>("valJ"): 5.000000
+inc<T>("valJ"): -5.500000
+inc<T>("valJ"): -4.500000
+inc<T>("valJ"): -3.500000
+inc<T>("valJ"): -2.500000
+inc<T>("valJ"): -1.500000
+inc<T>("valJ"): -0.500000
+inc<T>("valJ"): 0.500000
+dec<T>("valJ"): -0.500000
+dec<T>("valJ"): -1.500000
+dec<T>("valJ"): -2.500000
+dec<T>("valJ"): -3.500000
+dec<T>("valJ"): -4.500000
+dec<T>("valJ"): -5.500000
+dec<T>("valJ"): -5.500000
+dec<T>("valJ"): -5.500000
+dec<T>("valJ"): -5.500000
+dec<T>("valJ"): -5.500000
+add<T>("valJ", 5.): -0.500000
+add<T>("valJ", 5.): 4.500000
+add<T>("valJ", 5.): -1.500000
+add<T>("valJ", 5.): 3.500000
+add<T>("valJ", 5.): -2.500000
+add<T>("valJ", 5.): 2.500000
+add<T>("valJ", 5.): -3.500000
+add<T>("valJ", 5.): 1.500000
+add<T>("valJ", 5.): -4.500000
+add<T>("valJ", 5.): 0.500000
+sub<T>("valJ", 5.): -4.500000
+sub<T>("valJ", 5.): 1.500000
+sub<T>("valJ", 5.): -3.500000
+sub<T>("valJ", 5.): 2.500000
+sub<T>("valJ", 5.): -2.500000
+sub<T>("valJ", 5.): 3.500000
+sub<T>("valJ", 5.): -1.500000
+sub<T>("valJ", 5.): 4.500000
+sub<T>("valJ", 5.): -0.500000
+sub<T>("valJ", 5.): -5.500000
+mul<T>("valJ", 2.): 0.000000
+mul<T>("valJ", 2.): 0.000000
+mul<T>("valJ", 2.): 0.000000
+mul<T>("valJ", 2.): 0.000000
+mul<T>("valJ", 2.): 0.000000
+mul<T>("valJ", 2.): 0.000000
+mul<T>("valJ", 2.): 0.000000
+mul<T>("valJ", 2.): 0.000000
+mul<T>("valJ", 2.): 0.000000
+mul<T>("valJ", 2.): 0.000000
+div<T>("valJ", 3.): 0.000000
+eq<T>("valJ", 15.): false
+ne<T>("valJ", 15.): true
+gt<T>("valJ", 15.): false
+ge<T>("valJ", 15.): false
+lt<T>("valJ", 15.): true
+le<T>("valJ", 15.): true
+logicalAnd<T>("valJ", 15.): false
+logicalOr<T>("valJ", 15.): true
+isTrue<T>("valJ"): false
+isFalse<T>("valJ"): true
+
+--- testNamedRefCommon4<d>("valK") ---
+isRegistered<T>("valK"): true
+isReadOnly<T>("valK"): false
+isReadable<T>("valK"): true
+isWritable<T>("valK"): true
+isWritableRanged<T>("valK"): true
+isWritableWraparound<T>("valK"): false
+isWritableSaturation<T>("valK"): true
+max<T>("valK"): 3.500000
+min<T>("valK"): 1.500000
+load<T>("valK"): 123.000000
+cref<T>("valK"): 123.000000
+ref<T>("valK"): 123.000000
+ref<T>("valK")=1.: 1.000000
+store<T>("valK", 1.): 2.000000
+inc<T>("valK"): 3.000000
+inc<T>("valK"): 3.500000
+inc<T>("valK"): 3.500000
+inc<T>("valK"): 3.500000
+inc<T>("valK"): 3.500000
+inc<T>("valK"): 3.500000
+inc<T>("valK"): 3.500000
+inc<T>("valK"): 3.500000
+inc<T>("valK"): 3.500000
+inc<T>("valK"): 3.500000
+dec<T>("valK"): 2.500000
+dec<T>("valK"): 1.500000
+dec<T>("valK"): 1.500000
+dec<T>("valK"): 1.500000
+dec<T>("valK"): 1.500000
+dec<T>("valK"): 1.500000
+dec<T>("valK"): 1.500000
+dec<T>("valK"): 1.500000
+dec<T>("valK"): 1.500000
+dec<T>("valK"): 1.500000
+add<T>("valK", 5.): 3.500000
+add<T>("valK", 5.): 3.500000
+add<T>("valK", 5.): 3.500000
+add<T>("valK", 5.): 3.500000
+add<T>("valK", 5.): 3.500000
+add<T>("valK", 5.): 3.500000
+add<T>("valK", 5.): 3.500000
+add<T>("valK", 5.): 3.500000
+add<T>("valK", 5.): 3.500000
+add<T>("valK", 5.): 3.500000
+sub<T>("valK", 5.): 1.500000
+sub<T>("valK", 5.): 1.500000
+sub<T>("valK", 5.): 1.500000
+sub<T>("valK", 5.): 1.500000
+sub<T>("valK", 5.): 1.500000
+sub<T>("valK", 5.): 1.500000
+sub<T>("valK", 5.): 1.500000
+sub<T>("valK", 5.): 1.500000
+sub<T>("valK", 5.): 1.500000
+sub<T>("valK", 5.): 1.500000
+mul<T>("valK", 2.): 3.000000
+mul<T>("valK", 2.): 3.500000
+mul<T>("valK", 2.): 3.500000
+mul<T>("valK", 2.): 3.500000
+mul<T>("valK", 2.): 3.500000
+mul<T>("valK", 2.): 3.500000
+mul<T>("valK", 2.): 3.500000
+mul<T>("valK", 2.): 3.500000
+mul<T>("valK", 2.): 3.500000
+mul<T>("valK", 2.): 3.500000
+div<T>("valK", 3.): 1.166667
+eq<T>("valK", 15.): false
+ne<T>("valK", 15.): true
+gt<T>("valK", 15.): false
+ge<T>("valK", 15.): false
+lt<T>("valK", 15.): true
+le<T>("valK", 15.): true
+logicalAnd<T>("valK", 15.): true
+logicalOr<T>("valK", 15.): true
+isTrue<T>("valK"): true
+isFalse<T>("valK"): false
+
+--- testNamedRefCommon5<b>("valL") ---
+isRegistered<T>("valL"): true
+isReadOnly<T>("valL"): false
+isReadable<T>("valL"): true
+isWritable<T>("valL"): true
+isWritableRanged<T>("valL"): false
+isWritableWraparound<T>("valL"): false
+isWritableSaturation<T>("valL"): false
+load<T>("valL"): true
+cref<T>("valL"): true
+ref<T>("valL"): true
+ref<T>("valL")=false: false
+store<T>("valL", true): true
+eq<T>("valL", true): true
+ne<T>("valL", true): false
+gt<T>("valL", true): false
+ge<T>("valL", true): true
+lt<T>("valL", true): false
+le<T>("valL", true): true
+logicalAnd<T>("valL", true): true
+logicalOr<T>("valL", true): true
+isTrue<T>("valL"): true
+isFalse<T>("valL"): false
+
+--- testNamedRefCommon1<9uint128_t>("valM") ---
+isRegistered<T>("valM"): true
+isReadOnly<T>("valM"): false
+isReadable<T>("valM"): true
+isWritable<T>("valM"): true
+isWritableRanged<T>("valM"): true
+isWritableWraparound<T>("valM"): true
+isWritableSaturation<T>("valM"): false
+max<T>("valM"): 3
+min<T>("valM"): 1
+load<T>("valM"): 123
+cref<T>("valM"): 123
+ref<T>("valM"): 123
+ref<T>("valM")=1: 1
+store<T>("valM", 1): 2
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+inc<T>("valM"): 3
+dec<T>("valM"): 2
+dec<T>("valM"): 1
+dec<T>("valM"): 1
+dec<T>("valM"): 1
+dec<T>("valM"): 1
+dec<T>("valM"): 1
+dec<T>("valM"): 1
+dec<T>("valM"): 1
+dec<T>("valM"): 1
+dec<T>("valM"): 1
+add<T>("valM", 5): 3
+add<T>("valM", 5): 2
+add<T>("valM", 5): 1
+add<T>("valM", 5): 3
+add<T>("valM", 5): 2
+add<T>("valM", 5): 1
+add<T>("valM", 5): 3
+add<T>("valM", 5): 2
+add<T>("valM", 5): 1
+add<T>("valM", 5): 3
+sub<T>("valM", 5): 1
+sub<T>("valM", 5): 2
+sub<T>("valM", 5): 3
+sub<T>("valM", 5): 1
+sub<T>("valM", 5): 2
+sub<T>("valM", 5): 3
+sub<T>("valM", 5): 1
+sub<T>("valM", 5): 2
+sub<T>("valM", 5): 3
+sub<T>("valM", 5): 1
+eq<T>("valM", 15): false
+ne<T>("valM", 15): true
+gt<T>("valM", 15): false
+ge<T>("valM", 15): true
+lt<T>("valM", 15): true
+le<T>("valM", 15): true
+logicalAnd<T>("valM", 15): true
+logicalOr<T>("valM", 15): true
+isTrue<T>("valM"): true
+isFalse<T>("valM"): false
+
+--- testNamedRefCommon2<i>("unregistered data") ---
+isRegistered<T>("unregistered data"): false
+isReadOnly<T>("unregistered data"): false
+isReadable<T>("unregistered data"): false
+isWritable<T>("unregistered data"): false
+isWritableRanged<T>("unregistered data"): false
+isWritableWraparound<T>("unregistered data"): false
+isWritableSaturation<T>("unregistered data"): false
+
+--- testNamedRefCommon2<c>("valA") ---
+isRegistered<T>("valA"): true
+isReadOnly<T>("valA"): false
+isReadable<T>("valA"): false
+isWritable<T>("valA"): false
+isWritableRanged<T>("valA"): false
+isWritableWraparound<T>("valA"): false
+isWritableSaturation<T>("valA"): false
+
+----------------------------------------
+Named func
+
+funcA: a=1, b=2
+funcA:ret=1
+lambdaA: a=3, b=4
+lambdaA:ret=1
+functorA: a=5, b=6
+functorA:ret=1
+objType::memberA() const: a=7, b=8, m_mem=123
+memberA:ret=1
+funcA: a=1, b=2
+funcA:ret=1
+lambdaA: a=3, b=4
+lambdaA:ret=1
+functorA: a=5, b=6
+functorA:ret=1
+objType::memberA() const: a=7, b=8, m_mem=123
+memberA:ret=1
+funcB:
+lambdaB:
+functorB:
+objType::memberB_noconst() const: m_mem=123
+funcB:
+lambdaB:
+functorB:
+objType::memberB() const: m_mem=123
+funcA: a=1, b=2
+lambdaA: a=3, b=4
+functorA: a=5, b=6
+objType::memberA() const: a=7, b=8, m_mem=123
+func_tbl.func<int>(* ref_tbl.ref<data_t>("dataC"), "data_t", "methodA", 2)=2
+
+----------------------------------------
+Named value
+
+value_tbl.value<int>("value1")=1
+value_tbl.value<float>("valueA")=1.100000
+value_tbl.value<int>("g_value1")=102
+value_tbl.value<uint128_t>("g_value1")=123
+value_tbl.next("valueGroupA", "(null)"): "value1"=1
+value_tbl.next("valueGroupA", "value1"): "value2"=2
+value_tbl.next("valueGroupA", "value2"): "value9"=9
+value_tbl.next("valueGroupA", "value9"): "value10"=10
+value_tbl.next("valueGroupA", "value10"): "value10"=10
+value_tbl.next("valueGroupA", "(null)", 3): "value9"=9
+value_tbl.next("valueGroupA", "value9", 3): "value10"=10
+value_tbl.next("valueGroupA", "value10", 3): "value10"=10
+value_tbl.next("valueGroupA", "value10", 3): "value10"=10
+value_tbl.next("valueGroupA", "value10", 3): "value10"=10
+value_tbl.next("valueGroupA", "(null)", valueTable::wraparound): "value1"=1
+value_tbl.next("valueGroupA", "value1", valueTable::wraparound): "value2"=2
+value_tbl.next("valueGroupA", "value2", valueTable::wraparound): "value9"=9
+value_tbl.next("valueGroupA", "value9", valueTable::wraparound): "value10"=10
+value_tbl.next("valueGroupA", "value10", valueTable::wraparound): "value1"=1
+value_tbl.next("valueGroupA", "(null)", valueTable::wraparound, 3): "value9"=9
+value_tbl.next("valueGroupA", "value9", valueTable::wraparound, 3): "value2"=2
+value_tbl.next("valueGroupA", "value2", valueTable::wraparound, 3): "value1"=1
+value_tbl.next("valueGroupA", "value1", valueTable::wraparound, 3): "value10"=10
+value_tbl.next("valueGroupA", "value10", valueTable::wraparound, 3): "value9"=9
+value_tbl.prev("valueGroupA", "(null)"): "value10"=10
+value_tbl.prev("valueGroupA", "value10"): "value9"=9
+value_tbl.prev("valueGroupA", "value9"): "value2"=2
+value_tbl.prev("valueGroupA", "value2"): "value1"=1
+value_tbl.prev("valueGroupA", "value1"): "value1"=1
+value_tbl.prev("valueGroupA", "(null)", 3): "value2"=2
+value_tbl.prev("valueGroupA", "value2", 3): "value1"=1
+value_tbl.prev("valueGroupA", "value1", 3): "value1"=1
+value_tbl.prev("valueGroupA", "value1", 3): "value1"=1
+value_tbl.prev("valueGroupA", "value1", 3): "value1"=1
+value_tbl.prev("valueGroupA", "(null)", valueTable::wraparound): "value10"=10
+value_tbl.prev("valueGroupA", "value10", valueTable::wraparound): "value9"=9
+value_tbl.prev("valueGroupA", "value9", valueTable::wraparound): "value2"=2
+value_tbl.prev("valueGroupA", "value2", valueTable::wraparound): "value1"=1
+value_tbl.prev("valueGroupA", "value1", valueTable::wraparound): "value10"=10
+value_tbl.prev("valueGroupA", "(null)", valueTable::wraparound, 3): "value2"=2
+value_tbl.prev("valueGroupA", "value2", valueTable::wraparound, 3): "value9"=9
+value_tbl.prev("valueGroupA", "value9", valueTable::wraparound, 3): "value10"=10
+value_tbl.prev("valueGroupA", "value10", valueTable::wraparound, 3): "value1"=1
+value_tbl.prev("valueGroupA", "value1", valueTable::wraparound, 3): "value2"=2
+----------------------------------------
+Registered named-ref items:(num=14)
+  ref: name(crc)=0x69e7a07e, type=i, access_type=ReadOnly
+  ref: name(crc)=0xe33ef8b1, type=d, access_type=Writable(Wrap-around)
+  ref: name(crc)=0x37f49c5a, type=9uint128_t, access_type=Writable(Wrap-around)
+  ref: name(crc)=0xbd2dc495, type=d, access_type=Writable
+  ref: name(crc)=0x11557bb2, type=d, access_type=Writable(Saturation)
+  ref: name(crc)=0x5c16b462, type=t, access_type=Writable(Saturation)
+  ref: name(crc)=0x214007cc, type=6data_t, access_type=Writable
+  ref: name(crc)=0x7ab7538a, type=i, access_type=Writable
+  ref: name(crc)=0x4f641d77, type=i, access_type=ReadOnly
+  ref: name(crc)=0xae7d3761, type=i, access_type=Writable(Wrap-around)
+  ref: name(crc)=0x02058846, type=f, access_type=Writable(Wrap-around)
+  ref: name(crc)=0x4f464796, type=f, access_type=Writable
+  ref: name(crc)=0xf06e0b45, type=f, access_type=Writable(Saturation)
+  ref: name(crc)=0xc59f1f59, type=b, access_type=Writable
+----------------------------------------
+Registered named-func items:(num=21)
+  group: group-name(crc)=0x00000000
+    func: name(crc)=0x02c60901, funcType=Writable, retType=b, objType=(none)
+    func: name(crc)=0x192061d7, funcType=Writable, retType=b, objType=(none)
+    func: name(crc)=0x7715ceaf, funcType=Writable, retType=b, objType=(none)
+    func: name(crc)=0x6db5b10e, funcType=Writable, retType=b, objType=N5gasha7objTypeE
+  group: group-name(crc)=0xb7960ecd
+    func: name(crc)=0x192061d7, funcType=Writable, retType=b, objType=(none)
+    func: name(crc)=0xad98cc18, funcType=Const, retType=b, objType=(none)
+    func: name(crc)=0x0a709223, funcType=Writable, retType=v, objType=(none)
+    func: name(crc)=0x159db940, funcType=Const, retType=v, objType=(none)
+  group: group-name(crc)=0x86cb6ab5
+    func: name(crc)=0x77f638fc, funcType=Writable, retType=i, objType=6data_t
+  group: group-name(crc)=0x45fd8dce
+    func: name(crc)=0x7715ceaf, funcType=Writable, retType=b, objType=(none)
+    func: name(crc)=0xc99e4163, funcType=Const, retType=b, objType=(none)
+    func: name(crc)=0x64453d5b, funcType=Writable, retType=v, objType=(none)
+    func: name(crc)=0x719b343b, funcType=Const, retType=v, objType=(none)
+  group: group-name(crc)=0xa4c6fd39
+    func: name(crc)=0x02c60901, funcType=Writable, retType=b, objType=(none)
+    func: name(crc)=0xb7c440da, funcType=Const, retType=b, objType=(none)
+    func: name(crc)=0x1196faf5, funcType=Writable, retType=v, objType=(none)
+    func: name(crc)=0x0fc13582, funcType=Const, retType=v, objType=(none)
+  group: group-name(crc)=0x9137e925
+    func: name(crc)=0x6db5b10e, funcType=Writable, retType=b, objType=N5gasha7objTypeE
+    func: name(crc)=0x9137e925, funcType=Const, retType=b, objType=N5gasha7objTypeE
+    func: name(crc)=0x7ee542fa, funcType=Writable, retType=v, objType=N5gasha7objTypeE
+    func: name(crc)=0x9137e925, funcType=Const, retType=v, objType=N5gasha7objTypeE
+----------------------------------------
+Registered named-value items:(num=16)
+  group: group-name(crc)=0x00000000
+    func: name="g_value1"(0x61fdccdf), type=i
+    func: name="g_value2"(0x72ad3f2b), type=i
+    func: name="g_value9"(0xeb249410), type=i
+    func: name="g_value10"(0xef3f3aa3), type=i
+    func: name="g_value128"(0x7ef60ba9), type=9uint128_t
+  group: group-name(crc)=0x3c4789fa
+    func: name="valueA"(0x931a4d7b), type=f
+    func: name="valueB"(0x804abe8f), type=f
+    func: name="valueC"(0x72213d8c), type=f
+    func: name="valueD"(0xa6eb5967), type=f
+  group: group-name(crc)=0x2f177a0e
+    func: name="value1"(0xe2821976), type=i
+    func: name="value2"(0xf1d2ea82), type=i
+    func: name="value9"(0x685b41b9), type=i
+    func: name="value10"(0x35452b1c), type=i
+  group: group-name(crc)=0xd9d0b31f
+    func: name="testValueA"(0x08088a59), type=N5gasha10testValuesE
+    func: name="testValueB"(0x1b5879ad), type=N5gasha10testValuesE
+    func: name="testValueC"(0xe933faae), type=N5gasha10testValuesE
+- end -
+----------------------------------------
+Registered named-ref items:(num=0)
+----------------------------------------
+Registered named-func items:(num=2)
+  group: group-name(crc)=0x00000000
+  group: group-name(crc)=0xb7960ecd
+  group: group-name(crc)=0x86cb6ab5
+  group: group-name(crc)=0x45fd8dce
+  group: group-name(crc)=0xa4c6fd39
+  group: group-name(crc)=0x9137e925
+----------------------------------------
+Registered named-value items:(num=0)
+  group: group-name(crc)=0x00000000
+  group: group-name(crc)=0x3c4789fa
+  group: group-name(crc)=0x2f177a0e
+  group: group-name(crc)=0xd9d0b31f
