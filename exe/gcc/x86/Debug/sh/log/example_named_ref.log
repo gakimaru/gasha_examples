@@ -1,4 +1,8 @@
 ----- Test for namedRef -----
+
+----------------------------------------
+Named ref
+
 load<int>(): valA=123
 load<int>(): valA=123
 store<int>(): valA=1
@@ -10,7 +14,7 @@ cref<int>(): valB=123
 ref<data_t>(): dataC={ 1, {2, 3}, 4.0}
 ref<data_t>(): dataC={ 1, {2, 3}, 4.0}
 
---- testCommon1<i>("valA") ---
+--- testNamedRefCommon1<i>("valA") ---
 isRegistered<T>("valA"): true
 isReadOnly<T>("valA"): false
 isReadable<T>("valA"): true
@@ -96,7 +100,7 @@ logicalOr<T>("valA", 15): true
 isTrue<T>("valA"): true
 isFalse<T>("valA"): false
 
---- testCommon1<i>("valA'") ---
+--- testNamedRefCommon1<i>("valA'") ---
 isRegistered<T>("valA'"): true
 isReadOnly<T>("valA'"): true
 isReadable<T>("valA'"): true
@@ -119,7 +123,7 @@ logicalOr<T>("valA'", 15): true
 isTrue<T>("valA'"): true
 isFalse<T>("valA'"): false
 
---- testCommon1<i>("valB") ---
+--- testNamedRefCommon1<i>("valB") ---
 isRegistered<T>("valB"): true
 isReadOnly<T>("valB"): true
 isReadable<T>("valB"): true
@@ -142,7 +146,7 @@ logicalOr<T>("valB", 15): true
 isTrue<T>("valB"): true
 isFalse<T>("valB"): false
 
---- testCommon2<6data_t>("dataC") ---
+--- testNamedRefCommon2<6data_t>("dataC") ---
 isRegistered<T>("dataC"): true
 isReadOnly<T>("dataC"): false
 isReadable<T>("dataC"): true
@@ -151,7 +155,7 @@ isWritableRanged<T>("dataC"): false
 isWritableWraparound<T>("dataC"): false
 isWritableSaturation<T>("dataC"): false
 
---- testCommon3<f>("valD") ---
+--- testNamedRefCommon3<f>("valD") ---
 isRegistered<T>("valD"): true
 isReadOnly<T>("valD"): false
 isReadable<T>("valD"): true
@@ -226,7 +230,7 @@ logicalOr<T>("valD", 15.f): true
 isTrue<T>("valD"): true
 isFalse<T>("valD"): false
 
---- testCommon4<d>("valE") ---
+--- testNamedRefCommon4<d>("valE") ---
 isRegistered<T>("valE"): true
 isReadOnly<T>("valE"): false
 isReadable<T>("valE"): true
@@ -301,7 +305,7 @@ logicalOr<T>("valE", 15.): true
 isTrue<T>("valE"): true
 isFalse<T>("valE"): false
 
---- testCommon1<i>("valF") ---
+--- testNamedRefCommon1<i>("valF") ---
 isRegistered<T>("valF"): true
 isReadOnly<T>("valF"): false
 isReadable<T>("valF"): true
@@ -389,7 +393,7 @@ logicalOr<T>("valF", 15): true
 isTrue<T>("valF"): true
 isFalse<T>("valF"): false
 
---- testCommon1<t>("valG") ---
+--- testNamedRefCommon1<t>("valG") ---
 isRegistered<T>("valG"): true
 isReadOnly<T>("valG"): false
 isReadable<T>("valG"): true
@@ -477,7 +481,7 @@ logicalOr<T>("valG", 15): true
 isTrue<T>("valG"): true
 isFalse<T>("valG"): false
 
---- testCommon3<f>("valH") ---
+--- testNamedRefCommon3<f>("valH") ---
 isRegistered<T>("valH"): true
 isReadOnly<T>("valH"): false
 isReadable<T>("valH"): true
@@ -554,7 +558,7 @@ logicalOr<T>("valH", 15.f): true
 isTrue<T>("valH"): false
 isFalse<T>("valH"): true
 
---- testCommon3<f>("valI") ---
+--- testNamedRefCommon3<f>("valI") ---
 isRegistered<T>("valI"): true
 isReadOnly<T>("valI"): false
 isReadable<T>("valI"): true
@@ -631,7 +635,7 @@ logicalOr<T>("valI", 15.f): true
 isTrue<T>("valI"): true
 isFalse<T>("valI"): false
 
---- testCommon4<d>("valJ") ---
+--- testNamedRefCommon4<d>("valJ") ---
 isRegistered<T>("valJ"): true
 isReadOnly<T>("valJ"): false
 isReadable<T>("valJ"): true
@@ -708,7 +712,7 @@ logicalOr<T>("valJ", 15.): true
 isTrue<T>("valJ"): false
 isFalse<T>("valJ"): true
 
---- testCommon4<d>("valK") ---
+--- testNamedRefCommon4<d>("valK") ---
 isRegistered<T>("valK"): true
 isReadOnly<T>("valK"): false
 isReadable<T>("valK"): true
@@ -785,7 +789,7 @@ logicalOr<T>("valK", 15.): true
 isTrue<T>("valK"): true
 isFalse<T>("valK"): false
 
---- testCommon5<b>("valL") ---
+--- testNamedRefCommon5<b>("valL") ---
 isRegistered<T>("valL"): true
 isReadOnly<T>("valL"): false
 isReadable<T>("valL"): true
@@ -809,7 +813,7 @@ logicalOr<T>("valL", true): true
 isTrue<T>("valL"): true
 isFalse<T>("valL"): false
 
---- testCommon1<9uint128_t>("valM") ---
+--- testNamedRefCommon1<9uint128_t>("valM") ---
 isRegistered<T>("valM"): true
 isReadOnly<T>("valM"): false
 isReadable<T>("valM"): true
@@ -875,7 +879,7 @@ logicalOr<T>("valM", 15): true
 isTrue<T>("valM"): true
 isFalse<T>("valM"): false
 
---- testCommon2<i>("unregistered data") ---
+--- testNamedRefCommon2<i>("unregistered data") ---
 isRegistered<T>("unregistered data"): false
 isReadOnly<T>("unregistered data"): false
 isReadable<T>("unregistered data"): false
@@ -884,7 +888,7 @@ isWritableRanged<T>("unregistered data"): false
 isWritableWraparound<T>("unregistered data"): false
 isWritableSaturation<T>("unregistered data"): false
 
---- testCommon2<c>("valA") ---
+--- testNamedRefCommon2<c>("valA") ---
 isRegistered<T>("valA"): true
 isReadOnly<T>("valA"): false
 isReadable<T>("valA"): false
@@ -892,20 +896,168 @@ isWritable<T>("valA"): false
 isWritableRanged<T>("valA"): false
 isWritableWraparound<T>("valA"): false
 isWritableSaturation<T>("valA"): false
+
 ----------------------------------------
-Registered data items:(num=14)
-data: name(crc)=0x69e7a07e, type=i, access_type=ReadOnly
-data: name(crc)=0xe33ef8b1, type=d, access_type=Writable(Wrap-around)
-data: name(crc)=0x37f49c5a, type=9uint128_t, access_type=Writable(Wrap-around)
-data: name(crc)=0xbd2dc495, type=d, access_type=Writable
-data: name(crc)=0x11557bb2, type=d, access_type=Writable(Saturation)
-data: name(crc)=0x5c16b462, type=t, access_type=Writable(Saturation)
-data: name(crc)=0x214007cc, type=6data_t, access_type=Writable
-data: name(crc)=0x7ab7538a, type=i, access_type=Writable
-data: name(crc)=0x4f641d77, type=i, access_type=ReadOnly
-data: name(crc)=0xae7d3761, type=i, access_type=Writable(Wrap-around)
-data: name(crc)=0x02058846, type=f, access_type=Writable(Wrap-around)
-data: name(crc)=0x4f464796, type=f, access_type=Writable
-data: name(crc)=0xf06e0b45, type=f, access_type=Writable(Saturation)
-data: name(crc)=0xc59f1f59, type=b, access_type=Writable
+Named func
+
+funcA: a=1, b=2
+funcA:ret=1
+lambdaA: a=3, b=4
+lambdaA:ret=1
+functorA: a=5, b=6
+functorA:ret=1
+objType::memberA() const: a=7, b=8, m_mem=123
+memberA:ret=1
+funcA: a=1, b=2
+funcA:ret=1
+lambdaA: a=3, b=4
+lambdaA:ret=1
+functorA: a=5, b=6
+functorA:ret=1
+objType::memberA() const: a=7, b=8, m_mem=123
+memberA:ret=1
+funcB:
+lambdaB:
+functorB:
+objType::memberB_noconst() const: m_mem=123
+funcB:
+lambdaB:
+functorB:
+objType::memberB() const: m_mem=123
+funcA: a=1, b=2
+lambdaA: a=3, b=4
+functorA: a=5, b=6
+objType::memberA() const: a=7, b=8, m_mem=123
+func_tbl.func<int>(* ref_tbl.ref<data_t>("dataC"), "data_t", "methodA", 2)=2
+
+----------------------------------------
+Named value
+
+value_tbl.value<int>("value1")=1
+value_tbl.value<float>("valueA")=1.100000
+value_tbl.value<int>("g_value1")=102
+value_tbl.value<uint128_t>("g_value1")=123
+value_tbl.next("valueGroupA", "(null)"): "value1"=1
+value_tbl.next("valueGroupA", "value1"): "value2"=2
+value_tbl.next("valueGroupA", "value2"): "value9"=9
+value_tbl.next("valueGroupA", "value9"): "value10"=10
+value_tbl.next("valueGroupA", "value10"): "value10"=10
+value_tbl.next("valueGroupA", "(null)", 3): "value9"=9
+value_tbl.next("valueGroupA", "value9", 3): "value10"=10
+value_tbl.next("valueGroupA", "value10", 3): "value10"=10
+value_tbl.next("valueGroupA", "value10", 3): "value10"=10
+value_tbl.next("valueGroupA", "value10", 3): "value10"=10
+value_tbl.next("valueGroupA", "(null)", valueTable::wraparound): "value1"=1
+value_tbl.next("valueGroupA", "value1", valueTable::wraparound): "value2"=2
+value_tbl.next("valueGroupA", "value2", valueTable::wraparound): "value9"=9
+value_tbl.next("valueGroupA", "value9", valueTable::wraparound): "value10"=10
+value_tbl.next("valueGroupA", "value10", valueTable::wraparound): "value1"=1
+value_tbl.next("valueGroupA", "(null)", valueTable::wraparound, 3): "value9"=9
+value_tbl.next("valueGroupA", "value9", valueTable::wraparound, 3): "value2"=2
+value_tbl.next("valueGroupA", "value2", valueTable::wraparound, 3): "value1"=1
+value_tbl.next("valueGroupA", "value1", valueTable::wraparound, 3): "value10"=10
+value_tbl.next("valueGroupA", "value10", valueTable::wraparound, 3): "value9"=9
+value_tbl.prev("valueGroupA", "(null)"): "value10"=10
+value_tbl.prev("valueGroupA", "value10"): "value9"=9
+value_tbl.prev("valueGroupA", "value9"): "value2"=2
+value_tbl.prev("valueGroupA", "value2"): "value1"=1
+value_tbl.prev("valueGroupA", "value1"): "value1"=1
+value_tbl.prev("valueGroupA", "(null)", 3): "value2"=2
+value_tbl.prev("valueGroupA", "value2", 3): "value1"=1
+value_tbl.prev("valueGroupA", "value1", 3): "value1"=1
+value_tbl.prev("valueGroupA", "value1", 3): "value1"=1
+value_tbl.prev("valueGroupA", "value1", 3): "value1"=1
+value_tbl.prev("valueGroupA", "(null)", valueTable::wraparound): "value10"=10
+value_tbl.prev("valueGroupA", "value10", valueTable::wraparound): "value9"=9
+value_tbl.prev("valueGroupA", "value9", valueTable::wraparound): "value2"=2
+value_tbl.prev("valueGroupA", "value2", valueTable::wraparound): "value1"=1
+value_tbl.prev("valueGroupA", "value1", valueTable::wraparound): "value10"=10
+value_tbl.prev("valueGroupA", "(null)", valueTable::wraparound, 3): "value2"=2
+value_tbl.prev("valueGroupA", "value2", valueTable::wraparound, 3): "value9"=9
+value_tbl.prev("valueGroupA", "value9", valueTable::wraparound, 3): "value10"=10
+value_tbl.prev("valueGroupA", "value10", valueTable::wraparound, 3): "value1"=1
+value_tbl.prev("valueGroupA", "value1", valueTable::wraparound, 3): "value2"=2
+----------------------------------------
+Registered named-ref items:(num=14)
+  ref: name(crc)=0x69e7a07e, type=i, access_type=ReadOnly
+  ref: name(crc)=0xe33ef8b1, type=d, access_type=Writable(Wrap-around)
+  ref: name(crc)=0x37f49c5a, type=9uint128_t, access_type=Writable(Wrap-around)
+  ref: name(crc)=0xbd2dc495, type=d, access_type=Writable
+  ref: name(crc)=0x11557bb2, type=d, access_type=Writable(Saturation)
+  ref: name(crc)=0x5c16b462, type=t, access_type=Writable(Saturation)
+  ref: name(crc)=0x214007cc, type=6data_t, access_type=Writable
+  ref: name(crc)=0x7ab7538a, type=i, access_type=Writable
+  ref: name(crc)=0x4f641d77, type=i, access_type=ReadOnly
+  ref: name(crc)=0xae7d3761, type=i, access_type=Writable(Wrap-around)
+  ref: name(crc)=0x02058846, type=f, access_type=Writable(Wrap-around)
+  ref: name(crc)=0x4f464796, type=f, access_type=Writable
+  ref: name(crc)=0xf06e0b45, type=f, access_type=Writable(Saturation)
+  ref: name(crc)=0xc59f1f59, type=b, access_type=Writable
+----------------------------------------
+Registered named-func items:(num=21)
+  group: group-name(crc)=0x00000000
+    func: name(crc)=0x02c60901, funcType=Writable, retType=b, objType=(none)
+    func: name(crc)=0x192061d7, funcType=Writable, retType=b, objType=(none)
+    func: name(crc)=0x7715ceaf, funcType=Writable, retType=b, objType=(none)
+    func: name(crc)=0x6db5b10e, funcType=Writable, retType=b, objType=N5gasha7objTypeE
+  group: group-name(crc)=0xb7960ecd
+    func: name(crc)=0x192061d7, funcType=Writable, retType=b, objType=(none)
+    func: name(crc)=0xad98cc18, funcType=Const, retType=b, objType=(none)
+    func: name(crc)=0x0a709223, funcType=Writable, retType=v, objType=(none)
+    func: name(crc)=0x159db940, funcType=Const, retType=v, objType=(none)
+  group: group-name(crc)=0x86cb6ab5
+    func: name(crc)=0x77f638fc, funcType=Writable, retType=i, objType=6data_t
+  group: group-name(crc)=0x45fd8dce
+    func: name(crc)=0x7715ceaf, funcType=Writable, retType=b, objType=(none)
+    func: name(crc)=0xc99e4163, funcType=Const, retType=b, objType=(none)
+    func: name(crc)=0x64453d5b, funcType=Writable, retType=v, objType=(none)
+    func: name(crc)=0x719b343b, funcType=Const, retType=v, objType=(none)
+  group: group-name(crc)=0xa4c6fd39
+    func: name(crc)=0x02c60901, funcType=Writable, retType=b, objType=(none)
+    func: name(crc)=0xb7c440da, funcType=Const, retType=b, objType=(none)
+    func: name(crc)=0x1196faf5, funcType=Writable, retType=v, objType=(none)
+    func: name(crc)=0x0fc13582, funcType=Const, retType=v, objType=(none)
+  group: group-name(crc)=0x9137e925
+    func: name(crc)=0x6db5b10e, funcType=Writable, retType=b, objType=N5gasha7objTypeE
+    func: name(crc)=0x9137e925, funcType=Const, retType=b, objType=N5gasha7objTypeE
+    func: name(crc)=0x7ee542fa, funcType=Writable, retType=v, objType=N5gasha7objTypeE
+    func: name(crc)=0x9137e925, funcType=Const, retType=v, objType=N5gasha7objTypeE
+----------------------------------------
+Registered named-value items:(num=16)
+  group: group-name(crc)=0x00000000
+    func: name="g_value1"(0x61fdccdf), type=i
+    func: name="g_value2"(0x72ad3f2b), type=i
+    func: name="g_value9"(0xeb249410), type=i
+    func: name="g_value10"(0xef3f3aa3), type=i
+    func: name="g_value128"(0x7ef60ba9), type=9uint128_t
+  group: group-name(crc)=0x3c4789fa
+    func: name="valueA"(0x931a4d7b), type=f
+    func: name="valueB"(0x804abe8f), type=f
+    func: name="valueC"(0x72213d8c), type=f
+    func: name="valueD"(0xa6eb5967), type=f
+  group: group-name(crc)=0x2f177a0e
+    func: name="value1"(0xe2821976), type=i
+    func: name="value2"(0xf1d2ea82), type=i
+    func: name="value9"(0x685b41b9), type=i
+    func: name="value10"(0x35452b1c), type=i
+  group: group-name(crc)=0xd9d0b31f
+    func: name="testValueA"(0x08088a59), type=N5gasha10testValuesE
+    func: name="testValueB"(0x1b5879ad), type=N5gasha10testValuesE
+    func: name="testValueC"(0xe933faae), type=N5gasha10testValuesE
 - end -
+----------------------------------------
+Registered named-ref items:(num=0)
+----------------------------------------
+Registered named-func items:(num=2)
+  group: group-name(crc)=0x00000000
+  group: group-name(crc)=0xb7960ecd
+  group: group-name(crc)=0x86cb6ab5
+  group: group-name(crc)=0x45fd8dce
+  group: group-name(crc)=0xa4c6fd39
+  group: group-name(crc)=0x9137e925
+----------------------------------------
+Registered named-value items:(num=0)
+  group: group-name(crc)=0x00000000
+  group: group-name(crc)=0x3c4789fa
+  group: group-name(crc)=0x2f177a0e
+  group: group-name(crc)=0xd9d0b31f

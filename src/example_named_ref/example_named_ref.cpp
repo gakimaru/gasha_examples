@@ -11,17 +11,19 @@
 #include "example_named_ref.h"//名前付きデータ参照テスト
 
 #include "gasha/type_traits.h"//型特性ユーティリティ：toStr()
+#include <gasha/singleton.h>//シングルトン
+#include <gasha/utility.h>//汎用ユーティリティ
 
 #include <cstdio>//std::printf()
 
 GASHA_USING_NAMESPACE;//ネームスペース使用
 
-//共通処理
+//名前付きデータ参照テスト：共通処理
 template<class TABLE_TYPE, typename T>
-void testCommon1(named_ref::table<TABLE_TYPE>& table, const char* name)
+void testNamedRefCommon1(named_ref::table<TABLE_TYPE>& table, const char* name)
 {
 	std::printf("\n");
-	std::printf("--- testCommon1<%s>(\"%s\") ---\n", typeid(T).name(), name);
+	std::printf("--- testNamedRefCommon1<%s>(\"%s\") ---\n", typeid(T).name(), name);
 	std::printf("isRegistered<T>(\"%s\"): %s\n", name, toStr(table.isRegistered(name)));
 	std::printf("isReadOnly<T>(\"%s\"): %s\n", name, toStr(table.template isReadOnly<T>(name)));
 	std::printf("isReadable<T>(\"%s\"): %s\n", name, toStr(table.template isReadable<T>(name)));
@@ -91,10 +93,10 @@ void testCommon1(named_ref::table<TABLE_TYPE>& table, const char* name)
 	std::printf("isFalse<T>(\"%s\"): %s\n", name, toStr(table.template isFalse<T>(name)));
 }
 template<class TABLE_TYPE, typename T>
-void testCommon2(named_ref::table<TABLE_TYPE>& table, const char* name)
+void testNamedRefCommon2(named_ref::table<TABLE_TYPE>& table, const char* name)
 {
 	std::printf("\n");
-	std::printf("--- testCommon2<%s>(\"%s\") ---\n", typeid(T).name(), name);
+	std::printf("--- testNamedRefCommon2<%s>(\"%s\") ---\n", typeid(T).name(), name);
 	std::printf("isRegistered<T>(\"%s\"): %s\n", name, toStr(table.isRegistered(name)));
 	std::printf("isReadOnly<T>(\"%s\"): %s\n", name, toStr(table.template isReadOnly<T>(name)));
 	std::printf("isReadable<T>(\"%s\"): %s\n", name, toStr(table.template isReadable<T>(name)));
@@ -104,10 +106,10 @@ void testCommon2(named_ref::table<TABLE_TYPE>& table, const char* name)
 	std::printf("isWritableSaturation<T>(\"%s\"): %s\n", name, toStr(table.template isWritableSaturation<T>(name)));
 }
 template<class TABLE_TYPE, typename T>
-void testCommon3(named_ref::table<TABLE_TYPE>& table, const char* name)
+void testNamedRefCommon3(named_ref::table<TABLE_TYPE>& table, const char* name)
 {
 	std::printf("\n");
-	std::printf("--- testCommon3<%s>(\"%s\") ---\n", typeid(T).name(), name);
+	std::printf("--- testNamedRefCommon3<%s>(\"%s\") ---\n", typeid(T).name(), name);
 	std::printf("isRegistered<T>(\"%s\"): %s\n", name, toStr(table.isRegistered(name)));
 	std::printf("isReadOnly<T>(\"%s\"): %s\n", name, toStr(table.template isReadOnly<T>(name)));
 	std::printf("isReadable<T>(\"%s\"): %s\n", name, toStr(table.template isReadable<T>(name)));
@@ -177,10 +179,10 @@ void testCommon3(named_ref::table<TABLE_TYPE>& table, const char* name)
 	std::printf("isFalse<T>(\"%s\"): %s\n", name, toStr(table.template isFalse<T>(name)));
 }
 template<class TABLE_TYPE, typename T>
-void testCommon4(named_ref::table<TABLE_TYPE>& table, const char* name)
+void testNamedRefCommon4(named_ref::table<TABLE_TYPE>& table, const char* name)
 {
 	std::printf("\n");
-	std::printf("--- testCommon4<%s>(\"%s\") ---\n", typeid(T).name(), name);
+	std::printf("--- testNamedRefCommon4<%s>(\"%s\") ---\n", typeid(T).name(), name);
 	std::printf("isRegistered<T>(\"%s\"): %s\n", name, toStr(table.isRegistered(name)));
 	std::printf("isReadOnly<T>(\"%s\"): %s\n", name, toStr(table.template isReadOnly<T>(name)));
 	std::printf("isReadable<T>(\"%s\"): %s\n", name, toStr(table.template isReadable<T>(name)));
@@ -250,10 +252,10 @@ void testCommon4(named_ref::table<TABLE_TYPE>& table, const char* name)
 	std::printf("isFalse<T>(\"%s\"): %s\n", name, toStr(table.template isFalse<T>(name)));
 }
 template<class TABLE_TYPE, typename T>
-void testCommon5(named_ref::table<TABLE_TYPE>& table, const char* name)
+void testNamedRefCommon5(named_ref::table<TABLE_TYPE>& table, const char* name)
 {
 	std::printf("\n");
-	std::printf("--- testCommon5<%s>(\"%s\") ---\n", typeid(T).name(), name);
+	std::printf("--- testNamedRefCommon5<%s>(\"%s\") ---\n", typeid(T).name(), name);
 	std::printf("isRegistered<T>(\"%s\"): %s\n", name, toStr(table.isRegistered(name)));
 	std::printf("isReadOnly<T>(\"%s\"): %s\n", name, toStr(table.template isReadOnly<T>(name)));
 	std::printf("isReadable<T>(\"%s\"): %s\n", name, toStr(table.template isReadable<T>(name)));
@@ -285,12 +287,12 @@ void testCommon5(named_ref::table<TABLE_TYPE>& table, const char* name)
 	std::printf("isTrue<T>(\"%s\"): %s\n", name, toStr(table.template isTrue<T>(name)));
 	std::printf("isFalse<T>(\"%s\"): %s\n", name, toStr(table.template isFalse<T>(name)));
 }
-//共通処理
+//名前付きデータ参照テスト：共通処理
 template<class TABLE_TYPE, typename T>
-void testCommon6(named_ref::table<TABLE_TYPE>& table, const char* name)
+void testNamedRefCommon6(named_ref::table<TABLE_TYPE>& table, const char* name)
 {
 	std::printf("\n");
-	std::printf("--- testCommon1<%s>(\"%s\") ---\n", typeid(T).name(), name);
+	std::printf("--- testNamedRefCommon1<%s>(\"%s\") ---\n", typeid(T).name(), name);
 	std::printf("isRegistered<T>(\"%s\"): %s\n", name, toStr(table.isRegistered(name)));
 	std::printf("isReadOnly<T>(\"%s\"): %s\n", name, toStr(table.template isReadOnly<T>(name)));
 	std::printf("isReadable<T>(\"%s\"): %s\n", name, toStr(table.template isReadable<T>(name)));
@@ -343,13 +345,14 @@ void testCommon6(named_ref::table<TABLE_TYPE>& table, const char* name)
 	std::printf("isFalse<T>(\"%s\"): %s\n", name, toStr(table.template isFalse<T>(name)));
 }
 
-//----------------------------------------
-//名前付きデータ参照テスト
-void example_named_ref()
+//名前付きデータ参照テスト（メイン）
+void testNamedRef()
 {
-	std::printf("----- Test for namedRef -----\n");
-	
 	//名前付きデータ参照
+	std::printf("\n");
+	std::printf("----------------------------------------\n");
+	std::printf("Named ref\n");
+	std::printf("\n");
 	refTable ref_tbl;
 
 	//名前をCRC値取得
@@ -473,31 +476,40 @@ void example_named_ref()
 		auto data_c = ref_tbl.cref<data_t>(name_dataC);//参照を取得 ※戻り値 val が有効なスコープの間、共有ロックすることに注意
 		std::printf("ref<data_t>(): dataC={ %d, {%d, %d}, %.1f}\n", data_c->m_memberA, data_c->m_memberB[0], data_c->m_memberB[1], data_c->m_memberC);
 	}
-	
-	//演算
-	testCommon1<refTable_type, int>(ref_tbl, "valA");
-	testCommon1<refTable_type, int>(ref_tbl, "valA'");
-	testCommon1<refTable_type, int>(ref_tbl, "valB");
-	testCommon2<refTable_type, data_t>(ref_tbl, "dataC");
-	testCommon3<refTable_type, float>(ref_tbl, "valD");
-	testCommon4<refTable_type, double>(ref_tbl, "valE");
-	testCommon1<refTable_type, int>(ref_tbl, "valF");
-	testCommon1<refTable_type, unsigned short>(ref_tbl, "valG");
-	testCommon3<refTable_type, float>(ref_tbl, "valH");
-	testCommon3<refTable_type, float>(ref_tbl, "valI");
-	testCommon4<refTable_type, double>(ref_tbl, "valJ");
-	testCommon4<refTable_type, double>(ref_tbl, "valK");
-	testCommon5<refTable_type, bool>(ref_tbl, "valL");
-	testCommon6<refTable_type, uint128_t>(ref_tbl, "valM");
-	testCommon2<refTable_type, int>(ref_tbl, "unregistered data");
-	testCommon2<refTable_type, char>(ref_tbl, "valA");
 
-	//名前付き関数呼び出し
+	//演算
+	testNamedRefCommon1<refTable_type, int>(ref_tbl, "valA");
+	testNamedRefCommon1<refTable_type, int>(ref_tbl, "valA'");
+	testNamedRefCommon1<refTable_type, int>(ref_tbl, "valB");
+	testNamedRefCommon2<refTable_type, data_t>(ref_tbl, "dataC");
+	testNamedRefCommon3<refTable_type, float>(ref_tbl, "valD");
+	testNamedRefCommon4<refTable_type, double>(ref_tbl, "valE");
+	testNamedRefCommon1<refTable_type, int>(ref_tbl, "valF");
+	testNamedRefCommon1<refTable_type, unsigned short>(ref_tbl, "valG");
+	testNamedRefCommon3<refTable_type, float>(ref_tbl, "valH");
+	testNamedRefCommon3<refTable_type, float>(ref_tbl, "valI");
+	testNamedRefCommon4<refTable_type, double>(ref_tbl, "valJ");
+	testNamedRefCommon4<refTable_type, double>(ref_tbl, "valK");
+	testNamedRefCommon5<refTable_type, bool>(ref_tbl, "valL");
+	testNamedRefCommon6<refTable_type, uint128_t>(ref_tbl, "valM");
+	testNamedRefCommon2<refTable_type, int>(ref_tbl, "unregistered data");
+	testNamedRefCommon2<refTable_type, char>(ref_tbl, "valA");
+}
+
+//----------------------------------------
+//名前付き関数テスト
+void testNamedFunc()
+{
+	std::printf("\n");
+	std::printf("----------------------------------------\n");
+	std::printf("Named func\n");
+	std::printf("\n");
 	funcTable func_tbl;
 	objType obj;
 	obj.m_mem = 123;
 	const objType const_obj(obj);
 
+	//※判定文はメソッドのテストのために冗長に記述している（本来 isRegistered と isWritable の両方をチェックする必要はない）
 	if (func_tbl.isRegistered("funcGroupA", "funcA") && func_tbl.isWritable<bool>("funcGroupA", "funcA"))
 	{
 		const bool ret = func_tbl.func<bool>("funcGroupA", "funcA", 1, 2); std::printf("funcA:ret=%d\n", ret);
@@ -565,24 +577,161 @@ void example_named_ref()
 	{
 		func_tbl.proc(const_obj, "funcGroupD", "memberB const");
 	}
+	//グループなし
+	//※ロック制御なし
+	func_tbl.func<bool>(nullptr, "funcA", 1, 2);
+	func_tbl.func<bool>(nullptr, "lambdaA", 3, 4);
+	func_tbl.func<bool>(nullptr, "functorA", 5, 6);
+	func_tbl.func<bool>(obj, nullptr, "memberA", 7, 8);
 
-	//列挙
-	std::printf("----------------------------------------\n");
-	std::printf("Registered named-ref items:(num=%d)\n", ref_tbl.size());
-	for (const auto& info : ref_tbl)
+	//名前付きデータ参照と組み合わせ
+	//※名前付きデータ参照と組み合わせる場合は、ロック制御は名前付きデータ参照側のみで行い、名前付き関数はロック制御しない方が良い
 	{
-		std::printf("  ref: name(crc)=0x%08x, type=%s, access_type=%s\n", info.m_nameCrc, info.m_typeInfo ? info.m_typeInfo->name() : "(unknown)", info.m_accessType == refTable::READ_ONLY ? "ReadOnly" : info.m_accessType == refTable::WRITABLE ? "Writable" : info.m_accessType == refTable::WRITABLE_WRAPAROUND ? "Writable(Wrap-around)" : info.m_accessType == refTable::WRITABLE_SATURATION ? "Writable(Saturation)" : "(Unknown)");
+		refTable ref_tbl;
+		auto data_c = ref_tbl.ref<data_t>("dataC");
+		const int ret = func_tbl.func<int>(*data_c, "data_t", "methodA", 2);
+		std::printf("func_tbl.func<int>(* ref_tbl.ref<data_t>(\"dataC\"), \"data_t\", \"methodA\", 2)=%d\n", ret);
 	}
+}
+
+//----------------------------------------
+//名前付き定数テスト
+void testNamedValue()
+{
+	std::printf("\n");
 	std::printf("----------------------------------------\n");
-	std::printf("Registered named-func items:(num=%d)\n", func_tbl.size());
-	for (const auto& group_info : func_tbl)
+	std::printf("Named value\n");
+	std::printf("\n");
+	valueTable value_tbl;
+	simpleSingleton<valueStrPool> value_str("ref");
+
+	//※判定文はメソッドのテストのために冗長に記述している（本来 isRegistered と isType の両方をチェックする必要はない）
+	if (value_tbl.isRegistered("value1") && value_tbl.isType<int>("value1"))
 	{
-		std::printf("  group: group-name(crc)=0x%08x\n", group_info.m_groupNameCrc);
-		for (const auto& func_info : group_info.m_funcList)
-		{
-			std::printf("    func: name(crc)=0x%08x, funcType=%s, ret=%s, obj=%s\n", func_info.m_key.m_nameCrc, func_info.m_funcType == funcTable::CONST_FUNCTION ? "Const" : "Writable", func_info.m_retTypeInfo ? func_info.m_retTypeInfo->name() : "(null)", func_info.m_objTypeInfo ? func_info.m_objTypeInfo->name() : "(none)");
-		}
+		const auto value = value_tbl.value<int>("value1");
+		std::printf("value_tbl.value<int>(\"value1\")=%d\n", value);
 	}
+	if (value_tbl.isRegistered("valueX") && value_tbl.isType<int>("valueX"))//※存在しない値
+	{
+		const auto value = value_tbl.value<int>("valueX");
+		std::printf("value_tbl.value<int>(\"valueX\")=%d\n", value);
+	}
+	if (value_tbl.isRegistered("value1") && value_tbl.isType<float>("value1"))//※型エラー
+	{
+		const auto value = value_tbl.value<float>("value1");
+		std::printf("value_tbl.value<float>(\"value1\")=%f\n", value);
+	}
+	if (value_tbl.isRegistered("valueA") && value_tbl.isType<float>("valueA"))
+	{
+		const auto value = value_tbl.value<float>("valueA");
+		std::printf("value_tbl.value<float>(\"valueA\")=%f\n", value);
+	}
+	if (value_tbl.isRegistered("g_value1") && value_tbl.isType<int>("g_value1"))
+	{
+		const auto value = value_tbl.value<int>("g_value1");
+		std::printf("value_tbl.value<int>(\"g_value1\")=%d\n", value);
+	}
+	if (value_tbl.isRegistered("g_value128") && value_tbl.isType<uint128_t>("g_value128"))
+	{
+		const auto value = value_tbl.value<uint128_t>("g_value128");
+		std::printf("value_tbl.value<uint128_t>(\"g_value1\")=%lld\n", value.m_lo);
+	}
+	const char* group_name = "valueGroupA";
+	const char* name = nullptr;
+	for (int i = 0; i < 5; ++i)
+	{
+		const crc32_t name_crc = value_tbl.next(group_name, name);
+		const auto next_value = value_tbl.value<int>(name_crc);
+		const char* next_name = (*value_str)(name_crc);
+		std::printf("value_tbl.next(\"%s\", \"%s\"): \"%s\"=%d\n", group_name, nvl(name), next_name, next_value);
+		name = next_name;
+	}
+	name = nullptr;
+	for (int i = 0; i < 5; ++i)
+	{
+		const crc32_t name_crc = value_tbl.next(group_name, name, 3);
+		const auto next_value = value_tbl.value<int>(name_crc);
+		const char* next_name = (*value_str)(name_crc);
+		std::printf("value_tbl.next(\"%s\", \"%s\", 3): \"%s\"=%d\n", group_name, nvl(name), next_name, next_value);
+		name = next_name;
+	}
+	name = nullptr;
+	for (int i = 0; i < 5; ++i)
+	{
+		const crc32_t name_crc = value_tbl.next(group_name, name, valueTable::wraparound);
+		const auto next_value = value_tbl.value<int>(name_crc);
+		const char* next_name = (*value_str)(name_crc);
+		std::printf("value_tbl.next(\"%s\", \"%s\", valueTable::wraparound): \"%s\"=%d\n", group_name, nvl(name), next_name, next_value);
+		name = next_name;
+	}
+	name = nullptr;
+	for (int i = 0; i < 5; ++i)
+	{
+		const crc32_t name_crc = value_tbl.next(group_name, name, valueTable::wraparound, 3);
+		const auto next_value = value_tbl.value<int>(name_crc);
+		const char* next_name = (*value_str)(name_crc);
+		std::printf("value_tbl.next(\"%s\", \"%s\", valueTable::wraparound, 3): \"%s\"=%d\n", group_name, nvl(name), next_name, next_value);
+		name = next_name;
+	}
+	name = nullptr;
+	for (int i = 0; i < 5; ++i)
+	{
+		const crc32_t name_crc = value_tbl.prev(group_name, name);
+		const auto next_value = value_tbl.value<int>(name_crc);
+		const char* next_name = (*value_str)(name_crc);
+		std::printf("value_tbl.prev(\"%s\", \"%s\"): \"%s\"=%d\n", group_name, nvl(name), next_name, next_value);
+		name = next_name;
+	}
+	name = nullptr;
+	for (int i = 0; i < 5; ++i)
+	{
+		const crc32_t name_crc = value_tbl.prev(group_name, name, 3);
+		const auto next_value = value_tbl.value<int>(name_crc);
+		const char* next_name = (*value_str)(name_crc);
+		std::printf("value_tbl.prev(\"%s\", \"%s\", 3): \"%s\"=%d\n", group_name, nvl(name), next_name, next_value);
+		name = next_name;
+	}
+	name = nullptr;
+	for (int i = 0; i < 5; ++i)
+	{
+		const crc32_t name_crc = value_tbl.prev(group_name, name, valueTable::wraparound);
+		const auto next_value = value_tbl.value<int>(name_crc);
+		const char* next_name = (*value_str)(name_crc);
+		std::printf("value_tbl.prev(\"%s\", \"%s\", valueTable::wraparound): \"%s\"=%d\n", group_name, nvl(name), next_name, next_value);
+		name = next_name;
+	}
+	name = nullptr;
+	for (int i = 0; i < 5; ++i)
+	{
+		const crc32_t name_crc = value_tbl.prev(group_name, name, valueTable::wraparound, 3);
+		const auto next_value = value_tbl.value<int>(name_crc);
+		const char* next_name = (*value_str)(name_crc);
+		std::printf("value_tbl.prev(\"%s\", \"%s\", valueTable::wraparound, 3): \"%s\"=%d\n", group_name, nvl(name), next_name, next_value);
+		name = next_name;
+	}
+}
+
+//----------------------------------------
+//名前付きデータ参照テスト
+void example_named_ref()
+{
+	std::printf("----- Test for namedRef -----\n");
+
+	//名前付きデータ参照テスト
+	testNamedRef();
+
+	//名前付き関数テスト
+	testNamedFunc();
+
+	//名前付き定数テスト
+	testNamedValue();
+
+	//名前付きデータ参照の列挙
+	enumNamedRef();
+	//名前付き関数の列挙
+	enumNamedFunc();
+	//名前付き定数の列挙
+	enumNamedValue();
 
 	std::printf("- end -\n");
 }

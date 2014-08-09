@@ -25,6 +25,8 @@ SRCS := \
 	main.cpp \
 	$(PROJ_SRC_DIR)/example_named_ref.cpp \
 	$(PROJ_SRC_DIR)/example_named_ref_sub.cpp \
+	$(PROJ_SRC_DIR)/example_named_ref_init.cpp \
+	$(PROJ_SRC_DIR)/example_named_ref_instance.cpp \
 
 # インクルードディレクトリ
 INCLIDE_DIRS := \

@@ -8,27 +8,27 @@ START: logQueueMonitor thread
 【標準】メッセージ①
 【標準】メッセージ②
 【詳細】メッセージ②
-[6|00:00:00.000999|asNormal|forAny]【標準】メッセージ③
-[8|00:00:00.000999|asDetail|forAny]【詳細】メッセージ③
-[9|00:00:00.000999|asNormal|forMiniGame]【通常】【ミニゲーム用】メッセージ④
+[6|00:00:00.001999|asNormal|forAny]【標準】メッセージ③
+[8|00:00:00.001999|asDetail|forAny]【詳細】メッセージ③
+[9|00:00:00.001999|asNormal|forMiniGame]【通常】【ミニゲーム用】メッセージ④
 【通常】【ミニゲーム用】【ローカル処理ブロック前】メッセージ
-[00:00:00.001998|asNormal|forMiniGame]【通常】【ミニゲーム用】【ローカル処理ブロック中①】メッセージ
+[00:00:00.001999|asNormal|forMiniGame]【通常】【ミニゲーム用】【ローカル処理ブロック中①】メッセージ
 【通常】【ミニゲーム用】【ローカル処理ブロック後】メッセージ
 [asNormal|forMiniGame]【通常】【コールポイント用】メッセージ
 [asNormal|forMiniGame]【通常】【クリティカルコールポイント用】メッセージ
 [asImportant|forMiniGame]【重要】【クリティカルコールポイント用】アサーション
 ASSERTION FAILURE!: 1 + 1 == 3
 func: commonFunc
-file: example_debug_log_basic_test.cpp(379)[Sat Jul 26 08:31:50 2014]
+file: example_debug_log_basic_test.cpp(379)[Thu Aug  7 15:01:21 2014]
 ----- callPoint stack info -----
-Thread: "MainThread"(ID=5fdc639e)
+Thread: "MainThread"(ID=d5b2ce94)
 Num of point: 2
 ------------------------------------
-[forMiniGame]"CP level2(with perform)"(addr=000000215506ECC8)<CRITICAL><Auto-Profiling>
-        src: example_debug_log_basic_test.cpp(237)[Sat Jul 26 08:31:50 2014]
+[forMiniGame]"CP level2(with perform)"(addr=00000082470CECA8)<CRITICAL><Auto-Profiling>
+        src: example_debug_log_basic_test.cpp(237)[Thu Aug  7 15:01:21 2014]
         func:example_debugLog_basicTest
- [forAny]"CallPoint"(addr=000000215506EC78)
-         src: example_debug_log_basic_test.cpp(231)[Sat Jul 26 08:31:50 2014]
+ [forAny]"CallPoint"(addr=00000082470CEC58)
+         src: example_debug_log_basic_test.cpp(231)[Thu Aug  7 15:01:21 2014]
          func:example_debugLog_basicTest
 ------------------------------------
 [asNormal|forFileSystem]【通常】【コールポイント用】メッセージ
@@ -36,19 +36,19 @@ Num of point: 2
 [asImportant|forMiniGame]【重要】【クリティカルコールポイント用】アサーション
 ASSERTION FAILURE!: 1 + 1 == 3
 func: commonFunc
-file: example_debug_log_basic_test.cpp(379)[Sat Jul 26 08:31:50 2014]
+file: example_debug_log_basic_test.cpp(379)[Thu Aug  7 15:01:21 2014]
 ----- callPoint stack info -----
-Thread: "MainThread"(ID=5fdc639e)
+Thread: "MainThread"(ID=d5b2ce94)
 Num of point: 3
 ------------------------------------
-[forFileSystem]"CP level3"(addr=000000215506ED18)
-        src: example_debug_log_basic_test.cpp(243)[Sat Jul 26 08:31:50 2014]
+[forFileSystem]"CP level3"(addr=00000082470CECF8)
+        src: example_debug_log_basic_test.cpp(243)[Thu Aug  7 15:01:21 2014]
         func:example_debugLog_basicTest
- [forMiniGame]"CP level2(with perform)"(addr=000000215506ECC8)<CRITICAL><Auto-Profiling>
-         src: example_debug_log_basic_test.cpp(237)[Sat Jul 26 08:31:50 2014]
+ [forMiniGame]"CP level2(with perform)"(addr=00000082470CECA8)<CRITICAL><Auto-Profiling>
+         src: example_debug_log_basic_test.cpp(237)[Thu Aug  7 15:01:21 2014]
          func:example_debugLog_basicTest
-  [forAny]"CallPoint"(addr=000000215506EC78)
-          src: example_debug_log_basic_test.cpp(231)[Sat Jul 26 08:31:50 2014]
+  [forAny]"CallPoint"(addr=00000082470CEC58)
+          src: example_debug_log_basic_test.cpp(231)[Thu Aug  7 15:01:21 2014]
           func:example_debugLog_basicTest
 ------------------------------------
 [26]【通常】【ミニゲーム用】予約メッセージ①
@@ -60,7 +60,7 @@ Num of point: 3
 
 thread: "MainThread"
 
-  profile: "CP level2(with perform)", max=0.013001, min=0.013001, avg=0.013001
+  profile: "CP level2(with perform)", max=0.012001, min=0.012001, avg=0.012001
 
 END: logQueueMonitor thread
 
@@ -579,39 +579,39 @@ END: logQueueMonitor thread
 [ Test for print log ]
 
 START: logQueueMonitor thread
-[1|00:00:00.061004|asImportant|forAny](01)Test Message:10
-[2|00:00:00.061004](10)Test Message:10
-[3|00:00:00.061004](11)Test Message
-[4|00:00:00.061004](12)TEST MESSAGE
-[5|00:00:00.061004](13)test message
-[6|00:00:00.061004](14)Test Message
-[7|00:00:00.061004](15)Test Message
-[8|00:00:00.061004](16)TEST MESSAGE
-[9|00:00:00.061004](17)test message
-[10|00:00:00.061004](02)Test Message:10
-[11|00:00:00.061004](03)Test Message:10
-[12|00:00:00.061004](04)TEST MESSAGE:10
-[13|00:00:00.061004](05)test message:10
-[14|00:00:00.061004](06)Test Message
-[15|00:00:00.061004](07)Test Message
-[16|00:00:00.061004](08)TEST MESSAGE
-[17|00:00:00.061004](09)test message
-[00:00:00.064005](18)Test Message:10
-[00:00:00.064005](19)Test Message:10
-[00:00:00.064005](20)Test Message:10
-[00:00:00.064005](21)TEST MESSAGE:10
-[00:00:00.064005](22)test message:10
-[00:00:00.064005](23)Test Message:10
-[00:00:00.064005](24)TEST MESSAGE:10
-[00:00:00.064005](25)test message:10
-[00:00:00.064005](26)Test Message
-[00:00:00.064005](27)Test Message
-[00:00:00.064005](28)Test Message
-[00:00:00.064005](29)TEST MESSAGE
-[00:00:00.064005](30)test message
-[00:00:00.064005](31)Test Message
-[00:00:00.064005](32)TEST MESSAGE
-[00:00:00.064005](33)test message
+[1|00:00:00.058005|asImportant|forAny](01)Test Message:10
+[2|00:00:00.058005](10)Test Message:10
+[3|00:00:00.058005](11)Test Message
+[4|00:00:00.058005](12)TEST MESSAGE
+[5|00:00:00.058005](13)test message
+[6|00:00:00.058005](14)Test Message
+[7|00:00:00.058005](15)Test Message
+[8|00:00:00.058005](16)TEST MESSAGE
+[9|00:00:00.058005](17)test message
+[10|00:00:00.058005](02)Test Message:10
+[11|00:00:00.058005](03)Test Message:10
+[12|00:00:00.058005](04)TEST MESSAGE:10
+[13|00:00:00.058005](05)test message:10
+[14|00:00:00.058005](06)Test Message
+[15|00:00:00.058005](07)Test Message
+[16|00:00:00.058005](08)TEST MESSAGE
+[17|00:00:00.058005](09)test message
+[00:00:00.061005](18)Test Message:10
+[00:00:00.061005](19)Test Message:10
+[00:00:00.061005](20)Test Message:10
+[00:00:00.061005](21)TEST MESSAGE:10
+[00:00:00.061005](22)test message:10
+[00:00:00.061005](23)Test Message:10
+[00:00:00.061005](24)TEST MESSAGE:10
+[00:00:00.061005](25)test message:10
+[00:00:00.061005](26)Test Message
+[00:00:00.061005](27)Test Message
+[00:00:00.061005](28)Test Message
+[00:00:00.061005](29)TEST MESSAGE
+[00:00:00.061005](30)test message
+[00:00:00.061005](31)Test Message
+[00:00:00.061005](32)TEST MESSAGE
+[00:00:00.061005](33)test message
 END: logQueueMonitor thread
 
 --------------------------------------------------------------------------------
@@ -624,7 +624,7 @@ END: logQueueMonitor thread
   - autoProfiling = "useAutoProfiling"
   - source file = "example_debug_log_feature_test.cpp(989)[Mon Jul 28 23:18:46 2014]"
   - function = "example_debugLog_featureTest"
-  - begin time = 0.066004
+  - begin time = 0.061005
 > recent critical-cp info
   - name = "test3"
   - category = "forTARO"
@@ -632,7 +632,7 @@ END: logQueueMonitor thread
   - autoProfiling = "noProfiling"
   - source file = "example_debug_log_feature_test.cpp(997)[Mon Jul 28 23:18:46 2014]"
   - function = "example_debugLog_featureTest"
-  - begin time = 0.066004
+  - begin time = 0.061005
 > recent critical-cp info
   - name = "test2"
   - category = "forTARO"
@@ -640,7 +640,7 @@ END: logQueueMonitor thread
   - autoProfiling = "useAutoProfiling"
   - source file = "example_debug_log_feature_test.cpp(995)[Mon Jul 28 23:18:46 2014]"
   - function = "example_debugLog_featureTest"
-  - begin time = 0.066004
+  - begin time = 0.061005
 > recent critical-cp info
   - name = "test3"
   - category = "forTARO"
@@ -648,7 +648,7 @@ END: logQueueMonitor thread
   - autoProfiling = "noProfiling"
   - source file = "example_debug_log_feature_test.cpp(997)[Mon Jul 28 23:18:46 2014]"
   - function = "example_debugLog_featureTest"
-  - begin time = 0.066004
+  - begin time = 0.061005
 > recent critical-cp info
   - name = "test4"
   - category = "forTARO"
@@ -656,7 +656,7 @@ END: logQueueMonitor thread
   - autoProfiling = "noProfiling"
   - source file = "example_debug_log_feature_test.cpp(1007)[Mon Jul 28 23:18:46 2014]"
   - function = "example_debugLog_featureTest"
-  - begin time = 0.066004
+  - begin time = 0.061005
 > recent critical-cp info
   - name = "test4"
   - category = "forTARO"
@@ -664,22 +664,22 @@ END: logQueueMonitor thread
   - autoProfiling = "noProfiling"
   - source file = "example_debug_log_feature_test.cpp(1007)[Mon Jul 28 23:18:46 2014]"
   - function = "example_debugLog_featureTest"
-  - begin time = 0.066004
+  - begin time = 0.061005
 debugInfo(len=860):
 ----- callPoint stack info -----
-Thread: "MainThread"(ID=5fdc639e)
+Thread: "MainThread"(ID=d5b2ce94)
 Num of point: 4
 ------------------------------------
-[forTARO]"test4"(addr=000000215506E818)
+[forTARO]"test4"(addr=00000082470CE7F8)
         src: example_debug_log_feature_test.cpp(1007)[Mon Jul 28 23:18:46 2014]
         func:example_debugLog_featureTest
- [forTARO]"test3"(addr=000000215506E7C8)
+ [forTARO]"test3"(addr=00000082470CE7A8)
          src: example_debug_log_feature_test.cpp(997)[Mon Jul 28 23:18:46 2014]
          func:example_debugLog_featureTest
-  [forTARO]"test2"(addr=000000215506E728)<CRITICAL><Auto-Profiling>
+  [forTARO]"test2"(addr=00000082470CE708)<CRITICAL><Auto-Profiling>
           src: example_debug_log_feature_test.cpp(995)[Mon Jul 28 23:18:46 2014]
           func:example_debugLog_featureTest
-   [forTARO]"test"(addr=000000215506E688)<Auto-Profiling>
+   [forTARO]"test"(addr=00000082470CE668)<Auto-Profiling>
            src: example_debug_log_feature_test.cpp(989)[Mon Jul 28 23:18:46 2014]
            func:example_debugLog_featureTest
 ------------------------------------
@@ -690,7 +690,7 @@ Num of point: 4
   - autoProfiling = "noProfiling"
   - source file = "example_debug_log_feature_test.cpp(997)[Mon Jul 28 23:18:46 2014]"
   - function = "example_debugLog_featureTest"
-  - begin time = 0.066004
+  - begin time = 0.061005
 > recent critical-cp info
   - name = "test2"
   - category = "forTARO"
@@ -698,7 +698,7 @@ Num of point: 4
   - autoProfiling = "useAutoProfiling"
   - source file = "example_debug_log_feature_test.cpp(995)[Mon Jul 28 23:18:46 2014]"
   - function = "example_debugLog_featureTest"
-  - begin time = 0.066004
+  - begin time = 0.061005
 > recent critical-cp info
   - name = "test2"
   - category = "forTARO"
@@ -706,7 +706,7 @@ Num of point: 4
   - autoProfiling = "useAutoProfiling"
   - source file = "example_debug_log_feature_test.cpp(995)[Mon Jul 28 23:18:46 2014]"
   - function = "example_debugLog_featureTest"
-  - begin time = 0.066004
+  - begin time = 0.061005
 > recent critical-cp info
   - name = "test2"
   - category = "forTARO"
@@ -714,7 +714,7 @@ Num of point: 4
   - autoProfiling = "useAutoProfiling"
   - source file = "example_debug_log_feature_test.cpp(995)[Mon Jul 28 23:18:46 2014]"
   - function = "example_debugLog_featureTest"
-  - begin time = 0.066004
+  - begin time = 0.061005
 > recent critical-cp info
   - name = "test"
   - category = "forTARO"
@@ -722,7 +722,7 @@ Num of point: 4
   - autoProfiling = "useAutoProfiling"
   - source file = "example_debug_log_feature_test.cpp(989)[Mon Jul 28 23:18:46 2014]"
   - function = "example_debugLog_featureTest"
-  - begin time = 0.066004
+  - begin time = 0.061005
 > recent critical-cp info
   (nothing)
 > recent critical-cp info
@@ -732,7 +732,7 @@ Num of point: 4
   - autoProfiling = "useAutoProfiling"
   - source file = "example_debug_log_feature_test.cpp(989)[Mon Jul 28 23:18:46 2014]"
   - function = "example_debugLog_featureTest"
-  - begin time = 0.066004
+  - begin time = 0.061005
 > recent critical-cp info
   (nothing)
 > recent critical-cp info
@@ -741,7 +741,7 @@ Num of point: 4
   (nothing)
 debugInfo(len=119):
 ----- callPoint stack info -----
-Thread: "MainThread"(ID=5fdc639e)
+Thread: "MainThread"(ID=d5b2ce94)
 Num of point: 0
 ------------------------------------
 
@@ -754,13 +754,13 @@ ASSERTION FAILURE!: 1 != 1
 func: example_debugLog_featureTest
 file: example_debug_log_feature_test.cpp(1098)[Mon Jul 28 23:18:46 2014]
 ----- callPoint stack info -----
-Thread: "MainThread"(ID=5fdc639e)
+Thread: "MainThread"(ID=d5b2ce94)
 Num of point: 2
 ------------------------------------
-[forJIRO]"CP2"(addr=000000215506EAE8)<CRITICAL>
+[forJIRO]"CP2"(addr=00000082470CEAC8)<CRITICAL>
         src: example_debug_log_feature_test.cpp(1095)[Mon Jul 28 23:18:46 2014]
         func:example_debugLog_featureTest
- [forTARO]"CP1"(addr=000000215506EA98)<CRITICAL>
+ [forTARO]"CP1"(addr=00000082470CEA78)<CRITICAL>
          src: example_debug_log_feature_test.cpp(1093)[Mon Jul 28 23:18:46 2014]
          func:example_debugLog_featureTest
 ------------------------------------
@@ -768,13 +768,13 @@ Num of point: 2
 func: example_debugLog_featureTest
 file: example_debug_log_feature_test.cpp(1099)[Mon Jul 28 23:18:46 2014]
 ----- callPoint stack info -----
-Thread: "MainThread"(ID=5fdc639e)
+Thread: "MainThread"(ID=d5b2ce94)
 Num of point: 2
 ------------------------------------
-[forJIRO]"CP2"(addr=000000215506EAE8)<CRITICAL>
+[forJIRO]"CP2"(addr=00000082470CEAC8)<CRITICAL>
         src: example_debug_log_feature_test.cpp(1095)[Mon Jul 28 23:18:46 2014]
         func:example_debugLog_featureTest
- [forTARO]"CP1"(addr=000000215506EA98)<CRITICAL>
+ [forTARO]"CP1"(addr=00000082470CEA78)<CRITICAL>
          src: example_debug_log_feature_test.cpp(1093)[Mon Jul 28 23:18:46 2014]
          func:example_debugLog_featureTest
 ------------------------------------
@@ -783,13 +783,13 @@ HIT!: 1 == 1
 func: example_debugLog_featureTest
 file: example_debug_log_feature_test.cpp(1101)[Mon Jul 28 23:18:46 2014]
 ----- callPoint stack info -----
-Thread: "MainThread"(ID=5fdc639e)
+Thread: "MainThread"(ID=d5b2ce94)
 Num of point: 2
 ------------------------------------
-[forJIRO]"CP2"(addr=000000215506EAE8)<CRITICAL>
+[forJIRO]"CP2"(addr=00000082470CEAC8)<CRITICAL>
         src: example_debug_log_feature_test.cpp(1095)[Mon Jul 28 23:18:46 2014]
         func:example_debugLog_featureTest
- [forTARO]"CP1"(addr=000000215506EA98)<CRITICAL>
+ [forTARO]"CP1"(addr=00000082470CEA78)<CRITICAL>
          src: example_debug_log_feature_test.cpp(1093)[Mon Jul 28 23:18:46 2014]
          func:example_debugLog_featureTest
 ------------------------------------
@@ -798,10 +798,10 @@ ASSERTION FAILURE!: 1 != 1
 func: example_debugLog_featureTest
 file: example_debug_log_feature_test.cpp(1122)[Mon Jul 28 23:18:46 2014]
 ----- callPoint stack info -----
-Thread: "MainThread"(ID=5fdc639e)
+Thread: "MainThread"(ID=d5b2ce94)
 Num of point: 1
 ------------------------------------
-[forTARO]"CP1"(addr=000000215506EA98)<CRITICAL>
+[forTARO]"CP1"(addr=00000082470CEA78)<CRITICAL>
         src: example_debug_log_feature_test.cpp(1093)[Mon Jul 28 23:18:46 2014]
         func:example_debugLog_featureTest
 ------------------------------------
@@ -809,10 +809,10 @@ Num of point: 1
 func: example_debugLog_featureTest
 file: example_debug_log_feature_test.cpp(1123)[Mon Jul 28 23:18:46 2014]
 ----- callPoint stack info -----
-Thread: "MainThread"(ID=5fdc639e)
+Thread: "MainThread"(ID=d5b2ce94)
 Num of point: 1
 ------------------------------------
-[forTARO]"CP1"(addr=000000215506EA98)<CRITICAL>
+[forTARO]"CP1"(addr=00000082470CEA78)<CRITICAL>
         src: example_debug_log_feature_test.cpp(1093)[Mon Jul 28 23:18:46 2014]
         func:example_debugLog_featureTest
 ------------------------------------
@@ -821,10 +821,10 @@ HIT!: 1 == 1
 func: example_debugLog_featureTest
 file: example_debug_log_feature_test.cpp(1124)[Mon Jul 28 23:18:46 2014]
 ----- callPoint stack info -----
-Thread: "MainThread"(ID=5fdc639e)
+Thread: "MainThread"(ID=d5b2ce94)
 Num of point: 1
 ------------------------------------
-[forTARO]"CP1"(addr=000000215506EA98)<CRITICAL>
+[forTARO]"CP1"(addr=00000082470CEA78)<CRITICAL>
         src: example_debug_log_feature_test.cpp(1093)[Mon Jul 28 23:18:46 2014]
         func:example_debugLog_featureTest
 ------------------------------------
@@ -833,10 +833,10 @@ ASSERTION FAILURE!: 1 != 1
 func: example_debugLog_featureTest
 file: example_debug_log_feature_test.cpp(1132)[Mon Jul 28 23:18:46 2014]
 ----- callPoint stack info -----
-Thread: "MainThread"(ID=5fdc639e)
+Thread: "MainThread"(ID=d5b2ce94)
 Num of point: 1
 ------------------------------------
-[forTARO]"CP1"(addr=000000215506EA98)<CRITICAL>
+[forTARO]"CP1"(addr=00000082470CEA78)<CRITICAL>
         src: example_debug_log_feature_test.cpp(1093)[Mon Jul 28 23:18:46 2014]
         func:example_debugLog_featureTest
 ------------------------------------
@@ -844,10 +844,10 @@ Num of point: 1
 func: example_debugLog_featureTest
 file: example_debug_log_feature_test.cpp(1133)[Mon Jul 28 23:18:46 2014]
 ----- callPoint stack info -----
-Thread: "MainThread"(ID=5fdc639e)
+Thread: "MainThread"(ID=d5b2ce94)
 Num of point: 1
 ------------------------------------
-[forTARO]"CP1"(addr=000000215506EA98)<CRITICAL>
+[forTARO]"CP1"(addr=00000082470CEA78)<CRITICAL>
         src: example_debug_log_feature_test.cpp(1093)[Mon Jul 28 23:18:46 2014]
         func:example_debugLog_featureTest
 ------------------------------------
@@ -856,10 +856,10 @@ HIT!: 1 == 1
 func: example_debugLog_featureTest
 file: example_debug_log_feature_test.cpp(1134)[Mon Jul 28 23:18:46 2014]
 ----- callPoint stack info -----
-Thread: "MainThread"(ID=5fdc639e)
+Thread: "MainThread"(ID=d5b2ce94)
 Num of point: 1
 ------------------------------------
-[forTARO]"CP1"(addr=000000215506EA98)<CRITICAL>
+[forTARO]"CP1"(addr=00000082470CEA78)<CRITICAL>
         src: example_debug_log_feature_test.cpp(1093)[Mon Jul 28 23:18:46 2014]
         func:example_debugLog_featureTest
 ------------------------------------
@@ -868,10 +868,10 @@ ASSERTION FAILURE!: 1 != 1
 func: example_debugLog_featureTest
 file: example_debug_log_feature_test.cpp(1141)[Mon Jul 28 23:18:46 2014]
 ----- callPoint stack info -----
-Thread: "MainThread"(ID=5fdc639e)
+Thread: "MainThread"(ID=d5b2ce94)
 Num of point: 1
 ------------------------------------
-[forTARO]"CP1"(addr=000000215506EA98)<CRITICAL>
+[forTARO]"CP1"(addr=00000082470CEA78)<CRITICAL>
         src: example_debug_log_feature_test.cpp(1093)[Mon Jul 28 23:18:46 2014]
         func:example_debugLog_featureTest
 ------------------------------------
@@ -879,10 +879,10 @@ Num of point: 1
 func: example_debugLog_featureTest
 file: example_debug_log_feature_test.cpp(1142)[Mon Jul 28 23:18:46 2014]
 ----- callPoint stack info -----
-Thread: "MainThread"(ID=5fdc639e)
+Thread: "MainThread"(ID=d5b2ce94)
 Num of point: 1
 ------------------------------------
-[forTARO]"CP1"(addr=000000215506EA98)<CRITICAL>
+[forTARO]"CP1"(addr=00000082470CEA78)<CRITICAL>
         src: example_debug_log_feature_test.cpp(1093)[Mon Jul 28 23:18:46 2014]
         func:example_debugLog_featureTest
 ------------------------------------
@@ -891,10 +891,10 @@ HIT!: 1 == 1
 func: example_debugLog_featureTest
 file: example_debug_log_feature_test.cpp(1143)[Mon Jul 28 23:18:46 2014]
 ----- callPoint stack info -----
-Thread: "MainThread"(ID=5fdc639e)
+Thread: "MainThread"(ID=d5b2ce94)
 Num of point: 1
 ------------------------------------
-[forTARO]"CP1"(addr=000000215506EA98)<CRITICAL>
+[forTARO]"CP1"(addr=00000082470CEA78)<CRITICAL>
         src: example_debug_log_feature_test.cpp(1093)[Mon Jul 28 23:18:46 2014]
         func:example_debugLog_featureTest
 ------------------------------------
@@ -904,13 +904,13 @@ END: logQueueMonitor thread
 ----------
 thread: "MainThread"
   -----  Process:"test"
-    TOTAL: count=4, time=0.005000600, max=0.002000800, min=0.001000300, avg=0.001250150, sum-cnt=2, max-cnt=3, min-cnt=1, avg-cnt=2.00
-    PERIOD:count=4, time=0.005000600, max=0.002000800, min=0.001000300, avg=0.001250150, sum-cnt=2, max-cnt=3, min-cnt=1, avg-cnt=2.00
+    TOTAL: count=4, time=0.004001800, max=0.001999700, min=0.001000300, avg=0.001000450, sum-cnt=2, max-cnt=3, min-cnt=1, avg-cnt=2.00
+    PERIOD:count=4, time=0.004001800, max=0.001999700, min=0.001000300, avg=0.001000450, sum-cnt=2, max-cnt=3, min-cnt=1, avg-cnt=2.00
   -----  Process:"test2"
     TOTAL: count=1, time=0.000000000, max=0.000000000, min=0.000000000, avg=0.000000000, sum-cnt=2, max-cnt=1, min-cnt=0, avg-cnt=0.50
     PERIOD:count=1, time=0.000000000, max=0.000000000, min=0.000000000, avg=0.000000000, sum-cnt=2, max-cnt=1, min-cnt=0, avg-cnt=0.50
   -----  Process:"CP level2(with perform)"
-    TOTAL: count=1, time=0.013000700, max=0.013000700, min=0.000000000, avg=0.013000700, sum-cnt=3, max-cnt=1, min-cnt=0, avg-cnt=0.33
+    TOTAL: count=1, time=0.012000700, max=0.012000700, min=0.000000000, avg=0.012000700, sum-cnt=3, max-cnt=1, min-cnt=0, avg-cnt=0.33
     PERIOD:count=0, time=0.000000000, max=0.000000000, min=0.000000000, avg=0.000000000, sum-cnt=2, max-cnt=0, min-cnt=0, avg-cnt=0.00
 --------------
 
@@ -929,251 +929,251 @@ Many thread printing
 
 [1]Reserved-message(00) on THREAD[09]
 [2]Reserved-message(00) on THREAD[07]
-[3]Reserved-message(00) on THREAD[03]
-[4]Reserved-message(00) on THREAD[05]
-[5]Reserved-message(00) on THREAD[02]
-[6]Reserved-message(00) on THREAD[01]
-[7]Reserved-message(00) on THREAD[00]
-[8]Reserved-message(00) on THREAD[04]
-[9]Reserved-message(00) on THREAD[08]
+[3]Reserved-message(00) on THREAD[05]
+[4]Reserved-message(00) on THREAD[03]
+[5]Reserved-message(00) on THREAD[00]
+[6]Reserved-message(00) on THREAD[02]
+[7]Reserved-message(00) on THREAD[04]
+[8]Reserved-message(00) on THREAD[08]
+[9]Reserved-message(00) on THREAD[01]
 [10]Reserved-message(00) on THREAD[06]
-[11]Normal-message(00) on THREAD[07]
-[12]Normal-message(00) on THREAD[09]
-[13]Normal-message(00) on THREAD[00]
+[11]Normal-message(00) on THREAD[09]
+[12]Normal-message(00) on THREAD[00]
+[13]Normal-message(00) on THREAD[05]
 [14]Normal-message(00) on THREAD[03]
-[15]Normal-message(00) on THREAD[05]
-[16]Normal-message(00) on THREAD[04]
-[17]Normal-message(00) on THREAD[08]
-[18]Normal-message(00) on THREAD[02]
-[19]Normal-message(00) on THREAD[01]
-[20]Normal-message(00) on THREAD[06]
-[21]Reserved-message(01) on THREAD[04]
-[22]Reserved-message(01) on THREAD[09]
-[23]Reserved-message(01) on THREAD[03]
-[24]Reserved-message(01) on THREAD[07]
-[25]Reserved-message(01) on THREAD[05]
-[26]Reserved-message(01) on THREAD[08]
+[15]Normal-message(00) on THREAD[07]
+[16]Normal-message(00) on THREAD[02]
+[17]Normal-message(00) on THREAD[04]
+[18]Normal-message(00) on THREAD[08]
+[19]Normal-message(00) on THREAD[06]
+[20]Normal-message(00) on THREAD[01]
+[21]Reserved-message(01) on THREAD[00]
+[22]Reserved-message(01) on THREAD[08]
+[23]Reserved-message(01) on THREAD[07]
+[24]Reserved-message(01) on THREAD[05]
+[25]Reserved-message(01) on THREAD[06]
+[26]Reserved-message(01) on THREAD[09]
 [27]Reserved-message(01) on THREAD[02]
-[28]Reserved-message(01) on THREAD[00]
-[29]Reserved-message(01) on THREAD[01]
-[30]Reserved-message(01) on THREAD[06]
-[31]Normal-message(01) on THREAD[04]
+[28]Reserved-message(01) on THREAD[01]
+[29]Reserved-message(01) on THREAD[03]
+[30]Reserved-message(01) on THREAD[04]
+[31]Normal-message(01) on THREAD[00]
 [32]Normal-message(01) on THREAD[05]
-[33]Normal-message(01) on THREAD[08]
-[34]Normal-message(01) on THREAD[07]
-[35]Normal-message(01) on THREAD[02]
-[36]Normal-message(01) on THREAD[00]
-[37]Normal-message(01) on THREAD[09]
-[38]Normal-message(01) on THREAD[06]
-[39]Normal-message(01) on THREAD[01]
-[40]Normal-message(01) on THREAD[03]
-[41]Reserved-message(02) on THREAD[00]
-[42]Reserved-message(02) on THREAD[04]
-[43]Reserved-message(02) on THREAD[07]
-[44]Reserved-message(02) on THREAD[05]
-[45]Reserved-message(02) on THREAD[02]
-[46]Reserved-message(02) on THREAD[01]
-[47]Reserved-message(02) on THREAD[08]
-[48]Reserved-message(02) on THREAD[06]
-[49]Reserved-message(02) on THREAD[03]
-[50]Reserved-message(02) on THREAD[09]
-[51]Normal-message(02) on THREAD[07]
-[52]Normal-message(02) on THREAD[04]
-[53]Normal-message(02) on THREAD[00]
-[54]Normal-message(02) on THREAD[05]
+[33]Normal-message(01) on THREAD[09]
+[34]Normal-message(01) on THREAD[06]
+[35]Normal-message(01) on THREAD[08]
+[36]Normal-message(01) on THREAD[01]
+[37]Normal-message(01) on THREAD[03]
+[38]Normal-message(01) on THREAD[02]
+[39]Normal-message(01) on THREAD[07]
+[40]Normal-message(01) on THREAD[04]
+[41]Reserved-message(02) on THREAD[08]
+[42]Reserved-message(02) on THREAD[00]
+[43]Reserved-message(02) on THREAD[09]
+[44]Reserved-message(02) on THREAD[06]
+[45]Reserved-message(02) on THREAD[01]
+[46]Reserved-message(02) on THREAD[03]
+[47]Reserved-message(02) on THREAD[05]
+[48]Reserved-message(02) on THREAD[07]
+[49]Reserved-message(02) on THREAD[02]
+[50]Reserved-message(02) on THREAD[04]
+[51]Normal-message(02) on THREAD[00]
+[52]Normal-message(02) on THREAD[08]
+[53]Normal-message(02) on THREAD[03]
+[54]Normal-message(02) on THREAD[09]
 [55]Normal-message(02) on THREAD[01]
-[56]Normal-message(02) on THREAD[08]
-[57]Normal-message(02) on THREAD[02]
-[58]Normal-message(02) on THREAD[06]
-[59]Normal-message(02) on THREAD[03]
-[60]Normal-message(02) on THREAD[09]
-[61]Reserved-message(03) on THREAD[08]
-[62]Reserved-message(03) on THREAD[07]
-[63]Reserved-message(03) on THREAD[04]
-[64]Reserved-message(03) on THREAD[05]
-[65]Reserved-message(03) on THREAD[01]
+[56]Normal-message(02) on THREAD[06]
+[57]Normal-message(02) on THREAD[05]
+[58]Normal-message(02) on THREAD[04]
+[59]Normal-message(02) on THREAD[07]
+[60]Normal-message(02) on THREAD[02]
+[61]Reserved-message(03) on THREAD[00]
+[62]Reserved-message(03) on THREAD[08]
+[63]Reserved-message(03) on THREAD[06]
+[64]Reserved-message(03) on THREAD[09]
+[65]Reserved-message(03) on THREAD[04]
 [66]Reserved-message(03) on THREAD[03]
-[67]Reserved-message(03) on THREAD[06]
-[68]Reserved-message(03) on THREAD[02]
-[69]Reserved-message(03) on THREAD[09]
-[70]Reserved-message(03) on THREAD[00]
-[71]Normal-message(03) on THREAD[07]
-[72]Normal-message(03) on THREAD[08]
-[73]Normal-message(03) on THREAD[01]
+[67]Reserved-message(03) on THREAD[07]
+[68]Reserved-message(03) on THREAD[01]
+[69]Reserved-message(03) on THREAD[05]
+[70]Reserved-message(03) on THREAD[02]
+[71]Normal-message(03) on THREAD[08]
+[72]Normal-message(03) on THREAD[06]
+[73]Normal-message(03) on THREAD[07]
 [74]Normal-message(03) on THREAD[04]
 [75]Normal-message(03) on THREAD[03]
-[76]Normal-message(03) on THREAD[06]
-[77]Normal-message(03) on THREAD[05]
-[78]Normal-message(03) on THREAD[02]
-[79]Normal-message(03) on THREAD[09]
-[80]Normal-message(03) on THREAD[00]
-[81]Reserved-message(04) on THREAD[06]
-[82]Reserved-message(04) on THREAD[01]
+[76]Normal-message(03) on THREAD[00]
+[77]Normal-message(03) on THREAD[09]
+[78]Normal-message(03) on THREAD[01]
+[79]Normal-message(03) on THREAD[05]
+[80]Normal-message(03) on THREAD[02]
+[81]Reserved-message(04) on THREAD[04]
+[82]Reserved-message(04) on THREAD[08]
 [83]Reserved-message(04) on THREAD[03]
-[84]Reserved-message(04) on THREAD[05]
-[85]Reserved-message(04) on THREAD[04]
+[84]Reserved-message(04) on THREAD[01]
+[85]Reserved-message(04) on THREAD[06]
 [86]Reserved-message(04) on THREAD[09]
-[87]Reserved-message(04) on THREAD[02]
-[88]Reserved-message(04) on THREAD[00]
-[89]Reserved-message(04) on THREAD[07]
-[90]Reserved-message(04) on THREAD[08]
-[91]Normal-message(04) on THREAD[06]
+[87]Reserved-message(04) on THREAD[07]
+[88]Reserved-message(04) on THREAD[02]
+[89]Reserved-message(04) on THREAD[05]
+[90]Reserved-message(04) on THREAD[00]
+[91]Normal-message(04) on THREAD[03]
 [92]Normal-message(04) on THREAD[09]
-[93]Normal-message(04) on THREAD[05]
-[94]Normal-message(04) on THREAD[03]
-[95]Normal-message(04) on THREAD[04]
-[96]Normal-message(04) on THREAD[01]
-[97]Normal-message(04) on THREAD[07]
-[98]Normal-message(04) on THREAD[02]
-[99]Normal-message(04) on THREAD[00]
-[100]Normal-message(04) on THREAD[08]
-[101]Reserved-message(05) on THREAD[05]
+[93]Normal-message(04) on THREAD[01]
+[94]Normal-message(04) on THREAD[04]
+[95]Normal-message(04) on THREAD[08]
+[96]Normal-message(04) on THREAD[00]
+[97]Normal-message(04) on THREAD[06]
+[98]Normal-message(04) on THREAD[07]
+[99]Normal-message(04) on THREAD[05]
+[100]Normal-message(04) on THREAD[02]
+[101]Reserved-message(05) on THREAD[03]
 [102]Reserved-message(05) on THREAD[04]
-[103]Reserved-message(05) on THREAD[09]
-[104]Reserved-message(05) on THREAD[06]
+[103]Reserved-message(05) on THREAD[06]
+[104]Reserved-message(05) on THREAD[05]
 [105]Reserved-message(05) on THREAD[07]
-[106]Reserved-message(05) on THREAD[02]
-[107]Reserved-message(05) on THREAD[01]
-[108]Reserved-message(05) on THREAD[00]
-[109]Reserved-message(05) on THREAD[03]
-[110]Reserved-message(05) on THREAD[08]
-[111]Normal-message(05) on THREAD[07]
-[112]Normal-message(05) on THREAD[06]
+[106]Reserved-message(05) on THREAD[08]
+[107]Reserved-message(05) on THREAD[00]
+[108]Reserved-message(05) on THREAD[09]
+[109]Reserved-message(05) on THREAD[01]
+[110]Reserved-message(05) on THREAD[02]
+[111]Normal-message(05) on THREAD[03]
+[112]Normal-message(05) on THREAD[07]
 [113]Normal-message(05) on THREAD[05]
 [114]Normal-message(05) on THREAD[09]
-[115]Normal-message(05) on THREAD[04]
-[116]Normal-message(05) on THREAD[03]
-[117]Normal-message(05) on THREAD[00]
-[118]Normal-message(05) on THREAD[01]
-[119]Normal-message(05) on THREAD[02]
-[120]Normal-message(05) on THREAD[08]
-[121]Reserved-message(06) on THREAD[07]
-[122]Reserved-message(06) on THREAD[05]
+[115]Normal-message(05) on THREAD[01]
+[116]Normal-message(05) on THREAD[04]
+[117]Normal-message(05) on THREAD[06]
+[118]Normal-message(05) on THREAD[08]
+[119]Normal-message(05) on THREAD[00]
+[120]Normal-message(05) on THREAD[02]
+[121]Reserved-message(06) on THREAD[05]
+[122]Reserved-message(06) on THREAD[07]
 [123]Reserved-message(06) on THREAD[03]
-[124]Reserved-message(06) on THREAD[00]
-[125]Reserved-message(06) on THREAD[06]
-[126]Reserved-message(06) on THREAD[01]
-[127]Reserved-message(06) on THREAD[02]
-[128]Reserved-message(06) on THREAD[09]
-[129]Reserved-message(06) on THREAD[04]
-[130]Reserved-message(06) on THREAD[08]
-[131]Normal-message(06) on THREAD[00]
-[132]Normal-message(06) on THREAD[01]
-[133]Normal-message(06) on THREAD[03]
-[134]Normal-message(06) on THREAD[07]
-[135]Normal-message(06) on THREAD[04]
-[136]Normal-message(06) on THREAD[06]
-[137]Normal-message(06) on THREAD[05]
-[138]Normal-message(06) on THREAD[02]
-[139]Normal-message(06) on THREAD[09]
-[140]Normal-message(06) on THREAD[08]
-[141]Reserved-message(07) on THREAD[07]
-[142]Reserved-message(07) on THREAD[00]
-[143]Reserved-message(07) on THREAD[01]
-[144]Reserved-message(07) on THREAD[04]
-[145]Reserved-message(07) on THREAD[05]
-[146]Reserved-message(07) on THREAD[09]
-[147]Reserved-message(07) on THREAD[02]
-[148]Reserved-message(07) on THREAD[06]
-[149]Reserved-message(07) on THREAD[03]
-[150]Reserved-message(07) on THREAD[08]
+[124]Reserved-message(06) on THREAD[04]
+[125]Reserved-message(06) on THREAD[09]
+[126]Reserved-message(06) on THREAD[06]
+[127]Reserved-message(06) on THREAD[00]
+[128]Reserved-message(06) on THREAD[01]
+[129]Reserved-message(06) on THREAD[08]
+[130]Reserved-message(06) on THREAD[02]
+[131]Normal-message(06) on THREAD[05]
+[132]Normal-message(06) on THREAD[07]
+[133]Normal-message(06) on THREAD[04]
+[134]Normal-message(06) on THREAD[03]
+[135]Normal-message(06) on THREAD[08]
+[136]Normal-message(06) on THREAD[09]
+[137]Normal-message(06) on THREAD[00]
+[138]Normal-message(06) on THREAD[01]
+[139]Normal-message(06) on THREAD[06]
+[140]Normal-message(06) on THREAD[02]
+[141]Reserved-message(07) on THREAD[05]
+[142]Reserved-message(07) on THREAD[03]
+[143]Reserved-message(07) on THREAD[08]
+[144]Reserved-message(07) on THREAD[09]
+[145]Reserved-message(07) on THREAD[07]
+[146]Reserved-message(07) on THREAD[01]
+[147]Reserved-message(07) on THREAD[00]
+[148]Reserved-message(07) on THREAD[04]
+[149]Reserved-message(07) on THREAD[06]
+[150]Normal-message(07) on THREAD[03]
 [151]Normal-message(07) on THREAD[07]
-[152]Normal-message(07) on THREAD[04]
-[153]Normal-message(07) on THREAD[00]
-[154]Normal-message(07) on THREAD[06]
-[155]Normal-message(07) on THREAD[02]
-[156]Normal-message(07) on THREAD[05]
-[157]Normal-message(07) on THREAD[01]
-[158]Normal-message(07) on THREAD[03]
-[159]Normal-message(07) on THREAD[09]
-[160]Normal-message(07) on THREAD[08]
-[161]Reserved-message(08) on THREAD[07]
-[162]Reserved-message(08) on THREAD[01]
-[163]Reserved-message(08) on THREAD[06]
-[164]Reserved-message(08) on THREAD[04]
-[165]Reserved-message(08) on THREAD[02]
-[166]Reserved-message(08) on THREAD[05]
-[167]Reserved-message(08) on THREAD[03]
-[168]Reserved-message(08) on THREAD[09]
-[169]Reserved-message(08) on THREAD[00]
-[170]Reserved-message(08) on THREAD[08]
-[171]Normal-message(08) on THREAD[06]
-[172]Normal-message(08) on THREAD[01]
-[173]Normal-message(08) on THREAD[05]
-[174]Normal-message(08) on THREAD[02]
-[175]Normal-message(08) on THREAD[04]
-[176]Normal-message(08) on THREAD[07]
-[177]Normal-message(08) on THREAD[03]
-[178]Normal-message(08) on THREAD[09]
-[179]Normal-message(08) on THREAD[00]
-[180]Normal-message(08) on THREAD[08]
-[181]Reserved-message(09) on THREAD[01]
+[152]Normal-message(07) on THREAD[09]
+[153]Normal-message(07) on THREAD[08]
+[154]Normal-message(07) on THREAD[05]
+[155]Normal-message(07) on THREAD[00]
+[156]Normal-message(07) on THREAD[01]
+[157]Normal-message(07) on THREAD[04]
+[158]Reserved-message(07) on THREAD[02]
+[159]Normal-message(07) on THREAD[06]
+[160]Normal-message(07) on THREAD[02]
+[161]Reserved-message(08) on THREAD[03]
+[162]Reserved-message(08) on THREAD[09]
+[163]Reserved-message(08) on THREAD[08]
+[164]Reserved-message(08) on THREAD[05]
+[165]Reserved-message(08) on THREAD[07]
+[166]Reserved-message(08) on THREAD[00]
+[167]Reserved-message(08) on THREAD[04]
+[168]Reserved-message(08) on THREAD[01]
+[169]Normal-message(08) on THREAD[03]
+[170]Normal-message(08) on THREAD[05]
+[171]Normal-message(08) on THREAD[09]
+[172]Normal-message(08) on THREAD[08]
+[173]Normal-message(08) on THREAD[04]
+[174]Normal-message(08) on THREAD[00]
+[175]Normal-message(08) on THREAD[01]
+[176]Reserved-message(08) on THREAD[06]
+[177]Reserved-message(08) on THREAD[02]
+[178]Normal-message(08) on THREAD[07]
+[179]Normal-message(08) on THREAD[02]
+[180]Normal-message(08) on THREAD[06]
+[181]Reserved-message(09) on THREAD[03]
 [182]Reserved-message(09) on THREAD[05]
-[183]Reserved-message(09) on THREAD[06]
-[184]Reserved-message(09) on THREAD[04]
-[185]Reserved-message(09) on THREAD[09]
-[186]Reserved-message(09) on THREAD[07]
-[187]Reserved-message(09) on THREAD[03]
-[188]Reserved-message(09) on THREAD[00]
-[189]Reserved-message(09) on THREAD[02]
-[190]Normal-message(09) on THREAD[06]
+[183]Reserved-message(09) on THREAD[09]
+[184]Reserved-message(09) on THREAD[08]
+[185]Reserved-message(09) on THREAD[00]
+[186]Reserved-message(09) on THREAD[04]
+[187]Reserved-message(09) on THREAD[07]
+[188]Normal-message(09) on THREAD[05]
+[189]Normal-message(09) on THREAD[03]
+[190]Normal-message(09) on THREAD[08]
 [191]Normal-message(09) on THREAD[09]
-[192]Normal-message(09) on THREAD[05]
-[193]Normal-message(09) on THREAD[01]
-[194]Normal-message(09) on THREAD[07]
-[195]Reserved-message(09) on THREAD[08]
-[196]Normal-message(09) on THREAD[04]
-[197]Normal-message(09) on THREAD[00]
+[192]Normal-message(09) on THREAD[00]
+[193]Reserved-message(09) on THREAD[02]
+[194]Reserved-message(09) on THREAD[01]
+[195]Normal-message(09) on THREAD[04]
+[196]Normal-message(09) on THREAD[07]
+[197]Reserved-message(09) on THREAD[06]
 [198]Normal-message(09) on THREAD[02]
-[199]Normal-message(09) on THREAD[03]
-[200]Normal-message(09) on THREAD[08]
-*elapsed time: output=0.042002500 sec, flush=0.042002500 sec
+[199]Normal-message(09) on THREAD[01]
+[200]Normal-message(09) on THREAD[06]
+*elapsed time: output=0.043020700 sec, flush=0.045001700 sec
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 Many thread profiling(1) : 1+3 threads, 120 frames, 2 processes, 2 repeats, sum on 30 frames
 
-*elapsed time: finish=0.907055200 sec
+*elapsed time: finish=0.889054500 sec
 --------------------------------------------------------------------------------
 ----------------------------------------
 THREAD:"MainThread"
-  PROFILE:"MAIN-PROC[00]"
-    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.108133(max=0.003017,min=0.001000,avg=0.001802)
-    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.441193(max=0.003022,min=0.001000,avg=0.001838)
   PROFILE:"MAIN-PROC[01]"
-    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.104880(max=0.003000,min=0.001000,avg=0.001748)
-    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.445861(max=0.003007,min=0.001000,avg=0.001858)
-----------------------------------------
-THREAD:"THREAD[02]"
-  PROFILE:"PROC[01]"
-    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.121011(max=0.003000,min=0.001000,avg=0.002017)
-    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.438110(max=0.003001,min=0.001000,avg=0.001825)
-  PROFILE:"PROC[00]"
-    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.103984(max=0.003000,min=0.001000,avg=0.001733)
-    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.442942(max=0.003004,min=0.001000,avg=0.001846)
-----------------------------------------
-THREAD:"THREAD[01]"
-  PROFILE:"PROC[01]"
-    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.111125(max=0.003017,min=0.001000,avg=0.001852)
-    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.449113(max=0.003017,min=0.001000,avg=0.001871)
-  PROFILE:"PROC[00]"
-    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.119866(max=0.003000,min=0.001000,avg=0.001998)
-    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.457943(max=0.003022,min=0.001000,avg=0.001908)
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.103072(max=0.003000,min=0.001000,avg=0.001718)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.426412(max=0.004998,min=0.001000,avg=0.001777)
+  PROFILE:"MAIN-PROC[00]"
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.110942(max=0.003000,min=0.001000,avg=0.001849)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.453642(max=0.005001,min=0.001000,avg=0.001890)
 ----------------------------------------
 THREAD:"THREAD[00]"
   PROFILE:"PROC[00]"
-    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.116897(max=0.003002,min=0.001000,avg=0.001948)
-    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.452027(max=0.003002,min=0.001000,avg=0.001883)
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.103024(max=0.003002,min=0.001000,avg=0.001717)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.424555(max=0.003002,min=0.001000,avg=0.001769)
   PROFILE:"PROC[01]"
-    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.113100(max=0.003000,min=0.001000,avg=0.001885)
-    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.453035(max=0.003022,min=0.001000,avg=0.001888)
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.107991(max=0.003000,min=0.001000,avg=0.001800)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.427499(max=0.006296,min=0.001000,avg=0.001781)
+----------------------------------------
+THREAD:"THREAD[02]"
+  PROFILE:"PROC[00]"
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.115953(max=0.003006,min=0.001000,avg=0.001933)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.435110(max=0.005297,min=0.001000,avg=0.001813)
+  PROFILE:"PROC[01]"
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.101061(max=0.003000,min=0.001000,avg=0.001684)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.423942(max=0.004002,min=0.001000,avg=0.001766)
+----------------------------------------
+THREAD:"THREAD[01]"
+  PROFILE:"PROC[00]"
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.116026(max=0.003004,min=0.001000,avg=0.001934)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.451418(max=0.005297,min=0.001000,avg=0.001881)
+  PROFILE:"PROC[01]"
+    PERIOD:sums=30,count=60(max=2,min=2,avg=2.00),time=0.108988(max=0.003001,min=0.001000,avg=0.001816)
+    TOTAL: sums=120,count=240(max=2,min=2,avg=2.00),time=0.437636(max=0.003002,min=0.001000,avg=0.001823)
 
 --------------------------------------------------------------------------------
 Many thread profiling(2) : 1+20 threads, 120 frames, 10 processes, 10 repeats, sum on 30 frames
 
-*elapsed time: finish=3.639214300 sec
+*elapsed time: finish=4.103243600 sec
 --------------------------------------------------------------------------------
-thread-infos=20,processe-infos=200,total:(sums=24000,counts=240000,time=66.926344000),period:(sums=6000,counts=60000,time=15.447755400)
+thread-infos=20,processe-infos=200,total:(sums=24000,counts=240000,time=76.057271500),period:(sums=6000,counts=60000,time=18.052672200)
 END: logQueueMonitor thread
 
 ================================================================================

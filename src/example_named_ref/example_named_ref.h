@@ -14,6 +14,8 @@
 
 #include <gasha/named_ref.h>//名前付きデータ参照
 #include <gasha/named_func.h>//名前付き関数
+#include <gasha/named_value.h>//名前付き定数
+#include <gasha/str_pool.h>//文字列プール
 #include <gasha/shared_spin_lock.h>//共有スピンロック
 #include <gasha/limits.h>//限界値
 
@@ -32,12 +34,14 @@ static const std::size_t REF_TABLE_EX_SIZE = 10;
 //名前付きデータ参照操作用構造体
 //※インスタンスの区別を用途として兼ねる
 struct refTable_type : public named_ref::baseOpe<refTable_type, REF_TABLE_SIZE>
+//struct refTable_type : public namedRef_baseOpe<refTable_type, REF_TABLE_SIZE>//※別名バージョン
 {
 	typedef sharedSpinLock lock_type;//ロックポリシー
 };
 
 //名前付きデータ参照の型宣言
 using refTable = named_ref::table<refTable_type>;
+//using refTable = namedRef<refTable_type>;//※別名バージョン
 
 //※複数インスタンスも生成可能
 struct refTableEx_type : public named_ref::baseOpe<refTableEx_type, REF_TABLE_EX_SIZE>{};
@@ -49,12 +53,33 @@ static const std::size_t FUNC_TABLE_SIZE = 32;
 
 //名前付き関数操作用構造体
 struct funcTable_type : public named_func::baseOpe<funcTable_type, FUNC_GROUP_TABLE_SIZE, FUNC_TABLE_SIZE>
+//struct funcTable_type : public namedFunc_baseOpe<funcTable_type, FUNC_GROUP_TABLE_SIZE, FUNC_TABLE_SIZE>//※別名バージョン
 {
 	typedef sharedSpinLock lock_type;//ロックポリシー
 };
 
 //名前付き関数の型宣言
 using funcTable = named_func::table<funcTable_type>;
+//using funcTable = namedFunc<funcTable_type>;//※別名バージョン
+
+//名前付き定数テーブル用定数
+static const std::size_t VALUE_GROUP_TABLE_SIZE = 8;
+static const std::size_t VALUE_TABLE_SIZE = 32;
+static const std::size_t VALUE_TABLE_STR_BUFF = 8192;
+
+//名前付き定数操作用構造体
+struct valueTable_type : public named_value::baseOpe<valueTable_type, VALUE_GROUP_TABLE_SIZE, VALUE_TABLE_SIZE>
+//struct valueTable_type : public namedValue_baseOpe<valueTable_type, VALUE_GROUP_TABLE_SIZE, VALUE_TABLE_SIZE>//※別名バージョン
+{
+	typedef sharedSpinLock lock_type;//ロックポリシー
+};
+
+//名前付き定数の型宣言
+using valueTable = named_value::table<valueTable_type>;
+//using valueTable = namedValue<valueTable_type>;//※別名バージョン
+
+//名前付き定数用の文字列プール
+typedef strPool<VALUE_TABLE_STR_BUFF, VALUE_TABLE_SIZE, sharedSpinLock> valueStrPool;
 
 //----------------------------------------
 //名前付きデータ参照用構造体
@@ -63,6 +88,7 @@ struct data_t
 	int m_memberA;
 	char m_memberB[2];
 	float m_memberC;
+	int methodA(const int val);
 };
 
 //----------------------------------------
@@ -130,11 +156,28 @@ struct objType
 	int m_mem;
 };
 
+//----------------------------------------
+//名前付き定数テスト用
+enum testValues
+{
+	testValueA = 0,
+	testValueB,
+	testValueC,
+};
+
 GASHA_NAMESPACE_END;//ネームスペース：終了
 
 //----------------------------------------
 //名前付きデータ参照テスト
 void example_named_ref();
+
+//----------------------------------------
+//名前付きデータ参照の列挙
+void enumNamedRef();
+//名前付き関数の列挙
+void enumNamedFunc();
+//名前付き定数の列挙
+void enumNamedValue();
 
 #endif//GASHA_INCLUDED_EXAMPLE_NAMED_REF_H
 
