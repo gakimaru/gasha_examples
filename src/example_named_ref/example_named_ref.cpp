@@ -302,35 +302,35 @@ void testNamedRefCommon6(named_ref::table<TABLE_TYPE>& table, const char* name)
 	std::printf("isWritableSaturation<T>(\"%s\"): %s\n", name, toStr(table.template isWritableSaturation<T>(name)));
 	if (table.template isWritableRanged<T>(name))
 	{
-		std::printf("max<T>(\"%s\"): %llu\n", name, table.template max<T>(name).m_lo);
-		std::printf("min<T>(\"%s\"): %llu\n", name, table.template min<T>(name).m_lo);
+		std::printf("max<T>(\"%s\"): %llu\n", name, static_cast<unsigned long long>(table.template max<T>(name).m_lo));
+		std::printf("min<T>(\"%s\"): %llu\n", name, static_cast<unsigned long long>(table.template min<T>(name).m_lo));
 	}
-	std::printf("load<T>(\"%s\"): %llu\n", name, table.template load<T>(name).m_lo);
-	std::printf("cref<T>(\"%s\"): %llu\n", name, table.template cref<T>(name)->m_lo);
+	std::printf("load<T>(\"%s\"): %llu\n", name, static_cast<unsigned long long>(table.template load<T>(name).m_lo));
+	std::printf("cref<T>(\"%s\"): %llu\n", name, static_cast<unsigned long long>(table.template cref<T>(name)->m_lo));
 	if (table.template isWritable<T>(name))
 	{
-		std::printf("ref<T>(\"%s\"): %llu\n", name, table.template ref<T>(name)->m_lo);
-		*table.template ref<T>(name) = 1; std::printf("ref<T>(\"%s\")=1: %llu\n", name, table.template load<T>(name).m_lo);
-		table.template store<T>(name, 2); std::printf("store<T>(\"%s\", 1): %llu\n", name, table.template load<T>(name).m_lo);
+		std::printf("ref<T>(\"%s\"): %llu\n", name, static_cast<unsigned long long>(table.template ref<T>(name)->m_lo));
+		*table.template ref<T>(name) = 1; std::printf("ref<T>(\"%s\")=1: %llu\n", name, static_cast<unsigned long long>(table.template load<T>(name).m_lo));
+		table.template store<T>(name, 2); std::printf("store<T>(\"%s\", 1): %llu\n", name, static_cast<unsigned long long>(table.template load<T>(name).m_lo));
 		for (int i = 0; i < 10; ++i)
 		{
 			table.template inc<T>(name);
-			std::printf("inc<T>(\"%s\"): %llu\n", name, table.template load<T>(name).m_lo);
+			std::printf("inc<T>(\"%s\"): %llu\n", name, static_cast<unsigned long long>(table.template load<T>(name).m_lo));
 		}
 		for (int i = 0; i < 10; ++i)
 		{
 			table.template dec<T>(name);
-			std::printf("dec<T>(\"%s\"): %llu\n", name, table.template load<T>(name).m_lo);
+			std::printf("dec<T>(\"%s\"): %llu\n", name, static_cast<unsigned long long>(table.template load<T>(name).m_lo));
 		}
 		for (int i = 0; i < 10; ++i)
 		{
 			table.template add<T>(name, 5);
-			std::printf("add<T>(\"%s\", 5): %llu\n", name, table.template load<T>(name).m_lo);
+			std::printf("add<T>(\"%s\", 5): %llu\n", name, static_cast<unsigned long long>(table.template load<T>(name).m_lo));
 		}
 		for (int i = 0; i < 10; ++i)
 		{
 			table.template sub<T>(name, 5);
-			std::printf("sub<T>(\"%s\", 5): %llu\n", name, table.template load<T>(name).m_lo);
+			std::printf("sub<T>(\"%s\", 5): %llu\n", name, static_cast<unsigned long long>(table.template load<T>(name).m_lo));
 		}
 	}
 	std::printf("eq<T>(\"%s\", 15): %s\n", name, toStr(table.template eq<T>(name, 15)));
@@ -634,7 +634,7 @@ void testNamedValue()
 	if (value_tbl.isRegistered("g_value128") && value_tbl.isType<uint128_t>("g_value128"))
 	{
 		const auto value = value_tbl.value<uint128_t>("g_value128");
-		std::printf("value_tbl.value<uint128_t>(\"g_value1\")=%lld\n", value.m_lo);
+		std::printf("value_tbl.value<uint128_t>(\"g_value1\")=%llu\n", static_cast<unsigned long long>(value.m_lo));
 	}
 	const char* group_name = "valueGroupA";
 	const char* name = nullptr;

@@ -46,7 +46,7 @@ void enumNamedRef()
 {
 	refTable ref_tbl;
 	std::printf("----------------------------------------\n");
-	std::printf("Registered named-ref items:(num=%d)\n", ref_tbl.size());
+	std::printf("Registered named-ref items:(num=%d)\n", static_cast<int>(ref_tbl.size()));
 	for (const auto& info : ref_tbl)
 	{
 		std::printf("  ref: name(crc)=0x%08x, type=%s, access_type=%s\n", info.m_nameCrc, info.m_typeInfo ? info.m_typeInfo->name() : "(unknown)", info.m_accessType == refTable::READ_ONLY ? "ReadOnly" : info.m_accessType == refTable::WRITABLE ? "Writable" : info.m_accessType == refTable::WRITABLE_WRAPAROUND ? "Writable(Wrap-around)" : info.m_accessType == refTable::WRITABLE_SATURATION ? "Writable(Saturation)" : "(Unknown)");
@@ -59,7 +59,7 @@ void enumNamedFunc()
 {
 	funcTable func_tbl;
 	std::printf("----------------------------------------\n");
-	std::printf("Registered named-func items:(num=%d)\n", func_tbl.size());
+	std::printf("Registered named-func items:(num=%d)\n", static_cast<int>(func_tbl.size()));
 	for (const auto& group_info : func_tbl)
 	{
 		std::printf("  group: group-name(crc)=0x%08x\n", group_info.m_groupNameCrc);
@@ -77,7 +77,7 @@ void enumNamedValue()
 	valueTable value_tbl;
 	simpleSingleton<valueStrPool> value_str("enum");
 	std::printf("----------------------------------------\n");
-	std::printf("Registered named-value items:(num=%d)\n", value_tbl.size());
+	std::printf("Registered named-value items:(num=%d)\n", static_cast<int>(value_tbl.size()));
 	for (const auto& group_info : value_tbl)
 	{
 		std::printf("  group: group-name(crc)=0x%08x\n", group_info.m_groupNameCrc);
