@@ -37,7 +37,7 @@ name="Name_000007" ... OK
 name="Name_000008" ... OK
 name="Name_000009" ... OK
 success=10, failure=0
-*elapsed time=0.000066000 sec.
+*elapsed time=0.000109305 sec.
 
 --- Table Status ---
 .bucket_count()=23
@@ -167,7 +167,7 @@ name="Name_000017" ... NG
 name="Name_000018" ... NG
 name="Name_000019" ... NG
 success=10, failure=10
-*elapsed time=0.000066000 sec.
+*elapsed time=0.000125230 sec.
 
 --- Erase Data ---
 name="Name_000000" ... OK
@@ -181,7 +181,7 @@ name="Name_000014" ... NG
 name="Name_000016" ... NG
 name="Name_000018" ... NG
 success=5, failure=5
-*elapsed time=0.000005000 sec.
+*elapsed time=0.000008774 sec.
 
 --- Table Status ---
 .bucket_count()=23
@@ -227,7 +227,7 @@ name="Name_000017" ... NG
 name="Name_000018" ... NG
 name="Name_000019" ... NG
 success=5, failure=15
-*elapsed time=0.000011000 sec.
+*elapsed time=0.000019391 sec.
 
 --- Insert Data ---
 name="Name_000001" ... NG
@@ -241,7 +241,7 @@ name="Name_000015" ... OK
 name="Name_000017" ... OK
 name="Name_000019" ... OK
 success=5, failure=5
-*elapsed time=0.000006000 sec.
+*elapsed time=0.000010833 sec.
 
 --- Table Status ---
 .bucket_count()=23
@@ -290,11 +290,11 @@ name="Name_000017" ... OK   [    11](    11) key=4acd8083, name="Name_000017", v
 name="Name_000018" ... NG
 name="Name_000019" ... OK  *[     6](     4) key=e6b53fa4, name="Name_000019", value=19 (bucket=6, bucket_size=1)
 success=10, failure=10
-*elapsed time=0.000017000 sec.
+*elapsed time=0.000050698 sec.
 
 --- Rehash Table ---
 OK.
-*elapsed time=0.000004000 sec.
+*elapsed time=0.000006716 sec.
 
 --- Table Status ---
 .bucket_count()=23
@@ -340,11 +340,11 @@ name="Name_000017" ... OK   [    11](    11) key=4acd8083, name="Name_000017", v
 name="Name_000018" ... NG
 name="Name_000019" ... OK  *[     6](     4) key=e6b53fa4, name="Name_000019", value=19 (bucket=6, bucket_size=1)
 success=10, failure=10
-*elapsed time=0.000014000 sec.
+*elapsed time=0.000024483 sec.
 
 --- Clear Table ---
 OK.
-*elapsed time=0.000002000 sec.
+*elapsed time=0.000002817 sec.
 
 --- Table Status ---
 .bucket_count()=23
@@ -380,7 +380,7 @@ name="Name_000017" ... NG
 name="Name_000018" ... NG
 name="Name_000019" ... NG
 success=0, failure=20
-*elapsed time=0.000007000 sec.
+*elapsed time=0.000012025 sec.
 
 --- Insert Data ---
 name="Name_000000" ... OK
@@ -404,7 +404,7 @@ name="Name_000017" ... OK
 name="Name_000018" ... OK
 name="Name_000019" ... OK
 success=20, failure=0
-*elapsed time=0.000016000 sec.
+*elapsed time=0.000029899 sec.
 
 --- Table Status ---
 .bucket_count()=23
@@ -460,7 +460,7 @@ name="Name_000017" ... OK  *[    19](    11) key=4acd8083, name="Name_000017", v
 name="Name_000018" ... OK  *[    12](     3) key=14debca7, name="Name_000018", value=18 (bucket=12, bucket_size=1)
 name="Name_000019" ... OK  *[    16](     4) key=e6b53fa4, name="Name_000019", value=19 (bucket=16, bucket_size=1)
 success=20, failure=0
-*elapsed time=0.000025000 sec.
+*elapsed time=0.000042574 sec.
 
 --- Erase Data ---
 name="Name_000000" ... OK
@@ -484,7 +484,7 @@ name="Name_000017" ... OK
 name="Name_000018" ... OK
 name="Name_000019" ... OK
 success=20, failure=0
-*elapsed time=0.000009000 sec.
+*elapsed time=0.000017225 sec.
 
 --- Table Status ---
 .bucket_count()=23
@@ -520,11 +520,11 @@ name="Name_000017" ... NG
 name="Name_000018" ... NG
 name="Name_000019" ... NG
 success=0, failure=20
-*elapsed time=0.000006000 sec.
+*elapsed time=0.000011592 sec.
 
 End
 ============================================================
-*elapsed time=0.000364000 sec.
+*elapsed time=0.000654422 sec.
 
 --------------------------------------------------------------------------------
 [STL] Hash Table Test
@@ -536,7 +536,7 @@ End
 --- [STL] Table Status ---
 .size()=0
 .empty()=1
-.bucket_count()=41
+.bucket_count()=23
 .max_bucket_count()=1717986918
 .load_factor()=0.000
 .max_load_factor()=1.000
@@ -553,39 +553,39 @@ name="Name_000007" ... OK
 name="Name_000008" ... OK
 name="Name_000009" ... OK
 success=10, failure=0
-*elapsed time=0.000019000 sec.
+*elapsed time=0.000043115 sec.
 
 --- [STL] Table Status ---
 .size()=10
 .empty()=0
-.bucket_count()=41
+.bucket_count()=23
 .max_bucket_count()=1717986918
-.load_factor()=0.244
+.load_factor()=0.435
 .max_load_factor()=1.000
 
 --- [STL] Print Table ---
-[    24] key=f517a7d3, name="Name_000009", value=9 (bucket=24, bucket_size=1)
-[     1] key=077c24d0, name="Name_000008", value=8 (bucket=1, bucket_size=1)
-[    11] key=596f18f4, name="Name_000007", value=7 (bucket=11, bucket_size=1)
-[    13] key=ab049bf7, name="Name_000006", value=6 (bucket=13, bucket_size=1)
-[     5] key=b8546803, name="Name_000005", value=5 (bucket=5, bucket_size=1)
-[    35] key=4a3feb00, name="Name_000004", value=4 (bucket=35, bucket_size=1)
-[    34] key=9ef58feb, name="Name_000003", value=3 (bucket=34, bucket_size=1)
-[     4] key=6c9e0ce8, name="Name_000002", value=2 (bucket=4, bucket_size=1)
-[    36] key=7fceff1c, name="Name_000001", value=1 (bucket=36, bucket_size=1)
-[    19] key=8da57c1f, name="Name_000000", value=0 (bucket=19, bucket_size=1)
+[    11] key=077c24d0, name="Name_000008", value=8 (bucket=11, bucket_size=1)
+[    15] key=596f18f4, name="Name_000007", value=7 (bucket=15, bucket_size=1)
+[    13] key=f517a7d3, name="Name_000009", value=9 (bucket=13, bucket_size=2)
+[    13] key=b8546803, name="Name_000005", value=5 (bucket=13, bucket_size=2)
+[     5] key=9ef58feb, name="Name_000003", value=3 (bucket=5, bucket_size=1)
+[     6] key=ab049bf7, name="Name_000006", value=6 (bucket=6, bucket_size=2)
+[     6] key=6c9e0ce8, name="Name_000002", value=2 (bucket=6, bucket_size=2)
+[     4] key=4a3feb00, name="Name_000004", value=4 (bucket=4, bucket_size=2)
+[     4] key=7fceff1c, name="Name_000001", value=1 (bucket=4, bucket_size=2)
+[    14] key=8da57c1f, name="Name_000000", value=0 (bucket=14, bucket_size=1)
 
 --- [STL] Find Data ---
-name="Name_000000" ... OK  key=8da57c1f, name="Name_000000", value=0 (bucket=19, bucket_size=1)
-name="Name_000001" ... OK  key=7fceff1c, name="Name_000001", value=1 (bucket=36, bucket_size=1)
-name="Name_000002" ... OK  key=6c9e0ce8, name="Name_000002", value=2 (bucket=4, bucket_size=1)
-name="Name_000003" ... OK  key=9ef58feb, name="Name_000003", value=3 (bucket=34, bucket_size=1)
-name="Name_000004" ... OK  key=4a3feb00, name="Name_000004", value=4 (bucket=35, bucket_size=1)
-name="Name_000005" ... OK  key=b8546803, name="Name_000005", value=5 (bucket=5, bucket_size=1)
-name="Name_000006" ... OK  key=ab049bf7, name="Name_000006", value=6 (bucket=13, bucket_size=1)
-name="Name_000007" ... OK  key=596f18f4, name="Name_000007", value=7 (bucket=11, bucket_size=1)
-name="Name_000008" ... OK  key=077c24d0, name="Name_000008", value=8 (bucket=1, bucket_size=1)
-name="Name_000009" ... OK  key=f517a7d3, name="Name_000009", value=9 (bucket=24, bucket_size=1)
+name="Name_000000" ... OK  key=8da57c1f, name="Name_000000", value=0 (bucket=14, bucket_size=1)
+name="Name_000001" ... OK  key=7fceff1c, name="Name_000001", value=1 (bucket=4, bucket_size=2)
+name="Name_000002" ... OK  key=6c9e0ce8, name="Name_000002", value=2 (bucket=6, bucket_size=2)
+name="Name_000003" ... OK  key=9ef58feb, name="Name_000003", value=3 (bucket=5, bucket_size=1)
+name="Name_000004" ... OK  key=4a3feb00, name="Name_000004", value=4 (bucket=4, bucket_size=2)
+name="Name_000005" ... OK  key=b8546803, name="Name_000005", value=5 (bucket=13, bucket_size=2)
+name="Name_000006" ... OK  key=ab049bf7, name="Name_000006", value=6 (bucket=6, bucket_size=2)
+name="Name_000007" ... OK  key=596f18f4, name="Name_000007", value=7 (bucket=15, bucket_size=1)
+name="Name_000008" ... OK  key=077c24d0, name="Name_000008", value=8 (bucket=11, bucket_size=1)
+name="Name_000009" ... OK  key=f517a7d3, name="Name_000009", value=9 (bucket=13, bucket_size=2)
 name="Name_000010" ... NG
 name="Name_000011" ... NG
 name="Name_000012" ... NG
@@ -597,7 +597,7 @@ name="Name_000017" ... NG
 name="Name_000018" ... NG
 name="Name_000019" ... NG
 success=10, failure=10
-*elapsed time=0.000017000 sec.
+*elapsed time=0.000035965 sec.
 
 --- [STL] Erase Data ---
 name="Name_000000" ... OK
@@ -611,34 +611,34 @@ name="Name_000014" ... NG
 name="Name_000016" ... NG
 name="Name_000018" ... NG
 success=5, failure=5
-*elapsed time=0.000006000 sec.
+*elapsed time=0.000009317 sec.
 
 --- [STL] Table Status ---
 .size()=5
 .empty()=0
-.bucket_count()=41
+.bucket_count()=23
 .max_bucket_count()=1717986918
-.load_factor()=0.122
+.load_factor()=0.217
 .max_load_factor()=1.000
 
 --- [STL] Print Table ---
-[    24] key=f517a7d3, name="Name_000009", value=9 (bucket=24, bucket_size=1)
-[    11] key=596f18f4, name="Name_000007", value=7 (bucket=11, bucket_size=1)
-[     5] key=b8546803, name="Name_000005", value=5 (bucket=5, bucket_size=1)
-[    34] key=9ef58feb, name="Name_000003", value=3 (bucket=34, bucket_size=1)
-[    36] key=7fceff1c, name="Name_000001", value=1 (bucket=36, bucket_size=1)
+[    15] key=596f18f4, name="Name_000007", value=7 (bucket=15, bucket_size=1)
+[    13] key=f517a7d3, name="Name_000009", value=9 (bucket=13, bucket_size=2)
+[    13] key=b8546803, name="Name_000005", value=5 (bucket=13, bucket_size=2)
+[     5] key=9ef58feb, name="Name_000003", value=3 (bucket=5, bucket_size=1)
+[     4] key=7fceff1c, name="Name_000001", value=1 (bucket=4, bucket_size=1)
 
 --- [STL] Find Data ---
 name="Name_000000" ... NG
-name="Name_000001" ... OK  key=7fceff1c, name="Name_000001", value=1 (bucket=36, bucket_size=1)
+name="Name_000001" ... OK  key=7fceff1c, name="Name_000001", value=1 (bucket=4, bucket_size=1)
 name="Name_000002" ... NG
-name="Name_000003" ... OK  key=9ef58feb, name="Name_000003", value=3 (bucket=34, bucket_size=1)
+name="Name_000003" ... OK  key=9ef58feb, name="Name_000003", value=3 (bucket=5, bucket_size=1)
 name="Name_000004" ... NG
-name="Name_000005" ... OK  key=b8546803, name="Name_000005", value=5 (bucket=5, bucket_size=1)
+name="Name_000005" ... OK  key=b8546803, name="Name_000005", value=5 (bucket=13, bucket_size=2)
 name="Name_000006" ... NG
-name="Name_000007" ... OK  key=596f18f4, name="Name_000007", value=7 (bucket=11, bucket_size=1)
+name="Name_000007" ... OK  key=596f18f4, name="Name_000007", value=7 (bucket=15, bucket_size=1)
 name="Name_000008" ... NG
-name="Name_000009" ... OK  key=f517a7d3, name="Name_000009", value=9 (bucket=24, bucket_size=1)
+name="Name_000009" ... OK  key=f517a7d3, name="Name_000009", value=9 (bucket=13, bucket_size=2)
 name="Name_000010" ... NG
 name="Name_000011" ... NG
 name="Name_000012" ... NG
@@ -650,7 +650,7 @@ name="Name_000017" ... NG
 name="Name_000018" ... NG
 name="Name_000019" ... NG
 success=5, failure=15
-*elapsed time=0.000010000 sec.
+*elapsed time=0.000017657 sec.
 
 --- [STL] Insert Data ---
 name="Name_000001" ... NG
@@ -664,55 +664,7 @@ name="Name_000015" ... OK
 name="Name_000017" ... OK
 name="Name_000019" ... OK
 success=5, failure=5
-*elapsed time=0.000007000 sec.
-
---- [STL] Table Status ---
-.size()=10
-.empty()=0
-.bucket_count()=41
-.max_bucket_count()=1717986918
-.load_factor()=0.244
-.max_load_factor()=1.000
-
---- [STL] Print Table ---
-[     4] key=abf6f074, name="Name_000015", value=15 (bucket=4, bucket_size=1)
-[    26] key=8d57179c, name="Name_000013", value=13 (bucket=26, bucket_size=1)
-[    12] key=4acd8083, name="Name_000017", value=17 (bucket=12, bucket_size=2)
-[    12] key=6c6c676b, name="Name_000011", value=11 (bucket=12, bucket_size=2)
-[    24] key=e6b53fa4, name="Name_000019", value=19 (bucket=24, bucket_size=2)
-[    24] key=f517a7d3, name="Name_000009", value=9 (bucket=24, bucket_size=2)
-[    11] key=596f18f4, name="Name_000007", value=7 (bucket=11, bucket_size=1)
-[     5] key=b8546803, name="Name_000005", value=5 (bucket=5, bucket_size=1)
-[    34] key=9ef58feb, name="Name_000003", value=3 (bucket=34, bucket_size=1)
-[    36] key=7fceff1c, name="Name_000001", value=1 (bucket=36, bucket_size=1)
-
---- [STL] Find Data ---
-name="Name_000000" ... NG
-name="Name_000001" ... OK  key=7fceff1c, name="Name_000001", value=1 (bucket=36, bucket_size=1)
-name="Name_000002" ... NG
-name="Name_000003" ... OK  key=9ef58feb, name="Name_000003", value=3 (bucket=34, bucket_size=1)
-name="Name_000004" ... NG
-name="Name_000005" ... OK  key=b8546803, name="Name_000005", value=5 (bucket=5, bucket_size=1)
-name="Name_000006" ... NG
-name="Name_000007" ... OK  key=596f18f4, name="Name_000007", value=7 (bucket=11, bucket_size=1)
-name="Name_000008" ... NG
-name="Name_000009" ... OK  key=f517a7d3, name="Name_000009", value=9 (bucket=24, bucket_size=2)
-name="Name_000010" ... NG
-name="Name_000011" ... OK  key=6c6c676b, name="Name_000011", value=11 (bucket=12, bucket_size=2)
-name="Name_000012" ... NG
-name="Name_000013" ... OK  key=8d57179c, name="Name_000013", value=13 (bucket=26, bucket_size=1)
-name="Name_000014" ... NG
-name="Name_000015" ... OK  key=abf6f074, name="Name_000015", value=15 (bucket=4, bucket_size=1)
-name="Name_000016" ... NG
-name="Name_000017" ... OK  key=4acd8083, name="Name_000017", value=17 (bucket=12, bucket_size=2)
-name="Name_000018" ... NG
-name="Name_000019" ... OK  key=e6b53fa4, name="Name_000019", value=19 (bucket=24, bucket_size=2)
-success=10, failure=10
-*elapsed time=0.000015000 sec.
-
---- [STL] Rehash Table ---
-OK.
-*elapsed time=0.000002000 sec.
+*elapsed time=0.000013108 sec.
 
 --- [STL] Table Status ---
 .size()=10
@@ -723,16 +675,16 @@ OK.
 .max_load_factor()=1.000
 
 --- [STL] Print Table ---
-[     5] key=9ef58feb, name="Name_000003", value=3 (bucket=5, bucket_size=1)
-[    15] key=596f18f4, name="Name_000007", value=7 (bucket=15, bucket_size=1)
-[    13] key=b8546803, name="Name_000005", value=5 (bucket=13, bucket_size=2)
-[    13] key=f517a7d3, name="Name_000009", value=9 (bucket=13, bucket_size=2)
-[     4] key=7fceff1c, name="Name_000001", value=1 (bucket=4, bucket_size=2)
-[     4] key=e6b53fa4, name="Name_000019", value=19 (bucket=4, bucket_size=2)
-[     3] key=6c6c676b, name="Name_000011", value=11 (bucket=3, bucket_size=1)
 [    11] key=4acd8083, name="Name_000017", value=17 (bucket=11, bucket_size=1)
-[     8] key=8d57179c, name="Name_000013", value=13 (bucket=8, bucket_size=2)
 [     8] key=abf6f074, name="Name_000015", value=15 (bucket=8, bucket_size=2)
+[     8] key=8d57179c, name="Name_000013", value=13 (bucket=8, bucket_size=2)
+[     3] key=6c6c676b, name="Name_000011", value=11 (bucket=3, bucket_size=1)
+[    15] key=596f18f4, name="Name_000007", value=7 (bucket=15, bucket_size=1)
+[    13] key=f517a7d3, name="Name_000009", value=9 (bucket=13, bucket_size=2)
+[    13] key=b8546803, name="Name_000005", value=5 (bucket=13, bucket_size=2)
+[     5] key=9ef58feb, name="Name_000003", value=3 (bucket=5, bucket_size=1)
+[     4] key=e6b53fa4, name="Name_000019", value=19 (bucket=4, bucket_size=2)
+[     4] key=7fceff1c, name="Name_000001", value=1 (bucket=4, bucket_size=2)
 
 --- [STL] Find Data ---
 name="Name_000000" ... NG
@@ -756,11 +708,59 @@ name="Name_000017" ... OK  key=4acd8083, name="Name_000017", value=17 (bucket=11
 name="Name_000018" ... NG
 name="Name_000019" ... OK  key=e6b53fa4, name="Name_000019", value=19 (bucket=4, bucket_size=2)
 success=10, failure=10
-*elapsed time=0.000013000 sec.
+*elapsed time=0.000027082 sec.
+
+--- [STL] Rehash Table ---
+OK.
+*elapsed time=0.000001517 sec.
+
+--- [STL] Table Status ---
+.size()=10
+.empty()=0
+.bucket_count()=23
+.max_bucket_count()=1717986918
+.load_factor()=0.435
+.max_load_factor()=1.000
+
+--- [STL] Print Table ---
+[    11] key=4acd8083, name="Name_000017", value=17 (bucket=11, bucket_size=1)
+[     8] key=abf6f074, name="Name_000015", value=15 (bucket=8, bucket_size=2)
+[     8] key=8d57179c, name="Name_000013", value=13 (bucket=8, bucket_size=2)
+[     3] key=6c6c676b, name="Name_000011", value=11 (bucket=3, bucket_size=1)
+[    15] key=596f18f4, name="Name_000007", value=7 (bucket=15, bucket_size=1)
+[    13] key=f517a7d3, name="Name_000009", value=9 (bucket=13, bucket_size=2)
+[    13] key=b8546803, name="Name_000005", value=5 (bucket=13, bucket_size=2)
+[     5] key=9ef58feb, name="Name_000003", value=3 (bucket=5, bucket_size=1)
+[     4] key=e6b53fa4, name="Name_000019", value=19 (bucket=4, bucket_size=2)
+[     4] key=7fceff1c, name="Name_000001", value=1 (bucket=4, bucket_size=2)
+
+--- [STL] Find Data ---
+name="Name_000000" ... NG
+name="Name_000001" ... OK  key=7fceff1c, name="Name_000001", value=1 (bucket=4, bucket_size=2)
+name="Name_000002" ... NG
+name="Name_000003" ... OK  key=9ef58feb, name="Name_000003", value=3 (bucket=5, bucket_size=1)
+name="Name_000004" ... NG
+name="Name_000005" ... OK  key=b8546803, name="Name_000005", value=5 (bucket=13, bucket_size=2)
+name="Name_000006" ... NG
+name="Name_000007" ... OK  key=596f18f4, name="Name_000007", value=7 (bucket=15, bucket_size=1)
+name="Name_000008" ... NG
+name="Name_000009" ... OK  key=f517a7d3, name="Name_000009", value=9 (bucket=13, bucket_size=2)
+name="Name_000010" ... NG
+name="Name_000011" ... OK  key=6c6c676b, name="Name_000011", value=11 (bucket=3, bucket_size=1)
+name="Name_000012" ... NG
+name="Name_000013" ... OK  key=8d57179c, name="Name_000013", value=13 (bucket=8, bucket_size=2)
+name="Name_000014" ... NG
+name="Name_000015" ... OK  key=abf6f074, name="Name_000015", value=15 (bucket=8, bucket_size=2)
+name="Name_000016" ... NG
+name="Name_000017" ... OK  key=4acd8083, name="Name_000017", value=17 (bucket=11, bucket_size=1)
+name="Name_000018" ... NG
+name="Name_000019" ... OK  key=e6b53fa4, name="Name_000019", value=19 (bucket=4, bucket_size=2)
+success=10, failure=10
+*elapsed time=0.000022966 sec.
 
 --- [STL] Clear Table ---
 OK.
-*elapsed time=0.000001000 sec.
+*elapsed time=0.000002708 sec.
 
 --- [STL] Table Status ---
 .size()=0
@@ -794,7 +794,7 @@ name="Name_000017" ... NG
 name="Name_000018" ... NG
 name="Name_000019" ... NG
 success=0, failure=20
-*elapsed time=0.000010000 sec.
+*elapsed time=0.000018525 sec.
 
 --- [STL] Insert Data ---
 name="Name_000000" ... OK
@@ -818,7 +818,7 @@ name="Name_000017" ... OK
 name="Name_000018" ... OK
 name="Name_000019" ... OK
 success=20, failure=0
-*elapsed time=0.000021000 sec.
+*elapsed time=0.000038891 sec.
 
 --- [STL] Table Status ---
 .size()=20
@@ -872,7 +872,7 @@ name="Name_000017" ... OK  key=4acd8083, name="Name_000017", value=17 (bucket=11
 name="Name_000018" ... OK  key=14debca7, name="Name_000018", value=18 (bucket=3, bucket_size=2)
 name="Name_000019" ... OK  key=e6b53fa4, name="Name_000019", value=19 (bucket=4, bucket_size=3)
 success=20, failure=0
-*elapsed time=0.000022000 sec.
+*elapsed time=0.000078864 sec.
 
 --- [STL] Erase Data ---
 name="Name_000000" ... OK
@@ -896,7 +896,7 @@ name="Name_000017" ... OK
 name="Name_000018" ... OK
 name="Name_000019" ... OK
 success=20, failure=0
-*elapsed time=0.000010000 sec.
+*elapsed time=0.000019066 sec.
 
 --- [STL] Table Status ---
 .size()=0
@@ -930,11 +930,11 @@ name="Name_000017" ... NG
 name="Name_000018" ... NG
 name="Name_000019" ... NG
 success=0, failure=20
-*elapsed time=0.000007000 sec.
+*elapsed time=0.000013216 sec.
 
 End
 ============================================================
-*elapsed time=0.000226000 sec.
+*elapsed time=0.000437979 sec.
 
 --------------------------------------------------------------------------------
 Hash Table Test for Pointer

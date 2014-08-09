@@ -320,10 +320,10 @@ array= [1:102] [1:101] [2:103] [2:104] [3:105] [3:106] [4:107] [4:108] [5:109] [
 [normal container]
 (before)
 size=0, max_size=100(100)
-array= [1:1] [7:7] [6:6] [8:8] [4:4] [5:5] [3:3] [2:2] [0:0] [9:9]
+array=(empty)
 (after)
 size=10, max_size=100(100)
-array= [7:7] [8:8] [5:5] [2:2] [1:11] [7:17] [8:18] [4:14] [2:12] [9:19]
+array= [4:4] [6:6] [8:8] [0:0] [3:13] [5:15] [9:19] [8:18] [2:12] [0:10]
 
 [multi-thread container]
 (before)
@@ -331,110 +331,110 @@ size=0, max_size=100(100)
 array=(empty)
 (after)
 size=10, max_size=100(100)
-array= [1:11] [3:13] [7:17] [6:16] [2:12] [0:10] [9:19] [8:18] [5:15] [4:14]
+array= [1:11] [8:18] [9:19] [2:12] [6:16] [7:17] [5:15] [0:10] [3:13] [4:14]
 --------------------------------------------------------------------------------
 [Test for performance dynamic_array]
 
 [create container & assign() * 10]
-*elapsed_time=0.000004000 sec
+*elapsed_time=0.000005525 sec
 
 [clear() * 10]
-*elapsed_time=0.000022000 sec
+*elapsed_time=0.000027299 sec
 
 [push_back() * 10]
 num=10
-*elapsed_time=0.000002000 sec
+*elapsed_time=0.000004334 sec
 
 [iterator(1)]
 size=10, max_size=10(10)
 array= [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
 num=10
-*elapsed_time=0.000005000 sec
+*elapsed_time=0.000006933 sec
 
 [reverse sort]
-*elapsed_time=0.000002000 sec
+*elapsed_time=0.000004766 sec
 
 [iterator(2)]
 size=10, max_size=10(10)
 array= [9:10000009] [8:10000008] [7:10000007] [6:10000006] [5:10000005] [4:10000004] [3:10000003] [2:10000002] [1:10000001] [0:10000000]
 num=10
-*elapsed_time=0.000004000 sec
+*elapsed_time=0.000006283 sec
 
 [sort]
-*elapsed_time=0.000002000 sec
+*elapsed_time=0.000003792 sec
 
 [reverse_iterator]
 size=10, max_size=10(10)
 array= [9:10000009] [8:10000008] [7:10000007] [6:10000006] [5:10000005] [4:10000004] [3:10000003] [2:10000002] [1:10000001] [0:10000000]
 num=10
-*elapsed_time=0.000004000 sec
+*elapsed_time=0.000006933 sec
 
 [findValue]
  [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
 num=10
-*elapsed_time=0.000005000 sec
+*elapsed_time=0.000007367 sec
 
 [binarySearchValue]
  [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
 num=10
-*elapsed_time=0.000004000 sec
+*elapsed_time=0.000008341 sec
 
 [delete container]
-*elapsed_time=0.000002000 sec
+*elapsed_time=0.000002925 sec
 
 [finish]
-*elapsed_time=0.000057000 sec
+*elapsed_time=0.000086231 sec
 --------------------------------------------------------------------------------
 [Test for performance std::vector]
 
 [create container & assign() * 10]
-*elapsed_time=0.000002000 sec
+*elapsed_time=0.000004442 sec
 
 [clear() * 10]
-*elapsed_time=0.000001000 sec
+*elapsed_time=0.000002383 sec
 
 [push_back() * 10]
 num=10
-*elapsed_time=0.000002000 sec
+*elapsed_time=0.000003033 sec
 
 [iterator(1)]
 size=10, max_size=-1
 array= [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
 num=10
-*elapsed_time=0.000003000 sec
+*elapsed_time=0.000005958 sec
 
 [reverse sort]
-*elapsed_time=0.000002000 sec
+*elapsed_time=0.000003792 sec
 
 [iterator(2)]
 size=10, max_size=-1
 array= [9:10000009] [8:10000008] [7:10000007] [6:10000006] [5:10000005] [4:10000004] [3:10000003] [2:10000002] [1:10000001] [0:10000000]
 num=10
-*elapsed_time=0.000003000 sec
+*elapsed_time=0.000006283 sec
 
 [sort]
-*elapsed_time=0.000002000 sec
+*elapsed_time=0.000003683 sec
 
 [reverse_iterator]
 array= [9:10000009] [8:10000008] [7:10000007] [6:10000006] [5:10000005] [4:10000004] [3:10000003] [2:10000002] [1:10000001] [0:10000000]
 num=10
-*elapsed_time=0.000003000 sec
+*elapsed_time=0.000005850 sec
 
 [findValue]
  [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
 num=10
-*elapsed_time=0.000025000 sec
+*elapsed_time=0.000006392 sec
 
 [binarySearchValue]
  [0:10000000] [1:10000001] [2:10000002] [3:10000003] [4:10000004] [5:10000005] [6:10000006] [7:10000007] [8:10000008] [9:10000009]
 num=10
-*elapsed_time=0.000004000 sec
+*elapsed_time=0.000046473 sec
 
 [delete container]
-*elapsed_time=0.000002000 sec
+*elapsed_time=0.000003575 sec
 
 [finish]
-*elapsed_time=0.000050000 sec
+*elapsed_time=0.000094031 sec
 
 - end -
 
