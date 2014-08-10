@@ -141,9 +141,9 @@ class numeric_limits<::uint128_t>
 {
 public:
 	static const std::size_t SIZE = sizeof(uint128_t);//サイズ
-	static inline constexpr uint128_t zero(){ return uint128_t(); }//ゼロ
-	static inline constexpr uint128_t min(){ return uint128_t(0x00000000, 0x00000000); }//最小値
-	static inline constexpr uint128_t max(){ return uint128_t(0xffffffff, 0xffffffff); }//最大値
+	inline static constexpr uint128_t zero(){ return uint128_t(); }//ゼロ
+	inline static constexpr uint128_t min(){ return uint128_t(0x00000000, 0x00000000); }//最小値
+	inline static constexpr uint128_t max(){ return uint128_t(0xffffffff, 0xffffffff); }//最大値
 };
 
 //----------------------------------------
