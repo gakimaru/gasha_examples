@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="プリコンパイル済みヘッダー">
+      <UniqueIdentifier>{7ef016ed-f570-4324-b5ac-0ae9f7621f6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="example">
+      <UniqueIdentifier>{925716df-6e93-4299-a2eb-fc23a05529d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="example\real_test">
+      <UniqueIdentifier>{f0dfc0c1-1766-4a39-b5e4-8ec2a4973828}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="example\real_test\game_loop">
+      <UniqueIdentifier>{91e257f7-369b-48f4-b44a-228379f77042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="example\real_test\modules">
+      <UniqueIdentifier>{ab9246ea-db46-4dde-9142-484c9ada6673}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\example_unit_test\example_unit_test.cpp">
+      <Filter>example</Filter>
+    </ClCompile>
+    <ClCompile Include="standard.cpp">
+      <Filter>プリコンパイル済みヘッダー</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>example</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_unit_test\real_test\game_loop\game_loop.cpp">
+      <Filter>example\real_test\game_loop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_unit_test\real_test\modules\module_a.cpp">
+      <Filter>example\real_test\modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\example_unit_test\real_test\modules\module_b.cpp">
+      <Filter>example\real_test\modules</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\example_unit_test\example_unit_test.h">
+      <Filter>example</Filter>
+    </ClInclude>
+    <ClInclude Include="standard.h">
+      <Filter>プリコンパイル済みヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\example_unit_test\real_test\unit_test_id.h">
+      <Filter>example\real_test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\example_unit_test\real_test\game_loop\game_loop.h">
+      <Filter>example\real_test\game_loop</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

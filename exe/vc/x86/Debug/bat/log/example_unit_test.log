@@ -1,0 +1,25 @@
+----- Test for UnitTest -----
+- gameLoop::gameLoop()
+- gameLoop::initialize() [BEGIN] ...
+- gameLoop::initialize() [END]
+- gameLoop::main() [BEGIN] ...
+
+Start unit test: [Target module="moduleA"][Attr=0x00000001]
+============================================================
+
+----- Start unit test module: "moduleA" (Group=1,Attr=0x00000001) -----
+ [OK]  <-- module_a.func1(1, 2) == 3 (ret=3)
+ [OK]  <-- module_a.func1(3, 4) == 7 (ret=7)
+*[NG!] <-- module_a.func1(4, 5) != 9 (ret=9)
+ [OK]  <-- module_a.func2() == true (ret=true)
+*[NG!] <-- module_a.func2() != true (ret=true)
+*[??]  <-- module_a.func3() == true <EXCEPTION!!:Faile to custom unit-test>
+----- Finish unit test module: [test=6, passed=3, missed=3] 0.000999700 sec -----
+
+============================================================
+Finish unit test: Total [test=6, passed=3, missed=3] 0.000999700 sec -----
+(registeredNum=3, minStackRemain=1824, minStrRemain=1027, minStrBuffRemain=2037)
+- gameLoop::finalize() [BEGIN] ...
+- gameLoop::finalize() [END]
+- end -
+- gameLoop::~gameLoop()

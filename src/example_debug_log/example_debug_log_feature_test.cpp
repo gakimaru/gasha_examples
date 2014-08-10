@@ -80,7 +80,9 @@ void printAllLogLevel()
 			if (!print_notice_console || *print_notice_console == dummyConsole())
 				print_notice_console = &stdOutConsole::instance();
 			char message[1024];
+			message[0] = '\0';
 			char str_color[64];
+			str_color[0] = '\0';
 			print_console->changeColor(level_obj.color(ofLog));
 			if (level_obj.isSpecial())
 				print_console->printf(message, "[%2d](SP%2d)\"%s\"", level_obj.outputLevel(), level_obj.value(), level_obj.name());
@@ -139,6 +141,7 @@ void printAllLogCategory()
 			if (!print_console)
 				print_console = &stdOutConsole::instance();
 			char message[1024];
+			message[0] = '\0';
 			if (category_obj.isSpecial())
 				print_console->printf(message, "(SP%2d)\"%s\"", category_obj.value(), category_obj.name());
 			else
@@ -186,6 +189,7 @@ void printAllLogMask(const logLevel::level_type level)
 			if (!print_notice_console || *print_notice_console == dummyConsole())
 				print_notice_console = &stdOutConsole::instance();
 			char message[1024];
+			message[0] = '\0';
 			if (category.isSpecial())
 				print_console->printf(message, "(SP%2d)\"%s\"", category.value(), category.name());
 			else
@@ -961,6 +965,7 @@ void example_debugLog_featureTest()
 
 	//コールポイントのテスト
 	char message[1024];
+	message[0] = '\0';
 	auto print_cp = [](const callPoint* cp)
 	{
 		std::printf("> recent critical-cp info\n");

@@ -1,0 +1,166 @@
+----- Test for UnitTest -----
+- gameLoop::gameLoop()
+- gameLoop::initialize() [BEGIN] ...
+- gameLoop::initialize() [END]
+- gameLoop::main() [BEGIN] ...
+[Unit Test:MANUAL:ALL]
+
+Start unit test: [Target=All][Attr=ANY]
+============================================================
+
+----- Start unit test module: "moduleA" (Group=1,Attr=0x00000001) -----
+ [OK]  <-- module_a.func1(1, 2) == 3 (ret=3)
+ [OK]  <-- module_a.func1(3, 4) == 7 (ret=7)
+*[NG!] <-- module_a.func1(4, 5) != 9 (ret=9)
+ [OK]  <-- module_a.func2() == true (ret=true)
+*[NG!] <-- module_a.func2() != true (ret=true)
+*[??]  <-- module_a.func3() == true <EXCEPTION!!:Faile to custom unit-test>
+----- Finish unit test module: [test=6, passed=3, missed=3] 0.000000000 sec -----
+
+----- Start unit test module: "moduleB" (Group=2,Attr=0x00000001) -----
+ [OK]  <-- module_b.func1(1, 2, 3) == 1+2+3 (ret=6)
+*[NG!] <-- module_b.func1(3, 4, 5) != 60 (ret=60)
+ [OK]  <-- module_b.func1(5, 6, 7) > 10 (ret=210)
+ [OK]  <-- module_b.func1(7, 8, 9) >= 20 (ret=504)
+*[NG!] <-- module_b.func1(9, 10, 11) < 30 (ret=990)
+*[NG!] <-- module_b.func1(11, 12, 13) <= 40 (ret=1716)
+           module_b.func2(1, 2, oparam)
+*[NG!] <--     oparam == 2 (ret=0)
+           module_b.func2(3, 4, oparam)
+ [OK]  <--     oparam != 12 (ret=0)
+----- Finish unit test module: [test=8, passed=4, missed=4] 0.001000000 sec -----
+
+----- Start unit test module: "moduleC" (Group=2,Attr=0x00000002) -----
+           module_c.func(1.1f, 2.2f, out_par1, out_par2) (ret=2.420000)
+*[NG!] <--     out_par1 == 2.f (ret=3.300000)
+ [OK]  <--     out_par2 < 0.f (ret=-1.100000)
+           module_c.func(3.3f, 4.4f, out_par1, out_par2) (ret=14.520000)
+ [OK]  <--     out_par1 != 7.f (ret=7.700000)
+*[NG!] <--     out_par2 > 0.f (ret=-1.100000)
+           module_c.func(5.5f, 6.6f, out_par1, out_par2) (ret=36.299999)
+ [OK]  <--     out_par1 <= 20.f (ret=12.100000)
+*[NG!] <--     out_par2 >= 10.f (ret=-1.100000)
+           module_c.func(7.7f, 8.8f, out_par1, out_par2) (ret=67.760002)
+*[NG!] <--     out_par1 < 1.f (ret=16.500000)
+ [OK]  <--     out_par2 <= 2.f (ret=-1.100000)
+----- Finish unit test module: [test=8, passed=4, missed=4] 0.000000000 sec -----
+
+============================================================
+Finish unit test: Total [test=22, passed=11, missed=11] 0.001000000 sec -----
+(registeredNum=3, minStackRemain=1280, minStrRemain=1011, minStrBuffRemain=1926)
+[Unit Test:MANUAL:MODULE("moduleB")]
+
+Start unit test: [Target module="moduleB"][Attr=ANY]
+============================================================
+
+----- Start unit test module: "moduleB" (Group=2,Attr=0x00000001) -----
+ [OK]  <-- module_b.func1(1, 2, 3) == 1+2+3 (ret=6)
+*[NG!] <-- module_b.func1(3, 4, 5) != 60 (ret=60)
+ [OK]  <-- module_b.func1(5, 6, 7) > 10 (ret=210)
+ [OK]  <-- module_b.func1(7, 8, 9) >= 20 (ret=504)
+*[NG!] <-- module_b.func1(9, 10, 11) < 30 (ret=990)
+*[NG!] <-- module_b.func1(11, 12, 13) <= 40 (ret=1716)
+           module_b.func2(1, 2, oparam)
+*[NG!] <--     oparam == 2 (ret=0)
+           module_b.func2(3, 4, oparam)
+ [OK]  <--     oparam != 12 (ret=0)
+----- Finish unit test module: [test=8, passed=4, missed=4] 0.000000000 sec -----
+
+============================================================
+Finish unit test: Total [test=8, passed=4, missed=4] 0.000000000 sec -----
+(registeredNum=3, minStackRemain=1280, minStrRemain=1011, minStrBuffRemain=1926)
+[Unit Test:MANUAL:GROUP(2)]
+
+Start unit test: [Target group=2][Attr=ANY]
+============================================================
+
+----- Start unit test module: "moduleB" (Group=2,Attr=0x00000001) -----
+ [OK]  <-- module_b.func1(1, 2, 3) == 1+2+3 (ret=6)
+*[NG!] <-- module_b.func1(3, 4, 5) != 60 (ret=60)
+ [OK]  <-- module_b.func1(5, 6, 7) > 10 (ret=210)
+ [OK]  <-- module_b.func1(7, 8, 9) >= 20 (ret=504)
+*[NG!] <-- module_b.func1(9, 10, 11) < 30 (ret=990)
+*[NG!] <-- module_b.func1(11, 12, 13) <= 40 (ret=1716)
+           module_b.func2(1, 2, oparam)
+*[NG!] <--     oparam == 2 (ret=0)
+           module_b.func2(3, 4, oparam)
+ [OK]  <--     oparam != 12 (ret=0)
+----- Finish unit test module: [test=8, passed=4, missed=4] 0.000000000 sec -----
+
+----- Start unit test module: "moduleC" (Group=2,Attr=0x00000002) -----
+           module_c.func(1.1f, 2.2f, out_par1, out_par2) (ret=2.420000)
+*[NG!] <--     out_par1 == 2.f (ret=3.300000)
+ [OK]  <--     out_par2 < 0.f (ret=-1.100000)
+           module_c.func(3.3f, 4.4f, out_par1, out_par2) (ret=14.520000)
+ [OK]  <--     out_par1 != 7.f (ret=7.700000)
+*[NG!] <--     out_par2 > 0.f (ret=-1.100000)
+           module_c.func(5.5f, 6.6f, out_par1, out_par2) (ret=36.299999)
+ [OK]  <--     out_par1 <= 20.f (ret=12.100000)
+*[NG!] <--     out_par2 >= 10.f (ret=-1.100000)
+           module_c.func(7.7f, 8.8f, out_par1, out_par2) (ret=67.760002)
+*[NG!] <--     out_par1 < 1.f (ret=16.500000)
+ [OK]  <--     out_par2 <= 2.f (ret=-1.100000)
+----- Finish unit test module: [test=8, passed=4, missed=4] 0.001000300 sec -----
+
+============================================================
+Finish unit test: Total [test=16, passed=8, missed=8] 0.001000300 sec -----
+(registeredNum=3, minStackRemain=1280, minStrRemain=1011, minStrBuffRemain=1926)
+[Unit Test:MANUAL:MODULE("moduleB") & GROUP(2)]
+
+Start unit test: [Target module="moduleB"][Target group=2][Attr=ANY]
+============================================================
+
+----- Start unit test module: "moduleB" (Group=2,Attr=0x00000001) -----
+ [OK]  <-- module_b.func1(1, 2, 3) == 1+2+3 (ret=6)
+*[NG!] <-- module_b.func1(3, 4, 5) != 60 (ret=60)
+ [OK]  <-- module_b.func1(5, 6, 7) > 10 (ret=210)
+ [OK]  <-- module_b.func1(7, 8, 9) >= 20 (ret=504)
+*[NG!] <-- module_b.func1(9, 10, 11) < 30 (ret=990)
+*[NG!] <-- module_b.func1(11, 12, 13) <= 40 (ret=1716)
+           module_b.func2(1, 2, oparam)
+*[NG!] <--     oparam == 2 (ret=0)
+           module_b.func2(3, 4, oparam)
+ [OK]  <--     oparam != 12 (ret=0)
+----- Finish unit test module: [test=8, passed=4, missed=4] 0.000000000 sec -----
+
+============================================================
+Finish unit test: Total [test=8, passed=4, missed=4] 0.000000000 sec -----
+(registeredNum=3, minStackRemain=1280, minStrRemain=1011, minStrBuffRemain=1926)
+[Unit Test:MANUAL:ATTR_AUTO]
+
+Start unit test: [Target=All][Attr=0x00000001]
+============================================================
+
+----- Start unit test module: "moduleA" (Group=1,Attr=0x00000001) -----
+ [OK]  <-- module_a.func1(1, 2) == 3 (ret=3)
+ [OK]  <-- module_a.func1(3, 4) == 7 (ret=7)
+*[NG!] <-- module_a.func1(4, 5) != 9 (ret=9)
+ [OK]  <-- module_a.func2() == true (ret=true)
+*[NG!] <-- module_a.func2() != true (ret=true)
+*[??]  <-- module_a.func3() == true <EXCEPTION!!:Faile to custom unit-test>
+----- Finish unit test module: [test=6, passed=3, missed=3] 0.000000000 sec -----
+
+----- Start unit test module: "moduleB" (Group=2,Attr=0x00000001) -----
+ [OK]  <-- module_b.func1(1, 2, 3) == 1+2+3 (ret=6)
+*[NG!] <-- module_b.func1(3, 4, 5) != 60 (ret=60)
+ [OK]  <-- module_b.func1(5, 6, 7) > 10 (ret=210)
+ [OK]  <-- module_b.func1(7, 8, 9) >= 20 (ret=504)
+*[NG!] <-- module_b.func1(9, 10, 11) < 30 (ret=990)
+*[NG!] <-- module_b.func1(11, 12, 13) <= 40 (ret=1716)
+           module_b.func2(1, 2, oparam)
+*[NG!] <--     oparam == 2 (ret=0)
+           module_b.func2(3, 4, oparam)
+ [OK]  <--     oparam != 12 (ret=0)
+----- Finish unit test module: [test=8, passed=4, missed=4] 0.000000000 sec -----
+
+============================================================
+Finish unit test: Total [test=14, passed=7, missed=7] 0.000000000 sec -----
+(registeredNum=3, minStackRemain=1280, minStrRemain=1011, minStrBuffRemain=1926)
+Result of Unit-test: passed=7, missed=7
+After reset: passed=0, missed=0
+Print: var_for_ut=123
+- gameLoop::main() [END]
+- gameLoop::finalize() [BEGIN] ...
+- gameLoop::finalize() [END]
+- end -
+- gameLoop::~gameLoop()
