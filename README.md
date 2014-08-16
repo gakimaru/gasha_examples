@@ -798,10 +798,10 @@ Ver.`2.01` [master] `Aug.11.2014` M.Itagaki
 > > 基本的な考え方はそのままに、実装内容は大きく変更しています。  
 
 ##情報アクセス系：名前付きデータ参照##
-* `gasha/named_ref.h` ... ［テンプレートクラス］**名前付きデータ参照**  
-* `gasha/named_func.h` ... ［テンプレートクラス］**名前付き関数**  
-* `gasha/named_value.h` ... ［テンプレートクラス］**名前付き定数**  
-* `gasha/str_pool.h` ... ［テンプレートクラス］**文字列プール** ※1  
+* `gasha/named_ref.h` ... ［テンプレートクラス］**名前付きデータ参照** ※T  
+* `gasha/named_func.h` ... ［テンプレートクラス］**名前付き関数** ※T  
+* `gasha/named_value.h` ... ［テンプレートクラス］**名前付き定数** ※T  
+* `gasha/str_pool.h` ... ［テンプレートクラス］**文字列プール** ※1 ※T  
 
 > ＜説明＞  
 > * 既存のデータ（変数）／関数および定数に対する間接的なアクセス手段を提供します。  
@@ -868,7 +868,7 @@ Ver.`2.01` [master] `Aug.11.2014` M.Itagaki
 * `gasha/win_console.h` ... **Windowsコマンドプロンプト**  
 * `gasha/vs_console.h` ... **Visual Studio出力ウインドウ**  
 * `gasha/dummy_console.h` ... **ダミーコンソール** ※2  
-* `gasha/mem_console.h` ... **メモリコンソール** ※3  
+* `gasha/mem_console.h` ... **メモリコンソール** ※3 ※T  
 * `gasha/std_console.h` ... **標準コンソール** ※4  
 * `gasha/console_color.h` ... **コンソールカラー**  
 
